@@ -10,6 +10,9 @@ public class ControlerBack {
         this.db = DB.getInstance();
     }
 
+    public DB getDb() {
+        return this.db;
+    }
 
 
 }

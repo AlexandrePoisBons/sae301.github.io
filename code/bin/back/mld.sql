@@ -6,8 +6,16 @@ DROP TABLE IF EXISTS Module      CASCADE;
 
 Create Table Module (
     id_module serial primary key,
-    nom_module VARCHAR(50),
-    nb_heure integer NOT NULL
+    type_module VARCHAR(50),
+    libele VARCHAR(100),
+    libele_court VARCHAR(50),
+    code VARCHAR(15),
+    nb_etudiant integer,
+    nb_gp_td integer,
+    nb_gp_tp integer,
+    nb_semaine integer,
+    nb_heure integer NOT NULL,
+    nb_semestre VARCHAR(2)
 );
 /*
 Un module possèdera :
@@ -31,7 +39,8 @@ Un type d’heure possèdera :
 Create table Statut (
     id_statut VARCHAR(10) primary key,
     nbHeureMini float check(nbHeureMini>0),
-    nbHeureMax  float check(nbHeureMax>0)
+    nbHeureMax  float check(nbHeureMax>0),
+    coeffTP     float NOT NULL
 );
 /*
 Un statut possèdera :
@@ -44,13 +53,16 @@ Un statut possèdera :
 Create table Intervenant (
     id_intervenant serial primary key,
     nom VARCHAR(25),
+    prenom VARCHAR(25),
+    nb_equivalent_td int,
     id_statut VARCHAR(10) REFERENCES Statut(id_statut)
 );
 /*
 Un intervenant possèdera :
 1. Un identifiant (un nombre entier positif)
 2. Un nom (de 25 caractères maximum)
-3. Un statut associé
+3. Un prenom (de 25 caractères maximum)
+4. Un statut associé
 */
 
 
