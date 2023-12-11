@@ -14,16 +14,16 @@ public class DB {
 	public static void main(String[] args) { DB db = DB.getInstance(); }
 
 	private DB() {
-		// try {
-		// 	//Class.forName("org.postgresql.Driver");
-		// 	System.out.println ("CHARGEMENT DU PILOTE OK");
-		// } 
-		// catch (ClassNotFoundException e) {
-		// 	e.printStackTrace();
-		// }
+		try {
+			Class.forName("org.postgresql.Driver");
+			System.out.println ("CHARGEMENT DU PILOTE OK");
+		} 
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		try {
-			connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","coucou");
+			connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
 			psSelectP = connec.prepareStatement("SELECT * FROM Produit WHERE np = ?");
 			psSelectP.setInt(1, 7);
 			this.psInsertP = connec.prepareStatement("INSERT INTO Produit VALUES (?, ?, ?, ?);");

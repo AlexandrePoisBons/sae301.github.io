@@ -1,6 +1,5 @@
 {
     "java.project.sourcePaths": [
-        "code/src",
-        "code/lib"
+        "code/src/back/db"
     ]
 }
