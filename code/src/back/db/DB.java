@@ -24,11 +24,7 @@ public class DB {
 
 		try {
 			connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
-			psSelectP = connec.prepareStatement("SELECT * FROM Produit WHERE np = ?");
-			psSelectP.setInt(1, 7);
-			this.psInsertP = connec.prepareStatement("INSERT INTO Produit VALUES (?, ?, ?, ?);");
-			this.psDeleteP = connec.prepareStatement("DELETE FROM Produit WHERE np = ?;");
-			this.psUpdateP = connec.prepareStatement("UPDATE Produit SET qs = ?, coul = ? WHERE np = ?;");
+			
 			connec.close();
 		}
 		catch (SQLException e) {
@@ -41,35 +37,34 @@ public class DB {
 		return dbInstance;
 	}
 
-
-	// public Produit getProduit(int np) throws SQLException{
-	// 	Produit p = null;
-	// 	psSelectP.setInt(1,np);
-	// 	ResultSet rsProd=psSelectP.executeQuery();
-	// 	if(rsProd.next())
-	// 		p = new Produit(rsProd.getInt("np"),rsProd.getString("lib"),rsProd.getString("coul"),rsProd.getInt("qs"));  
-	// 	rsProd.close();
-	// 	return p;
-	// }
+	public Produit getProduit(int np) throws SQLException{
+		Produit p = null;
+		psSelectP.setInt(1,np);
+		ResultSet rsProd=psSelectP.executeQuery();
+		if(rsProd.next())
+			p = new Produit(rsProd.getInt("np"),rsProd.getString("lib"),rsProd.getString("coul"),rsProd.getInt("qs"));  
+		rsProd.close();
+		return p;
+	}
 
 	// //Methode a n'utiliser que dans la classe DB
 	// //Le parametre req doit correspondre a une requete de la forme "SELECT * FROM produit WHERE ..."
-	// private ArrayList<Produit> getProduits(String req) throws SQLException {
-	// 	Statement selectNP=connec.createStatement();
-	// 	ArrayList<Produit> listeP=new ArrayList<Produit>();
+	private ArrayList<Produit> getProduits(String req) throws SQLException {
+		Statement selectNP=connec.createStatement();
+		ArrayList<Produit> listeP=new ArrayList<Produit>();
 			
-	// 	ResultSet rsP=selectNP.executeQuery(req);
-	// 	while(rsP.next()){
-	// 		Produit p = new Produit(rsP.getInt("np"),rsP.getString("lib"),rsP.getString("coul"),rsP.getInt("qs"));
-	// 		listeP.add(p);
-	// 	  }
-	// 	rsP.close(); 
-	// 	return listeP;
-	// }
+		ResultSet rsP=selectNP.executeQuery(req);
+		while(rsP.next()){
+			Produit p = new Produit(rsP.getInt("np"),rsP.getString("lib"),rsP.getString("coul"),rsP.getInt("qs"));
+			listeP.add(p);
+		  }
+		rsP.close(); 
+		return listeP;
+	}
 
-	// public ArrayList<Produit> getProduits() throws SQLException {
-	// 	return getProduits("SELECT * FROM Produit");
-	// }
+	public ArrayList<Produit> getProduits() throws SQLException {
+		return getProduits("SELECT * FROM Produit");
+	}
 
 	// public void insertProduit(Produit p) throws SQLException {
 		
