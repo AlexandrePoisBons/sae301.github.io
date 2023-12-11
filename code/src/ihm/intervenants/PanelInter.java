@@ -1,6 +1,6 @@
-package ihm.Panels;
+package intervenants;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class PanelInter extends JPanel{
 	public PanelInter(){

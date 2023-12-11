@@ -1,15 +1,12 @@
-package ihm.Panels;
+package previsionnel;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import ihm.FrameAccueil;
+import acceuil.FrameAccueil;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class PanelPrevi extends JPanel implements ActionListener {
 	private FrameAccueil frame;
@@ -23,11 +20,12 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	public PanelPrevi(FrameAccueil frAccueil){
 		this.frame = frAccueil;
 		this.setLayout(new BorderLayout());
+
 		JPanel panelSud = new JPanel();
 		panelSud.setLayout(new GridLayout(1, 4, 5, 0));
-		this.panelCenterPrevi = new PanelCenterPrevi(this.frame);
 
-		this.btnCreerRessource = new JButton("Créer \n Ressource");
+		this.panelCenterPrevi = new PanelCenterPrevi(this.frame);
+		this.btnCreerRessource = new JButton("Créer ressource");
 		this.btnCreerSAE = new JButton("Créer SAE");
 		this.btnCreerStage = new JButton("Créer stage/suivi");
 		this.btnModifier = new JButton("Modifier");
@@ -39,11 +37,9 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		panelSud.add(this.btnModifier);
 		panelSud.add(this.btnSupprimer);
 
-
 		this.add(panelCenterPrevi, BorderLayout.CENTER);
 		this.add(panelSud, BorderLayout.SOUTH);
 
-		
 		this.btnCreerRessource.addActionListener(this);
 		this.btnCreerSAE.addActionListener(this);
 		this.btnCreerStage.addActionListener(this);

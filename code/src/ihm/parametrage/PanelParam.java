@@ -1,6 +1,6 @@
-package ihm.Panels;
+package parametrage;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class PanelParam extends JPanel{
 	public PanelParam(){

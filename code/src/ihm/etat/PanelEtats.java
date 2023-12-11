@@ -1,6 +1,6 @@
-package ihm.Panels;
+package etat;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class PanelEtats extends JPanel{
 	public PanelEtats(){
