@@ -1,4 +1,4 @@
-package intervenants;
+package ihm.intervenants;
 
 import javax.swing.*;
 

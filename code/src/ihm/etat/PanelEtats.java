@@ -1,4 +1,4 @@
-package etat;
+package ihm.etat;
 
 import javax.swing.*;
 

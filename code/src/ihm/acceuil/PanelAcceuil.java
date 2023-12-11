@@ -1,9 +1,9 @@
-package acceuil;
+package ihm.acceuil;
 
-import previsionnel.*;
-import parametrage.*;
-import etat.PanelEtats;
-import intervenants.PanelInter;
+import ihm.previsionnel.*;
+import ihm.parametrage.*;
+import ihm.etat.PanelEtats;
+import ihm.intervenants.PanelInter;
 
 import javax.swing.*;
 import java.awt.GridLayout;

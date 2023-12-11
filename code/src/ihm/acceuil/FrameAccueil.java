@@ -1,4 +1,4 @@
-package acceuil;
+package ihm.acceuil;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -42,4 +42,6 @@ public class FrameAccueil extends JFrame
 	public static void main(String[] args) {
 		new FrameAccueil();
 	}
+
+
 }

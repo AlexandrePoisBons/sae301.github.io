@@ -1,6 +1,6 @@
-package previsionnel;
+package ihm.previsionnel;
 
-import acceuil.FrameAccueil;
+import ihm.acceuil.FrameAccueil;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

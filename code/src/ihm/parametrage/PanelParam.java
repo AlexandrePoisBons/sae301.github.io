@@ -1,4 +1,4 @@
-package parametrage;
+package ihm.parametrage;
 
 import javax.swing.*;
 

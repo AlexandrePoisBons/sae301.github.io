@@ -23,10 +23,10 @@ public class Requetes {
 	private PreparedStatement psDeleteH;
 	private PreparedStatement psUpdateH;
 
-	private PreparedStatement psSelect;
-	private PreparedStatement psInsert;
-	private PreparedStatement psDelete;
-	private PreparedStatement psUpdate;
+	private PreparedStatement psSelectTH;
+	private PreparedStatement psInsertTH;
+	private PreparedStatement psDeleteTH;
+	private PreparedStatement psUpdateTH;
 
 	public Requetes() {
 		this.db = DB.getInstance();
@@ -43,6 +43,10 @@ public class Requetes {
 			this.psDeleteH = this.connec.prepareStatement("DELETE * FROM Heure WHERE id_heure=?;");
 			this.psUpdateH = this.connec.prepareStatement("UPDATE Heure SET id_module=?, id_intervenant=?, id_type_heure=?, nb_heures=? WHERE id_heure=?;");
 
+			this.psSelectTH = this.connec.prepareStatement("SELECT * FROM Type_Heure WHERE id_type_heure=?;");
+			this.psInsertTH = this.connec.prepareStatement("INSERT INTO Type_Heure VALUES(?,?);");
+			this.psDeleteTH = this.connec.prepareStatement("DELETE * FROM Type_Heure WHERE id_type_heure=?;");
+			this.psUpdateTH = this.connec.prepareStatement("UPDATE Type_Heure SET coeff=? WHERE id_type_heure=?;");
 
 		} catch(SQLException e) { e.printStackTrace(); }
 
@@ -175,6 +179,69 @@ public class Requetes {
 		else
 			System.out.println("Heure id_heure = "+heure.getIdHeure()+" inexistant");
 	}
+
+
+	public void insertTypeHeure(TypeHeure typeHeure) throws SQLException {
+		
+		String request = "SELECT * FROM Type_Heure WHERE id_type_heure="+typeHeure.getIdTypeHeure()+";";
+
+		Statement stmt = this.connec.createStatement();
+
+		ResultSet rs = stmt.executeQuery(request);
+
+		int cptLig = 0;
+		while ( rs.next() ) cptLig ++;
+
+		if ( cptLig <= 0 ) {
+			this.psInsertTH.setInt(1, typeHeure.getIdTypeHeure());
+			this.psInsertTH.setFloat(2, typeHeure.getCoeff());
+			this.psInsertTH.executeUpdate();
+		} else {
+			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
+		}
+	}
+
+
+	public void deleteTypeHeure(TypeHeure typeHeure) throws SQLException {
+		String request = "SELECT * FROM Type_Heure WHERE id_type_heure="+typeHeure.getIdTypeHeure()+";";
+
+		Statement stmt = this.connec.createStatement();
+
+		ResultSet rs = stmt.executeQuery(request);
+
+		int cptLig = 0;
+		while ( rs.next() ) cptLig ++;
+
+		if ( cptLig > 0 ) {
+			this.psDeleteTH.setInt(1, typeHeure.getIdTypeHeure());
+			this.psDeleteTH.executeUpdate();
+		}
+		else {
+			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
+		}
+	}
+
+
+	public void updateTypeHeure(TypeHeure typeHeure) throws SQLException {
+		Statement stmt = this.connec.createStatement();
+
+		String request = "SELECT * FROM Type_Heure WHERE id_type_heure="+typeHeure.getIdTypeHeure()+";";
+
+		ResultSet rs = stmt.executeQuery(request);
+
+		int cptLig = 0;
+		while (rs.next()) cptLig ++;
+
+		if ( cptLig > 0 ) {
+			this.psUpdateTH.setFloat(1, typeHeure.getCoeff());
+			this.psUpdateTH.setInt(2, typeHeure.getIdTypeHeure());
+			this.psUpdateTH.executeUpdate();
+		}
+		else
+			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
+	}
+
+
 
 
 

@@ -1,7 +1,7 @@
-package previsionnel;
+package ihm.previsionnel;
 
 //Pour permettre la synchronisation des pages  
-import acceuil.FrameAccueil;
+import ihm.acceuil.FrameAccueil;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
