@@ -12,7 +12,7 @@ public class DB2
 		this.dataSource = new PGSimpleDataSource();
 		this.dataSource.setServerName("localhost");
 		this.dataSource.setPort(5432);
-		this.dataSource.setDatabaseName("postgres"); // A changer
+		this.dataSource.setDatabaseName("astre"); // A changer
 		this.dataSource.setUser("postgres");         // A changer
 		this.dataSource.setPassword("coucou");       // A changer
 	}

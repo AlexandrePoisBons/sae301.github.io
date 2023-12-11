@@ -14,13 +14,13 @@ public class DB {
 	public static void main(String[] args) { DB db = DB.getInstance(); }
 
 	private DB() {
-		try {
-			Class.forName("org.postgresql.Driver");
-			System.out.println ("CHARGEMENT DU PILOTE OK");
-		} 
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		// try {
+		// 	//Class.forName("org.postgresql.Driver");
+		// 	System.out.println ("CHARGEMENT DU PILOTE OK");
+		// } 
+		// catch (ClassNotFoundException e) {
+		// 	e.printStackTrace();
+		// }
 
 		try {
 			connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","coucou");
@@ -29,6 +29,7 @@ public class DB {
 			this.psInsertP = connec.prepareStatement("INSERT INTO Produit VALUES (?, ?, ?, ?);");
 			this.psDeleteP = connec.prepareStatement("DELETE FROM Produit WHERE np = ?;");
 			this.psUpdateP = connec.prepareStatement("UPDATE Produit SET qs = ?, coul = ? WHERE np = ?;");
+			connec.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
