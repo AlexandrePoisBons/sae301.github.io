@@ -1,3 +1,5 @@
 database: astre
 login: postgres
 mdp: coucou
+
+finir action performed dans panelAcceuil
