@@ -7,15 +7,14 @@ DROP TABLE IF EXISTS Module      CASCADE;
 Create Table Module (
     id_module serial primary key,
     type_module VARCHAR(50),
-    libele VARCHAR(100),
-    libele_court VARCHAR(50),
+    libelle VARCHAR(100),
+    libelle_court VARCHAR(50),
     code VARCHAR(15),
-    nb_etudiant integer,
+    nb_etudiants integer,
     nb_gp_td integer,
     nb_gp_tp integer,
-    nb_semaine integer,
-    nb_heure integer NOT NULL,
-    nb_semestre VARCHAR(2)
+    nb_semaines integer,
+    nb_heures integer NOT NULL
 );
 /*
 Un module possèdera :
