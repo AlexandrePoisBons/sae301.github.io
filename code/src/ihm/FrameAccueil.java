@@ -36,6 +36,7 @@ public class FrameAccueil extends JFrame
     {
         this.remove(this.panel);
         this.panel = panel;
+        this.add(this.panel);
         this.setVisible(true);
     }
 
