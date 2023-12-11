@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import back.Heure;
 import back.Intervenant;
+import back.Module;
 import back.Statut;
 import back.TypeHeure;
 
@@ -17,7 +18,7 @@ public class Requetes {
 	private PreparedStatement psInsertI;
 	private PreparedStatement psDeleteI;
 	private PreparedStatement psUpdateI;
-	
+
 	private PreparedStatement psSelectH;
 	private PreparedStatement psInsertH;
 	private PreparedStatement psDeleteH;
@@ -27,6 +28,13 @@ public class Requetes {
 	private PreparedStatement psInsertTH;
 	private PreparedStatement psDeleteTH;
 	private PreparedStatement psUpdateTH;
+
+	private PreparedStatement psSelectM;
+	private PreparedStatement psInsertM;
+	private PreparedStatement psDeleteM;
+	private PreparedStatement psUpdateM;
+
+	// STATUT
 
 	public Requetes() {
 		this.db = DB.getInstance();
@@ -48,8 +56,12 @@ public class Requetes {
 			this.psDeleteTH = this.connec.prepareStatement("DELETE * FROM Type_Heure WHERE id_type_heure=?;");
 			this.psUpdateTH = this.connec.prepareStatement("UPDATE Type_Heure SET coeff=? WHERE id_type_heure=?;");
 
-		} catch(SQLException e) { e.printStackTrace(); }
+			this.psSelectM = this.connec.prepareStatement("SELECT * FROM Module WHERE id_module=?;");
+			this.psInsertM = this.connec.prepareStatement("INSERT INTO Module VALUES(?,?,?,?,?,?,?,?,?,?);");
+			this.psDeleteM = this.connec.prepareStatement("DELETE * FROM Module WHERE id_module=?;");
+			this.psUpdateM = this.connec.prepareStatement("UPDATE Module SET type_module=?, libelle=?, libelle_court=?, code=?, nb_etudiants=?, nb_gp_td=?, nb_gp_tp=?, nb_semaines=?, nb_heures=?;");
 
+		} catch(SQLException e) { e.printStackTrace(); }
 
 	}
 
@@ -71,7 +83,7 @@ public class Requetes {
 			this.psInsertI.setString(5, intervenant.getStatut().getNomStatut());
 			this.psInsertI.executeUpdate();
 		} else {
-			System.out.println("Intervenant id_intervenant="+intervenant.getIdIntervenant()+" existant");
+			System.out.println("Intervenant id_intervenant="+intervenant.getIdIntervenant()+" deja existant");
 		}
 	}
 
@@ -88,8 +100,7 @@ public class Requetes {
 		if ( cptLig > 0 ) {
 			this.psDeleteI.setInt(1, intervenant.getIdIntervenant());
 			this.psDeleteI.executeUpdate();
-		}
-		else{
+		} else{
 			System.out.println("Intervenant id_intervenant="+intervenant.getIdIntervenant()+" inexistant");
 		}
 	}
@@ -111,9 +122,9 @@ public class Requetes {
 			this.psUpdateI.setString(4, intervenant.getStatut().getNomStatut());
 			this.psUpdateI.setInt(5, intervenant.getIdIntervenant());
 			this.psUpdateI.executeUpdate();
-		}
-		else
+		} else {
 			System.out.println("Intervenant id_intervenant = "+intervenant.getIdIntervenant()+" inexistant");
+		}
 	}
 
 
@@ -136,7 +147,7 @@ public class Requetes {
 			this.psInsertH.setInt(5, heure.getNbHeures());
 			this.psInsertH.executeUpdate();
 		} else {
-			System.out.println("Heure id_heure = "+heure.getIdHeure()+" inexistant");
+			System.out.println("Heure id_heure = "+heure.getIdHeure()+" deja existant");
 		}
 	}
 
@@ -153,8 +164,7 @@ public class Requetes {
 		if ( cptLig > 0 ) {
 			this.psDeleteH.setInt(1, heure.getIdHeure());
 			this.psDeleteH.executeUpdate();
-		}
-		else{
+		} else {
 			System.out.println("Heure id_heure = "+heure.getIdHeure()+" inexistant");
 		}
 	}
@@ -175,9 +185,9 @@ public class Requetes {
 			this.psUpdateH.setInt(3, heure.getTypeHeure().getIdTypeHeure());
 			this.psUpdateH.setInt(4, heure.getNbHeures());
 			this.psUpdateH.executeUpdate();
-		}
-		else
+		} else {
 			System.out.println("Heure id_heure = "+heure.getIdHeure()+" inexistant");
+		}
 	}
 
 
@@ -197,7 +207,7 @@ public class Requetes {
 			this.psInsertTH.setFloat(2, typeHeure.getCoeff());
 			this.psInsertTH.executeUpdate();
 		} else {
-			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
+			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" deja existant");
 		}
 	}
 
@@ -215,8 +225,7 @@ public class Requetes {
 		if ( cptLig > 0 ) {
 			this.psDeleteTH.setInt(1, typeHeure.getIdTypeHeure());
 			this.psDeleteTH.executeUpdate();
-		}
-		else {
+		} else {
 			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
 		}
 	}
@@ -236,10 +245,91 @@ public class Requetes {
 			this.psUpdateTH.setFloat(1, typeHeure.getCoeff());
 			this.psUpdateTH.setInt(2, typeHeure.getIdTypeHeure());
 			this.psUpdateTH.executeUpdate();
-		}
-		else
+		} else {
 			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
+		}
 	}
+
+
+		public void insertModule(Module module) throws SQLException {
+		
+		String request = "SELECT * FROM Module WHERE id_module="+module.getIdModule()+";";
+
+		Statement stmt = this.connec.createStatement();
+
+		ResultSet rs = stmt.executeQuery(request);
+
+		int cptLig = 0;
+		while ( rs.next() ) cptLig ++;
+
+		if ( cptLig <= 0 ) {
+			this.psInsertTH.setInt(1, module.getIdModule());
+			this.psInsertTH.setString(2, module.getTypeModule());
+			this.psInsertTH.setString(3, module.getLibelle());
+			this.psInsertM.setString(4, module.getLibelleCourt());
+			this.psInsertM.setString(5, module.getCode());
+			this.psInsertM.setInt(6, module.getNbEtudiants());
+			this.psInsertM.setInt(7, module.getNbGpTD());
+			this.psInsertM.setInt(8, module.getNbGpTP());
+			this.psInsertM.setInt(9, module.getNbSemaines());
+			this.psInsertM.setInt(10, module.getNbHeures());
+			this.psInsertTH.executeUpdate();
+		} else {
+			System.out.println("Module id_module = "+module.getIdModule()+" deja existant");
+		}
+	}
+
+
+	public void deleteModule(Module module) throws SQLException {
+		String request = "SELECT * FROM Module WHERE id_module="+module.getIdModule()+";";
+
+		Statement stmt = this.connec.createStatement();
+
+		ResultSet rs = stmt.executeQuery(request);
+
+		int cptLig = 0;
+		while ( rs.next() ) cptLig ++;
+
+		if ( cptLig > 0 ) {
+			this.psDeleteM.setInt(1, module.getIdModule());
+			this.psDeleteM.executeUpdate();
+		} else {
+			System.out.println("Module id_module = "+module.getIdModule()+" inexistant");
+		}
+	}
+
+
+	public void updateModule(Module module) throws SQLException {
+		Statement stmt = this.connec.createStatement();
+
+		String request = "SELECT * FROM Module WHERE id_module="+module.getIdModule()+";";
+
+		ResultSet rs = stmt.executeQuery(request);
+
+		int cptLig = 0;
+		while (rs.next()) cptLig ++;
+
+		if ( cptLig > 0 ) {
+			this.psUpdateTH.setString(1, module.getTypeModule());
+			this.psUpdateTH.setString(2, module.getLibelle());
+			this.psUpdateM.setString(3, module.getLibelleCourt());
+			this.psUpdateM.setString(4, module.getCode());
+			this.psUpdateM.setInt(5, module.getNbEtudiants());
+			this.psUpdateM.setInt(6, module.getNbGpTD());
+			this.psUpdateM.setInt(7, module.getNbGpTP());
+			this.psUpdateM.setInt(8, module.getNbSemaines());
+			this.psUpdateM.setInt(9, module.getNbHeures());
+			this.psUpdateTH.setInt(10, module.getIdModule());
+			this.psUpdateTH.executeUpdate();
+		} else {
+			System.out.println("Module id_module = "+module.getIdModule()+" inexistant");
+		}
+	}
+
+
+
+
+
 
 
 
@@ -248,8 +338,8 @@ public class Requetes {
 
 	private ArrayList<Intervenant> getIntervenants(String req) throws SQLException {
 		Statement selectNP = connec.createStatement();
-		ArrayList<Intervenant> listeI  =new ArrayList<Intervenant>();
-			
+		ArrayList<Intervenant> listeI = new ArrayList<Intervenant>();
+		
 		ResultSet rs = selectNP.executeQuery(req);
 		while(rs.next()){
 			Intervenant p = new Intervenant(rs.getInt("id_intervenant"),rs.getString("nom"), rs.getString("prenom"),
@@ -352,6 +442,7 @@ public class Requetes {
 		rs.close(); 
 		return listeI;
 	}
+
 	public ArrayList<Module> getModules() throws SQLException {
 		return getModules("SELECT * FROM Module");
 	}
