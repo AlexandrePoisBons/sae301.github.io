@@ -6,14 +6,14 @@ import java.awt.*;
 import ihm.*;
 
 public class PanelFrameAcceuil extends JPanel implements ActionListener {
-	private FrameAccueil frAccueil;
+	private FrameAccueil frame;
 	private JButton btnParam;
 	private JButton btnPrevi;
 	private JButton btnInter;
 	private JButton btnEtats;
 
 	public PanelFrameAcceuil(FrameAccueil frame){
-		this.frAccueil = frame;
+		this.frame = frame;
 		//GridLayout
 		this.setLayout(new GridLayout(4, 1, 0, 5));
 
@@ -37,17 +37,16 @@ public class PanelFrameAcceuil extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == this.btnParam){
-			this.frAccueil.changerPanel(new PanelParam());
+			this.frame.changerPanel(new PanelParam());
 		}
 		if(e.getSource() == this.btnPrevi){
-			this.frAccueil.changerPanel(new PanelPrevi());
+			this.frame.changerPanel(new PanelPrevi(this.frame));
 		}
 		if(e.getSource() == this.btnInter){
-			this.frAccueil.changerPanel(new PanelInter());
+			this.frame.changerPanel(new PanelInter());
 		}
 		if(e.getSource() == this.btnEtats){
-			this.frAccueil.changerPanel(new PanelEtats());
+			this.frame.changerPanel(new PanelEtats());
 		}
-
 	}
 }
