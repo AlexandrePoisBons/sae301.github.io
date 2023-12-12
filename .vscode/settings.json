@@ -1,5 +1,9 @@
 {
-    "java.project.sourcePaths": ["src","lib"],
+    "java.project.sourcePaths": [
+        "code/src/ihm",
+        "code/src/back/db",
+        "src"
+    ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar",

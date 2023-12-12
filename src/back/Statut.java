@@ -14,10 +14,10 @@ public class Statut {
         this.coeffTP    = coeffTP;
     }
 
-    public String getNomStatut() { return this.nomStatut;  }
-    public int getNbMinHeure()   { return this.nbMinHeure; }
-    public int getNbMaxHeure()   { return this.nbMaxHeure; }
-    public float getCoeffTP()    { return this.coeffTP;    }
+    public String getNomStatut()  { return this.nomStatut;  }
+    public int    getNbMinHeure() { return this.nbMinHeure; }
+    public int    getNbMaxHeure() { return this.nbMaxHeure; }
+    public float  getCoeffTP()    { return this.coeffTP;    }
 
     public void setNomStatut(String nomStatut) { this.nomStatut  = nomStatut;  }
     public void setNbMinHeure(int nbMinHeure)  { this.nbMinHeure = nbMinHeure; }
