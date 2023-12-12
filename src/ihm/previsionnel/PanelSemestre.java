@@ -6,6 +6,7 @@ import ihm.acceuil.FrameAccueil;
 //Imports classes Java
 import java.awt.BorderLayout;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 
 public class PanelSemestre extends JPanel {
@@ -29,35 +30,34 @@ public class PanelSemestre extends JPanel {
 		this.id 	= idSemestre		;
 
 		// JPanels
-		JPanel panelNord	 = 	new JPanel()		 ;
-		JPanel panelCentre	 = 	new JPanel()		 ;
+		JPanel panelNord		= new JPanel()	;
+		JPanel panelCentre	 	= new JPanel()	;	
 
 		// Layout
 		this.setLayout			(new BorderLayout()	);
 		panelCentre.setLayout	(new BorderLayout()	);
 
-		//Création de la liste des modules
-		tabModule = new JTable();
+		//Instanciations des composants
+		this.txtNbGpTd = new JTextField(2			);
+		this.txtNbGpTp = new JTextField(2			);
+		this.txtNbEtd = new JTextField(2			);
+		this.txtNbSemaine = new JTextField(2		);
+
+		this.tabModule = new JTable();
+
+		JScrollPane tableau = new JScrollPane(tabModule);
 
 		// Ajout des composants
-		panelNord.add(new JLabel("nb gp TD")		);
-		this.txtNbGpTd = new JTextField(2			);
-		panelNord.add(this.txtNbGpTd				);
-
-		panelNord.add(new JLabel("nb gp TP")		);
-		this.txtNbGpTp = new JTextField(2			);
-		panelNord.add(this.txtNbGpTp				);
-
-		panelNord.add(new JLabel("nb Etd")			);
-		this.txtNbEtd = new JTextField(2			);
-		panelNord.add(this.txtNbEtd					);
-
-		panelNord.add(new JLabel("nb semaines")		);
-		this.txtNbSemaine = new JTextField(2		);
-		panelNord.add(this.txtNbSemaine				);
-															// Position des composants
-		panelCentre.add(new JLabel("Liste des modules :")	, BorderLayout.NORTH	);
-		panelCentre.add(tabModule							, BorderLayout.CENTER	);
+		panelNord.add	(new JLabel("nb gp TD")		);
+		panelNord.add	(this.txtNbGpTd				);
+		panelNord.add	(new JLabel("nb gp TP")		);
+		panelNord.add	(this.txtNbGpTp				);
+		panelNord.add	(new JLabel("nb Etd")			);		
+		panelNord.add	(this.txtNbEtd					);
+		panelNord.add	(new JLabel("nb semaines")		);		
+		panelNord.add	(this.txtNbSemaine				);
+		panelCentre.add	(new JLabel("Liste des modules :")	, BorderLayout.NORTH	);
+		panelCentre.add	(tableau							, BorderLayout.CENTER	);
 
 		this.add(panelNord									, BorderLayout.NORTH	);
 		this.add(panelCentre								, BorderLayout.CENTER	);

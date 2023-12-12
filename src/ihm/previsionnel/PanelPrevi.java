@@ -59,7 +59,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	//Permets de faire une action en fonction du bouton cliqué
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnCreerRessource){this.frame.changerPanel(new PanelRessources(this));}
+		if(e.getSource() == this.btnCreerRessource){this.frame.changerPanel(new PanelRessources(this.frame, this));}
 		if(e.getSource() == this.btnCreerSAE){
 
 		}
