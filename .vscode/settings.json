@@ -1,7 +1,5 @@
 {
     "java.project.sourcePaths": [
-        "code/src/ihm",
-        "code/src/back/db",
         "src"
     ],
     "java.project.outputPath": "bin",
