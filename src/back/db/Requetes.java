@@ -61,42 +61,42 @@ public class Requetes {
 		try {
 			this.psSelectI = this.connec.prepareStatement("SELECT * FROM Intervenant WHERE id_intervenant=?;");
 			this.psInsertI = this.connec.prepareStatement("INSERT INTO Intervenant VALUES(?,?,?,?,?);");
-			this.psDeleteI = this.connec.prepareStatement("DELETE * FROM Intervenant WHERE id_intervenant=?;");
+			this.psDeleteI = this.connec.prepareStatement("DELETE FROM Intervenant WHERE id_intervenant=?;");
 			this.psUpdateI = this.connec.prepareStatement("UPDATE Intervenant SET nom=?, prenom=?, nb_equivalent_td=?, nom_statut=? WHERE id_intervenant=?;");
 
 			this.psSelectH = this.connec.prepareStatement("SELECT * FROM Heure WHERE id_heure=?;");
 			this.psInsertH = this.connec.prepareStatement("INSERT INTO Heure VALUES(?,?,?,?,?);");
-			this.psDeleteH = this.connec.prepareStatement("DELETE * FROM Heure WHERE id_heure=?;");
+			this.psDeleteH = this.connec.prepareStatement("DELETE FROM Heure WHERE id_heure=?;");
 			this.psUpdateH = this.connec.prepareStatement("UPDATE Heure SET id_module=?, id_type_heure=?, duree=?, commentaire=? WHERE id_heure=?;");
 
 			this.psSelectTH = this.connec.prepareStatement("SELECT * FROM Type_Heure WHERE id_type_heure=?;");
 			this.psInsertTH = this.connec.prepareStatement("INSERT INTO Type_Heure VALUES(?,?);");
-			this.psDeleteTH = this.connec.prepareStatement("DELETE * FROM Type_Heure WHERE id_type_heure=?;");
+			this.psDeleteTH = this.connec.prepareStatement("DELETE FROM Type_Heure WHERE id_type_heure=?;");
 			this.psUpdateTH = this.connec.prepareStatement("UPDATE Type_Heure SET coeff=? WHERE id_type_heure=?;");
 
 			this.psSelectM = this.connec.prepareStatement("SELECT * FROM Module WHERE id_module=?;");
-			this.psInsertM = this.connec.prepareStatement("INSERT INTO Module VALUES(?,?,?,?,?,?,?,?,?,?);");
-			this.psDeleteM = this.connec.prepareStatement("DELETE * FROM Module WHERE id_module=?;");
-			this.psUpdateM = this.connec.prepareStatement("UPDATE Module SET type_module=?, libelle=?, libelle_court=?, code=?, nb_etudiants=?, nb_gp_td=?, nb_gp_tp=?, nb_semaines=?, nb_heures=?;");
+			this.psInsertM = this.connec.prepareStatement("INSERT INTO Module VALUES(?,?,?,?,?,?,?,?,?,?,?);");
+			this.psDeleteM = this.connec.prepareStatement("DELETE FROM Module CASCADE WHERE id_module=?;");
+			this.psUpdateM = this.connec.prepareStatement("UPDATE Module SET type_module=?, semestre=?, libelle=?, libelle_court=?, code=?, nb_etudiants=?, nb_gp_td=?, nb_gp_tp=?, nb_semaines=?, nb_heures=? WHERE id_module=?;");
 			
 			this.psSelectS = this.connec.prepareStatement("SELECT * FROM Statut WHERE nom_statut=?;");
 			this.psInsertS = this.connec.prepareStatement("INSERT INTO Statut VALUES(?,?,?,?);");
-			this.psDeleteS = this.connec.prepareStatement("DELETE * FROM Statut WHERE nom_Statut=?;");
+			this.psDeleteS = this.connec.prepareStatement("DELETE FROM Statut WHERE nom_Statut=?;");
 			this.psUpdateS = this.connec.prepareStatement("UPDATE Statut SET nb_heures_mini=?, nb_heure_maxi=?, coeff_tp=? WHERE nom_statut=?;");
 
 			this.psSelectIM = this.connec.prepareStatement("SELECT * FROM Intervenant_Module WHERE id_intervenant=? AND id_module=?;");
 			this.psInsertIM = this.connec.prepareStatement("INSERT INTO Intervenant_Module VALUES(?,?);");
-			this.psDeleteIM = this.connec.prepareStatement("DELETE * FROM Intervenant_Module WHERE id_intervenant=?, id_module=?;");
+			this.psDeleteIM = this.connec.prepareStatement("DELETE FROM Intervenant_Module WHERE id_intervenant=?, id_module=?;");
 			this.psUpdateIM = this.connec.prepareStatement("UPDATE Intervenant_Module SET id_intervenant=?, id_module=? WHERE id_intervenant=? AND id_module=?;");
 
 			this.psSelectIH = this.connec.prepareStatement("SELECT * FROM Intervenant_Heure WHERE id_intervenant=? AND id_heure=?;");
 			this.psInsertIH = this.connec.prepareStatement("INSERT INTO Intervenant_Heure VALUES(?,?);");
-			this.psDeleteIH = this.connec.prepareStatement("DELETE * FROM Intervenant_Heure WHERE id_intervenant=?, id_heure=?;");
+			this.psDeleteIH = this.connec.prepareStatement("DELETE FROM Intervenant_Heure WHERE id_intervenant=?, id_heure=?;");
 			this.psUpdateIH = this.connec.prepareStatement("UPDATE Intervenant_Heure SET id_intervenant=?, id_heure=? WHERE id_intervenant=? AND id_heure=?;");
 
 			this.psSelectHM = this.connec.prepareStatement("SELECT * FROM Heure_Module WHERE id_heure=? AND id_module=?;");
 			this.psInsertHM = this.connec.prepareStatement("INSERT INTO Heure_Module VALUES(?,?);");
-			this.psDeleteHM = this.connec.prepareStatement("DELETE * FROM Heure_Module WHERE id_heure=?, id_module=?;");
+			this.psDeleteHM = this.connec.prepareStatement("DELETE FROM Heure_Module WHERE id_heure=?, id_module=?;");
 			this.psUpdateHM = this.connec.prepareStatement("UPDATE Heure_Module SET id_heure=?, id_module=? WHERE id_heure=? AND id_module=?;");
 
 		} catch( SQLException e ) { e.printStackTrace(); }
@@ -269,14 +269,15 @@ public class Requetes {
 		if ( !this.existsModule(module.getIdModule()) ) {
 			this.psInsertM.setInt(1, module.getIdModule());
 			this.psInsertM.setString(2, module.getTypeModule());
-			this.psInsertM.setString(3, module.getLibelle());
-			this.psInsertM.setString(4, module.getLibelleCourt());
-			this.psInsertM.setString(5, module.getCode());
-			this.psInsertM.setInt(6, module.getNbEtudiants());
-			this.psInsertM.setInt(7, module.getNbGpTD());
-			this.psInsertM.setInt(8, module.getNbGpTP());
-			this.psInsertM.setInt(9, module.getNbSemaines());
-			this.psInsertM.setInt(10, module.getNbHeures());
+			this.psInsertM.setString(3, module.getSemestre());
+			this.psInsertM.setString(4, module.getLibelle());
+			this.psInsertM.setString(5, module.getLibelleCourt());
+			this.psInsertM.setString(6, module.getCode());
+			this.psInsertM.setInt(7, module.getNbEtudiants());
+			this.psInsertM.setInt(8, module.getNbGpTD());
+			this.psInsertM.setInt(9, module.getNbGpTP());
+			this.psInsertM.setInt(10, module.getNbSemaines());
+			this.psInsertM.setInt(11, module.getNbHeures());
 			this.psInsertM.executeUpdate();
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" deja existant");
@@ -298,15 +299,16 @@ public class Requetes {
 	public void updateModule(Module module) throws SQLException {
 		if ( this.existsModule(module.getIdModule()) ) {
 			this.psUpdateM.setString(1, module.getTypeModule());
-			this.psUpdateM.setString(2, module.getLibelle());
-			this.psUpdateM.setString(3, module.getLibelleCourt());
-			this.psUpdateM.setString(4, module.getCode());
-			this.psUpdateM.setInt(5, module.getNbEtudiants());
-			this.psUpdateM.setInt(6, module.getNbGpTD());
-			this.psUpdateM.setInt(7, module.getNbGpTP());
-			this.psUpdateM.setInt(8, module.getNbSemaines());
-			this.psUpdateM.setInt(9, module.getNbHeures());
-			this.psUpdateM.setInt(10, module.getIdModule());
+			this.psUpdateM.setString(2,module.getSemestre());
+			this.psUpdateM.setString(3, module.getLibelle());
+			this.psUpdateM.setString(4, module.getLibelleCourt());
+			this.psUpdateM.setString(5, module.getCode());
+			this.psUpdateM.setInt(6, module.getNbEtudiants());
+			this.psUpdateM.setInt(7, module.getNbGpTD());
+			this.psUpdateM.setInt(8, module.getNbGpTP());
+			this.psUpdateM.setInt(9, module.getNbSemaines());
+			this.psUpdateM.setInt(10, module.getNbHeures());
+			this.psUpdateM.setInt(11, module.getIdModule());
 			this.psUpdateM.executeUpdate();
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" inexistant");
@@ -631,7 +633,7 @@ public class Requetes {
 	}
 
 	public ArrayList<Heure> getHeures() throws SQLException {
-		return getHeures("SELECT * FROM Heure h JOIN Module m ON m.id_heure = h.id_heure JOIN Intervenant i ON i.id_intervenant = h.intervenant JOIN Type_Heure t ON t.id_type_heure = h.id_type_heure;");
+		return getHeures("SELECT * FROM Heure h JOIN Module m ON m.id_module = h.id_module JOIN Intervenant i ON i.id_intervenant = h.intervenant JOIN Type_Heure t ON t.id_type_heure = h.id_type_heure;");
 	}
 
 

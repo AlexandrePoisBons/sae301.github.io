@@ -70,5 +70,7 @@ public class Intervenant {
 		return nbHeures;
 	}
 
-	
+	public String toString() {
+		return this.idIntervenant + " " + this.prenom + " " + this.nom + " (" + this.statut + ", " + this.nbEqTD + "eqTD)";
+	}
 }

@@ -22,4 +22,8 @@ public class Statut {
     public void setNbHeureService(int nbHeureService)  { this.nbHeureService = nbHeureService; }
     public void setNbHeuresMax(int nbMaxHeures)        { this.nbHeuresMax    = nbMaxHeures;    }
     public void setCoeffTP( int coeffTP )              { this.coeffTP        = coeffTP;        }
+
+    public String toString() {
+        return this.nomStatut + " (" + this.nbHeureService + "h, " + this.nbHeuresMax + "h max, coeffTP=" + this.coeffTP + ")"; 
+    }
 }

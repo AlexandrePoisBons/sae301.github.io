@@ -48,4 +48,8 @@ public class Heure {
 	public void setIntervenants(List<Intervenant> intervenants) { this.intervenants = intervenants;      }
 	public void ajouterIntervenant(Intervenant intervenant)     { this.intervenants.add(intervenant);    }
 	public void supprimerIntervenant(Intervenant intervenant)   { this.intervenants.remove(intervenant); }
+
+	public String toString() {
+		return this.idHeure + " " + this.module + " " + this.typeHeure + " " + this.duree + " " + this.commentaire;
+	}
 }

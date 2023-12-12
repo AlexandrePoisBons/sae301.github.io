@@ -43,33 +43,33 @@ Create table Intervenant (
     nom VARCHAR(25),
     prenom VARCHAR(25),
     nb_equivalent_td float,
-    nom_statut VARCHAR(10) REFERENCES Statut(nom_statut)
+    nom_statut VARCHAR(10) REFERENCES Statut(nom_statut) ON DELETE CASCADE
 );
 
 
 Create table Heure (
     id_heure integer primary key,
-    id_module integer REFERENCES Module(id_module),
-    id_type_heure integer REFERENCES Type_Heure(id_type_heure),
+    id_module integer REFERENCES Module(id_module) ON DELETE CASCADE,
+    id_type_heure integer REFERENCES Type_Heure(id_type_heure) ON DELETE CASCADE,
     duree integer NOT NULL CHECK(duree > 0),
     commentaire VARCHAR(250)
 );
 
 Create table Intervenant_Module (
-    id_intervenant integer REFERENCES Intervenant(id_intervenant),
-    id_module integer  REFERENCES Module(id_module),
+    id_intervenant integer REFERENCES Intervenant(id_intervenant) ON DELETE CASCADE,
+    id_module integer  REFERENCES Module(id_module) ON DELETE CASCADE,
     primary key (id_intervenant, id_module)
 );
 
 Create table Intervenant_Heure ( 
-    id_intervenant integer REFERENCES Intervenant(id_intervenant),
-    id_heure integer REFERENCES Heure(id_heure),
+    id_intervenant integer REFERENCES Intervenant(id_intervenant) ON DELETE CASCADE,
+    id_heure integer REFERENCES Heure(id_heure) ON DELETE CASCADE,
     primary key (id_intervenant, id_heure)
 );
 
 
 Create table Heure_Module (
-    id_heure integer REFERENCES Heure(id_heure),
-    id_module integer REFERENCES Module(id_module),
+    id_heure integer REFERENCES Heure(id_heure) ON DELETE CASCADE,
+    id_module integer REFERENCES Module(id_module) ON DELETE CASCADE,
     primary key (id_heure, id_module)
 );
