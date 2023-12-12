@@ -2,6 +2,7 @@ package ihm.previsionnel				;
 
 //Imports classes externes
 import ihm.acceuil.FrameAccueil			;
+import ihm.previsionnel.ressources.PanelRessources;
 
 //Imports classes Java
 import java.awt.BorderLayout			;
@@ -55,18 +56,10 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.btnSupprimer		.addActionListener(this);
 	}
 
-		//Permet de changer le panel en fonction du choix de l'utilisateur
-	public void changerPanel(JPanel panel) {
-		this.remove(this.panel);
-		this.panel = panel;
-		this.add(this.panel);
-		this.setVisible(true);
-	}
-
 	//Permets de faire une action en fonction du bouton cliqué
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnCreerRessource){this.changerPanel(new PanelRessources(this));}
+		if(e.getSource() == this.btnCreerRessource){this.frame.changerPanel(new PanelRessources(this));}
 		if(e.getSource() == this.btnCreerSAE){
 
 		}
