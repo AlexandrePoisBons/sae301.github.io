@@ -531,13 +531,13 @@ public class Requetes {
 	}
 
 
-	public void updateIntervenantModule(Intervenant intervenant, Heure module) throws SQLException {
+	public void updateIntervenantModule(Intervenant intervenant, Heure heure) throws SQLException {
 
-		if ( this.existsIntervenantModule(intervenant.getIdIntervenant(), module.getIdModule()) ) {
+		if ( this.existsIntervenantModule(intervenant.getIdIntervenant(), heure.getIdModule()) ) {
 			this.psUpdateIM.setInt(1, intervenant.getIdIntervenant());
-			this.psUpdateIM.setInt(2, module.getIdModule());
+			this.psUpdateIM.setInt(2, heure.getIdModule());
 			this.psUpdateIM.setInt(1, intervenant.getIdIntervenant());
-			this.psUpdateIM.setInt(2, module.getIdModule());
+			this.psUpdateIM.setInt(2, heure.getIdModule());
 			this.psUpdateIM.executeUpdate();
 		} else {
 			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" inexistant");
