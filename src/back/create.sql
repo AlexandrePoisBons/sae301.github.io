@@ -9,8 +9,9 @@ DROP TABLE IF EXISTS Module             CASCADE;
 
 
 Create Table Module (
-    id_module serial primary key,
+    id_module integer primary key,
     type_module VARCHAR(50) NOT NULL,
+    semestre VARCHAR(2) NOT NULL,
     libelle VARCHAR(100) NOT NULL,
     libelle_court VARCHAR(50) NOT NULL,
     code VARCHAR(15) NOT NULL,
@@ -23,7 +24,7 @@ Create Table Module (
 
 
 Create table Type_Heure(
-    id_type_heure serial primary key,
+    id_type_heure integer primary key,
     nom_type_heure varchar(50),
     coeff float
 );
@@ -31,14 +32,14 @@ Create table Type_Heure(
 
 Create table Statut (
     nom_statut VARCHAR(10) primary key,
-    nb_heure_service int check(nb_heure_service>0),
-    nb_heure_maxi int check(nb_heure_maxi>0),
-    coeff_tp     float NOT NULL
+    nb_heures_service int check(nb_heures_service>0),
+    nb_heures_maxi int check(nb_heures_maxi>0),
+    coeff_tp float NOT NULL
 );
 
 
 Create table Intervenant (
-    id_intervenant serial primary key,
+    id_intervenant integer primary key,
     nom VARCHAR(25),
     prenom VARCHAR(25),
     nb_equivalent_td float,
@@ -47,12 +48,11 @@ Create table Intervenant (
 
 
 Create table Heure (
-    id_heure serial primary key,
+    id_heure integer primary key,
     id_module integer REFERENCES Module(id_module),
-    id_intervenant integer REFERENCES Intervenant(id_intervenant),
     id_type_heure integer REFERENCES Type_Heure(id_type_heure),
-    commentaire VARCHAR(250),
-    duree integer NOT NULL CHECK(duree > 0)
+    duree integer NOT NULL CHECK(duree > 0),
+    commentaire VARCHAR(250)
 );
 
 Create table Intervenant_Module (
