@@ -1,10 +1,23 @@
 package back.tests;
 
-import back.db.*;
 import back.*;
+import back.db.*;
 import back.Module;
 
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
+
+
 public class TestRequetes {
+
+    @Test
+    public void testRequete1(){
+        assertEquals(1,1);
+    }
+
+
+    
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
 

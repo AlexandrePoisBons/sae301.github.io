@@ -54,6 +54,8 @@ public class Requetes {
 	private PreparedStatement psDeleteHM;
 	private PreparedStatement psUpdateHM;
 
+	private PreparedStatement psDeleteHeureModule;
+
 	public Requetes() {
 		this.db = DB.getInstance();
 		this.connec = this.db.getConnection();
@@ -78,7 +80,7 @@ public class Requetes {
 			this.psInsertM = this.connec.prepareStatement("INSERT INTO Module VALUES(?,?,?,?,?,?,?,?,?,?,?);");
 			this.psDeleteM = this.connec.prepareStatement("DELETE FROM Module CASCADE WHERE id_module=?;");
 			this.psUpdateM = this.connec.prepareStatement("UPDATE Module SET type_module=?, semestre=?, libelle=?, libelle_court=?, code=?, nb_etudiants=?, nb_gp_td=?, nb_gp_tp=?, nb_semaines=?, nb_heures=? WHERE id_module=?;");
-			
+
 			this.psSelectS = this.connec.prepareStatement("SELECT * FROM Statut WHERE nom_statut=?;");
 			this.psInsertS = this.connec.prepareStatement("INSERT INTO Statut VALUES(?,?,?,?);");
 			this.psDeleteS = this.connec.prepareStatement("DELETE FROM Statut WHERE nom_Statut=?;");
@@ -98,6 +100,8 @@ public class Requetes {
 			this.psInsertHM = this.connec.prepareStatement("INSERT INTO Heure_Module VALUES(?,?);");
 			this.psDeleteHM = this.connec.prepareStatement("DELETE FROM Heure_Module WHERE id_heure=?, id_module=?;");
 			this.psUpdateHM = this.connec.prepareStatement("UPDATE Heure_Module SET id_heure=?, id_module=? WHERE id_heure=? AND id_module=?;");
+
+			this.psDeleteHeureModule = this.connec.prepareStatement("DELETE FROM Heure WHERE id_module=?;");
 
 		} catch( SQLException e ) { e.printStackTrace(); }
 
@@ -288,6 +292,10 @@ public class Requetes {
 	public void deleteModule(Module module) throws SQLException {
 
 		if ( this.existsModule(module.getIdModule()) ) {
+
+			this.psDeleteHeureModule.setInt(1, module.getIdModule());
+			this.psDeleteHeureModule.executeUpdate();
+
 			this.psDeleteM.setInt(1, module.getIdModule());
 			this.psDeleteM.executeUpdate();
 		} else {
@@ -602,11 +610,10 @@ public class Requetes {
 	}
 
 
-
 	private ArrayList<Heure> getHeures(String req) throws SQLException {
 		Statement selectH = connec.createStatement();
 		ArrayList<Heure> listeH = new ArrayList<Heure>();
-			
+
 		ResultSet rs = selectH.executeQuery(req);
 		while( rs.next() ) {
 			 Heure h = Heure.creerHeure( rs.getInt("id_heure"),
@@ -671,11 +678,4 @@ public class Requetes {
 	// methode getHeuresByModule(Module)
 
 	// methode getIntervenantsByHeure(Heure)
-
-
-
-
-
-
-
 }
