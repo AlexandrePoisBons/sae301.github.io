@@ -21,7 +21,7 @@ public class Module {
     private List<Intervenant> intervenants;
     private List<Heure>       heures;
 
-    public Module creerModule( String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+    public static Module creerModule( String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
         if ( typeModule == null || typeModule.isEmpty() || semestre == null || semestre.isEmpty() || libelle == null || libelle.isEmpty() || libelleCourt == null || libelleCourt.isEmpty() || code == null || code.isEmpty() || nbEtudiants < 0 || nbGpTD < 0 || nbGpTP < 0 || nbSemaines < 0 || nbHeures < 0 )
             return null;
 
@@ -76,5 +76,10 @@ public class Module {
     public void setIntervenant(List<Intervenant> i )   { this.intervenants = i;            }
 
 
-    
+    public float getNbHeuresAffecte() {
+        float nbHeuresAffecte = 0;
+        for ( Heure h : this.heures )
+            nbHeuresAffecte += h.getDuree();
+        return nbHeuresAffecte;
+    }
 }

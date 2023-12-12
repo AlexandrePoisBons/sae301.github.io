@@ -31,7 +31,7 @@ Create table Type_Heure(
 
 Create table Statut (
     nom_statut VARCHAR(10) primary key,
-    nb_heure_mini int check(nb_heure_mini>0),
+    nb_heure_service int check(nb_heure_service>0),
     nb_heure_maxi int check(nb_heure_maxi>0),
     coeff_tp     float NOT NULL
 );

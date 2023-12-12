@@ -11,13 +11,13 @@ public class Intervenant {
     private String prenom;
     private String nom;
     private Statut statut;
-    private float    nbEqTD;
+    private float  nbEqTD;
     
     private List<Heure>  heures;
     private List<Module> modules;
 
     
-    public Intervenant creerIntervenant(String prenom, String nom, Statut statut, float nbEqTD ) {
+    public static Intervenant creerIntervenant(String prenom, String nom, Statut statut, float nbEqTD ) {
         if ( prenom == null || nom == null || statut == null || nbEqTD < 0  )
             return null;
 

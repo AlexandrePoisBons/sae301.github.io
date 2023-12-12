@@ -49,11 +49,16 @@ public class Requetes {
 	private PreparedStatement psDeleteIH;
 	private PreparedStatement psUpdateIH;
 
+	private PreparedStatement psSelectHM;
+	private PreparedStatement psInsertHM;
+	private PreparedStatement psDeleteHM;
+	private PreparedStatement psUpdateHM;
+
 	public Requetes() {
 		this.db = DB.getInstance();
 		this.connec = this.db.getConnection();
 
-		try{
+		try {
 			this.psSelectI = this.connec.prepareStatement("SELECT * FROM Intervenant WHERE id_intervenant=?;");
 			this.psInsertI = this.connec.prepareStatement("INSERT INTO Intervenant VALUES(?,?,?,?,?);");
 			this.psDeleteI = this.connec.prepareStatement("DELETE * FROM Intervenant WHERE id_intervenant=?;");
@@ -89,21 +94,35 @@ public class Requetes {
 			this.psDeleteIH = this.connec.prepareStatement("DELETE * FROM Intervenant_Heure WHERE id_intervenant=?, id_heure=?;");
 			this.psUpdateIH = this.connec.prepareStatement("UPDATE Intervenant_Heure SET id_intervenant=?, id_heure=? WHERE id_intervenant=? AND id_heure=?;");
 
+			this.psSelectHM = this.connec.prepareStatement("SELECT * FROM Heure_Module WHERE id_heure=? AND id_module=?;");
+			this.psInsertHM = this.connec.prepareStatement("INSERT INTO Heure_Module VALUES(?,?);");
+			this.psDeleteHM = this.connec.prepareStatement("DELETE * FROM Heure_Module WHERE id_heure=?, id_module=?;");
+			this.psUpdateHM = this.connec.prepareStatement("UPDATE Heure_Module SET id_heure=?, id_module=? WHERE id_heure=? AND id_module=?;");
+		
+		
+		
+		
+		
 		} catch( SQLException e ) { e.printStackTrace(); }
 
 	}
 
-	public void insertIntervenant( Intervenant intervenant ) throws SQLException {
-		String request = "SELECT * FROM Intervenant WHERE id_intervenant="+intervenant.getIdIntervenant()+";";
 
-		Statement stmt = this.connec.createStatement();
+	public boolean existsIntervenant(int idIntervenant) throws SQLException {
 
-		ResultSet rs = stmt.executeQuery(request);
+		this.psSelectI.setInt(1, idIntervenant);
+		ResultSet rs = this.psSelectI.executeQuery();
 
 		int cptLig = 0;
 		while ( rs.next() ) cptLig ++;
 
-		if ( cptLig <= 0 ) {
+		return cptLig > 0;
+	}
+
+
+	public void insertIntervenant( Intervenant intervenant ) throws SQLException {
+		
+		if ( !this.existsIntervenant(intervenant.getIdIntervenant()) ) {
 			this.psInsertI.setInt(1, intervenant.getIdIntervenant());
 			this.psInsertI.setString(2, intervenant.getNom());
 			this.psInsertI.setString(3, intervenant.getPrenom());
@@ -116,16 +135,8 @@ public class Requetes {
 	}
 
 	public void deleteIntervenant(Intervenant intervenant) throws SQLException {
-		String request = "SELECT * FROM Intervenant WHERE id_intervenant="+intervenant.getIdIntervenant()+";";
 
-		Statement stmt = this.connec.createStatement();
-
-		ResultSet rs = stmt.executeQuery(request);
-
-		int cptLig = 0;
-		while ( rs.next() ) cptLig ++;
-
-		if ( cptLig > 0 ) {
+		if ( this.existsIntervenant(intervenant.getIdIntervenant()) ) {
 			this.psDeleteI.setInt(1, intervenant.getIdIntervenant());
 			this.psDeleteI.executeUpdate();
 		} else{
@@ -134,16 +145,8 @@ public class Requetes {
 	}
 
 	public void updateIntervenant(Intervenant intervenant) throws SQLException {
-		Statement stmt = this.connec.createStatement();
 
-		String request = "SELECT * FROM Intervenant WHERE id_intervenant="+intervenant.getIdIntervenant()+";";
-
-		ResultSet rs = stmt.executeQuery(request);
-
-		int cptLig = 0;
-		while (rs.next()) cptLig ++;
-
-		if ( cptLig > 0 ) {
+		if ( this.existsIntervenant(intervenant.getIdIntervenant()) ) {
 			this.psUpdateI.setString(1, intervenant.getNom());
 			this.psUpdateI.setString(2, intervenant.getPrenom());
 			this.psUpdateI.setFloat(3, intervenant.getNbEqTD());
@@ -156,18 +159,21 @@ public class Requetes {
 	}
 
 
-	public void insertHeure(Heure heure) throws SQLException {
-		
-		String request = "SELECT * FROM Heure WHERE id_heure="+heure.getIdHeure()+";";
+	public boolean existsHeure(int idHeure) throws SQLException {
 
-		Statement stmt = this.connec.createStatement();
-
-		ResultSet rs = stmt.executeQuery(request);
+		this.psSelectH.setInt(1, idHeure);
+		ResultSet rs = this.psSelectH.executeQuery();
 
 		int cptLig = 0;
 		while ( rs.next() ) cptLig ++;
 
-		if ( cptLig <= 0 ) {
+		return cptLig > 0;
+	}
+
+
+	public void insertHeure(Heure heure) throws SQLException {
+
+		if ( !this.existsHeure(heure.getIdHeure()) ) {
 			this.psInsertH.setInt(1, heure.getIdHeure());
 			this.psInsertH.setInt(2, heure.getModule().getIdModule());
 			this.psInsertH.setInt(3, heure.getTypeHeure().getIdTypeHeure());
@@ -179,16 +185,8 @@ public class Requetes {
 	}
 
 	public void deleteHeure(Heure heure) throws SQLException {
-		String request = "SELECT * FROM heure WHERE id_heure="+heure.getIdHeure()+";";
 
-		Statement stmt = this.connec.createStatement();
-
-		ResultSet rs = stmt.executeQuery(request);
-
-		int cptLig = 0;
-		while ( rs.next() ) cptLig ++;
-
-		if ( cptLig > 0 ) {
+		if ( this.existsHeure(heure.getIdHeure()) ) {
 			this.psDeleteH.setInt(1, heure.getIdHeure());
 			this.psDeleteH.executeUpdate();
 		} else {
@@ -197,16 +195,8 @@ public class Requetes {
 	}
 
 	public void updateHeure(Heure heure) throws SQLException {
-		Statement stmt = this.connec.createStatement();
 
-		String request = "SELECT * FROM Heure WHERE id_heure="+heure.getIdHeure()+";";
-
-		ResultSet rs = stmt.executeQuery(request);
-
-		int cptLig = 0;
-		while (rs.next()) cptLig ++;
-
-		if ( cptLig > 0 ) {
+		if ( this.existsHeure(heure.getIdHeure()) ) {
 			this.psUpdateH.setInt(1, heure.getModule().getIdModule());
 			this.psUpdateH.setInt(2, heure.getTypeHeure().getIdTypeHeure());
 			this.psUpdateH.setInt(3, heure.getDuree());
@@ -216,39 +206,33 @@ public class Requetes {
 		}
 	}
 
+	public boolean existsTypeHeure(int idTypeHeure) throws SQLException {
 
-	public void insertTypeHeure(TypeHeure typeHeure) throws SQLException {
-		
-		String request = "SELECT * FROM Type_Heure WHERE id_type_heure="+typeHeure.getIdTypeHeure()+";";
-
-		Statement stmt = this.connec.createStatement();
-
-		ResultSet rs = stmt.executeQuery(request);
+		this.psSelectTH.setInt(1, idTypeHeure);
+		ResultSet rs = this.psSelectTH.executeQuery();
 
 		int cptLig = 0;
 		while ( rs.next() ) cptLig ++;
 
-		if ( cptLig <= 0 ) {
+		return cptLig > 0;
+	}
+
+
+	public void insertTypeHeure(TypeHeure typeHeure) throws SQLException {
+
+		if ( !this.existsTypeHeure(typeHeure.getIdTypeHeure()) ) {
 			this.psInsertTH.setInt(1, typeHeure.getIdTypeHeure());
 			this.psInsertTH.setFloat(2, typeHeure.getCoeff());
 			this.psInsertTH.executeUpdate();
 		} else {
-			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" deja existant");
+			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
 		}
 	}
 
 
 	public void deleteTypeHeure(TypeHeure typeHeure) throws SQLException {
-		String request = "SELECT * FROM Type_Heure WHERE id_type_heure="+typeHeure.getIdTypeHeure()+";";
 
-		Statement stmt = this.connec.createStatement();
-
-		ResultSet rs = stmt.executeQuery(request);
-
-		int cptLig = 0;
-		while ( rs.next() ) cptLig ++;
-
-		if ( cptLig > 0 ) {
+		if ( this.existsTypeHeure(typeHeure.getIdTypeHeure()) ) {
 			this.psDeleteTH.setInt(1, typeHeure.getIdTypeHeure());
 			this.psDeleteTH.executeUpdate();
 		} else {
@@ -258,16 +242,8 @@ public class Requetes {
 
 
 	public void updateTypeHeure(TypeHeure typeHeure) throws SQLException {
-		Statement stmt = this.connec.createStatement();
 
-		String request = "SELECT * FROM Type_Heure WHERE id_type_heure="+typeHeure.getIdTypeHeure()+";";
-
-		ResultSet rs = stmt.executeQuery(request);
-
-		int cptLig = 0;
-		while (rs.next()) cptLig ++;
-
-		if ( cptLig > 0 ) {
+		if ( this.existsTypeHeure(typeHeure.getIdTypeHeure()) ) {
 			this.psUpdateTH.setFloat(1, typeHeure.getCoeff());
 			this.psUpdateTH.setInt(2, typeHeure.getIdTypeHeure());
 			this.psUpdateTH.executeUpdate();
@@ -276,19 +252,21 @@ public class Requetes {
 		}
 	}
 
+	public boolean existsModule(int idModule) throws SQLException {
 
-	public void insertModule(Module module) throws SQLException {
-		
-		String request = "SELECT * FROM Module WHERE id_module="+module.getIdModule()+";";
-
-		Statement stmt = this.connec.createStatement();
-
-		ResultSet rs = stmt.executeQuery(request);
+		this.psSelectM.setInt(1, idModule);
+		ResultSet rs = this.psSelectM.executeQuery();
 
 		int cptLig = 0;
 		while ( rs.next() ) cptLig ++;
 
-		if ( cptLig <= 0 ) {
+		return cptLig > 0;
+	}
+
+
+	public void insertModule(Module module) throws SQLException {
+
+		if ( !this.existsModule(module.getIdModule()) ) {
 			this.psInsertM.setInt(1, module.getIdModule());
 			this.psInsertM.setString(2, module.getTypeModule());
 			this.psInsertM.setString(3, module.getLibelle());
@@ -307,16 +285,8 @@ public class Requetes {
 
 
 	public void deleteModule(Module module) throws SQLException {
-		String request = "SELECT * FROM Module WHERE id_module="+module.getIdModule()+";";
 
-		Statement stmt = this.connec.createStatement();
-
-		ResultSet rs = stmt.executeQuery(request);
-
-		int cptLig = 0;
-		while ( rs.next() ) cptLig ++;
-
-		if ( cptLig > 0 ) {
+		if ( this.existsModule(module.getIdModule()) ) {
 			this.psDeleteM.setInt(1, module.getIdModule());
 			this.psDeleteM.executeUpdate();
 		} else {
@@ -335,7 +305,7 @@ public class Requetes {
 		int cptLig = 0;
 		while (rs.next()) cptLig ++;
 
-		if ( cptLig > 0 ) {
+		if ( this.existsModule(module.getIdModule()) ) {
 			this.psUpdateM.setString(1, module.getTypeModule());
 			this.psUpdateM.setString(2, module.getLibelle());
 			this.psUpdateM.setString(3, module.getLibelleCourt());
@@ -352,20 +322,24 @@ public class Requetes {
 		}
 	}
 
-	public void insertStatut(Statut statut) throws SQLException {
 
-		String request = "SELECT * FROM Statut WHERE nom_statut="+statut.getNomStatut()+";";
 
-		Statement stmt = this.connec.createStatement();
+	public boolean existsStatut(String nomStatut) throws SQLException {
 
-		ResultSet rs = stmt.executeQuery(request);
+		this.psSelectS.setString(1, nomStatut);
+		ResultSet rs = this.psSelectS.executeQuery();
 
 		int cptLig = 0;
 		while ( rs.next() ) cptLig ++;
 
-		if ( cptLig <= 0 ) {
+		return cptLig > 0;
+	}
+
+	public void insertStatut(Statut statut) throws SQLException {
+
+		if ( !this.existsStatut(statut.getNomStatut()) ) {
 			this.psInsertS.setString(1, statut.getNomStatut());
-			this.psInsertS.setInt(2, statut.getNbMinHeure());
+			this.psInsertS.setInt(2, statut.getNbHeureService());
 			this.psInsertS.setInt(3, statut.getNbMaxHeure());
 			this.psInsertS.setFloat(4, statut.getCoeffTP());
 			this.psInsertTH.executeUpdate();
@@ -376,16 +350,8 @@ public class Requetes {
 
 
 	public void deleteStatut(Statut statut) throws SQLException {
-		String request = "SELECT * FROM Statut WHERE nom_statut="+statut.getNomStatut()+";";
 
-		Statement stmt = this.connec.createStatement();
-
-		ResultSet rs = stmt.executeQuery(request);
-
-		int cptLig = 0;
-		while ( rs.next() ) cptLig ++;
-
-		if ( cptLig > 0 ) {
+		if ( this.existsStatut(statut.getNomStatut()) ) {
 			this.psDeleteS.setString(1, statut.getNomStatut());
 			this.psDeleteS.executeUpdate();
 		} else {
@@ -395,17 +361,9 @@ public class Requetes {
 
 
 	public void updateStatut(Statut statut) throws SQLException {
-		Statement stmt = this.connec.createStatement();
 
-		String request = "SELECT * FROM Statut WHERE nom_statut="+statut.getNomStatut()+";";
-
-		ResultSet rs = stmt.executeQuery(request);
-
-		int cptLig = 0;
-		while (rs.next()) cptLig ++;
-
-		if ( cptLig > 0 ) {
-			this.psUpdateS.setInt(1, statut.getNbMinHeure());
+		if ( this.existsStatut(statut.getNomStatut()) ) {
+			this.psUpdateS.setInt(1, statut.getNbHeureService());
 			this.psUpdateS.setInt(2, statut.getNbMaxHeure());
 			this.psUpdateS.setFloat(3, statut.getCoeffTP());
 			this.psUpdateS.setString(4, statut.getNomStatut());
@@ -417,10 +375,10 @@ public class Requetes {
 
 	
 	public boolean existsIntervenantModule(int idIntervenant, int idModule) throws SQLException {
-		String request = "SELECT * FROM Intervenant_Module WHERE id_intervenant="+idIntervenant+" AND id_module="+idModule+";";
 
-		Statement stmt = this.connec.createStatement();
-		ResultSet rs = stmt.executeQuery(request);
+		this.psSelectIM.setInt(1, idIntervenant);
+		this.psSelectIM.setInt(2, idModule);
+		ResultSet rs = this.psSelectIM.executeQuery();
 
 		int cptLig = 0;
 		while ( rs.next() ) cptLig ++;
@@ -456,7 +414,7 @@ public class Requetes {
 
 	public void deleteIntervenantModule(Intervenant intervenant, Module module) throws SQLException {
 
-		if ( !this.existsIntervenantModule(intervenant.getIdIntervenant(), module.getIdModule()) ) {
+		if ( this.existsIntervenantModule(intervenant.getIdIntervenant(), module.getIdModule()) ) {
 			this.psDeleteIM.setInt(1, intervenant.getIdIntervenant());
 			this.psDeleteIM.setInt(2, module.getIdModule());
 			this.psDeleteIM.executeUpdate();
@@ -480,12 +438,12 @@ public class Requetes {
 	}
 
 
-
 	public boolean existsIntervenantHeure(int idIntervenant, int idHeure) throws SQLException {
-		String request = "SELECT * FROM Intervenant_Heure WHERE id_intervenant="+idIntervenant+" AND id_heure="+idHeure+";";
+		
 
-		Statement stmt = this.connec.createStatement();
-		ResultSet rs = stmt.executeQuery(request);
+		this.psSelectIH.setInt(1, idIntervenant);
+		this.psSelectIH.setInt(2, idHeure);
+		ResultSet rs = this.psSelectIM.executeQuery();
 
 		int cptLig = 0;
 		while ( rs.next() ) cptLig ++;
@@ -521,26 +479,90 @@ public class Requetes {
 
 	public void deleteIntervenantHeure(Intervenant intervenant, Heure heure) throws SQLException {
 
-		if ( !this.existsIntervenantModule(intervenant.getIdIntervenant(), heure.getIdHeure()) ) {
+		if ( this.existsIntervenantModule(intervenant.getIdIntervenant(), heure.getIdHeure()) ) {
 			this.psDeleteIM.setInt(1, intervenant.getIdIntervenant());
 			this.psDeleteIM.setInt(2, heure.getIdHeure());
 			this.psDeleteIM.executeUpdate();
 		} else {
-			System.out.println("Intervenant id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" inexistant");
+			System.out.println("Intervenant id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" inexistant");
 		}
 	}
 
 
-	public void updateIntervenantModule(Intervenant intervenant, Heure heure) throws SQLException {
+	public void updateIntervenantHeure(Intervenant intervenant, Heure heure) throws SQLException {
 
-		if ( this.existsIntervenantModule(intervenant.getIdIntervenant(), heure.getIdModule()) ) {
+		if ( this.existsIntervenantModule(intervenant.getIdIntervenant(), heure.getIdHeure()) ) {
 			this.psUpdateIM.setInt(1, intervenant.getIdIntervenant());
-			this.psUpdateIM.setInt(2, heure.getIdModule());
+			this.psUpdateIM.setInt(2, heure.getIdHeure());
 			this.psUpdateIM.setInt(1, intervenant.getIdIntervenant());
-			this.psUpdateIM.setInt(2, heure.getIdModule());
+			this.psUpdateIM.setInt(2, heure.getIdHeure());
 			this.psUpdateIM.executeUpdate();
 		} else {
-			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" inexistant");
+			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" inexistant");
+		}
+	}
+
+
+	public boolean existsHeureModule(int idHeure, int idModule) throws SQLException {
+
+		this.psSelectHM.setInt(1, idHeure);
+		this.psSelectHM.setInt(2,idModule);
+		ResultSet rs = this.psSelectHM.executeQuery();
+
+		int cptLig = 0;
+		while ( rs.next() ) cptLig ++;
+
+		return cptLig > 0;
+	}
+
+
+	public void insertHeureModule(ArrayList<Heure> heures, Module module) throws SQLException {
+
+		for (Heure heure : heures) {
+			if ( !this.existsHeureModule(heure.getIdHeure(), module.getIdModule()) ) {
+				this.psInsertHM.setInt(1, heure.getIdHeure());
+				this.psInsertHM.setInt(2, module.getIdModule());
+				this.psInsertHM.executeUpdate();
+			} else {
+				System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_heure = "+module.getIdModule()+" deja existant");
+			}
+		}
+	}
+
+	public void insertHeureModule(Heure heure, Module module) throws SQLException {
+
+		if ( !this.existsHeureModule(heure.getIdHeure(), module.getIdModule()) ) {
+			this.psInsertHM.setInt(1, heure.getIdHeure());
+			this.psInsertHM.setInt(2, module.getIdModule());
+			this.psInsertHM.executeUpdate();
+		} else {
+			System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" deja existant");
+		}
+	}
+
+
+	public void deleteHeureModule(Heure heure, Module module) throws SQLException {
+
+		if ( this.existsHeureModule(heure.getIdHeure(), module.getIdModule()) ) {
+			this.psDeleteHM.setInt(1, heure.getIdHeure());
+			this.psDeleteHM.setInt(2, module.getIdModule());
+			this.psDeleteHM.executeUpdate();
+		} else {
+			System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" inexistant");
+		}
+	}
+
+
+	public void updateHeureModule(Heure heure, Module module) throws SQLException {
+
+		if ( this.existsHeureModule(heure.getIdHeure(), module.getIdModule()) ) {
+			this.psUpdateHM.setInt(1, heure.getIdHeure());
+			this.psUpdateHM.setInt(2, module.getIdModule());
+			this.psUpdateHM.setInt(1, heure.getIdHeure());
+			this.psUpdateHM.setInt(2, module.getIdModule());
+			this.psUpdateHM.executeUpdate();
+		} else {
+			System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" inexistant");
 		}
 	}
 
@@ -549,6 +571,63 @@ public class Requetes {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 
 
@@ -672,7 +751,7 @@ p = c			;()erueH wen = p erue
 		return getModules("SELECT * FROM Module");
 	}
 
-
+ */
 
 
 }

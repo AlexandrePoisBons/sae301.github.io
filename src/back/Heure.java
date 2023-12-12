@@ -14,7 +14,7 @@ public class Heure {
 
 	private List<Intervenant> intervenants;
     
-    public Heure creerHeure( Module module, TypeHeure typeHeure, int duree, String commentaire)
+    public static Heure creerHeure( Module module, TypeHeure typeHeure, int duree, String commentaire)
     {
 		if ( module == null || typeHeure == null || duree <= 0 )
 			return null;
@@ -42,11 +42,12 @@ public class Heure {
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
 
 
-	public void setIdHeure( int idHeure )                       { this.idHeure     = idHeure;         }
-	public void setModule(Module module)                        { this.module      = module;          }
-	public void setTypeHeure(TypeHeure typeHeure)               { this.typeHeure   = typeHeure;       }
-	public void setDuree(int duree)                             { this.duree       = duree;           }
-	public void setCommentaire(String commentaire)              { this.commentaire = commentaire;     }
-	public void setIntervenants(List<Intervenant> intervenants) { this.intervenants = intervenants;   }
-	public void ajouterIntervenant(Intervenant intervenant)     { this.intervenants.add(intervenant); }
+	public void setIdHeure( int idHeure )                       { this.idHeure     = idHeure;            }
+	public void setModule(Module module)                        { this.module      = module;             }
+	public void setTypeHeure(TypeHeure typeHeure)               { this.typeHeure   = typeHeure;          }
+	public void setDuree(int duree)                             { this.duree       = duree;              }
+	public void setCommentaire(String commentaire)              { this.commentaire = commentaire;        }
+	public void setIntervenants(List<Intervenant> intervenants) { this.intervenants = intervenants;      }
+	public void ajouterIntervenant(Intervenant intervenant)     { this.intervenants.add(intervenant);    }
+	public void supprimerIntervenant(Intervenant intervenant)   { this.intervenants.remove(intervenant); }
 }
