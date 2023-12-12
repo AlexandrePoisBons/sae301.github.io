@@ -1,6 +1,9 @@
 {
-    "java.project.sourcePaths": [
-        "code/src/back/db",
-        "code/src/ihm"
+    "java.project.sourcePaths": ["src","lib"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "lib/*.jar",
+        "lib/postgresql-8.4-703.jdbc4.jar"
     ]
 }
