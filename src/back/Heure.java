@@ -1,29 +1,47 @@
 package back;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Heure {
-    private int         idHeure;
-    private Module      module;
-    private Intervenant intervenant;
-    private TypeHeure   typeHeure;
-    private int         nbHeures;
+	private static int nbHeures = 0;
 
-    public Heure(int idHeure, Module module, Intervenant intervenant, TypeHeure typeHeure, int nbHeures) {
-        this.idHeure     = idHeure;
-        this.module      = module;
-        this.intervenant = intervenant;
-        this.typeHeure   = typeHeure;
-        this.nbHeures    = nbHeures;
+	private int         idHeure;
+	private Module      module;
+	private TypeHeure   typeHeure;
+	private int         duree;
+	private List<Intervenant> intervenants;
+
+	
+    
+    public Heure creerHeure( Module module, TypeHeure typeHeure, int duree )
+    {
+
+
+        return new Heure(module, typeHeure, duree);
     }
+    
+    private Heure(Module module, TypeHeure typeHeure, int duree) {
+		this.idHeure     = Heure.nbHeures++;
+		this.module      = module;
+		this.typeHeure   = typeHeure;
+		this.duree       = duree;
 
-    public int getIdHeure()             { return this.idHeure;     }
-    public Module getModule()           { return this.module;      }
-    public Intervenant getIntervenant() { return this.intervenant; }
-    public TypeHeure getTypeHeure()     { return this.typeHeure;   }
-    public int getNbHeures()            { return this.nbHeures;    }
+		this.intervenants = new ArrayList<Intervenant>();
+	}
 
-    public void setIdHeure( int idHeure )               { this.idHeure     = idHeure;     }
-    public void setModule(Module module)                { this.module      = module;      }
-    public void setIntervenant(Intervenant intervenant) { this.intervenant = intervenant; }
-    public void setTypeHeure(TypeHeure typeHeure)       { this.typeHeure   = typeHeure;   }
-    public void setNbHeures(int nbHeures)               { this.nbHeures    = nbHeures;    }
+
+
+	public int               getIdHeure()      { return this.idHeure;      }
+	public Module            getModule()       { return this.module;       }
+	public TypeHeure         getTypeHeure()    { return this.typeHeure;    }
+	public int               getDuree()        { return this.duree;        }
+	public List<Intervenant> getIntervenants() { return this.intervenants; }
+
+	public void setIdHeure( int idHeure )                       { this.idHeure     = idHeure;         }
+	public void setModule(Module module)                        { this.module      = module;          }
+	public void setTypeHeure(TypeHeure typeHeure)               { this.typeHeure   = typeHeure;       }
+	public void setDuree(int duree)                             { this.duree       = duree;           }
+	public void setIntervenants(List<Intervenant> intervenants) { this.intervenants = intervenants;   }
+	public void ajouterIntervenant(Intervenant intervenant)     { this.intervenants.add(intervenant); }
 }

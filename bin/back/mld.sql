@@ -1,11 +1,12 @@
-DROP TABLE IF EXISTS Heure             CASCADE;
-DROP TABLE IF EXISTS Type_Heure        CASCADE;
-DROP TABLE IF EXISTS Intervenant       CASCADE;
-DROP TABLE IF EXISTS Statut            CASCADE;
-DROP TABLE IF EXISTS Module            CASCADE;
-DROP TABLE IF EXISTS IntervenantModule CASCADE;
-DROP TABLE IF EXISTS IntervenantHeure  CASCADE;
-DROP TABLE IF EXISTS HeureModule       CASCADE;
+DROP TABLE IF EXISTS Intervenant_Heure  CASCADE;
+DROP TABLE IF EXISTS Intervenant_Module CASCADE;
+DROP TABLE IF EXISTS Heure_Module       CASCADE;
+DROP TABLE IF EXISTS Heure              CASCADE;
+DROP TABLE IF EXISTS Type_Heure         CASCADE;
+DROP TABLE IF EXISTS Intervenant        CASCADE;
+DROP TABLE IF EXISTS Statut             CASCADE;
+DROP TABLE IF EXISTS Module             CASCADE;
+
 
 Create Table Module (
     id_module serial primary key,
@@ -41,8 +42,8 @@ Un type d’heure possèdera :
 
 Create table Statut (
     nom_statut VARCHAR(10) primary key,
-    nb_heure_mini int check(nbHeureMini>0),
-    nb_heure_maxi int check(nbHeureMax>0),
+    nb_heure_mini int check(nb_heure_mini>0),
+    nb_heure_maxi int check(nb_heure_maxi>0),
     coeff_tp     float NOT NULL
 );
 /*
@@ -58,7 +59,7 @@ Create table Intervenant (
     nom VARCHAR(25),
     prenom VARCHAR(25),
     nb_equivalent_td int,
-    id_statut VARCHAR(10) REFERENCES Statut(id_statut)
+    nom_statut VARCHAR(10) REFERENCES Statut(nom_statut)
 );
 /*
 Un intervenant possèdera :
@@ -74,7 +75,7 @@ Create table Heure (
     id_module integer REFERENCES Module(id_module),
     id_intervenant integer REFERENCES Intervenant(id_intervenant),
     id_type_heure integer REFERENCES Type_Heure(id_type_heure),
-    nb_heures integer NOT NULL CHECK(nb_heures > 0)
+    duree integer NOT NULL CHECK(duree > 0)
 );
 
 /*
@@ -86,20 +87,20 @@ Une heure possèdera :
 5. Un nombre d’heures (un nombre entier positif)
 */
 
-Create table IntervantModule (
+Create table Intervant_Module (
     id_intervenant integer REFERENCES Intervant(id_intervenant),
     id_module integer  REFERENCES Module(id_module),
     primary key (id_intervenant, id_module)
 )
 
-Create table IntervenantHeure ( 
+Create table Intervenant_Heure ( 
     id_intervenant integer REFERENCES Intervenant(id_intervenant),
     id_module integer REFERENCES Module(id_module),
     primary key (id_intervenant, id_module)
 )
 
 
-Create table HeureModule (
+Create table Heure_Module (
     id_module integer REFERENCES Module(id_module),
     id_heure integer REFERENCES Heure(id_heure),
     primary key (id_module, id_heure)

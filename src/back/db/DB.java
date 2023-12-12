@@ -1,7 +1,6 @@
 package back.db;
 
 import java.sql.*;
-import java.util.ArrayList;
 import back.*;
 
 public class DB {
