@@ -17,7 +17,7 @@ public class TestRequetes {
     }
 
 
-    
+
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
 
@@ -68,7 +68,6 @@ public class TestRequetes {
         System.out.println("update: " + req.getHeures());
         req.deleteHeure(Heure.creerHeure(1, Module.creerModule(1, "Sae", "s3", "Sae3", "Sae3", "S4.ST", 52, 2, 4, 52, 0) , new TypeHeure(1, "sae", 2f) , 10, "relou"));
         System.out.println("delete: " + req.getHeures() + "\n\n");
-
 
 
     }

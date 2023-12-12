@@ -26,7 +26,7 @@ Create Table Module (
 Create table Type_Heure(
     id_type_heure integer primary key,
     nom_type_heure varchar(50),
-    coeff float
+    coeff float DEFAULT 1
 );
 
 
@@ -34,7 +34,7 @@ Create table Statut (
     nom_statut VARCHAR(10) primary key,
     nb_heures_service int check(nb_heures_service>0),
     nb_heures_maxi int check(nb_heures_maxi>0),
-    coeff_tp float NOT NULL
+    coeff_tp float NOT NULL DEFAULT 1
 );
 
 

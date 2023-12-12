@@ -616,7 +616,7 @@ public class Requetes {
 
 		ResultSet rs = selectH.executeQuery(req);
 		while( rs.next() ) {
-			 Heure h = Heure.creerHeure( rs.getInt("id_heure"),
+			Heure h = Heure.creerHeure( rs.getInt("id_heure"),
 			                    Module.creerModule( rs.getInt("id_module"),
 			                                        rs.getString("type_module"),
 			                                        rs.getString("semestre"),
@@ -631,8 +631,10 @@ public class Requetes {
 			                         new TypeHeure( rs.getInt("id_type_heure"),
 			                                        rs.getString("nom_type_heure"),
 			                                        rs.getFloat("coeff") ),
-			                             rs.getInt("duree"),
-										 rs.getString("commentaire"));
+			                            rs.getInt("duree"),
+			                            rs.getString("commentaire"));
+
+
 			listeH.add(h);
 		}
 		rs.close(); 
@@ -640,7 +642,7 @@ public class Requetes {
 	}
 
 	public ArrayList<Heure> getHeures() throws SQLException {
-		return getHeures("SELECT * FROM Heure h JOIN Module m ON m.id_module = h.id_module JOIN Intervenant i ON i.id_intervenant = h.intervenant JOIN Type_Heure t ON t.id_type_heure = h.id_type_heure;");
+		return getHeures("SELECT * FROM Heure h JOIN Module m ON m.id_module = h.id_module JOIN Type_Heure t ON t.id_type_heure = h.id_type_heure JOIN Intervenant_Heure ih ON ih.id_heure = h.id_heure JOIN Intervenant i ON i.id_intervenant = ih.id_intervenant ");
 	}
 
 
