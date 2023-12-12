@@ -22,7 +22,7 @@ public class PanelModule extends JPanel {
 
 		// Création des éléments
 		this.txtCode 		= new JTextField();
-		this.txtLibCourt 	= new JTextField();
+		this.txtLibLong 	= new JTextField();
 		this.txtLibCourt 	= new JTextField();
 
 		// Ajouts des éléments
