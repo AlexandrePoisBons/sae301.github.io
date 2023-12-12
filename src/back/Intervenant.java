@@ -11,20 +11,20 @@ public class Intervenant {
     private String prenom;
     private String nom;
     private Statut statut;
-    private int    nbEqTD;
+    private float    nbEqTD;
     
     private List<Heure>  heures;
     private List<Module> modules;
 
     
-    public Intervenant creerIntervenant(String prenom, String nom, Statut statut, int nbEqTD ) {
+    public Intervenant creerIntervenant(String prenom, String nom, Statut statut, float nbEqTD ) {
         if ( prenom == null || nom == null || statut == null || nbEqTD < 0  )
             return null;
 
         return new Intervenant(prenom, nom, statut, nbEqTD);
     }
     
-    private Intervenant(String prenom, String nom, Statut statut, int nbEqTD ) {
+    private Intervenant(String prenom, String nom, Statut statut, float nbEqTD ) {
         this.idIntervenant = Intervenant.nbIntervenants++;
         this.prenom        = prenom;
         this.nom           = nom;
@@ -39,7 +39,7 @@ public class Intervenant {
     public String        getPrenom()        { return this.prenom;        }
     public String        getNom()           { return this.nom;           }
     public Statut        getStatut()        { return this.statut;        }
-    public int           getNbEqTD()        { return this.nbEqTD;        }
+    public float         getNbEqTD()        { return this.nbEqTD;        }
     public List<Heure>   getHeures()        { return this.heures;        }
     public List<Module>  getModules()       { return this.modules;       }
 
@@ -47,7 +47,7 @@ public class Intervenant {
     public void setPrenom( String prenom )          { this.prenom        = prenom;        }
     public void setNom(String nom)                  { this.nom           = nom;           }
     public void setStatut(Statut statut)            { this.statut        = statut;        }
-    public void setNbEqTD( int nbEqTD )             { this.nbEqTD        = nbEqTD;        }
+    public void setNbEqTD( float nbEqTD )           { this.nbEqTD        = nbEqTD;        }
 
     public void ajouterHeure(Heure h) {
         this.heures.add(h);
@@ -57,8 +57,6 @@ public class Intervenant {
         this.heures.remove(h);
     }
 
-
-
     public void ajouterModule(Module m) {
         this.modules.add(m);
     }
@@ -66,4 +64,14 @@ public class Intervenant {
     public void supprimerModule(Module m) {
         this.modules.remove(m);
     }
+
+    public float getNbHeures() {
+        float nbHeures = 0;
+        for (Heure h : this.heures)
+            nbHeures += h.getDuree() * h.getTypeHeure().getCoeff();
+        
+        return nbHeures;
+    }
+
+    
 }
