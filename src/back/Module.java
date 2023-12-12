@@ -1,6 +1,11 @@
 package back;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Module {
+    private static int nbModules = 0;
+
     private int    idModule;
     private String typeModule;
     private String semestre;
@@ -12,9 +17,13 @@ public class Module {
     private int    nbGpTP;
     private int    nbSemaines;
     private int    nbHeures;
+    
+    private List<Intervenant> intervenants;
+    private List<Heure>       heures;
+
 
     public Module( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
-        this.idModule     = idModule;
+        this.idModule     = Module.nbModules++;
         this.typeModule   = typeModule;
         this.semestre     = semestre;
         this.libelle      = libelle;
@@ -25,19 +34,24 @@ public class Module {
         this.nbGpTP       = nbGpTP;
         this.nbSemaines   = nbSemaines;
         this.nbHeures     = nbHeures;
+
+        this.intervenants = new ArrayList<Intervenant>();
+        this.heures       = new ArrayList<Heure>();
     }
 
-    public int    getIdModule()     { return this.idModule;     }
-    public String getTypeModule()   { return this.typeModule;   }
-    public String getSemestre()     { return this.semestre;     }
-    public String getLibelle()      { return this.libelle;      }
-    public String getLibelleCourt() { return this.libelleCourt; }
-    public String getCode()         { return this.code;         }
-    public int    getNbEtudiants()  { return this.nbEtudiants;  }
-    public int    getNbGpTD()       { return this.nbGpTD;       }
-    public int    getNbGpTP()       { return this.nbGpTP;       }
-    public int    getNbSemaines()   { return this.nbSemaines;   }
-    public int    getNbHeures()     { return this.nbHeures;     }
+    public int               getIdModule()     { return this.idModule;     }
+    public String            getTypeModule()   { return this.typeModule;   }
+    public String            getSemestre()     { return this.semestre;     }
+    public String            getLibelle()      { return this.libelle;      }
+    public String            getLibelleCourt() { return this.libelleCourt; }
+    public String            getCode()         { return this.code;         }
+    public int               getNbEtudiants()  { return this.nbEtudiants;  }
+    public int               getNbGpTD()       { return this.nbGpTD;       }
+    public int               getNbGpTP()       { return this.nbGpTP;       }
+    public int               getNbSemaines()   { return this.nbSemaines;   }
+    public int               getNbHeures()     { return this.nbHeures;     }
+    public List<Intervenant> getIntervenants() { return this.intervenants; }
+    public List<Heure>       getHeures()       { return this.heures;       }
 
 
     public void setIdModule( int idModule )            { this.idModule     = idModule;     }
@@ -50,4 +64,9 @@ public class Module {
     public void setNbGpTD( int nbGpTD )                { this.nbGpTD       = nbGpTD;       }
     public void setNbGpTP( int nbGpTP )                { this.nbGpTP       = nbGpTP;       }
     public void setNbSemaines( int nbSemaines )        { this.nbSemaines   = nbSemaines;   }
+    public void setHeures ( List<Heure> heures )       { this.heures       = heures;       }
+    public void setIntervenant(List<Intervenant> i )   { this.intervenants = i;            }
+
+
+    
 }
