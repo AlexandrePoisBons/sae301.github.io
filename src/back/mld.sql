@@ -1,8 +1,11 @@
-DROP TABLE IF EXISTS Heure       CASCADE;
-DROP TABLE IF EXISTS Type_Heure  CASCADE;
-DROP TABLE IF EXISTS Intervenant CASCADE;
-DROP TABLE IF EXISTS Statut      CASCADE;
-DROP TABLE IF EXISTS Module      CASCADE;
+DROP TABLE IF EXISTS Heure             CASCADE;
+DROP TABLE IF EXISTS Type_Heure        CASCADE;
+DROP TABLE IF EXISTS Intervenant       CASCADE;
+DROP TABLE IF EXISTS Statut            CASCADE;
+DROP TABLE IF EXISTS Module            CASCADE;
+DROP TABLE IF EXISTS IntervenantModule CASCADE;
+DROP TABLE IF EXISTS IntervenantHeure  CASCADE;
+DROP TABLE IF EXISTS HeureModule       CASCADE;
 
 Create Table Module (
     id_module serial primary key,
@@ -26,6 +29,7 @@ Un module possèdera :
 
 Create table Type_Heure(
     id_type_heure serial primary key,
+    nom_type_heure varchar(50),
     coeff float
 );
 /*
@@ -36,10 +40,10 @@ Un type d’heure possèdera :
 
 
 Create table Statut (
-    id_statut VARCHAR(10) primary key,
-    nbHeureMini float check(nbHeureMini>0),
-    nbHeureMax  float check(nbHeureMax>0),
-    coeffTP     float NOT NULL
+    nom_statut VARCHAR(10) primary key,
+    nb_heure_mini int check(nbHeureMini>0),
+    nb_heure_maxi int check(nbHeureMax>0),
+    coeff_tp     float NOT NULL
 );
 /*
 Un statut possèdera :
@@ -72,6 +76,7 @@ Create table Heure (
     id_type_heure integer REFERENCES Type_Heure(id_type_heure),
     nb_heures integer NOT NULL CHECK(nb_heures > 0)
 );
+
 /*
 Une heure possèdera :
 1. Un identifiant (un nombre entier positif)
@@ -80,3 +85,22 @@ Une heure possèdera :
 4. Un type d’heure
 5. Un nombre d’heures (un nombre entier positif)
 */
+
+Create table IntervantModule (
+    id_intervenant integer REFERENCES Intervant(id_intervenant),
+    id_module integer  REFERENCES Module(id_module),
+    primary key (id_intervenant, id_module)
+)
+
+Create table IntervenantHeure ( 
+    id_intervenant integer REFERENCES Intervenant(id_intervenant),
+    id_module integer REFERENCES Module(id_module),
+    primary key (id_intervenant, id_module)
+)
+
+
+Create table HeureModule (
+    id_module integer REFERENCES Module(id_module),
+    id_heure integer REFERENCES Heure(id_heure),
+    primary key (id_module, id_heure)
+)
