@@ -11,9 +11,9 @@ public class TypeHeure {
         this.coeff        = coeff;
     }
 
-    public int getIdTypeHeure()     { return this.idTypeHeure;  }
+    public int    getIdTypeHeure()  { return this.idTypeHeure;  }
     public String getNomTypeHeure() { return this.nomTypeHeure; }
-    public float getCoeff()         { return this.coeff;        }
+    public float  getCoeff()        { return this.coeff;        }
 
     public void setIdTypeHeure( int idTypeHeure )     { this.idTypeHeure  = idTypeHeure;  }
     public void setNomTypeHeure(String nomTypeHeure ) { this.nomTypeHeure = nomTypeHeure; }
