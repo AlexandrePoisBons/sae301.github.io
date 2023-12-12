@@ -18,7 +18,6 @@ public class DB {
 		try {
 			connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
-			connec.close();
 		} catch (SQLException e) { e.printStackTrace(); }
 	}
 
@@ -26,6 +25,8 @@ public class DB {
 		if ( dbInstance == null ) { dbInstance = new DB(); }
 		return dbInstance;
 	}
+
+	public void close() throws SQLException { this.connec.close(); }
 
 	public Connection getConnection() { return this.connec; }
 }

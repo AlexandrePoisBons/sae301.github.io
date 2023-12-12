@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Heure {
-	private static int nbHeures = 0;
-
 	private int         idHeure;
 	private Module      module;
 	private TypeHeure   typeHeure;
@@ -14,16 +12,16 @@ public class Heure {
 
 	private List<Intervenant> intervenants;
     
-    public static Heure creerHeure( Module module, TypeHeure typeHeure, int duree, String commentaire)
+    public static Heure creerHeure( int idHeure,  Module module, TypeHeure typeHeure, int duree, String commentaire)
     {
 		if ( module == null || typeHeure == null || duree <= 0 )
 			return null;
 
-        return new Heure(module, typeHeure, duree, commentaire);
+        return new Heure(idHeure, module, typeHeure, duree, commentaire);
     }
     
-    private Heure(Module module, TypeHeure typeHeure, int duree, String commentaire) {
-		this.idHeure     = Heure.nbHeures++;
+    private Heure(int idHeure, Module module, TypeHeure typeHeure, int duree, String commentaire) {
+		this.idHeure     = idHeure;
 		this.module      = module;
 		this.typeHeure   = typeHeure;
 		this.duree       = duree;
@@ -50,4 +48,8 @@ public class Heure {
 	public void setIntervenants(List<Intervenant> intervenants) { this.intervenants = intervenants;      }
 	public void ajouterIntervenant(Intervenant intervenant)     { this.intervenants.add(intervenant);    }
 	public void supprimerIntervenant(Intervenant intervenant)   { this.intervenants.remove(intervenant); }
+
+	public String toString() {
+		return this.idHeure + " " + this.module + " " + this.typeHeure + " " + this.duree + " " + this.commentaire;
+	}
 }

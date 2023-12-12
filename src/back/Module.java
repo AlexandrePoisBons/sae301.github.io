@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Module {
-    private static int nbModules = 0;
-
     private int    idModule;
     private String typeModule;
     private String semestre;
@@ -21,17 +19,17 @@ public class Module {
     private List<Intervenant> intervenants;
     private List<Heure>       heures;
 
-    public static Module creerModule( String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+    public static Module creerModule( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
         if ( typeModule == null || typeModule.isEmpty() || semestre == null || semestre.isEmpty() || libelle == null || libelle.isEmpty() || libelleCourt == null || libelleCourt.isEmpty() || code == null || code.isEmpty() || nbEtudiants < 0 || nbGpTD < 0 || nbGpTP < 0 || nbSemaines < 0 || nbHeures < 0 )
             return null;
 
-        return new Module( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
+        return new Module( idModule, typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
     }
 
 
 
-    private Module( String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
-        this.idModule     = Module.nbModules++;
+    private Module( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+        this.idModule     = idModule;
         this.typeModule   = typeModule;
         this.semestre     = semestre;
         this.libelle      = libelle;
@@ -77,9 +75,13 @@ public class Module {
 
 
     public float getNbHeuresAffecte() {
-        float nbHeuresAffecte = 0;
+        float nbHeuresAffectees = 0;
         for ( Heure h : this.heures )
-            nbHeuresAffecte += h.getDuree();
-        return nbHeuresAffecte;
+            nbHeuresAffectees += h.getDuree();
+        return nbHeuresAffectees;
+    }
+
+    public String toString() {
+        return "Module [idModule=" + this.idModule + ", typeModule=" + this.typeModule + ", semestre=" + this.semestre + ", libelle=" + this.libelle + ", libelleCourt=" + this.libelleCourt + ", code=" + this.code + ", nbEtudiants=" + this.nbEtudiants + ", nbGpTD=" + this.nbGpTD + ", nbGpTP=" + this.nbGpTP + ", nbSemaines=" + this.nbSemaines + ", nbHeures=" + this.nbHeures + ", intervenants=" + this.intervenants + ", heures=" + this.heures + "]";
     }
 }

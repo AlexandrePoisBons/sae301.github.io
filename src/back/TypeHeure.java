@@ -18,4 +18,8 @@ public class TypeHeure {
     public void setIdTypeHeure( int idTypeHeure )     { this.idTypeHeure  = idTypeHeure;  }
     public void setNomTypeHeure(String nomTypeHeure ) { this.nomTypeHeure = nomTypeHeure; }
     public void setCoeff( float coeff )               { this.coeff        = coeff;        }
+
+    public String toString() {
+        return this.idTypeHeure + " " + this.nomTypeHeure + " (coeff=" + this.coeff + ")"; 
+    }
 }
