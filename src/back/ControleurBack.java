@@ -2,11 +2,11 @@ package back;
 
 import back.db.*;
 
-public class ControlerBack {
+public class ControleurBack {
 
     private DB db;
 
-    public ControlerBack() {
+    public ControleurBack() {
         this.db = DB.getInstance();
     }
 
