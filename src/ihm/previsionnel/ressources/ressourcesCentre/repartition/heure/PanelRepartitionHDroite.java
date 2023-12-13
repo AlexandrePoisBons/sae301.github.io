@@ -36,9 +36,9 @@ public class PanelRepartitionHDroite extends JPanel{
 		this.add(new JLabel("TD"), gbc);
 		gbc.gridx = 2;
 		this.add(new JLabel("TP"), gbc);
-		gbc.insets = new Insets(0, 10, 5, 0);
+		gbc.insets = new Insets(0, 7, 5, 0);
 		gbc.gridx = 3;
-		this.add(new JLabel("Heures Ponctuelles"), gbc);
+		this.add(new JLabel("HP"), gbc);
 		gbc.gridx = 4;
 		this.add(new JLabel("OE"), gbc);
 		gbc.gridx = 0;
@@ -50,7 +50,7 @@ public class PanelRepartitionHDroite extends JPanel{
 		this.add(this.ensTxtFld.get(1), gbc);
 		gbc.gridx = 2;
 		this.add(this.ensTxtFld.get(2), gbc);
-		gbc.insets = new Insets(0, 10, 5, 0);
+		gbc.insets = new Insets(0, 7, 5, 0);
 		gbc.gridx = 3;
 		this.add(this.ensTxtFld.get(3), gbc);
 		gbc.gridx = 4;
@@ -64,7 +64,7 @@ public class PanelRepartitionHDroite extends JPanel{
 		this.add(this.ensTxtFld.get(6), gbc);
 		gbc.gridx = 2;
 		this.add(this.ensTxtFld.get(7), gbc);
-		gbc.insets = new Insets(0, 10, 5, 0);
+		gbc.insets = new Insets(0, 7, 5, 0);
 		gbc.gridx = 3;
 		this.add(this.ensTxtFld.get(8), gbc);
 		gbc.gridx = 4;
@@ -78,7 +78,7 @@ public class PanelRepartitionHDroite extends JPanel{
 		this.add(this.ensTxtFld.get(11), gbc);
 		gbc.gridx = 2;
 		this.add(this.ensTxtFld.get(12), gbc);
-		gbc.insets = new Insets(0, 10, 5, 0);
+		gbc.insets = new Insets(0, 7, 5, 0);
 		gbc.gridx = 3;
 		this.add(this.ensTxtFld.get(13), gbc);
 		gbc.gridx = 4;

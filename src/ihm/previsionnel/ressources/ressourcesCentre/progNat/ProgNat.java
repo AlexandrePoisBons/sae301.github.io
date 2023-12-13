@@ -8,6 +8,7 @@ import java.awt.Insets;
 import java.awt.GridLayout;
 
 public class ProgNat extends JPanel{
+	private JPanel panelPrincipal;
 	private JPanel panelCentre;
 	private JTextField txtCMWrite;
 	private JTextField txtTDWrite;
@@ -22,6 +23,7 @@ public class ProgNat extends JPanel{
 
 	public ProgNat(){
 		//Initialisation des composants
+		this.panelPrincipal = new JPanel();
 		this.panelCentre = new JPanel();
 		this.txtCMWrite = new JTextField(4);
 		this.txtTDWrite = new JTextField(4);
@@ -47,43 +49,44 @@ public class ProgNat extends JPanel{
 
 
 		//Layouts
-		this.setLayout(new BorderLayout());
+		//this.setLayout(new BorderLayout());
+		this.panelPrincipal.setLayout(new BorderLayout());
 		this.panelCentre.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		// Ajout des composants avec GridBagLayout
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(0, 0, 5, 0);
 		this.panelCentre.add(new JLabel("CM"), gbc);
 		gbc.gridx = 2;
 		this.panelCentre.add(new JLabel("TD"), gbc);
 		gbc.gridx = 3;
 		this.panelCentre.add(new JLabel("TP"), gbc);
-		gbc.insets = new Insets(0, 5, 0, 0);
+		gbc.insets = new Insets(0, 5, 5, 0);
 		gbc.gridx = 4;
 		this.panelCentre.add(new JLabel("OE"), gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
-		gbc.insets = new Insets(0, 0, 0, 0);
+		gbc.insets = new Insets(0, 0, 5, 0);
 		this.panelCentre.add(this.txtCMWrite, gbc);
 		gbc.gridx = 2;
 		this.panelCentre.add(this.txtTDWrite, gbc);
 		gbc.gridx = 3;
 		this.panelCentre.add(this.txtTPWrite, gbc);
-		gbc.insets = new Insets(0, 5, 0, 0);
+		gbc.insets = new Insets(0, 5, 5, 0);
 		gbc.gridx = 4;
 		this.panelCentre.add(this.txtOEWrite, gbc);
 
 		gbc.gridx = 1;
 		gbc.gridy = 2;
-		gbc.insets = new Insets(0, 0, 0, 0);
+		gbc.insets = new Insets(0, 0, 5, 0);
 		this.panelCentre.add(this.txtCM, gbc);
 		gbc.gridx = 2;
 		this.panelCentre.add(this.txtTD, gbc);
 		gbc.gridx = 3;
 		this.panelCentre.add(this.txtTP, gbc);
-		gbc.insets = new Insets(0, 5, 0, 0);
+		gbc.insets = new Insets(0, 5, 5, 0);
 		gbc.gridx = 4;
 		this.panelCentre.add(this.txtOE, gbc);
 
@@ -92,9 +95,11 @@ public class ProgNat extends JPanel{
 		this.panelCentre.add(new JLabel("Total (eqtd) promo"), gbc);
 
 		//Ajout des composants
-		this.add(new JLabel("PN local (nb h tot/etd)"), BorderLayout.NORTH);
-		this.add(this.panelCentre, BorderLayout.CENTER);
-		this.add(this.checkValid, BorderLayout.SOUTH);
+		//this.panelPrincipal.add(new JLabel("PN local (nb h tot/etd)"), BorderLayout.NORTH);
+		//this.panelPrincipal.add(this.panelCentre, BorderLayout.CENTER);
+		//this.panelPrincipal.add(this.checkValid, BorderLayout.SOUTH);
+
+		this.add(this.panelCentre);
 
 		this.setVisible(true);
 	}
