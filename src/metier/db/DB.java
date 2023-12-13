@@ -1,7 +1,8 @@
-package back.db;
+package metier.db;
 
 import java.sql.*;
-import back.*;
+
+import metier.*;
 
 public class DB {
 	private Connection connec;

@@ -1,7 +1,6 @@
 package ihm.previsionnel				;
 
-//Imports classes externes
-import ihm.acceuil.FrameAccueil			;
+import ihm.accueil.FrameAccueil;
 import ihm.previsionnel.ressources.PanelRessources;
 
 //Imports classes Java

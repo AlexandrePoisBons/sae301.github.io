@@ -1,13 +1,13 @@
-package back.db;
+package metier.db;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-import back.Heure;
-import back.Intervenant;
-import back.Module;
-import back.Statut;
-import back.TypeHeure;
+import metier.Heure;
+import metier.Intervenant;
+import metier.Module;
+import metier.Statut;
+import metier.TypeHeure;
 
 public class Requetes {
 
@@ -67,7 +67,7 @@ public class Requetes {
 			this.psUpdateI = this.connec.prepareStatement("UPDATE Intervenant SET nom=?, prenom=?, nb_equivalent_td=?, nom_statut=? WHERE id_intervenant=?;");
 
 			this.psSelectH = this.connec.prepareStatement("SELECT * FROM Heure WHERE id_heure=?;");
-			this.psInsertH = this.connec.prepareStatement("INSERT INTO Heure VALUES(?,?,?,?,?);");
+			this.psInsertH = this.connec.prepareStatement("INSERT INTO Heure (id_heure, id_module, id_type_heure, duree, commentaire) VALUES(?,?,?,?,?);");
 			this.psDeleteH = this.connec.prepareStatement("DELETE FROM Heure WHERE id_heure=?;");
 			this.psUpdateH = this.connec.prepareStatement("UPDATE Heure SET id_module=?, id_type_heure=?, duree=?, commentaire=? WHERE id_heure=?;");
 
@@ -173,18 +173,21 @@ public class Requetes {
 	}
 
 
-	public void insertHeure(Heure heure) throws SQLException {
-
-		if ( !this.existsHeure(heure.getIdHeure()) ) {
-			this.psInsertH.setInt(1, heure.getIdHeure());
-			this.psInsertH.setInt(2, heure.getModule().getIdModule());
-			this.psInsertH.setInt(3, heure.getTypeHeure().getIdTypeHeure());
-			this.psInsertH.setInt(4, heure.getDuree());
-			this.psInsertH.setString(5,heure.getCommentaire());
-			this.psInsertH.executeUpdate();
-		} else {
-			System.out.println("Heure id_heure = "+heure.getIdHeure()+" deja existant");
-		}
+	public void insertHeure(Heure heure) {
+		try{
+			if ( !this.existsHeure(heure.getIdHeure()) ) {
+				this.psInsertH.setInt(1, heure.getIdHeure());
+				this.psInsertH.setInt(2, heure.getModule().getIdModule());
+				this.psInsertH.setInt(3, heure.getTypeHeure().getIdTypeHeure());
+				this.psInsertH.setInt(4, heure.getDuree());
+				this.psInsertH.setString(5,heure.getCommentaire());
+				System.out.println("donova: "+this.psInsertH.executeUpdate());
+				System.out.println(heure.toString());
+			} else {
+				System.out.println("Heure id_heure = "+heure.getIdHeure()+" deja existant");
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+		
 	}
 
 	public void deleteHeure(Heure heure) throws SQLException {
@@ -372,7 +375,7 @@ public class Requetes {
 		}
 	}
 
-	
+
 	public boolean existsIntervenantModule(int idIntervenant, int idModule) throws SQLException {
 
 		this.psSelectIM.setInt(1, idIntervenant);
@@ -617,22 +620,22 @@ public class Requetes {
 		ResultSet rs = selectH.executeQuery(req);
 		while( rs.next() ) {
 			Heure h = Heure.creerHeure( rs.getInt("id_heure"),
-			                    Module.creerModule( rs.getInt("id_module"),
-			                                        rs.getString("type_module"),
-			                                        rs.getString("semestre"),
-			                                        rs.getString("libelle"),
-			                                        rs.getString("libelle_court"),
-			                                        rs.getString("code"),
-			                                        rs.getInt("nb_etudiants"),
-			                                        rs.getInt("nb_gp_td"), 
-			                                        rs.getInt("nb_gp_tp"),
-			                                        rs.getInt("nb_semaines"),
-			                                        rs.getInt("nb_heures")),
-			                         new TypeHeure( rs.getInt("id_type_heure"),
-			                                        rs.getString("nom_type_heure"),
-			                                        rs.getFloat("coeff") ),
-			                            rs.getInt("duree"),
-			                            rs.getString("commentaire"));
+										Module.creerModule( rs.getInt("id_module"),
+															rs.getString("type_module"),
+															rs.getString("semestre"),
+															rs.getString("libelle"),
+															rs.getString("libelle_court"),
+															rs.getString("code"),
+															rs.getInt("nb_etudiants"),
+															rs.getInt("nb_gp_td"), 
+															rs.getInt("nb_gp_tp"),
+															rs.getInt("nb_semaines"),
+															rs.getInt("nb_heures")),
+										new TypeHeure      (rs.getInt("id_type_heure"),
+															rs.getString("nom_type_heure"),
+															rs.getFloat("coeff") ),
+												rs.getInt("duree"),
+												rs.getString("commentaire"));
 
 
 			listeH.add(h);
@@ -642,7 +645,7 @@ public class Requetes {
 	}
 
 	public ArrayList<Heure> getHeures() throws SQLException {
-		return getHeures("SELECT * FROM Heure h JOIN Module m ON m.id_module = h.id_module JOIN Type_Heure t ON t.id_type_heure = h.id_type_heure JOIN Intervenant_Heure ih ON ih.id_heure = h.id_heure JOIN Intervenant i ON i.id_intervenant = ih.id_intervenant ");
+		return getHeures("SELECT * FROM Heure h JOIN Module m ON m.id_module = h.id_module JOIN Type_Heure t ON t.id_type_heure = h.id_type_heure;");
 	}
 
 

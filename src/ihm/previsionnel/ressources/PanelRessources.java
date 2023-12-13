@@ -4,8 +4,8 @@ import ihm.previsionnel.PanelPrevi;
 import javax.swing.*;
 import java.awt.*;
 
+import ihm.accueil.*;
 import ihm.previsionnel.*;
-import ihm.acceuil.*;
 import ihm.previsionnel.ressources.ressourcesCentre.PRCentre;
 import ihm.previsionnel.ressources.ressourcesCentre.progNat.ProgNat;
 import ihm.previsionnel.ressources.ressourcesNord.PRNord;

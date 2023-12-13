@@ -21,7 +21,7 @@ public class ProgNat extends JPanel{
 	private JCheckBox checkValid;
 
 
-	public ProgNat(){
+	public ProgNat() {
 		//Initialisation des composants
 		this.panelPrincipal = new JPanel();
 		this.panelCentre = new JPanel();

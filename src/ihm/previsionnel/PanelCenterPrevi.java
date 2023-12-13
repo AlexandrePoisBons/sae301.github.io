@@ -1,12 +1,11 @@
 package ihm.previsionnel;
 
-//Imports classes externes
-import ihm.acceuil.FrameAccueil;
-
 //Imports classes Java
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.*;
+
+import ihm.accueil.FrameAccueil;
 
 public class PanelCenterPrevi extends JPanel {
 	// Attribut(s) final(s)

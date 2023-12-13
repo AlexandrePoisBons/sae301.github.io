@@ -16,7 +16,7 @@ import ihm.previsionnel.ressources.ressourcesCentre.repartition.heure.PanelRepar
 public class PanelRepartition extends JPanel implements ActionListener{
 	private PRCentre panelMere;
 	private PanelRepartitionHeure panelRepartitionHeure;
-	private PanelAffect PanelAffect;
+	private PanelAffect panelAffect;
 	private JButton btnAjouter;
 	private JButton btnSuppr;
 
@@ -29,7 +29,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 		JPanel panelBoutons = new JPanel();
 
 		this.panelRepartitionHeure 	= new PanelRepartitionHeure	(this)				;
-		this.PanelAffect	 		= new PanelAffect			(this)				;
+		this.panelAffect	 		= new PanelAffect			(this)				;
 		panelBoutons	 			= new JPanel				(    )				;
 		this.btnAjouter 			= new JButton				("Ajouter")	;
 		this.btnSuppr				= new JButton				("Supprimmer")	;	
@@ -46,7 +46,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 		gbc.insets = new Insets(0, 0, 1, 0);
 		pnlAlignementNordCentre.add		(this.panelRepartitionHeure, gbc)	;
 		gbc.gridy = 1;
-		pnlAlignementNordCentre.add		(this.PanelAffect, gbc)				;
+		pnlAlignementNordCentre.add		(this.panelAffect, gbc)				;
 		this.add		(pnlAlignementNordCentre, BorderLayout.NORTH)	;
 		this.add		(panelBoutons, BorderLayout.CENTER)				;
 
@@ -55,13 +55,12 @@ public class PanelRepartition extends JPanel implements ActionListener{
 		this.btnSuppr.addActionListener		(this);
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter){
-
+			this.panelAffect.ajouter();
 		}
 		if(e.getSource() == this.btnSuppr){
-
+			this.panelAffect.supprimer();
 		}
 	}
 }

@@ -1,5 +1,19 @@
+
+import ihm.accueil.*;
+import metier.*;
+import metier.db.*;
+
+
 public class Controleur {
-    public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+
+    private ControleurMetier metier;
+
+    public Controleur() {
+
     }
+
+    public static void main(String[] args) throws Exception {
+        new Controleur();
+    }
+
 }
