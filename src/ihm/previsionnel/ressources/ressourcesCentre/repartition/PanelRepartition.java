@@ -67,4 +67,5 @@ public class PanelRepartition extends JPanel implements ActionListener{
 	public Object[] getHeuresProgNat(){
 		return this.panelMere.getHeuresProgNat();
 	}
+
 }

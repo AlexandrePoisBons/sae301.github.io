@@ -31,16 +31,13 @@ public class PanelAffect extends JPanel {
 
 	public void ajouter() {
 
-		Object[] obj = this.panelMere.getHeuresProgNat();
-		for (int i = 0; i < obj.length; i++) {
-			System.out.println("dono"+i+":"+obj[i]);
-		}
+		// HashMap<String, Integer> map = this.panelMere.getData();
 
-		Object[] objs = {"SylvainLevy",obj[1],1,1,1,1};
+		// Object[] objs = {"SylvainLevy",obj[1],1,1,1,1};
 
 		// Object[] objsCM = {"SylvainLevy", "CM", progNat, PanelRepartitionHGauche, PanelRepartitionHDroite, "chillax"};
 		// Object[] objsTP = {"PierreChabrier", "TP"}
-		this.dtm.addRow(objs);
+		// this.dtm.addRow(objs);
 	}
 
 	public void supprimer() {
