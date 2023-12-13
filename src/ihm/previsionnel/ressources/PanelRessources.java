@@ -17,8 +17,6 @@ public class PanelRessources extends JPanel {
     private PRNord      pRNord;
     private PRCentre    pRCentre;
     private PanelSud    pSud;
-    
-
 
     public PanelRessources(FrameAccueil frameAcceuil, PanelPrevi frame) {
         this.frameAcceuil = frameAcceuil;
@@ -37,4 +35,10 @@ public class PanelRessources extends JPanel {
         this.add(this.pRCentre, BorderLayout.CENTER);
         this.add(this.pSud, BorderLayout.SOUTH);
     }
+
+    public String getSemestre() { return this.panelMere.getSemestre(); }
+    public String getNbEtd() { return this.panelMere.getNbEtd(); }
+    public String getNbGpTd() { return this.panelMere.getNbGpTd(); }
+    public String getNbGpTp() { return this.panelMere.getNbGpTp(); }
+
 }

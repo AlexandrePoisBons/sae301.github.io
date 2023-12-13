@@ -1,7 +1,7 @@
 package ihm.accueil						;
 //Imports classes externes
 import ihm.previsionnel.*				;
-import ihm.parametrage.*				;
+import ihm.parametrage.PanelParam		;
 import ihm.etat.PanelEtats				;
 import ihm.intervenants.PanelInter		;
 
