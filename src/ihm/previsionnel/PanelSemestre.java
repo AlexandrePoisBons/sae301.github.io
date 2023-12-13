@@ -1,12 +1,11 @@
 package ihm.previsionnel;
 
-//Imports classes externes
-import ihm.acceuil.FrameAccueil;
-
 //Imports classes Java
 import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import ihm.accueil.FrameAccueil;
 
 
 public class PanelSemestre extends JPanel {

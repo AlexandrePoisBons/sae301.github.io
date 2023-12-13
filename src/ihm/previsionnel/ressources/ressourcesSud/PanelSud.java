@@ -1,7 +1,7 @@
 package ihm.previsionnel.ressources.ressourcesSud;
+import ihm.accueil.*;
 //Import des classes externes au package
 import ihm.previsionnel.*;
-import ihm.acceuil.*;
 
 //Import des classes Java
 import javax.swing.JButton;

@@ -1,4 +1,4 @@
-package ihm.acceuil			;
+package ihm.accueil			;
 
 import javax.swing.*		;
 import java.awt.BorderLayout;

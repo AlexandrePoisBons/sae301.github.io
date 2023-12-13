@@ -1,4 +1,4 @@
-package ihm.acceuil						;
+package ihm.accueil						;
 //Imports classes externes
 import ihm.previsionnel.*				;
 import ihm.parametrage.*				;
