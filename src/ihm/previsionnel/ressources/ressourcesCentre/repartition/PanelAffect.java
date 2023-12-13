@@ -1,6 +1,8 @@
 package ihm.previsionnel.ressources.ressourcesCentre.repartition;
 
 
+import java.awt.Dimension;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +24,7 @@ public class PanelAffect extends JPanel{
 		this.tableauAffect = new JTable(dtm);
 
 		JScrollPane scroll = new JScrollPane(this.tableauAffect);
+		scroll.setPreferredSize(new Dimension(700, 250));
 
 		this.add(scroll);
 	}

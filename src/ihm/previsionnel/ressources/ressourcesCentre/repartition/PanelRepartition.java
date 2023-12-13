@@ -1,6 +1,9 @@
 package ihm.previsionnel.ressources.ressourcesCentre.repartition;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +22,9 @@ public class PanelRepartition extends JPanel implements ActionListener{
 
 	public PanelRepartition(PRCentre panelMere){
 		this.panelMere = panelMere;
+		JPanel pnlAlignementNordCentre = new JPanel();
 		this.setLayout(new BorderLayout());
+		pnlAlignementNordCentre.setLayout(new GridBagLayout());
 
 		JPanel panelBoutons = new JPanel();
 
@@ -34,9 +39,16 @@ public class PanelRepartition extends JPanel implements ActionListener{
 		panelBoutons.add(this.btnSuppr)									;
 
 		//Ajout des panels au panel principal
-		this.add		(this.panelRepartitionHeure, BorderLayout.NORTH);
-		this.add		(this.PanelAffect, BorderLayout.CENTER)	;
-		this.add		(panelBoutons, BorderLayout.SOUTH)				;
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(0, 0, 1, 0);
+		pnlAlignementNordCentre.add		(this.panelRepartitionHeure, gbc)	;
+		gbc.gridy = 1;
+		pnlAlignementNordCentre.add		(this.PanelAffect, gbc)				;
+		this.add		(pnlAlignementNordCentre, BorderLayout.NORTH)	;
+		this.add		(panelBoutons, BorderLayout.CENTER)				;
 
 		//Ajout des
 		this.btnAjouter.addActionListener	(this);
