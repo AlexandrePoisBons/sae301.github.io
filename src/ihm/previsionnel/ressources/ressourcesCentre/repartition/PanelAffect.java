@@ -29,14 +29,18 @@ public class PanelAffect extends JPanel {
 		this.add(scroll);
 	}
 
-
 	public void ajouter() {
 
-		
+		Object[] obj = this.panelMere.getHeuresProgNat();
+		for (int i = 0; i < obj.length; i++) {
+			System.out.println("dono"+i+":"+obj[i]);
+		}
 
-		Object[] objsCM = {"SylvainLevy", "CM", progNat, PanelRepartitionHGauche, PanelRepartitionHDroite, "chillax"};
-		Object[] objsTP = {"PierreChabrier", "TP"}
-		this.dtm.addRow(objsCM);
+		Object[] objs = {"SylvainLevy",obj[1],1,1,1,1};
+
+		// Object[] objsCM = {"SylvainLevy", "CM", progNat, PanelRepartitionHGauche, PanelRepartitionHDroite, "chillax"};
+		// Object[] objsTP = {"PierreChabrier", "TP"}
+		this.dtm.addRow(objs);
 	}
 
 	public void supprimer() {
