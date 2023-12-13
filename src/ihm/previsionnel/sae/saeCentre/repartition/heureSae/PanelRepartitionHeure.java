@@ -1,42 +1,35 @@
 package ihm.previsionnel.sae.saeCentre.repartition.heureSae;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import ihm.previsionnel.sae.saeCentre.repartition.PanelRepartitionSae;
-
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.JLabel;
+
+import javax.swing.*;
 
 public class PanelRepartitionHeure extends JPanel{
-	//4,3
-	private PanelRepartitionSae panelMere;
-	private JPanel panelC;
-	private JPanel panelW;
+	private PanelRepartitionHeureSae panelMere;
 	private JTextField txtHSaePromo;
 	private JTextField txtHSaeAffecte;
 	private JTextField txtHTutPromo;
 	private JTextField txtHTutAffecte;
 
-	public PanelRepartitionHeure(PanelRepartitionSae panelMere){
+	public PanelRepartitionHeure(PanelRepartitionHeureSae panelMere){
 		this.panelMere = panelMere;
-		this.setLayout(new BorderLayout());
+		this.setLayout(new GridLayout(1, 2));
 
-		this.panelC = new JPanel();
-		this.panelW = new JPanel();
-		this.txtHSaePromo = new JTextField();
-		this.txtHSaeAffecte = new JTextField();
-		this.txtHTutPromo = new JTextField();
-		this.txtHTutAffecte = new JTextField();
-		
-		
-		this.panelC.setLayout(new GridBagLayout());
+		JPanel panelC = new JPanel();
+		JPanel panelW = new JPanel();
+
+		panelC.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
-		this.panelW.setLayout(new GridLayout(2, 1));
+		panelW.setLayout(new GridLayout(2, 1));
+		this.setLayout(new GridLayout(3, 1));
+
+		this.txtHSaePromo = new JTextField(2);
+		this.txtHSaeAffecte = new JTextField(2);
+		this.txtHTutPromo = new JTextField(2);
+		this.txtHTutAffecte = new JTextField(2);
 
 
 		// Ajout des composants avec GridBagLayout
@@ -45,24 +38,24 @@ public class PanelRepartitionHeure extends JPanel{
         gbc.insets = new Insets(0, 3, 5, 0);
 
 		//Ajout des éléments
-		this.panelC.add(new JLabel("h Sae"), gbc);
+		panelC.add(new JLabel("h Sae"), gbc);
 		gbc.gridx = 1;
-		this.panelC.add(new JLabel("h Tut"), gbc);
+		panelC.add(new JLabel("h Tut"), gbc);
 		gbc.gridy = 1;
 		gbc.gridx = 0;
-		this.panelC.add(this.txtHSaePromo, gbc);
+		panelC.add(this.txtHSaePromo, gbc);
 		gbc.gridx = 1;
-		this.panelC.add(this.txtHSaeAffecte, gbc);
+		panelC.add(this.txtHTutPromo, gbc);
 		gbc.gridy = 2;
 		gbc.gridx = 0;
-		this.panelC.add(this.txtHTutPromo, gbc);
+		panelC.add(this.txtHSaeAffecte, gbc);
 		gbc.gridx = 1;
-		this.panelC.add(this.txtHTutAffecte, gbc);
+		panelC.add(this.txtHTutAffecte, gbc);
 
-		this.panelW.add(new JLabel("Total promo (eqtd)"));
-		this.panelW.add(new JLabel("Total affecté (eqtd)"));
+		panelW.add(new JLabel("Total promo (eqtd)"));
+		panelW.add(new JLabel("Total affecté (eqtd)"));
 
-		this.add(this.panelC, BorderLayout.CENTER);
-		this.add(this.panelW, BorderLayout.WEST);
+		this.add(panelW);
+		this.add(panelC);
 	}
 }

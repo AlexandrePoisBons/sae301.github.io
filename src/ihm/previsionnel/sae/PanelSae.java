@@ -7,7 +7,6 @@ import java.awt.*;
 import ihm.accueil.*;
 import ihm.previsionnel.PanelPrevi;
 import ihm.previsionnel.sae.saeCentre.PCentreSae;
-import ihm.previsionnel.sae.saeCentre.progNatSae.ProgNatSae;
 import ihm.previsionnel.sae.saeNord.PNordSae;
 import ihm.previsionnel.sae.saeSud.PanelSudSae;
 

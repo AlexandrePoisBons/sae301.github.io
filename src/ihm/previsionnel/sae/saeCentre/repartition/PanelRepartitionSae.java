@@ -13,44 +13,33 @@ import javax.swing.JPanel;
 
 //Imports classes externes
 import ihm.previsionnel.sae.saeCentre.PCentreSae;
-import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepartitionHeure;
+import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepartitionHeureSae;
 
 public class PanelRepartitionSae extends JPanel implements ActionListener {
 	private PCentreSae panelMere;
-	private PanelRepartitionHeure panelRepartitionHeure;
+	private PanelRepartitionHeureSae panelRepartitionHeure;
 	private PanelAffectSae panelAffect;
 	private JButton btnAjouter;
 	private JButton btnSuppr;
 
 	public PanelRepartitionSae(PCentreSae panelMere) {
 		this.panelMere = panelMere;
-		JPanel pnlAlignementNordCentre = new JPanel();
 		this.setLayout(new BorderLayout());
-		pnlAlignementNordCentre.setLayout(new GridBagLayout());
 
-		JPanel panelBoutons = new JPanel();
+		JPanel panelBtn = new JPanel();
 
-		this.panelRepartitionHeure 	= new PanelRepartitionHeure	(this)				;
-		this.panelAffect	 		= new PanelAffectSae			(this)				;
-		panelBoutons	 			= new JPanel				(    )				;
-		this.btnAjouter 			= new JButton				("Ajouter")	;
-		this.btnSuppr				= new JButton				("Supprimmer")	;	
+		this.panelRepartitionHeure 	= new PanelRepartitionHeureSae	(this)				;
+		this.panelAffect	 		= new PanelAffectSae			(this)				;	
+		this.btnAjouter 			= new JButton					("Ajouter")	;
+		this.btnSuppr				= new JButton					("Supprimmer")	;	
 
 		//Ajout des boutons au panel de boutons
-		panelBoutons.add(this.btnAjouter)								;
-		panelBoutons.add(this.btnSuppr)									;
+		panelBtn.add(this.btnAjouter)								;
+		panelBtn.add(this.btnSuppr)									;
 
-		//Ajout des panels au panel principal
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.anchor = GridBagConstraints.WEST;
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.insets = new Insets(0, 0, 1, 0);
-		pnlAlignementNordCentre.add		(this.panelRepartitionHeure, gbc)	;
-		gbc.gridy = 1;
-		pnlAlignementNordCentre.add		(this.panelAffect, gbc)				;
-		this.add		(pnlAlignementNordCentre, BorderLayout.NORTH)	;
-		this.add		(panelBoutons, BorderLayout.CENTER)				;
+		this.add(this.panelRepartitionHeure, BorderLayout.NORTH);
+		this.add(this.panelAffect, BorderLayout.CENTER);
+		this.add(panelBtn, BorderLayout.SOUTH);
 
 		//Ajout des
 		this.btnAjouter.addActionListener	(this);
