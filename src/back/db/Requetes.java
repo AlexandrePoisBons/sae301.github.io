@@ -54,7 +54,7 @@ public class Requetes {
 	private PreparedStatement psDeleteHM;
 	private PreparedStatement psUpdateHM;
 
-	private PreparedStatement psDeleteHeureModule;
+	private PreparedStatement psDeleteHeureByModule;
 
 	public Requetes() {
 		this.db = DB.getInstance();
@@ -101,7 +101,7 @@ public class Requetes {
 			this.psDeleteHM = this.connec.prepareStatement("DELETE FROM Heure_Module WHERE id_heure=?, id_module=?;");
 			this.psUpdateHM = this.connec.prepareStatement("UPDATE Heure_Module SET id_heure=?, id_module=? WHERE id_heure=? AND id_module=?;");
 
-			this.psDeleteHeureModule = this.connec.prepareStatement("DELETE FROM Heure WHERE id_module=?;");
+			this.psDeleteHeureByModule = this.connec.prepareStatement("DELETE FROM Heure WHERE id_module=?;");
 
 		} catch( SQLException e ) { e.printStackTrace(); }
 
@@ -293,8 +293,8 @@ public class Requetes {
 
 		if ( this.existsModule(module.getIdModule()) ) {
 
-			this.psDeleteHeureModule.setInt(1, module.getIdModule());
-			this.psDeleteHeureModule.executeUpdate();
+			this.psDeleteHeureByModule.setInt(1, module.getIdModule());
+			this.psDeleteHeureByModule.executeUpdate();
 
 			this.psDeleteM.setInt(1, module.getIdModule());
 			this.psDeleteM.executeUpdate();
@@ -666,7 +666,7 @@ public class Requetes {
 			                               rs.getInt    ("nb_heures"     ));
 			listeI.add(m);
 		}
-		rs.close(); 
+		rs.close();
 		return listeI;
 	}
 

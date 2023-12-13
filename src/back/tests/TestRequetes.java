@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class TestRequetes {
 
     @Test
-    public void testRequete1(){
+    public void testRequete1() {
         assertEquals(1,1);
     }
 
