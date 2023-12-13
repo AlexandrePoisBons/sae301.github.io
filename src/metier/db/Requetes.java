@@ -11,7 +11,7 @@ import metier.TypeHeure;
 
 public class Requetes {
 
-	// coucou
+	// coucou cocuou
 
 	private DB db;
 	private Connection connec;

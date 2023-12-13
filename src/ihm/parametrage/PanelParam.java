@@ -9,8 +9,6 @@ public class PanelParam extends JPanel{
 	
 	public PanelParam(FrameAccueil frame){
 		this.frame = frame;
-
-		
 		
 	}
 }

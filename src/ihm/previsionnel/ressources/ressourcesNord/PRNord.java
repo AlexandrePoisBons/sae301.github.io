@@ -28,8 +28,8 @@ public class PRNord extends JPanel {
         this.setLayout(new BorderLayout());
 
         this.panelCentre = new JPanel();
-        this.txtTypeModule = new JTextField("a completer", 10);
-        this.txtSemestre = new JTextField("a completer", 10);
+        this.txtTypeModule = new JTextField(10);
+        this.txtSemestre = new JTextField(10);
         this.txtCode = new JTextField(10);
         this.txtLibLong = new JTextField(10);
         this.txtLibCourt = new JTextField(10);
@@ -97,6 +97,19 @@ public class PRNord extends JPanel {
 
         this.add(this.panelCentre, BorderLayout.WEST);
 
+        this.setValues();
+
         this.setVisible(true);
     }
+
+
+    private void setValues() {
+        this.txtTypeModule.setText("Ressource");
+        this.txtSemestre.setText(this.panelMere.getSemestre());
+        this.txtNbEtd.setText(this.panelMere.getNbEtd());
+        this.txtNbGpTd.setText(this.panelMere.getNbGpTd());
+        this.txtNbGpTp.setText(this.panelMere.getNbGpTp());
+    }
+
+
 }

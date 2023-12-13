@@ -65,8 +65,12 @@ public class PanelSemestre extends JPanel {
 		this.setVisible(true);
 	}
 
-	// Getters id
-	public int getIdSemestre() {
-		return this.id;
-	}
+	// Getters
+	public int getIdSemestre() { return this.id; }
+
+	public String getNbEtd() { return this.txtNbEtd.getText(); }
+	public String getNbGpTd() { return this.txtNbGpTd.getText(); }
+	public String getNbGpTp() { return this.txtNbGpTp.getText(); }
+
+
 }
