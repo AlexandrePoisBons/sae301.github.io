@@ -47,22 +47,6 @@ public class PanelInter extends JPanel{
 
 	// 	this.panelTabInter = new JPanel();
 
-	// 	// this.panelTabInter.add(this.intervants, "Categorie");
-	// 	// this.panelTabInter.add(this.intervants, "Nom");
-	// 	// this.panelTabInter.add(this.intervants, "Prenom");
-	// 	// this.panelTabInter.add(this.intervants, "hServ");
-	// 	// this.panelTabInter.add(this.intervants, "hMax");
-	// 	// this.panelTabInter.add(this.intervants, "coefTP");
-	// 	// this.panelTabInter.add(this.intervants, "S1");
-	// 	// this.panelTabInter.add(this.intervants, "S3");
-	// 	// this.panelTabInter.add(this.intervants, "S5");
-	// 	// this.panelTabInter.add(this.intervants, "sTot");
-	// 	// this.panelTabInter.add(this.intervants, "s2");
-	// 	// this.panelTabInter.add(this.intervants, "s4");
-	// 	// this.panelTabInter.add(this.intervants, "s6");
-	// 	// this.panelTabInter.add(this.intervants, "sTot");
-	// 	// this.panelTabInter.add(this.intervants, "Total");
-
 	// 	this.setVisible(true);
 	// }
 
