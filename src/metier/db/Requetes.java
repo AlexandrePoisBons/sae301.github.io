@@ -1,13 +1,13 @@
-package back.db;
+package metier.db;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-import back.Heure;
-import back.Intervenant;
-import back.Module;
-import back.Statut;
-import back.TypeHeure;
+import metier.Heure;
+import metier.Intervenant;
+import metier.Module;
+import metier.Statut;
+import metier.TypeHeure;
 
 public class Requetes {
 

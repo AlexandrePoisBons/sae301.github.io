@@ -1,4 +1,4 @@
-package back;
+package metier;
 
 public class TypeHeure {
     private int    idTypeHeure;

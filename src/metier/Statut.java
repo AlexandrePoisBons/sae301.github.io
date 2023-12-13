@@ -1,4 +1,4 @@
-package back;
+package metier;
 
 public class Statut {
     private String nomStatut;
