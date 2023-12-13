@@ -14,14 +14,14 @@ import ihm.previsionnel.sae.saeCentre.repartition.PanelRepartitionSae;
 
 public class PCentreSae extends JPanel{
 		private PanelSae 	panelMere;
-		private PanelRepartitionSae 	panelRepartition;
+		private PanelRepartitionSae 	panelRepartitionSae;
 		private ProgNatSae 			pProgNat;
 
 		public PCentreSae(PanelSae panelMere){
 		this.panelMere = panelMere;
 		this.setLayout(new BorderLayout());
 
-		this.panelRepartition 	= new PanelRepartitionSae(this);
+		this.panelRepartitionSae 	= new PanelRepartitionSae(this);
 		this.pProgNat 			= new ProgNatSae();
 
 		JPanel panelN = new JPanel();
@@ -37,7 +37,7 @@ public class PCentreSae extends JPanel{
 		gbc.gridx = 2;
 		panelN.add(new JLabel("Répartition"), gbc);
 
-		panelC.add(this.panelRepartition, BorderLayout.CENTER);
+		panelC.add(this.panelRepartitionSae, BorderLayout.CENTER);
 		panelC.add(this.pProgNat, BorderLayout.WEST);
 
 		this.add(panelC, BorderLayout.CENTER);

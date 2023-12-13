@@ -5,27 +5,23 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JPanel;
 
-import ihm.previsionnel.ressources.ressourcesCentre.repartition.PanelRepartition;
-
 public class PanelRepartitionHSae extends JPanel{
-	private PanelRepartition panelMere;
-	private PanelRepartitionHGauche panelRepartitionHGauche;
-	private PanelRepartitionHDroite panelRepartitionHDroite;
+	private PanelRepartitionHeure panelMere;
+	private JPanel panelSomme;
 
-	public PanelRepartitionHSae(PanelRepartition panelMere){
+	public PanelRepartitionHSae(PanelRepartitionHeure panelMere){
 		this.panelMere = panelMere;
-		this.setLayout(new GridLayout(1,2));
+		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
-		this.panelRepartitionHGauche = new PanelRepartitionHGauche(this);
-		this.panelRepartitionHDroite = new PanelRepartitionHDroite();
+		this.panelSomme 			= new JPanel();
+		this.panelSomme.setLayout(new GridLayout(3, 1));
 
-		this.add(this.panelRepartitionHGauche);
-		this.add(this.panelRepartitionHDroite);
+		this.add(this.panelSomme, BorderLayout.EAST);
 	}
-	
 }

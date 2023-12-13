@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 //Imports classes externes
 import ihm.previsionnel.sae.saeCentre.PCentreSae;
-import ihm.previsionnel.sae.saeCentre.repartition.heure.PanelRepartitionHeure;
+import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepartitionHeure;
 
 public class PanelRepartitionSae extends JPanel implements ActionListener {
 	private PCentreSae panelMere;
@@ -68,6 +68,5 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 
 	public Object[] getHeuresProgNat(){
 		return this.panelMere.getHeuresProgNat();
-	}
 	}
 }
