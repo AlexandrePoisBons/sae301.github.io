@@ -40,5 +40,5 @@ public class PRCentre extends JPanel{
 		this.add(panelC, BorderLayout.CENTER);
 		this.add(panelN, BorderLayout.NORTH);
 	}
-	
+
 }
