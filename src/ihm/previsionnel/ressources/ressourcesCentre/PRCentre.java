@@ -3,6 +3,7 @@ package ihm.previsionnel.ressources.ressourcesCentre;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.*;
 
@@ -30,6 +31,7 @@ public class PRCentre extends JPanel{
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
+		gbc.insets = new Insets(0, 0, 0, 200);
 		panelN.add(new JLabel("PN local (nb h tot/etd)"), gbc);
 		gbc.gridx = 2;
 		panelN.add(new JLabel("Répartition"), gbc);

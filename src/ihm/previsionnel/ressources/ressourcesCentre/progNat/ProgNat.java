@@ -9,7 +9,7 @@ import java.awt.Color;
 
 public class ProgNat extends JPanel{
 	private JPanel panelPrincipal;
-	private JPanel panelCentre;
+	private JPanel panelValidation;
 	private JTextField txtCMWrite;
 	private JTextField txtTDWrite;
 	private JTextField txtTPWrite;
@@ -22,9 +22,10 @@ public class ProgNat extends JPanel{
 
 
 	public ProgNat() {
+		this.setLayout(new BorderLayout());
 		//Initialisation des composants
 		this.panelPrincipal = new JPanel();
-		this.panelCentre = new JPanel();
+		this.panelValidation = new JPanel();
 		this.txtCMWrite = new JTextField(4);
 		this.txtTDWrite = new JTextField(4);
 		this.txtTPWrite = new JTextField(4);
@@ -34,7 +35,7 @@ public class ProgNat extends JPanel{
 		this.txtTP = new JTextField(4);
 		this.txtOE = new JTextField(4);
 		this.checkValid = new JCheckBox();
-		this.panelCentre.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+		this.panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		
 		//Rendre certain champ de sasie non modifiable
 		this.txtCM.setEditable(false);
@@ -43,64 +44,64 @@ public class ProgNat extends JPanel{
 		this.txtOE.setEditable(false);
 		this.txtOEWrite.setEditable(false);
 
-		//Légender la checkbox et la rebdre non coché
-		this.checkValid.setText("Validation");
+		//Rendre non coché
 		this.checkValid.setSelected(false);
+		this.checkValid.setEnabled(false);
 
 
 
 		//Layouts
 		//this.setLayout(new BorderLayout());
 		this.panelPrincipal.setLayout(new BorderLayout());
-		this.panelCentre.setLayout(new GridBagLayout());
+		this.panelPrincipal.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		// Ajout des composants avec GridBagLayout
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.insets = new Insets(11, 0, 2, 0);
-		this.panelCentre.add(new JLabel("CM"), gbc);
+		this.panelPrincipal.add(new JLabel("CM"), gbc);
 		gbc.gridx = 2;
-		this.panelCentre.add(new JLabel("TD"), gbc);
+		this.panelPrincipal.add(new JLabel("TD"), gbc);
 		gbc.gridx = 3;
-		this.panelCentre.add(new JLabel("TP"), gbc);
+		this.panelPrincipal.add(new JLabel("TP"), gbc);
 		gbc.insets = new Insets(11, 5, 2, 0);
 		gbc.gridx = 4;
-		this.panelCentre.add(new JLabel("OE"), gbc);
+		this.panelPrincipal.add(new JLabel("OE"), gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		gbc.insets = new Insets(0, 0, 2, 0);
-		this.panelCentre.add(this.txtCMWrite, gbc);
+		this.panelPrincipal.add(this.txtCMWrite, gbc);
 		gbc.gridx = 2;
-		this.panelCentre.add(this.txtTDWrite, gbc);
+		this.panelPrincipal.add(this.txtTDWrite, gbc);
 		gbc.gridx = 3;
-		this.panelCentre.add(this.txtTPWrite, gbc);
+		this.panelPrincipal.add(this.txtTPWrite, gbc);
 		gbc.insets = new Insets(0, 5, 2, 0);
 		gbc.gridx = 4;
-		this.panelCentre.add(this.txtOEWrite, gbc);
+		this.panelPrincipal.add(this.txtOEWrite, gbc);
 
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		gbc.insets = new Insets(0, 0, 2, 0);
-		this.panelCentre.add(this.txtCM, gbc);
+		this.panelPrincipal.add(this.txtCM, gbc);
 		gbc.gridx = 2;
-		this.panelCentre.add(this.txtTD, gbc);
+		this.panelPrincipal.add(this.txtTD, gbc);
 		gbc.gridx = 3;
-		this.panelCentre.add(this.txtTP, gbc);
+		this.panelPrincipal.add(this.txtTP, gbc);
 		gbc.insets = new Insets(0, 5, 2, 0);
 		gbc.gridx = 4;
-		this.panelCentre.add(this.txtOE, gbc);
+		this.panelPrincipal.add(this.txtOE, gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 2;
-		this.panelCentre.add(new JLabel("Total (eqtd) promo"), gbc);
+		this.panelPrincipal.add(new JLabel("Total (eqtd) promo"), gbc);
 
 		//Ajout des composants
-		//this.panelPrincipal.add(new JLabel("PN local (nb h tot/etd)"), BorderLayout.NORTH);
-		//this.panelPrincipal.add(this.panelCentre, BorderLayout.CENTER);
-		//this.panelPrincipal.add(this.checkValid, BorderLayout.SOUTH);
+		this.panelValidation.add(new JLabel("Validation"));
+		this.panelValidation.add(this.checkValid);
 
-		this.add(this.panelCentre);
+		this.add(this.panelPrincipal, BorderLayout.NORTH);
+		this.add(this.panelValidation, BorderLayout.CENTER);
 
 		this.setVisible(true);
 	}
