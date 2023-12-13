@@ -53,7 +53,7 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == this.btnParam){this.frame.changerPanel(new PanelParam()				);}
 		if(e.getSource() == this.btnPrevi){this.frame.changerPanel(new PanelPrevi(this.frame)	);}
-		if(e.getSource() == this.btnInter){this.frame.changerPanel(new PanelInter()				);}
+		if(e.getSource() == this.btnInter){this.frame.changerPanel(new PanelInter(this.frame)   );}
 		if(e.getSource() == this.btnEtats){this.frame.changerPanel(new PanelEtats()				);}
 	}
 }

@@ -12,22 +12,22 @@ public class PanelCenterPrevi extends JPanel {
 	private final int NB_SEMESTRE = 6;
 
 	// Attribut(s)
-	private FrameAccueil frame;
+	private FrameAccueil panelMere;
 	private ArrayList<PanelSemestre> listSemestre;
 
 	// Constructeur
 	public PanelCenterPrevi(FrameAccueil frameAccueil) {
 
 		// Synchronisation des pages
-		this.frame = frameAccueil;
+		this.panelMere = frameAccueil;
 
 		// Définition de la taille de la fenêtre
-		this.frame.setSize(800, 300);
+		this.panelMere.setSize(800, 300);
 
 		// création de la liste des semestres et des semestres qu'elle contient
 		this.listSemestre = new ArrayList<PanelSemestre>()			;
 		for (int i = 0; i < this.NB_SEMESTRE; i++)
-			this.listSemestre.add(new PanelSemestre(this.frame, i))	;
+			this.listSemestre.add(new PanelSemestre(this.panelMere, i));
 
 		// création du JTabbedPane
 		JTabbedPane modules = new JTabbedPane(JTabbedPane.TOP)		;
