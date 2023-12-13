@@ -20,7 +20,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 	private JButton btnAjouter;
 	private JButton btnSuppr;
 
-	public PanelRepartition(PRCentre panelMere){
+	public PanelRepartition(PRCentre panelMere) {
 		this.panelMere = panelMere;
 		JPanel pnlAlignementNordCentre = new JPanel();
 		this.setLayout(new BorderLayout());
@@ -62,5 +62,9 @@ public class PanelRepartition extends JPanel implements ActionListener{
 		if(e.getSource() == this.btnSuppr){
 			this.panelAffect.supprimer();
 		}
+	}
+
+	public Object[] getHeuresProgNat(){
+		return this.panelMere.getHeuresProgNat();
 	}
 }

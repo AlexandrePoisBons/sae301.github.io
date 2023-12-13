@@ -42,5 +42,9 @@ public class PRCentre extends JPanel{
 		this.add(panelC, BorderLayout.CENTER);
 		this.add(panelN, BorderLayout.NORTH);
 	}
-	
+
+	public Object[] getHeuresProgNat(){
+		return this.pProgNat.getHeuresTot();
+	}
+
 }

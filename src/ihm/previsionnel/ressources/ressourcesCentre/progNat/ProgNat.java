@@ -105,4 +105,21 @@ public class ProgNat extends JPanel{
 
 		this.setVisible(true);
 	}
+
+
+	public Object[] getHeuresTot(){
+
+		Object[] objs = new Object[3];
+
+		objs[0] = Integer.parseInt(this.txtCMWrite.getText());
+		objs[1] = Integer.parseInt(this.txtTDWrite.getText());
+		objs[2] = Integer.parseInt(this.txtTPWrite.getText());
+
+		return objs;
+	}
+
+
+
+
+
 }//"Total (eqtd) promo"));
