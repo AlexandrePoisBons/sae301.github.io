@@ -1,22 +1,22 @@
 package ihm.previsionnel.ressources.ressourcesCentre.repartition;
 
-
 import java.awt.Dimension;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class PanelAffect extends JPanel{
+public class PanelAffect extends JPanel {
 	private PanelRepartition panelMere;
 	private JTable tableauAffect;
+	private DefaultTableModel dtm;
 
-	public PanelAffect(PanelRepartition panelMere){
+	public PanelAffect(PanelRepartition panelMere) {
 		this.panelMere = panelMere;
 
-		DefaultTableModel dtm = new DefaultTableModel();
+		this.dtm = new DefaultTableModel();
 		dtm.addColumn("Intervenant");
 		dtm.addColumn("type");
-		dtm.addColumn("nb sema");
+		dtm.addColumn("nb semaines");
 		dtm.addColumn("nb Gp|nb h");
 		dtm.addColumn("tot eqtd");
 		dtm.addColumn("commentaire");
@@ -28,5 +28,19 @@ public class PanelAffect extends JPanel{
 
 		this.add(scroll);
 	}
-	
+
+
+	public void ajouter() {
+
+		
+
+		Object[] objsCM = {"SylvainLevy", "CM", progNat, PanelRepartitionHGauche, PanelRepartitionHDroite, "chillax"};
+		Object[] objsTP = {"PierreChabrier", "TP"}
+		this.dtm.addRow(objsCM);
+	}
+
+	public void supprimer() {
+		this.dtm.removeRow(this.tableauAffect.getSelectedRow());
+	}
+
 }

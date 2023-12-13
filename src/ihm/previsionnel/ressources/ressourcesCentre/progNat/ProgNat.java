@@ -21,7 +21,7 @@ public class ProgNat extends JPanel{
 	private JCheckBox checkValid;
 
 
-	public ProgNat(){
+	public ProgNat() {
 		//Initialisation des composants
 		this.panelPrincipal = new JPanel();
 		this.panelCentre = new JPanel();
@@ -34,7 +34,7 @@ public class ProgNat extends JPanel{
 		this.txtTP = new JTextField(4);
 		this.txtOE = new JTextField(4);
 		this.checkValid = new JCheckBox();
-		
+
 		//Rendre certain champ de sasie non modifiable
 		this.txtCM.setEditable(false);
 		this.txtTD.setEditable(false);
