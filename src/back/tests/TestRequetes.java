@@ -33,8 +33,7 @@ public class TestRequetes {
         System.out.println("update: " + req.getIntervenants());
         req.deleteIntervenant(Intervenant.creerIntervenant(1, "Thomas", "Colignon", new Statut("vacataire", 120, 87, 2/3), 150f));
         System.out.println("delete: " + req.getIntervenants() + "\n\n");
-        req.insertIntervenant(Intervenant.creerIntervenant(1, "Thomas", "Colignon", s, 40.3f));
-
+        
 
         // Module
         System.out.println("--Module--");
@@ -44,29 +43,33 @@ public class TestRequetes {
         System.out.println("update: " + req.getModules());
         req.deleteModule(Module.creerModule(1, "Stage/suivi", "S6", "Stage", "Stage", "S4.ST", 52, 4, 4, 52, 10));
         System.out.println("delete: " + req.getModules() + "\n\n");
-        req.insertModule(Module.creerModule(1, "Stage/suivi", "S4", "Stage", "Stage", "S4.ST", 52, 2, 4, 52, 0));
-
 
         // TypeHeure
         System.out.println("--TypeHeure--");
         req.insertTypeHeure(new TypeHeure(2, "sae", 2f));
         System.out.println("insert: " + req.getTypesHeures());
         req.updateTypeHeure(new TypeHeure(2, "td", 1f));
-        System.out.println("insert: " + req.getTypesHeures());
+        System.out.println("update: " + req.getTypesHeures());
         req.deleteTypeHeure(new TypeHeure(2, "td", 1f));
-        System.out.println("insert: " + req.getTypesHeures());
-        req.insertTypeHeure(new TypeHeure(1, "sae", 2f));
-        System.out.println("insert: " + req.getTypesHeures()); 
-        req.insertTypeHeure(new TypeHeure(1, "sae", 2f));
+        System.out.println("delete: " + req.getTypesHeures());
 
 
         // Heure
-        System.out.println("--Heure--");
-        req.insertHeure(Heure.creerHeure(1, Module.creerModule(1, "Stage/suivi", "s4", "Stage", "Stage", "S4.ST", 52, 2, 4, 52, 0), new TypeHeure(1, "sae", 2f) , 10, "relou"));
+        System.out.println("\n--Heure--");
+        Module module = Module.creerModule(1, "Stage/suivi", "S4", "Stage", "Stage", "S4.ST", 52, 2, 4, 52, 0);
+        req.insertModule(module);
+        System.out.println("module: "+req.getModules());
+        TypeHeure typeHeure = new TypeHeure(1, "sae", 2f);
+        req.insertTypeHeure(typeHeure);
+        System.out.println("typeHeure: "+req.getTypesHeures());
+        Heure heure = Heure.creerHeure(1, Module.creerModule(1, "Stage/suivi", "s4", "Stage", "Stage", "S4.ST", 52, 2, 4, 52, 0), typeHeure , 10, "relou");
+        System.out.println("\n\n"+heure.toString()+"\n\n");
+        req.insertHeure(heure);
         System.out.println("insert: " + req.getHeures());
-        req.updateHeure(Heure.creerHeure(1, Module.creerModule(1, "Sae", "s3", "Sae3", "Sae3", "S3.SAE", 52, 2, 4, 52, 0), new TypeHeure(1, "sae", 2f) , 10, "relou"));
+        heure.setDuree(25);
+        req.updateHeure(heure);
         System.out.println("update: " + req.getHeures());
-        req.deleteHeure(Heure.creerHeure(1, Module.creerModule(1, "Sae", "s3", "Sae3", "Sae3", "S4.ST", 52, 2, 4, 52, 0) , new TypeHeure(1, "sae", 2f) , 10, "relou"));
+        req.deleteHeure(heure);
         System.out.println("delete: " + req.getHeures() + "\n\n");
 
 
