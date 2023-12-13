@@ -37,6 +37,10 @@ public class PRNord extends JPanel {
         this.txtNbGpTd = new JTextField(2);
         this.txtNbGpTp = new JTextField(2);
 
+        this.txtNbEtd.setEditable(false);
+        this.txtNbGpTd.setEditable(false);
+        this.txtNbGpTp.setEditable(false);
+
         this.panelCentre.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;

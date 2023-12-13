@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.GridLayout;
+import java.awt.Color;
 
 public class ProgNat extends JPanel{
 	private JPanel panelPrincipal;
@@ -34,6 +34,7 @@ public class ProgNat extends JPanel{
 		this.txtTP = new JTextField(4);
 		this.txtOE = new JTextField(4);
 		this.checkValid = new JCheckBox();
+		this.panelCentre.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		
 		//Rendre certain champ de sasie non modifiable
 		this.txtCM.setEditable(false);
@@ -57,36 +58,36 @@ public class ProgNat extends JPanel{
 		// Ajout des composants avec GridBagLayout
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.insets = new Insets(0, 0, 5, 0);
+        gbc.insets = new Insets(11, 0, 2, 0);
 		this.panelCentre.add(new JLabel("CM"), gbc);
 		gbc.gridx = 2;
 		this.panelCentre.add(new JLabel("TD"), gbc);
 		gbc.gridx = 3;
 		this.panelCentre.add(new JLabel("TP"), gbc);
-		gbc.insets = new Insets(0, 5, 5, 0);
+		gbc.insets = new Insets(11, 5, 2, 0);
 		gbc.gridx = 4;
 		this.panelCentre.add(new JLabel("OE"), gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
-		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.insets = new Insets(0, 0, 2, 0);
 		this.panelCentre.add(this.txtCMWrite, gbc);
 		gbc.gridx = 2;
 		this.panelCentre.add(this.txtTDWrite, gbc);
 		gbc.gridx = 3;
 		this.panelCentre.add(this.txtTPWrite, gbc);
-		gbc.insets = new Insets(0, 5, 5, 0);
+		gbc.insets = new Insets(0, 5, 2, 0);
 		gbc.gridx = 4;
 		this.panelCentre.add(this.txtOEWrite, gbc);
 
 		gbc.gridx = 1;
 		gbc.gridy = 2;
-		gbc.insets = new Insets(0, 0, 5, 0);
+		gbc.insets = new Insets(0, 0, 2, 0);
 		this.panelCentre.add(this.txtCM, gbc);
 		gbc.gridx = 2;
 		this.panelCentre.add(this.txtTD, gbc);
 		gbc.gridx = 3;
 		this.panelCentre.add(this.txtTP, gbc);
-		gbc.insets = new Insets(0, 5, 5, 0);
+		gbc.insets = new Insets(0, 5, 2, 0);
 		gbc.gridx = 4;
 		this.panelCentre.add(this.txtOE, gbc);
 
