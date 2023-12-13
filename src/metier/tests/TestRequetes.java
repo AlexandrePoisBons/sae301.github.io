@@ -1,15 +1,13 @@
-package back.tests;
+package metier.tests;
 
-import back.*;
-import back.db.*;
-import back.Module;
+import metier.*;
+import metier.db.*;
+import metier.Module;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 import java.sql.SQLException;
-
-
 
 public class TestRequetes {
 

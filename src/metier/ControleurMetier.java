@@ -4,11 +4,11 @@ import java.sql.SQLException;
 
 import metier.db.*;
 
-public class ControleurBack {
+public class ControleurMetier {
 
     private Requetes requetes;
 
-    public ControleurBack() {
+    public ControleurMetier() {
         this.requetes = new Requetes();
     }
 
@@ -18,8 +18,6 @@ public class ControleurBack {
         this.requetes.insertIntervenant(intervenant);
         return false;
     }
-
-
 
 
 
