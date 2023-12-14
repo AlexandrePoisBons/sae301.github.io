@@ -31,11 +31,11 @@ public class TestRequetes {
 
 			// Module
 			System.out.println("--Module--");
-			req.insertModule(Module.creerModule(1, "Stage/suivi", "S4", "Stage", "Stage", "S4.ST", 52, 2, 4, 52, 0));
+			req.insertModule(Module.creerModule(1, "Stage/suivi", "S4", "Stage", "Stage", "S4.ST", 52, 2, 4, 52, 0, "chillax"));
 			System.out.println("insert: " + req.getModules());
-			req.updateModule(Module.creerModule(1, "Stage/suivi", "S6", "Stage", "Stage", "S4.ST", 52, 4, 4, 52, 10));
+			req.updateModule(Module.creerModule(1, "Stage/suivi", "S6", "Stage", "Stage", "S4.ST", 52, 4, 4, 52, 10, "chillax"));
 			System.out.println("update: " + req.getModules());
-			req.deleteModule(Module.creerModule(1, "Stage/suivi", "S6", "Stage", "Stage", "S4.ST", 52, 4, 4, 52, 10));
+			req.deleteModule(Module.creerModule(1, "Stage/suivi", "S6", "Stage", "Stage", "S4.ST", 52, 4, 4, 52, 10, "chillax"));
 			System.out.println("delete: " + req.getModules() + "\n\n");
 
 			// TypeHeure
@@ -50,13 +50,13 @@ public class TestRequetes {
 
 			// Heure
 			System.out.println("\n--Heure--");
-			Module module = Module.creerModule(1, "Stage/suivi", "S4", "Stage", "Stage", "S4.ST", 52, 2, 4, 52, 0);
+			Module module = Module.creerModule(1, "Stage/suivi", "S4", "Stage", "Stage", "S4.ST", 52, 2, 4, 52, 0, "chillax");
 			req.insertModule(module);
 			System.out.println("module: "+req.getModules());
 			TypeHeure typeHeure = new TypeHeure(1, "sae", 2f);
 			req.insertTypeHeure(typeHeure);
 			System.out.println("typeHeure: "+req.getTypesHeures());
-			Heure heure = Heure.creerHeure(1, Module.creerModule(1, "Stage/suivi", "s4", "Stage", "Stage", "S4.ST", 52, 2, 4, 52, 0), typeHeure , 10, "relou");
+			Heure heure = Heure.creerHeure(1, Module.creerModule(1, "Stage/suivi", "s4", "Stage", "Stage", "S4.ST", 52, 2, 4, 52, 0, "chillax"), typeHeure , 10, "relou");
 			System.out.println("\n\n"+heure.toString()+"\n\n");
 			req.insertHeure(heure);
 			System.out.println("insert: " + req.getHeures());
@@ -65,10 +65,12 @@ public class TestRequetes {
 			System.out.println("update: " + req.getHeures());
 			
 
-			
+
 			assertEquals(heure.toString(),req.getHeures().get(0).toString());
 			// req.deleteHeure(heure);
 			// System.out.println("delete: " + req.getHeures() + "\n\n");
+
+			req.close();
 		} catch ( SQLException e ) { e.printStackTrace(); }
 
 	}
