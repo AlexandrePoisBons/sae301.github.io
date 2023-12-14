@@ -1,6 +1,7 @@
 package ihm.previsionnel				;
 
 import ihm.accueil.FrameAccueil;
+import ihm.previsionnel.ppp.PanelPpp;
 import ihm.previsionnel.ressources.PanelRessources;
 import ihm.previsionnel.sae.PanelSae;
 import ihm.previsionnel.stage.PanelStage;
@@ -74,7 +75,8 @@ public class PanelPrevi extends JPanel implements ActionListener {
 			this.frame.changerPanel( new PanelRessources(this.frame, this) );
 		}
 		if(e.getSource() == this.btnCreerSAE) {
-			this.frame.changerPanel( new PanelSae(this.frame, this) );
+			//this.frame.changerPanel( new PanelSae(this.frame, this) );
+			this.frame.changerPanel( new PanelPpp(this.frame, this) );
 		}
 		if(e.getSource() == this.btnCreerStage) {
 			this.frame.changerPanel(new PanelStage(this.frame, this));

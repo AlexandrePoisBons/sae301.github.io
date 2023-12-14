@@ -16,7 +16,6 @@ public class PanelCenterPrevi extends JPanel {
 	private FrameAccueil frame;
 	private ArrayList<PanelSemestre> listSemestre;
 	private JTabbedPane modules;
-	private ArrayList<JPanel> listPanelCreer;
 
 	// Constructeur
 	public PanelCenterPrevi(FrameAccueil frameAccueil) {
