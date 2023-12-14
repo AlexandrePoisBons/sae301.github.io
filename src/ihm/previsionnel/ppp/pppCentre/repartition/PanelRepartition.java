@@ -58,15 +58,15 @@ public class PanelRepartition extends JPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter){
-			this.panelAffect.ajouter();
+			//this.panelAffect.ajouter();
 		}
 		if(e.getSource() == this.btnSuppr){
 			this.panelAffect.supprimer();
 		}
 	}
 
-	public HashMap<String,Integer> getNbSemaines() { return this.panelRepartitionHeure.getNbSemaines(); }
+	//public HashMap<String,Integer> getNbSemaines() { return this.panelRepartitionHeure.getNbSemaines(); }
 
-	public HashMap<String,Integer> getTabData() { return this.panelMere.getData(); }
+	//public HashMap<String,Integer> getTabData() { return this.panelMere.getData(); }
 
 }

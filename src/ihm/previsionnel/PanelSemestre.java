@@ -2,10 +2,13 @@ package ihm.previsionnel;
 
 //Imports classes Java
 import java.awt.BorderLayout;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import ihm.accueil.FrameAccueil;
+import metier.Module;
 
 
 public class PanelSemestre extends JPanel {
@@ -16,6 +19,7 @@ public class PanelSemestre extends JPanel {
 	private JTextField txtNbGpTp		;
 	private JTextField txtNbEtd			;
 	private JTextField txtNbSemaine		;
+	private DefaultTableModel dtm       ;
 	private JTable tabModule			;
 	private int id						;
 
@@ -42,9 +46,11 @@ public class PanelSemestre extends JPanel {
 		this.txtNbEtd = new JTextField(2			);
 		this.txtNbSemaine = new JTextField(2		);
 
-		this.tabModule = new JTable();
+		this.dtm = new DefaultTableModel();
+		this.dtm.addRow(new String[] {"R1", "dev", "2/6"});
+		this.tabModule = new JTable(this.dtm);
 
-		JScrollPane tableau = new JScrollPane(tabModule);
+		JScrollPane tableau = new JScrollPane(this.tabModule);
 
 		// Ajout des composants
 		panelNord.add	(new JLabel("nb gp TD")		    );
@@ -66,8 +72,16 @@ public class PanelSemestre extends JPanel {
 	}
 
 	// Getters
-	public int    getIdSemestre() { return this.id;                  }
-	public String getNbEtd()      { return this.txtNbEtd.getText();  }
-	public String getNbGpTd()     { return this.txtNbGpTd.getText(); }
-	public String getNbGpTp()     { return this.txtNbGpTp.getText(); }
+	public int    getIdSemestre() { return this.id;                    }
+	public String getNbEtd()      { return this.txtNbEtd.getText();    }
+	public String getNbGpTd()     { return this.txtNbGpTd.getText();   }
+	public String getNbGpTp()     { return this.txtNbGpTp.getText();   }
+	public int    getNbSemaines() { return Integer.parseInt(this.txtNbSemaine.getText());}
+
+	public void   setModules(List<Module> list) {
+		for (Module module : list) {
+			String[] s = {module.getCode(), module.getLibelle()};
+			this.dtm.addRow(s);
+		}
+	}
 }

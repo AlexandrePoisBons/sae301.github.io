@@ -44,7 +44,7 @@ public class PanelPppCentre extends JPanel{
 		this.add(panelN, BorderLayout.NORTH);
 	}
 
-	public HashMap<String,Integer> getData() {
+	/*public HashMap<String,Integer> getData() {
 		HashMap<String,Integer> map = new HashMap<>();
 		HashMap<String,Integer> mapH = this.pProgNat.getHeuresTot();
 		HashMap<String,Integer> mapS = this.panelRepartition.getNbSemaines();
@@ -54,6 +54,6 @@ public class PanelPppCentre extends JPanel{
 				map.put(type, mapS.get(type));
 
 		return map;
-	}
+	}*/
 
 }

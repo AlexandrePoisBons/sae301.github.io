@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.*;
 
 import ihm.accueil.FrameAccueil;
+import metier.Module;
 
 public class PanelCenterPrevi extends JPanel {
 	// Attribut(s) final(s)
@@ -77,5 +78,6 @@ public class PanelCenterPrevi extends JPanel {
 	public String getNbEtd()            { return this.getCurrentSemestre().getNbEtd();          }
 	public String getNbGpTd()           { return this.getCurrentSemestre().getNbGpTd();         }
 	public String getNbGpTp()           { return this.getCurrentSemestre().getNbGpTp();         }
+	public int    getNbSemaines()       { return this.getCurrentSemestre().getNbSemaines();     }
 
 }

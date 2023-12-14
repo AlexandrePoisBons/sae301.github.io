@@ -20,6 +20,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	private JButton 			btnCreerRessource;
 	private JButton 			btnCreerSAE;
 	private JButton 			btnCreerStage;
+	private JButton             btnCreerPpp;
 	private JButton 			btnModifier;
 	private JButton 			btnSupprimer;
 
@@ -29,22 +30,24 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.frame = frAccueil;
 
 		// création des composants
-		JPanel panelSud 		= new JPanel			(					);
-		this.panelCenterPrevi 	= new PanelCenterPrevi	(this.frame			);
-		this.btnCreerRessource 	= new JButton			("Créer ressource"	);
-		this.btnCreerSAE 		= new JButton			("Créer SAE"		);
+		JPanel panelSud 		= new JPanel			(					     );
+		this.panelCenterPrevi 	= new PanelCenterPrevi	(this.frame			     );
+		this.btnCreerRessource 	= new JButton			("Créer ressource"	 );
+		this.btnCreerSAE 		= new JButton			("Créer SAE"		 );
 		this.btnCreerStage 		= new JButton			("Créer stage/suivi");
-		this.btnModifier 		= new JButton			("Modifier"			);
-		this.btnSupprimer 		= new JButton			("Supprimer"		);
+		this.btnCreerPpp        = new JButton           ("Créer PPP"        );
+		this.btnModifier 		= new JButton			("Modifier"		 );
+		this.btnSupprimer 		= new JButton			("Supprimer"		 );
 
 		//Layout
 		this.setLayout		(new BorderLayout	()			);
-		panelSud.setLayout	(new GridLayout		(1, 4, 5, 0));
+		panelSud.setLayout	(new GridLayout		(1, 5, 5, 0));
 
 		//Ajout des composants
 		panelSud.add(this.btnCreerRessource						);
 		panelSud.add(this.btnCreerSAE							);
 		panelSud.add(this.btnCreerStage							);
+		panelSud.add(this.btnCreerPpp                           );
 		panelSud.add(this.btnModifier							);
 		panelSud.add(this.btnSupprimer							);
 		this	.add(panelCenterPrevi, 		BorderLayout.CENTER	);
@@ -54,6 +57,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.btnCreerRessource  .addActionListener(this);
 		this.btnCreerSAE        .addActionListener(this);
 		this.btnCreerStage      .addActionListener(this);
+		this.btnCreerPpp        .addActionListener(this);
 		this.btnModifier        .addActionListener(this);
 		this.btnSupprimer       .addActionListener(this);
 	}
@@ -72,10 +76,13 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		}
 		if(e.getSource() == this.btnCreerSAE) {
 			//this.frame.changerPanel( new PanelSae(this.frame, this) );
-			this.frame.changerPanel( new PanelPpp(this.frame, this) );
+			this.frame.changerPanel( new PanelSae(this.frame, this) );
 		}
 		if(e.getSource() == this.btnCreerStage) {
 			this.frame.changerPanel(new PanelStage(this.frame, this));
+		}
+		if(e.getSource() == this.btnCreerPpp) {
+			this.frame.changerPanel(new PanelPpp(this.frame, this));
 		}
 		if(e.getSource() == this.btnModifier) {
 
