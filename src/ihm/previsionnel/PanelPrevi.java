@@ -4,6 +4,7 @@ import ihm.accueil.FrameAccueil;
 import ihm.previsionnel.ressources.PanelRessources;
 import ihm.previsionnel.sae.PanelSae;
 import ihm.previsionnel.sae.saeCentre.PCentreSae;
+import ihm.previsionnel.stage.PanelStage;
 
 //Imports classes Java
 import java.awt.BorderLayout			;
@@ -72,7 +73,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 			this.frame.changerPanel( new PanelSae(this.frame, this) );
 		}
 		if(e.getSource() == this.btnCreerStage) {
-
+			this.frame.changerPanel(new PanelStage(this.frame, this));
 		}
 		if(e.getSource() == this.btnModifier) {
 
