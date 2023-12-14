@@ -1,9 +1,13 @@
-package metier;
+package controleur;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import metier.Intervenant;
+import metier.Module;
+import metier.Statut;
+import metier.TypeHeure;
 import metier.db.*;
 
 public class ControleurMetier {
@@ -16,8 +20,13 @@ public class ControleurMetier {
     private List<Intervenant> intervenants;
     private List<Module>      modules;
 
+    private Controleur ctrl;
 
-    public ControleurMetier() {
+
+    public ControleurMetier(Controleur ctrl) {
+
+        this.ctrl = ctrl;
+
         this.requetes = new Requetes();
 
         this.statuts      = new ArrayList<Statut>();
