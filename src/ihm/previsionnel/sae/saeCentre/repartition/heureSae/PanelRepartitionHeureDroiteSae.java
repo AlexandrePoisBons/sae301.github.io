@@ -6,11 +6,13 @@ import javax.swing.JTextField;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
-public class PanelRepartitionHeureDroiteSae extends JPanel{
+public class PanelRepartitionHeureDroiteSae extends JPanel implements FocusListener{
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
 	public PanelRepartitionHeureDroiteSae(){
@@ -39,5 +41,15 @@ public class PanelRepartitionHeureDroiteSae extends JPanel{
 		gbcC.gridx = 4;
 		this.panelC.add(this.ensTxtFld.get(1), gbcC);
 		this.add(this.panelC);
+	}
+	@Override
+	public void focusGained(FocusEvent e) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'focusGained'");
+	}
+	@Override
+	public void focusLost(FocusEvent e) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'focusLost'");
 	}
 }

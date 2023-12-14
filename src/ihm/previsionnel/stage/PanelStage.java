@@ -22,9 +22,14 @@ public class PanelStage extends JPanel {
 		this.frame = frame;
 		this.panelMere = panelMere;
 
-		this.frame.setTitle("Prévisionnel - Module: SAE");
-		this.frame.setSize(1105, 600);
-		this.frame.setLocation(20, 20);
+		this.frame.setTitle("Prévisionnel - Module: Stage");
+		//Définition de la taille et la position de la fenêtre
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int xSize = (int)(largeur*0.72);
+		int ySize = (int)(hauteur*0.85);
+		this.frame.setSize(xSize, ySize);
+		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 		this.setLayout(new BorderLayout());
 
         this.pNordStage = new PNordStage(this);

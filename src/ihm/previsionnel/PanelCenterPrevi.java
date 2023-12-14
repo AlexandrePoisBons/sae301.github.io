@@ -16,17 +16,22 @@ public class PanelCenterPrevi extends JPanel {
 	private FrameAccueil frame;
 	private ArrayList<PanelSemestre> listSemestre;
 	private JTabbedPane modules;
+	private ArrayList<JPanel> listPanelCreer;
 
 	// Constructeur
 	public PanelCenterPrevi(FrameAccueil frameAccueil) {
 
 		// Synchronisation des pages
 		this.frame = frameAccueil;
+		this.frame.setTitle("Prévisionnel"); 
 
-		// Définition de la taille de la fenêtre
-		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		this.frame.setSize(800, 300);
+		 //Définition de la taille et la position de la fenêtre
+		 int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+		 int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		 int xSize = (int)(largeur*0.65);
+		 int ySize = (int)(hauteur*0.45);
+		 this.frame.setSize(xSize, ySize);
+		 this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 
 		// création de la liste des semestres et des semestres qu'elle contient
 		this.listSemestre = new ArrayList<PanelSemestre>();

@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
 import javax.swing.JLabel;
 
 
-public class PanelRepartitionHDroite extends JPanel{
+public class PanelRepartitionHDroite extends JPanel implements FocusListener{
 	//4,3
 	private JPanel panelN;
 	private JPanel panelC;
@@ -98,5 +99,17 @@ public class PanelRepartitionHDroite extends JPanel{
 
 		this.add(this.panelN, BorderLayout.NORTH);
 		this.add(this.panelC, BorderLayout.CENTER);
+	}
+
+	@Override
+	public void focusGained(FocusEvent e) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'focusGained'");
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'focusLost'");
 	}
 }

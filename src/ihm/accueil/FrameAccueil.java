@@ -12,11 +12,12 @@ public class FrameAccueil extends JFrame {
 	//Constructeur
 	public FrameAccueil() {
 		this.setTitle("Accueil");
-		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		this.setResizable(false);
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		
 		//Position
-		this.setLocation((int)(hauteur*0.60), (int)(largeur*0.15));
+		this.setLocation((int)(largeur*0.5)-175, (int)(hauteur*0.5)-100);
 
 		//Taille
 		this.setSize(350, 200);

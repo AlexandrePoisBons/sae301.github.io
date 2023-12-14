@@ -12,25 +12,30 @@ import ihm.previsionnel.ressources.ressourcesNord.PRNord;
 import ihm.previsionnel.ressources.ressourcesSud.PanelSud;
 
 public class PanelRessources extends JPanel {
-    private FrameAccueil frameAcceuil;
+    private FrameAccueil frame;
     private PanelPrevi  panelMere;
     private PRNord      pRNord;
     private PRCentre    pRCentre;
     private PanelSud    pSud;
 
-    public PanelRessources(FrameAccueil frameAcceuil, PanelPrevi frame) {
-        this.frameAcceuil = frameAcceuil;
-        this.panelMere = frame;
+    public PanelRessources(FrameAccueil frame, PanelPrevi framePrevi) {
+        this.frame = frame;
+        this.panelMere = framePrevi;
 
-        int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+        this.frame.setTitle("Prévisionnel - Module: Ressources"); //Définition du titre de la fenêtre
+        //Définition de la taille et la position de la fenêtre
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-        this.frameAcceuil.setSize(1050, 650);
-        this.frameAcceuil.setLocation(20, 20);
+		int xSize = (int)(largeur*0.65);
+		int ySize = (int)(hauteur*0.9);
+		this.frame.setSize(xSize, ySize);
+		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
+		this.setLayout(new BorderLayout());
         this.setLayout(new BorderLayout());
 
         this.pRNord = new PRNord(this);
         this.pRCentre = new PRCentre(this);
-        this.pSud = new PanelSud(this.frameAcceuil, this.panelMere);
+        this.pSud = new PanelSud(this.frame, this.panelMere);
 
         // Utiliser BoxLayout pour organiser les composants horizontalement
         this.add(this.pRNord, BorderLayout.NORTH);

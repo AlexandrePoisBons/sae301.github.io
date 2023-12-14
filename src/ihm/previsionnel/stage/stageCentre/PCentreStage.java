@@ -20,6 +20,7 @@ public class PCentreStage extends JPanel {
 	public PCentreStage(PanelStage panelMere){
 		this.panelMere = panelMere;
 		this.setLayout(new BorderLayout());
+		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
 		this.panelRepartitionStage 	= new PanelRepartitionStage(this);
 		this.pProgNatStage 			= new ProgNatStage();

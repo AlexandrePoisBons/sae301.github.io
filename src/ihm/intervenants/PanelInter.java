@@ -34,11 +34,16 @@ public class PanelInter extends JPanel implements ActionListener, TableCellEdito
 	public PanelInter(FrameAccueil frAcceuil){
 		//Synchronisation des pages
 		this.frame = frAcceuil;
-		this.frame.setLocation(0, 0);
-		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
-		this.frame.setSize(hauteur, largeur);
+		
+		//Définition de la taille et la position de la fenêtre
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int xSize = (int)(largeur*0.70);
+		int ySize = (int)(hauteur*0.5);
+		this.frame.setSize(xSize, ySize);
+		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 		this.setLayout(new BorderLayout());
+
 
 		JPanel panelAjSup 	= new JPanel();
 		this.panelPrincipal = new JPanel();

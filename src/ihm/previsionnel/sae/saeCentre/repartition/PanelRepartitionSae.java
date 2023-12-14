@@ -24,7 +24,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public PanelRepartitionSae(PCentreSae panelMere) {
 		this.panelMere = panelMere;
 		this.setLayout(new BorderLayout());
-		this.setBorder(new EmptyBorder(0, 5, 0, 0));
+		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
 		JPanel panelBtn = new JPanel();
 
