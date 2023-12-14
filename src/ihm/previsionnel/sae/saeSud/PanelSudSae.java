@@ -40,7 +40,7 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			// à faire avec la bado
 		}
 		else if(e.getSource() == this.boutonAnnuler) {
-			this.frame.changerPanel(this.panelPrevi);
+			this.frame.changerPanel(new PanelPrevi(this.frame));
 		}
 	}
 }

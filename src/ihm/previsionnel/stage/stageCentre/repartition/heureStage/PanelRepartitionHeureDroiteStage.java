@@ -2,20 +2,16 @@ package ihm.previsionnel.stage.stageCentre.repartition.heureStage;
 
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.util.ArrayList;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
-import javax.swing.JLabel;
 
-public class PanelRepartitionHeureDroiteStage extends JPanel {
+public class PanelRepartitionHeureDroiteStage extends JPanel implements FocusListener{
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
 	public PanelRepartitionHeureDroiteStage(){
@@ -44,5 +40,15 @@ public class PanelRepartitionHeureDroiteStage extends JPanel {
 		gbcC.gridx = 4;
 		this.panelC.add(this.ensTxtFld.get(1), gbcC);
 		this.add(this.panelC);
+	}
+	@Override
+	public void focusGained(FocusEvent e) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'focusGained'");
+	}
+	@Override
+	public void focusLost(FocusEvent e) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'focusLost'");
 	}
 }

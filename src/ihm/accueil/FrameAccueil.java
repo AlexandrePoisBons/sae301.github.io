@@ -1,38 +1,35 @@
 package ihm.accueil			;
 
 import javax.swing.*		;
-import java.awt.BorderLayout;
-import java.awt.Dimension	;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 
 public class FrameAccueil extends JFrame {
 	//Attribut(s)
 	private JPanel panel;
 
+
 	//Constructeur
 	public FrameAccueil() {
 		this.setTitle("Accueil");
-		//Layout
-		this.setLayout(new BorderLayout());
-
+		this.setResizable(false);
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		
 		//Position
-		this.setLocation(100, 100);
+		this.setLocation((int)(largeur*0.5)-175, (int)(hauteur*0.5)-100);
 
 		//Taille
 		this.setSize(350, 200);
 
-		//Composants						//Dimension des panels pour centrer le panel au milieu
-		//JPanel eastPanel = new JPanel();	eastPanel.setPreferredSize(new Dimension(100, 1));
-		//JPanel westPanel = new JPanel();	westPanel.setPreferredSize(new Dimension(100, 1));
 
 		//Panel principal
 		this.panel = new PanelAcceuil(this);
 
-		//Ajout des composants	  
-		//this.add(new JPanel()	, BorderLayout.NORTH	);
-		this.add(this.panel		, BorderLayout.CENTER	);
-		//this.add(new JPanel()	, BorderLayout.SOUTH	);
-		//this.add(eastPanel		, BorderLayout.EAST		);
-		//this.add(westPanel		, BorderLayout.WEST		);
+		//Ajout des composants
+		 
+		this.add(this.panel);
+
 
 		//Permet la fermeture de la fenetre quand on appuie sur la croix
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

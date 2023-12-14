@@ -46,7 +46,7 @@ public class PanelSud extends JPanel implements ActionListener {
 			this.enregistrer();
 		}
 		else if(e.getSource() == this.boutonAnnuler) {
-			this.frame.changerPanel(this.panelPrevi);
+			this.frame.changerPanel(new PanelPrevi(this.frame));
 		}
 	}
 

@@ -37,7 +37,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	private DefaultTableModel dtmCoef;
 	
 	public PanelParam(FrameAccueil frame){
-		this.frame = frame;
+		this.frame      = frame;
 		this.listStatut = new ArrayList<String>();
 		this.listCoef   = new ArrayList<String> ();
 
@@ -45,11 +45,11 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.frame.setSize(1000, 600);
 
 		// Creation des éléments de la page 
-		this.dtmStatut    = new DefaultTableModel();
-		this.dtmCoef      = new DefaultTableModel();
-		this.panelG       = new JPanel();
-		this.panelD       = new JPanel();
-		this.panelSud     = new JPanel();
+		this.dtmStatut      = new DefaultTableModel();
+		this.dtmCoef        = new DefaultTableModel();
+		this.panelG         = new JPanel();
+		this.panelD         = new JPanel();
+		this.panelSud       = new JPanel();
 
 		this.btnAjoutStat   = new JButton("Ajouter");
 		this.btnAjoutCoef   = new JButton("Ajouter");
@@ -118,40 +118,49 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.setVisible(true);
 	}
 
+	// Ajout des statut
 	public void ajouterStatut(){
 		Object[] objs = {""};
 		this.dtmStatut.addRow(objs);
+		System.out.println("taille: " + listStatut.size());
 	}
 
+	// Ajout des coef
 	public void ajouterCoef(){
 		Object[] objs = {"0.0"};
 		this.dtmCoef.addRow(objs);
 	}
 
-	public void supprimerStatut(){
-
-		System.out.println("valeur selectionné: " + this.dtmStatut.getValueAt(this.tableauStatut.getSelectedRow(), 0));
-		System.out.println("row selectionné: " + this.tableauStatut.getSelectedRow());
-
-		if(this.tableauStatut.getSelectedRow() != -1){
-			this.dtmStatut.removeRow(this.tableauStatut.getSelectedRow());
-
-			if(this.dtmStatut.getValueAt(this.tableauStatut.getSelectedRow(), 0) != "")
-				this.listStatut.remove(this.dtmStatut.getValueAt(this.tableauStatut.getSelectedRow(), 0));
-			
-		}
-
-	}
-
-	public void supprimerCoef(){
-		if(this.tableauCoef.getSelectedRow() != -1){
-			this.dtmCoef.removeRow(this.tableauCoef.getSelectedRow());
-
-			// if(this.dtmCoef.getValueAt(this.tableauCoef.getSelectedRow(), 0) != "0.0")
-			// 	this.listCoef.remove(this.dtmCoef.getValueAt(this.tableauCoef.getSelectedRow(), 0));
-		}
-
+	// Supprimer Statut
+	public void supprimerStatut() {
+		int ligneSelectionne = this.tableauStatut.getSelectedRow();
+		
+		if (ligneSelectionne != -1) {
+			String valeurASupp = (String) this.dtmStatut.getValueAt(ligneSelectionne, 0);
+			this.dtmStatut.removeRow(ligneSelectionne);
 	
+			if (!this.listStatut.isEmpty() && this.listStatut.contains(valeurASupp)) {
+				this.listStatut.remove(valeurASupp);
+			}
+		}
+	
+		System.out.println("taille : " + listStatut.size());
+		System.out.println(this.listStatut);
+	}
+	
+
+	// Supprimer coef
+	public void supprimerCoef(){
+		int ligneSelectionne = this.tableauCoef.getSelectedRow();
+		
+		if (ligneSelectionne != -1) {
+			String valeurASupp = (String) this.dtmCoef.getValueAt(ligneSelectionne, 0);
+			this.dtmCoef.removeRow(ligneSelectionne);
+	
+			if (!this.listCoef.isEmpty() && this.listCoef.contains(valeurASupp)) {
+				this.listCoef.remove(valeurASupp);
+			}
+		}	
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -171,25 +180,25 @@ public class PanelParam extends JPanel implements ActionListener{
 			supprimerCoef();
 		}
 
+		// Ajout des valeurs dans listStatut et listCoef quand on clique sur Enregistrer
 		if(e.getSource() == this.btnEnregistrer){
 			
 			for (int i = 0; i < this.dtmStatut.getRowCount(); i++) {
-				if(this.dtmStatut.getValueAt(i, 0) != "")
-					this.listStatut.add((String) this.dtmStatut.getValueAt(i, 0));
-
-					System.out.println(this.listStatut.size());
-					System.out.println(this.listStatut);
+				if(this.dtmStatut.getValueAt(i, 0) != ""){
+					if(!this.listStatut.contains((String) this.dtmStatut.getValueAt(i, 0))){
+						this.listStatut.add((String) this.dtmStatut.getValueAt(i, 0));
+					}
+				}
+				System.out.println("enreg: " + listStatut);	
 			}
 				
-				
-
-			for (int i = 0; i < this.dtmCoef.getRowCount(); i++) 
-			{
-				System.out.println(this.dtmCoef.getValueAt(i, 0));
-				if(this.dtmCoef.getValueAt(i, 0) != "0.0")
-					this.listCoef.add((String)this.dtmCoef.getValueAt(i, 0));
-			}
-					
+			for (int i = 0; i < this.dtmCoef.getRowCount(); i++) {
+				if(this.dtmCoef.getValueAt(i, 0) != "0.0"){
+					if(!this.listCoef.contains((String) this.dtmCoef.getValueAt(i, 0))){
+						this.listCoef.add((String)this.dtmCoef.getValueAt(i, 0));
+					}
+				}	
+			}			
 		}
 
 		if(e.getSource() == this.btnRetour){
