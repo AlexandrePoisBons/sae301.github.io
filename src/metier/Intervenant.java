@@ -71,6 +71,13 @@ public class Intervenant {
 		return nbHeures;
 	}
 
+	public void verificationModule( Module m )
+	{
+		for ( Heure h : this.heures )
+			if ( ! (h.getModule() == m) )
+				this.modules.remove(m);
+	}
+
 	public String toString() {
 		return this.idIntervenant + " " + this.prenom + " " + this.nom + " (" + this.statut + ", " + this.nbEqTD + "eqTD)";
 	}

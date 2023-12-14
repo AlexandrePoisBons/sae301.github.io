@@ -53,7 +53,7 @@ public class PCentreSae extends JPanel{
 		HashMap<String,Integer> mapR = this.panelRepartitionSae.getRepartitionHeures();
 
 		for ( String type : mapN.keySet() )
-			if ( mapN.get(type) != 0 || mapR.get(type) != 0 )
+			if ( mapN.get(type) != 0 && mapR.get(type) != 0 )
 				map.put(type, mapR.get(type));
 
 		return map;

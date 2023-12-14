@@ -88,13 +88,13 @@ public class Module {
     public void ajouterHeure( Heure h ) {
         this.heures.add( h );
         
-        for ( Intervenant i : h.getIntervenants() )
+        for ( Intervenant i : h.getIntervenants() ) {   
             if ( !this.intervenants.contains( i ) ) {
                 this.intervenants.add( i );
                 i.ajouterModule( this );
-                i.ajouterHeure(h);
             }
-               
+            i.ajouterHeure( h );
+        }
 
         // Ajoute la durée de l'heure au total du type d'heure correspondant
         this.heureParType.put( h.getTypeHeure().getNomTypeHeure(), h.getDuree() );
@@ -107,6 +107,9 @@ public class Module {
     public void supprimerHeure( Heure h ) {
         this.heures.remove( h );
 
+        for ( Intervenant i : h.getIntervenants() )
+            i.verificationModule( this );
+
         this.heureParType.put( h.getTypeHeure().getNomTypeHeure(), -h.getDuree() );
     }
 
@@ -115,6 +118,11 @@ public class Module {
      * Cette HashMap permet de stocker le nombre d'heures affectées à un module par type d'heure
      */
     public void initHash() {
+        switch ( this.typeModule )
+        {
+            
+        }
+        
         if ( this.typeModule == "SAE" )
             this.heureParType.put( "h Sae", 0 );
             this.heureParType.put( "Tut"  , 0 );
