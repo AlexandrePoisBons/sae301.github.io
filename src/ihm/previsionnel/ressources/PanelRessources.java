@@ -22,7 +22,7 @@ public class PanelRessources extends JPanel {
         this.frameAcceuil = frameAcceuil;
         this.panelMere = frame;
 
-        this.frameAcceuil.setSize(1000, 650);
+        this.frameAcceuil.setSize(1050, 650);
         this.frameAcceuil.setLocation(20, 20);
         this.setLayout(new BorderLayout());
 
