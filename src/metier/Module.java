@@ -4,34 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 
+import metier.db.Requetes;
+
 public class Module {
-    private int    idModule;
-    private String typeModule;
-    private String semestre;
-    private String libelle;
-    private String libelleCourt;
-    private String code;
-    private String commentaire;
-    private int    nbEtudiants;
-    private int    nbGpTD;
-    private int    nbGpTP;
-    private int    nbSemaines;
-    private int    nbHeures;
+    private static int nbModules = Requetes.getNbModules();
+
+    private int        idModule;
+    private TypeModule typeModule;
+    private String     semestre;
+    private String     libelle;
+    private String     libelleCourt;
+    private String     code;
+    private int        nbEtudiants;
+    private int        nbGpTD;
+    private int        nbGpTP;
+    private int        nbSemaines;
+    private int        nbHeures;
 
     private HashMap<String, Integer> heureParType;
-    
+
     private List<Intervenant> intervenants;
     private List<Heure>       heures;
 
-    public static Module creerModule( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures, String commentaire ) {
-        if ( typeModule == null || typeModule.isEmpty() || semestre == null || semestre.isEmpty() || libelle == null || libelle.isEmpty() || libelleCourt == null || libelleCourt.isEmpty() || code == null || code.isEmpty() || nbEtudiants < 0 || nbGpTD < 0 || nbGpTP < 0 || nbSemaines < 0 || nbHeures < 0 )
+    public static Module creerModule( TypeModule typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+        if ( typeModule == null || semestre == null || semestre.isEmpty() || libelle == null || libelle.isEmpty() || libelleCourt == null || libelleCourt.isEmpty() || code == null || code.isEmpty() || nbEtudiants < 0 || nbGpTD < 0 || nbGpTP < 0 || nbSemaines < 0 || nbHeures < 0 )
             return null;
 
-        return new Module( idModule, typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures, commentaire );
+        return new Module( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures);
     }
 
-    private Module( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures, String commentaire ) {
-        this.idModule     = idModule;
+    private Module( TypeModule typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+        this.idModule     = Module.nbModules++;
         this.typeModule   = typeModule;
         this.semestre     = semestre;
         this.libelle      = libelle;
@@ -42,7 +45,6 @@ public class Module {
         this.nbGpTP       = nbGpTP;
         this.nbSemaines   = nbSemaines;
         this.nbHeures     = nbHeures;
-        this.commentaire  = commentaire;
 
         this.intervenants = new ArrayList<Intervenant>();
         this.heures       = new ArrayList<Heure>();
@@ -52,7 +54,7 @@ public class Module {
     }
 
     public int               getIdModule()     { return this.idModule;     }
-    public String            getTypeModule()   { return this.typeModule;   }
+    public TypeModule        getTypeModule()   { return this.typeModule;   }
     public String            getSemestre()     { return this.semestre;     }
     public String            getLibelle()      { return this.libelle;      }
     public String            getLibelleCourt() { return this.libelleCourt; }
@@ -62,13 +64,12 @@ public class Module {
     public int               getNbGpTP()       { return this.nbGpTP;       }
     public int               getNbSemaines()   { return this.nbSemaines;   }
     public int               getNbHeures()     { return this.nbHeures;     }
-    public String            getCommentaire()  { return this.commentaire;  }
     public List<Intervenant> getIntervenants() { return this.intervenants; }
     public List<Heure>       getHeures()       { return this.heures;       }
 
 
     public void setIdModule( int idModule )            { this.idModule     = idModule;     }
-    public void setTypeModule( String typeModule )     { this.typeModule   = typeModule;   }
+    public void setTypeModule( TypeModule typeModule ) { this.typeModule   = typeModule;   }
     public void setSemestre( String semestre )         { this.semestre     = semestre;     }
     public void setLibelle( String libelle )           { this.libelle      = libelle;      }
     public void setLibelleCourt( String libelleCourt ) { this.libelleCourt = libelleCourt; }
@@ -78,7 +79,6 @@ public class Module {
     public void setNbGpTP( int nbGpTP )                { this.nbGpTP       = nbGpTP;       }
     public void setNbSemaines( int nbSemaines )        { this.nbSemaines   = nbSemaines;   }
     public void setHeures ( List<Heure> heures )       { this.heures       = heures;       }
-    public void setCommentaire(String commentaire)     { this.commentaire  = commentaire;  }
     public void setIntervenant(List<Intervenant> i )   { this.intervenants = i;            }
 
     /**
@@ -118,25 +118,24 @@ public class Module {
      * Cette HashMap permet de stocker le nombre d'heures affectées à un module par type d'heure
      */
     public void initHash() {
-        switch ( this.typeModule )
-        {
-            
+        switch ( this.typeModule.getLibelle() ) {
+            case "CM" :
+                this.heureParType.put( "h CM" , 0 );
+                this.heureParType.put( "h TD" , 0 );
+                this.heureParType.put( "h TP" , 0 );
+                break;
+
+            case "TD" :
+                this.heureParType.put( "h TD" , 0 );
+                this.heureParType.put( "h TP" , 0 );
+                break;
+
+            case "SAE" :
+                this.heureParType.put( "h Sae", 0 );
+                this.heureParType.put( "Tut"  , 0 );
+                break;
         }
-        
-        if ( this.typeModule == "SAE" )
-            this.heureParType.put( "h Sae", 0 );
-            this.heureParType.put( "Tut"  , 0 );
-        
-        if ( this.typeModule == "REH" )
-            this.heureParType.put( "h Reh", 0 );
-            this.heureParType.put( "Tut"  , 0 );
-
-        if ( this.typeModule == "CM" )
-            this.heureParType.put( "h CM" , 0 );
-            this.heureParType.put( "h TD" , 0 );
-            this.heureParType.put( "h TP" , 0 );
-    }
-
+    }      
     /**
      *  Méthode permettant de récupérer le nombre d'heures affectées à un module au moment de l'appel
      * @return Retourne le nombre d'heures affectées en float
@@ -166,6 +165,6 @@ public class Module {
 
   
     public String toString() {
-        return "Module [idModule=" + this.idModule + ", typeModule=" + this.typeModule + ", semestre=" + this.semestre + ", libelle=" + this.libelle + ", libelleCourt=" + this.libelleCourt + ", code=" + this.code + ", nbEtudiants=" + this.nbEtudiants + ", nbGpTD=" + this.nbGpTD + ", nbGpTP=" + this.nbGpTP + ", nbSemaines=" + this.nbSemaines + ", nbHeures=" + this.nbHeures + ", intervenants=" + this.intervenants + ", heures=" + this.heures +", commentaire="+this.commentaire+ "]";
+        return "Module [idModule=" + this.idModule + ", typeModule=" + this.typeModule + ", semestre=" + this.semestre + ", libelle=" + this.libelle + ", libelleCourt=" + this.libelleCourt + ", code=" + this.code + ", nbEtudiants=" + this.nbEtudiants + ", nbGpTD=" + this.nbGpTD + ", nbGpTP=" + this.nbGpTP + ", nbSemaines=" + this.nbSemaines + ", nbHeures=" + this.nbHeures + ", intervenants=" + this.intervenants + ", heures=" + this.heures +", commentaire="+  "]";
     }
 }

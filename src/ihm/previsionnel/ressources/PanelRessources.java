@@ -3,6 +3,7 @@ package ihm.previsionnel.ressources;
 import ihm.previsionnel.PanelPrevi;
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 import ihm.accueil.*;
 import ihm.previsionnel.*;
@@ -26,19 +27,28 @@ public class PanelRessources extends JPanel {
         this.frameAcceuil.setLocation(20, 20);
         this.setLayout(new BorderLayout());
 
-        this.pRNord = new PRNord(this);
-        this.pRCentre = new PRCentre(this);
-        this.pSud = new PanelSud(this.frameAcceuil, this.panelMere);
+        this.pRNord   = new PRNord   (this);
+        this.pRCentre = new PRCentre (this);
+        this.pSud     = new PanelSud (this.frameAcceuil,this.panelMere, this);
 
         // Utiliser BoxLayout pour organiser les composants horizontalement
-        this.add(this.pRNord, BorderLayout.NORTH);
-        this.add(this.pRCentre, BorderLayout.CENTER);
-        this.add(this.pSud, BorderLayout.SOUTH);
+        this.add( this.pRNord,   BorderLayout.NORTH);
+        this.add( this.pRCentre, BorderLayout.CENTER);
+        this.add( this.pSud,     BorderLayout.SOUTH);
     }
 
-    public String getSemestre() { return this.panelMere.getSemestre(); }
-    public String getNbEtd() { return this.panelMere.getNbEtd(); }
-    public String getNbGpTd() { return this.panelMere.getNbGpTd(); }
-    public String getNbGpTp() { return this.panelMere.getNbGpTp(); }
+    public String getSemestre()     { return this.panelMere.getSemestre();  }
+    public String getNbEtd()        { return this.panelMere.getNbEtd();     }
+    public String getNbGpTd()       { return this.panelMere.getNbGpTd();    }
+    public String getNbGpTp()       { return this.panelMere.getNbGpTp();    }
+    public String getCode()         { return this.pRNord.getCode();         }
+    public String getLibelle()      { return this.pRNord.getLibelle();      }
+    public String getLibelleCourt() { return this.pRNord.getLibelleCourt(); }
+
+    public HashMap<String, Integer> getDataHeures() { return this.pRCentre.getData(); }
+
+    public HashMap<String,Integer> getData() {
+        return this.pRCentre.getData();
+    }
 
 }

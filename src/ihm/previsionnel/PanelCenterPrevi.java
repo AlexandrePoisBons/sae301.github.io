@@ -57,9 +57,10 @@ public class PanelCenterPrevi extends JPanel {
 		return null;
 	}
 
-	public String getSemestre() { return "S"+this.getCurrentSemestre().getIdSemestre(); }
-	public String getNbEtd()    { return this.getCurrentSemestre().getNbEtd();          }
-	public String getNbGpTd()   { return this.getCurrentSemestre().getNbGpTd();         }
-	public String getNbGpTp()   { return this.getCurrentSemestre().getNbGpTp();         }
+	public int    getNumCurrentModule() { return this.modules.getSelectedIndex();               }
+	public String getSemestre()         { return "S"+this.getCurrentSemestre().getIdSemestre(); }
+	public String getNbEtd()            { return this.getCurrentSemestre().getNbEtd();          }
+	public String getNbGpTd()           { return this.getCurrentSemestre().getNbGpTd();         }
+	public String getNbGpTp()           { return this.getCurrentSemestre().getNbGpTp();         }
 
 }

@@ -58,7 +58,7 @@ public class Requetes {
 	private PreparedStatement psDeleteHeureByTypeHeure;
 
 	public Requetes() {
-		this.db = DB.getInstance();
+		this.db     = DB.getInstance();
 		this.connec = this.db.getConnection();
 
 		try {
@@ -78,9 +78,9 @@ public class Requetes {
 			this.psUpdateTH = this.connec.prepareStatement("UPDATE Type_Heure SET coeff=? WHERE id_type_heure=?;");
 
 			this.psSelectM = this.connec.prepareStatement("SELECT * FROM Module WHERE id_module=?;");
-			this.psInsertM = this.connec.prepareStatement("INSERT INTO Module VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
+			this.psInsertM = this.connec.prepareStatement("INSERT INTO Module VALUES(?,?,?,?,?,?,?,?,?,?);");
 			this.psDeleteM = this.connec.prepareStatement("DELETE FROM Module CASCADE WHERE id_module=?;");
-			this.psUpdateM = this.connec.prepareStatement("UPDATE Module SET type_module=?, semestre=?, libelle=?, libelle_court=?, code=?, nb_etudiants=?, nb_gp_td=?, nb_gp_tp=?, nb_semaines=?, nb_heures=?, commentaire=? WHERE id_module=?;");
+			this.psUpdateM = this.connec.prepareStatement("UPDATE Module SET type_module=?, semestre=?, libelle=?, libelle_court=?, code=?, nb_etudiants=?, nb_gp_td=?, nb_gp_tp=?, nb_semaines=?, nb_heures=? WHERE id_module=?;");
 
 			this.psSelectS = this.connec.prepareStatement("SELECT * FROM Statut WHERE nom_statut=?;");
 			this.psInsertS = this.connec.prepareStatement("INSERT INTO Statut VALUES(?,?,?,?);");
@@ -103,7 +103,8 @@ public class Requetes {
 			this.psUpdateHM = this.connec.prepareStatement("UPDATE Heure_Module SET id_heure=?, id_module=? WHERE id_heure=? AND id_module=?;");
 
 			this.psDeleteHeureByModule    = this.connec.prepareStatement("DELETE FROM Heure WHERE id_module=?;");
-			this.psDeleteHeureByTypeHeure = this.connec.prepareStatement("DELETE FROM Heure WHERE id_type_heure=?;"); 
+			this.psDeleteHeureByTypeHeure = this.connec.prepareStatement("DELETE FROM Heure WHERE id_type_heure=?;");
+
 
 		} catch( SQLException e ) { e.printStackTrace(); }
 
@@ -215,6 +216,36 @@ public class Requetes {
 		}
 	}
 
+	public static int getNbHeure()
+	{
+		int nbHeures = 0;
+
+		try {
+			Class.forName("org.postgresql.Driver");
+			System.out.println ("CHARGEMENT DU PILOTE OK");
+		} catch (ClassNotFoundException e) { e.printStackTrace(); }
+
+		try {
+			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
+			System.out.println("CONNEXION A LA BADO: REUSSIE");
+
+			
+			try {
+				PreparedStatement psGetNbHeures =  connec.prepareStatement("SELECT COUNT(*) FROM Intervenant;");
+				ResultSet rs = psGetNbHeures.executeQuery();
+				while ( rs.next() ) nbHeures = rs.getInt(1);
+			} catch (SQLException e) { e.printStackTrace(); }
+		
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		return nbHeures;
+	}
+
+
+
+
+
+
 	public boolean existsTypeHeure(int idTypeHeure) throws SQLException {
 
 		this.psSelectTH.setInt(1, idTypeHeure);
@@ -291,7 +322,6 @@ public class Requetes {
 			this.psInsertM.setInt(9, module.getNbGpTP());
 			this.psInsertM.setInt(10, module.getNbSemaines());
 			this.psInsertM.setInt(11, module.getNbHeures());
-			this.psUpdateM.setString(12, module.getCommentaire());
 			this.psInsertM.executeUpdate();
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" deja existant");
@@ -326,13 +356,38 @@ public class Requetes {
 			this.psUpdateM.setInt(8, module.getNbGpTP());
 			this.psUpdateM.setInt(9, module.getNbSemaines());
 			this.psUpdateM.setInt(10, module.getNbHeures());
-			this.psUpdateM.setString(11, module.getCommentaire());
-			this.psUpdateM.setInt(12, module.getIdModule());
+			this.psUpdateM.setInt(11, module.getIdModule());
 			this.psUpdateM.executeUpdate();
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" inexistant");
 		}
 	}
+
+	public static int getNbModules()
+	{
+		int nbModules = 0;
+
+		try {
+			Class.forName("org.postgresql.Driver");
+			System.out.println ("CHARGEMENT DU PILOTE OK");
+		} catch (ClassNotFoundException e) { e.printStackTrace(); }
+
+		try {
+			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
+			System.out.println("CONNEXION A LA BADO: REUSSIE");
+
+			
+			try {
+				PreparedStatement  psGetNbModules =  connec.prepareStatement("SELECT COUNT(*) FROM Module;");
+				ResultSet rs = psGetNbModules.executeQuery();
+				while ( rs.next() ) nbModules = rs.getInt(1);
+			} catch (SQLException e) { e.printStackTrace(); }
+		
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		return nbModules;
+	}
+
 
 	public boolean existsStatut(String nomStatut) throws SQLException {
 
@@ -381,6 +436,31 @@ public class Requetes {
 		} else {
 			System.out.println("Statut nom_statut = "+statut.getNomStatut()+" inexistant");
 		}
+	}
+
+	public static int getNbStatuts()
+	{
+		int nbModules = 0;
+
+		try {
+			Class.forName("org.postgresql.Driver");
+			System.out.println ("CHARGEMENT DU PILOTE OK");
+		} catch (ClassNotFoundException e) { e.printStackTrace(); }
+
+		try {
+			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
+			System.out.println("CONNEXION A LA BADO: REUSSIE");
+
+			
+			try {
+				PreparedStatement psGetNbStatuts =  connec.prepareStatement("SELECT COUNT(*) FROM Statut;");
+				ResultSet rs = psGetNbStatuts.executeQuery();
+				while ( rs.next() ) nbModules = rs.getInt(1);
+			} catch (SQLException e) { e.printStackTrace(); }
+		
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		return nbModules;
 	}
 
 
@@ -492,6 +572,32 @@ public class Requetes {
 			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" inexistant");
 		}
 	}
+
+	public static int getNbIntervenant()
+	{
+		int nbModules = 0;
+
+		try {
+			Class.forName("org.postgresql.Driver");
+			System.out.println ("CHARGEMENT DU PILOTE OK");
+		} catch (ClassNotFoundException e) { e.printStackTrace(); }
+
+		try {
+			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
+			System.out.println("CONNEXION A LA BADO: REUSSIE");
+
+			
+			try {
+				PreparedStatement psGetNbIntervenant =  connec.prepareStatement("SELECT COUNT(*) FROM Intervenant;");
+				ResultSet rs = psGetNbIntervenant.executeQuery();
+				while ( rs.next() ) nbModules = rs.getInt(1);
+			} catch (SQLException e) { e.printStackTrace(); }
+		
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		return nbModules;
+	}
+
 
 
 
@@ -628,8 +734,7 @@ public class Requetes {
 		ResultSet rs = selectH.executeQuery(req);
 		while( rs.next() ) {
 			Heure h = Heure.creerHeure( rs.getInt("id_heure"),
-										Module.creerModule( rs.getInt("id_module"),
-															rs.getString("type_module"),
+										Module.creerModule( rs.getString("type_module"),
 															rs.getString("semestre"),
 															rs.getString("libelle"),
 															rs.getString("libelle_court"),
@@ -638,8 +743,7 @@ public class Requetes {
 															rs.getInt("nb_gp_td"), 
 															rs.getInt("nb_gp_tp"),
 															rs.getInt("nb_semaines"),
-															rs.getInt("nb_heures"),
-															rs.getString("commentaire")),
+															rs.getInt("nb_heures")),
 										new TypeHeure      (rs.getInt("id_type_heure"),
 															rs.getString("nom_type_heure"),
 															rs.getFloat("coeff") ),
@@ -663,8 +767,7 @@ public class Requetes {
 
 		ResultSet rs = selectNP.executeQuery(req);
 		while(rs.next()){
-			Module m = Module.creerModule( rs.getInt    ("id_module"     ),
-			                               rs.getString ("type_module"   ),
+			Module m = Module.creerModule( rs.getString ("type_module"   ),
 			                               rs.getString ("semestre"      ),
 			                               rs.getString ("libelle"       ),
 			                               rs.getString ("libelle_court" ),
@@ -673,8 +776,7 @@ public class Requetes {
 			                               rs.getInt    ("nb_gp_td"      ),
 			                               rs.getInt    ("nb_gp_tp"      ),
 			                               rs.getInt    ("nb_semaines"   ),
-			                               rs.getInt    ("nb_heures"     ),
-			                               rs.getString ("commentaire"));
+			                               rs.getInt    ("nb_heures"     ));
 			listeI.add(m);
 		}
 		rs.close();

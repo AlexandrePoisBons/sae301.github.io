@@ -27,15 +27,15 @@ public class PRNord extends JPanel {
 
         this.setLayout(new BorderLayout());
 
-        this.panelCentre = new JPanel();
+        this.panelCentre   = new JPanel();
         this.txtTypeModule = new JTextField(10);
-        this.txtSemestre = new JTextField(10);
-        this.txtCode = new JTextField(10);
-        this.txtLibLong = new JTextField(10);
-        this.txtLibCourt = new JTextField(10);
-        this.txtNbEtd = new JTextField(2);
-        this.txtNbGpTd = new JTextField(2);
-        this.txtNbGpTp = new JTextField(2);
+        this.txtSemestre   = new JTextField(10);
+        this.txtCode       = new JTextField(10);
+        this.txtLibLong    = new JTextField(10);
+        this.txtLibCourt   = new JTextField(10);
+        this.txtNbEtd      = new JTextField(2);
+        this.txtNbGpTd     = new JTextField(2);
+        this.txtNbGpTp     = new JTextField(2);
 
         this.txtNbEtd.setEditable(false);
         this.txtNbGpTd.setEditable(false);
@@ -111,5 +111,8 @@ public class PRNord extends JPanel {
         this.txtNbGpTp.setText(this.panelMere.getNbGpTp());
     }
 
+    public String getLibelle()      { return this.txtLibLong.getText();  }
+    public String getLibelleCourt() { return this.txtLibCourt.getText(); }
+    public String getCode()         { return this.txtCode.getText();     }
 
 }
