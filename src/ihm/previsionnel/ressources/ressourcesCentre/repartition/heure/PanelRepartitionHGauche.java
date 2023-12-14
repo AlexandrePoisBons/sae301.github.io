@@ -6,7 +6,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.*;
 
@@ -89,4 +91,18 @@ public class PanelRepartitionHGauche extends JPanel{
 		this.add(panelB);
 		
 	}
+
+	public HashMap<String, Integer> getNbSemaines(){
+		HashMap<String, Integer> map = new HashMap<>();
+
+		try { map.put("CM",Integer.parseInt(this.ensJTextField.get(0).getText())); }
+		catch(NumberFormatException e) { map.put("CM", 0); }
+		try { map.put("TD",Integer.parseInt(this.ensJTextField.get(2).getText())); }
+		catch(NumberFormatException e) { map.put("TD", 0); }
+		try { map.put("TP",Integer.parseInt(this.ensJTextField.get(4).getText())); }
+		catch(NumberFormatException e) { map.put("TP", 0); }
+
+		return map;
+	}
+
 }

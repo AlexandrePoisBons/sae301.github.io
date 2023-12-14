@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.HashMap;
 import java.awt.Color;
 
 public class ProgNat extends JPanel{
@@ -107,15 +108,17 @@ public class ProgNat extends JPanel{
 	}
 
 
-	public Object[] getHeuresTot(){
+	public HashMap<String,Integer> getHeuresTot(){
+		HashMap<String,Integer> map = new HashMap<>();
 
-		Object[] objs = new Object[3];
+		try { map.put("CM", Integer.parseInt(this.txtCMWrite.getText())); }
+		catch(NumberFormatException e) { map.put("CM", 0); }
+		try { map.put("TD", Integer.parseInt(this.txtTDWrite.getText())); }
+		catch(NumberFormatException e) { map.put("TD", 0); }
+		try { map.put("TP", Integer.parseInt(this.txtTPWrite.getText())); }
+		catch(NumberFormatException e) { map.put("TP", 0); }
 
-		objs[0] = Integer.parseInt(this.txtCMWrite.getText());
-		objs[1] = Integer.parseInt(this.txtTDWrite.getText());
-		objs[2] = Integer.parseInt(this.txtTPWrite.getText());
-
-		return objs;
+		return map;
 	}
 
 

@@ -1,6 +1,7 @@
 package ihm.previsionnel.ressources.ressourcesCentre.repartition.heure;
 
 import java.awt.GridLayout;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -26,6 +27,10 @@ public class PanelRepartitionHeure extends JPanel{
 
 		this.add(this.panelRepartitionHGauche);
 		this.add(this.panelRepartitionHDroite);
+	}
+
+	public HashMap<String, Integer> getNbSemaines() {
+		return this.panelRepartitionHGauche.getNbSemaines();
 	}
 	
 }

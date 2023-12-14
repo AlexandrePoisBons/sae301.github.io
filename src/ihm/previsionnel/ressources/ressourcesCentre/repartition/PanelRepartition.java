@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -32,7 +33,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 		this.panelAffect	 		= new PanelAffect			(this)				;
 		panelBoutons	 			= new JPanel				(    )				;
 		this.btnAjouter 			= new JButton				("Ajouter")	;
-		this.btnSuppr				= new JButton				("Supprimmer")	;	
+		this.btnSuppr				= new JButton				("Supprimer")	;
 
 		//Ajout des boutons au panel de boutons
 		panelBoutons.add(this.btnAjouter)								;
@@ -64,8 +65,8 @@ public class PanelRepartition extends JPanel implements ActionListener{
 		}
 	}
 
-	public Object[] getHeuresProgNat(){
-		return this.panelMere.getHeuresProgNat();
-	}
+	public HashMap<String,Integer> getNbSemaines() { return this.panelRepartitionHeure.getNbSemaines(); }
+
+	public HashMap<String,Integer> getTabData() { return this.panelMere.getData(); }
 
 }
