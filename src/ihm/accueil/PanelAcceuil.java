@@ -8,6 +8,7 @@ import ihm.intervenants.PanelInter		;
 //Imports classes Java
 import javax.swing.*					;
 import java.awt.GridLayout				;
+import java.awt.BorderLayout			;
 import java.awt.event.ActionListener	;
 import java.awt.event.ActionEvent		;
 
@@ -25,21 +26,39 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 	public PanelAcceuil(FrameAccueil frame){
 		//Synchronisation des pages
 		this.frame = frame;
+		JPanel panelCentre;
+		JPanel panelHaut;
+		JPanel panelBas;
+		JPanel panelGauche;
+		JPanel panelDroite;
 
 		//Layout
-		this.setLayout(new GridLayout(4, 1, 0, 5));
+		this.setLayout(new BorderLayout(60, 0));
 
 		//Composants
+		panelCentre = new JPanel();	
+		panelHaut = new JPanel();
+		panelBas = new JPanel();
+		panelGauche = new JPanel();
+		panelDroite = new JPanel();
 		this.btnParam = new JButton("Paramètres		");
 		this.btnPrevi = new JButton("Prévisionnel	");
 		this.btnInter = new JButton("Intervenants	");
 		this.btnEtats = new JButton("Etats			");
 
+		panelCentre.setLayout(new GridLayout(4, 1, 10, 5));
+
 		//Ajout des composants
-		this.add(this.btnParam);
-		this.add(this.btnPrevi);
-		this.add(this.btnInter);
-		this.add(this.btnEtats);
+		panelCentre.add(this.btnParam);
+		panelCentre.add(this.btnPrevi);
+		panelCentre.add(this.btnInter);
+		panelCentre.add(this.btnEtats);
+
+		this.add(panelCentre, BorderLayout.CENTER);
+		this.add(panelHaut, BorderLayout.NORTH);
+		this.add(panelBas, BorderLayout.SOUTH);
+		this.add(panelGauche, BorderLayout.WEST);
+		this.add(panelDroite, BorderLayout.EAST);
 	
 		//ActionListeners
 		this.btnParam.addActionListener(this);

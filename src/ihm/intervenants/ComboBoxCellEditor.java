@@ -13,7 +13,7 @@ public class ComboBoxCellEditor extends AbstractCellEditor implements TableCellE
 	private String[] tabStatut;
 
 	public ComboBoxCellEditor(){
-		this.box = new JComboBox<String>(this.tabStatut);
+		this.box = new JComboBox<String>();
 	}
 	@Override
 	public Object getCellEditorValue() {
