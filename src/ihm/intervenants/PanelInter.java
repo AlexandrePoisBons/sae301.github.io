@@ -5,16 +5,21 @@ package ihm.intervenants;
 import ihm.accueil.FrameAccueil;
 
 import javax.swing.*;
+import javax.swing.event.CellEditorListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumn;
 
 import java.awt.event.ActionEvent		;
 import java.awt.event.ActionListener	;
+import java.util.EventObject;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 
-public class PanelInter extends JPanel implements ActionListener{
+public class PanelInter extends JPanel implements ActionListener, TableCellEditor{
 	private FrameAccueil      frame;
 
 	private JPanel 			  panelPrincipal;
@@ -92,6 +97,8 @@ public class PanelInter extends JPanel implements ActionListener{
 
 	public void ajouter()
 	{
+		TableColumn tc = this.tableauInter.getColumnModel().getColumn(0);
+		tc.setCellEditor(new ComboBoxCellEditor());
 		Object[] objs = {"", "", "", 0, 0, "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0"};
 		
 		this.dtm.addRow(objs);
@@ -144,6 +151,54 @@ public class PanelInter extends JPanel implements ActionListener{
 		if(e.getSource() == this.btnAnnuler){
 			//this.frame.changerPanel();
 		}
+	}
+
+	@Override
+	public Object getCellEditorValue() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getCellEditorValue'");
+	}
+
+	@Override
+	public boolean isCellEditable(EventObject anEvent) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'isCellEditable'");
+	}
+
+	@Override
+	public boolean shouldSelectCell(EventObject anEvent) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'shouldSelectCell'");
+	}
+
+	@Override
+	public boolean stopCellEditing() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'stopCellEditing'");
+	}
+
+	@Override
+	public void cancelCellEditing() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'cancelCellEditing'");
+	}
+
+	@Override
+	public void addCellEditorListener(CellEditorListener l) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'addCellEditorListener'");
+	}
+
+	@Override
+	public void removeCellEditorListener(CellEditorListener l) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'removeCellEditorListener'");
+	}
+
+	@Override
+	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getTableCellEditorComponent'");
 	}
 
     
