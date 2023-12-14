@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import java.util.HashMap;
+
 public class PanelAffect extends JPanel {
 	private PanelRepartition panelMere;
 	private JTable tableauAffect;
@@ -30,18 +32,24 @@ public class PanelAffect extends JPanel {
 	}
 
 	public void ajouter() {
+		HashMap<String, Integer> map = this.panelMere.getData();
 
-		// HashMap<String, Integer> map = this.panelMere.getData();
+		Object[] objs = new Object[6];
+		for ( String type : map.keySet() ) {
+			objs[0] = "";
+			objs[1] = type;
+			objs[2] = map.get(type);
+			objs[3] = "";
+			objs[4] = "";
+			objs[5] = "";
+			this.dtm.addRow(objs);
+		}
 
-		// Object[] objs = {"SylvainLevy",obj[1],1,1,1,1};
-
-		// Object[] objsCM = {"SylvainLevy", "CM", progNat, PanelRepartitionHGauche, PanelRepartitionHDroite, "chillax"};
-		// Object[] objsTP = {"PierreChabrier", "TP"}
-		// this.dtm.addRow(objs);
 	}
 
 	public void supprimer() {
 		this.dtm.removeRow(this.tableauAffect.getSelectedRow());
 	}
+
 
 }
