@@ -26,14 +26,14 @@ public class PanelSae extends JPanel{
 		this.frame.setLocation(20, 20);
 		this.setLayout(new BorderLayout());
 
-        this.pNordSae = new PNordSae(this);
-        this.pCentreSae = new PCentreSae(this);
-        this.pSudSae = new PanelSudSae(this.frame, this.panelMere);
+		this.pNordSae = new PNordSae(this);
+		this.pCentreSae = new PCentreSae(this);
+		this.pSudSae = new PanelSudSae(this.frame, this.panelMere);
 
-        // Utiliser BoxLayout pour organiser les composants horizontalement
-        this.add(this.pNordSae, BorderLayout.NORTH);
-        this.add(this.pCentreSae, BorderLayout.CENTER);
-        this.add(this.pSudSae, BorderLayout.SOUTH);
+		// Utiliser BoxLayout pour organiser les composants horizontalement
+		this.add(this.pNordSae, BorderLayout.NORTH);
+		this.add(this.pCentreSae, BorderLayout.CENTER);
+		this.add(this.pSudSae, BorderLayout.SOUTH);
 	}
 
 

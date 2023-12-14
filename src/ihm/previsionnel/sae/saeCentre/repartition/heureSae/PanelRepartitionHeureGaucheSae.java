@@ -12,7 +12,7 @@ import javax.swing.*;
 
 public class PanelRepartitionHeureGaucheSae extends JPanel{
 	private PanelRepH panelMere;
-	private ArrayList<JTextField> 	ensJTextField	;
+	private ArrayList<JTextField> 	ensJTextField;
 
 	public PanelRepartitionHeureGaucheSae(PanelRepH panelRepH){
 		this.panelMere = panelRepH;
@@ -22,7 +22,7 @@ public class PanelRepartitionHeureGaucheSae extends JPanel{
 		JPanel panelHC	= new JPanel();
 		for(int cpt=0; cpt < 4; cpt++){
 			JTextField jtf = new JTextField(3);
-			this.ensJTextField.add(jtf);	
+			this.ensJTextField.add(jtf);
 		}
 		panelHC.setLayout(new GridBagLayout());
 		GridBagConstraints gbcH = new GridBagConstraints();
@@ -31,7 +31,7 @@ public class PanelRepartitionHeureGaucheSae extends JPanel{
 		gbcH.gridx = 1;
 		gbcH.gridy = 0;
 		gbcH.insets = new Insets(10, 0, 2, 0);
-		panelHC.add(new JLabel("nbSem")		, gbcH);
+		panelHC.add(new JLabel("nbSem")	, gbcH);
 		gbcH.gridx = 2;
 		panelHC.add(new JLabel("nbH")	, gbcH);
 
@@ -51,10 +51,10 @@ public class PanelRepartitionHeureGaucheSae extends JPanel{
 		gbcH.gridy = 2;
 		gbcH.gridx = 1;
 		gbcH.insets = new Insets(0, 0, 2, 0);
-		panelHC.add(this.ensJTextField.get(3), gbcH);
+		panelHC.add(this.ensJTextField.get(2), gbcH);
 		gbcH.gridx = 2;
 		gbcH.insets = new Insets(0, 0, 2, 0);
-		panelHC.add(this.ensJTextField.get(4), gbcH);
+		panelHC.add(this.ensJTextField.get(3), gbcH);
 
 		this.add(panelHC);
 	}

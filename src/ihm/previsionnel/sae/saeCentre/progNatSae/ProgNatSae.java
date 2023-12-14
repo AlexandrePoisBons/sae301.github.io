@@ -95,7 +95,7 @@ public class ProgNatSae extends JPanel{
 		try { map.put("SAE", Integer.parseInt(this.txtHSae.getText())); }
 		catch(NumberFormatException e) { map.put("SAE", 0); }
 
-		try { map.put("TUT", Integer.parseInt(this.txtHSae.getText())); }
+		try { map.put("TUT", Integer.parseInt(this.txtHTut.getText())); }
 		catch (NumberFormatException e) { map.put("TUT",0); }
 
 		return map;
