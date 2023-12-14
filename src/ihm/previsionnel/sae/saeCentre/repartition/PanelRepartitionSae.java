@@ -13,11 +13,12 @@ import javax.swing.JPanel;
 
 //Imports classes externes
 import ihm.previsionnel.sae.saeCentre.PCentreSae;
-import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepartitionHeureSae;
+import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepH;
+import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepartitionHeureDroiteSae;
 
 public class PanelRepartitionSae extends JPanel implements ActionListener {
 	private PCentreSae panelMere;
-	private PanelRepartitionHeureSae panelRepartitionHeure;
+	private PanelRepH panelRepartitionHeure;
 	private PanelAffectSae panelAffect;
 	private JButton btnAjouter;
 	private JButton btnSuppr;
@@ -28,7 +29,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 
 		JPanel panelBtn = new JPanel();
 
-		this.panelRepartitionHeure 	= new PanelRepartitionHeureSae	(this)				;
+		this.panelRepartitionHeure 	= new PanelRepH	(this)				;
 		this.panelAffect	 		= new PanelAffectSae			(this)				;	
 		this.btnAjouter 			= new JButton					("Ajouter")	;
 		this.btnSuppr				= new JButton					("Supprimmer")	;	
