@@ -5,35 +5,35 @@ import java.util.List;
 import java.util.HashMap;
 
 import metier.db.Requetes;
-
+    
 public class Module {
     private static int nbModules = Requetes.getNbModules();
 
-    private int        idModule;
-    private TypeModule typeModule;
-    private String     semestre;
-    private String     libelle;
-    private String     libelleCourt;
-    private String     code;
-    private int        nbEtudiants;
-    private int        nbGpTD;
-    private int        nbGpTP;
-    private int        nbSemaines;
-    private int        nbHeures;
+    private int    idModule;
+    private String typeModule;
+    private String semestre;
+    private String libelle;
+    private String libelleCourt;
+    private String code;
+    private int    nbEtudiants;
+    private int    nbGpTD;
+    private int    nbGpTP;
+    private int    nbSemaines;
+    private int    nbHeures;
 
     private HashMap<String, Integer> heureParType;
-
+    
     private List<Intervenant> intervenants;
     private List<Heure>       heures;
 
-    public static Module creerModule( TypeModule typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
-        if ( typeModule == null || semestre == null || semestre.isEmpty() || libelle == null || libelle.isEmpty() || libelleCourt == null || libelleCourt.isEmpty() || code == null || code.isEmpty() || nbEtudiants < 0 || nbGpTD < 0 || nbGpTP < 0 || nbSemaines < 0 || nbHeures < 0 )
+    public static Module creerModule( String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+        if ( typeModule == null || typeModule.isEmpty() || semestre == null || semestre.isEmpty() || libelle == null || libelle.isEmpty() || libelleCourt == null || libelleCourt.isEmpty() || code == null || code.isEmpty() || nbEtudiants < 0 || nbGpTD < 0 || nbGpTP < 0 || nbSemaines < 0 || nbHeures < 0 )
             return null;
 
         return new Module( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures);
     }
 
-    private Module( TypeModule typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+    private Module( String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
         this.idModule     = Module.nbModules++;
         this.typeModule   = typeModule;
         this.semestre     = semestre;
@@ -54,7 +54,7 @@ public class Module {
     }
 
     public int               getIdModule()     { return this.idModule;     }
-    public TypeModule        getTypeModule()   { return this.typeModule;   }
+    public String            getTypeModule()   { return this.typeModule;   }
     public String            getSemestre()     { return this.semestre;     }
     public String            getLibelle()      { return this.libelle;      }
     public String            getLibelleCourt() { return this.libelleCourt; }
@@ -69,7 +69,7 @@ public class Module {
 
 
     public void setIdModule( int idModule )            { this.idModule     = idModule;     }
-    public void setTypeModule( TypeModule typeModule ) { this.typeModule   = typeModule;   }
+    public void setTypeModule( String typeModule )     { this.typeModule   = typeModule;   }
     public void setSemestre( String semestre )         { this.semestre     = semestre;     }
     public void setLibelle( String libelle )           { this.libelle      = libelle;      }
     public void setLibelleCourt( String libelleCourt ) { this.libelleCourt = libelleCourt; }
@@ -118,7 +118,7 @@ public class Module {
      * Cette HashMap permet de stocker le nombre d'heures affectées à un module par type d'heure
      */
     public void initHash() {
-        switch ( this.typeModule.getLibelle() ) {
+        switch ( this.typeModule ) {
             case "CM" :
                 this.heureParType.put( "h CM" , 0 );
                 this.heureParType.put( "h TD" , 0 );

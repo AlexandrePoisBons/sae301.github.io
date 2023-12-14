@@ -6,21 +6,12 @@ DROP TABLE IF EXISTS Type_Heure         CASCADE;
 DROP TABLE IF EXISTS Intervenant        CASCADE;
 DROP TABLE IF EXISTS Statut             CASCADE;
 DROP TABLE IF EXISTS Module             CASCADE;
-DROP TABLE IF EXISTS Type_Module        CASCADE;
 
-
-
-
-
-Create table Type_Module (
-    id_type_module integer primary key,
-    libelle VARCHAR(10) NOT NULL
-);
 
 
 Create Table Module (
     id_module integer primary key,
-    id_type_module integer REFERENCES Type_Module(id_type_module),
+    type_module VARCHAR(50) NOT NULL,
     semestre VARCHAR(2) NOT NULL,
     libelle VARCHAR(100) NOT NULL,
     libelle_court VARCHAR(50) NOT NULL,
