@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.*;
 
@@ -19,7 +20,7 @@ public class PanelRepartitionHeureGaucheSae extends JPanel{
 
 
 		JPanel panelHC	= new JPanel();
-		for(int cpt=0; cpt < 6; cpt++){
+		for(int cpt=0; cpt < 4; cpt++){
 			JTextField jtf = new JTextField(3);
 			this.ensJTextField.add(jtf);	
 		}
@@ -57,4 +58,21 @@ public class PanelRepartitionHeureGaucheSae extends JPanel{
 
 		this.add(panelHC);
 	}
+
+
+	public HashMap<String, Integer> getRepartitionHeures() {
+		HashMap<String, Integer> map = new HashMap<>();
+	
+		try { map.put("SAE", Integer.parseInt(this.ensJTextField.get(0).getText())); }
+		catch (NumberFormatException e) { map.put("SAE", 0); }
+
+		try { map.put("TUT", Integer.parseInt(this.ensJTextField.get(1).getText())); }
+		catch (NumberFormatException e) { map.put("TUT", 0); }
+
+		return map;
+	}
+
+
+
+
 }

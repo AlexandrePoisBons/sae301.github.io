@@ -11,6 +11,7 @@ public class Intervenant {
 	private float  nbEqTD;
 
 	private List<Heure>  heures;
+	
 	private List<Module> modules;
 
 	
