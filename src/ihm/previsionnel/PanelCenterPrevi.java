@@ -2,6 +2,7 @@ package ihm.previsionnel;
 
 //Imports classes Java
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -23,6 +24,8 @@ public class PanelCenterPrevi extends JPanel {
 		this.frame = frameAccueil;
 
 		// Définition de la taille de la fenêtre
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		this.frame.setSize(800, 300);
 
 		// création de la liste des semestres et des semestres qu'elle contient

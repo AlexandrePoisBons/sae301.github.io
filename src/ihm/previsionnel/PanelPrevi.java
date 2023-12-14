@@ -3,7 +3,6 @@ package ihm.previsionnel				;
 import ihm.accueil.FrameAccueil;
 import ihm.previsionnel.ressources.PanelRessources;
 import ihm.previsionnel.sae.PanelSae;
-import ihm.previsionnel.sae.saeCentre.PCentreSae;
 
 //Imports classes Java
 import java.awt.BorderLayout			;

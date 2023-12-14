@@ -7,7 +7,6 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
-import ihm.parametrage.PanelParam;
 
 public class ComboBoxCellEditor extends AbstractCellEditor implements TableCellEditor{
 	private JComboBox<String> box;

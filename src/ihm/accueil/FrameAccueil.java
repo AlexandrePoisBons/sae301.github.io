@@ -3,8 +3,7 @@ package ihm.accueil			;
 import javax.swing.*		;
 import java.awt.BorderLayout;
 import java.awt.Dimension	;
-
-public class FrameAccueil extends JFrame {
+import java.awt.Toolkit;eil extends JFrame {
 	//Attribut(s)
 	private JPanel panel;
 
@@ -18,6 +17,8 @@ public class FrameAccueil extends JFrame {
 		this.setLocation(100, 100);
 
 		//Taille
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		this.setSize(350, 200);
 
 		//Composants						//Dimension des panels pour centrer le panel au milieu

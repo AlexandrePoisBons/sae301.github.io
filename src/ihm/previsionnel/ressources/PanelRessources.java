@@ -22,6 +22,8 @@ public class PanelRessources extends JPanel {
         this.frameAcceuil = frameAcceuil;
         this.panelMere = frame;
 
+        int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
         this.frameAcceuil.setSize(1050, 650);
         this.frameAcceuil.setLocation(20, 20);
         this.setLayout(new BorderLayout());

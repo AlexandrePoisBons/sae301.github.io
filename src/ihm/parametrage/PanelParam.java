@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent		;
 import java.awt.event.ActionListener	;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class PanelParam extends JPanel implements ActionListener{
 
@@ -42,6 +43,8 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.listCoef   = new ArrayList<String> ();
 
 		this.setLayout(new BorderLayout());
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		this.frame.setSize(1000, 600);
 
 		// Creation des éléments de la page 
