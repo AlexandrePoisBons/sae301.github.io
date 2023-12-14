@@ -22,18 +22,18 @@ import java.awt.Toolkit;eil extends JFrame {
 		this.setSize(350, 200);
 
 		//Composants						//Dimension des panels pour centrer le panel au milieu
-		JPanel eastPanel = new JPanel();	eastPanel.setPreferredSize(new Dimension(100, 1));
-		JPanel westPanel = new JPanel();	westPanel.setPreferredSize(new Dimension(100, 1));
+		//JPanel eastPanel = new JPanel();	eastPanel.setPreferredSize(new Dimension(100, 1));
+		//JPanel westPanel = new JPanel();	westPanel.setPreferredSize(new Dimension(100, 1));
 
 		//Panel principal
 		this.panel = new PanelAcceuil(this);
 
 		//Ajout des composants	  
-		this.add(new JPanel()	, BorderLayout.NORTH	);
+		//this.add(new JPanel()	, BorderLayout.NORTH	);
 		this.add(this.panel		, BorderLayout.CENTER	);
-		this.add(new JPanel()	, BorderLayout.SOUTH	);
-		this.add(eastPanel		, BorderLayout.EAST		);
-		this.add(westPanel		, BorderLayout.WEST		);
+		//this.add(new JPanel()	, BorderLayout.SOUTH	);
+		//this.add(eastPanel		, BorderLayout.EAST		);
+		//this.add(westPanel		, BorderLayout.WEST		);
 
 		//Permet la fermeture de la fenetre quand on appuie sur la croix
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
