@@ -90,7 +90,7 @@ public class PanelSud extends JPanel implements ActionListener {
 
 		Module module = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
 
-		System.out.println(this.frame.getControleur().getCtrl().requete().ajouterModule( module ));
+		System.out.println(this.frame.getControleur().getCtrl().metier().ajouterModule( module ));
 
 		System.out.println(module.toString());
 

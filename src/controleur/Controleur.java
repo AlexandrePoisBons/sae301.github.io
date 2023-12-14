@@ -17,9 +17,7 @@ public class Controleur {
 		this.ihm = new ControleurIHM(this);
 	}
 
-	public ControleurMetier requete(){
-		return this.metier;
-	}
+	public ControleurMetier metier() { return this.metier; }
 
 
 

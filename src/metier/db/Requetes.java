@@ -113,9 +113,9 @@ public class Requetes {
 	public void close() throws SQLException { this.db.close(); }
 
 
-/*----------------------------------------*/
-/*              Intervenant               */
-/*----------------------------------------*/
+	/*----------------------------------------*/
+	/*              Intervenant               */
+	/*----------------------------------------*/
 
 	public boolean existsIntervenant(int idIntervenant) throws SQLException {
 
@@ -193,9 +193,9 @@ public class Requetes {
 	}
 
 
-/*----------------------------------------*/
-/*                Heure                   */
-/*----------------------------------------*/
+	/*----------------------------------------*/
+	/*                Heure                   */
+	/*----------------------------------------*/
 
 	public boolean existsHeure(int idHeure) throws SQLException {
 
@@ -276,10 +276,9 @@ public class Requetes {
 
 
 
-/*----------------------------------------*/
-/*              Type_Heure                */
-/*----------------------------------------*/
-
+	/*----------------------------------------*/
+	/*              Type_Heure                */
+	/*----------------------------------------*/
 
 	public boolean existsTypeHeure(int idTypeHeure) throws SQLException {
 
@@ -359,9 +358,9 @@ public class Requetes {
 
 
 
-/*----------------------------------------*/
-/*               Module                   */
-/*----------------------------------------*/
+	/*----------------------------------------*/
+	/*               Module                   */
+	/*----------------------------------------*/
 
 	public boolean existsModule(int idModule) throws SQLException {
 
@@ -458,9 +457,9 @@ public class Requetes {
 	}
 
 
-/*----------------------------------------*/
-/*               Statut                   */
-/*----------------------------------------*/
+	/*----------------------------------------*/
+	/*               Statut                   */
+	/*----------------------------------------*/
 
 	public boolean existsStatut(String nomStatut) throws SQLException {
 
@@ -512,9 +511,9 @@ public class Requetes {
 	}
 
 
-/*----------------------------------------*/
-/*           Intervenant_Statut           */
-/*----------------------------------------*/
+	/*----------------------------------------*/
+	/*           Intervenant_Statut           */
+	/*----------------------------------------*/
 
 
 	public boolean existsIntervenantModule(int idIntervenant, int idModule) throws SQLException {
@@ -574,9 +573,9 @@ public class Requetes {
 
 
 
-/*----------------------------------------*/
-/*           Intervenant_Heure            */
-/*----------------------------------------*/
+	/*----------------------------------------*/
+	/*           Intervenant_Heure            */
+	/*----------------------------------------*/
 
 	public boolean existsIntervenantHeure(int idIntervenant, int idHeure) throws SQLException {
 
@@ -632,11 +631,9 @@ public class Requetes {
 	}
 
 	
-/*----------------------------------------*/
-/*             Heure_Module               */
-/*----------------------------------------*/
-
-
+	/*----------------------------------------*/
+	/*             Heure_Module               */
+	/*----------------------------------------*/
 
 	public boolean existsHeureModule(int idHeure, int idModule) throws SQLException {
 

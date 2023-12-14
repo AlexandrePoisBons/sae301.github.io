@@ -95,7 +95,7 @@ public class ControleurMetier {
 		this.typesHeures.remove(typeHeure);
 		return false;
 	}
-	
+
 
 	public List<Statut>      getStatuts()      { return this.statuts;      }
 	public List<TypeHeure>   getTypesHeures()  { return this.typesHeures;  }

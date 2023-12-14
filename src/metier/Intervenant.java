@@ -85,7 +85,7 @@ public class Intervenant {
 		float nbHeures = 0;
 		for (Heure h : this.heures)
 			nbHeures += h.getDuree() * h.getTypeHeure().getCoeff();
-		
+
 		return nbHeures;
 	}
 
