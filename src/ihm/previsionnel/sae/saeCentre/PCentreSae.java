@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import ihm.previsionnel.sae.PanelSae;
 import ihm.previsionnel.sae.saeCentre.progNatSae.ProgNatSae;

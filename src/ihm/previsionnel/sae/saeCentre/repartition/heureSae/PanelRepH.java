@@ -3,13 +3,13 @@ package ihm.previsionnel.sae.saeCentre.repartition.heureSae;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 
 import java.awt.Color;
 
 import javax.swing.JPanel;
 
 import ihm.previsionnel.sae.saeCentre.repartition.PanelRepartitionSae;
+
 
 public class PanelRepH extends JPanel{
 	private PanelRepartitionSae panelMere;

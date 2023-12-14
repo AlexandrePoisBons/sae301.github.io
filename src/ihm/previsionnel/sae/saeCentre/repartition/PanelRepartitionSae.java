@@ -2,14 +2,12 @@ package ihm.previsionnel.sae.saeCentre.repartition;
 
 //Imports classes Java
 import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 //Imports classes externes
 import ihm.previsionnel.sae.saeCentre.PCentreSae;
@@ -17,7 +15,7 @@ import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepH;
 
 public class PanelRepartitionSae extends JPanel implements ActionListener {
 	private PCentreSae panelMere;
-	private PanelRepH panelRepartitionHeure;
+	private PanelRepH panelRepH;
 	private PanelAffectSae panelAffect;
 	private JButton btnAjouter;
 	private JButton btnSuppr;
@@ -25,10 +23,11 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public PanelRepartitionSae(PCentreSae panelMere) {
 		this.panelMere = panelMere;
 		this.setLayout(new BorderLayout());
+		this.setBorder(new EmptyBorder(0, 5, 0, 0));
 
 		JPanel panelBtn = new JPanel();
 
-		this.panelRepartitionHeure 	= new PanelRepH	(this)				;
+		this.panelRepH 	= new PanelRepH					(this)				;
 		this.panelAffect	 		= new PanelAffectSae			(this)				;	
 		this.btnAjouter 			= new JButton					("Ajouter")	;
 		this.btnSuppr				= new JButton					("Supprimmer")	;	
@@ -37,7 +36,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 		panelBtn.add(this.btnAjouter)								;
 		panelBtn.add(this.btnSuppr)									;
 
-		this.add(this.panelRepartitionHeure, BorderLayout.NORTH);
+		this.add(this.panelRepH, BorderLayout.NORTH);
 		this.add(this.panelAffect, BorderLayout.CENTER);
 		this.add(panelBtn, BorderLayout.SOUTH);
 

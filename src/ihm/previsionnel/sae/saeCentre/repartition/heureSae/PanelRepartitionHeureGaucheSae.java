@@ -11,21 +11,14 @@ import javax.swing.*;
 
 public class PanelRepartitionHeureGaucheSae extends JPanel{
 	private PanelRepH panelMere;
-	private JPanel 					panelHeure;
-	private JPanel 					panelTotal		;
 	private ArrayList<JTextField> 	ensJTextField	;
 
 	public PanelRepartitionHeureGaucheSae(PanelRepH panelRepH){
 		this.panelMere = panelRepH;
-		this.panelHeure = new JPanel();
 		this.ensJTextField = new ArrayList<JTextField>();
 
-		this.setLayout(new GridLayout(2, 1));
-		this.panelHeure.setLayout(new BorderLayout());
 
-		JPanel panelHN 	= new JPanel();
 		JPanel panelHC	= new JPanel();
-		JPanel panelB 	= new JPanel();
 		for(int cpt=0; cpt < 6; cpt++){
 			JTextField jtf = new JTextField(3);
 			this.ensJTextField.add(jtf);	
