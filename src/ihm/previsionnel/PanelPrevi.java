@@ -1,4 +1,4 @@
-package ihm.previsionnel				;
+package ihm.previsionnel;
 
 import ihm.accueil.FrameAccueil;
 import ihm.previsionnel.ressources.PanelRessources;
@@ -6,21 +6,21 @@ import ihm.previsionnel.sae.PanelSae;
 import ihm.previsionnel.stage.PanelStage;
 
 //Imports classes Java
-import java.awt.BorderLayout			;
-import java.awt.GridLayout				;
-import java.awt.event.ActionEvent		;
-import java.awt.event.ActionListener	;
-import javax.swing.*					;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class PanelPrevi extends JPanel implements ActionListener {
 	//Attributs
-	private FrameAccueil 		frame				;
-	private PanelCenterPrevi 	panelCenterPrevi	;
-	private JButton 			btnCreerRessource	;
-	private JButton 			btnCreerSAE			;
-	private JButton 			btnCreerStage		;
-	private JButton 			btnModifier			;
-	private JButton 			btnSupprimer		;	
+	private FrameAccueil 		frame;
+	private PanelCenterPrevi 	panelCenterPrevi;
+	private JButton 			btnCreerRessource;
+	private JButton 			btnCreerSAE;
+	private JButton 			btnCreerStage;
+	private JButton 			btnModifier;
+	private JButton 			btnSupprimer;
 
 	//Constructeur
 	public PanelPrevi(FrameAccueil frAccueil) {

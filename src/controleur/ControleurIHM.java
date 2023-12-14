@@ -12,9 +12,9 @@ public class ControleurIHM {
 
 	public ControleurIHM(Controleur ctrl) {
 		this.ctrl = ctrl;
-		this.frame = new FrameAccueil();
+		this.frame = new FrameAccueil(this);
 	}
 
-
+	public Controleur getCtrl() { return this.ctrl; }
 
 }

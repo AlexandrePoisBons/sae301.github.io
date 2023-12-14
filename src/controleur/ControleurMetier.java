@@ -38,16 +38,22 @@ public class ControleurMetier {
 
 
 	/* Insert */
-	public boolean ajouterIntervenant(Intervenant intervenant) throws SQLException {
-		this.requetes.insertIntervenant(intervenant);
-		this.intervenants.add(intervenant);
-		return false;
+	public boolean ajouterIntervenant(Intervenant intervenant) {
+		try{
+			this.requetes.insertIntervenant(intervenant);
+			this.intervenants.add(intervenant);
+			return true;
+		} catch (SQLException e) { return false; }
 	}
 
-	public boolean ajouterModule(Module module) throws SQLException {
-		this.requetes.insertModule(module);
-		this.modules.add(module);
-		return false;
+	public boolean ajouterModule(Module module) {
+		try {
+			this.requetes.insertModule(module);
+			System.out.println("dono");
+			this.modules.add(module);
+			System.out.println("donova");
+			return true;
+		} catch ( SQLException e ) { return false; }
 	}
 
 	public boolean ajouterStatut(Statut statut) throws SQLException {

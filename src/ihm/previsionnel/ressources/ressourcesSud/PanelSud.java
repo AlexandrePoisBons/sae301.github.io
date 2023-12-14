@@ -57,9 +57,19 @@ public class PanelSud extends JPanel implements ActionListener {
 		String libelle      = this.panelRessources.getLibelle();
 		String libelleCourt = this.panelRessources.getLibelleCourt();
 		String code         = this.panelRessources.getCode();
-		int nbEtudiants     = Integer.parseInt(this.panelPrevi.getNbEtd());
-		int nbGpTD          = Integer.parseInt(this.panelPrevi.getNbGpTd());
-		int nbGpTP          = Integer.parseInt(this.panelPrevi.getNbGpTp());
+		
+		int nbEtudiants;
+		try { nbEtudiants = Integer.parseInt(this.panelPrevi.getNbEtd()); }
+		catch (NumberFormatException e) { nbEtudiants = 0;}
+
+		int nbGpTD;
+		try { nbGpTD = Integer.parseInt(this.panelPrevi.getNbGpTd()); }
+		catch (NumberFormatException e) { nbGpTD = 0; }
+
+		int nbGpTP;
+		try { nbGpTP = Integer.parseInt(this.panelPrevi.getNbGpTp()); }
+		catch (NumberFormatException e) { nbGpTP = 0; }
+	
 		int nbSemaines;
 		int nbHeures;
 
@@ -80,6 +90,7 @@ public class PanelSud extends JPanel implements ActionListener {
 
 		Module module = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
 
+		System.out.println(this.frame.getControleur().getCtrl().requete().ajouterModule( module ));
 
 		System.out.println(module.toString());
 

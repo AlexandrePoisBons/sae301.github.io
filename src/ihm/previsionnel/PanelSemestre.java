@@ -70,7 +70,4 @@ public class PanelSemestre extends JPanel {
 	public String getNbEtd()      { return this.txtNbEtd.getText();  }
 	public String getNbGpTd()     { return this.txtNbGpTd.getText(); }
 	public String getNbGpTp()     { return this.txtNbGpTp.getText(); }
-
-
-
 }

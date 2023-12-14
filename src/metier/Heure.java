@@ -3,25 +3,50 @@ package metier;
 import java.util.ArrayList;
 import java.util.List;
 
+import metier.db.Requetes;
+
+/**
+ * Classe Heure : représente une heure de cours avec ses intervenant et son module lié
+ * @author Alexandre Pois--Bons - Florian Janot
+ * @version 1.0
+ */
 public class Heure {
+	private static int  nbHeures = Requetes.getNbHeures();
+
 	private int         idHeure;
 	private Module      module;
 	private TypeHeure   typeHeure;
-	private int         duree;
+	private float       duree;
 	private String      commentaire;
-
+	
 	private List<Intervenant> intervenants;
-    
-    public static Heure creerHeure( int idHeure,  Module module, TypeHeure typeHeure, int duree, String commentaire)
-    {
+
+	/**
+	 * Factory pour la classe Heure
+	 * @param module      Un module préalablement crée
+	 * @param typeHeure   Un type d'heure préalablement crée
+	 * @param duree       La durée de l'heure (en heure)
+	 * @param commentaire Un commentaire sur l'heure saisie par l'utilisateur
+	 * @return une heure ou null
+	 */
+	public static Heure creerHeure( Module module, TypeHeure typeHeure, float duree, String commentaire)
+	{
 		if ( module == null || typeHeure == null || duree <= 0 )
 			return null;
 
-        return new Heure(idHeure, module, typeHeure, duree, commentaire);
-    }
-    
-    private Heure(int idHeure, Module module, TypeHeure typeHeure, int duree, String commentaire) {
-		this.idHeure     = idHeure;
+		return new Heure( module, typeHeure, duree, commentaire);
+	}
+	
+	/**
+	 * Constructeur privé de la classe Heure uniquement appellé par la factory
+	 * @param module      Un module préalablement crée
+	 * @param typeHeure   Un type d'heure préalablement crée
+	 * @param duree       La durée de l'heure (en heure)
+	 * @param commentaire Un commentaire sur l'heure saisie par l'utilisateur
+	 * @return            Une heure validé par la factory
+	 */
+	private Heure( Module module, TypeHeure typeHeure, float duree, String commentaire) {
+		this.idHeure     = nbHeures++;
 		this.module      = module;
 		this.typeHeure   = typeHeure;
 		this.duree       = duree;
@@ -30,25 +55,29 @@ public class Heure {
 		this.intervenants = new ArrayList<Intervenant>();
 	}
 
-
-
+	// Getters
 	public int               getIdHeure()      { return this.idHeure;      }
 	public Module            getModule()       { return this.module;       }
 	public TypeHeure         getTypeHeure()    { return this.typeHeure;    }
-	public int               getDuree()        { return this.duree;        }
+	public float             getDuree()        { return this.duree;        }
 	public String            getCommentaire()  { return this.commentaire;  }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
 
-
+	// Setters
 	public void setIdHeure( int idHeure )                       { this.idHeure      = idHeure;            }
 	public void setModule(Module module)                        { this.module       = module;             }
 	public void setTypeHeure(TypeHeure typeHeure)               { this.typeHeure    = typeHeure;          }
-	public void setDuree(int duree)                             { this.duree        = duree;              }
+	public void setDuree(float duree)                           { this.duree        = duree;              }
 	public void setCommentaire(String commentaire)              { this.commentaire  = commentaire;        }
 	public void setIntervenants(List<Intervenant> intervenants) { this.intervenants = intervenants;       }
 	public void ajouterIntervenant(Intervenant intervenant)     { this.intervenants.add(intervenant);     }
 	public void supprimerIntervenant(Intervenant intervenant)   { this.intervenants.remove(intervenant);  }
 
+
+	/**
+	 * Méthode toString de la classe Heure
+	 * @return une chaine de caractère représentant l'heure
+	 */
 	public String toString() {
 		return "Heure [idHeure="+this.idHeure + ", idModule=" + this.module.getIdModule() + ", idTypeHeure=" + this.typeHeure.getIdTypeHeure() + ", duree=" + this.duree + ", commentaire=" + this.commentaire+"]";
 	}
