@@ -23,7 +23,7 @@ public class PanelStage extends JPanel {
 		this.panelMere = panelMere;
 
 		this.frame.setTitle("Prévisionnel - Module: SAE");
-		this.frame.setSize(1100, 650);
+		this.frame.setSize(1105, 600);
 		this.frame.setLocation(20, 20);
 		this.setLayout(new BorderLayout());
 
