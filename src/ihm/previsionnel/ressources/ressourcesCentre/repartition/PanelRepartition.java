@@ -67,6 +67,6 @@ public class PanelRepartition extends JPanel implements ActionListener{
 
 	public HashMap<String,Integer> getNbSemaines() { return this.panelRepartitionHeure.getNbSemaines(); }
 
-	public HashMap<String,Integer> getData() { return this.panelMere.getData(); }
+	public HashMap<String,Integer> getTabData() { return this.panelMere.getData(); }
 
 }

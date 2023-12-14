@@ -32,7 +32,7 @@ public class PanelAffect extends JPanel {
 	}
 
 	public void ajouter() {
-		HashMap<String, Integer> map = this.panelMere.getData();
+		HashMap<String, Integer> map = this.panelMere.getTabData();
 
 		Object[] objs = new Object[6];
 		for ( String type : map.keySet() ) {
