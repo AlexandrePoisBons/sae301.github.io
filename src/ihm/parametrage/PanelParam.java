@@ -197,4 +197,8 @@ public class PanelParam extends JPanel implements ActionListener{
 			this.frame.setSize(350, 200);
 		}
 	}
+
+	public ArrayList<String> getListStatut(){
+		return this.listStatut;
+	}
 }

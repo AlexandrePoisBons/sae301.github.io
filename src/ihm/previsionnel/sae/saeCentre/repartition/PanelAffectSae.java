@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class PanelAffectSae extends JPanel{
-		private PanelRepartitionSae panelMere;
+	private PanelRepartitionSae panelMere;
 	private JTable tableauAffect;
 	private DefaultTableModel dtm;
 
