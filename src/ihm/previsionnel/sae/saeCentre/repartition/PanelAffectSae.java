@@ -23,7 +23,7 @@ public class PanelAffectSae extends JPanel{
 		this.tableauAffect = new JTable(dtm);
 
 		JScrollPane scroll = new JScrollPane(this.tableauAffect);
-		scroll.setPreferredSize(new Dimension(470, 250));
+		scroll.setPreferredSize(new Dimension(650, 250));
 
 		this.add(scroll);
 	}
