@@ -32,7 +32,7 @@ public class PCentreSae extends JPanel{
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.insets = new Insets(0, 0, 0, 200);
+		gbc.insets = new Insets(0, 0, 0, 300);
 		panelN.add(new JLabel("PN local (nb h tot/etd)"), gbc);
 		gbc.gridx = 2;
 		panelN.add(new JLabel("Répartition"), gbc);
