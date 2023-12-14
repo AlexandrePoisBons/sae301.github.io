@@ -1,4 +1,4 @@
-package ihm.previsionnel				;
+package ihm.previsionnel;
 
 import ihm.accueil.FrameAccueil;
 import ihm.previsionnel.ppp.PanelPpp;
@@ -7,46 +7,41 @@ import ihm.previsionnel.sae.PanelSae;
 import ihm.previsionnel.stage.PanelStage;
 
 //Imports classes Java
-import java.awt.BorderLayout			;
-import java.awt.GridLayout				;
-import java.awt.event.ActionEvent		;
-import java.awt.event.ActionListener	;
-import javax.swing.*					;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class PanelPrevi extends JPanel implements ActionListener {
 	//Attributs
-	private FrameAccueil 		frame				;
-	private PanelCenterPrevi 	panelCenterPrevi	;
-	private JButton             btnCreer            ;
-	private JComboBox<String>   ddlst               ;
-	private JButton 			btnCreerRessource	;
-	private JButton 			btnCreerSAE			;
-	private JButton 			btnCreerStage		;
-	private JButton 			btnModifier			;
-	private JButton 			btnSupprimer		;	
+	private FrameAccueil 		frame;
+	private PanelCenterPrevi 	panelCenterPrevi;
+	private JButton 			btnCreerRessource;
+	private JButton 			btnCreerSAE;
+	private JButton 			btnCreerStage;
+	private JButton 			btnModifier;
+	private JButton 			btnSupprimer;
 
 	//Constructeur
-	public PanelPrevi(FrameAccueil frAccueil){
+	public PanelPrevi(FrameAccueil frAccueil) {
 		//Synchronisation des pages
 		this.frame = frAccueil;
 
 		// création des composants
-		JPanel panelSud 		= new JPanel			(					     );
-		this.panelCenterPrevi 	= new PanelCenterPrevi	(this.frame			     );
-		this.btnCreer           = new JButton           ("Créer"            );
-		this.ddlst              = new JComboBox<String> (                        );
-		this.btnCreerRessource 	= new JButton			("Créer ressource"	 );
-		this.btnCreerSAE 		= new JButton			("Créer SAE"		 );
+		JPanel panelSud 		= new JPanel			(					);
+		this.panelCenterPrevi 	= new PanelCenterPrevi	(this.frame			);
+		this.btnCreerRessource 	= new JButton			("Créer ressource"	);
+		this.btnCreerSAE 		= new JButton			("Créer SAE"		);
 		this.btnCreerStage 		= new JButton			("Créer stage/suivi");
-		this.btnModifier 		= new JButton			("Modifier"         );
-		this.btnSupprimer 		= new JButton			("Supprimer"		 );
+		this.btnModifier 		= new JButton			("Modifier"			);
+		this.btnSupprimer 		= new JButton			("Supprimer"		);
 
 		//Layout
-		this.setLayout		(new BorderLayout());
-		panelSud.setLayout	(new GridLayout(1, 4, 5, 0));
+		this.setLayout		(new BorderLayout	()			);
+		panelSud.setLayout	(new GridLayout		(1, 4, 5, 0));
 
 		//Ajout des composants
-		panelSud.add(this.btnCreer);
 		panelSud.add(this.btnCreerRessource						);
 		panelSud.add(this.btnCreerSAE							);
 		panelSud.add(this.btnCreerStage							);
@@ -56,17 +51,18 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this	.add(panelSud, 				BorderLayout.SOUTH	);
 
 		//ActionListeners
-		this.btnCreerRessource	.addActionListener(this);
-		this.btnCreerSAE		.addActionListener(this);
-		this.btnCreerStage		.addActionListener(this);
-		this.btnModifier		.addActionListener(this);
-		this.btnSupprimer		.addActionListener(this);
+		this.btnCreerRessource  .addActionListener(this);
+		this.btnCreerSAE        .addActionListener(this);
+		this.btnCreerStage      .addActionListener(this);
+		this.btnModifier        .addActionListener(this);
+		this.btnSupprimer       .addActionListener(this);
 	}
 
-	public String getSemestre() { return this.panelCenterPrevi.getSemestre(); }
-	public String getNbEtd() { return this.panelCenterPrevi.getNbEtd(); }
-	public String getNbGpTd() { return this.panelCenterPrevi.getNbGpTd(); }
-	public String getNbGpTp() { return this.panelCenterPrevi.getNbGpTp(); }
+	public String getSemestre()   { return this.panelCenterPrevi.getSemestre();   }
+	public String getNbEtd()      { return this.panelCenterPrevi.getNbEtd();      }
+	public String getNbGpTd()     { return this.panelCenterPrevi.getNbGpTd();     }
+	public String getNbGpTp()     { return this.panelCenterPrevi.getNbGpTp();     }
+	public int    getNbSemaines() { return this.panelCenterPrevi.getNbSemaines(); }
 
 	//Permets de faire une action en fonction du bouton cliqué
 	@Override

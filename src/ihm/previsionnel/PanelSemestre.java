@@ -47,10 +47,10 @@ public class PanelSemestre extends JPanel {
 		JScrollPane tableau = new JScrollPane(tabModule);
 
 		// Ajout des composants
-		panelNord.add	(new JLabel("nb gp TD")		);
-		panelNord.add	(this.txtNbGpTd				);
-		panelNord.add	(new JLabel("nb gp TP")		);
-		panelNord.add	(this.txtNbGpTp				);
+		panelNord.add	(new JLabel("nb gp TD")		    );
+		panelNord.add	(this.txtNbGpTd				    );
+		panelNord.add	(new JLabel("nb gp TP")		    );
+		panelNord.add	(this.txtNbGpTp				    );
 		panelNord.add	(new JLabel("nb Etd")			);		
 		panelNord.add	(this.txtNbEtd					);
 		panelNord.add	(new JLabel("nb semaines")		);		
@@ -66,11 +66,8 @@ public class PanelSemestre extends JPanel {
 	}
 
 	// Getters
-	public int getIdSemestre() { return this.id; }
-
-	public String getNbEtd() { return this.txtNbEtd.getText(); }
-	public String getNbGpTd() { return this.txtNbGpTd.getText(); }
-	public String getNbGpTp() { return this.txtNbGpTp.getText(); }
-
-
+	public int    getIdSemestre() { return this.id;                  }
+	public String getNbEtd()      { return this.txtNbEtd.getText();  }
+	public String getNbGpTd()     { return this.txtNbGpTd.getText(); }
+	public String getNbGpTp()     { return this.txtNbGpTp.getText(); }
 }

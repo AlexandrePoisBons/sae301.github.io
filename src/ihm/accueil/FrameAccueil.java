@@ -1,6 +1,9 @@
 package ihm.accueil			;
 
 import javax.swing.*		;
+
+import controleur.ControleurIHM;
+
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
@@ -8,14 +11,16 @@ public class FrameAccueil extends JFrame {
 	//Attribut(s)
 	private JPanel panel;
 
+	private ControleurIHM ctrl;
 
 	//Constructeur
-	public FrameAccueil() {
+	public FrameAccueil(ControleurIHM ctrl) {
+		this.ctrl = ctrl;
 		this.setTitle("Accueil");
 		this.setResizable(false);
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		
+
 		//Position
 		this.setLocation((int)(largeur*0.5)-175, (int)(hauteur*0.5)-100);
 
@@ -27,8 +32,7 @@ public class FrameAccueil extends JFrame {
 		this.panel = new PanelAcceuil(this);
 
 		//Ajout des composants
-		 
-		this.add(this.panel);
+		 this.add(this.panel);
 
 
 		//Permet la fermeture de la fenetre quand on appuie sur la croix
@@ -45,5 +49,9 @@ public class FrameAccueil extends JFrame {
 		this.add(this.panel);
 		this.setVisible(true);
 	}
+
+
+	public ControleurIHM getControleur() { return this.ctrl; }
+
 
 }

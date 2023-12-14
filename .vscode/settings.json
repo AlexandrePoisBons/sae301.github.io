@@ -8,5 +8,6 @@
         "lib/**/*.jar",
         "lib/*.jar",
         "lib/postgresql-8.4-703.jdbc4.jar"
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }

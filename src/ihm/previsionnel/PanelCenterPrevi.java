@@ -4,6 +4,7 @@ package ihm.previsionnel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 
 import ihm.accueil.FrameAccueil;
@@ -64,9 +65,17 @@ public class PanelCenterPrevi extends JPanel {
 		return null;
 	}
 
-	public String getSemestre() { return "S"+this.getCurrentSemestre().getIdSemestre(); }
-	public String getNbEtd()    { return this.getCurrentSemestre().getNbEtd();          }
-	public String getNbGpTd()   { return this.getCurrentSemestre().getNbGpTd();         }
-	public String getNbGpTp()   { return this.getCurrentSemestre().getNbGpTp();         }
+	public void setModules(List<Module> alModules){
+		// Ajouter les modules au JTabbedPane
+		for (int i = 0; i < this.listSemestre.size(); i++) {
+			this.listSemestre.get(i).setModules(alModules);
+		}
+	}
+
+	public int    getNumCurrentModule() { return this.modules.getSelectedIndex();               }
+	public String getSemestre()         { return "S"+this.getCurrentSemestre().getIdSemestre(); }
+	public String getNbEtd()            { return this.getCurrentSemestre().getNbEtd();          }
+	public String getNbGpTd()           { return this.getCurrentSemestre().getNbGpTd();         }
+	public String getNbGpTp()           { return this.getCurrentSemestre().getNbGpTp();         }
 
 }

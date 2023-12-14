@@ -5,6 +5,11 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import metier.Heure;
+import metier.Module;
+import metier.TypeHeure;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PanelAffect extends JPanel {
@@ -47,9 +52,24 @@ public class PanelAffect extends JPanel {
 
 	}
 
+	public ArrayList<Heure> getDataHeures(Module module, TypeHeure typeHeure) {
+		ArrayList<Heure> heures = new ArrayList<>();
+
+		float duree = 0;
+		//duree  = this.dtm.getValueAt(, 6).toString();
+
+		int nb = this.dtm.getRowCount();
+
+		Heure tmp;
+		for (int i = 0; i < nb; i++) {
+			tmp = Heure.creerHeure(module, typeHeure, duree, this.dtm.getValueAt(i,6).toString());
+			heures.add(tmp);
+		}
+
+		return heures;
+	}
+
 	public void supprimer() {
 		this.dtm.removeRow(this.tableauAffect.getSelectedRow());
 	}
-
-
 }

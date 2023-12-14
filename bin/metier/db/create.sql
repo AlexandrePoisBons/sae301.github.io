@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS Statut             CASCADE;
 DROP TABLE IF EXISTS Module             CASCADE;
 
 
+
 Create Table Module (
     id_module integer primary key,
     type_module VARCHAR(50) NOT NULL,
@@ -19,8 +20,7 @@ Create Table Module (
     nb_gp_td integer NOT NULL,
     nb_gp_tp integer NOT NULL,
     nb_semaines integer NOT NULL,
-    nb_heures integer NOT NULL,
-    commentaire VARCHAR(250)
+    nb_heures integer NOT NULL
 );
 
 
