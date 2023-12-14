@@ -55,6 +55,7 @@ public class Requetes {
 	private PreparedStatement psUpdateHM;
 
 	private PreparedStatement psDeleteHeureByModule;
+	private PreparedStatement psDeleteHeureByTypeHeure;
 
 	public Requetes() {
 		this.db = DB.getInstance();
@@ -101,7 +102,8 @@ public class Requetes {
 			this.psDeleteHM = this.connec.prepareStatement("DELETE FROM Heure_Module WHERE id_heure=?, id_module=?;");
 			this.psUpdateHM = this.connec.prepareStatement("UPDATE Heure_Module SET id_heure=?, id_module=? WHERE id_heure=? AND id_module=?;");
 
-			this.psDeleteHeureByModule = this.connec.prepareStatement("DELETE FROM Heure WHERE id_module=?;");
+			this.psDeleteHeureByModule    = this.connec.prepareStatement("DELETE FROM Heure WHERE id_module=?;");
+			this.psDeleteHeureByTypeHeure = this.connec.prepareStatement("DELETE FROM Heure WHERE id_type_heure=?;"); 
 
 		} catch( SQLException e ) { e.printStackTrace(); }
 
@@ -240,6 +242,10 @@ public class Requetes {
 	public void deleteTypeHeure(TypeHeure typeHeure) throws SQLException {
 
 		if ( this.existsTypeHeure(typeHeure.getIdTypeHeure()) ) {
+
+			this.psDeleteHeureByTypeHeure.setInt(1, typeHeure.getIdTypeHeure());
+			this.psDeleteHeureByTypeHeure.executeUpdate();
+
 			this.psDeleteTH.setInt(1, typeHeure.getIdTypeHeure());
 			this.psDeleteTH.executeUpdate();
 		} else {

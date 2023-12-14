@@ -35,4 +35,14 @@ public class PanelSae extends JPanel{
         this.add(this.pCentreSae, BorderLayout.CENTER);
         this.add(this.pSudSae, BorderLayout.SOUTH);
 	}
+
+
+	public String getSemestre() { return this.panelMere.getSemestre(); }
+	public String getNbEtd() { return this.panelMere.getNbEtd(); }
+	public String getNbGpTd() { return this.panelMere.getNbGpTd(); }
+	public String getNbGpTp() { return this.panelMere.getNbGpTp(); }
+
+
+
+
 }

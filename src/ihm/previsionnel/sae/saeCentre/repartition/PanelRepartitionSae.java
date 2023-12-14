@@ -4,6 +4,7 @@ package ihm.previsionnel.sae.saeCentre.repartition;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -46,15 +47,20 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnAjouter){
+		if(e.getSource() == this.btnAjouter) {
 			this.panelAffect.ajouter();
 		}
-		if(e.getSource() == this.btnSuppr){
+		if(e.getSource() == this.btnSuppr) {
 			this.panelAffect.supprimer();
 		}
 	}
 
-	public Object[] getHeuresProgNat(){
-		return this.panelMere.getHeuresProgNat();
+	public HashMap<String,Integer> getRepartitionHeures() {
+		return this.panelRepH.getRepartitionHeures();
 	}
+
+	public HashMap<String,Integer> getData(){
+		return this.panelMere.getData();
+	}
+
 }

@@ -2,6 +2,7 @@ package metier;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
 public class Module {
     private int    idModule;
@@ -17,6 +18,8 @@ public class Module {
     private int    nbSemaines;
     private int    nbHeures;
 
+    private HashMap<String, Integer> heureParType;
+    
     private List<Intervenant> intervenants;
     private List<Heure>       heures;
 
@@ -26,8 +29,6 @@ public class Module {
 
         return new Module( idModule, typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures, commentaire );
     }
-
-
 
     private Module( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures, String commentaire ) {
         this.idModule     = idModule;
@@ -41,10 +42,13 @@ public class Module {
         this.nbGpTP       = nbGpTP;
         this.nbSemaines   = nbSemaines;
         this.nbHeures     = nbHeures;
-        this.commentaire = commentaire;
+        this.commentaire  = commentaire;
 
         this.intervenants = new ArrayList<Intervenant>();
         this.heures       = new ArrayList<Heure>();
+
+        this.heureParType = new HashMap<String, Integer>();
+        initHash();
     }
 
     public int               getIdModule()     { return this.idModule;     }
@@ -77,14 +81,82 @@ public class Module {
     public void setCommentaire(String commentaire)     { this.commentaire  = commentaire;  }
     public void setIntervenant(List<Intervenant> i )   { this.intervenants = i;            }
 
+    /**
+     * Méthode permettant d'ajouter une heure à un module
+     * @param h Heure à ajouter
+     */
+    public void ajouterHeure( Heure h ) {
+        this.heures.add( h );
+        
+        for ( Intervenant i : h.getIntervenants() )
+            if ( !this.intervenants.contains( i ) ) {
+                this.intervenants.add( i );
+                i.ajouterModule( this );
+                i.ajouterHeure(h);
+            }
+               
 
+        // Ajoute la durée de l'heure au total du type d'heure correspondant
+        this.heureParType.put( h.getTypeHeure().getNomTypeHeure(), h.getDuree() );
+    }
+
+    /**
+     * Méthode permettant de supprimer une heure à un module
+     * @param h Heure à supprimer
+     */
+    public void supprimerHeure( Heure h ) {
+        this.heures.remove( h );
+
+        this.heureParType.put( h.getTypeHeure().getNomTypeHeure(), -h.getDuree() );
+    }
+
+    /**
+     * Méthode permettant d'initialiser le HashMap heureParType en fonction du type de module
+     * Cette HashMap permet de stocker le nombre d'heures affectées à un module par type d'heure
+     */
+    public void initHash() {
+        if ( this.typeModule == "SAE" )
+            this.heureParType.put( "h Sae", 0 );
+            this.heureParType.put( "Tut"  , 0 );
+        
+        if ( this.typeModule == "REH" )
+            this.heureParType.put( "h Reh", 0 );
+            this.heureParType.put( "Tut"  , 0 );
+
+        if ( this.typeModule == "CM" )
+            this.heureParType.put( "h CM" , 0 );
+            this.heureParType.put( "h TD" , 0 );
+            this.heureParType.put( "h TP" , 0 );
+    }
+
+    /**
+     *  Méthode permettant de récupérer le nombre d'heures affectées à un module au moment de l'appel
+     * @return Retourne le nombre d'heures affectées en float
+     */
     public float getNbHeuresAffecte() {
         float nbHeuresAffectees = 0;
+        
         for ( Heure h : this.heures )
             nbHeuresAffectees += h.getDuree();
+        
         return nbHeuresAffectees;
     }
 
+    /**
+     * Méthode permettant de vérifier si le nombre d'heures affectées à un module est égal au nombre d'heures prévues
+     * @return boolean 
+     */
+    public boolean verification()
+    {
+        float heuresAffectees = 0;
+        
+        for (String s : this.heureParType.keySet() )
+            heuresAffectees += this.heureParType.get(s);
+
+        return ( heuresAffectees == this.nbHeures );      
+    }
+
+  
     public String toString() {
         return "Module [idModule=" + this.idModule + ", typeModule=" + this.typeModule + ", semestre=" + this.semestre + ", libelle=" + this.libelle + ", libelleCourt=" + this.libelleCourt + ", code=" + this.code + ", nbEtudiants=" + this.nbEtudiants + ", nbGpTD=" + this.nbGpTD + ", nbGpTP=" + this.nbGpTP + ", nbSemaines=" + this.nbSemaines + ", nbHeures=" + this.nbHeures + ", intervenants=" + this.intervenants + ", heures=" + this.heures +", commentaire="+this.commentaire+ "]";
     }

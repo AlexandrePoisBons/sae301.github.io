@@ -68,8 +68,8 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		if ( e.getSource() == this.btnCreerRessource ) {
 			this.frame.changerPanel( new PanelRessources(this.frame, this) );
 		}
-		if(e.getSource() == this.btnCreerSAE){ this.frame.changerPanel(new PanelSae(this.frame, this));
-
+		if(e.getSource() == this.btnCreerSAE){
+			this.frame.changerPanel( new PanelSae(this.frame, this) );
 		}
 		if(e.getSource() == this.btnCreerStage){
 
