@@ -11,8 +11,6 @@ import metier.TypeHeure;
 
 public class Requetes {
 
-	// coucou cocuou
-
 	private DB db;
 	private Connection connec;
 
@@ -79,9 +77,9 @@ public class Requetes {
 			this.psUpdateTH = this.connec.prepareStatement("UPDATE Type_Heure SET coeff=? WHERE id_type_heure=?;");
 
 			this.psSelectM = this.connec.prepareStatement("SELECT * FROM Module WHERE id_module=?;");
-			this.psInsertM = this.connec.prepareStatement("INSERT INTO Module VALUES(?,?,?,?,?,?,?,?,?,?,?);");
+			this.psInsertM = this.connec.prepareStatement("INSERT INTO Module VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
 			this.psDeleteM = this.connec.prepareStatement("DELETE FROM Module CASCADE WHERE id_module=?;");
-			this.psUpdateM = this.connec.prepareStatement("UPDATE Module SET type_module=?, semestre=?, libelle=?, libelle_court=?, code=?, nb_etudiants=?, nb_gp_td=?, nb_gp_tp=?, nb_semaines=?, nb_heures=? WHERE id_module=?;");
+			this.psUpdateM = this.connec.prepareStatement("UPDATE Module SET type_module=?, semestre=?, libelle=?, libelle_court=?, code=?, nb_etudiants=?, nb_gp_td=?, nb_gp_tp=?, nb_semaines=?, nb_heures=?, commentaire=? WHERE id_module=?;");
 
 			this.psSelectS = this.connec.prepareStatement("SELECT * FROM Statut WHERE nom_statut=?;");
 			this.psInsertS = this.connec.prepareStatement("INSERT INTO Statut VALUES(?,?,?,?);");
@@ -287,6 +285,7 @@ public class Requetes {
 			this.psInsertM.setInt(9, module.getNbGpTP());
 			this.psInsertM.setInt(10, module.getNbSemaines());
 			this.psInsertM.setInt(11, module.getNbHeures());
+			this.psUpdateM.setString(12, module.getCommentaire());
 			this.psInsertM.executeUpdate();
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" deja existant");
@@ -321,7 +320,8 @@ public class Requetes {
 			this.psUpdateM.setInt(8, module.getNbGpTP());
 			this.psUpdateM.setInt(9, module.getNbSemaines());
 			this.psUpdateM.setInt(10, module.getNbHeures());
-			this.psUpdateM.setInt(11, module.getIdModule());
+			this.psUpdateM.setString(11, module.getCommentaire());
+			this.psUpdateM.setInt(12, module.getIdModule());
 			this.psUpdateM.executeUpdate();
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" inexistant");
@@ -632,14 +632,13 @@ public class Requetes {
 															rs.getInt("nb_gp_td"), 
 															rs.getInt("nb_gp_tp"),
 															rs.getInt("nb_semaines"),
-															rs.getInt("nb_heures")),
+															rs.getInt("nb_heures"),
+															rs.getString("commentaire")),
 										new TypeHeure      (rs.getInt("id_type_heure"),
 															rs.getString("nom_type_heure"),
 															rs.getFloat("coeff") ),
 												rs.getInt("duree"),
 												rs.getString("commentaire"));
-
-
 			listeH.add(h);
 		}
 		rs.close(); 
@@ -668,7 +667,8 @@ public class Requetes {
 			                               rs.getInt    ("nb_gp_td"      ),
 			                               rs.getInt    ("nb_gp_tp"      ),
 			                               rs.getInt    ("nb_semaines"   ),
-			                               rs.getInt    ("nb_heures"     ));
+			                               rs.getInt    ("nb_heures"     ),
+			                               rs.getString ("commentaire"));
 			listeI.add(m);
 		}
 		rs.close();

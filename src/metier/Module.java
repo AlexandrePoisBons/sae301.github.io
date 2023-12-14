@@ -10,25 +10,26 @@ public class Module {
     private String libelle;
     private String libelleCourt;
     private String code;
+    private String commentaire;
     private int    nbEtudiants;
     private int    nbGpTD;
     private int    nbGpTP;
     private int    nbSemaines;
     private int    nbHeures;
-    
+
     private List<Intervenant> intervenants;
     private List<Heure>       heures;
 
-    public static Module creerModule( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+    public static Module creerModule( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures, String commentaire ) {
         if ( typeModule == null || typeModule.isEmpty() || semestre == null || semestre.isEmpty() || libelle == null || libelle.isEmpty() || libelleCourt == null || libelleCourt.isEmpty() || code == null || code.isEmpty() || nbEtudiants < 0 || nbGpTD < 0 || nbGpTP < 0 || nbSemaines < 0 || nbHeures < 0 )
             return null;
 
-        return new Module( idModule, typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
+        return new Module( idModule, typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures, commentaire );
     }
 
 
 
-    private Module( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+    private Module( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures, String commentaire ) {
         this.idModule     = idModule;
         this.typeModule   = typeModule;
         this.semestre     = semestre;
@@ -40,6 +41,7 @@ public class Module {
         this.nbGpTP       = nbGpTP;
         this.nbSemaines   = nbSemaines;
         this.nbHeures     = nbHeures;
+        this.commentaire = commentaire;
 
         this.intervenants = new ArrayList<Intervenant>();
         this.heures       = new ArrayList<Heure>();
@@ -56,6 +58,7 @@ public class Module {
     public int               getNbGpTP()       { return this.nbGpTP;       }
     public int               getNbSemaines()   { return this.nbSemaines;   }
     public int               getNbHeures()     { return this.nbHeures;     }
+    public String            getCommentaire()  { return this.commentaire;  }
     public List<Intervenant> getIntervenants() { return this.intervenants; }
     public List<Heure>       getHeures()       { return this.heures;       }
 
@@ -71,6 +74,7 @@ public class Module {
     public void setNbGpTP( int nbGpTP )                { this.nbGpTP       = nbGpTP;       }
     public void setNbSemaines( int nbSemaines )        { this.nbSemaines   = nbSemaines;   }
     public void setHeures ( List<Heure> heures )       { this.heures       = heures;       }
+    public void setCommentaire(String commentaire)     { this.commentaire  = commentaire;  }
     public void setIntervenant(List<Intervenant> i )   { this.intervenants = i;            }
 
 
@@ -82,6 +86,6 @@ public class Module {
     }
 
     public String toString() {
-        return "Module [idModule=" + this.idModule + ", typeModule=" + this.typeModule + ", semestre=" + this.semestre + ", libelle=" + this.libelle + ", libelleCourt=" + this.libelleCourt + ", code=" + this.code + ", nbEtudiants=" + this.nbEtudiants + ", nbGpTD=" + this.nbGpTD + ", nbGpTP=" + this.nbGpTP + ", nbSemaines=" + this.nbSemaines + ", nbHeures=" + this.nbHeures + ", intervenants=" + this.intervenants + ", heures=" + this.heures + "]";
+        return "Module [idModule=" + this.idModule + ", typeModule=" + this.typeModule + ", semestre=" + this.semestre + ", libelle=" + this.libelle + ", libelleCourt=" + this.libelleCourt + ", code=" + this.code + ", nbEtudiants=" + this.nbEtudiants + ", nbGpTD=" + this.nbGpTD + ", nbGpTP=" + this.nbGpTP + ", nbSemaines=" + this.nbSemaines + ", nbHeures=" + this.nbHeures + ", intervenants=" + this.intervenants + ", heures=" + this.heures +", commentaire="+this.commentaire+ "]";
     }
 }

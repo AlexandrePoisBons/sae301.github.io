@@ -19,7 +19,8 @@ Create Table Module (
     nb_gp_td integer NOT NULL,
     nb_gp_tp integer NOT NULL,
     nb_semaines integer NOT NULL,
-    nb_heures integer NOT NULL
+    nb_heures integer NOT NULL,
+    commentaire VARCHAR(250)
 );
 
 

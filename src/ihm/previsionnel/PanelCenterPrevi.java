@@ -47,10 +47,10 @@ public class PanelCenterPrevi extends JPanel {
 		this.setVisible(true);
 	}
 
-	public PanelSemestre getCurrentSemestre(){
+	public PanelSemestre getCurrentSemestre() {
 		int i = this.modules.getSelectedIndex();
 
-		for (PanelSemestre panelSemestre : listSemestre)
+		for ( PanelSemestre panelSemestre : this.listSemestre )
 			if (panelSemestre.getIdSemestre() == i+1)
 				return panelSemestre;
 
@@ -58,9 +58,8 @@ public class PanelCenterPrevi extends JPanel {
 	}
 
 	public String getSemestre() { return "S"+this.getCurrentSemestre().getIdSemestre(); }
-	public String getNbEtd() { return this.getCurrentSemestre().getNbEtd(); }
-	public String getNbGpTd() { return this.getCurrentSemestre().getNbGpTd(); }
-	public String getNbGpTp() { return this.getCurrentSemestre().getNbGpTp(); }
-
+	public String getNbEtd()    { return this.getCurrentSemestre().getNbEtd();          }
+	public String getNbGpTd()   { return this.getCurrentSemestre().getNbGpTd();         }
+	public String getNbGpTp()   { return this.getCurrentSemestre().getNbGpTp();         }
 
 }
