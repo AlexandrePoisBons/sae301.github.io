@@ -50,10 +50,11 @@ public class PRCentre extends JPanel{
 		HashMap<String,Integer> mapS = this.panelRepartition.getNbSemaines();
 
 		for ( String type : mapH.keySet() )
-			if ( mapH.get(type) != 0 || mapS.get(type) != 0 )
+			if ( mapH.get(type) != 0 && mapS.get(type) != 0 )
 				map.put(type, mapS.get(type));
 
 		return map;
 	}
 
+	
 }

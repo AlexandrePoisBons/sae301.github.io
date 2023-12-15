@@ -70,23 +70,15 @@ public class PanelSud extends JPanel implements ActionListener {
 		try { nbGpTP = Integer.parseInt(this.panelPrevi.getNbGpTp()); }
 		catch (NumberFormatException e) { nbGpTP = 0; }
 	
-		int nbSemaines;
-		int nbHeures;
+		int nbSemaines = 0;
+		int nbHeures   = 0;
 
-		int max=0;
-		int sum=0;
 		HashMap<String, Integer> map = this.panelRessources.getDataHeures();
 		for (String heure : map.keySet() ){
-			if (map.get(heure) > max)
-				max = map.get(heure);
-			sum+= map.get(heure);
+			if (map.get(heure) > nbSemaines)
+				nbSemaines = map.get(heure);
+			nbHeures+= map.get(heure);
 		}
-		nbSemaines = max;
-		nbHeures   = sum;
-
-		// Objectif : prCentre
-
-		// panelRessource -> panelCentre
 
 		Module module = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
 

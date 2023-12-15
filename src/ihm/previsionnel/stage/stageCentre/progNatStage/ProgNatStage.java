@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.HashMap;
 import java.awt.Color;
 
 
@@ -89,14 +90,16 @@ public class ProgNatStage extends JPanel{
 	}
 
 
-	public Object[] getHeuresTot(){
+	public HashMap<String, Integer> getHeuresTot() {
 
-		Object[] objs = new Object[3];
+		HashMap<String,Integer> map = new HashMap<>();
 
-		objs[0] = Integer.parseInt(this.txtHSae.getText());
-		objs[1] = Integer.parseInt(this.txtHTut.getText());
-		objs[2] = Integer.parseInt(this.txtSomme.getText());
+		try { map.put("REH", Integer.parseInt(this.txtHSae.getText())); }
+		catch(NumberFormatException e) { map.put("REH", 0); }
 
-		return objs;
+		try { map.put("TUT", Integer.parseInt(this.txtHTut.getText())); }
+		catch (NumberFormatException e) { map.put("TUT",0); }
+
+		return map;
 	}
 }

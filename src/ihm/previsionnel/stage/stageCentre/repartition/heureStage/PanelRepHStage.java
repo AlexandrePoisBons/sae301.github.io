@@ -4,6 +4,7 @@ import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepartitionHeure
 import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepartitionHeureGaucheSae;
 import ihm.previsionnel.stage.stageCentre.repartition.PanelRepartitionStage;
 import java.awt.GridLayout;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 
@@ -27,4 +28,7 @@ public class PanelRepHStage extends JPanel{
 		this.add(this.panelRepartitionHGauche);
 		this.add(this.panelRepartitionHDroite);
 	}
+
+
+	public HashMap<String, Integer> getRepartitionHeures() { return this.panelRepartitionHDroite.getRepartitionHeures(); }
 }

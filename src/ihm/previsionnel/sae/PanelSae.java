@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
+import java.util.HashMap;
 
 //Import classes externes
 import ihm.accueil.*;
@@ -36,7 +37,7 @@ public class PanelSae extends JPanel{
 
 		this.pNordSae = new PNordSae(this);
 		this.pCentreSae = new PCentreSae(this);
-		this.pSudSae = new PanelSudSae(this.frame, this.panelMere);
+		this.pSudSae = new PanelSudSae(this.frame, this.panelMere, this);
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add(this.pNordSae, BorderLayout.NORTH);
@@ -44,13 +45,17 @@ public class PanelSae extends JPanel{
 		this.add(this.pSudSae, BorderLayout.SOUTH);
 	}
 
+	public String getSemestre()     { return this.panelMere.getSemestre();    }
+    public String getNbEtd()        { return this.panelMere.getNbEtd();       }
+    public String getNbGpTd()       { return this.panelMere.getNbGpTd();      }
+    public String getNbGpTp()       { return this.panelMere.getNbGpTp();      }
+    public String getCode()         { return this.pNordSae.getCode();         }
+    public String getLibelle()      { return this.pNordSae.getLibelle();      }
+    public String getLibelleCourt() { return this.pNordSae.getLibelleCourt(); }
 
-	public String getSemestre() { return this.panelMere.getSemestre(); }
-	public String getNbEtd() { return this.panelMere.getNbEtd(); }
-	public String getNbGpTd() { return this.panelMere.getNbGpTd(); }
-	public String getNbGpTp() { return this.panelMere.getNbGpTp(); }
+    public HashMap<String, Integer> getDataHeures() { return this.pCentreSae.getData(); }
 
-
-
-
+    public HashMap<String,Integer> getData() {
+        return this.pCentreSae.getData();
+    }
 }

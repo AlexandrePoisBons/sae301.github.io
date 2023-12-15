@@ -1,6 +1,7 @@
 package ihm.previsionnel.stage.stageCentre.repartition.heureStage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.*;
 
@@ -14,7 +15,8 @@ import java.awt.event.FocusListener;
 public class PanelRepartitionHeureDroiteStage extends JPanel implements FocusListener{
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
-	public PanelRepartitionHeureDroiteStage(){
+
+	public PanelRepartitionHeureDroiteStage() {
 		this.panelC = new JPanel();
 		this.ensTxtFld = new ArrayList<JTextField>();
 		for(int i = 0; i < 2; i++){
@@ -51,4 +53,19 @@ public class PanelRepartitionHeureDroiteStage extends JPanel implements FocusLis
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'focusLost'");
 	}
+
+
+	public HashMap<String, Integer> getRepartitionHeures() {
+		HashMap<String, Integer> map = new HashMap<>();
+	
+		try { map.put("REH", Integer.parseInt(this.ensTxtFld.get(0).getText())); }
+		catch (NumberFormatException e) { map.put("REH", 0); }
+
+		try { map.put("TUT", Integer.parseInt(this.ensTxtFld.get(1).getText())); }
+		catch (NumberFormatException e) { map.put("TUT", 0); }
+
+		return map;
+	}
+
+
 }

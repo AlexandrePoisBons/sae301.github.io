@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.HashMap;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -45,6 +46,21 @@ public class PCentreStage extends JPanel {
 		this.add(panelC, BorderLayout.CENTER);
 		this.add(panelN, BorderLayout.NORTH);
 	}
+
+	public HashMap<String, Integer> getData() {
+
+		HashMap<String,Integer> map = new HashMap<>();
+		HashMap<String,Integer> mapN = this.pProgNatStage.getHeuresTot();
+		HashMap<String,Integer> mapR = this.panelRepartitionStage.getRepartitionHeures();
+
+		for ( String type : mapN.keySet() )
+			if ( mapN.get(type) != 0 && mapR.get(type) != 0 )
+				map.put(type, mapR.get(type));
+
+		return map;
+	}
+
+
 	/* A DECOMENTER 
 	public Object[] getHeuresProgNat() {
 		return this.pProgNatStage.getHeuresTot();
