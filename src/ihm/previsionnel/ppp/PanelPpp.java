@@ -6,6 +6,7 @@ import ihm.previsionnel.ppp.pppNord.PanelPppNord;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 import ihm.accueil.*;
 import ihm.previsionnel.ppp.pppSud.PanelSud;
@@ -33,7 +34,7 @@ public class PanelPpp extends JPanel {
 
         this.panelPppNord = new PanelPppNord(this);
         this.panelPppCentre = new PanelPppCentre(this);
-        this.pSud = new PanelSud(this.frame, this.panelMere);
+        this.pSud = new PanelSud(this.frame, this.panelMere, this);
 
         // Utiliser BoxLayout pour organiser les composants horizontalement
         this.add(this.panelPppNord, BorderLayout.NORTH);
@@ -41,9 +42,18 @@ public class PanelPpp extends JPanel {
         this.add(this.pSud, BorderLayout.SOUTH);
     }
 
-    public String getSemestre() { return this.panelMere.getSemestre(); }
-    public String getNbEtd() { return this.panelMere.getNbEtd(); }
-    public String getNbGpTd() { return this.panelMere.getNbGpTd(); }
-    public String getNbGpTp() { return this.panelMere.getNbGpTp(); }
+    public String getSemestre()     { return this.panelMere.getSemestre();      }
+    public String getNbEtd()        { return this.panelMere.getNbEtd();         }
+    public String getNbGpTd()       { return this.panelMere.getNbGpTd();        }
+    public String getNbGpTp()       { return this.panelMere.getNbGpTp();        }
+    public String getCode()         { return this.panelPppNord.getCode();       }
+    public String getLibelle()      { return this.panelPppNord.getLibelle();      }
+    public String getLibelleCourt() { return this.panelPppNord.getLibelleCourt(); }
+
+    public HashMap<String, Integer> getDataHeures() { return this.panelPppCentre.getData(); }
+
+    public HashMap<String,Integer> getData() {
+        return this.panelPppCentre.getData();
+    }
 
 }
