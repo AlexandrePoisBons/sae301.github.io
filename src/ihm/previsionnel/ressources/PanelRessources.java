@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.List;
 
 import ihm.accueil.*;
 import ihm.previsionnel.*;
@@ -13,6 +14,7 @@ import ihm.previsionnel.ressources.ressourcesCentre.PRCentre;
 import ihm.previsionnel.ressources.ressourcesCentre.progNat.ProgNat;
 import ihm.previsionnel.ressources.ressourcesNord.PRNord;
 import ihm.previsionnel.ressources.ressourcesSud.PanelSud;
+import metier.Intervenant;
 
 public class PanelRessources extends JPanel {
     private FrameAccueil frame;
@@ -58,6 +60,10 @@ public class PanelRessources extends JPanel {
 
     public HashMap<String,Integer> getData() {
         return this.pRCentre.getData();
+    }
+
+    public List<Intervenant> getIntervenants(){
+        return frame.getControleur().getCtrl().metier().getIntervenants();
     }
 
 }

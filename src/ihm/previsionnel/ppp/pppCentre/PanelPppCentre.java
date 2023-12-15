@@ -5,12 +5,14 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.*;
 
 import ihm.previsionnel.ppp.PanelPpp;
 import ihm.previsionnel.ppp.pppCentre.progNat.ProgNat;
 import ihm.previsionnel.ppp.pppCentre.repartition.PanelRepartition;
+import metier.Intervenant;
 
 public class PanelPppCentre extends JPanel{
 	private PanelPpp 	panelMere;
@@ -56,4 +58,7 @@ public class PanelPppCentre extends JPanel{
 		return map;
 	}
 
+	public List<Intervenant> getIntervenants(){
+		return this.panelMere.getIntervenants();
+	}
 }

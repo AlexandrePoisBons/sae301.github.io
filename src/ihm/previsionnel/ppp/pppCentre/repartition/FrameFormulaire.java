@@ -1,4 +1,5 @@
-package ihm.previsionnel.sae.saeCentre.repartition;
+package ihm.previsionnel.ppp.pppCentre.repartition;
+
 
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -18,7 +19,7 @@ import metier.Intervenant;
 import metier.Statut;
 
 public class FrameFormulaire extends JFrame implements ActionListener{
-	private PanelRepartitionSae     panelMere;
+	private PanelRepartition        panelMere;
 	private JPanel                  panelFormulaire;
 	private JComboBox<Intervenant>  ddlstIntervenant;
 	private JTextField              txtType; 
@@ -28,7 +29,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	private JButton                 btnValider;
 	private JButton                 btnAnnuler;
 
-	public FrameFormulaire(PanelRepartitionSae panelMere){
+	public FrameFormulaire(PanelRepartition panelMere){
 		this.panelMere       = panelMere;
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
@@ -101,7 +102,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		}
 	}
 
-		public void remplirListe(List<Intervenant> intervenants){
+	public void remplirListe(List<Intervenant> intervenants){
 		Intervenant[] tabInter = new Intervenant[intervenants.size()];
 		for(int i=0;i<intervenants.size();i++){
 			tabInter[i] = intervenants.get(i);

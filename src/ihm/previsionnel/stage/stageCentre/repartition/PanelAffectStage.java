@@ -49,4 +49,15 @@ public class PanelAffectStage extends JPanel {
 	public void supprimer() {
 		this.dtm.removeRow(this.tableauAffect.getSelectedRow());
 	}
+
+
+	public void ajouterLigne(String string, String text, int int1, int int2, String text2) {
+		Object[] objs = new Object[5];
+		objs[0] = string;
+		objs[1] = text;
+		objs[2] = int1;
+		objs[3] = int2;
+		objs[4] = text2;
+		this.dtm.addRow(objs);
+	}
 }

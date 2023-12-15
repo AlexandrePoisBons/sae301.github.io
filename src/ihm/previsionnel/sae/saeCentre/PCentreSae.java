@@ -5,13 +5,14 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 import ihm.previsionnel.sae.PanelSae;
 import ihm.previsionnel.sae.saeCentre.progNatSae.ProgNatSae;
 import ihm.previsionnel.sae.saeCentre.repartition.PanelRepartitionSae;
+import metier.Intervenant;
 
 
 public class PCentreSae extends JPanel{
@@ -63,5 +64,9 @@ public class PCentreSae extends JPanel{
 	// public String getNbEtd() { return this.pCentreSae.getNbEtd(); }
 	// public String getNbGpTd() { return this.pCentreSae.getNbGpTd(); }
 	// public String getNbGpTp() { return this.pCentreSae.getNbGpTp(); }
+
+	public List<Intervenant> getIntervenants(){
+		return this.panelMere.getIntervenants();
+	}
 
 }

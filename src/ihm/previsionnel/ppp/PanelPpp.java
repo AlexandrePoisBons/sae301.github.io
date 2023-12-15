@@ -7,9 +7,11 @@ import ihm.previsionnel.ppp.pppNord.PanelPppNord;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
+import java.util.List;
 
 import ihm.accueil.*;
 import ihm.previsionnel.ppp.pppSud.PanelSud;
+import metier.Intervenant;
 
 public class PanelPpp extends JPanel {
     private FrameAccueil frame;
@@ -54,6 +56,10 @@ public class PanelPpp extends JPanel {
 
     public HashMap<String,Integer> getData() {
         return this.panelPppCentre.getData();
+    }
+
+    public List<Intervenant> getIntervenants(){
+        return this.frame.getControleur().getCtrl().metier().getIntervenants();
     }
 
 }

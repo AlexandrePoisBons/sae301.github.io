@@ -6,6 +6,9 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.util.HashMap;
+import metier.Intervenant;
+import java.util.List;
+
 
 //Import classes externes
 import ihm.accueil.*;
@@ -60,5 +63,9 @@ public class PanelStage extends JPanel {
     public HashMap<String,Integer> getData() {
         return this.pCentreStage.getData();
     }
+
+	public List<Intervenant> getIntervenants(){
+		return this.frame.getControleur().getCtrl().metier().getIntervenants();
+	}
 
 }
