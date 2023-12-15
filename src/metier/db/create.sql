@@ -24,7 +24,7 @@ Create Table Module (
 );
 
 
-Create table Type_Heure(
+Create table Type_Heure (
     id_type_heure integer primary key,
     nom_type_heure varchar(50),
     coeff float DEFAULT 1

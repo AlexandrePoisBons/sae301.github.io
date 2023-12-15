@@ -1,7 +1,6 @@
 package controleur;
 
 import ihm.accueil.*;
-import metier.*;
 import metier.db.*;
 
 
@@ -18,6 +17,7 @@ public class Controleur {
 	}
 
 	public ControleurMetier metier() { return this.metier; }
+	
 
 
 

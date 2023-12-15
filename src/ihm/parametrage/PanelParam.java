@@ -4,6 +4,9 @@ import javax.swing.*;
 
 import java.util.*;
 
+import metier.Statut;
+import metier.db.Requetes;
+
 import ihm.accueil.FrameAccueil;
 import ihm.accueil.PanelAcceuil;
 
@@ -35,11 +38,11 @@ public class PanelParam extends JPanel implements ActionListener{
 	private JTable            tableauCoef;
 	private DefaultTableModel dtmStatut;
 	private DefaultTableModel dtmCoef;
-	
-	public PanelParam(FrameAccueil frame){
+
+	public PanelParam(FrameAccueil frame) {
 		this.frame      = frame;
 		this.listStatut = new ArrayList<String>();
-		this.listCoef   = new ArrayList<String> ();
+		this.listCoef   = new ArrayList<String>();
 
 		this.setLayout(new BorderLayout());
 		this.frame.setSize(1000, 600);
@@ -115,18 +118,34 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.btnRetour     .addActionListener(this);
 		this.btnEnregistrer.addActionListener(this);
 
+		this.init();
+
 		this.setVisible(true);
 	}
 
+
+	public void init() {
+		List<Statut> statuts = this.frame.getControleur().getCtrl().metier().getStatuts();
+
+		for (Statut statut : statuts)
+			this.ajouterStatut(statut);
+
+	}
+
+	public void afficheCoeff() {
+		
+	}
+
+
 	// Ajout des statut
-	public void ajouterStatut(){
-		Object[] objs = {""};
+	private void ajouterStatut(Statut statut) {
+		Object[] objs = {statut.getNomStatut()};
 		this.dtmStatut.addRow(objs);
 		System.out.println("taille: " + listStatut.size());
 	}
 
 	// Ajout des coef
-	public void ajouterCoef(){
+	private void ajouterCoef() {
 		Object[] objs = {"0.0"};
 		this.dtmCoef.addRow(objs);
 	}
@@ -165,7 +184,7 @@ public class PanelParam extends JPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjoutStat){
-			ajouterStatut();
+			this.ajouterStatut(null);
 		}
 
 		if(e.getSource() == this.btnAjoutCoef){

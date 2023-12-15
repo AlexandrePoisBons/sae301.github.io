@@ -210,6 +210,6 @@ public class Module {
 	 * Méthode toString de la classe Module
 	 */
 	public String toString() {
-		return "Module [idModule=" + this.idModule + ", typeModule=" + this.typeModule + ", semestre=" + this.semestre + ", libelle=" + this.libelle + ", libelleCourt=" + this.libelleCourt + ", code=" + this.code + ", nbEtudiants=" + this.nbEtudiants + ", nbGpTD=" + this.nbGpTD + ", nbGpTP=" + this.nbGpTP + ", nbSemaines=" + this.nbSemaines + ", nbHeures=" + this.nbHeures + ", intervenants=" + this.intervenants + ", heures=" + this.heures +", commentaire="+  "]";
+		return "Module [idModule=" + this.idModule + ", typeModule=" + this.typeModule + ", semestre=" + this.semestre + ", libelle=" + this.libelle + ", libelleCourt=" + this.libelleCourt + ", code=" + this.code + ", nbEtudiants=" + this.nbEtudiants + ", nbGpTD=" + this.nbGpTD + ", nbGpTP=" + this.nbGpTP + ", nbSemaines=" + this.nbSemaines + ", nbHeures=" + this.nbHeures + ", intervenants=" + this.intervenants + ", heures=" + this.heures + "]";
 	}
 }
