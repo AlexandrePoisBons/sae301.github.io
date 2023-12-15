@@ -1,6 +1,8 @@
 package ihm.previsionnel.sae;
 //Import classes Java
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 
 //Import classes externes
@@ -30,6 +32,7 @@ public class PanelSae extends JPanel{
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 		this.setLayout(new BorderLayout());
+		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
 		this.pNordSae = new PNordSae(this);
 		this.pCentreSae = new PCentreSae(this);

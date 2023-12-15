@@ -31,6 +31,7 @@ public class PCentreStage extends JPanel {
 		JPanel panelC = new JPanel();
 		panelC.setLayout(new BorderLayout());
 
+
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(0, 0, 0, 300);
