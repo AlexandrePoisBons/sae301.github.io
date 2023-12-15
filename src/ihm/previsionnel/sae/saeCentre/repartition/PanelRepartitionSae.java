@@ -28,18 +28,18 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 
 		JPanel panelBtn = new JPanel();
 
-		this.panelRepH 	= new PanelRepH					(this)				;
-		this.panelAffect	 		= new PanelAffectSae			(this)				;	
-		this.btnAjouter 			= new JButton					("Ajouter")	;
+		this.panelRepH 	            = new PanelRepH					(this)		    ;
+		this.panelAffect	 		= new PanelAffectSae			(this)		    ;	
+		this.btnAjouter 			= new JButton					("Ajouter")   	;
 		this.btnSuppr				= new JButton					("Supprimmer")	;	
 
 		//Ajout des boutons au panel de boutons
 		panelBtn.add(this.btnAjouter)								;
 		panelBtn.add(this.btnSuppr)									;
 
-		this.add(this.panelRepH, BorderLayout.NORTH);
-		this.add(this.panelAffect, BorderLayout.CENTER);
-		this.add(panelBtn, BorderLayout.SOUTH);
+		this.add(this.panelRepH   , BorderLayout.NORTH);
+		this.add(this.panelAffect , BorderLayout.CENTER);
+		this.add(panelBtn         , BorderLayout.SOUTH);
 
 		//Ajout des
 		this.btnAjouter.addActionListener	(this);
@@ -48,6 +48,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter) {
+			new FrameFormulaire(this);
 			this.panelAffect.ajouter();
 		}
 		if(e.getSource() == this.btnSuppr) {
