@@ -52,9 +52,7 @@ public class ControleurMetier {
 	public boolean ajouterModule(Module module) {
 		try {
 			this.requetes.insertModule(module);
-			System.out.println("dono");
 			this.modules.add(module);
-			System.out.println("donova");
 			return true;
 		} catch ( SQLException e ) { return false; }
 	}
@@ -102,10 +100,14 @@ public class ControleurMetier {
 
 
 	public void init() throws SQLException {
-		this.statuts	  = this.requetes.getStatuts();
+		this.statuts      = this.requetes.getStatuts();
+		System.out.println("coucou toi");
 		this.intervenants = this.requetes.getIntervenants();
+		System.out.println("eh oh");
 		this.modules      = this.requetes.getModules();
+		System.out.println("bon bah"+this.modules);
 		this.typesHeures  = this.requetes.getTypesHeures();
+		System.out.println("nan mais");
 
 		if ( this.typesHeures.size() == 0 ) {
 			this.typesHeures.add( new TypeHeure("CM"    , (float) 1.5  ) );
@@ -120,11 +122,15 @@ public class ControleurMetier {
 				this.requetes.insertTypeHeure(typeHeure);
 		}
 
+		System.out.println("---FIN---");
+
 
 	}
 
 	public List<Statut>      getStatuts()      { return this.statuts;      }
 	public List<TypeHeure>   getTypesHeures()  { return this.typesHeures;  }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
-	public List<Module>      getModules()      { return this.modules;      }
+	public List<Module>      getModules()      { System.out.println(this.modules+"donovaaaa");return this.modules;      }
+
+
 }
