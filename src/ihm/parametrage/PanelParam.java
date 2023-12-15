@@ -133,7 +133,8 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	public void afficheCoeff() {
-		
+		Object[] objs = {"0.0"};
+		this.dtmCoef.addRow(objs);
 	}
 
 
