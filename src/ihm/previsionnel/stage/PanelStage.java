@@ -28,7 +28,7 @@ public class PanelStage extends JPanel {
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		int xSize = (int)(largeur*0.72);
+		int xSize = (int)(largeur*0.75);
 		int ySize = (int)(hauteur*0.85);
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
@@ -44,4 +44,13 @@ public class PanelStage extends JPanel {
         this.add(this.pCentreStage, BorderLayout.CENTER);
         this.add(this.pSudStage, BorderLayout.SOUTH);
 	}
+	public String getSemestre()     { return this.panelMere.getSemestre();  }
+    public String getNbEtd()        { return this.panelMere.getNbEtd();     }
+    public String getNbGpTd()       { return this.panelMere.getNbGpTd();    }
+    public String getNbGpTp()       { return this.panelMere.getNbGpTp();    }
+    public String getCode()         { return this.pNordStage.getCode();         }
+    public String getLibelle()      { return this.pNordStage.getLibelle();      }
+    public String getLibelleCourt() { return this.pNordStage.getLibelleCourt(); }
+
+	
 }
