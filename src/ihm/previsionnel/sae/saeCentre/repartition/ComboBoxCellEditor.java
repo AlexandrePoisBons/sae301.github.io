@@ -25,5 +25,6 @@ public class ComboBoxCellEditor extends AbstractCellEditor implements TableCellE
 		box.setSelectedItem(value);
 		return box;
 	}
-	
+
 }
+ 

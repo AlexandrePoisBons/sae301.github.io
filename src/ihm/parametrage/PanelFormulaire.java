@@ -76,7 +76,6 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 													Float.parseFloat(this.txtCoeff.getText())));
 			}
 			else {
-				
 			}
 		}
 		if(e.getSource() == this.btnAnnuler){
@@ -84,7 +83,6 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 			this.txtBnHeuresService.setText("");
 			this.txtNbHeuresMax.setText("");
 			this.txtCoeff.setText("");
-			
 		}
 	}
 }
