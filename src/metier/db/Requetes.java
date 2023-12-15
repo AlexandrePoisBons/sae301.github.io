@@ -377,19 +377,20 @@ public class Requetes {
 	public void insertModule(Module module) throws SQLException {
 
 		if ( !this.existsModule(module.getIdModule()) ) {
-			this.psInsertM.setInt    ( 1, module.getIdModule()     );
-			this.psInsertM.setString ( 2, module.getTypeModule()   );
-			this.psInsertM.setString ( 3, module.getSemestre()     );
-			this.psInsertM.setString ( 4, module.getLibelle()      );
-			this.psInsertM.setString ( 5, module.getLibelleCourt() );
-			this.psInsertM.setString ( 6, module.getCode()         );
-			this.psInsertM.setInt    ( 7, module.getNbEtudiants()  );
-			this.psInsertM.setInt    ( 8, module.getNbGpTD()       );
-			this.psInsertM.setInt    ( 9, module.getNbGpTP()       );
-			this.psInsertM.setInt    ( 10, module.getNbSemaines()  );
-			this.psInsertM.setInt    ( 11, module.getNbHeures()    );
+			this.psInsertM.setInt    ( 1,  module.getIdModule()     );
+			this.psInsertM.setString ( 2,  module.getTypeModule()   );
+			this.psInsertM.setString ( 3,  module.getSemestre()     );
+			this.psInsertM.setString ( 4,  module.getLibelle()      );
+			this.psInsertM.setString ( 5,  module.getLibelleCourt() );
+			this.psInsertM.setString ( 6,  module.getCode()         );
+			this.psInsertM.setInt    ( 7,  module.getNbEtudiants()  );
+			this.psInsertM.setInt    ( 8,  module.getNbGpTD()       );
+			this.psInsertM.setInt    ( 9,  module.getNbGpTP()       );
+			this.psInsertM.setInt    ( 10, module.getNbSemaines()   );
+			this.psInsertM.setInt    ( 11, module.getNbHeures()     );
 			System.out.println("coucou");
-			this.psInsertM.executeUpdate();
+			System.out.println("laaaa: "+this.psInsertM.execute());
+			
 			System.out.println("coucou2");
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" deja existant");
