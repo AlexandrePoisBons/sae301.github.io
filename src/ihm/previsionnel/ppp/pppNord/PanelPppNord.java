@@ -31,8 +31,8 @@ public class PanelPppNord extends JPanel {
         this.txtTypeModule = new JTextField(10);
         this.txtSemestre = new JTextField(10);
         this.txtCode = new JTextField(10);
-        this.txtLibLong = new JTextField(10);
-        this.txtLibCourt = new JTextField(10);
+        this.txtLibLong = new JTextField(20);
+        this.txtLibCourt = new JTextField(15);
         this.txtNbEtd = new JTextField(2);
         this.txtNbGpTd = new JTextField(2);
         this.txtNbGpTp = new JTextField(2);
@@ -104,7 +104,7 @@ public class PanelPppNord extends JPanel {
 
 
 	private void setValues() {
-        this.txtTypeModule.setText("Ressource");
+        this.txtTypeModule.setText("PPP");
         this.txtSemestre.setText(this.panelMere.getSemestre());
         this.txtNbEtd.setText(this.panelMere.getNbEtd());
         this.txtNbGpTd.setText(this.panelMere.getNbGpTd());
