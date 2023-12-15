@@ -13,12 +13,8 @@ public class Controleur {
 
 	public Controleur() {
 		this.metier = new ControleurMetier(this);
-		this.ihm = new ControleurIHM(this);
+		this.ihm    = new ControleurIHM(this);
 	}
 
 	public ControleurMetier metier() { return this.metier; }
-	
-
-
-
 }

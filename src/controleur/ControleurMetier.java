@@ -9,7 +9,7 @@ import metier.Module;
 import metier.Statut;
 import metier.TypeHeure;
 import metier.db.*;
-import metier.TypeHeure;
+
 
 public class ControleurMetier {
 
@@ -99,6 +99,8 @@ public class ControleurMetier {
 		return false;
 	}
 
+
+
 	public void init() throws SQLException {
 		this.statuts	  = this.requetes.getStatuts();
 		this.intervenants = this.requetes.getIntervenants();
@@ -106,11 +108,12 @@ public class ControleurMetier {
 		this.typesHeures  = this.requetes.getTypesHeures();
 
 		if ( this.typesHeures.size() == 0 ) {
-			this.typesHeures.add( new TypeHeure("CM"    , (float) 1.5)  );
-			this.typesHeures.add( new TypeHeure("TD"    , (float) 1.0)  );
-			this.typesHeures.add( new TypeHeure("TP"    , (float) 0.66) );
-			this.typesHeures.add( new TypeHeure("Tutoré", (float) 0.5)  );
-			this.typesHeures.add( new TypeHeure("Sae"   , (float) 0.5)  );
+			this.typesHeures.add( new TypeHeure("CM"    , (float) 1.5  ) );
+			this.typesHeures.add( new TypeHeure("TD"    , (float) 1.0  ) );
+			this.typesHeures.add( new TypeHeure("TP"    , (float) 0.66 ) );
+			this.typesHeures.add( new TypeHeure("Tutoré", (float) 1.0  ) );
+			this.typesHeures.add( new TypeHeure("Sae"   , (float) 1.0  ) );
+			this.typesHeures.add( new TypeHeure("REH"   , (float) 1.0  ) );
 
 			for ( TypeHeure typeHeure : this.typesHeures )
 				this.requetes.insertTypeHeure(typeHeure);
@@ -119,10 +122,8 @@ public class ControleurMetier {
 
 	}
 
-
 	public List<Statut>      getStatuts()      { return this.statuts;      }
 	public List<TypeHeure>   getTypesHeures()  { return this.typesHeures;  }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
 	public List<Module>      getModules()      { return this.modules;      }
-
 }
