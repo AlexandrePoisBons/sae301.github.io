@@ -10,6 +10,7 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import controleur.Controleur;
 import ihm.accueil.FrameAccueil;
 import metier.Module;
 
@@ -17,20 +18,21 @@ import metier.Module;
 public class PanelSemestre extends JPanel {
 
 	// Attributs
-	private FrameAccueil frame;
-	private JTextField txtNbGpTd		;
-	private JTextField txtNbGpTp		;
-	private JTextField txtNbEtd			;
-	private JTextField txtNbSemaine		;
-	private DefaultTableModel dtm       ;
-	private JTable tabModule			;
-	private int id						;
+	private FrameAccueil      frame         ;
+	private Controleur        ctrl          ;
+	private JTextField        txtNbGpTd     ;
+	private JTextField        txtNbGpTp     ;
+	private JTextField        txtNbEtd      ;
+	private JTextField        txtNbSemaine  ;
+	private DefaultTableModel dtm           ;
+	private JTable            tabModule	    ;
+	private int               id            ;
 
 	// Constructeur
 	public PanelSemestre(FrameAccueil frameAccueil, int idSemestre) {
 
 		// Synchronisation des pages
-		this.frame 	= frameAccueil;
+		this.ctrl = frameAccueil.getControleur().getCtrl();
 
 		// Permet d'identifier le semestre cliqué
 		this.id 	= idSemestre;
@@ -44,26 +46,25 @@ public class PanelSemestre extends JPanel {
 		panelCentre.setLayout	(new BorderLayout());
 
 		//Instanciations des composants
-		this.txtNbGpTd = new JTextField(2			);
-		this.txtNbGpTp = new JTextField(2			);
-		this.txtNbEtd = new JTextField(2			);
-		this.txtNbSemaine = new JTextField(2		);
+		this.txtNbGpTd    = new JTextField(2);
+		this.txtNbGpTp    = new JTextField(2);
+		this.txtNbEtd     = new JTextField(2);
+		this.txtNbSemaine = new JTextField(2);
 
-		Object[][] o = {{"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"},
-		             {"R1", "dev", "2/6"}};
+		List<Module> alModules = this.ctrl.metier().getModules();
 
-		this.dtm = new DefaultTableModel(o, new String[] {"Liste des modules :"});
+		int cpt=0;
+		Object[][] objs = new Object[alModules.size()][1];
+		for ( Module m : alModules ) {
+			Object[] o = 
+					{m.getCode() + " " + m.getTypeModule() + "" + m.getNbHeuresAffecte() + "/ " + m.getNbHeures() 
+				};
+			objs[cpt] = o;
+			cpt++;
+		}
+
+
+		this.dtm = new DefaultTableModel(objs, new String[] {"Liste des modules :"});
 
 		this.tabModule = new JTable(this.dtm);
 
@@ -88,8 +89,8 @@ public class PanelSemestre extends JPanel {
 		//panelCentre.add	(new JLabel("Liste des modules :")  , BorderLayout.NORTH  );
 		panelCentre.add (new JScrollPane(this.tabModule), BorderLayout.CENTER );
 
-		this.add(panelNord                                  , BorderLayout.NORTH  );
-		this.add(panelCentre                                , BorderLayout.CENTER );
+		this.add(panelNord                              , BorderLayout.NORTH  );
+		this.add(panelCentre                            , BorderLayout.CENTER );
 
 		this.ajouterModule(Module.creerModule("qsd", "qsd", "qsd", "qsd", "qsd", 0, 0, 0, 0, 0));
 

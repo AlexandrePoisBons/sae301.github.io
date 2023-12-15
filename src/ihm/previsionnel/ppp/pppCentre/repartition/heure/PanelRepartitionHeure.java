@@ -1,6 +1,8 @@
 package ihm.previsionnel.ppp.pppCentre.repartition.heure;
 
 import java.awt.GridLayout;
+import java.util.HashMap;
+
 import javax.swing.BorderFactory;
 import java.awt.Color;
 
@@ -25,8 +27,8 @@ public class PanelRepartitionHeure extends JPanel{
 		this.add(this.panelRepartitionHDroite);
 	}
 
-	/*public HashMap<String, Integer> getNbSemaines() {
-		return this.panelRepartitionHGauche.getNbSemaines();
-	}*/
+	public HashMap<String, Integer> getNbSemaines() {
+		return this.panelRepartitionHDroite.getRepartitionHeures();
+	}
 	
 }

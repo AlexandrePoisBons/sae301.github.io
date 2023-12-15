@@ -112,6 +112,10 @@ public class PNordSae extends JPanel{
 		this.txtNbGpTp.setText(this.panelMere.getNbGpTp());
 	}
 
+    public String getLibelle()      { return this.txtLibLong.getText();  }
+    public String getLibelleCourt() { return this.txtLibCourt.getText(); }
+    public String getCode()         { return this.txtCode.getText();     }
+
 
 
 }

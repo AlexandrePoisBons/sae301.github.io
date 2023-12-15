@@ -124,10 +124,15 @@ public class ProgNat extends JPanel{
 
 		try { map.put("CM", Integer.parseInt(this.txtCMWrite.getText())); }
 		catch(NumberFormatException e) { map.put("CM", 0); }
+		
 		try { map.put("TD", Integer.parseInt(this.txtTDWrite.getText())); }
 		catch(NumberFormatException e) { map.put("TD", 0); }
-		try { map.put("TP", Integer.parseInt(this.txtTPWrite.getText())); }
-		catch(NumberFormatException e) { map.put("TP", 0); }
+		
+		try { map.put("TUT", Integer.parseInt(this.txtHTutWrite.getText())); }
+		catch(NumberFormatException e) { map.put("TUT", 0); }
+		
+		try { map.put("HP", Integer.parseInt(this.txtHPonctWrite.getText())); }
+		catch(NumberFormatException e) { map.put("HP", 0); }
 
 		return map;
 	}

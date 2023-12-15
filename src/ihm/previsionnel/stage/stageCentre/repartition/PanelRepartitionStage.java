@@ -4,6 +4,7 @@ package ihm.previsionnel.stage.stageCentre.repartition;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -55,7 +56,12 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 		}
 	}
 
-	/*public Object[] getHeuresProgNat(){
-		return this.panelMere.getHeuresProgNat();
-	}*/
+	public HashMap<String,Integer> getRepartitionHeures() {
+		return this.panelRepH.getRepartitionHeures();
+	}
+
+	public HashMap<String,Integer> getData(){
+		return this.panelMere.getData();
+	}
+
 }

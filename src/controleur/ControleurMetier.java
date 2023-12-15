@@ -110,10 +110,11 @@ public class ControleurMetier {
 		if ( this.typesHeures.size() == 0 ) {
 			this.typesHeures.add( new TypeHeure("CM"    , (float) 1.5  ) );
 			this.typesHeures.add( new TypeHeure("TD"    , (float) 1.0  ) );
-			this.typesHeures.add( new TypeHeure("TP"    , (float) 0.66 ) );
+			this.typesHeures.add( new TypeHeure("TP"    , (float) 1.0  ) );
 			this.typesHeures.add( new TypeHeure("Tutoré", (float) 1.0  ) );
 			this.typesHeures.add( new TypeHeure("Sae"   , (float) 1.0  ) );
 			this.typesHeures.add( new TypeHeure("REH"   , (float) 1.0  ) );
+			this.typesHeures.add( new TypeHeure("HP"    , (float) 1.0  ) );
 
 			for ( TypeHeure typeHeure : this.typesHeures )
 				this.requetes.insertTypeHeure(typeHeure);

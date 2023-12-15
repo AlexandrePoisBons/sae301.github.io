@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
+import java.util.HashMap;
 
 //Import classes externes
 import ihm.accueil.*;
@@ -37,20 +38,27 @@ public class PanelStage extends JPanel {
 
         this.pNordStage = new PNordStage(this);
         this.pCentreStage = new PCentreStage(this);
-        this.pSudStage = new PanelSudStage(this.frame, this.panelMere);
+        this.pSudStage = new PanelSudStage(this.frame, this.panelMere, this);
 
         // Utiliser BoxLayout pour organiser les composants horizontalement
         this.add(this.pNordStage, BorderLayout.NORTH);
         this.add(this.pCentreStage, BorderLayout.CENTER);
         this.add(this.pSudStage, BorderLayout.SOUTH);
 	}
-	public String getSemestre()     { return this.panelMere.getSemestre();  }
-    public String getNbEtd()        { return this.panelMere.getNbEtd();     }
-    public String getNbGpTd()       { return this.panelMere.getNbGpTd();    }
-    public String getNbGpTp()       { return this.panelMere.getNbGpTp();    }
+
+
+	public String getSemestre()     { return this.panelMere.getSemestre();      }
+    public String getNbEtd()        { return this.panelMere.getNbEtd();         }
+    public String getNbGpTd()       { return this.panelMere.getNbGpTd();        }
+    public String getNbGpTp()       { return this.panelMere.getNbGpTp();        }
     public String getCode()         { return this.pNordStage.getCode();         }
     public String getLibelle()      { return this.pNordStage.getLibelle();      }
     public String getLibelleCourt() { return this.pNordStage.getLibelleCourt(); }
 
-	
+    public HashMap<String, Integer> getDataHeures() { return this.pCentreStage.getData(); }
+
+    public HashMap<String,Integer> getData() {
+        return this.pCentreStage.getData();
+    }
+
 }

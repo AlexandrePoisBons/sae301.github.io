@@ -1,6 +1,8 @@
 package ihm.previsionnel.ppp.pppCentre.repartition.heure;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
@@ -140,4 +142,27 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener{
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'focusLost'");
 	}
+
+	public HashMap<String, Integer> getRepartitionHeures() {
+		HashMap<String, Integer> map = new HashMap<>();
+	
+		try { map.put("CM", Integer.parseInt(this.ensTxtFld.get(0).getText())); }
+		catch (NumberFormatException e) { map.put("CM", 0); }
+
+		try { map.put("TD", Integer.parseInt(this.ensTxtFld.get(1).getText())); }
+		catch (NumberFormatException e) { map.put("TD", 0); }
+
+		try { map.put("TP", Integer.parseInt(this.ensTxtFld.get(2).getText())); }
+		catch (NumberFormatException e) { map.put("TP", 0); }
+
+		try { map.put("TUT", Integer.parseInt(this.ensTxtFld.get(3).getText())); }
+		catch (NumberFormatException e) { map.put("TUT", 0); }
+
+		try { map.put("HP", Integer.parseInt(this.ensTxtFld.get(4).getText())); }
+		catch (NumberFormatException e) { map.put("HP", 0); }
+
+		return map;
+	}
+
+
 }
