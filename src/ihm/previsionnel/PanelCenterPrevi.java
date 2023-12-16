@@ -44,7 +44,7 @@ public class PanelCenterPrevi extends JPanel {
 		this.modules.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
 		// Initialiser la taille du JTabbedPane
-		this.modules.setPreferredSize(new Dimension(550, 200))			;
+		this.modules.setPreferredSize(new Dimension(820, 250))			;
 
 		// Ajouter les onglets au JTabbedPanes
 		for (int i = 0; i < this.listSemestre.size(); i++) { this.modules.add(this.listSemestre.get(i), "s" + (i + 1)); }
