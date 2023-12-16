@@ -2,6 +2,7 @@ package metier.db;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import metier.Heure;
 import metier.Intervenant;
@@ -814,10 +815,33 @@ public class Requetes {
 	}
 
 	public ArrayList<Module> getModules() throws SQLException {
-		return getModules("SELECT * FROM Module;");
+		return this.getModules("SELECT * FROM Module;");
 	}
 
 
+
+	private HashMap<Integer, Integer> getHeuresParModule(String req) throws SQLException {
+		HashMap<Integer, Integer> map = new HashMap<>();
+		Integer idHeure;
+		Integer idModule;
+
+		Statement selectHM = connec.createStatement();
+
+		ResultSet rs = selectHM.executeQuery(req);
+		while( rs.next() ) {
+			idHeure = rs.getInt(1);
+			idModule = rs.getInt(2);
+			map.put(idHeure, idModule);
+		}
+		rs.close();
+
+		return map;
+	}
+
+
+	public HashMap<Integer, Integer> getHeuresParModule() throws SQLException {
+		return this.getHeuresParModule("SELECT * FROM Heure_Module;");
+	}
 
 	// methode getIntervenantsByModule(Module)
 	// methode getHeuresByModule(Module)
