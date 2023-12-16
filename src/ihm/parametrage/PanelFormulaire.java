@@ -69,32 +69,40 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		if(e.getSource() == this.btnValider) {
-			if(this.txtNomStatut.getText() != null && this.txtNbHeuresMax.getText() != null &&
-			this.txtNbHeuresService.getText() != null && this.txtCoeff.getText() != null){
-				this.panelMere.ajouterStatut(new Statut(this.txtNomStatut.getText(), 
-											        Integer.parseInt(this.txtNbHeuresService.getText()), 
-													Integer.parseInt(this.txtNbHeuresMax.getText()), 
-													Float.parseFloat(this.txtCoeff.getText())));
-				this.effacer();
-			} catch (Exception err) {
-				System.err.println("Erreur de saisie, veuillez recommencer");
-			}
-		
+			this.valider();
 		}
 		if(e.getSource() == this.btnAnnuler){
 			this.effacer();
 		}
 	}
 
-	public void effacer(){
+	public void valider() {
+
+		int nbHeuresService = 0;
+		int nbHeuresMax = 0;
+		float coeff = 0.0f;
+
+		try { Integer.parseInt(this.txtNbHeuresService.getText()); }
+		catch ( NumberFormatException e ) { System.out.println(this.txtNbHeuresService.getText() + " : pas un Integer"); }
+
+		try { Integer.parseInt(this.txtNbHeuresMax.getText()); }
+		catch ( NumberFormatException e ) { System.out.println(this.txtNbHeuresMax.getText() + " : pas un Integer"); }
+
+		try { Float.parseFloat(this.txtCoeff.getText()); }
+		catch ( NumberFormatException e ) { System.out.println(this.txtCoeff.getText() + " : pas un Float"); }
+
+		this.panelMere.ajouterStatut( new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff) );
+	}
+
+	public void effacer() {
 		this.txtNomStatut.setText("");
 		this.txtNbHeuresService.setText("");
 		this.txtNbHeuresMax.setText("");
 		this.txtCoeff.setText("");
 	}
 
-	
-	public void setLigne(String nomIntervenant, Integer nbHeureService, Integer nbHeureMax, Float coeff){
+
+	public void setLigne(String nomIntervenant, Integer nbHeureService, Integer nbHeureMax, Float coeff) {
 		this.txtNomStatut.setText(nomIntervenant);
 		this.txtNbHeuresService.setText("" + nbHeureService);
 		this.txtNbHeuresMax.setText("" + nbHeureMax);
