@@ -343,9 +343,11 @@ public class Requetes {
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
+				System.out.println("dono");
 				Statement sGetNbTypeHeures =  connec.createStatement();
-				ResultSet rs = sGetNbTypeHeures.executeQuery("SELECT * FROM Type_Heure;");
-				nbTypeHeures = rs.getInt(1);
+				System.out.println("donova");
+				ResultSet rs = sGetNbTypeHeures.executeQuery("SELECT * FROM Type_Heure");
+				System.out.println("YOUHOUUU");
 			} catch (SQLException e) { e.printStackTrace(); }
 		
 		} catch (SQLException e) { e.printStackTrace(); }

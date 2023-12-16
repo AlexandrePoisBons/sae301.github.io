@@ -19,13 +19,13 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 	private JButton    btnValider;
 	private JButton    btnAnnuler;
 
-	public PanelFormulaire(PanelParam panelMere){
+	public PanelFormulaire(PanelParam panelMere) {
 		this.panelMere = panelMere;
 		this.setLayout(new GridBagLayout());
 
 		GridBagConstraints gbc 	= new GridBagConstraints();		
 		gbc.anchor = GridBagConstraints.WEST;
-		
+
 		this.txtNomStatut       = new JTextField(15);
 		this.txtNbHeuresService = new JTextField(15);
 		this.txtNbHeuresMax     = new JTextField(15);
