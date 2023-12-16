@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 //Imports classes externes
 import ihm.previsionnel.stage.stageCentre.PCentreStage;
 import ihm.previsionnel.stage.stageCentre.repartition.heureStage.PanelRepHStage;
+import metier.Intervenant;
 
 public class PanelRepartitionStage extends JPanel implements ActionListener{
 	private PCentreStage panelMere;
@@ -49,7 +51,7 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 	//A DECOMMENTER
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter){
-			//this.panelAffect.ajouter();
+			new FrameFormulaire(this);
 		}
 		if(e.getSource() == this.btnSuppr){
 			//this.panelAffect.supprimer();
@@ -63,5 +65,14 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 	public HashMap<String,Integer> getData(){
 		return this.panelMere.getData();
 	}
+	public List<Intervenant> getIntervenants(){
+		return this.panelMere.getIntervenants();
+	}
+
+	public void ajouterLigne(String string, String text, int int1, int int2, String text2) {
+		this.panelAffect.ajouterLigne(string, text, int1, int2, text2);
+	}
 
 }
+
+	

@@ -105,7 +105,6 @@ public class PanelInter extends JPanel implements ActionListener, TableCellEdito
 		TableColumn tc = this.tableauInter.getColumnModel().getColumn(0);
 		tc.setCellEditor(new ComboBoxCellEditor());
 		Object[] objs = {"", "", "", 0, 0, "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0"};
-		
 		this.dtm.addRow(objs);
 	}
 

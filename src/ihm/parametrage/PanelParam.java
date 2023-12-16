@@ -21,7 +21,8 @@ import java.awt.Toolkit;
 public class PanelParam extends JPanel implements ActionListener{
 
 	private ArrayList<String> listStatut;
-	private JPanel   panelFormulaire;
+	private ArrayList<Statut> ensStatut;
+	private PanelFormulaire   panelFormulaire;
 
 	private FrameAccueil      frame;
 	private JPanel            panelStatut;
@@ -40,6 +41,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	public PanelParam(FrameAccueil frame){
 		this.frame      = frame;
 		this.listStatut = new ArrayList<String>();
+		this.ensStatut  = new ArrayList<Statut>();
 		this.setLayout(new BorderLayout());
 
 		//Placement de la frame
@@ -51,7 +53,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 
 		// Creation des éléments de la page 
-		this.panelFormulaire     = new JPanel();
+		this.panelFormulaire     = new PanelFormulaire();
 		this.dtmStatut           = new DefaultTableModel();
 		this.panelStatut         = new JPanel();
 		this.panelSud            = new JPanel();
@@ -66,16 +68,18 @@ public class PanelParam extends JPanel implements ActionListener{
 		// Creation du tableau
 		this.dtmStatut.addColumn("Statut");
 		this.tableauStatut  = new JTable(this.dtmStatut);
+		//rendre les lignes du tableau non éditables
+		this.tableauStatut.setDefaultEditor(Object.class, null);
+		
 		
 		// Creation des scrollpane
 		JScrollPane scrollStatut = new JScrollPane(this.tableauStatut);
 		scrollStatut.setPreferredSize(new Dimension(300, 300));
+		
 
 		// Creation sous panels
 		JPanel panelTableauG = new JPanel();
-		JPanel panelTableauD = new JPanel();
 		JPanel panelBtnG     = new JPanel();
-		JPanel panelBtnD     = new JPanel();
 
 		this.panelStatut.setLayout(new BorderLayout());
 		
@@ -114,22 +118,36 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 
-	/*public void init() {
+	public void init() {
 		List<Statut> statuts = this.frame.getControleur().getCtrl().metier().getStatuts();
 
 		for (Statut statut : statuts)
 			this.ajouterStatut(statut);
 
-	}*/
+	}
 
 	// Ajout des statut
 	public void ajouterStatut(Statut statut) {
-		Object[] objs = {statut.getNomStatut()};
+		String[] objs = {statut.getNomStatut()};
 		this.dtmStatut.addRow(objs);
+		this.ensStatut.add(statut);
 		System.out.println("taille: " + listStatut.size());
 	}
 
-
+	// Modifier des statuts
+	public void modifierStatut(){
+		int ligneSelectionne = this.tableauStatut.getSelectedRow();
+		if (ligneSelectionne != -1) {
+			this.panelFormulaire.setLigne(this.ensStatut.get(ligneSelectionne).getNomStatut(), 
+										  this.ensStatut.get(ligneSelectionne).getNbHeureService(),
+										  this.ensStatut.get(ligneSelectionne).getNbHeuresMax(),
+										  this.ensStatut.get(ligneSelectionne).getCoeffTP());
+			this.ensStatut.remove(ligneSelectionne);
+			this.dtmStatut.removeRow(ligneSelectionne);
+			this.panelFormulaire.revalidate();
+			this.panelFormulaire.repaint();
+		}
+	}
 	// Supprimer Statut
 	public void supprimerStatut() {
 		int ligneSelectionne = this.tableauStatut.getSelectedRow();
@@ -159,7 +177,11 @@ public class PanelParam extends JPanel implements ActionListener{
 		}
 
 		if(e.getSource() == this.btnSuppStat){
-			supprimerStatut();
+			this.supprimerStatut();
+		}
+
+		if(e.getSource() == this.btnModifierStat){
+			this.modifierStatut();
 		}
 
 		// Ajout des valeurs dans listStatut et listCoef quand on clique sur Enregistrer

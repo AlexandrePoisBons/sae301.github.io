@@ -180,7 +180,6 @@ public class Requetes {
 			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
-			
 			try {
 				PreparedStatement psGetNbIntervenant =  connec.prepareStatement("SELECT COUNT(*) FROM Intervenant;");
 				ResultSet rs = psGetNbIntervenant.executeQuery();
@@ -343,11 +342,12 @@ public class Requetes {
 			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
-			
 			try {
-				PreparedStatement psGetNbTypeHeures =  connec.prepareStatement("SELECT COUNT(*) FROM Type_Heure;");
-				ResultSet rs = psGetNbTypeHeures.executeQuery();
-				while ( rs.next() ) nbTypeHeures = rs.getInt(1);
+				System.out.println("dono");
+				Statement sGetNbTypeHeures =  connec.createStatement();
+				System.out.println("donova");
+				ResultSet rs = sGetNbTypeHeures.executeQuery("SELECT * FROM Type_Heure");
+				System.out.println("YOUHOUUU");
 			} catch (SQLException e) { e.printStackTrace(); }
 		
 		} catch (SQLException e) { e.printStackTrace(); }

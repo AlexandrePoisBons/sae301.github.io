@@ -24,7 +24,9 @@ public class PanelCenterPrevi extends JPanel {
 
 		// Synchronisation des pages
 		this.frame = frameAccueil;
-		this.frame.setTitle("Prévisionnel"); 
+		this.frame.setTitle("Prévisionnel");
+
+		this.listSemestre = new ArrayList<>();
 
 		 //Définition de la taille et la position de la fenêtre
 		 int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
@@ -66,15 +68,18 @@ public class PanelCenterPrevi extends JPanel {
 		return null;
 	}
 
-	public void setModules(List<Module> alModules){
+	public void setModules(List<Module> alModules) {
 		// Ajouter les modules au JTabbedPane
-		for (int i = 0; i < this.listSemestre.size(); i++) {
-			this.listSemestre.get(i).setModules(alModules);
+		List<Module> list;
+		for (int i = 1; i < this.listSemestre.size(); i++) {
+			list = new ArrayList<Module>();
+			for (Module module : alModules)
+				if ( module.getSemestre() == ("S"+i) ) list.add(module);
+			this.listSemestre.get(i).setModules(list);
 		}
 	}
 
 	public int    getNumCurrentModule() { return this.modules.getSelectedIndex();               }
-	public String getSemestre()         { return "S"+this.getCurrentSemestre().getIdSemestre(); }
 	public String getNbEtd()            { return this.getCurrentSemestre().getNbEtd();          }
 	public String getNbGpTd()           { return this.getCurrentSemestre().getNbGpTd();         }
 	public String getNbGpTp()           { return this.getCurrentSemestre().getNbGpTp();         }

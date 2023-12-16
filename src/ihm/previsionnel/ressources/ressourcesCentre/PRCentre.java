@@ -5,12 +5,14 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.*;
 
 import ihm.previsionnel.ressources.PanelRessources;
 import ihm.previsionnel.ressources.ressourcesCentre.progNat.ProgNat;
 import ihm.previsionnel.ressources.ressourcesCentre.repartition.PanelRepartition;
+import metier.Intervenant;
 
 public class PRCentre extends JPanel{
 	private PanelRessources 	panelMere;
@@ -55,6 +57,10 @@ public class PRCentre extends JPanel{
 
 		return map;
 	}
+
+	public List<Intervenant> getIntervenants(){
+        return this.panelMere.getIntervenants();
+    }
 
 	
 }

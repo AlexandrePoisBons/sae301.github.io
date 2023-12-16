@@ -3,6 +3,8 @@ package ihm.previsionnel;
 //Imports classes Java
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
@@ -18,15 +20,16 @@ import metier.Module;
 public class PanelSemestre extends JPanel {
 
 	// Attributs
-	private FrameAccueil      frame         ;
-	private Controleur        ctrl          ;
-	private JTextField        txtNbGpTd     ;
-	private JTextField        txtNbGpTp     ;
-	private JTextField        txtNbEtd      ;
-	private JTextField        txtNbSemaine  ;
-	private DefaultTableModel dtm           ;
-	private JTable            tabModule	    ;
-	private int               id            ;
+	private FrameAccueil      frame        ;
+	private Controleur        ctrl         ;
+	private JTextField        txtNbGpTd    ;
+	private JTextField        txtNbGpTp    ;
+	private JTextField        txtNbEtd     ;
+	private JTextField        txtNbSemaine ;
+	private DefaultTableModel dtm          ;
+	private JTable            tabModule	   ;
+	private int               id           ;
+	private List<Module>      modules      ;
 
 	// Constructeur
 	public PanelSemestre(FrameAccueil frameAccueil, int idSemestre) {
@@ -92,10 +95,15 @@ public class PanelSemestre extends JPanel {
 		this.add(panelNord                              , BorderLayout.NORTH  );
 		this.add(panelCentre                            , BorderLayout.CENTER );
 
+		this.modules = new ArrayList<Module>();
+
 		this.ajouterModule(Module.creerModule("qsd", "qsd", "qsd", "qsd", "qsd", 0, 0, 0, 0, 0));
+
+		this.dtm.addRow(new String[] {"SAE", "Dev"} );
 
 		// Affichage
 		this.setVisible(true);
+
 	}
 
 	// Getters
@@ -106,14 +114,37 @@ public class PanelSemestre extends JPanel {
 	public int    getNbSemaines() { return Integer.parseInt(this.txtNbSemaine.getText());}
 
 	public void setModules(List<Module> list) {
-		for (Module module : list) {
+		this.modules = list;
+			for (Module module : this.modules) {
 			String[] s = {module.getCode(), module.getLibelle()};
 			this.dtm.addRow(s);
 		}
+		
 	}
 
 	public void ajouterModule(Module module) {
-		String[] s = {module.getLibelle()};
+		this.modules.add(module);
+		System.out.println("ajout module: "+this.ctrl.metier().ajouterModule(module));
+		String[] s = {module.getCode()};
 		this.dtm.addRow(s);
 	}
+
+	public Module getCurrentModule() {
+		return this.modules.get(this.tabModule.getSelectedRow());
+	}
+
+	public void removeModule() throws SQLException{
+		this.dtm.removeRow (this.tabModule.getSelectedRow());
+		this.modules.remove(this.tabModule.getSelectedRow());
+		this.ctrl.metier().supprimerModule(getCurrentModule());
+	}
+
+	public List<Module> getModules() {
+		return this.modules;
+	}
+
+	public void afficherModuleParSemestre()	{
+		
+	}
+
 }

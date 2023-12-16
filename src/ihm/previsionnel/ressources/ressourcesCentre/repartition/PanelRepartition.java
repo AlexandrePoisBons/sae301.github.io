@@ -7,12 +7,14 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import ihm.previsionnel.ressources.ressourcesCentre.PRCentre;
 import ihm.previsionnel.ressources.ressourcesCentre.repartition.heure.PanelRepartitionHeure;
+import metier.Intervenant;
 
 public class PanelRepartition extends JPanel implements ActionListener{
 	private PRCentre panelMere;
@@ -58,7 +60,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter){
-			this.panelAffect.ajouter();
+			new FrameFormulaire(this);
 		}
 		if(e.getSource() == this.btnSuppr){
 			this.panelAffect.supprimer();
@@ -69,4 +71,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 
 	public HashMap<String,Integer> getTabData() { return this.panelMere.getData(); }
 
+	public List<Intervenant> getIntervenants(){
+        return this.panelMere.getIntervenants();
+    }
 }

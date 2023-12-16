@@ -58,9 +58,8 @@ Create table Heure (
 
 
 Create table Intervenant_Module (
-    id_intervenant integer REFERENCES Intervenant(id_intervenant) ON DELETE CASCADE,
-    id_module integer  REFERENCES Module(id_module) ON DELETE CASCADE,
-    primary key (id_intervenant, id_module)
+    id_intervenant integer REFERENCES Intervenant(id_intervenant) NOT NULL,
+    id_module integer  REFERENCES Module(id_module) NOT NULL
 );
 
 

@@ -8,6 +8,8 @@ import java.util.HashMap;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import metier.Intervenant;
+import java.util.List;
 
 import ihm.previsionnel.stage.stageCentre.repartition.PanelRepartitionStage;
 import ihm.previsionnel.stage.stageCentre.progNatStage.ProgNatStage;
@@ -58,6 +60,10 @@ public class PCentreStage extends JPanel {
 				map.put(type, mapR.get(type));
 
 		return map;
+	}
+
+	public List<Intervenant> getIntervenants(){
+		return this.panelMere.getIntervenants();
 	}
 
 

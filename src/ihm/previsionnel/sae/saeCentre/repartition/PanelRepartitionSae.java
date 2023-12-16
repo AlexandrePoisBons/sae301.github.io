@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 //Imports classes externes
 import ihm.previsionnel.sae.saeCentre.PCentreSae;
 import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepH;
+import metier.Intervenant;
 
 public class PanelRepartitionSae extends JPanel implements ActionListener {
 	private PCentreSae panelMere;
@@ -62,6 +64,10 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 
 	public HashMap<String,Integer> getData(){
 		return this.panelMere.getData();
+	}
+
+	public List<Intervenant> getIntervenants(){
+		return this.panelMere.getIntervenants();
 	}
 
 }

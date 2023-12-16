@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
+import java.util.List;
 import java.util.HashMap;
 
 //Import classes externes
@@ -12,6 +13,7 @@ import ihm.previsionnel.PanelPrevi;
 import ihm.previsionnel.sae.saeCentre.PCentreSae;
 import ihm.previsionnel.sae.saeNord.PNordSae;
 import ihm.previsionnel.sae.saeSud.PanelSudSae;
+import metier.Intervenant;
 
 public class PanelSae extends JPanel{
 	private FrameAccueil frame;
@@ -58,4 +60,8 @@ public class PanelSae extends JPanel{
     public HashMap<String,Integer> getData() {
         return this.pCentreSae.getData();
     }
+
+	public List<Intervenant> getIntervenants(){
+		return this.frame.getControleur().getCtrl().metier().getIntervenants();
+	}
 }
