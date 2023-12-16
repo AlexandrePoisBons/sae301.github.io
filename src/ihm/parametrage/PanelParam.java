@@ -53,7 +53,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 
 		// Creation des éléments de la page 
-		this.panelFormulaire     = new PanelFormulaire();
+		this.panelFormulaire     = new PanelFormulaire(this);
 		this.dtmStatut           = new DefaultTableModel();
 		this.panelStatut         = new JPanel();
 		this.panelSud            = new JPanel();
@@ -112,7 +112,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.btnRetour     .addActionListener(this);
 		this.btnEnregistrer.addActionListener(this);
 
-		//this.init();
+		this.init();
 
 		this.setVisible(true);
 	}
@@ -135,7 +135,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	// Modifier des statuts
-	public void modifierStatut(){
+	public void modifierStatut() {
 		int ligneSelectionne = this.tableauStatut.getSelectedRow();
 		if (ligneSelectionne != -1) {
 			this.panelFormulaire.setLigne(this.ensStatut.get(ligneSelectionne).getNomStatut(), 

@@ -17,7 +17,7 @@ public class ComboBoxCellEditor extends AbstractCellEditor implements TableCellE
 	}
 	@Override
 	public Object getCellEditorValue() {
-		return box.getSelectedItem(); 
+		return box.getSelectedItem();
 	}
 
 	@Override
@@ -25,5 +25,5 @@ public class ComboBoxCellEditor extends AbstractCellEditor implements TableCellE
 		box.setSelectedItem(value);
 		return box;
 	}
-	
+
 }

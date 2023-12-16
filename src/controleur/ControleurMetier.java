@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import metier.Heure;
 import metier.Intervenant;
 import metier.Module;
 import metier.Statut;
@@ -21,6 +22,8 @@ public class ControleurMetier {
 	private List<Intervenant> intervenants;
 	private List<Module>      modules;
 
+	private List<Heure>       heures;
+
 	private Controleur ctrl;
 
 
@@ -29,6 +32,9 @@ public class ControleurMetier {
 		this.ctrl = ctrl;
 
 		this.requetes = new Requetes();
+
+		try { System.out.println(this.requetes.getModules().get(0)); System.out.println("\n\n\nCOUCOUUUU\n\n\n"); }
+		catch ( SQLException e ) { e.printStackTrace(); System.out.println("ca clc le gros pc"); }
 
 		this.statuts      = new ArrayList<Statut>();
 		this.typesHeures  = new ArrayList<TypeHeure>();
@@ -99,11 +105,26 @@ public class ControleurMetier {
 
 
 	public void init() throws SQLException {
+
+		this.heures = this.requetes.getHeures();
+		System.out.println("insh'");
 		this.statuts      = this.requetes.getStatuts();
 		System.out.println("coucou toi");
 		this.intervenants = this.requetes.getIntervenants();
 		System.out.println("eh oh");
 		this.modules      = this.requetes.getModules();
+
+		this.requetes.get // l'erreur c'est pour que mon cerveau se rappelle des commentaires la mdr
+
+		// LIER MODULES AVEC LES HEURES A PARTIR DE Heure_Module (requete deja créée)
+
+		// LIER INTERVENANT AVEC LES HEURES A PARTIR DE Intervenant_Heure (requete a faire)
+
+		// LIER INTERVENANT A MODULE A PARTIE DE Intervenant_Module (requete a faire)
+
+		// apres ca: on pourra afficher les intervenants dans Intervenants (et avec toutes les valeurs)
+		                                // les méthodes et l'implémentation est normalement deja faite
+
 		System.out.println("bon bah"+this.modules);
 		this.typesHeures  = this.requetes.getTypesHeures();
 		System.out.println("nan mais");

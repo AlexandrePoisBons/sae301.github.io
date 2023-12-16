@@ -2,6 +2,7 @@ package metier.db;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import metier.Heure;
 import metier.Intervenant;
@@ -185,7 +186,8 @@ public class Requetes {
 				ResultSet rs = psGetNbIntervenant.executeQuery();
 				while ( rs.next() ) nbModules = rs.getInt(1);
 			} catch (SQLException e) { e.printStackTrace(); }
-		
+
+			connec.close();
 		} catch (SQLException e) { e.printStackTrace(); }
 
 		return nbModules;
@@ -261,13 +263,13 @@ public class Requetes {
 			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
-			
 			try {
 				PreparedStatement psGetNbHeures =  connec.prepareStatement("SELECT COUNT(*) FROM Heure;");
 				ResultSet rs = psGetNbHeures.executeQuery();
 				while ( rs.next() ) nbHeures = rs.getInt(1);
 			} catch (SQLException e) { e.printStackTrace(); }
-		
+
+			connec.close();
 		} catch (SQLException e) { e.printStackTrace(); }
 
 		return nbHeures;
@@ -343,13 +345,12 @@ public class Requetes {
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
-				System.out.println("dono");
 				Statement sGetNbTypeHeures =  connec.createStatement();
-				System.out.println("donova");
-				ResultSet rs = sGetNbTypeHeures.executeQuery("SELECT * FROM Type_Heure");
-				System.out.println("YOUHOUUU");
+				ResultSet rs = sGetNbTypeHeures.executeQuery("SELECT COUNT(*) FROM Type_Heure");
+				while ( rs.next() ) nbTypeHeures = rs.getInt(1);
 			} catch (SQLException e) { e.printStackTrace(); }
-		
+
+			connec.close();
 		} catch (SQLException e) { e.printStackTrace(); }
 
 		return nbTypeHeures;
@@ -388,10 +389,8 @@ public class Requetes {
 			this.psInsertM.setInt    ( 9,  module.getNbGpTP()       );
 			this.psInsertM.setInt    ( 10, module.getNbSemaines()   );
 			this.psInsertM.setInt    ( 11, module.getNbHeures()     );
-			System.out.println("coucou");
-			System.out.println("laaaa: "+this.psInsertM.execute());
-			
-			System.out.println("coucou2");
+
+			this.psInsertM.execute();
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" deja existant");
 		}
@@ -452,6 +451,7 @@ public class Requetes {
 				while ( rs.next() ) nbModules = rs.getInt(1);
 			} catch (SQLException e) { e.printStackTrace(); }
 		
+			connec.close();
 		} catch (SQLException e) { e.printStackTrace(); }
 
 		return nbModules;
@@ -815,10 +815,33 @@ public class Requetes {
 	}
 
 	public ArrayList<Module> getModules() throws SQLException {
-		return getModules("SELECT * FROM Module;");
+		return this.getModules("SELECT * FROM Module;");
 	}
 
 
+
+	private HashMap<Integer, Integer> getHeuresParModule(String req) throws SQLException {
+		HashMap<Integer, Integer> map = new HashMap<>();
+		Integer idHeure;
+		Integer idModule;
+
+		Statement selectHM = connec.createStatement();
+
+		ResultSet rs = selectHM.executeQuery(req);
+		while( rs.next() ) {
+			idHeure = rs.getInt(1);
+			idModule = rs.getInt(2);
+			map.put(idHeure, idModule);
+		}
+		rs.close();
+
+		return map;
+	}
+
+
+	public HashMap<Integer, Integer> getHeuresParModule() throws SQLException {
+		return this.getHeuresParModule("SELECT * FROM Heure_Module;");
+	}
 
 	// methode getIntervenantsByModule(Module)
 	// methode getHeuresByModule(Module)

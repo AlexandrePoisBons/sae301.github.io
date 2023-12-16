@@ -3,6 +3,7 @@ package ihm.intervenants;
 
 //Imports classes externes
 import ihm.accueil.FrameAccueil;
+import metier.Intervenant;
 
 import javax.swing.*;
 import javax.swing.event.CellEditorListener;
@@ -12,7 +13,10 @@ import javax.swing.table.TableColumn;
 
 import java.awt.event.ActionEvent		;
 import java.awt.event.ActionListener	;
+import java.util.ArrayList;
 import java.util.EventObject;
+import java.util.HashMap;
+import java.util.List;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -97,32 +101,76 @@ public class PanelInter extends JPanel implements ActionListener, TableCellEdito
 		this.btnEnregistrer.addActionListener(this);
 		this.btnAnnuler.addActionListener(this);
 
+		this.init();
+
 		this.setVisible(true);
 	}
 
-	public void ajouter()
-	{
+	public void init() {
+		List<Intervenant> list = this.frame.getControleur().getCtrl().metier().getIntervenants();
+		String categorie, nom, prenom;
+		Float nbHeures, nbHeuresMax, coeff;
+		Float s1, s2, s3, s4, s5, s6;
+		Float totPair, totImpair, tot;
+
+		Object[] vals = new Object[15];
+		for (Intervenant intervenant : list) {
+			HashMap<String, Float> map = intervenant.getNbHeuresParSemestre();
+			categorie = intervenant.getStatut().getNomStatut();
+			nom = intervenant.getNom();
+			prenom = intervenant.getPrenom();
+			nbHeures = intervenant.getNbHeures(); nbHeuresMax = intervenant.getNbEqTD();
+			coeff = intervenant.getStatut().getCoeffTP();
+			s1 = map.get("S1"); s2 = map.get("S2"); s3 = map.get("S3"); s4 = map.get("S4"); s5 = map.get("S5"); s6 = map.get("S6");
+			totPair = s2+s4+s6;
+			totImpair = s1+s3+s5;
+			tot = totPair+totImpair;
+
+			vals[0] = categorie; // categorie
+			vals[1] = nom; // nom
+			vals[2] = prenom; // prenom
+			vals[3] = nbHeures; // heures de service
+			vals[4] = nbHeuresMax; // heures max
+			vals[5] = coeff; // coeff TP
+			vals[6] = s1; // S1
+			vals[7] = s3; // S3
+			vals[8] = s5; // S5
+			vals[9] = totImpair; // sTot : total des semestes impaires
+			vals[10] = s2; // S2
+			vals[11] = s4; // S4
+			vals[12] = s6; // S6
+			vals[13] = totPair; // sTot : total des semestres pairs
+			vals[14] = tot; // Total des semestres
+			this.ajouterLigne(vals);
+		}
+
+	}
+
+	public void ajouterLigne(Object[] values) {
+		this.dtm.addRow(values);
+	}
+
+	public void ajouter() {
 		TableColumn tc = this.tableauInter.getColumnModel().getColumn(0);
 		tc.setCellEditor(new ComboBoxCellEditor());
 		Object[] objs = {"", "", "", 0, 0, "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0"};
 		this.dtm.addRow(objs);
 	}
 
-	public void supprimer()
-	{
+	public void supprimer() {
 		this.dtm.removeRow(this.tableauInter.getSelectedRow());
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnAjouter){
+		if(e.getSource() == this.btnAjouter) {
 			this.ajouter();
 		}
 
-		if(e.getSource() == this.btnSupprimer){
+		if(e.getSource() == this.btnSupprimer) {
 			this.supprimer();
 		}
 
-		if(e.getSource() == this.btnEnregistrer){
+		if(e.getSource() == this.btnEnregistrer) {
 			boolean bOk = true;
 			for(int i=0;i<this.dtm.getRowCount() && bOk;i++){
 				for(int j=0;j<this.dtm.getColumnCount() && bOk;j++){
@@ -137,14 +185,14 @@ public class PanelInter extends JPanel implements ActionListener, TableCellEdito
 						if(!(this.dtm.getValueAt(i, j) instanceof Integer) ){
 							bOk = false;
 							System.out.println("int faux");
-						}	
+						}
 					}
 					if(j>4 && j<this.dtm.getColumnCount()){
 						if(!(this.dtm.getValueAt(i, j) instanceof Float) ){
 							bOk = false;
 							System.out.println("float faux");
 						}
-					}				
+					}
 				}
 			}
 			if(bOk){
@@ -205,6 +253,6 @@ public class PanelInter extends JPanel implements ActionListener, TableCellEdito
 		throw new UnsupportedOperationException("Unimplemented method 'getTableCellEditorComponent'");
 	}
 
-    
-	
+
+
 }

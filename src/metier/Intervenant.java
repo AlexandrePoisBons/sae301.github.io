@@ -1,6 +1,7 @@
 package metier;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import metier.db.Requetes;
@@ -80,7 +81,7 @@ public class Intervenant {
 	public void ajouterModule(Module m)   { this.modules.add(m);    }
 	public void supprimerModule(Module m) { this.modules.remove(m); }
 
-	// Calcul du nombre d'heures équivalent TD de l'intervenant
+	// Calcul du nombre d'heures affectées à l'intervenant équivalent TD
 	public float getNbHeures() {
 		float nbHeures = 0;
 		for (Heure h : this.heures)
@@ -88,6 +89,20 @@ public class Intervenant {
 
 		return nbHeures;
 	}
+
+	public HashMap<String, Float> getNbHeuresParSemestre() {
+		HashMap<String, Float> map = new HashMap<>();
+
+		for ( Heure heure : this.heures )
+			if ( !map.containsKey(heure.getModule().getSemestre()) )
+				map.put(heure.getModule().getSemestre(), heure.getDuree());
+
+		for (String s : map.keySet()) {
+			System.out.println(s+" : "+map.get(s));
+		}
+		return map;
+	}
+
 
 	// Vérification des modules de l'intervenant
 	public void verificationModule( Module m )
