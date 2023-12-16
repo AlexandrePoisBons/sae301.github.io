@@ -28,7 +28,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	private JButton                 btnValider;
 	private JButton                 btnAnnuler;
 
-	public FrameFormulaire(PanelRepartition panelMere){
+	public FrameFormulaire(PanelRepartition panelMere) {
 		this.panelMere       = panelMere;
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);

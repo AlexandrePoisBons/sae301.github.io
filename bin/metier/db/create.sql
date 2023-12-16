@@ -64,14 +64,14 @@ Create table Intervenant_Module (
 
 
 Create table Intervenant_Heure (
-    id_intervenant integer REFERENCES Intervenant(id_intervenant) ON DELETE CASCADE,
-    id_heure integer REFERENCES Heure(id_heure) ON DELETE CASCADE,
+    id_intervenant integer REFERENCES Intervenant(id_intervenant) NOT NULL,
+    id_heure integer REFERENCES Heure(id_heure) NOT NULL,
     primary key (id_intervenant, id_heure)
 );
 
 
 Create table Heure_Module (
-    id_heure integer REFERENCES Heure(id_heure) ON DELETE CASCADE,
-    id_module integer REFERENCES Module(id_module) ON DELETE CASCADE,
+    id_heure integer REFERENCES Heure(id_heure) NOT NULL,
+    id_module integer REFERENCES Module(id_module) NULL,
     primary key (id_heure, id_module)
 );

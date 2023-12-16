@@ -23,7 +23,7 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 		this.panelMere = panelMere;
 		this.setLayout(new GridBagLayout());
 
-		GridBagConstraints gbc 	= new GridBagConstraints();		
+		GridBagConstraints gbc 	= new GridBagConstraints();
 		gbc.anchor = GridBagConstraints.WEST;
 
 		this.txtNomStatut       = new JTextField(15);
@@ -101,4 +101,5 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 		this.txtCoeff.setText("" + coeff);
 		System.out.println("test");
 	}
+
 }

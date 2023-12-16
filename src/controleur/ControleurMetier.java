@@ -30,6 +30,9 @@ public class ControleurMetier {
 
 		this.requetes = new Requetes();
 
+		try { System.out.println(this.requetes.getModules().get(0)); System.out.println("\n\n\nCOUCOUUUU\n\n\n"); }
+		catch ( SQLException e ) { e.printStackTrace(); System.out.println("ca clc le gros pc"); }
+
 		this.statuts      = new ArrayList<Statut>();
 		this.typesHeures  = new ArrayList<TypeHeure>();
 		this.intervenants = new ArrayList<Intervenant>();
