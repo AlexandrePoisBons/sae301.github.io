@@ -66,20 +66,11 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 		this.setVisible(true);
 	}
 
-<<<<<<< Updated upstream
-	public PanelFormulaire() {
-	}
-
-	public void actionPerformed(ActionEvent e){
-		if(e.getSource() == this.btnValider){
-			try {
-=======
 	public void actionPerformed(ActionEvent e) {
 
 		if(e.getSource() == this.btnValider) {
 			if(this.txtNomStatut.getText() != null && this.txtNbHeuresMax.getText() != null &&
-			this.txtBnHeuresService.getText() != null && this.txtCoeff.getText() != null){
->>>>>>> Stashed changes
+			this.txtNbHeuresService.getText() != null && this.txtCoeff.getText() != null){
 				this.panelMere.ajouterStatut(new Statut(this.txtNomStatut.getText(), 
 											        Integer.parseInt(this.txtNbHeuresService.getText()), 
 													Integer.parseInt(this.txtNbHeuresMax.getText()), 
@@ -90,18 +81,8 @@ public class PanelFormulaire extends JPanel implements ActionListener{
 			}
 		
 		}
-<<<<<<< Updated upstream
 		if(e.getSource() == this.btnAnnuler){
 			this.effacer();
-=======
-
-		if (e.getSource() == this.btnAnnuler) {
-			this.txtNomStatut.setText("");
-			this.txtBnHeuresService.setText("");
-			this.txtNbHeuresMax.setText("");
-			this.txtCoeff.setText("");
-
->>>>>>> Stashed changes
 		}
 	}
 

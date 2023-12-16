@@ -23,7 +23,6 @@ public class ControleurMetier {
 
 	private Controleur ctrl;
 
-	public static void main(String[] args) { new ControleurMetier(null); }
 
 	public ControleurMetier(Controleur ctrl) {
 
