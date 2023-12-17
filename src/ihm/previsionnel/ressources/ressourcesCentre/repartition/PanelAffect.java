@@ -49,7 +49,10 @@ public class PanelAffect extends JPanel {
 			objs[5] = "";
 			this.dtm.addRow(objs);
 		}
+	}
 
+	public void ajouterLigne(Object[] objs) {
+		this.dtm.addRow(objs);
 	}
 
 	public ArrayList<Heure> getDataHeures(Module module, TypeHeure typeHeure) {

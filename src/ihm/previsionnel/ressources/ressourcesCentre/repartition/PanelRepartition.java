@@ -71,7 +71,13 @@ public class PanelRepartition extends JPanel implements ActionListener{
 
 	public HashMap<String,Integer> getTabData() { return this.panelMere.getData(); }
 
-	public List<Intervenant> getIntervenants(){
-        return this.panelMere.getIntervenants();
-    }
+	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
+
+	public void ajouterLigne(Object[] objs) { this.panelAffect.ajouterLigne(objs); }
+	
+
+
+
+
+	
 }

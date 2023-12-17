@@ -37,32 +37,32 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.frame = frAccueil;
 
 		// création des composants
-		JPanel panelSud 		= new JPanel			(					);
-		this.panelCenterPrevi 	= new PanelCenterPrevi	(this.frame			);
-		this.btnCreerRessource 	= new JButton			("Créer ressource"	);
-		this.btnCreerSAE 		= new JButton			("Créer SAE"		);
-		this.btnCreerStage 		= new JButton			("Créer stage/suivi");
-		this.btnCreerPpp        = new JButton           ("Créer PPP"        );
-		this.btnModifier 		= new JButton			("Modifier"		 	);
-		this.btnSupprimer 		= new JButton			("Supprimer"		);
+		JPanel panelSud = new JPanel();
+		this.panelCenterPrevi = new PanelCenterPrevi	(this.frame);
+		this.btnCreerRessource = new JButton("Créer ressource");
+		this.btnCreerSAE = new JButton("Créer SAE");
+		this.btnCreerStage = new JButton("Créer stage/suivi");
+		this.btnCreerPpp        = new JButton("Créer PPP");
+		this.btnModifier= new JButton("Modifier");
+		this.btnSupprimer = new JButton("Supprimer");
 
 		//Layout
-		this.setLayout		(new GridBagLayout()			);
-		panelSud.setLayout	(new GridLayout		(1, 5, 6, 0));
-		GridBagConstraints gbc 	= new GridBagConstraints(	);	
+		this.setLayout(new GridBagLayout());
+		panelSud.setLayout(new GridLayout(1, 5, 6, 0));
+		GridBagConstraints gbc = new GridBagConstraints();
 
 		//Ajout des composants
-		panelSud.add(this.btnCreerRessource						);
-		panelSud.add(this.btnCreerSAE							);
-		panelSud.add(this.btnCreerStage							);
-		panelSud.add(this.btnCreerPpp                           );
-		panelSud.add(this.btnModifier							);
-		panelSud.add(this.btnSupprimer							);
+		panelSud.add(this.btnCreerRessource);
+		panelSud.add(this.btnCreerSAE);
+		panelSud.add(this.btnCreerStage);
+		panelSud.add(this.btnCreerPpp);
+		panelSud.add(this.btnModifier);
+		panelSud.add(this.btnSupprimer);
 		gbc.gridy = 0;
 		gbc.gridx = 0;
-		this.add(panelCenterPrevi	, gbc);
+		this.add(panelCenterPrevi, gbc);
 		gbc.gridy = 1;
-		this.add(panelSud			, gbc);
+		this.add(panelSud, gbc);
 
 
 		//ActionListeners
@@ -74,9 +74,9 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.btnSupprimer       .addActionListener(this);
 
 		List<Module> alModule = this.frame.getControleur().getCtrl().metier().getModules();
-		Module m = Module.creerModule("coucou", "a", "a", "a", "a", 0, 0, 0, 0, 0);
-		alModule.add(m);
-		System.out.println("coucou"+alModule);
+		// Module m = Module.creerModule("coucou", "a", "a", "a", "a", 0, 0, 0, 0, 0);
+		// alModule.add(m);
+		// System.out.println("coucou"+alModule);
 		this.panelCenterPrevi.setModules( alModule );
 
 	}
@@ -90,20 +90,20 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	//Permets de faire une action en fonction du bouton cliqué
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if ( e.getSource() == this.btnCreerRessource ) 	{
+		if ( e.getSource() == this.btnCreerRessource ) {
 			this.frame.changerPanel( new PanelRessources(this.frame, this) );
 		}
-		if(e.getSource() == this.btnCreerSAE) 			{
+		if(e.getSource() == this.btnCreerSAE) {
 			//this.frame.changerPanel( new PanelSae(this.frame, this) );
 			this.frame.changerPanel( new PanelSae(this.frame, this) );
 		}
-		if(e.getSource() == this.btnCreerStage) 		{
+		if(e.getSource() == this.btnCreerStage) {
 			this.frame.changerPanel(new PanelStage(this.frame, this));
 		}
-		if(e.getSource() == this.btnCreerPpp) 			{
+		if(e.getSource() == this.btnCreerPpp) {
 			this.frame.changerPanel(new PanelPpp(this.frame, this));
 		}
-		if(e.getSource() == this.btnModifier) 			{
+		if(e.getSource() == this.btnModifier) {
 
 			// switch(m.getTypeModule()) {
 			// case "SAE"       -> this.frame.changerPanel(new PanelSae         (this.frame, this, m ) );
@@ -113,7 +113,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 			// default          -> System.err.println("TypeModule inexistant");
  			// }
 		}
-		if(e.getSource() == this.btnSupprimer) 			{}
+		if(e.getSource() == this.btnSupprimer) {}
 
 		if(e.getSource() == this.btnSupprimer) {
 			try { this.panelCenterPrevi.getCurrentSemestre().removeModule(); }

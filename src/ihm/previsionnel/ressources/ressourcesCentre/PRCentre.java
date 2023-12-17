@@ -58,9 +58,7 @@ public class PRCentre extends JPanel{
 		return map;
 	}
 
-	public List<Intervenant> getIntervenants(){
-        return this.panelMere.getIntervenants();
-    }
+	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 
-	
+
 }
