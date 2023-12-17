@@ -119,4 +119,5 @@ public class Intervenant {
 	public String toString() {
 		return this.idIntervenant + " " + this.prenom + " " + this.nom + " (" + this.statut + ", " + this.nbEqTD + "eqTD)";
 	}
+
 }

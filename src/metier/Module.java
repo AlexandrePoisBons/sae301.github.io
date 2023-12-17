@@ -116,6 +116,11 @@ public class Module {
 	public void setHeures ( List<Heure> heures )       { this.heures       = heures;       }
 	public void setIntervenant(List<Intervenant> i )   { this.intervenants = i;            }
 
+
+	public void ajouterIntervenant(Intervenant i) { 
+		this.intervenants.add(i);
+	}
+
 	/**
 	 * Méthode permettant d'ajouter une heure à un module et un intervenant
 	 * @param h Heure à ajouter
@@ -123,13 +128,13 @@ public class Module {
 	public void ajouterHeure( Heure h ) {
 		this.heures.add( h );
 		
-		for ( Intervenant i : h.getIntervenants() ) {
-			if ( !this.intervenants.contains( i ) ) {
-				this.intervenants.add( i );
-				i.ajouterModule( this );
-			}
-			i.ajouterHeure( h );
-		}
+		// for ( Intervenant i : h.getIntervenants() ) {
+		// 	if ( !this.intervenants.contains( i ) ) {
+		// 		this.intervenants.add( i );
+		// 		i.ajouterModule( this );
+		// 	}
+		// 	i.ajouterHeure( h );
+		// }
 
 		// Ajoute la durée de l'heure au total du type d'heure correspondant
 		this.heureParType.put( h.getTypeHeure().getNomTypeHeure(), (double) h.getDuree() );
@@ -142,8 +147,8 @@ public class Module {
 	public void supprimerHeure( Heure h ) {
 		this.heures.remove( h );
 
-		for ( Intervenant i : h.getIntervenants() )
-			i.verificationModule( this );
+		// for ( Intervenant i : h.getIntervenants() )
+		// 	i.verificationModule( this );
 
 		this.heureParType.put( h.getTypeHeure().getNomTypeHeure(), (double) -h.getDuree() );
 	}
@@ -188,7 +193,7 @@ public class Module {
 		
 		for ( Heure h : this.heures )
 			nbHeuresAffectees += h.getDuree();
-		
+
 		return nbHeuresAffectees;
 	}
 

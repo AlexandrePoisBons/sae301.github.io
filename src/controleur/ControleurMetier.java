@@ -2,6 +2,7 @@ package controleur;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import metier.Heure;
@@ -107,20 +108,44 @@ public class ControleurMetier {
 	public void init() throws SQLException {
 
 		this.heures = this.requetes.getHeures();
-		System.out.println("insh'");
+		for (Heure heure : heures) {
+			System.out.print ("\t"+heure.getIdHeure());
+		}
+		System.out.println("insh' "+this.heures.size());
 		this.statuts      = this.requetes.getStatuts();
-		System.out.println("coucou toi");
+		System.out.println("coucou toi "+this.statuts.size());
 		this.intervenants = this.requetes.getIntervenants();
-		System.out.println("eh oh");
+		System.out.println("eh oh "+this.intervenants.size());
 		this.modules      = this.requetes.getModules();
+		System.out.println("papa noel "+this.modules.size());
 
-		this.requetes.get // l'erreur c'est pour que mon cerveau se rappelle des commentaires la mdr
+		//this.requetes.get // l'erreur c'est pour que mon cerveau se rappelle des commentaires la mdr
 
 		// LIER MODULES AVEC LES HEURES A PARTIR DE Heure_Module (requete deja créée)
+		HashMap<Integer,Integer> mapHeuresModule = this.requetes.getHeuresParModule();
 
-		// LIER INTERVENANT AVEC LES HEURES A PARTIR DE Intervenant_Heure (requete a faire)
+		System.out.println("\n\n\n");
+		for (Integer idHeure : mapHeuresModule.keySet()) {
+			System.out.println(idHeure+" : "+mapHeuresModule.get(idHeure));
+		}
+		System.out.println("\n\n\n");
 
-		// LIER INTERVENANT A MODULE A PARTIE DE Intervenant_Module (requete a faire)
+		for (Integer idHeure : mapHeuresModule.keySet()) {
+			System.out.println("ajout: module "+mapHeuresModule.get(idHeure)+" a l'heure "+this.heures.get(idHeure));
+			this.modules.get(mapHeuresModule.get(idHeure)).ajouterHeure(this.heures.get(idHeure));
+		}
+
+		// LIER INTERVENANT AVEC LES HEURES A PARTIR DE Intervenant_Heure (requete deja créée)
+		HashMap<Integer,Integer> mapIntervenantsHeure = this.requetes.getIntervenantsParHeure();
+		for (int index = 0; index < mapIntervenantsHeure.size(); index++) {
+			this.heures.get(index).ajouterIntervenant(this.intervenants.get(index));
+		}
+
+		// LIER INTERVENANT A MODULE A PARTIE DE Intervenant_Module (requete deja créée)
+		HashMap<Integer,Integer> mapIntervenantsModule = this.requetes.getIntervenantsParModule();
+		for (int index = 0; index < mapIntervenantsModule.size(); index++) {
+			this.modules.get(index).ajouterIntervenant(this.intervenants.get(index));
+		}
 
 		// apres ca: on pourra afficher les intervenants dans Intervenants (et avec toutes les valeurs)
 		                                // les méthodes et l'implémentation est normalement deja faite

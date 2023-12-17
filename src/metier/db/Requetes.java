@@ -331,8 +331,7 @@ public class Requetes {
 		}
 	}
 
-	public static int getNbTypeHeures()
-	{
+	public static int getNbTypeHeures() {
 		int nbTypeHeures = 0;
 
 		try {
@@ -842,6 +841,57 @@ public class Requetes {
 	public HashMap<Integer, Integer> getHeuresParModule() throws SQLException {
 		return this.getHeuresParModule("SELECT * FROM Heure_Module;");
 	}
+
+
+	private HashMap<Integer, Integer> getIntervenantsParHeure(String req) throws SQLException {
+		HashMap<Integer, Integer> map = new HashMap<>();
+		Integer idHeure;
+		Integer idModule;
+
+		Statement selectHM = connec.createStatement();
+
+		ResultSet rs = selectHM.executeQuery(req);
+		while( rs.next() ) {
+			idHeure = rs.getInt(1);
+			idModule = rs.getInt(2);
+			map.put(idHeure, idModule);
+		}
+		rs.close();
+
+		return map;
+	}
+
+
+	public HashMap<Integer, Integer> getIntervenantsParHeure() throws SQLException {
+		return this.getIntervenantsParHeure("SELECT * FROM Intervenant_Heure;");
+	}
+
+
+
+	private HashMap<Integer, Integer> getIntervenantsParModule(String req) throws SQLException {
+		HashMap<Integer, Integer> map = new HashMap<>();
+		Integer idHeure;
+		Integer idModule;
+
+		Statement selectHM = connec.createStatement();
+
+		ResultSet rs = selectHM.executeQuery(req);
+		while( rs.next() ) {
+			idHeure = rs.getInt(1);
+			idModule = rs.getInt(2);
+			map.put(idHeure, idModule);
+		}
+		rs.close();
+
+		return map;
+	}
+
+
+	public HashMap<Integer, Integer> getIntervenantsParModule() throws SQLException {
+		return this.getIntervenantsParModule("SELECT * FROM Intervenant_Module;");
+	}
+
+
 
 	// methode getIntervenantsByModule(Module)
 	// methode getHeuresByModule(Module)
