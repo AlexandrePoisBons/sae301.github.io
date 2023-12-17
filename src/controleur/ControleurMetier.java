@@ -108,14 +108,14 @@ public class ControleurMetier {
 	public void init() throws SQLException {
 
 		this.heures = this.requetes.getHeures();
-		for (Heure heure : heures) {
-			System.out.print ("\t"+heure.getIdHeure());
-		}
 		System.out.println("insh' "+this.heures.size());
+
 		this.statuts      = this.requetes.getStatuts();
 		System.out.println("coucou toi "+this.statuts.size());
+
 		this.intervenants = this.requetes.getIntervenants();
 		System.out.println("eh oh "+this.intervenants.size());
+		
 		this.modules      = this.requetes.getModules();
 		System.out.println("papa noel "+this.modules.size());
 
@@ -124,22 +124,21 @@ public class ControleurMetier {
 		// LIER MODULES AVEC LES HEURES A PARTIR DE Heure_Module (requete deja créée)
 		HashMap<Integer,Integer> mapHeuresModule = this.requetes.getHeuresParModule();
 
-		System.out.println("\n\n\n");
 		for (Integer idHeure : mapHeuresModule.keySet()) {
-			System.out.println(idHeure+" : "+mapHeuresModule.get(idHeure));
+			System.out.println("ajout: module "+mapHeuresModule.get(idHeure)+" a l'heure "+idHeure);
+			this.modules.get(mapHeuresModule.get(idHeure)).ajouterHeure(this.heures.get(idHeure-1));
 		}
-		System.out.println("\n\n\n");
+		System.out.println("LIAISON INTERVENANTS-HEURES FAITE");
 
-		for (Integer idHeure : mapHeuresModule.keySet()) {
-			System.out.println("ajout: module "+mapHeuresModule.get(idHeure)+" a l'heure "+this.heures.get(idHeure));
-			this.modules.get(mapHeuresModule.get(idHeure)).ajouterHeure(this.heures.get(idHeure));
-		}
+
 
 		// LIER INTERVENANT AVEC LES HEURES A PARTIR DE Intervenant_Heure (requete deja créée)
 		HashMap<Integer,Integer> mapIntervenantsHeure = this.requetes.getIntervenantsParHeure();
 		for (int index = 0; index < mapIntervenantsHeure.size(); index++) {
 			this.heures.get(index).ajouterIntervenant(this.intervenants.get(index));
 		}
+		System.out.println("LIAISON INTERVENANTS-HEURES FAITE");
+
 
 		// LIER INTERVENANT A MODULE A PARTIE DE Intervenant_Module (requete deja créée)
 		HashMap<Integer,Integer> mapIntervenantsModule = this.requetes.getIntervenantsParModule();

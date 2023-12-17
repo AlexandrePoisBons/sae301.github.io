@@ -781,7 +781,7 @@ public class Requetes {
 												rs.getString("commentaire"));
 			listeH.add(h);
 		}
-		rs.close(); 
+		rs.close();
 		return listeH;
 	}
 
