@@ -10,7 +10,7 @@ import metier.db.Requetes;
  * @author Alexandre Pois--Bons - Florian Janot
  * @version 1.0
  */
-public class Heure {
+public class Heure implements Comparable<Heure> {
 	private static int  nbHeures = Requetes.getNbHeures();
 
 	private int         idHeure;
@@ -36,7 +36,15 @@ public class Heure {
 
 		return new Heure( module, typeHeure, duree, commentaire);
 	}
-	
+
+	public static Heure initHeure( int idHeure, Module module, TypeHeure typeHeure, float duree, String commentaire)
+	{
+		if ( idHeure < 0 || module == null || typeHeure == null || duree <= 0 )
+			return null;
+
+		return new Heure( idHeure, module, typeHeure, duree, commentaire);
+	}
+
 	/**
 	 * Constructeur privé de la classe Heure uniquement appellé par la factory
 	 * @param module      Un module préalablement crée
@@ -47,6 +55,16 @@ public class Heure {
 	 */
 	private Heure( Module module, TypeHeure typeHeure, float duree, String commentaire) {
 		this.idHeure     = nbHeures++;
+		this.module      = module;
+		this.typeHeure   = typeHeure;
+		this.duree       = duree;
+		this.commentaire = commentaire;
+
+		this.intervenants = new ArrayList<Intervenant>();
+	}
+
+	private Heure (int idHeure, Module module, TypeHeure typeHeure, float duree, String commentaire) {
+		this.idHeure = idHeure;
 		this.module      = module;
 		this.typeHeure   = typeHeure;
 		this.duree       = duree;
@@ -81,4 +99,10 @@ public class Heure {
 	public String toString() {
 		return "Heure [idHeure="+this.idHeure + ", idModule=" + this.module.getIdModule() + ", idTypeHeure=" + this.typeHeure.getIdTypeHeure() + ", duree=" + this.duree + ", commentaire=" + this.commentaire+"]";
 	}
+
+	public int compareTo(Heure h) {
+		return ((Integer)this.idHeure).compareTo((Integer)h.getIdHeure());
+	}
+
+	
 }

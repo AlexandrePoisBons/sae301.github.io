@@ -893,8 +893,88 @@ public class Requetes {
 
 
 
-	// methode getIntervenantsByModule(Module)
-	// methode getHeuresByModule(Module)
 
-	// methode getIntervenantsByHeure(Heure)
+	/************
+	 *   INIT   *
+	 ************/
+
+	public ArrayList<Heure> initHeures() throws SQLException {
+		Statement selectH = connec.createStatement();
+		ArrayList<Heure> listeH = new ArrayList<Heure>();
+
+		String req = "SELECT * FROM Heure h JOIN Module m ON m.id_module = h.id_module JOIN Type_Heure t ON t.id_type_heure = h.id_type_heure;";
+		ResultSet rs = selectH.executeQuery(req);
+		while( rs.next() ) {
+			Heure h = Heure.initHeure( rs.getInt("id_heure"),
+			                           Module.initModule( rs.getInt("id_module"),
+			                                              rs.getString("type_module"),
+			                                              rs.getString("semestre"),
+			                                              rs.getString("libelle"),
+			                                              rs.getString("libelle_court"),
+			                                              rs.getString("code"),
+			                                              rs.getInt("nb_etudiants"),
+			                                              rs.getInt("nb_gp_td"), 
+			                                              rs.getInt("nb_gp_tp"),
+			                                              rs.getInt("nb_semaines"),
+			                                              rs.getInt("nb_heures")),
+			                           new TypeHeure ( rs.getString("nom_type_heure"),
+			                                           rs.getFloat("coeff") ),
+			                           rs.getInt("duree"),
+			                           rs.getString("commentaire") );
+			listeH.add(h);
+		}
+		rs.close();
+		return listeH;
+	}
+	
+	public ArrayList<Intervenant> initIntervenants() throws SQLException {
+		Statement selectI = connec.createStatement();
+		ArrayList<Intervenant> listeI = new ArrayList<Intervenant>();
+
+		String req = "SELECT * FROM Intervenant i JOIN Statut s ON s.nom_statut = i.nom_statut;";
+		ResultSet rs = selectI.executeQuery(req);
+		while( rs.next() ) {
+			Intervenant i = Intervenant.initIntervenant( rs.getInt("id_intervenant"),
+			                                             rs.getString("prenom"),
+			                                             rs.getString("nom"),
+			                                             new Statut( rs.getString("nom_statut"),
+			                                                         rs.getInt("nb_heures_service"),
+			                                                         rs.getInt("nb_heures_maxi"),
+			                                                         rs.getInt("coeff_tp") ),
+			                                             rs.getFloat("nb_equivalent_td") );
+			listeI.add(i);
+		}
+		rs.close();
+		return listeI;
+	}
+
+	public ArrayList<Module> initModules() throws SQLException {
+		Statement selectNP = connec.createStatement();
+		ArrayList<Module> listeI = new ArrayList<Module>();
+
+		String req = "SELECT * FROM Module";
+
+		ResultSet rs = selectNP.executeQuery(req);
+		while(rs.next()){
+			Module m = Module.initModule( rs.getInt("id_module"),
+			                              rs.getString ("type_module"   ),
+			                              rs.getString ("semestre"      ),
+			                              rs.getString ("libelle"       ),
+			                              rs.getString ("libelle_court" ),
+			                              rs.getString ("code"          ),
+			                              rs.getInt    ("nb_etudiants"  ),
+			                              rs.getInt    ("nb_gp_td"      ),
+			                              rs.getInt    ("nb_gp_tp"      ),
+			                              rs.getInt    ("nb_semaines"   ),
+			                              rs.getInt    ("nb_heures"     ) );
+			listeI.add(m);
+		}
+		rs.close();
+		return listeI;
+	}
+
+
+
 }
+
+

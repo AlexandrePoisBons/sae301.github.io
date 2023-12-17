@@ -2,6 +2,7 @@ package controleur;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -107,44 +108,72 @@ public class ControleurMetier {
 
 	public void init() throws SQLException {
 
-		this.heures = this.requetes.getHeures();
-		System.out.println("insh' "+this.heures.size());
+		this.heures = this.requetes.initHeures();
+		System.out.println("nb heures "+this.heures.size() + " : " + (this.heures.get(this.heures.size()-1).getIdHeure() <= this.heures.size()));
+		Collections.sort( this.heures );
+		System.out.println("Heures: ");
+		for (Heure heure : this.heures) { System.out.println(heure.getIdHeure()); }
 
-		this.statuts      = this.requetes.getStatuts();
-		System.out.println("coucou toi "+this.statuts.size());
+		this.statuts = this.requetes.getStatuts();
+		System.out.println("nb statuts "+this.statuts.size());
+		System.out.println("Statuts: ");
+		for (Statut statut : this.statuts) { System.out.println(statut.getNomStatut()); }
 
-		this.intervenants = this.requetes.getIntervenants();
-		System.out.println("eh oh "+this.intervenants.size());
-		
-		this.modules      = this.requetes.getModules();
-		System.out.println("papa noel "+this.modules.size());
+		this.intervenants = this.requetes.initIntervenants();
+		System.out.println("nb intervenants "+this.intervenants.size() + " : " + (this.intervenants.get(this.intervenants.size()-1).getIdIntervenant() <= this.intervenants.size()));
+		Collections.sort( this.intervenants );
+		System.out.println("Intervenants: ");
+		for (Intervenant intervenant : this.intervenants) { System.out.println(intervenant.getIdIntervenant()); }
 
-		//this.requetes.get // l'erreur c'est pour que mon cerveau se rappelle des commentaires la mdr
+		this.modules      = this.requetes.initModules();
+		System.out.println("nb modules "+this.modules.size() + " : " + (this.modules.get(this.modules.size()-1).getIdModule() <= this.modules.size()));
+		Collections.sort( this.modules );
+		System.out.println("Modules: ");
+		for (Module module : this.modules) { System.out.println(module.getIdModule()); }
 
-		// LIER MODULES AVEC LES HEURES A PARTIR DE Heure_Module (requete deja créée)
+
 		HashMap<Integer,Integer> mapHeuresModule = this.requetes.getHeuresParModule();
 
 		for (Integer idHeure : mapHeuresModule.keySet()) {
-			System.out.println("ajout: module "+mapHeuresModule.get(idHeure)+" a l'heure "+idHeure);
-			this.modules.get(mapHeuresModule.get(idHeure)).ajouterHeure(this.heures.get(idHeure-1));
+			System.out.println("ajout: heure "+idHeure+" au module "+mapHeuresModule.get(idHeure));
+			this.modules.get(mapHeuresModule.get(idHeure)-1).ajouterHeure(this.heures.get(idHeure-1));
 		}
-		System.out.println("LIAISON INTERVENANTS-HEURES FAITE");
+		System.out.println("LIAISON HEURES-MODULES FAITE");
 
-
+		System.out.println("intervenant");
+		for (Intervenant i : this.intervenants) {
+			System.out.println(i.toString());
+		}
 
 		// LIER INTERVENANT AVEC LES HEURES A PARTIR DE Intervenant_Heure (requete deja créée)
 		HashMap<Integer,Integer> mapIntervenantsHeure = this.requetes.getIntervenantsParHeure();
-		for (int index = 0; index < mapIntervenantsHeure.size(); index++) {
-			this.heures.get(index).ajouterIntervenant(this.intervenants.get(index));
+
+		for (Integer idIntervenant : mapIntervenantsHeure.keySet()) {
+			System.out.println("ajout: intervenant "+idIntervenant +" a l'heure "+mapIntervenantsHeure.get(idIntervenant));
+			this.heures.get(mapIntervenantsHeure.get(idIntervenant)-1).ajouterIntervenant(this.intervenants.get(idIntervenant-1));
 		}
 		System.out.println("LIAISON INTERVENANTS-HEURES FAITE");
+
+		for (Intervenant intervenant : this.intervenants) {
+			for (Heure heure : heures) {
+				if ( heure.getIntervenants().contains(intervenant) )
+					intervenant.ajouterHeure(heure);
+			}
+		}
+
+
 
 
 		// LIER INTERVENANT A MODULE A PARTIE DE Intervenant_Module (requete deja créée)
 		HashMap<Integer,Integer> mapIntervenantsModule = this.requetes.getIntervenantsParModule();
-		for (int index = 0; index < mapIntervenantsModule.size(); index++) {
-			this.modules.get(index).ajouterIntervenant(this.intervenants.get(index));
+
+		for (Integer idIntervenant : mapIntervenantsModule.keySet()) {
+			System.out.println("ajout: intervenant "+idIntervenant+" au module "+mapIntervenantsModule.get(idIntervenant));
+			this.modules.get(mapIntervenantsModule.get(idIntervenant)-1).ajouterIntervenant(this.intervenants.get(idIntervenant-1));
 		}
+		System.out.println("LIAISON INTERVENANTS-MODULES FAITE");
+
+
 
 		// apres ca: on pourra afficher les intervenants dans Intervenants (et avec toutes les valeurs)
 		                                // les méthodes et l'implémentation est normalement deja faite
