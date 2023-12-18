@@ -12,6 +12,7 @@ import java.util.List;
 import ihm.accueil.*;
 import ihm.previsionnel.ppp.pppSud.PanelSud;
 import metier.Intervenant;
+import metier.Module;
 
 public class PanelPpp extends JPanel {
 	private FrameAccueil frame;

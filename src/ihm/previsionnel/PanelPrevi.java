@@ -1,6 +1,6 @@
 package ihm.previsionnel;
 
-//Import classes externes 
+// Import classes externes
 import ihm.accueil.FrameAccueil;
 import ihm.accueil.PanelAcceuil;
 import ihm.previsionnel.ppp.PanelPpp;
@@ -9,7 +9,7 @@ import ihm.previsionnel.sae.PanelSae;
 import ihm.previsionnel.stage.PanelStage;
 import metier.Module;
 
-//Imports classes Java
+// Imports classes Java
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -89,6 +89,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	public String getNbGpTd()     { return this.panelCenterPrevi.getNbGpTd();     }
 	public String getNbGpTp()     { return this.panelCenterPrevi.getNbGpTp();     }
 	public int    getNbSemaines() { return this.panelCenterPrevi.getNbSemaines(); }
+	public void ajouterModule(Module module) { this.panelCenterPrevi.ajouterModule(module); }
 
 	//Permets de faire une action en fonction du bouton cliqué
 	@Override
@@ -109,14 +110,14 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		}
 		
 		if (e.getSource() == this.btnModifier) {
-
-			// switch(m.getTypeModule()) {
-			// case "SAE"       -> this.frame.changerPanel(new PanelSae         (this.frame, this, m ) );
-			// case "Ressource" -> this.frame.changerPanel(new PanelRessources  (this.frame, this, m ) );
-			// case "Stage"     -> this.frame.changerPanel(new PanelStage       (this.frame, this, m ) );
-			// case "PPP"       -> this.frame.changerPanel(new PanelPpp         (this.frame, this, m ) );
-			// default          -> System.err.println("TypeModule inexistant");
- 			// }
+			metier.Module m = this.panelCenterPrevi.getCurrentSemestre().getCurrentModule();
+			switch(this.panelCenterPrevi.getCurrentSemestre().getCurrentModule().getTypeModule()) {
+				case "SAE"       -> this.frame.changerPanel(new PanelSae         (this.frame, this, m ) );
+				case "Ressource" -> this.frame.changerPanel(new PanelRessources  (this.frame, this, m ) );
+				case "Stage"     -> this.frame.changerPanel(new PanelStage       (this.frame, this, m ) );
+				case "PPP"       -> this.frame.changerPanel(new PanelPpp         (this.frame, this, m ) );
+				default          -> System.err.println("TypeModule inexistant");
+ 			}
 		}
 		if(e.getSource() == this.btnSupprimer) {
 			try { this.panelCenterPrevi.getCurrentSemestre().removeModule(); }

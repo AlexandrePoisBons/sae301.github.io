@@ -14,6 +14,7 @@ import ihm.previsionnel.sae.saeCentre.PCentreSae;
 import ihm.previsionnel.sae.saeNord.PNordSae;
 import ihm.previsionnel.sae.saeSud.PanelSudSae;
 import metier.Intervenant;
+import metier.Module;
 
 public class PanelSae extends JPanel{
 	private FrameAccueil frame;

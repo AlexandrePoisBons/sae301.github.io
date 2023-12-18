@@ -16,6 +16,7 @@ import ihm.previsionnel.PanelPrevi;
 import ihm.previsionnel.stage.stageCentre.PCentreStage;
 import ihm.previsionnel.stage.stageSud.PanelSudStage;
 import ihm.previsionnel.stage.stageNord.PNordStage;
+import metier.Module;
 
 public class PanelStage extends JPanel {
 	private FrameAccueil frame;

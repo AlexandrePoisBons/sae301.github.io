@@ -71,12 +71,32 @@ public class PanelCenterPrevi extends JPanel {
 	public void setModules(List<Module> alModules) {
 		// Ajouter les modules au JTabbedPane
 		List<Module> list;
-		for (int i = 1; i < this.listSemestre.size(); i++) {
+		int i=1;
+		for (PanelSemestre semestre : this.listSemestre) {
 			list = new ArrayList<Module>();
-			for (Module module : alModules)
-				if ( module.getSemestre() == ("S"+i) ) list.add(module);
-			this.listSemestre.get(i).setModules(list);
+			for (Module module : alModules){
+				System.out.println("comparaison  -  "+module.getSemestre()+" : "+"S"+i);
+				if ( module.getSemestre().equals("S"+i) ) list.add(module);
+			}
+			System.out.println("LA ON SET: "+list.size());
+			for (Module module : list) {
+				System.out.print(module+" ");
+			}
+			semestre.setModules(list);
+			i++;
 		}
+	}
+
+	public void ajouterModule(Module module) {
+		for( Module m: this.getCurrentSemestre().getModules() ) {
+			if ( m.getIdModule() == module.getIdModule() ) {
+				// faire tous les setters maj
+				System.out.println("MISE A JOUR MODULE");
+				return;
+			}
+		}
+		System.out.println("NOUVEAU MODULE");
+		this.getCurrentSemestre().getModules().add(module);
 	}
 
 	public int    getNumCurrentModule() { return this.modules.getSelectedIndex();               }
