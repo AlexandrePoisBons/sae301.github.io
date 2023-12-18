@@ -1,4 +1,4 @@
-package ihm.previsionnel.ressources.ressourcesCentre.repartition;
+package ihm.previsionnel.ressources.ressourcesCentre;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -12,12 +12,15 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import ihm.previsionnel.ressources.ressourcesCentre.PRCentre;
+import ihm.previsionnel.ressources.ressourcesCentre.repartition.FrameFormulaire;
+import ihm.previsionnel.ressources.ressourcesCentre.repartition.PanelAffect;
 import ihm.previsionnel.ressources.ressourcesCentre.repartition.heure.PanelRepartitionHeure;
 import metier.Heure;
 import metier.Intervenant;
+import metier.TypeHeure;
+import metier.Module;
 
-public class PanelRepartition extends JPanel implements ActionListener{
+public class PanelRepartition extends JPanel implements ActionListener {
 	private PRCentre panelMere;
 	private PanelRepartitionHeure panelRepartitionHeure;
 	private PanelAffect panelAffect;
@@ -33,7 +36,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 		JPanel panelBoutons = new JPanel();
 
 		this.panelRepartitionHeure 	= new PanelRepartitionHeure	(this)				;
-		this.panelAffect	 		= new PanelAffect			(this)				;
+		this.panelAffect	 		= new PanelAffect(this);
 		panelBoutons	 			= new JPanel				(    )				;
 		this.btnAjouter 			= new JButton				("Ajouter")	;
 		this.btnSuppr				= new JButton				("Supprimer")	;
@@ -75,9 +78,11 @@ public class PanelRepartition extends JPanel implements ActionListener{
 	public HashMap<String,Integer> getTabData() { return this.panelMere.getData(); }
 
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
+	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
 
 	public void ajouterLigne(Object[] objs) { this.panelAffect.ajouterLigne(objs); }
-	
+
+	public List<Heure> getHeures(Module m) { return this.panelAffect.getDataHeures(m); }
 
 
 

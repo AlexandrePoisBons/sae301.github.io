@@ -10,7 +10,7 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-import ihm.previsionnel.ressources.ressourcesCentre.repartition.PanelRepartition;
+import ihm.previsionnel.ressources.ressourcesCentre.PanelRepartition;
 
 public class PanelRepartitionHeure extends JPanel{
 	private PanelRepartition panelMere;

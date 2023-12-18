@@ -35,7 +35,6 @@ public class ControleurMetier {
 
 		this.requetes = new Requetes();
 
-		
 		this.statuts      = new ArrayList<Statut>();
 		this.typesHeures  = new ArrayList<TypeHeure>();
 		this.intervenants = new ArrayList<Intervenant>();
@@ -57,7 +56,16 @@ public class ControleurMetier {
 	public boolean ajouterModule(Module module) {
 		try {
 			this.requetes.insertModule(module);
+			for (Heure heure : module.getHeures()) {
+				this.requetes.insertHeure(heure);
+				this.requetes.insertHeureModule(heure, module);
+				for (Intervenant intervenant : heure.getIntervenants()) {
+					this.requetes.insertIntervenantHeure(intervenant, heure);
+					this.requetes.insertIntervenantModule(intervenant, module);
+				}
+			}
 			this.modules.add(module);
+
 			return true;
 		} catch ( SQLException e ) { return false; }
 	}
@@ -226,7 +234,7 @@ public class ControleurMetier {
 	public List<Statut>      getStatuts()      { return this.statuts;      }
 	public List<TypeHeure>   getTypesHeures()  { return this.typesHeures;  }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
-	public List<Module>      getModules()      { System.out.println(this.modules+"donovaaaa"); return this.modules; }
+	public List<Module>      getModules()      { return this.modules; }
 
 	public void majStatuts(List<Statut> statuts) {
 		try {

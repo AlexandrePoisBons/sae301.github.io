@@ -60,7 +60,7 @@ public class PanelSud extends JPanel implements ActionListener {
 		String libelle      = this.panelRessources.getLibelle();
 		String libelleCourt = this.panelRessources.getLibelleCourt();
 		String code         = this.panelRessources.getCode();
-		
+
 		int nbEtudiants;
 		try { nbEtudiants = Integer.parseInt(this.panelPrevi.getNbEtd()); }
 		catch (NumberFormatException e) { nbEtudiants = 0;}
@@ -80,20 +80,31 @@ public class PanelSud extends JPanel implements ActionListener {
 		for (String heure : map.keySet() ){
 			if (map.get(heure) > nbSemaines)
 				nbSemaines = map.get(heure);
-			nbHeures+= map.get(heure);
+			nbHeures += map.get(heure);
 		}
 
-		Module m;
-		if ( this.module == null )
+		Module m = this.panelRessources.getModule();
+
+		if ( this.module == null ) {
 			m = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
-		else
-			m = Module.initModule( this.module.getIdModule(), typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
+			this.panelRessources.enregistrer(m);
+		} else {
+			this.module.setTypeModule(m.getTypeModule());
+			this.module.setSemestre(m.getSemestre());
+			this.module.setLibelle(m.getLibelle());
+			this.module.setLibelleCourt(m.getLibelleCourt());
+			this.module.setCode(m.getCode());
+			this.module.setNbEtudiants(m.getNbEtudiants());
+			this.module.setNbGpTD(m.getNbGpTD());
+			this.module.setNbGpTP(m.getNbGpTP());
+			this.module.setNbSemaines(m.getNbSemaines());
+			this.module.setNbHeures(m.getNbHeures());
+			this.panelRessources.enregistrer(this.module);
+		}
+
+		// m = Module.initModule( this.module.getIdModule(), typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
 
 
-		System.out.println(this.frame.getControleur().getCtrl().metier().ajouterModule( module ));
-		System.out.println(module.toString());
-
-		this.panelPrevi.ajouterModule(module);
 
 	}
 

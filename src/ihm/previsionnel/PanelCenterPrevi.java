@@ -74,13 +74,8 @@ public class PanelCenterPrevi extends JPanel {
 		int i=1;
 		for (PanelSemestre semestre : this.listSemestre) {
 			list = new ArrayList<Module>();
-			for (Module module : alModules){
-				System.out.println("comparaison  -  "+module.getSemestre()+" : "+"S"+i);
+			for (Module module : alModules) {
 				if ( module.getSemestre().equals("S"+i) ) list.add(module);
-			}
-			System.out.println("LA ON SET: "+list.size());
-			for (Module module : list) {
-				System.out.print(module+" ");
 			}
 			semestre.setModules(list);
 			i++;
@@ -90,12 +85,14 @@ public class PanelCenterPrevi extends JPanel {
 	public void ajouterModule(Module module) {
 		for( Module m: this.getCurrentSemestre().getModules() ) {
 			if ( m.getIdModule() == module.getIdModule() ) {
-				// faire tous les setters maj
-				System.out.println("MISE A JOUR MODULE");
+				this.frame.getControleur().getCtrl().metier().ajouterModule(module);
+				for (PanelSemestre panelSemestre : listSemestre) {
+					if (module.getSemestre().equals("S"+panelSemestre.getIdSemestre()))
+						panelSemestre.ajouterModule(module);
+				}
 				return;
 			}
 		}
-		System.out.println("NOUVEAU MODULE");
 		this.getCurrentSemestre().getModules().add(module);
 	}
 

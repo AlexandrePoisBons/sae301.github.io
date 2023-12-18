@@ -42,7 +42,7 @@ public class PanelSemestre extends JPanel {
 
 		// JPanels
 		JPanel panelNord		= new JPanel()	;
-		JPanel panelCentre	 	= new JPanel()	;	
+		JPanel panelCentre	 	= new JPanel()	;
 
 		// Layout
 		this.setLayout			(new BorderLayout());
@@ -81,13 +81,13 @@ public class PanelSemestre extends JPanel {
 		this.tabModule.setBorder(tableBorder);
 
 		// Ajout des composants
-		panelNord.add	(new JLabel("nb gp TD")		    );
+		panelNord.add	(new JLabel("nb gp TD")    );
 		panelNord.add	(this.txtNbGpTd				    );
-		panelNord.add	(new JLabel("nb gp TP")		    );
+		panelNord.add	(new JLabel("nb gp TP")    );
 		panelNord.add	(this.txtNbGpTp				    );
-		panelNord.add	(new JLabel("nb Etd")			);		
+		panelNord.add	(new JLabel("nb Etd")			);
 		panelNord.add	(this.txtNbEtd					);
-		panelNord.add	(new JLabel("nb semaines")		);		
+		panelNord.add	(new JLabel("nb semaines")		);
 		panelNord.add	(this.txtNbSemaine				);
 		//panelCentre.add	(new JLabel("Liste des modules :")  , BorderLayout.NORTH  );
 		panelCentre.add (new JScrollPane(this.tabModule), BorderLayout.CENTER );
@@ -123,29 +123,19 @@ public class PanelSemestre extends JPanel {
 
 	public void ajouterModule(Module module) {
 		this.modules.add(module);
-		System.out.println("ajout module: "+this.ctrl.metier().ajouterModule(module));
 		String[] s = {module.getCode()};
 		this.dtm.addRow(s);
 	}
 
-	public Module getCurrentModule() {
-		System.out.println("\n\nLENGTH:"+this.modules.size()+"\n\n");
-		return this.modules.get(this.tabModule.getSelectedRow());
-	}
+	public Module getCurrentModule() { return this.modules.get(this.tabModule.getSelectedRow()); }
 
 	public void removeModule() throws SQLException{
-		System.out.println("selected: " + this.modules.get(this.tabModule.getSelectedRow()));
 		this.ctrl.metier().supprimerModule(this.getCurrentModule());
 		this.modules.remove(this.tabModule.getSelectedRow());
 		this.dtm.removeRow (this.tabModule.getSelectedRow());
 	}
 
-	public List<Module> getModules() {
-		return this.modules;
-	}
+	public List<Module> getModules() { return this.modules; }
 
-	public void afficherModuleParSemestre()	{
-		
-	}
 
 }

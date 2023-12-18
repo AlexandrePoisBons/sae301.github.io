@@ -3,7 +3,9 @@ package metier.db;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import controleur.Infos;
 import metier.Heure;
 import metier.Intervenant;
 import metier.Module;
@@ -172,13 +174,18 @@ public class Requetes {
 	{
 		int nbModules = 0;
 
+		Infos infos = new Infos();
+
 		try {
 			Class.forName("org.postgresql.Driver");
 			System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","coucou");
+			String url = "jdbc:postgresql://localhost:5432/" + infos.getDatabase() ;
+			String login = infos.getLogin();
+			String password = infos.getPassword();
+			Connection connec = DriverManager.getConnection(url,login,password);
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
@@ -582,7 +589,7 @@ public class Requetes {
 
 		this.psSelectIH.setInt(1, idIntervenant);
 		this.psSelectIH.setInt(2, idHeure);
-		ResultSet rs = this.psSelectIM.executeQuery();
+		ResultSet rs = this.psSelectIH.executeQuery();
 
 		int cptLig = 0;
 		while ( rs.next() ) cptLig ++;
@@ -648,7 +655,7 @@ public class Requetes {
 		return cptLig > 0;
 	}
 
-	public void insertHeureModule(ArrayList<Heure> heures, Module module) throws SQLException {
+	public void insertHeureModule(List<Heure> heures, Module module) throws SQLException {
 		for (Heure heure : heures)
 			this.insertHeureModule(heure, module);
 	}
@@ -659,6 +666,7 @@ public class Requetes {
 			this.psInsertHM.setInt(1, heure.getIdHeure());
 			this.psInsertHM.setInt(2, module.getIdModule());
 			this.psInsertHM.executeUpdate();
+			System.out.println("insert faite");
 		} else {
 			System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" deja existant");
 		}

@@ -14,8 +14,10 @@ import ihm.previsionnel.ressources.ressourcesCentre.PRCentre;
 import ihm.previsionnel.ressources.ressourcesCentre.progNat.ProgNat;
 import ihm.previsionnel.ressources.ressourcesNord.PRNord;
 import ihm.previsionnel.ressources.ressourcesSud.PanelSud;
+import metier.Heure;
 import metier.Intervenant;
 import metier.Module;
+import metier.TypeHeure;
 
 public class PanelRessources extends JPanel {
 	private FrameAccueil frame;
@@ -29,6 +31,9 @@ public class PanelRessources extends JPanel {
 		this.frame = frame;
 		this.panelMere = framePrevi;
 		this.module = m;
+
+		if ( this.module != null )
+			System.out.println("COUCOU TOI"+m.getHeures());
 
 		this.frame.setTitle("Prévisionnel - Module: Ressources"); //Définition du titre de la fenêtre
 		//Définition de la taille et la position de la fenêtre
@@ -58,6 +63,18 @@ public class PanelRessources extends JPanel {
 		this.add( this.pSud,     BorderLayout.SOUTH);
 	}
 
+
+	public void enregistrer(Module m) {
+		List<Heure> heures = this.pRCentre.getHeures(m);
+		m.setHeures(heures);
+		this.panelMere.ajouterModule(m);
+
+		this.frame.changerPanel(new PanelPrevi(this.frame));
+
+	}
+
+
+
 	public String getSemestre()     { return this.panelMere.getSemestre();  }
 	public String getNbEtd()        { return this.panelMere.getNbEtd();     }
 	public String getNbGpTd()       { return this.panelMere.getNbGpTd();    }
@@ -74,5 +91,6 @@ public class PanelRessources extends JPanel {
 	}
 
 	public List<Intervenant> getIntervenants() { return frame.getControleur().getCtrl().metier().getIntervenants(); }
+	public List<TypeHeure> getTypesHeures() { return frame.getControleur().getCtrl().metier().getTypesHeures(); }
 
 }

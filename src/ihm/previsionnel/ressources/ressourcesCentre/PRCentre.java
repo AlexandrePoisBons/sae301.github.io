@@ -11,9 +11,10 @@ import javax.swing.*;
 
 import ihm.previsionnel.ressources.PanelRessources;
 import ihm.previsionnel.ressources.ressourcesCentre.progNat.ProgNat;
-import ihm.previsionnel.ressources.ressourcesCentre.repartition.PanelRepartition;
+import metier.Heure;
 import metier.Intervenant;
 import metier.Module;
+import metier.TypeHeure;
 
 public class PRCentre extends JPanel {
 	private PanelRessources  panelMere;
@@ -58,6 +59,8 @@ public class PRCentre extends JPanel {
 
 	}
 
+	public List<Heure> getHeures(Module m) { return this.panelRepartition.getHeures(m); }
+
 	public HashMap<String,Integer> getData() {
 		HashMap<String,Integer> map = new HashMap<>();
 		HashMap<String,Integer> mapH = this.pProgNat.getHeuresTot();
@@ -71,16 +74,11 @@ public class PRCentre extends JPanel {
 	}
 
 	public void setData() {
-		System.out.println("coucou");
-		System.out.println("\n\n\n\n\n"+this.module+"\n\n\n\n\n");
-		System.out.println("Intervenants: ");
-		for (Intervenant intervenant : this.module.getIntervenants()) {
-			System.out.println(intervenant);
-		}
 		this.panelRepartition.setHeures(this.module.getHeures());
 	}
 
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
+	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
 
 
 }

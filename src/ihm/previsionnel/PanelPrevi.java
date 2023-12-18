@@ -44,7 +44,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.ddlstBox          = new JComboBox<String>(typeModules);
 		this.btnModifier       = new JButton("Modifier");
 		this.btnSupprimer      = new JButton("Supprimer");
-		this.btnRetour		 = new JButton("Retour");
+		this.btnRetour         = new JButton("Retour");
 
 
 		//Layout
@@ -80,8 +80,8 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.panelCenterPrevi.setModules( alModule );
 	}
 
-	
-	
+
+
 
 
 	public String getSemestre()   { return "S"+this.panelCenterPrevi.getCurrentSemestre().getIdSemestre();   }
@@ -89,7 +89,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	public String getNbGpTd()     { return this.panelCenterPrevi.getNbGpTd();     }
 	public String getNbGpTp()     { return this.panelCenterPrevi.getNbGpTp();     }
 	public int    getNbSemaines() { return this.panelCenterPrevi.getNbSemaines(); }
-	public void ajouterModule(Module module) { this.panelCenterPrevi.ajouterModule(module); }
+	public void   ajouterModule(Module module) { this.panelCenterPrevi.ajouterModule(module); }
 
 	//Permets de faire une action en fonction du bouton cliqué
 	@Override

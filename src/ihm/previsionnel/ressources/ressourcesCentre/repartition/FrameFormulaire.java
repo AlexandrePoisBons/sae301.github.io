@@ -14,13 +14,16 @@ import javax.swing.*;
 import javax.swing.event.CellEditorListener;
 import javax.swing.table.TableCellEditor;
 
+import ihm.previsionnel.ressources.ressourcesCentre.PanelRepartition;
 import metier.Intervenant;
 import metier.Statut;
+import metier.TypeHeure;
 
 public class FrameFormulaire extends JFrame implements ActionListener{
 	private PanelRepartition     panelMere;
 	private JPanel                  panelFormulaire;
 	private JComboBox<Intervenant>  ddlstIntervenant;
+	private JComboBox<TypeHeure>    ddlstTypesHeures;
 	private JTextField              txtType; 
 	private JTextField              txtNbSemaines;
 	private JTextField              txtTotEqtd;
@@ -45,7 +48,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		GridBagConstraints gbc 	= new GridBagConstraints();
 		gbc.anchor = GridBagConstraints.WEST;
 
-		this.remplirListe(this.panelMere.getIntervenants());
+		this.remplirListe(this.panelMere.getIntervenants(), this.panelMere.getTypesHeures());
 		this.txtType         = new JTextField(15);
 		this.txtNbSemaines   = new JTextField(15);
 		this.txtTotEqtd      = new JTextField(15);
@@ -68,7 +71,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		gbc.gridy = 0;
 		this.panelFormulaire.add(this.ddlstIntervenant		, gbc);
 		gbc.gridy = 1;
-		this.panelFormulaire.add(this.txtType, gbc);
+		this.panelFormulaire.add(this.ddlstTypesHeures, gbc);
 		gbc.gridy = 2;
 		this.panelFormulaire.add(this.txtNbSemaines, gbc);
 		gbc.gridy = 3;
@@ -93,12 +96,18 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	}
 
 
-	public void remplirListe(List<Intervenant> intervenants) {
+	public void remplirListe(List<Intervenant> intervenants, List<TypeHeure> typesHeures) {
 		Intervenant[] tabInter = new Intervenant[intervenants.size()];
-		for(int i=0;i<intervenants.size();i++){
+		TypeHeure[] tabTypesHeures = new TypeHeure[typesHeures.size()];
+
+		for(int i=0;i<intervenants.size();i++)
 			tabInter[i] = intervenants.get(i);
-		}
+		
+		for (int i = 0; i < tabTypesHeures.length; i++)
+			tabTypesHeures[i] = typesHeures.get(i);
+		
 		this.ddlstIntervenant = new JComboBox<>(tabInter);
+		this.ddlstTypesHeures = new JComboBox<>(tabTypesHeures);
 	}
 
 
@@ -114,9 +123,9 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 
 	private void valider() {
 		Object[] objs = new Object[6];
-
-		objs[0] = ((Intervenant)(this.ddlstIntervenant.getSelectedItem())).getNom();
-		objs[1] = this.txtType.getText();
+		Intervenant intervenant = (Intervenant)(this.ddlstIntervenant.getSelectedItem());
+		objs[0] = intervenant.getNom()+" "+intervenant.getPrenom().substring(0,1)+".";
+		objs[1] = ((TypeHeure)this.ddlstTypesHeures.getSelectedItem()).getNomTypeHeure();
 		objs[2] = this.txtNbSemaines.getText();
 		objs[3] = "";
 		objs[4] = this.txtTotEqtd.getText();
