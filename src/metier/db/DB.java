@@ -17,7 +17,7 @@ public class DB {
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","mdpAdmin");
+			connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","Punaise14");
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 		} catch (SQLException e) { e.printStackTrace(); }
 	}

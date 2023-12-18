@@ -129,6 +129,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	// Ajout des statut
 	public void ajouterStatut(Statut statut) {
 		String[] objs = {statut.getNomStatut()};
+		
 		this.dtmStatut.addRow(objs);
 		this.ensStatut.add(statut);
 		System.out.println("taille: " + listStatut.size());
@@ -142,8 +143,7 @@ public class PanelParam extends JPanel implements ActionListener{
 										  this.ensStatut.get(ligneSelectionne).getNbHeureService(),
 										  this.ensStatut.get(ligneSelectionne).getNbHeuresMax(),
 										  this.ensStatut.get(ligneSelectionne).getCoeffTP());
-			this.ensStatut.remove(ligneSelectionne);
-			this.dtmStatut.removeRow(ligneSelectionne);
+			
 			this.panelFormulaire.revalidate();
 			this.panelFormulaire.repaint();
 		}
@@ -160,9 +160,6 @@ public class PanelParam extends JPanel implements ActionListener{
 				this.listStatut.remove(valeurASupp);
 			}
 		}
-	
-		System.out.println("taille : " + listStatut.size());
-		System.out.println(this.listStatut);
 	}
 	
 
@@ -211,7 +208,17 @@ public class PanelParam extends JPanel implements ActionListener{
 		}
 	}
 
+	//Supprimer Ligne 
+	public void supprimerLigne(){
+		this.listStatut.remove(this.tableauStatut.getSelectedRow());
+		this.dtmStatut.removeRow(this.tableauStatut.getSelectedRow());
+	}
+
 	public ArrayList<String> getListStatut(){
 		return this.listStatut;
+	}
+
+	public int getLigne(){
+		return this.tableauStatut.getSelectedRow();
 	}
 }

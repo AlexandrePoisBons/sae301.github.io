@@ -84,16 +84,26 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		int nbHeuresMax = 0;
 		float coeff = 0.0f;
 
-		try { Integer.parseInt(this.txtNbHeuresService.getText()); }
+		try { nbHeuresService = Integer.parseInt(this.txtNbHeuresService.getText()); System.out.println(this.txtNbHeuresService.getText()); }
 		catch ( NumberFormatException e ) { System.out.println(this.txtNbHeuresService.getText() + " : pas un Integer"); }
 
-		try { Integer.parseInt(this.txtNbHeuresMax.getText()); }
+		try { nbHeuresMax = Integer.parseInt(this.txtNbHeuresMax.getText()); }
 		catch ( NumberFormatException e ) { System.out.println(this.txtNbHeuresMax.getText() + " : pas un Integer"); }
 
-		try { Float.parseFloat(this.txtCoeff.getText()); }
+		try { coeff =  Float.parseFloat(this.txtCoeff.getText()); }
 		catch ( NumberFormatException e ) { System.out.println(this.txtCoeff.getText() + " : pas un Float"); }
 
-		this.panelMere.ajouterStatut( new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff) );
+		if(this.panelMere.getLigne() != -1){
+			this.panelMere.supprimerLigne();
+		}
+		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
+		if(nbHeuresService == 0 || nbHeuresMax == 0 || coeff == 0.0f){
+			System.out.println("Vérifier vos valeurs");
+		}
+		else{
+			this.panelMere.ajouterStatut( new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff) );
+			this.effacer();
+		}
 	}
 
 	public void effacer() {
@@ -109,7 +119,6 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		this.txtNbHeuresService.setText("" + nbHeureService);
 		this.txtNbHeuresMax.setText("" + nbHeureMax);
 		this.txtCoeff.setText("" + coeff);
-		System.out.println("test");
 	}
 
 }
