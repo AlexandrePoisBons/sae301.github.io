@@ -8,6 +8,7 @@ import ihm.intervenants.PanelInter		;
 //Imports classes Java
 import javax.swing.*					;
 import java.awt.GridLayout				;
+import java.awt.Toolkit;
 import java.awt.BorderLayout			;
 import java.awt.event.ActionListener	;
 import java.awt.event.ActionEvent		;
@@ -35,12 +36,19 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 		//Layout
 		this.setLayout(new BorderLayout(60, 0));
 
+		//Positionnement de la frame
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int xSize = (int)(largeur*0.3);
+		int ySize = (int)(hauteur*0.3);
+		this.frame.setSize(xSize, ySize);
+		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 		//Composants
-		panelCentre = new JPanel();	
-		panelHaut = new JPanel();
-		panelBas = new JPanel();
-		panelGauche = new JPanel();
-		panelDroite = new JPanel();
+		panelCentre   = new JPanel();	
+		panelHaut     = new JPanel();
+		panelBas      = new JPanel();
+		panelGauche   = new JPanel();
+		panelDroite   = new JPanel();
 		this.btnParam = new JButton("Paramètres		");
 		this.btnPrevi = new JButton("Prévisionnel	");
 		this.btnInter = new JButton("Intervenants	");
@@ -55,7 +63,7 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 		panelCentre.add(this.btnEtats);
 
 		this.add(panelCentre, BorderLayout.CENTER);
-		this.add(panelHaut, BorderLayout.NORTH);
+		this.add(panelHaut  , BorderLayout.NORTH);
 		this.add(panelBas, BorderLayout.SOUTH);
 		this.add(panelGauche, BorderLayout.WEST);
 		this.add(panelDroite, BorderLayout.EAST);

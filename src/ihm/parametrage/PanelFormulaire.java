@@ -4,7 +4,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Insets;
 
 import javax.swing.*;
 
@@ -64,6 +63,9 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		this.btnAnnuler.addActionListener(this);
 
 		this.setVisible(true);
+	}
+
+	public PanelFormulaire() {
 	}
 
 	public void actionPerformed(ActionEvent e) {

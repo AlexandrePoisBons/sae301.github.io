@@ -28,9 +28,9 @@ public class PanelParam extends JPanel implements ActionListener{
 	private JPanel            panelStatut;
 	private JPanel            panelSud;
 
-	private JButton           btnAjoutStat;
-	private JButton           btnModifierStat;
-	private JButton           btnSuppStat;
+	private JButton           btnAjout;
+	private JButton           btnModifier;
+	private JButton           btnSupp;
 	private JButton           btnRetour;
 	private JButton           btnEnregistrer;
 
@@ -47,20 +47,20 @@ public class PanelParam extends JPanel implements ActionListener{
 		//Placement de la frame
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		int xSize = (int)(largeur);
+		int xSize = (int)(largeur*0.25);
 		int ySize = (int)(hauteur*0.7);
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 
 		// Creation des éléments de la page 
-		this.panelFormulaire     = new PanelFormulaire(this);
+		this.panelFormulaire     = new PanelFormulaire();
 		this.dtmStatut           = new DefaultTableModel();
 		this.panelStatut         = new JPanel();
 		this.panelSud            = new JPanel();
 
-		this.btnAjoutStat    = new JButton("Ajouter");
-		this.btnModifierStat = new JButton("Modifier");
-		this.btnSuppStat     = new JButton("Supprimer");
+		this.btnAjout    = new JButton("Ajouter");
+		this.btnModifier = new JButton("Modifier");
+		this.btnSupp     = new JButton("Supprimer");
 		this.btnRetour       = new JButton("Retour");
 		this.btnEnregistrer  = new JButton("Enregistrer");
 
@@ -85,9 +85,9 @@ public class PanelParam extends JPanel implements ActionListener{
 		
 		panelTableauG.add(scrollStatut);
 
-		panelBtnG.add(this.btnAjoutStat);
-		panelBtnG.add(this.btnModifierStat);
-		panelBtnG.add(this.btnSuppStat);
+		panelBtnG.add(this.btnAjout);
+		panelBtnG.add(this.btnModifier);
+		panelBtnG.add(this.btnSupp);
 
 
 		// Ajout dans panel gauche
@@ -106,9 +106,9 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.add(this.panelSud , BorderLayout.SOUTH);
 
 		// Activation des boutons 
-		this.btnAjoutStat  .addActionListener(this);
-		this.btnModifierStat.addActionListener(this);
-		this.btnSuppStat   .addActionListener(this);
+		this.btnAjout  .addActionListener(this);
+		this.btnModifier.addActionListener(this);
+		this.btnSupp   .addActionListener(this);
 		this.btnRetour     .addActionListener(this);
 		this.btnEnregistrer.addActionListener(this);
 
@@ -167,7 +167,13 @@ public class PanelParam extends JPanel implements ActionListener{
 	
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnAjoutStat){
+		if(e.getSource() == this.btnAjout){
+			int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+			int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+			int xSize = (int)(largeur*0.6);
+			int ySize = (int)(hauteur*0.7);
+			this.frame.setSize(xSize, ySize);
+			this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 			this.remove(this.panelFormulaire);
 			this.panelFormulaire = new PanelFormulaire(this);
 			this.add(this.panelFormulaire, BorderLayout.CENTER);
@@ -176,11 +182,11 @@ public class PanelParam extends JPanel implements ActionListener{
 			this.setVisible(true);
 		}
 
-		if(e.getSource() == this.btnSuppStat){
+		if(e.getSource() == this.btnSupp){
 			this.supprimerStatut();
 		}
 
-		if(e.getSource() == this.btnModifierStat){
+		if(e.getSource() == this.btnModifier){
 			this.modifierStatut();
 		}
 
@@ -201,7 +207,7 @@ public class PanelParam extends JPanel implements ActionListener{
 
 		if(e.getSource() == this.btnRetour){
 			this.frame.changerPanel(new PanelAcceuil(frame));
-			this.frame.setSize(350, 200);
+			//this.frame.setSize(350, 200);
 		}
 	}
 

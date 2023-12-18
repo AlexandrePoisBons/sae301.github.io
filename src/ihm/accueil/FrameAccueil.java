@@ -18,15 +18,6 @@ public class FrameAccueil extends JFrame {
 		this.ctrl = ctrl;
 		this.setTitle("Accueil");
 		this.setResizable(false);
-		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
-		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-
-		//Position
-		this.setLocation((int)(largeur*0.5)-175, (int)(hauteur*0.5)-100);
-
-		//Taille
-		this.setSize(350, 200);
-
 
 		//Panel principal
 		this.panel = new PanelAcceuil(this);
