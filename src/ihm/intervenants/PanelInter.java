@@ -31,6 +31,7 @@ public class PanelInter extends JPanel implements ActionListener {
 	private JButton btnEnregistrer;
 	private JTable tableauInter;
 	private DefaultTableModel dtm;
+	private JLabel lblErreur;
 
 	public PanelInter(FrameAccueil frAcceuil) {
 		// Synchronisation des pages
@@ -55,6 +56,10 @@ public class PanelInter extends JPanel implements ActionListener {
 		this.btnSupprimer = new JButton("supprimer");
 		this.btnEnregistrer = new JButton("enregistrer");
 		this.btnAnnuler = new JButton("annuler");
+		this.lblErreur = new JLabel("");
+
+		//Coloration du label d'erreurs en rouge
+		this.lblErreur.setForeground(java.awt.Color.RED);
 
 		this.dtm = new DefaultTableModel();
 
@@ -88,6 +93,7 @@ public class PanelInter extends JPanel implements ActionListener {
 
 		this.panelBtn.add(this.btnEnregistrer);
 		this.panelBtn.add(this.btnAnnuler);
+		this.panelBtn.add(this.lblErreur, FlowLayout.RIGHT);
 
 		this.add(this.panelPrincipal, BorderLayout.CENTER);
 		this.add(this.panelBtn, BorderLayout.SOUTH);
@@ -175,20 +181,29 @@ public class PanelInter extends JPanel implements ActionListener {
 					if (j < 3) {
 						if (!(this.dtm.getValueAt(i, j) instanceof String)) {
 							bOk = false;
-							System.out.println("String faux");
+							this.lblErreur.setText("Erreur, veuillez vérifier que le type de données est bien un STRING");
+							this.repaint();
+							this.revalidate();
+							//System.out.println("String faux");
 						}
 					}
 
 					if (j == 3 || j == 4) {
 						if (!(this.dtm.getValueAt(i, j) instanceof Integer)) {
 							bOk = false;
-							System.out.println("int faux");
+							this.lblErreur.setText("Erreur, veuillez vérifier que le type de données est bien un INTEGER");
+							this.repaint();
+							this.revalidate();
+							//System.out.println("int faux");
 						}
 					}
 					if (j > 4 && j < this.dtm.getColumnCount()) {
 						if (!(this.dtm.getValueAt(i, j) instanceof Float)) {
 							bOk = false;
-							System.out.println("float faux");
+							this.lblErreur.setText("Erreur, veuillez vérifier que le type de données est bien un FLOAT");
+							this.repaint();
+							this.revalidate();
+							//System.out.println("float faux");
 						}
 					}
 				}

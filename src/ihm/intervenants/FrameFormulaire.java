@@ -23,6 +23,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	private JTextField              txtCoefTP;
 	private JButton                 btnValider;
 	private JButton                 btnAnnuler;
+	private JLabel                  lblErreur;
 
 	public FrameFormulaire(PanelInter panelMere){
 		this.panelMere       = panelMere;
@@ -49,6 +50,10 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		this.txtCoefTP      = new JTextField(15);
 		this.btnValider     = new JButton("Valider");
 		this.btnAnnuler     = new JButton("Annuler");
+		this.lblErreur      = new JLabel("");
+
+		//Colorisation du label d'erreur en rouge
+		this.lblErreur.setForeground(java.awt.Color.RED);
 
 		gbc.gridy = 0;
 		gbc.gridx = 0;
@@ -84,8 +89,11 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		gbc.anchor = GridBagConstraints.EAST;
 		this.panelFormulaire.add(this.btnValider, gbc);
 		gbc.gridx = 1;
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.CENTER;
 		this.panelFormulaire.add(this.btnAnnuler, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 7;
+		this.panelFormulaire.add(this.lblErreur, gbc);
 
 		this.btnValider.addActionListener(this);
 		this.btnAnnuler.addActionListener(this);
@@ -127,7 +135,10 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 			this.panelMere.revalidate();
 			this.panelMere.repaint();
 		} catch (Exception err) {
-			System.err.println("Erreur, vérifier vos valeurs");
+			this.lblErreur.setText("Erreur, vérifier vos valeurs");
+			this.repaint();
+			this.revalidate();
+			//System.err.println("Erreur, vérifier vos valeurs");
 		}
 	}
 }
