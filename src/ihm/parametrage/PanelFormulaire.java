@@ -112,12 +112,6 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		System.out.println("nbHeuresMax    : "+nbHeuresMax);
 		System.out.println("coeff          : "+coeff);
 
-
-		for (iterable_type iterable_element : iterable) {
-			
-		}
-
-
 		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
 		if (nbHeuresService == 0 || nbHeuresMax == 0 || coeff == 0.0f) {
 			System.out.println("Vérifier vos valeurs");
