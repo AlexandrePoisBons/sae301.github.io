@@ -61,10 +61,10 @@ public class Intervenant implements Comparable<Intervenant> {
 		this.nbEqTD        = nbEqTD;
 
 		this.heures  = new ArrayList<Heure>();
-		this.modules = new ArrayList<Module>(); 
+		this.modules = new ArrayList<Module>();
 	}
 
-	private Intervenant(int idIntervenant, String prenom, String nom, Statut statut, float nbEqTD ) {
+	private Intervenant( int idIntervenant, String prenom, String nom, Statut statut, float nbEqTD ) {
 		this.idIntervenant = idIntervenant;
 		this.prenom        = prenom;
 		this.nom           = nom;
@@ -116,9 +116,17 @@ public class Intervenant implements Comparable<Intervenant> {
 			System.out.println(heure.toString());
 		}
 
-		for ( Heure heure : this.heures )
-			if ( !map.containsKey(heure.getModule().getSemestre()) )
+		for ( Heure heure : this.heures ) {
+			if ( !map.containsKey(heure.getModule().getSemestre()) ){
 				map.put(heure.getModule().getSemestre(), heure.getDuree());
+			}
+			else {
+				Float f = map.get(heure.getModule().getSemestre());
+				f += heure.getDuree();
+				map.remove(heure.getModule().getSemestre());
+				map.put(heure.getModule().getSemestre(), f);
+			}
+		}
 
 		for (String s : map.keySet()) {
 			System.out.println(s+" : "+map.get(s));

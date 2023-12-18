@@ -1,7 +1,5 @@
 package controleur;
 
-import ihm.accueil.*;
-import metier.db.*;
 
 
 public class Controleur {

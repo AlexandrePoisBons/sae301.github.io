@@ -83,10 +83,15 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 
 
 	public void setValues() {
-		this.txtNomStatut.setText(this.statut.getNomStatut());
-		this.txtNbHeuresService.setText("" + this.statut.getNbHeureService());
-		this.txtNbHeuresMax.setText("" + this.statut.getNbHeuresMax());
-		this.txtCoeff.setText("" + this.statut.getCoeffTP());
+		if ( statut != null ) {
+			this.txtNomStatut.setText(this.statut.getNomStatut());
+			this.txtNbHeuresService.setText("" + this.statut.getNbHeureService());
+			this.txtNbHeuresMax.setText("" + this.statut.getNbHeuresMax());
+			this.txtCoeff.setText("" + this.statut.getCoeffTP());
+		} else {
+			this.txtCoeff.setText(""+0.0f);
+		}
+
 	}
 
 
@@ -104,7 +109,7 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 
 		int nbHeuresService = 0;
 		int nbHeuresMax = 0;
-		float coeff = 0.0f;
+		float coeff = 1.0f;
 
 		try { nbHeuresService = Integer.parseInt(this.txtNbHeuresService.getText()); System.out.println(this.txtNbHeuresService.getText()); }
 		catch ( NumberFormatException e ) {
@@ -133,7 +138,8 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 
 		Statut s = new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff);
 
-		this.panelMere.majStatut(this.statut, s);
+		if ( this.statut != null )
+			this.panelMere.majStatut(this.statut, s);
 
 
 		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
@@ -141,9 +147,13 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 			this.lblErreur.setText("Vérifier vos valeurs");
 		}
 		else {
-			this.panelMere.ajouterStatut( new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff) );
+			this.panelMere.ajouterStatut(s);
+			if ( statut != null ) this.panelMere.supprimerStatut();
 			this.effacer();
 		}
+
+
+		this.effacer();
 
 	}
 
