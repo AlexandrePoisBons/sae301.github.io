@@ -10,12 +10,12 @@ import java.util.List;
 
 import javax.swing.*;
 
-import metier.Intervenant;
+import metier.Statut;
 
 public class FrameFormulaire extends JFrame implements ActionListener{
-	private PanelInter     panelMere;
+	private PanelInter              panelMere;
 	private JPanel                  panelFormulaire;
-	private JComboBox<Intervenant>  ddlstIntervenant;
+	private JComboBox<String>       ddlstIntervenant;
 	private JTextField              txtNom; 
 	private JTextField              txtPrenom;
 	private JTextField              txtHServ;
@@ -41,7 +41,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		GridBagConstraints gbc 	= new GridBagConstraints();		
 		gbc.anchor = GridBagConstraints.WEST;
 		
-		this.remplirListe(this.panelMere.getIntervenants());
+		this.remplirListe(this.panelMere.getStatuts());
 		this.txtNom         = new JTextField(15);
 		this.txtPrenom      = new JTextField(15);
 		this.txtHServ       = new JTextField(15);
@@ -98,31 +98,36 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == this.btnValider){
 			this.ajouterLigne();
+			this.dispose();
 		}
 		if(e.getSource() == this.btnAnnuler){
+			
 			this.dispose();
 		}
 	}
 
-	public void remplirListe(List<Intervenant> intervenants){
-		Intervenant[] tabInter = new Intervenant[intervenants.size()];
-		for(int i=0;i<intervenants.size();i++){
-			tabInter[i] = intervenants.get(i);
+	public void remplirListe(List<Statut> statuts){
+		String[] tabStatut = new String[statuts.size()];
+		for(int i=0;i<statuts.size();i++){
+			tabStatut[i] = statuts.get(i).getNomStatut();
 		}
-		this.ddlstIntervenant = new JComboBox<>(tabInter);
+		this.ddlstIntervenant = new JComboBox<String>(tabStatut);
+		//ajouter un catégorie
+		this.ddlstIntervenant.addItem("Enseignant");
 	}
 
 	public void ajouterLigne(){
 		try {
-			this.panelMere.ajouterLigne(this.ddlstIntervenant.getSelectedItem().toString(), 			
-										this.txtNom.getText(), 
-										this.txtPrenom.getText(), 
-										this.txtHServ.getText(), 
+			this.panelMere.ajouterLigne(this.ddlstIntervenant.getSelectedItem().toString(),
+										this.txtNom.getText(),
+										this.txtPrenom.getText(),
+										this.txtHServ.getText(),
 										this.txtHMax.getText(),
 										this.txtCoefTP.getText());
-			
+			this.panelMere.revalidate();
+			this.panelMere.repaint();
 		} catch (Exception err) {
-			System.err.println("Erreur : " + err.getMessage() + "\n");
+			System.err.println("Erreur, vérifier vos valeurs");
 		}
 	}
 }

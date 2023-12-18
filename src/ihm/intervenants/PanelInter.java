@@ -3,6 +3,7 @@ package ihm.intervenants;
 //Imports classes externes
 import ihm.accueil.FrameAccueil;
 import metier.Intervenant;
+import metier.Statut;
 import ihm.accueil.PanelAcceuil;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class PanelInter extends JPanel implements ActionListener {
 	private FrameAccueil frame;
 
 	private JPanel panelPrincipal;
+	private FrameFormulaire panelFormulaire;
 	private JPanel panelBtn;
 	private JButton btnAjouter;
 	private JButton btnAnnuler;
@@ -146,25 +148,16 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	}
 
-	public void ajouterLigne(Object[] values) {
-		this.dtm.addRow(values);
-	}
-
-	public void ajouter() {
-		TableColumn tc = this.tableauInter.getColumnModel().getColumn(0);
-		tc.setCellEditor(new ComboBoxCellEditor());
-		Object[] objs = { "", "", "", 0, 0, "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0" };
-		this.dtm.addRow(objs);
-	}
-
 	public void supprimer() {
 		this.dtm.removeRow(this.tableauInter.getSelectedRow());
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.btnAjouter) {
-			new FrameFormulaire(this);
-			// this.ajouter();
+			this.panelFormulaire = new FrameFormulaire(this);
+			//this.panelFormulaire.ajouterLigne();
+			this.panelFormulaire.setVisible(true);
+			this.panelFormulaire.repaint();
 		}
 
 		if (e.getSource() == this.btnSupprimer) {
@@ -210,8 +203,14 @@ public class PanelInter extends JPanel implements ActionListener {
 		}
 	}
 
-	public List<Intervenant> getIntervenants() {
-		return this.frame.getControleur().getCtrl().metier().getIntervenants();
+	public List<Statut> getStatuts() {
+		return this.frame.getControleur().getCtrl().metier().getStatuts();
+	}
+
+	public void ajouterLigne(Object[] values) {
+		this.dtm.addRow(values);
+		this.repaint();
+		this.revalidate();
 	}
 
 	public void ajouterLigne(String categorie, String nom, String prenom, String hServ, String hMax, String coeff) {
@@ -228,7 +227,7 @@ public class PanelInter extends JPanel implements ActionListener {
 		
 		Object[] vals = new Object[15];
 		for (Intervenant intervenant : list) {
-			if (intervenant.getStatut().getNomStatut() == nom) {
+			if (intervenant.getStatut().getNomStatut() == nom && intervenant.getPrenom() == prenom) {
 				// calculer les semestres
 				s1 = intervenant.getNbHeuresParSemestre().get("S1");
 				s2 = intervenant.getNbHeuresParSemestre().get("S2");

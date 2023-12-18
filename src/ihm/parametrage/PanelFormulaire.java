@@ -20,9 +20,7 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 	private JButton    btnAnnuler;
 	private Statut     statut;
 
-	public PanelFormulaire() {
-
-	}
+	public PanelFormulaire() {}
 
 	public PanelFormulaire(PanelParam panelMere, Statut statut) {
 		this.panelMere = panelMere;
