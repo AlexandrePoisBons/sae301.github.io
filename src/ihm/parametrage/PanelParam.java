@@ -125,15 +125,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	public Statut getCurrentStatut() {
-
-		for (Statut statut : ensStatut) {
-			if (statut.getNomStatut().equals(this.dtmStatut.getValueAt(this.tableauStatut.getSelectedRow(), 0) ))
-				return statut;
-		}
-
-		System.out.println("current statut = null");
-
-		return null;
+		return this.ensStatut.get(this.tableauStatut.getSelectedRow());
 	}
 
 	// Ajout des statut
@@ -158,12 +150,8 @@ public class PanelParam extends JPanel implements ActionListener{
 		int ligneSelectionnee = this.tableauStatut.getSelectedRow();
 		if (ligneSelectionnee != -1) {
 			this.remove(this.panelFormulaire);
-			this.panelFormulaire = new PanelFormulaire(this, this.ensStatut.get(ligneSelectionnee));
+			this.panelFormulaire = new PanelFormulaire(this, this.getCurrentStatut());
 			this.add(this.panelFormulaire, BorderLayout.CENTER);
-			this.panelFormulaire.setLignes(this.ensStatut.get(ligneSelectionnee).getNomStatut(),
-										  this.ensStatut.get(ligneSelectionnee).getNbHeureService(),
-										  this.ensStatut.get(ligneSelectionnee).getNbHeuresMax(),
-										  this.ensStatut.get(ligneSelectionnee).getCoeffTP());
 			this.panelFormulaire.revalidate();
 			this.panelFormulaire.repaint();
 			this.panelFormulaire.setVisible(true);

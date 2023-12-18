@@ -112,10 +112,9 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		System.out.println("nbHeuresMax    : "+nbHeuresMax);
 		System.out.println("coeff          : "+coeff);
 
+		Statut s = new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff);
 
-		for (iterable_type iterable_element : iterable) {
-			
-		}
+		this.panelMere.majStatut(this.statut, s);
 
 
 		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
