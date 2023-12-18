@@ -2,6 +2,7 @@ package ihm.previsionnel;
 
 // Import classes externes
 import ihm.accueil.FrameAccueil;
+import ihm.accueil.PanelAcceuil;
 import ihm.previsionnel.ppp.PanelPpp;
 import ihm.previsionnel.ressources.PanelRessources;
 import ihm.previsionnel.sae.PanelSae;
@@ -24,12 +25,11 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	//Attributs
 	private FrameAccueil 		frame;
 	private PanelCenterPrevi 	panelCenterPrevi;
-	private JButton 			btnCreerRessource;
-	private JButton 			btnCreerSAE;
-	private JButton 			btnCreerStage;
-	private JButton             btnCreerPpp;
+	private JButton 			btnCreer;
+	private JComboBox<String>   ddlstBox;
 	private JButton 			btnModifier;
 	private JButton 			btnSupprimer;
+	private JButton             btnRetour;
 
 	//Constructeur
 	public PanelPrevi(FrameAccueil frAccueil) {
@@ -37,14 +37,15 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.frame = frAccueil;
 
 		// création des composants
-		JPanel panelSud = new JPanel();
-		this.panelCenterPrevi = new PanelCenterPrevi	(this.frame);
-		this.btnCreerRessource = new JButton("Créer ressource");
-		this.btnCreerSAE = new JButton("Créer SAE");
-		this.btnCreerStage = new JButton("Créer stage/suivi");
-		this.btnCreerPpp        = new JButton("Créer PPP");
-		this.btnModifier= new JButton("Modifier");
-		this.btnSupprimer = new JButton("Supprimer");
+		JPanel panelSud        = new JPanel();
+		this.panelCenterPrevi  = new PanelCenterPrevi	(this.frame);
+		this.btnCreer          = new JButton("Créer ressources");
+		String[] typeModules   = {"Ressources", "SAE", "Stage", "PPP"};
+		this.ddlstBox          = new JComboBox<String>(typeModules);
+		this.btnModifier       = new JButton("Modifier");
+		this.btnSupprimer      = new JButton("Supprimer");
+		this.btnRetour		 = new JButton("Retour");
+
 
 		//Layout
 		this.setLayout(new GridBagLayout());
@@ -52,12 +53,11 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		//Ajout des composants
-		panelSud.add(this.btnCreerRessource);
-		panelSud.add(this.btnCreerSAE);
-		panelSud.add(this.btnCreerStage);
-		panelSud.add(this.btnCreerPpp);
+		panelSud.add(this.btnCreer);
+		panelSud.add(this.ddlstBox);
 		panelSud.add(this.btnModifier);
 		panelSud.add(this.btnSupprimer);
+		panelSud.add(this.btnRetour);
 		gbc.gridy = 0;
 		gbc.gridx = 0;
 		this.add(panelCenterPrevi, gbc);
@@ -66,20 +66,23 @@ public class PanelPrevi extends JPanel implements ActionListener {
 
 
 		//ActionListeners
-		this.btnCreerRessource  .addActionListener(this);
-		this.btnCreerSAE        .addActionListener(this);
-		this.btnCreerStage      .addActionListener(this);
-		this.btnCreerPpp        .addActionListener(this);
+		this.btnCreer           .addActionListener(this);
+		this.ddlstBox           .addActionListener(this);
+		this.btnRetour          .addActionListener(this);
 		this.btnModifier        .addActionListener(this);
 		this.btnSupprimer       .addActionListener(this);
+		this.btnRetour          .addActionListener(this);
 
 		List<Module> alModule = this.frame.getControleur().getCtrl().metier().getModules();
 		// Module m = Module.creerModule("coucou", "a", "a", "a", "a", 0, 0, 0, 0, 0);
 		// alModule.add(m);
 		// System.out.println("coucou"+alModule);
 		this.panelCenterPrevi.setModules( alModule );
-
 	}
+
+	
+	
+
 
 	public String getSemestre()   { return "S"+this.panelCenterPrevi.getCurrentSemestre().getIdSemestre();   }
 	public String getNbEtd()      { return this.panelCenterPrevi.getNbEtd();      }
@@ -91,19 +94,21 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	//Permets de faire une action en fonction du bouton cliqué
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if ( e.getSource() == this.btnCreerRessource ) {
-			this.frame.changerPanel( new PanelRessources(this.frame, this, null) );
+		if ( e.getSource() == this.btnCreer ) {
+			switch (this.ddlstBox.getSelectedItem().toString()) {
+				case "Ressources" -> this.frame.changerPanel( new PanelRessources(this.frame, this, null) );
+				case "SAE"       -> this.frame.changerPanel( new PanelSae       (this.frame, this, null) );
+				case "Stage"     -> this.frame.changerPanel( new PanelStage     (this.frame, this, null) );
+				case "PPP"       -> this.frame.changerPanel( new PanelPpp       (this.frame, this, null) );
+				default -> System.err.println("TypeModule inexistant");
+			}
+			
 		}
-		if (e.getSource() == this.btnCreerSAE) {
-			//this.frame.changerPanel( new PanelSae(this.frame, this) );
-			this.frame.changerPanel( new PanelSae(this.frame, this, null) );
+
+		if(e.getSource() == this.ddlstBox){
+			this.btnCreer.setText("Créer " + this.ddlstBox.getSelectedItem().toString());
 		}
-		if (e.getSource() == this.btnCreerStage) {
-			this.frame.changerPanel(new PanelStage(this.frame, this, null));
-		}
-		if (e.getSource() == this.btnCreerPpp) {
-			this.frame.changerPanel(new PanelPpp(this.frame, this, null));
-		}
+		
 		if (e.getSource() == this.btnModifier) {
 			metier.Module m = this.panelCenterPrevi.getCurrentSemestre().getCurrentModule();
 			switch(this.panelCenterPrevi.getCurrentSemestre().getCurrentModule().getTypeModule()) {
@@ -117,6 +122,9 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		if(e.getSource() == this.btnSupprimer) {
 			try { this.panelCenterPrevi.getCurrentSemestre().removeModule(); }
 			catch(SQLException eq) {eq.printStackTrace(); }
+		}
+		if(e.getSource() == this.btnRetour){
+			this.frame.changerPanel(new PanelAcceuil(this.frame));
 		}
 	}
 

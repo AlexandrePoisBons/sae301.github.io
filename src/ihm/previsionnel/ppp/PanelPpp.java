@@ -27,7 +27,7 @@ public class PanelPpp extends JPanel {
 		this.panelMere = framePrevi;
 		this.module = m;
 
-		this.frame.setTitle("Prévisionnel - Module: Ressources"); //Définition du titre de la fenêtre
+		this.frame.setTitle("Prévisionnel - Module: PPP"); //Définition du titre de la fenêtre
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();

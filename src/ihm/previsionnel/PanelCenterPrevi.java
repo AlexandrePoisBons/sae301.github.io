@@ -31,8 +31,8 @@ public class PanelCenterPrevi extends JPanel {
 		 //Définition de la taille et la position de la fenêtre
 		 int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		 int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		 int xSize = (int)(largeur*0.65);
-		 int ySize = (int)(hauteur*0.45);
+		 int xSize = (int)(largeur*0.7);
+		 int ySize = (int)(hauteur*0.55);
 		 this.frame.setSize(xSize, ySize);
 		 this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 
