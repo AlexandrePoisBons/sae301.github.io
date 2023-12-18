@@ -19,6 +19,7 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 	private JButton    btnValider;
 	private JButton    btnAnnuler;
 	private Statut     statut;
+	private JLabel    lblErreur;
 
 	public PanelFormulaireStatut() {}
 
@@ -36,6 +37,11 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 		this.txtCoeff          	= new JTextField(15);
 		this.btnValider         = new JButton("Valider");
 		this.btnAnnuler         = new JButton("Annuler");
+		this.lblErreur          = new JLabel("");
+
+		//Coloration du label d'erreurs en rouge
+		this.lblErreur.setForeground(java.awt.Color.RED);
+
 
 		gbc.gridy = 0;
 		gbc.gridx = 0;
@@ -63,6 +69,9 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 		gbc.gridx = 1;
 		gbc.anchor = GridBagConstraints.WEST;
 		this.add(this.btnAnnuler, gbc);
+		gbc.gridy = 6;
+		gbc.gridx = 0;
+		this.add(this.lblErreur, gbc);
 
 		this.btnValider.addActionListener(this);
 		this.btnAnnuler.addActionListener(this);
@@ -103,13 +112,25 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 		float coeff = 1.0f;
 
 		try { nbHeuresService = Integer.parseInt(this.txtNbHeuresService.getText()); System.out.println(this.txtNbHeuresService.getText()); }
-		catch ( NumberFormatException e ) { System.out.println(this.txtNbHeuresService.getText() + " : pas un Integer"); }
+		catch ( NumberFormatException e ) {
+			this.lblErreur.setText(this.txtNbHeuresService.getText() + " : pas un Integer"); 
+			this.repaint();
+			this.revalidate();
+		}
 
 		try { nbHeuresMax = Integer.parseInt(this.txtNbHeuresMax.getText()); }
-		catch ( NumberFormatException e ) { System.out.println(this.txtNbHeuresMax.getText() + " : pas un Integer"); }
+		catch ( NumberFormatException e ) {
+			this.lblErreur.setText(this.txtNbHeuresService.getText() + " : pas un Integer"); 
+			this.repaint();
+			this.revalidate();
+		}
 
 		try { coeff =  Float.parseFloat(this.txtCoeff.getText()); }
-		catch ( NumberFormatException e ) { System.out.println(this.txtCoeff.getText() + " : pas un Float"); }
+		catch ( NumberFormatException e ) {
+			this.lblErreur.setText(this.txtNbHeuresService.getText() + " : pas un Float"); 
+			this.repaint();
+			this.revalidate();
+		}
 
 		System.out.println("nbHeuresService: "+nbHeuresService);
 		System.out.println("nbHeuresMax    : "+nbHeuresMax);
@@ -123,7 +144,7 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 
 		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
 		if (nbHeuresService == 0 || nbHeuresMax == 0 || coeff == 0.0f) {
-			System.out.println("Vérifier vos valeurs");
+			this.lblErreur.setText("Vérifier vos valeurs");
 		}
 		else {
 			this.panelMere.ajouterStatut(s);

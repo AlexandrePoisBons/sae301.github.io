@@ -43,6 +43,8 @@ public class PanelParam extends JPanel implements ActionListener{
 	private DefaultTableModel dtmCoef;
 	private DefaultTableModel dtmStatut;
 
+	private JLabel     lblErreur;
+
 
 	public PanelParam(FrameAccueil frame) {
 		this.frame        = frame;
@@ -74,6 +76,10 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.btnSuppStatut     = new JButton("Supprimer");
 		this.btnRetour         = new JButton("Retour");
 		this.btnEnregistrer    = new JButton("Enregistrer");
+		this.lblErreur       = new JLabel("");
+
+		// Coloration en rouge du label d'erreur
+		this.lblErreur.setForeground(java.awt.Color.RED);
 
 
 		// Creation des tableaux
@@ -124,7 +130,6 @@ public class PanelParam extends JPanel implements ActionListener{
 		//Ajout dans panel retour
 		this.panelSud.add(this.btnRetour, FlowLayout.LEFT);
 		this.panelSud.add(this.btnEnregistrer, FlowLayout.LEFT);
-		this.panelSud.setPreferredSize(new Dimension(xSize, 50));
 
 		// Ajout des panels
 		this.add(this.panelTableaux   , BorderLayout.WEST);
@@ -191,9 +196,14 @@ public class PanelParam extends JPanel implements ActionListener{
 		if (ligneSelectionne != -1) {
 			this.dtmStatut.removeRow(ligneSelectionne);
 			this.ensStatut.remove(this.ensStatut.get(ligneSelectionne));
+			this.lblErreur.setText("");
+			this.repaint();
+			this.revalidate();
 			System.out.println("statut suppr");
 		} else {
-			System.out.println("ligne non select");
+			this.lblErreur.setText("Veuillez sélectionner un statut");
+			this.repaint();
+			this.revalidate();
 		}
 	}
 
