@@ -129,29 +129,42 @@ public class ControleurMetier {
 		// System.out.println("Modules: ");
 		// for (Module module : this.modules) { System.out.println(module.getIdModule()); }
 
+		Integer idHeure;
+		Integer idModule;
+		Integer idIntervenant;
 
-		HashMap<Integer,Integer> mapHeuresModule = this.requetes.getHeuresParModule();
 
-		for (Integer idHeure : mapHeuresModule.keySet()) {
-			System.out.println("ajout: heure "+idHeure+" au module "+mapHeuresModule.get(idHeure));
-			this.modules.get(mapHeuresModule.get(idHeure)-1).ajouterHeure(this.heures.get(idHeure-1));
+		Integer[][] tabHeuresModule = this.requetes.getHeuresParModule();
+
+		idHeure = 0;
+		idModule = 0;
+		for (int i=0; i< tabHeuresModule.length;i++) {
+			idHeure = tabHeuresModule[i][0];
+			idModule = tabHeuresModule[i][1];
+			System.out.println("ajout: heure "+idHeure+" au module "+idModule);
+			this.modules.get(idModule-1).ajouterHeure(this.heures.get(idHeure-1));
 		}
 		System.out.println("LIAISON HEURES-MODULES FAITE");
 
 
-		HashMap<Integer,Integer> mapIntervenantsHeure = this.requetes.getIntervenantsParHeure();
 
-		for (Integer idIntervenant : mapIntervenantsHeure.keySet()) {
-			System.out.println();
-			System.out.println("ajout: intervenant "+idIntervenant +" a l'heure "+mapIntervenantsHeure.get(idIntervenant));
-			this.heures.get(mapIntervenantsHeure.get(idIntervenant)-1).ajouterIntervenant(this.intervenants.get(idIntervenant-1));
-			System.out.println("dono"+this.heures.get(mapIntervenantsHeure.get(this.intervenants.get(idIntervenant-1).getIdIntervenant())-1).getIntervenants());
+		Integer[][] tabIntervenantsHeure = this.requetes.getIntervenantsParHeure();
 
-			this.intervenants.get(idIntervenant-1).ajouterHeure(this.heures.get(mapIntervenantsHeure.get(idIntervenant)-1));
+		idIntervenant = 0;
+		idHeure = 0;
+		for (int i=0; i < tabIntervenantsHeure.length; i++) {
+			idIntervenant = tabIntervenantsHeure[i][0];
+			idHeure = tabIntervenantsHeure[i][1];
+			System.out.println("ajout: intervenant "+idIntervenant +" a l'heure "+idHeure);
+
+			this.heures.get(idHeure-1).ajouterIntervenant(this.intervenants.get(idIntervenant-1));
+			System.out.println("dono"+this.heures.get(idHeure-1).getIntervenants());
+
+			this.intervenants.get(idIntervenant-1).ajouterHeure(this.heures.get(idHeure-1));
 			System.out.println("va"+this.intervenants.get(idIntervenant-1).getHeures());
-
 		}
 
+		System.out.println("LIAISON INTERVENANTS-HEURES FAITE");
 		// for (Intervenant intervenant : this.intervenants)
 		// 		if ( mapIntervenantsHeure.containsKey(intervenant.getIdIntervenant()) ) {
 		// 			System.out.println("ajout de intervenant "+intervenant.getIdIntervenant()+ " a heure "+this.heures.get(intervenant.getIdIntervenant()-1).getIdHeure() );
@@ -163,31 +176,23 @@ public class ControleurMetier {
 		// 			System.out.println("\n\nzebiiii "+this.heures.get(mapIntervenantsHeure.get(intervenant.getIdIntervenant())-1).getIntervenants());
 		// 	}
 
-		System.out.println("\n\n INTERVENANTS PAR HEURES");
-		for (Heure heure : this.heures) {
-			System.out.println(heure.getIdHeure()+" HEUUUUUUREURUEURUERER "+heure.getIntervenants());
-		}
+		// System.out.println("\n\n INTERVENANTS PAR HEURES");
+		// for (Heure heure : this.heures) {
+		// 	System.out.println(heure.getIdHeure()+" HEUUUUUUREURUEURUERER "+heure.getIntervenants());
+		// }
 
-		System.out.println("\n\n HEURES PAR INTERVENANTS");
-		for (Intervenant intervenant : this.intervenants) {
-			System.out.println(intervenant.getIdIntervenant()+" AHAHAHHAHAAAAAAAA "+intervenant.getHeures());
-		}
-		System.out.println();
-
-
-
-
-		System.out.println("LIAISON INTERVENANTS-HEURES FAITE");
-
-
+		// System.out.println("\n\n HEURES PAR INTERVENANTS");
+		// for (Intervenant intervenant : this.intervenants) {
+		// 	System.out.println(intervenant.getIdIntervenant()+" AHAHAHHAHAAAAAAAA "+intervenant.getHeures());
+		// }
+		
+		
 
 
 		Integer[][] mapIntervenantsModule = this.requetes.getIntervenantsParModule();
 
-		System.out.println("intervenants par module");
-
-		Integer idIntervenant;
-		Integer idModule;
+		idIntervenant = 0;
+		idModule = 0;
 		for (int i = 0; i < mapIntervenantsModule.length; i++) {
 			idIntervenant = mapIntervenantsModule[i][0];
 			idModule = mapIntervenantsModule[i][1];
