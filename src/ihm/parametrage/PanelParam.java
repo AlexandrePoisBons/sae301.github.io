@@ -162,7 +162,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	// Supprimer Statut
 	public void supprimerStatut() {
 		int ligneSelectionne = this.tableauStatut.getSelectedRow();
-		
+
 		if (ligneSelectionne != -1) {
 			this.dtmStatut.removeRow(ligneSelectionne);
 			this.ensStatut.remove(this.ensStatut.get(ligneSelectionne));
@@ -170,8 +170,9 @@ public class PanelParam extends JPanel implements ActionListener{
 		} else {
 			System.out.println("ligne non select");
 		}
+
 	}
-	
+
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjout){
@@ -208,7 +209,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	public void enregistrer() {
-		
+		this.frame.getControleur().getCtrl().metier().majStatuts(this.ensStatut);
 	}
 
 	//Supprimer Ligne
