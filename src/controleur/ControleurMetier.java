@@ -225,13 +225,30 @@ public class ControleurMetier {
 
 
 		System.out.println("--- FIN INITIALISATION ---");
-
 	}
 
 	public List<Statut>      getStatuts()      { return this.statuts;      }
 	public List<TypeHeure>   getTypesHeures()  { return this.typesHeures;  }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
-	public List<Module>      getModules()      { System.out.println(this.modules+"donovaaaa"); return this.modules;      }
+	public List<Module>      getModules()      { System.out.println(this.modules+"donovaaaa"); return this.modules; }
+
+	public void majStatuts(List<Statut> statuts) {
+		try {
+			for (Statut statut : statuts){
+				if (this.requetes.existsStatut(statut.getNomStatut()))
+					this.requetes.updateStatut(statut);
+				else 
+					this.requetes.insertStatut(statut);
+			}
+
+			for (Statut statut : this.requetes.getStatuts()) {
+				if (!statuts.contains(statut))
+					this.requetes.deleteStatut(statut);
+			}
+
+		} catch (SQLException e ) {  System.out.println("INSERT STATUT IMPOSSIBLE"); e.printStackTrace(); }
+
+	}
 
 
 }

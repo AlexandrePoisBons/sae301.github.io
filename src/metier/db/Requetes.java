@@ -86,7 +86,7 @@ public class Requetes {
 			this.psSelectS = this.connec.prepareStatement("SELECT * FROM Statut WHERE nom_statut=?;");
 			this.psInsertS = this.connec.prepareStatement("INSERT INTO Statut VALUES(?,?,?,?);");
 			this.psDeleteS = this.connec.prepareStatement("DELETE FROM Statut WHERE nom_Statut=?;");
-			this.psUpdateS = this.connec.prepareStatement("UPDATE Statut SET nb_heures_mini=?, nb_heure_maxi=?, coeff_tp=? WHERE nom_statut=?;");
+			this.psUpdateS = this.connec.prepareStatement("UPDATE Statut SET nb_heures_service=?, nb_heures_maxi=?, coeff_tp=? WHERE nom_statut=?;");
 
 			this.psSelectIM = this.connec.prepareStatement("SELECT * FROM Intervenant_Module WHERE id_intervenant=? AND id_module=?;");
 			this.psInsertIM = this.connec.prepareStatement("INSERT INTO Intervenant_Module VALUES(?,?);");
@@ -728,7 +728,7 @@ public class Requetes {
 			Statut s = new Statut( rs.getString("nom_statut"  ),
 			                       rs.getInt("nb_heures_service" ), 
 			                       rs.getInt("nb_heures_maxi"),
-			                       rs.getInt("coeff_tp") );
+			                       rs.getFloat("coeff_tp") );
 			listeS.add(s);
 		}
 		rs.close(); 
