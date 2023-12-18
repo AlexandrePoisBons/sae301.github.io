@@ -139,23 +139,22 @@ public class PanelParam extends JPanel implements ActionListener{
 
 	// Modifier des statuts
 	public void modifierStatut() {
-		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
-		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		int xSize = (int)(largeur*0.6);
-		int ySize = (int)(hauteur*0.7);
-		this.frame.setSize(xSize, ySize);
-		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 		
-		System.out.println("modifiiie");
+		
 		int ligneSelectionnee = this.tableauStatut.getSelectedRow();
 		if (ligneSelectionnee != -1) {
+			int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+			int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+			int xSize = (int)(largeur*0.6);
+			int ySize = (int)(hauteur*0.7);
+			this.frame.setSize(xSize, ySize);
+			this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 			this.remove(this.panelFormulaire);
 			this.panelFormulaire = new PanelFormulaire(this, this.getCurrentStatut());
 			this.add(this.panelFormulaire, BorderLayout.CENTER);
 			this.panelFormulaire.revalidate();
 			this.panelFormulaire.repaint();
 			this.panelFormulaire.setVisible(true);
-
 		}
 	}
 
