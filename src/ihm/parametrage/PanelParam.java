@@ -20,7 +20,6 @@ import java.awt.Toolkit;
 
 public class PanelParam extends JPanel implements ActionListener{
 
-	private ArrayList<String> listStatut;
 	private ArrayList<Statut> ensStatut;
 	private PanelFormulaire   panelFormulaire;
 
@@ -37,10 +36,9 @@ public class PanelParam extends JPanel implements ActionListener{
 	private JTable            tableauStatut;
 	private DefaultTableModel dtmStatut;
 
-	
-	public PanelParam(FrameAccueil frame){
+
+	public PanelParam(FrameAccueil frame) {
 		this.frame      = frame;
-		this.listStatut = new ArrayList<String>();
 		this.ensStatut  = new ArrayList<Statut>();
 		this.setLayout(new BorderLayout());
 
@@ -126,99 +124,132 @@ public class PanelParam extends JPanel implements ActionListener{
 
 	}
 
+	public Statut getCurrentStatut() {
+
+		for (Statut statut : ensStatut) {
+			if (statut.getNomStatut().equals(this.dtmStatut.getValueAt(this.tableauStatut.getSelectedRow(), 0) ))
+				return statut;
+		}
+
+		System.out.println("current statut = null");
+
+		return null;
+	}
+
 	// Ajout des statut
 	public void ajouterStatut(Statut statut) {
 		String[] objs = {statut.getNomStatut()};
-		
+
 		this.dtmStatut.addRow(objs);
 		this.ensStatut.add(statut);
-		System.out.println("taille: " + listStatut.size());
+		System.out.println("taille: " + ensStatut.size());
 	}
 
 	// Modifier des statuts
 	public void modifierStatut() {
-		int ligneSelectionne = this.tableauStatut.getSelectedRow();
-		if (ligneSelectionne != -1) {
-			this.panelFormulaire.setLigne(this.ensStatut.get(ligneSelectionne).getNomStatut(), 
-										  this.ensStatut.get(ligneSelectionne).getNbHeureService(),
-										  this.ensStatut.get(ligneSelectionne).getNbHeuresMax(),
-										  this.ensStatut.get(ligneSelectionne).getCoeffTP());
-			
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int xSize = (int)(largeur*0.6);
+		int ySize = (int)(hauteur*0.7);
+		this.frame.setSize(xSize, ySize);
+		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
+		
+		System.out.println("modifiiie");
+		int ligneSelectionnee = this.tableauStatut.getSelectedRow();
+		if (ligneSelectionnee != -1) {
+			this.remove(this.panelFormulaire);
+			this.panelFormulaire = new PanelFormulaire(this, this.ensStatut.get(ligneSelectionnee));
+			this.add(this.panelFormulaire, BorderLayout.CENTER);
+			this.panelFormulaire.setLignes(this.ensStatut.get(ligneSelectionnee).getNomStatut(),
+										  this.ensStatut.get(ligneSelectionnee).getNbHeureService(),
+										  this.ensStatut.get(ligneSelectionnee).getNbHeuresMax(),
+										  this.ensStatut.get(ligneSelectionnee).getCoeffTP());
 			this.panelFormulaire.revalidate();
 			this.panelFormulaire.repaint();
+			this.panelFormulaire.setVisible(true);
+
 		}
 	}
+
 	// Supprimer Statut
 	public void supprimerStatut() {
 		int ligneSelectionne = this.tableauStatut.getSelectedRow();
 		
 		if (ligneSelectionne != -1) {
-			String valeurASupp = (String) this.dtmStatut.getValueAt(ligneSelectionne, 0);
 			this.dtmStatut.removeRow(ligneSelectionne);
-	
-			if (!this.listStatut.isEmpty() && this.listStatut.contains(valeurASupp)) {
-				this.listStatut.remove(valeurASupp);
-			}
+			this.ensStatut.remove(this.ensStatut.get(ligneSelectionne));
+			System.out.println("statut suppr");
+		} else {
+			System.out.println("ligne non select");
 		}
 	}
 	
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjout){
-			int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
-			int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-			int xSize = (int)(largeur*0.6);
-			int ySize = (int)(hauteur*0.7);
-			this.frame.setSize(xSize, ySize);
-			this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
-			this.remove(this.panelFormulaire);
-			this.panelFormulaire = new PanelFormulaire(this);
-			this.add(this.panelFormulaire, BorderLayout.CENTER);
-			this.revalidate();
-			this.repaint();
-			this.setVisible(true);
+			this.ajouter();
 		}
-
-		if(e.getSource() == this.btnSupp){
+		if(e.getSource() == this.btnSupp) {
 			this.supprimerStatut();
 		}
-
-		if(e.getSource() == this.btnModifier){
+		if(e.getSource() == this.btnModifier) {
 			this.modifierStatut();
 		}
-
-		// Ajout des valeurs dans listStatut et listCoef quand on clique sur Enregistrer
-		if(e.getSource() == this.btnEnregistrer){
-			
-			for (int i = 0; i < this.dtmStatut.getRowCount(); i++) {
-				if(this.dtmStatut.getValueAt(i, 0) != ""){
-					if(!this.listStatut.contains((String) this.dtmStatut.getValueAt(i, 0))){
-						this.listStatut.add((String) this.dtmStatut.getValueAt(i, 0));
-					}
-				}
-				System.out.println("enreg: " + listStatut);	
-			}
-				
-			
+		if(e.getSource() == this.btnEnregistrer) {
+			this.enregistrer();
 		}
-
 		if(e.getSource() == this.btnRetour){
 			this.frame.changerPanel(new PanelAcceuil(frame));
 			//this.frame.setSize(350, 200);
 		}
 	}
 
-	//Supprimer Ligne 
-	public void supprimerLigne(){
-		this.listStatut.remove(this.tableauStatut.getSelectedRow());
-		this.dtmStatut.removeRow(this.tableauStatut.getSelectedRow());
+	public void ajouter() {
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int xSize = (int)(largeur*0.6);
+		int ySize = (int)(hauteur*0.7);
+		this.frame.setSize(xSize, ySize);
+		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
+		this.remove(this.panelFormulaire);
+		this.panelFormulaire = new PanelFormulaire(this, null);
+		this.add(this.panelFormulaire, BorderLayout.CENTER);
+		this.revalidate();
+		this.repaint();
+		this.setVisible(true);
 	}
 
-	public ArrayList<String> getListStatut(){
-		return this.listStatut;
+	public void enregistrer() {
+		
 	}
 
-	public int getLigne(){
+	//Supprimer Ligne
+	public void supprimerLigne() {
+		int r = this.tableauStatut.getSelectedRow();
+		this.ensStatut.remove(r);
+		this.dtmStatut.removeRow(r);
+	}
+
+	public ArrayList<Statut> getListStatut() {
+		return this.ensStatut;
+	}
+
+	public boolean majStatut(Statut oldS, Statut newS) {
+		for (Statut statut : ensStatut) {
+			if ( statut.getNomStatut().equals(oldS.getNomStatut()) ){
+				statut.setCoeffTP(newS.getCoeffTP());
+				statut.setNomStatut(newS.getNomStatut());
+				statut.setNbHeureService(newS.getNbHeureService());
+				statut.setNbHeuresMax(newS.getNbHeuresMax());
+				return true;
+			}
+
+		}
+
+		return false;
+	}
+
+	public int getLigne() {
 		return this.tableauStatut.getSelectedRow();
 	}
 }

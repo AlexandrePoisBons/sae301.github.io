@@ -2,6 +2,7 @@ package ihm.parametrage;
 //Imp
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,9 +18,15 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 	private JTextField txtCoeff; 
 	private JButton    btnValider;
 	private JButton    btnAnnuler;
+	private Statut     statut;
 
-	public PanelFormulaire(PanelParam panelMere) {
+	public PanelFormulaire() {
+
+	}
+
+	public PanelFormulaire(PanelParam panelMere, Statut statut) {
 		this.panelMere = panelMere;
+		this.statut = statut;
 		this.setLayout(new GridBagLayout());
 
 		GridBagConstraints gbc 	= new GridBagConstraints();
@@ -63,10 +70,18 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		this.btnAnnuler.addActionListener(this);
 
 		this.setVisible(true);
+
+		this.setValues();
 	}
 
-	public PanelFormulaire() {
+
+	public void setValues() {
+		this.txtNomStatut.setText(this.statut.getNomStatut());
+		this.txtNbHeuresService.setText("" + this.statut.getNbHeureService());
+		this.txtNbHeuresMax.setText("" + this.statut.getNbHeuresMax());
+		this.txtCoeff.setText("" + this.statut.getCoeffTP());
 	}
+
 
 	public void actionPerformed(ActionEvent e) {
 
@@ -93,17 +108,25 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		try { coeff =  Float.parseFloat(this.txtCoeff.getText()); }
 		catch ( NumberFormatException e ) { System.out.println(this.txtCoeff.getText() + " : pas un Float"); }
 
-		if(this.panelMere.getLigne() != -1){
-			this.panelMere.supprimerLigne();
+		System.out.println("nbHeuresService: "+nbHeuresService);
+		System.out.println("nbHeuresMax    : "+nbHeuresMax);
+		System.out.println("coeff          : "+coeff);
+
+
+		for (iterable_type iterable_element : iterable) {
+			
 		}
+
+
 		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
-		if(nbHeuresService == 0 || nbHeuresMax == 0 || coeff == 0.0f){
+		if (nbHeuresService == 0 || nbHeuresMax == 0 || coeff == 0.0f) {
 			System.out.println("Vérifier vos valeurs");
 		}
-		else{
+		else {
 			this.panelMere.ajouterStatut( new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff) );
 			this.effacer();
 		}
+
 	}
 
 	public void effacer() {
@@ -114,11 +137,6 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 	}
 
 
-	public void setLigne(String nomIntervenant, Integer nbHeureService, Integer nbHeureMax, Float coeff) {
-		this.txtNomStatut.setText(nomIntervenant);
-		this.txtNbHeuresService.setText("" + nbHeureService);
-		this.txtNbHeuresMax.setText("" + nbHeureMax);
-		this.txtCoeff.setText("" + coeff);
-	}
+	
 
 }

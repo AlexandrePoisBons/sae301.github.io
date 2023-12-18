@@ -35,7 +35,7 @@ public class Statut {
 	public void setNomStatut(String nomStatut)         { this.nomStatut      = nomStatut;      }
 	public void setNbHeureService(int nbHeureService)  { this.nbHeureService = nbHeureService; }
 	public void setNbHeuresMax(int nbMaxHeures)        { this.nbHeuresMax    = nbMaxHeures;    }
-	public void setCoeffTP( int coeffTP )              { this.coeffTP        = coeffTP;        }
+	public void setCoeffTP( float coeffTP )            { this.coeffTP        = coeffTP;        }
 
 	/**
 	 * Retourne une chaîne de caractères représentant le statut

@@ -924,9 +924,7 @@ public class Requetes {
 
 
 	public Integer[][] getIntervenantsParModule() throws SQLException {
-		Integer[][] map = this.getIntervenantsParModule("SELECT * FROM Intervenant_Module;");
-
-		return map;
+		return this.getIntervenantsParModule("SELECT * FROM Intervenant_Module;");
 	}
 
 
