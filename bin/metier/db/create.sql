@@ -72,6 +72,6 @@ Create table Intervenant_Heure (
 
 Create table Heure_Module (
     id_heure integer REFERENCES Heure(id_heure) NOT NULL,
-    id_module integer REFERENCES Module(id_module) NULL,
+    id_module integer REFERENCES Module(id_module) NOT NULL,
     primary key (id_heure, id_module)
 );

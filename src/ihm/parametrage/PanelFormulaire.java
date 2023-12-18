@@ -10,7 +10,7 @@ import javax.swing.*;
 
 import metier.Statut;
 
-public class PanelFormulaire extends JPanel implements ActionListener{
+public class PanelFormulaire extends JPanel implements ActionListener {
 	private PanelParam panelMere;
 	private JTextField txtNomStatut; 
 	private JTextField txtNbHeuresService; 

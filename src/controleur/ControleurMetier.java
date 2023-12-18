@@ -2,6 +2,8 @@ package controleur;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import metier.Heure;
@@ -33,9 +35,7 @@ public class ControleurMetier {
 
 		this.requetes = new Requetes();
 
-		try { System.out.println(this.requetes.getModules().get(0)); System.out.println("\n\n\nCOUCOUUUU\n\n\n"); }
-		catch ( SQLException e ) { e.printStackTrace(); System.out.println("ca clc le gros pc"); }
-
+		
 		this.statuts      = new ArrayList<Statut>();
 		this.typesHeures  = new ArrayList<TypeHeure>();
 		this.intervenants = new ArrayList<Intervenant>();
@@ -106,28 +106,69 @@ public class ControleurMetier {
 
 	public void init() throws SQLException {
 
-		this.heures = this.requetes.getHeures();
-		System.out.println("insh'");
-		this.statuts      = this.requetes.getStatuts();
-		System.out.println("coucou toi");
-		this.intervenants = this.requetes.getIntervenants();
-		System.out.println("eh oh");
-		this.modules      = this.requetes.getModules();
+		this.heures = this.requetes.initHeures();
+		// System.out.println("nb heures "+this.heures.size() + " : " + (this.heures.get(this.heures.size()-1).getIdHeure() <= this.heures.size()));
+		Collections.sort( this.heures );
+		// System.out.println("Heures: ");
+		// for (Heure heure : this.heures) { System.out.println(heure.getIdHeure()); }
 
-		this.requetes.get // l'erreur c'est pour que mon cerveau se rappelle des commentaires la mdr
+		this.statuts = this.requetes.getStatuts();
+		// System.out.println("nb statuts "+this.statuts.size());
+		// System.out.println("Statuts: ");
+		// for (Statut statut : this.statuts) { System.out.println(statut.getNomStatut()); }
 
-		// LIER MODULES AVEC LES HEURES A PARTIR DE Heure_Module (requete deja créée)
+		this.intervenants = this.requetes.initIntervenants();
+		// System.out.println("nb intervenants "+this.intervenants.size() + " : " + (this.intervenants.get(this.intervenants.size()-1).getIdIntervenant() <= this.intervenants.size()));
+		Collections.sort( this.intervenants );
+		// System.out.println("Intervenants: ");
+		// for (Intervenant intervenant : this.intervenants) { System.out.println(intervenant.getIdIntervenant()); }
 
-		// LIER INTERVENANT AVEC LES HEURES A PARTIR DE Intervenant_Heure (requete a faire)
+		this.modules      = this.requetes.initModules();
+		//System.out.println("nb modules "+this.modules.size() + " : " + (this.modules.get(this.modules.size()-1).getIdModule() <= this.modules.size()));
+		Collections.sort( this.modules );
+		// System.out.println("Modules: ");
+		// for (Module module : this.modules) { System.out.println(module.getIdModule()); }
 
-		// LIER INTERVENANT A MODULE A PARTIE DE Intervenant_Module (requete a faire)
+
+		HashMap<Integer,Integer> mapHeuresModule = this.requetes.getHeuresParModule();
+
+		for (Integer idHeure : mapHeuresModule.keySet()) {
+			System.out.println("ajout: heure "+idHeure+" au module "+mapHeuresModule.get(idHeure));
+			this.modules.get(mapHeuresModule.get(idHeure)-1).ajouterHeure(this.heures.get(idHeure-1));
+		}
+		System.out.println("LIAISON HEURES-MODULES FAITE");
+
+
+		HashMap<Integer,Integer> mapIntervenantsHeure = this.requetes.getIntervenantsParHeure();
+
+		for (Integer idIntervenant : mapIntervenantsHeure.keySet()) {
+			System.out.println("ajout: intervenant "+idIntervenant +" a l'heure "+mapIntervenantsHeure.get(idIntervenant));
+			this.heures.get(mapIntervenantsHeure.get(idIntervenant)-1).ajouterIntervenant(this.intervenants.get(idIntervenant-1));
+		}
+
+		for (Intervenant intervenant : this.intervenants)
+			for (Heure heure : heures)
+				if ( heure.getIntervenants().contains(intervenant) )
+					intervenant.ajouterHeure(heure);
+		System.out.println("LIAISON INTERVENANTS-HEURES FAITE");
+
+
+		HashMap<Integer,Integer> mapIntervenantsModule = this.requetes.getIntervenantsParModule();
+
+		for (Integer idIntervenant : mapIntervenantsModule.keySet()) {
+			System.out.println("ajout: intervenant "+idIntervenant+" au module "+mapIntervenantsModule.get(idIntervenant));
+			this.modules.get(mapIntervenantsModule.get(idIntervenant)-1).ajouterIntervenant(this.intervenants.get(idIntervenant-1));
+		}
+		System.out.println("LIAISON INTERVENANTS-MODULES FAITE");
+
+
 
 		// apres ca: on pourra afficher les intervenants dans Intervenants (et avec toutes les valeurs)
 		                                // les méthodes et l'implémentation est normalement deja faite
 
-		System.out.println("bon bah"+this.modules);
+		
 		this.typesHeures  = this.requetes.getTypesHeures();
-		System.out.println("nan mais");
+		
 
 		if ( this.typesHeures.size() == 0 ) {
 			this.typesHeures.add( new TypeHeure("CM"    , (float) 1.5  ) );
@@ -142,15 +183,15 @@ public class ControleurMetier {
 				this.requetes.insertTypeHeure(typeHeure);
 		}
 
-		System.out.println("---FIN---");
 
+		System.out.println("--- FIN INITIALISATION ---");
 
 	}
 
 	public List<Statut>      getStatuts()      { return this.statuts;      }
 	public List<TypeHeure>   getTypesHeures()  { return this.typesHeures;  }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
-	public List<Module>      getModules()      { System.out.println(this.modules+"donovaaaa");return this.modules;      }
+	public List<Module>      getModules()      { System.out.println(this.modules+"donovaaaa"); return this.modules;      }
 
 
 }

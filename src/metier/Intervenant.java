@@ -11,7 +11,7 @@ import metier.db.Requetes;
  * @author Alexandre Pois--Bons - Florian Janot
  * @version 1.0
  */
-public class Intervenant {
+public class Intervenant implements Comparable<Intervenant> {
 	private static int nbIntervenant = Requetes.getNbIntervenants();
 
 	private int    idIntervenant;
@@ -37,7 +37,14 @@ public class Intervenant {
 
 		return new Intervenant( prenom, nom, statut, nbEqTD);
 	}
-	
+
+	public static Intervenant initIntervenant( int idIntervenant, String prenom, String nom, Statut statut, float nbEqTD ) {
+		if ( idIntervenant < 0 || prenom == null || nom == null || statut == null || nbEqTD < 0  )
+			return null;
+
+		return new Intervenant( idIntervenant, prenom, nom, statut, nbEqTD);
+	}
+
 	/**
 	 * Constructeur privé de la classe Intervenant
 	 * @param prenom Prénom de l'intervenant
@@ -48,6 +55,17 @@ public class Intervenant {
 	 */
 	private Intervenant( String prenom, String nom, Statut statut, float nbEqTD ) {
 		this.idIntervenant = Intervenant.nbIntervenant++;
+		this.prenom        = prenom;
+		this.nom           = nom;
+		this.statut        = statut;
+		this.nbEqTD        = nbEqTD;
+
+		this.heures  = new ArrayList<Heure>();
+		this.modules = new ArrayList<Module>(); 
+	}
+
+	private Intervenant(int idIntervenant, String prenom, String nom, Statut statut, float nbEqTD ) {
+		this.idIntervenant = idIntervenant;
 		this.prenom        = prenom;
 		this.nom           = nom;
 		this.statut        = statut;
@@ -93,6 +111,11 @@ public class Intervenant {
 	public HashMap<String, Float> getNbHeuresParSemestre() {
 		HashMap<String, Float> map = new HashMap<>();
 
+		System.out.println("\n\n HEURES de Intervenant nom="+this.nom);
+		for (Heure heure : this.heures) {
+			System.out.println(heure.toString());
+		}
+
 		for ( Heure heure : this.heures )
 			if ( !map.containsKey(heure.getModule().getSemestre()) )
 				map.put(heure.getModule().getSemestre(), heure.getDuree());
@@ -100,6 +123,13 @@ public class Intervenant {
 		for (String s : map.keySet()) {
 			System.out.println(s+" : "+map.get(s));
 		}
+
+		if ( !map.containsKey("S1") ) map.put("S1", (float)0.0);
+		if ( !map.containsKey("S2") ) map.put("S2", (float)0.0);
+		if ( !map.containsKey("S3") ) map.put("S3", (float)0.0);
+		if ( !map.containsKey("S4") ) map.put("S4", (float)0.0);
+		if ( !map.containsKey("S5") ) map.put("S5", (float)0.0);
+		if ( !map.containsKey("S6") ) map.put("S6", (float)0.0);
 		return map;
 	}
 
@@ -119,4 +149,9 @@ public class Intervenant {
 	public String toString() {
 		return this.idIntervenant + " " + this.prenom + " " + this.nom + " (" + this.statut + ", " + this.nbEqTD + "eqTD)";
 	}
+
+	public int compareTo(Intervenant i) {
+		return ((Integer)this.idIntervenant).compareTo((Integer)i.getIdIntervenant());
+	}
+
 }

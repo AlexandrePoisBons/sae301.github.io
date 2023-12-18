@@ -97,9 +97,9 @@ public class PanelSemestre extends JPanel {
 
 		this.modules = new ArrayList<Module>();
 
-		this.ajouterModule(Module.creerModule("qsd", "qsd", "qsd", "qsd", "qsd", 0, 0, 0, 0, 0));
+		//this.ajouterModule(Module.creerModule("qsd", "qsd", "qsd", "qsd", "qsd", 0, 0, 0, 0, 0));
 
-		this.dtm.addRow(new String[] {"SAE", "Dev"} );
+		//this.dtm.addRow(new String[] {"SAE", "Dev"} );
 
 		// Affichage
 		this.setVisible(true);
@@ -115,11 +115,10 @@ public class PanelSemestre extends JPanel {
 
 	public void setModules(List<Module> list) {
 		this.modules = list;
-			for (Module module : this.modules) {
+		for (Module module : this.modules) {
 			String[] s = {module.getCode(), module.getLibelle()};
 			this.dtm.addRow(s);
 		}
-		
 	}
 
 	public void ajouterModule(Module module) {
@@ -134,9 +133,10 @@ public class PanelSemestre extends JPanel {
 	}
 
 	public void removeModule() throws SQLException{
-		this.dtm.removeRow (this.tabModule.getSelectedRow());
+		System.out.println("selected: " + this.modules.get(this.tabModule.getSelectedRow()));
+		this.ctrl.metier().supprimerModule(this.getCurrentModule());
 		this.modules.remove(this.tabModule.getSelectedRow());
-		this.ctrl.metier().supprimerModule(getCurrentModule());
+		this.dtm.removeRow (this.tabModule.getSelectedRow());
 	}
 
 	public List<Module> getModules() {

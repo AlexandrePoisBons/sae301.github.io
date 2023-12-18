@@ -12,7 +12,7 @@ import metier.db.Requetes;
  * @author Alexandre Pois--Bons - Florian Janot
  * @version 1.0
  */
-public class Module {
+public class Module implements Comparable<Module> {
 	private static int nbModules = Requetes.getNbModules();
 
 	private int    idModule;
@@ -53,6 +53,13 @@ public class Module {
 		return new Module( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures);
 	}
 
+	public static Module initModule( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+		if ( idModule < 0 || typeModule == null || typeModule.isEmpty() || semestre == null || semestre.isEmpty() || libelle == null || libelle.isEmpty() || libelleCourt == null || libelleCourt.isEmpty() || code == null || code.isEmpty() || nbEtudiants < 0 || nbGpTD < 0 || nbGpTP < 0 || nbSemaines < 0 || nbHeures < 0 )
+			return null;
+
+		return new Module( idModule, typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures);
+	}
+
 	/**
 	 * Constructeur de la classe Module
 	 * @param typeModule   Type du module (CM, TD, SAE, PPP)
@@ -87,6 +94,27 @@ public class Module {
 		initHash();
 	}
 
+	private Module( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+		this.idModule     = idModule;
+		this.typeModule   = typeModule;
+		this.semestre     = semestre;
+		this.libelle      = libelle;
+		this.libelleCourt = libelleCourt;
+		this.code         = code;
+		this.nbEtudiants  = nbEtudiants;
+		this.nbGpTD       = nbGpTD;
+		this.nbGpTP       = nbGpTP;
+		this.nbSemaines   = nbSemaines;
+		this.nbHeures     = nbHeures;
+
+		this.intervenants = new ArrayList<Intervenant>();
+		this.heures       = new ArrayList<Heure>();
+
+		this.heureParType = new HashMap<String, Double>();
+		initHash();
+	}
+
+
 	// Getters
 	public int               getIdModule()     { return this.idModule;     }
 	public String            getTypeModule()   { return this.typeModule;   }
@@ -116,6 +144,11 @@ public class Module {
 	public void setHeures ( List<Heure> heures )       { this.heures       = heures;       }
 	public void setIntervenant(List<Intervenant> i )   { this.intervenants = i;            }
 
+
+	public void ajouterIntervenant(Intervenant i) { 
+		this.intervenants.add(i);
+	}
+
 	/**
 	 * Méthode permettant d'ajouter une heure à un module et un intervenant
 	 * @param h Heure à ajouter
@@ -123,13 +156,13 @@ public class Module {
 	public void ajouterHeure( Heure h ) {
 		this.heures.add( h );
 		
-		for ( Intervenant i : h.getIntervenants() ) {
-			if ( !this.intervenants.contains( i ) ) {
-				this.intervenants.add( i );
-				i.ajouterModule( this );
-			}
-			i.ajouterHeure( h );
-		}
+		// for ( Intervenant i : h.getIntervenants() ) {
+		// 	if ( !this.intervenants.contains( i ) ) {
+		// 		this.intervenants.add( i );
+		// 		i.ajouterModule( this );
+		// 	}
+		// 	i.ajouterHeure( h );
+		// }
 
 		// Ajoute la durée de l'heure au total du type d'heure correspondant
 		this.heureParType.put( h.getTypeHeure().getNomTypeHeure(), (double) h.getDuree() );
@@ -142,8 +175,8 @@ public class Module {
 	public void supprimerHeure( Heure h ) {
 		this.heures.remove( h );
 
-		for ( Intervenant i : h.getIntervenants() )
-			i.verificationModule( this );
+		// for ( Intervenant i : h.getIntervenants() )
+		// 	i.verificationModule( this );
 
 		this.heureParType.put( h.getTypeHeure().getNomTypeHeure(), (double) -h.getDuree() );
 	}
@@ -188,7 +221,7 @@ public class Module {
 		
 		for ( Heure h : this.heures )
 			nbHeuresAffectees += h.getDuree();
-		
+
 		return nbHeuresAffectees;
 	}
 
@@ -212,4 +245,12 @@ public class Module {
 	public String toString() {
 		return "Module [idModule=" + this.idModule + ", typeModule=" + this.typeModule + ", semestre=" + this.semestre + ", libelle=" + this.libelle + ", libelleCourt=" + this.libelleCourt + ", code=" + this.code + ", nbEtudiants=" + this.nbEtudiants + ", nbGpTD=" + this.nbGpTD + ", nbGpTP=" + this.nbGpTP + ", nbSemaines=" + this.nbSemaines + ", nbHeures=" + this.nbHeures + ", intervenants=" + this.intervenants + ", heures=" + this.heures + "]";
 	}
+
+
+	public int compareTo(Module m) {
+		return ((Integer)this.idModule).compareTo((Integer)m.getIdModule());
+	}
+
+
+
 }
