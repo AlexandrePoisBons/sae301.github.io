@@ -142,26 +142,72 @@ public class ControleurMetier {
 		HashMap<Integer,Integer> mapIntervenantsHeure = this.requetes.getIntervenantsParHeure();
 
 		for (Integer idIntervenant : mapIntervenantsHeure.keySet()) {
+			System.out.println();
 			System.out.println("ajout: intervenant "+idIntervenant +" a l'heure "+mapIntervenantsHeure.get(idIntervenant));
 			this.heures.get(mapIntervenantsHeure.get(idIntervenant)-1).ajouterIntervenant(this.intervenants.get(idIntervenant-1));
+			System.out.println("dono"+this.heures.get(mapIntervenantsHeure.get(this.intervenants.get(idIntervenant-1).getIdIntervenant())-1).getIntervenants());
+
+			this.intervenants.get(idIntervenant-1).ajouterHeure(this.heures.get(mapIntervenantsHeure.get(idIntervenant)-1));
+			System.out.println("va"+this.intervenants.get(idIntervenant-1).getHeures());
+
 		}
 
-		for (Intervenant intervenant : this.intervenants)
-			for (Heure heure : heures)
-				if ( !heure.getIntervenants().contains(intervenant) ){
-					intervenant.ajouterHeure(heure);
-					heure.ajouterIntervenant(intervenant);
-				}
+		// for (Intervenant intervenant : this.intervenants)
+		// 		if ( mapIntervenantsHeure.containsKey(intervenant.getIdIntervenant()) ) {
+		// 			System.out.println("ajout de intervenant "+intervenant.getIdIntervenant()+ " a heure "+this.heures.get(intervenant.getIdIntervenant()-1).getIdHeure() );
+
+		// 			this.heures.get(mapIntervenantsHeure.get(intervenant.getIdIntervenant())-1).ajouterIntervenant(intervenant);
+		// 			System.out.println("dono"+this.heures.get(mapIntervenantsHeure.get(intervenant.getIdIntervenant())-1).getIntervenants());
+		// 			intervenant.ajouterHeure(this.heures.get(mapIntervenantsHeure.get(intervenant.getIdIntervenant())-1));
+		// 			System.out.println("va"+intervenant.getHeures());
+		// 			System.out.println("\n\nzebiiii "+this.heures.get(mapIntervenantsHeure.get(intervenant.getIdIntervenant())-1).getIntervenants());
+		// 	}
+
+		System.out.println("\n\n INTERVENANTS PAR HEURES");
+		for (Heure heure : this.heures) {
+			System.out.println(heure.getIdHeure()+" HEUUUUUUREURUEURUERER "+heure.getIntervenants());
+		}
+
+		System.out.println("\n\n HEURES PAR INTERVENANTS");
+		for (Intervenant intervenant : this.intervenants) {
+			System.out.println(intervenant.getIdIntervenant()+" AHAHAHHAHAAAAAAAA "+intervenant.getHeures());
+		}
+		System.out.println();
+
+
+
+
 		System.out.println("LIAISON INTERVENANTS-HEURES FAITE");
 
 
-		HashMap<Integer,Integer> mapIntervenantsModule = this.requetes.getIntervenantsParModule();
 
-		for (Integer idIntervenant : mapIntervenantsModule.keySet()) {
-			System.out.println("ajout: intervenant "+idIntervenant+" au module "+mapIntervenantsModule.get(idIntervenant));
-			this.modules.get(mapIntervenantsModule.get(idIntervenant)-1).ajouterIntervenant(this.intervenants.get(idIntervenant-1));
+
+		Integer[][] mapIntervenantsModule = this.requetes.getIntervenantsParModule();
+
+		System.out.println("intervenants par module");
+
+		Integer idIntervenant;
+		Integer idModule;
+		for (int i = 0; i < mapIntervenantsModule.length; i++) {
+			idIntervenant = mapIntervenantsModule[i][0];
+			idModule = mapIntervenantsModule[i][1];
+			System.out.println("ajout: intervenant "+idIntervenant+" au module "+idModule);
+			this.modules.get(idModule-1).ajouterIntervenant(this.intervenants.get(idIntervenant-1));
+			this.intervenants.get(idIntervenant-1).ajouterModule(this.modules.get(idModule-1));
+		}
+
+		// for (Integer idIntervenant : mapIntervenantsModule.keySet()) {
+		// 	System.out.println("ajout: intervenant "+idIntervenant+" au module "+mapIntervenantsModule.get(idIntervenant));
+		// 	this.modules.get(mapIntervenantsModule.get(idIntervenant)-1).ajouterIntervenant(this.intervenants.get(idIntervenant-1));
+		// 	System.out.println("done");
+		// }
+
+		System.out.println("kjlhlzbgoiéapjpcv nz");
+		for (Module module : this.modules) {
+			System.out.println("intervenants du module "+module.getIdModule()+" : "+module.getIntervenants());
 		}
 		System.out.println("LIAISON INTERVENANTS-MODULES FAITE");
+
 
 
 

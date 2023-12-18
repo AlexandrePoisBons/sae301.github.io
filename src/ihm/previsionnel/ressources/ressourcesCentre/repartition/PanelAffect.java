@@ -55,19 +55,24 @@ public class PanelAffect extends JPanel {
 
 	public void setHeures(List<Heure> heures) {
 		Object[] objs;
+		System.out.println(heures);
 		System.out.println("taille: "+heures.size());
 		for (Heure heure : heures) {
+			System.out.println(heure.getIntervenants());
 			objs = new Object[6];
 			System.out.println("donova");
 			for (Intervenant intervenant : heure.getIntervenants()) {
-				System.out.println("dono");
-				objs[0] = intervenant.getNom();
-				objs[1] = heure.getTypeHeure().getNomTypeHeure();
-				objs[2] = heure.getDuree();
-				objs[3] = "";
-				objs[4] = "tot";
-				objs[5] = heure.getCommentaire();
-				this.ajouterLigne(objs);
+				System.out.println("dd");
+				if ( intervenant.getHeures().contains(heure) ) {
+					System.out.println("dono "+heure.getIntervenants().size());
+					objs[0] = intervenant.getNom();
+					objs[1] = heure.getTypeHeure().getNomTypeHeure();
+					objs[2] = heure.getDuree();
+					objs[3] = "";
+					objs[4] = "tot";
+					objs[5] = heure.getCommentaire();
+					this.ajouterLigne(objs);
+				}
 			}
 		}
 	}

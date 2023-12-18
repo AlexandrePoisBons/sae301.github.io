@@ -72,6 +72,11 @@ public class PRCentre extends JPanel {
 
 	public void setData() {
 		System.out.println("coucou");
+		System.out.println("\n\n\n\n\n"+this.module+"\n\n\n\n\n");
+		System.out.println("Intervenants: ");
+		for (Intervenant intervenant : this.module.getIntervenants()) {
+			System.out.println(intervenant);
+		}
 		this.panelRepartition.setHeures(this.module.getHeures());
 	}
 

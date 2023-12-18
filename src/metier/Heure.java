@@ -64,7 +64,7 @@ public class Heure implements Comparable<Heure> {
 	}
 
 	private Heure (int idHeure, Module module, TypeHeure typeHeure, float duree, String commentaire) {
-		this.idHeure = idHeure;
+		this.idHeure     = idHeure;
 		this.module      = module;
 		this.typeHeure   = typeHeure;
 		this.duree       = duree;

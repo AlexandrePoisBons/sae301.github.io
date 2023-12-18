@@ -868,18 +868,30 @@ public class Requetes {
 
 
 
-	private HashMap<Integer, Integer> getIntervenantsParModule(String req) throws SQLException {
-		HashMap<Integer, Integer> map = new HashMap<>();
+	private Integer[][] getIntervenantsParModule(String req) throws SQLException {
 		Integer idHeure;
 		Integer idModule;
+		int size;
+		int cpt;
 
 		Statement selectHM = connec.createStatement();
+		ResultSet s = selectHM.executeQuery("SELECT * FROM Intervenant_Module;");
+
+		size=0;
+		while (s.next()) size++;
+
+		Integer[][] map = new Integer[size][2];
 
 		ResultSet rs = selectHM.executeQuery(req);
+
+		cpt=0;
 		while( rs.next() ) {
 			idHeure = rs.getInt(1);
 			idModule = rs.getInt(2);
-			map.put(idHeure, idModule);
+			
+			map[cpt][0] = idHeure;
+			map[cpt][1] = idModule;
+			cpt++;
 		}
 		rs.close();
 
@@ -887,8 +899,10 @@ public class Requetes {
 	}
 
 
-	public HashMap<Integer, Integer> getIntervenantsParModule() throws SQLException {
-		return this.getIntervenantsParModule("SELECT * FROM Intervenant_Module;");
+	public Integer[][] getIntervenantsParModule() throws SQLException {
+		Integer[][] map = this.getIntervenantsParModule("SELECT * FROM Intervenant_Module;");
+
+		return map;
 	}
 
 
