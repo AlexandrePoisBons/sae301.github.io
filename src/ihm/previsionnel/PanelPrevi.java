@@ -91,19 +91,19 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ( e.getSource() == this.btnCreerRessource ) {
-			this.frame.changerPanel( new PanelRessources(this.frame, this) );
+			this.frame.changerPanel( new PanelRessources(this.frame, this, null) );
 		}
-		if(e.getSource() == this.btnCreerSAE) {
+		if (e.getSource() == this.btnCreerSAE) {
 			//this.frame.changerPanel( new PanelSae(this.frame, this) );
-			this.frame.changerPanel( new PanelSae(this.frame, this) );
+			this.frame.changerPanel( new PanelSae(this.frame, this, null) );
 		}
-		if(e.getSource() == this.btnCreerStage) {
-			this.frame.changerPanel(new PanelStage(this.frame, this));
+		if (e.getSource() == this.btnCreerStage) {
+			this.frame.changerPanel(new PanelStage(this.frame, this, null));
 		}
-		if(e.getSource() == this.btnCreerPpp) {
-			this.frame.changerPanel(new PanelPpp(this.frame, this));
+		if (e.getSource() == this.btnCreerPpp) {
+			this.frame.changerPanel(new PanelPpp(this.frame, this, null));
 		}
-		if(e.getSource() == this.btnModifier) {
+		if (e.getSource() == this.btnModifier) {
 
 			// switch(m.getTypeModule()) {
 			// case "SAE"       -> this.frame.changerPanel(new PanelSae         (this.frame, this, m ) );
@@ -113,11 +113,10 @@ public class PanelPrevi extends JPanel implements ActionListener {
 			// default          -> System.err.println("TypeModule inexistant");
  			// }
 		}
-		if(e.getSource() == this.btnSupprimer) {}
-
 		if(e.getSource() == this.btnSupprimer) {
 			try { this.panelCenterPrevi.getCurrentSemestre().removeModule(); }
 			catch(SQLException eq) {eq.printStackTrace(); }
 		}
 	}
+
 }

@@ -21,10 +21,12 @@ public class PanelSae extends JPanel{
 	private PNordSae pNordSae;
 	private PCentreSae pCentreSae;
 	private PanelSudSae pSudSae;
+	private Module module;
 
-	public PanelSae(FrameAccueil frame, PanelPrevi panelMere){
+	public PanelSae(FrameAccueil frame, PanelPrevi panelMere, Module m) {
 		this.frame = frame;
 		this.panelMere = panelMere;
+		this.module = m;
 
 		this.frame.setTitle("Prévisionnel - Module: SAE");
 		//Définition de la taille et la position de la fenêtre
@@ -48,18 +50,19 @@ public class PanelSae extends JPanel{
 	}
 
 	public String getSemestre()     { return this.panelMere.getSemestre();    }
-    public String getNbEtd()        { return this.panelMere.getNbEtd();       }
-    public String getNbGpTd()       { return this.panelMere.getNbGpTd();      }
-    public String getNbGpTp()       { return this.panelMere.getNbGpTp();      }
-    public String getCode()         { return this.pNordSae.getCode();         }
-    public String getLibelle()      { return this.pNordSae.getLibelle();      }
-    public String getLibelleCourt() { return this.pNordSae.getLibelleCourt(); }
+	public String getNbEtd()        { return this.panelMere.getNbEtd();       }
+	public String getNbGpTd()       { return this.panelMere.getNbGpTd();      }
+	public String getNbGpTp()       { return this.panelMere.getNbGpTp();      }
+	public String getCode()         { return this.pNordSae.getCode();         }
+	public String getLibelle()      { return this.pNordSae.getLibelle();      }
+	public String getLibelleCourt() { return this.pNordSae.getLibelleCourt(); }
+	public Module getModule () { return this.module; }
 
-    public HashMap<String, Integer> getDataHeures() { return this.pCentreSae.getData(); }
+	public HashMap<String, Integer> getDataHeures() { return this.pCentreSae.getData(); }
 
-    public HashMap<String,Integer> getData() {
-        return this.pCentreSae.getData();
-    }
+	public HashMap<String,Integer> getData() {
+		return this.pCentreSae.getData();
+	}
 
 	public List<Intervenant> getIntervenants(){
 		return this.frame.getControleur().getCtrl().metier().getIntervenants();

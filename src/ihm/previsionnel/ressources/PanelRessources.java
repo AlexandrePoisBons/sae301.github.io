@@ -22,10 +22,12 @@ public class PanelRessources extends JPanel {
 	private PRNord      pRNord;
 	private PRCentre    pRCentre;
 	private PanelSud    pSud;
+	private Module module;
 
-	public PanelRessources(FrameAccueil frame, PanelPrevi framePrevi) {
+	public PanelRessources(FrameAccueil frame, PanelPrevi framePrevi, Module m) {
 		this.frame = frame;
 		this.panelMere = framePrevi;
+		this.module = m;
 
 		this.frame.setTitle("Prévisionnel - Module: Ressources"); //Définition du titre de la fenêtre
 		//Définition de la taille et la position de la fenêtre
@@ -55,6 +57,7 @@ public class PanelRessources extends JPanel {
 	public String getCode()         { return this.pRNord.getCode();         }
 	public String getLibelle()      { return this.pRNord.getLibelle();      }
 	public String getLibelleCourt() { return this.pRNord.getLibelleCourt(); }
+	public Module getModule() { return this.module; }
 
 	public HashMap<String, Integer> getDataHeures() { return this.pRCentre.getData(); }
 
