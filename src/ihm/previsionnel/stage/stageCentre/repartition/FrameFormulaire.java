@@ -113,7 +113,4 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 			System.err.println("Erreur : " + err.getMessage() + "\n");
 		}
 	}
-
-
-
 }
