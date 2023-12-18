@@ -23,7 +23,8 @@ public class PanelParam extends JPanel implements ActionListener{
 
 	private ArrayList<Statut>       ensStatut;
 	private ArrayList<TypeHeure>    ensTypeHeure;
-	private PanelFormulaireStatut   panelFormulaire;
+	private PanelFormulaireStatut   panelFormulaireStatut;
+	private PanelFormulaireCoef     panelFormulaireCoef;
 
 	private FrameAccueil      frame;
 	private JPanel            panelTableaux;
@@ -61,7 +62,8 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 
 		// Creation des éléments de la page 
-		this.panelFormulaire     = new PanelFormulaireStatut();
+		this.panelFormulaireStatut     = new PanelFormulaireStatut();
+		this.panelFormulaireCoef = new PanelFormulaireCoef();
 		this.panelTableaux       = new JPanel();
 		this.panelSud            = new JPanel();
 		this.dtmStatut           = new DefaultTableModel();
@@ -85,7 +87,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		// Creation des tableaux
 		this.dtmStatut.addColumn("Statut");
 		this.tableauStatut  = new JTable(this.dtmStatut);
-		this.dtmCoef.addColumn("Coefficient");
+		this.dtmCoef.addColumn("Type d'heure");
 		this.tableauCoef    = new JTable(this.dtmCoef);
 		//rendre les lignes du tableau non éditables
 		this.tableauStatut.setDefaultEditor(Object.class, null);
@@ -133,15 +135,18 @@ public class PanelParam extends JPanel implements ActionListener{
 
 		// Ajout des panels
 		this.add(this.panelTableaux   , BorderLayout.WEST);
-		this.add(this.panelFormulaire, BorderLayout.CENTER);
+		this.add(this.panelFormulaireStatut, BorderLayout.CENTER);
 		this.add(this.panelSud , BorderLayout.SOUTH);
 
 		// Activation des boutons 
-		this.btnAjoutStatut  .addActionListener(this);
-		this.btnModifierStatut.addActionListener(this);
-		this.btnSuppStatut   .addActionListener(this);
-		this.btnRetour     .addActionListener(this);
-		this.btnEnregistrer.addActionListener(this);
+		this.btnAjoutCoef      .addActionListener(this);
+		this.btnModifierCoef   .addActionListener(this);
+		this.btnSuppCoef       .addActionListener(this);
+		this.btnAjoutStatut    .addActionListener(this);
+		this.btnModifierStatut .addActionListener(this);
+		this.btnSuppStatut     .addActionListener(this);
+		this.btnRetour         .addActionListener(this);
+		this.btnEnregistrer    .addActionListener(this);
 
 		this.init();
 
@@ -151,14 +156,23 @@ public class PanelParam extends JPanel implements ActionListener{
 
 	public void init() {
 		List<Statut> statuts = this.frame.getControleur().getCtrl().metier().getStatuts();
+		List<TypeHeure> typeHeures = this.frame.getControleur().getCtrl().metier().getTypesHeures();
 
-		for (Statut statut : statuts)
+		for (Statut statut : statuts) {
 			this.ajouterStatut(statut);
+		}
 
+		for (TypeHeure typeHeure : typeHeures) {
+			this.ajouterTypeHeure(typeHeure);
+		}
 	}
 
 	public Statut getCurrentStatut() {
 		return this.ensStatut.get(this.tableauStatut.getSelectedRow());
+	}
+
+	public TypeHeure getCurrentTypeHeure() {
+		return this.ensTypeHeure.get(this.tableauCoef.getSelectedRow());
 	}
 
 	// Ajout des statut
@@ -180,12 +194,13 @@ public class PanelParam extends JPanel implements ActionListener{
 			int ySize = (int)(hauteur*0.7);
 			this.frame.setSize(xSize, ySize);
 			this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
-			this.remove(this.panelFormulaire);
-			this.panelFormulaire = new PanelFormulaireStatut(this, this.getCurrentStatut());
-			this.add(this.panelFormulaire, BorderLayout.CENTER);
-			this.panelFormulaire.revalidate();
-			this.panelFormulaire.repaint();
-			this.panelFormulaire.setVisible(true);
+			this.remove(this.panelFormulaireStatut);
+			this.remove(this.panelFormulaireStatut);
+			this.panelFormulaireStatut = new PanelFormulaireStatut(this, this.getCurrentStatut());
+			this.add(this.panelFormulaireStatut, BorderLayout.CENTER);
+			this.panelFormulaireStatut.revalidate();
+			this.panelFormulaireStatut.repaint();
+			this.panelFormulaireStatut.setVisible(true);
 		}
 	}
 
@@ -207,36 +222,85 @@ public class PanelParam extends JPanel implements ActionListener{
 		}
 	}
 
+	public void ajouterTypeHeure(TypeHeure tH) {
+		String[] objs = {tH.getNomTypeHeure()};
 
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnAjoutStatut){
-			this.ajouter();
-		}
-		if(e.getSource() == this.btnSuppStatut) {
-			this.supprimerStatut();
-		}
-		if(e.getSource() == this.btnModifierStatut) {
-			this.modifierStatut();
-		}
-		if(e.getSource() == this.btnEnregistrer) {
-			this.enregistrer();
-		}
-		if(e.getSource() == this.btnRetour){
-			this.frame.changerPanel(new PanelAcceuil(frame));
-			//this.frame.setSize(350, 200);
+		this.dtmCoef.addRow(objs);
+		this.ensTypeHeure.add(tH);
+		System.out.println("taille: " + ensTypeHeure.size());
+	}
+
+	public void modifierTypeHeure() {	
+		int ligneSelectionnee = this.tableauCoef.getSelectedRow();
+		if (ligneSelectionnee != -1) {
+			int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+			int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+			int xSize = (int)(largeur*0.8);
+			int ySize = (int)(hauteur*0.7);
+			this.frame.setSize(xSize, ySize);
+			this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
+			this.remove(this.panelFormulaireStatut);
+			this.remove(this.panelFormulaireCoef);
+			this.panelFormulaireCoef = new PanelFormulaireCoef(this, this.getCurrentTypeHeure());
+			this.add(this.panelFormulaireCoef, BorderLayout.CENTER);
+			this.panelFormulaireCoef.revalidate();
+			this.panelFormulaireCoef.repaint();
+			this.panelFormulaireCoef.setVisible(true);
 		}
 	}
 
-	public void ajouter() {
+
+	public void supprimerTypeHeure() {
+		int ligneSelectionne = this.tableauCoef.getSelectedRow();
+
+		if (ligneSelectionne != -1) {
+			this.dtmCoef.removeRow(ligneSelectionne);
+			this.ensTypeHeure.remove(this.ensTypeHeure.get(ligneSelectionne));
+			System.out.println("Type d'heure supprimé");
+		} else {
+			System.out.println("ligne non selectionné");
+		}
+	}
+
+
+	public boolean majTypeHeure(TypeHeure oldTH, TypeHeure newTH) {
+		for (Statut statut : ensStatut) {
+			if ( statut.getNomStatut().equals(oldTH.getNomTypeHeure()) ){
+				statut.setCoeffTP(newTH.getCoeff());
+				statut.setNomStatut(newTH.getNomTypeHeure());
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void ajouter(PanelFormulaireStatut panel) {
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		int xSize = (int)(largeur*0.8);
 		int ySize = (int)(hauteur*0.7);
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
-		this.remove(this.panelFormulaire);
-		this.panelFormulaire = new PanelFormulaireStatut(this, null);
-		this.add(this.panelFormulaire, BorderLayout.CENTER);
+		this.remove(this.panelFormulaireCoef);
+		this.remove(this.panelFormulaireStatut);
+		this.panelFormulaireStatut = panel;
+		this.add(this.panelFormulaireStatut, BorderLayout.CENTER);
+		this.revalidate();
+		this.repaint();
+		this.setVisible(true);
+	}
+
+	public void ajouter(PanelFormulaireCoef panel) {
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int xSize = (int)(largeur*0.8);
+		int ySize = (int)(hauteur*0.7);
+		this.frame.setSize(xSize, ySize);
+		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
+		this.remove(this.panelFormulaireStatut);
+		this.remove(this.panelFormulaireCoef);
+		this.panelFormulaireCoef = panel;
+		this.add(this.panelFormulaireCoef, BorderLayout.CENTER);
 		this.revalidate();
 		this.repaint();
 		this.setVisible(true);
@@ -276,37 +340,30 @@ public class PanelParam extends JPanel implements ActionListener{
 		return this.tableauStatut.getSelectedRow();
 	}
 
-
-	public void ajouterTypeHeure(TypeHeure tH) {
-		String[] objs = {tH.getNomTypeHeure()};
-
-		this.dtmCoef.addRow(objs);
-		this.ensTypeHeure.add(tH);
-		System.out.println("taille: " + ensTypeHeure.size());
-	}
-
-
-	public void supprimerTypeHeure() {
-		int ligneSelectionne = this.tableauCoef.getSelectedRow();
-
-		if (ligneSelectionne != -1) {
-			this.dtmCoef.removeRow(ligneSelectionne);
-			this.ensTypeHeure.remove(this.ensTypeHeure.get(ligneSelectionne));
-			System.out.println("Type d'heure supprimé");
-		} else {
-			System.out.println("ligne non selectionné");
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == this.btnAjoutCoef) {
+			this.ajouter(new PanelFormulaireCoef(this, null));
 		}
-	}
-
-
-	public boolean majTypeHeure(TypeHeure oldTH, TypeHeure newTH) {
-		for (Statut statut : ensStatut) {
-			if ( statut.getNomStatut().equals(oldTH.getNomTypeHeure()) ){
-				statut.setCoeffTP(newTH.getCoeff());
-				statut.setNomStatut(newTH.getNomTypeHeure());
-				return true;
-			}
+		if(e.getSource() == this.btnModifierCoef) {
+			this.modifierTypeHeure();
 		}
-		return false;
+		if(e.getSource() == this.btnSuppCoef) {
+			this.supprimerTypeHeure();
+		}
+		if(e.getSource() == this.btnAjoutStatut){
+			this.ajouter(new PanelFormulaireStatut(this, null));
+		}
+		if(e.getSource() == this.btnSuppStatut) {
+			this.supprimerStatut();
+		}
+		if(e.getSource() == this.btnModifierStatut) {
+			this.modifierStatut();
+		}
+		if(e.getSource() == this.btnEnregistrer) {
+			this.enregistrer();
+		}
+		if(e.getSource() == this.btnRetour){
+			this.frame.changerPanel(new PanelAcceuil(frame));
+		}
 	}
 }
