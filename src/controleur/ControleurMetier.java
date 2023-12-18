@@ -148,8 +148,10 @@ public class ControleurMetier {
 
 		for (Intervenant intervenant : this.intervenants)
 			for (Heure heure : heures)
-				if ( heure.getIntervenants().contains(intervenant) )
+				if ( !heure.getIntervenants().contains(intervenant) ){
 					intervenant.ajouterHeure(heure);
+					heure.ajouterIntervenant(intervenant);
+				}
 		System.out.println("LIAISON INTERVENANTS-HEURES FAITE");
 
 

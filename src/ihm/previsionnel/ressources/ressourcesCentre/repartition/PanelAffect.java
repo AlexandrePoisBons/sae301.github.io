@@ -8,9 +8,11 @@ import javax.swing.table.DefaultTableModel;
 import metier.Heure;
 import metier.Module;
 import metier.TypeHeure;
+import metier.Intervenant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class PanelAffect extends JPanel {
 	private PanelRepartition panelMere;
@@ -48,6 +50,25 @@ public class PanelAffect extends JPanel {
 			objs[4] = "";
 			objs[5] = "";
 			this.dtm.addRow(objs);
+		}
+	}
+
+	public void setHeures(List<Heure> heures) {
+		Object[] objs;
+		System.out.println("taille: "+heures.size());
+		for (Heure heure : heures) {
+			objs = new Object[6];
+			System.out.println("donova");
+			for (Intervenant intervenant : heure.getIntervenants()) {
+				System.out.println("dono");
+				objs[0] = intervenant.getNom();
+				objs[1] = heure.getTypeHeure().getNomTypeHeure();
+				objs[2] = heure.getDuree();
+				objs[3] = "";
+				objs[4] = "tot";
+				objs[5] = heure.getCommentaire();
+				this.ajouterLigne(objs);
+			}
 		}
 	}
 

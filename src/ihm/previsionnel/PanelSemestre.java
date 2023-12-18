@@ -54,20 +54,20 @@ public class PanelSemestre extends JPanel {
 		this.txtNbEtd     = new JTextField(2);
 		this.txtNbSemaine = new JTextField(2);
 
-		List<Module> alModules = this.ctrl.metier().getModules();
+		// List<Module> alModules = this.ctrl.metier().getModules();
 
-		int cpt=0;
-		Object[][] objs = new Object[alModules.size()][1];
-		for ( Module m : alModules ) {
-			Object[] o = 
-					{m.getCode() + " " + m.getTypeModule() + "" + m.getNbHeuresAffecte() + "/ " + m.getNbHeures() 
-				};
-			objs[cpt] = o;
-			cpt++;
-		}
+		// int cpt=0;
+		// Object[][] objs = new Object[alModules.size()][1];
+		// for ( Module m : alModules ) {
+		// 	Object[] o = 
+		// 			{m.getCode() + " " + m.getTypeModule() + "" + m.getNbHeuresAffecte() + "/ " + m.getNbHeures() 
+		// 		};
+		// 	objs[cpt] = o;
+		// 	cpt++;
+		// }
 
 
-		this.dtm = new DefaultTableModel(objs, new String[] {"Liste des modules :"});
+		this.dtm = new DefaultTableModel(null, new String[] {"Liste des modules :"});
 
 		this.tabModule = new JTable(this.dtm);
 
@@ -129,6 +129,7 @@ public class PanelSemestre extends JPanel {
 	}
 
 	public Module getCurrentModule() {
+		System.out.println("\n\nLENGTH:"+this.modules.size()+"\n\n");
 		return this.modules.get(this.tabModule.getSelectedRow());
 	}
 

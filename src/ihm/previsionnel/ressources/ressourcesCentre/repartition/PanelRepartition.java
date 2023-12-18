@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import ihm.previsionnel.ressources.ressourcesCentre.PRCentre;
 import ihm.previsionnel.ressources.ressourcesCentre.repartition.heure.PanelRepartitionHeure;
+import metier.Heure;
 import metier.Intervenant;
 
 public class PanelRepartition extends JPanel implements ActionListener{
@@ -59,13 +60,15 @@ public class PanelRepartition extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnAjouter){
+		if (e.getSource() == this.btnAjouter) {
 			new FrameFormulaire(this);
 		}
-		if(e.getSource() == this.btnSuppr){
+		if (e.getSource() == this.btnSuppr) {
 			this.panelAffect.supprimer();
 		}
 	}
+
+	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 
 	public HashMap<String,Integer> getNbSemaines() { return this.panelRepartitionHeure.getNbSemaines(); }
 

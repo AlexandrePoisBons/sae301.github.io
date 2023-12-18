@@ -13,18 +13,21 @@ import ihm.previsionnel.ressources.PanelRessources;
 import ihm.previsionnel.ressources.ressourcesCentre.progNat.ProgNat;
 import ihm.previsionnel.ressources.ressourcesCentre.repartition.PanelRepartition;
 import metier.Intervenant;
+import metier.Module;
 
-public class PRCentre extends JPanel{
-	private PanelRessources 	panelMere;
-	private PanelRepartition 	panelRepartition;
-	private ProgNat 			pProgNat;
+public class PRCentre extends JPanel {
+	private PanelRessources  panelMere;
+	private PanelRepartition panelRepartition;
+	private ProgNat          pProgNat;
+	private Module           module;
 
-	public PRCentre(PanelRessources panelMere){
+	public PRCentre(PanelRessources panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
 		this.setLayout(new BorderLayout());
 
-		this.panelRepartition 	= new PanelRepartition(this);
-		this.pProgNat 			= new ProgNat();
+		this.panelRepartition = new PanelRepartition(this);
+		this.pProgNat         = new ProgNat();
 
 		JPanel panelN = new JPanel();
 		panelN.setLayout(new GridBagLayout());
@@ -44,6 +47,15 @@ public class PRCentre extends JPanel{
 
 		this.add(panelC, BorderLayout.CENTER);
 		this.add(panelN, BorderLayout.NORTH);
+
+
+		if ( this.module != null ){
+			this.setData();
+			System.out.println("!= null");
+		} else {
+			System.out.println("== null");
+		}
+
 	}
 
 	public HashMap<String,Integer> getData() {
@@ -56,6 +68,11 @@ public class PRCentre extends JPanel{
 				map.put(type, mapS.get(type));
 
 		return map;
+	}
+
+	public void setData() {
+		System.out.println("coucou");
+		this.panelRepartition.setHeures(this.module.getHeures());
 	}
 
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }

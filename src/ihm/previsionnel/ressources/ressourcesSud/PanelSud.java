@@ -21,14 +21,17 @@ public class PanelSud extends JPanel implements ActionListener {
 	private JButton boutonAnnuler;
 	private JPanel panelWest;
 	private PanelRessources panelRessources;
+	private Module module;
 
-	public PanelSud(FrameAccueil frame, PanelPrevi panelPrevi, PanelRessources panelRessources) {
+	public PanelSud(FrameAccueil frame, PanelPrevi panelPrevi, PanelRessources panelRessources, Module module) {
 		this.frame = frame;
+		this.panelPrevi        = panelPrevi;
 		this.panelRessources = panelRessources;
+		this.module = module;
 		this.setLayout(new BorderLayout());
 
 		this.panelWest         = new JPanel();
-		this.panelPrevi        = panelPrevi;
+
 		this.boutonEnregistrer = new JButton("Enregistrer");
 		this.boutonAnnuler     = new JButton("Annuler");
 		
@@ -80,12 +83,17 @@ public class PanelSud extends JPanel implements ActionListener {
 			nbHeures+= map.get(heure);
 		}
 
-		Module module = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
+		Module m;
+		if ( this.module == null )
+			m = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
+		else
+			m = Module.initModule( this.module.getIdModule(), typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
+
 
 		System.out.println(this.frame.getControleur().getCtrl().metier().ajouterModule( module ));
-
 		System.out.println(module.toString());
 
+		this.panelPrevi.ajouterModule(module);
 
 	}
 
