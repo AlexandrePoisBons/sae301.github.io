@@ -16,6 +16,7 @@ import java.awt.event.ActionListener	;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 public class PanelParam extends JPanel implements ActionListener{
@@ -24,16 +25,21 @@ public class PanelParam extends JPanel implements ActionListener{
 	private PanelFormulaire   panelFormulaire;
 
 	private FrameAccueil      frame;
-	private JPanel            panelStatut;
+	private JPanel            panelTableaux;
 	private JPanel            panelSud;
 
-	private JButton           btnAjout;
-	private JButton           btnModifier;
-	private JButton           btnSupp;
+	private JButton           btnAjoutCoef;
+	private JButton           btnModifierCoef;
+	private JButton           btnSuppCoef;
+	private JButton           btnAjoutStatut;
+	private JButton           btnModifierStatut;
+	private JButton           btnSuppStatut;
 	private JButton           btnRetour;
 	private JButton           btnEnregistrer;
 
 	private JTable            tableauStatut;
+	private JTable            tableauCoef;
+	private DefaultTableModel dtmCoef;
 	private DefaultTableModel dtmStatut;
 
 
@@ -45,68 +51,88 @@ public class PanelParam extends JPanel implements ActionListener{
 		//Placement de la frame
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		int xSize = (int)(largeur*0.25);
-		int ySize = (int)(hauteur*0.7);
+		int xSize = (int)(largeur*0.5);
+		int ySize = (int)(hauteur*0.55);
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 
 		// Creation des éléments de la page 
 		this.panelFormulaire     = new PanelFormulaire();
-		this.dtmStatut           = new DefaultTableModel();
-		this.panelStatut         = new JPanel();
+		this.panelTableaux       = new JPanel();
 		this.panelSud            = new JPanel();
+		this.dtmStatut           = new DefaultTableModel();
+		this.dtmCoef             = new DefaultTableModel();
+		
 
-		this.btnAjout    = new JButton("Ajouter");
-		this.btnModifier = new JButton("Modifier");
-		this.btnSupp     = new JButton("Supprimer");
-		this.btnRetour       = new JButton("Retour");
-		this.btnEnregistrer  = new JButton("Enregistrer");
+		this.btnAjoutCoef      = new JButton("Ajouter");
+		this.btnModifierCoef   = new JButton("Modifer");
+		this.btnSuppCoef       = new JButton("Supprimer");
+		this.btnAjoutStatut    = new JButton("Ajouter");
+		this.btnModifierStatut = new JButton("Modifier");
+		this.btnSuppStatut     = new JButton("Supprimer");
+		this.btnRetour         = new JButton("Retour");
+		this.btnEnregistrer    = new JButton("Enregistrer");
 
 
-		// Creation du tableau
+		// Creation des tableaux
 		this.dtmStatut.addColumn("Statut");
 		this.tableauStatut  = new JTable(this.dtmStatut);
+		this.dtmCoef.addColumn("Coefficient");
+		this.tableauCoef    = new JTable(this.dtmCoef);
 		//rendre les lignes du tableau non éditables
 		this.tableauStatut.setDefaultEditor(Object.class, null);
+		this.tableauCoef.setDefaultEditor(Object.class, null);
 		
 		
 		// Creation des scrollpane
 		JScrollPane scrollStatut = new JScrollPane(this.tableauStatut);
-		scrollStatut.setPreferredSize(new Dimension(300, 300));
+		scrollStatut.setPreferredSize(new Dimension(300, 125));
+		JScrollPane scrollCoef   = new JScrollPane(this.tableauCoef);
+		scrollCoef.setPreferredSize(new Dimension(300, 125));
 		
 
 		// Creation sous panels
-		JPanel panelTableauG = new JPanel();
-		JPanel panelBtnG     = new JPanel();
+		JPanel panelTableauStatut = new JPanel();
+		JPanel panelBtnStatut     = new JPanel();
+		JPanel panelTableauCoef   = new JPanel();
+		JPanel panelBtnCoef       = new JPanel();
 
-		this.panelStatut.setLayout(new BorderLayout());
+		this.panelTableaux.setLayout(new GridLayout(2, 2, 5, 5));
 		
-		panelTableauG.add(scrollStatut);
+		panelTableauStatut.add(scrollStatut);
 
-		panelBtnG.add(this.btnAjout);
-		panelBtnG.add(this.btnModifier);
-		panelBtnG.add(this.btnSupp);
+		panelBtnStatut.add(this.btnAjoutStatut);
+		panelBtnStatut.add(this.btnModifierStatut);
+		panelBtnStatut.add(this.btnSuppStatut);
 
+		panelTableauCoef.add(scrollCoef);
+
+		panelBtnCoef.add(this.btnAjoutCoef);
+		panelBtnCoef.add(this.btnModifierCoef);
+		panelBtnCoef.add(this.btnSuppCoef);
 
 		// Ajout dans panel gauche
-		this.panelStatut.add(panelTableauG, BorderLayout.NORTH);
-		this.panelStatut.add(panelBtnG);
+		this.panelTableaux.add(panelTableauCoef);
+		this.panelTableaux.add(panelTableauStatut);
+		this.panelTableaux.add(panelBtnCoef);
+		this.panelTableaux.add(panelBtnStatut);
 
 
 
 		//Ajout dans panel retour
 		this.panelSud.add(this.btnRetour, FlowLayout.LEFT);
 		this.panelSud.add(this.btnEnregistrer, FlowLayout.LEFT);
+		this.panelSud.setPreferredSize(new Dimension(xSize, 50));
 
 		// Ajout des panels
-		this.add(this.panelStatut   , BorderLayout.WEST);
+		this.add(this.panelTableaux   , BorderLayout.WEST);
 		this.add(this.panelFormulaire, BorderLayout.CENTER);
 		this.add(this.panelSud , BorderLayout.SOUTH);
 
 		// Activation des boutons 
-		this.btnAjout  .addActionListener(this);
-		this.btnModifier.addActionListener(this);
-		this.btnSupp   .addActionListener(this);
+		this.btnAjoutStatut  .addActionListener(this);
+		this.btnModifierStatut.addActionListener(this);
+		this.btnSuppStatut   .addActionListener(this);
 		this.btnRetour     .addActionListener(this);
 		this.btnEnregistrer.addActionListener(this);
 
@@ -173,13 +199,13 @@ public class PanelParam extends JPanel implements ActionListener{
 	
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnAjout){
+		if(e.getSource() == this.btnAjoutStatut){
 			this.ajouter();
 		}
-		if(e.getSource() == this.btnSupp) {
+		if(e.getSource() == this.btnSuppStatut) {
 			this.supprimerStatut();
 		}
-		if(e.getSource() == this.btnModifier) {
+		if(e.getSource() == this.btnModifierStatut) {
 			this.modifierStatut();
 		}
 		if(e.getSource() == this.btnEnregistrer) {
