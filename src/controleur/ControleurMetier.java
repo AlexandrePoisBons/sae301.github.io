@@ -241,13 +241,30 @@ public class ControleurMetier {
 					this.requetes.insertStatut(statut);
 			}
 
+			// gérer le warning
 			for (Statut statut : this.requetes.getStatuts()) {
 				if (!statuts.contains(statut))
-					this.requetes.deleteStatut(statut);
+					System.out.println("statut non supprimable");
 			}
 
-		} catch (SQLException e ) {  System.out.println("INSERT STATUT IMPOSSIBLE"); e.printStackTrace(); }
+		} catch (SQLException e ) { System.out.println("INSERT STATUT IMPOSSIBLE"); e.printStackTrace(); }
 
+	}
+
+	public void majTypesHeures(List<TypeHeure> typesHeures) {
+		try{
+			for (TypeHeure typeHeure : typesHeures) {
+				if ( this.requetes.existsTypeHeure(typeHeure.getIdTypeHeure()) )
+					this.requetes.updateTypeHeure(typeHeure);
+				else
+					this.requetes.insertTypeHeure(typeHeure);
+			}
+
+			for (TypeHeure typeHeure : this.requetes.getTypesHeures()) {
+				if (!typesHeures.contains(typeHeure))
+					System.out.println("type_heure non supprimable");
+			}
+		} catch (SQLException e) { System.out.println("INSERT TYPE_HEURE IMPOSSIBLE"); e.printStackTrace(); }
 	}
 
 

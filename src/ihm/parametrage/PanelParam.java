@@ -11,8 +11,8 @@ import ihm.accueil.PanelAcceuil;
 
 import javax.swing.table.DefaultTableModel;
 
-import java.awt.event.ActionEvent		;
-import java.awt.event.ActionListener	;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -185,7 +185,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	// Modifier des statuts
-	public void modifierStatut() {	
+	public void modifierStatut() {
 		int ligneSelectionnee = this.tableauStatut.getSelectedRow();
 		if (ligneSelectionnee != -1) {
 			int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
@@ -230,7 +230,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		System.out.println("taille: " + ensTypeHeure.size());
 	}
 
-	public void modifierTypeHeure() {	
+	public void modifierTypeHeure() {
 		int ligneSelectionnee = this.tableauCoef.getSelectedRow();
 		if (ligneSelectionnee != -1) {
 			int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
@@ -261,6 +261,7 @@ public class PanelParam extends JPanel implements ActionListener{
 			System.out.println("ligne non selectionné");
 		}
 	}
+
 
 
 	public boolean majTypeHeure(TypeHeure oldTH, TypeHeure newTH) {
@@ -307,6 +308,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	public void enregistrer() {
+		this.frame.getControleur().getCtrl().metier().majTypesHeures(this.ensTypeHeure);
 		this.frame.getControleur().getCtrl().metier().majStatuts(this.ensStatut);
 	}
 

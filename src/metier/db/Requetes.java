@@ -178,7 +178,7 @@ public class Requetes {
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
+			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","coucou");
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
@@ -260,7 +260,7 @@ public class Requetes {
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
+			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","coucou");
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
@@ -340,7 +340,7 @@ public class Requetes {
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
+			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","coucou");
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
@@ -440,7 +440,7 @@ public class Requetes {
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","coucou");
+			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","coucou");
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			

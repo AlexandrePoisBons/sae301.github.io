@@ -28,20 +28,21 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 		gbc.anchor = GridBagConstraints.WEST;
 
 		this.txtTypeHeure       = new JTextField(15);
+		this.txtTypeHeure.setEditable(false);
 		this.txtCoeff          	= new JTextField(15);
 		this.btnValider         = new JButton("Valider");
 		this.btnAnnuler         = new JButton("Annuler");
 
 		gbc.gridy = 0;
 		gbc.gridx = 0;
-		this.add(new JLabel("Type d'heure   "				), gbc);
+		this.add(new JLabel("Type d'heure   "), gbc);
 		gbc.gridy = 1;
-		this.add(new JLabel("Coefficient   "				), gbc);		
+		this.add(new JLabel("Coefficient   "), gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		this.add(this.txtTypeHeure		, gbc);
+		this.add(this.txtTypeHeure, gbc);
 		gbc.gridy = 1;
-		this.add(this.txtCoeff			, gbc);
+		this.add(this.txtCoeff, gbc);
 
 		gbc.gridy = 3;
 		gbc.gridx = 0;
@@ -83,7 +84,6 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 	public void valider() {
 		float coeff = 1.0f;
 
-		
 		try { coeff =  Float.parseFloat(this.txtCoeff.getText()); }
 		catch ( NumberFormatException e ) { System.out.println(this.txtCoeff.getText() + " : pas un Float"); }
 
@@ -105,10 +105,15 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 			this.effacer();
 		}
 		this.effacer();
+
+		System.out.println("\n\nTYPE HEURE:\t"+tH.toString());
+
 	}
 
 	public void effacer() {
 		this.txtTypeHeure.setText("");
 		this.txtCoeff.setText("");
 	}
+
+
 }
