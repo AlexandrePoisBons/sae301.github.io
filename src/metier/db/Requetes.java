@@ -819,18 +819,30 @@ public class Requetes {
 
 
 
-	private HashMap<Integer, Integer> getHeuresParModule(String req) throws SQLException {
-		HashMap<Integer, Integer> map = new HashMap<>();
+	private Integer[][] getHeuresParModule(String req) throws SQLException {
 		Integer idHeure;
 		Integer idModule;
+		int size;
+		int cpt;
 
 		Statement selectHM = connec.createStatement();
+		ResultSet s = selectHM.executeQuery("SELECT * FROM Heure_Module;");
+
+		size=0;
+		while (s.next()) size++;
+
+		Integer[][] map = new Integer[size][2];
 
 		ResultSet rs = selectHM.executeQuery(req);
+
+		cpt=0;
 		while( rs.next() ) {
 			idHeure = rs.getInt(1);
 			idModule = rs.getInt(2);
-			map.put(idHeure, idModule);
+			
+			map[cpt][0] = idHeure;
+			map[cpt][1] = idModule;
+			cpt++;
 		}
 		rs.close();
 
@@ -838,23 +850,35 @@ public class Requetes {
 	}
 
 
-	public HashMap<Integer, Integer> getHeuresParModule() throws SQLException {
+	public Integer[][] getHeuresParModule() throws SQLException {
 		return this.getHeuresParModule("SELECT * FROM Heure_Module;");
 	}
 
 
-	private HashMap<Integer, Integer> getIntervenantsParHeure(String req) throws SQLException {
-		HashMap<Integer, Integer> map = new HashMap<>();
+	private Integer[][] getIntervenantsParHeure(String req) throws SQLException {
+		Integer idIntervenant;
 		Integer idHeure;
-		Integer idModule;
+		int size;
+		int cpt;
 
-		Statement selectHM = connec.createStatement();
+		Statement selectIH = connec.createStatement();
+		ResultSet s = selectIH.executeQuery("SELECT * FROM Intervenant_Heure;");
 
-		ResultSet rs = selectHM.executeQuery(req);
+		size=0;
+		while (s.next()) size++;
+
+		Integer[][] map = new Integer[size][2];
+
+		ResultSet rs = selectIH.executeQuery(req);
+
+		cpt=0;
 		while( rs.next() ) {
-			idHeure = rs.getInt(1);
-			idModule = rs.getInt(2);
-			map.put(idHeure, idModule);
+			idIntervenant = rs.getInt(1);
+			idHeure = rs.getInt(2);
+			
+			map[cpt][0] = idIntervenant;
+			map[cpt][1] = idHeure;
+			cpt++;
 		}
 		rs.close();
 
@@ -862,14 +886,14 @@ public class Requetes {
 	}
 
 
-	public HashMap<Integer, Integer> getIntervenantsParHeure() throws SQLException {
+	public Integer[][] getIntervenantsParHeure() throws SQLException {
 		return this.getIntervenantsParHeure("SELECT * FROM Intervenant_Heure;");
 	}
 
 
 
 	private Integer[][] getIntervenantsParModule(String req) throws SQLException {
-		Integer idHeure;
+		Integer idIntervenant;
 		Integer idModule;
 		int size;
 		int cpt;
@@ -886,10 +910,10 @@ public class Requetes {
 
 		cpt=0;
 		while( rs.next() ) {
-			idHeure = rs.getInt(1);
+			idIntervenant = rs.getInt(1);
 			idModule = rs.getInt(2);
 			
-			map[cpt][0] = idHeure;
+			map[cpt][0] = idIntervenant;
 			map[cpt][1] = idModule;
 			cpt++;
 		}
