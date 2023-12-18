@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.util.*;
 
 import metier.Statut;
-
+import metier.TypeHeure;
 import ihm.accueil.FrameAccueil;
 import ihm.accueil.PanelAcceuil;
 
@@ -21,8 +21,9 @@ import java.awt.Toolkit;
 
 public class PanelParam extends JPanel implements ActionListener{
 
-	private ArrayList<Statut> ensStatut;
-	private PanelFormulaire   panelFormulaire;
+	private ArrayList<Statut>       ensStatut;
+	private ArrayList<TypeHeure>    ensTypeHeure;
+	private PanelFormulaireStatut   panelFormulaire;
 
 	private FrameAccueil      frame;
 	private JPanel            panelTableaux;
@@ -44,8 +45,9 @@ public class PanelParam extends JPanel implements ActionListener{
 
 
 	public PanelParam(FrameAccueil frame) {
-		this.frame      = frame;
-		this.ensStatut  = new ArrayList<Statut>();
+		this.frame        = frame;
+		this.ensStatut    = new ArrayList<Statut>();
+		this.ensTypeHeure = new ArrayList<TypeHeure>();
 		this.setLayout(new BorderLayout());
 
 		//Placement de la frame
@@ -57,7 +59,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 
 		// Creation des éléments de la page 
-		this.panelFormulaire     = new PanelFormulaire();
+		this.panelFormulaire     = new PanelFormulaireStatut();
 		this.panelTableaux       = new JPanel();
 		this.panelSud            = new JPanel();
 		this.dtmStatut           = new DefaultTableModel();
@@ -164,19 +166,17 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	// Modifier des statuts
-	public void modifierStatut() {
-		
-		
+	public void modifierStatut() {	
 		int ligneSelectionnee = this.tableauStatut.getSelectedRow();
 		if (ligneSelectionnee != -1) {
 			int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 			int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-			int xSize = (int)(largeur*0.6);
+			int xSize = (int)(largeur*0.8);
 			int ySize = (int)(hauteur*0.7);
 			this.frame.setSize(xSize, ySize);
 			this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 			this.remove(this.panelFormulaire);
-			this.panelFormulaire = new PanelFormulaire(this, this.getCurrentStatut());
+			this.panelFormulaire = new PanelFormulaireStatut(this, this.getCurrentStatut());
 			this.add(this.panelFormulaire, BorderLayout.CENTER);
 			this.panelFormulaire.revalidate();
 			this.panelFormulaire.repaint();
@@ -195,7 +195,6 @@ public class PanelParam extends JPanel implements ActionListener{
 		} else {
 			System.out.println("ligne non select");
 		}
-
 	}
 
 
@@ -221,12 +220,12 @@ public class PanelParam extends JPanel implements ActionListener{
 	public void ajouter() {
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		int xSize = (int)(largeur*0.6);
+		int xSize = (int)(largeur*0.8);
 		int ySize = (int)(hauteur*0.7);
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 		this.remove(this.panelFormulaire);
-		this.panelFormulaire = new PanelFormulaire(this, null);
+		this.panelFormulaire = new PanelFormulaireStatut(this, null);
 		this.add(this.panelFormulaire, BorderLayout.CENTER);
 		this.revalidate();
 		this.repaint();
@@ -265,5 +264,39 @@ public class PanelParam extends JPanel implements ActionListener{
 
 	public int getLigne() {
 		return this.tableauStatut.getSelectedRow();
+	}
+
+
+	public void ajouterTypeHeure(TypeHeure tH) {
+		String[] objs = {tH.getNomTypeHeure()};
+
+		this.dtmCoef.addRow(objs);
+		this.ensTypeHeure.add(tH);
+		System.out.println("taille: " + ensTypeHeure.size());
+	}
+
+
+	public void supprimerTypeHeure() {
+		int ligneSelectionne = this.tableauCoef.getSelectedRow();
+
+		if (ligneSelectionne != -1) {
+			this.dtmCoef.removeRow(ligneSelectionne);
+			this.ensTypeHeure.remove(this.ensTypeHeure.get(ligneSelectionne));
+			System.out.println("Type d'heure supprimé");
+		} else {
+			System.out.println("ligne non selectionné");
+		}
+	}
+
+
+	public boolean majTypeHeure(TypeHeure oldTH, TypeHeure newTH) {
+		for (Statut statut : ensStatut) {
+			if ( statut.getNomStatut().equals(oldTH.getNomTypeHeure()) ){
+				statut.setCoeffTP(newTH.getCoeff());
+				statut.setNomStatut(newTH.getNomTypeHeure());
+				return true;
+			}
+		}
+		return false;
 	}
 }

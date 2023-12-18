@@ -10,7 +10,7 @@ import javax.swing.*;
 
 import metier.Statut;
 
-public class PanelFormulaire extends JPanel implements ActionListener {
+public class PanelFormulaireStatut extends JPanel implements ActionListener {
 	private PanelParam panelMere;
 	private JTextField txtNomStatut; 
 	private JTextField txtNbHeuresService; 
@@ -20,9 +20,9 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 	private JButton    btnAnnuler;
 	private Statut     statut;
 
-	public PanelFormulaire() {}
+	public PanelFormulaireStatut() {}
 
-	public PanelFormulaire(PanelParam panelMere, Statut statut) {
+	public PanelFormulaireStatut(PanelParam panelMere, Statut statut) {
 		this.panelMere = panelMere;
 		this.statut = statut;
 		this.setLayout(new GridBagLayout());
