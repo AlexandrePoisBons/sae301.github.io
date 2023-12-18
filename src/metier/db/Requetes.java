@@ -74,7 +74,7 @@ public class Requetes {
 			this.psUpdateH = this.connec.prepareStatement("UPDATE Heure SET id_module=?, id_type_heure=?, duree=?, commentaire=? WHERE id_heure=?;");
 
 			this.psSelectTH = this.connec.prepareStatement("SELECT * FROM Type_Heure WHERE id_type_heure=?;");
-			this.psInsertTH = this.connec.prepareStatement("INSERT INTO Type_Heure VALUES(?,?);");
+			this.psInsertTH = this.connec.prepareStatement("INSERT INTO Type_Heure VALUES(?,?,?);");
 			this.psDeleteTH = this.connec.prepareStatement("DELETE FROM Type_Heure WHERE id_type_heure=?;");
 			this.psUpdateTH = this.connec.prepareStatement("UPDATE Type_Heure SET coeff=? WHERE id_type_heure=?;");
 
@@ -297,10 +297,11 @@ public class Requetes {
 
 		if ( !this.existsTypeHeure(typeHeure.getIdTypeHeure()) ) {
 			this.psInsertTH.setInt(1, typeHeure.getIdTypeHeure());
-			this.psInsertTH.setFloat(2, typeHeure.getCoeff());
+			this.psInsertTH.setString(2, typeHeure.getNomTypeHeure());
+			this.psInsertTH.setFloat(3, typeHeure.getCoeff());
 			this.psInsertTH.executeUpdate();
 		} else {
-			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
+			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" deja existant");
 		}
 	}
 
@@ -746,8 +747,9 @@ public class Requetes {
 
 		ResultSet rs = selectTH.executeQuery(req);
 		while( rs.next() ) {
-			TypeHeure th = new TypeHeure( rs.getString("nom_type_heure"),
-			                              rs.getFloat("coeff") );
+			TypeHeure th = TypeHeure.initTypeHeure( rs.getInt("id_type_heure"),
+			                                        rs.getString("nom_type_heure"),
+			                                        rs.getFloat("coeff") );
 			listeTH.add(th);
 		}
 		rs.close(); 

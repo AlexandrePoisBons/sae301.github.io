@@ -25,13 +25,13 @@ public class TypeHeure {
 		return new TypeHeure(nomTypeHeure, coeff);
 	}
 
-	public static TypeHeure initTypeHeure(int idTypeHeure, String nomTypeHeure) {
+	public static TypeHeure initTypeHeure(int idTypeHeure, String nomTypeHeure, float coeff) {
 		if ( idTypeHeure>=1 )
-			return new TypeHeure(idTypeHeure, nomTypeHeure, idTypeHeure);
+			return new TypeHeure(idTypeHeure, nomTypeHeure, coeff);
 		return null;
 	}
 
-	private TypeHeure( String nomTypeHeure, float coeff ) {
+	public TypeHeure( String nomTypeHeure, float coeff ) {
 		this.idTypeHeure  = nbTypeHeure++;
 		this.nomTypeHeure = nomTypeHeure;
 		this.coeff        = coeff;

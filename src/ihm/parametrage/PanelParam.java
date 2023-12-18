@@ -163,8 +163,11 @@ public class PanelParam extends JPanel implements ActionListener{
 		}
 
 		for (TypeHeure typeHeure : typeHeures) {
+			System.out.println(typeHeure.toString());
 			this.ajouterTypeHeure(typeHeure);
 		}
+
+	
 	}
 
 	public Statut getCurrentStatut() {
@@ -262,13 +265,11 @@ public class PanelParam extends JPanel implements ActionListener{
 		}
 	}
 
-
-
 	public boolean majTypeHeure(TypeHeure oldTH, TypeHeure newTH) {
-		for (Statut statut : ensStatut) {
-			if ( statut.getNomStatut().equals(oldTH.getNomTypeHeure()) ){
-				statut.setCoeffTP(newTH.getCoeff());
-				statut.setNomStatut(newTH.getNomTypeHeure());
+		for (TypeHeure typeHeure : this.ensTypeHeure) {
+			if ( typeHeure.getNomTypeHeure().equals(oldTH.getNomTypeHeure()) ){
+				typeHeure.setCoeff(newTH.getCoeff());
+				System.out.println("TypeHeure MAJ");
 				return true;
 			}
 		}
@@ -324,7 +325,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	public boolean majStatut(Statut oldS, Statut newS) {
-		for (Statut statut : ensStatut) {
+		for (Statut statut : this.ensStatut) {
 			if ( statut.getNomStatut().equals(oldS.getNomStatut()) ){
 				statut.setCoeffTP(newS.getCoeffTP());
 				statut.setNomStatut(newS.getNomStatut());

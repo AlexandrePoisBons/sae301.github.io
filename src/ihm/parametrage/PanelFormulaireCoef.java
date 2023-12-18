@@ -87,12 +87,16 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 		try { coeff =  Float.parseFloat(this.txtCoeff.getText()); }
 		catch ( NumberFormatException e ) { System.out.println(this.txtCoeff.getText() + " : pas un Float"); }
 
-		System.out.println("coeff          : "+coeff);
+		if ( this.typeHeure != null )
+			this.typeHeure.setCoeff(coeff);
+		
 
-		TypeHeure tH = new TypeHeure(this.txtTypeHeure.getText(), coeff);
+		System.out.println("id   : "+this.typeHeure.getIdTypeHeure());
+		System.out.println("nom  : "+this.typeHeure.getNomTypeHeure());
+		System.out.println("coeff: "+this.typeHeure.getCoeff());
 
 		if ( this.typeHeure != null )
-			this.panelMere.majTypeHeure(this.typeHeure, tH);
+			this.panelMere.majTypeHeure(this.typeHeure, this.typeHeure);
 
 
 		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
@@ -100,13 +104,13 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 			System.out.println("Vérifier vos valeurs");
 		}
 		else {
-			this.panelMere.ajouterTypeHeure(tH);
+			this.panelMere.ajouterTypeHeure(this.typeHeure);
 			if ( typeHeure != null ) this.panelMere.supprimerTypeHeure();
 			this.effacer();
 		}
 		this.effacer();
 
-		System.out.println("\n\nTYPE HEURE:\t"+tH.toString());
+		System.out.println("\n\nTYPE HEURE:\t"+this.typeHeure.toString());
 
 	}
 

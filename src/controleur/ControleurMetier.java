@@ -203,12 +203,7 @@ public class ControleurMetier {
 
 
 
-		// apres ca: on pourra afficher les intervenants dans Intervenants (et avec toutes les valeurs)
-		                                // les méthodes et l'implémentation est normalement deja faite
-
-		
 		this.typesHeures  = this.requetes.getTypesHeures();
-		
 
 		if ( this.typesHeures.size() == 0 ) {
 			this.typesHeures.add( new TypeHeure("CM"    , (float) 1.5  ) );
@@ -218,7 +213,8 @@ public class ControleurMetier {
 			this.typesHeures.add( new TypeHeure("Sae"   , (float) 1.0  ) );
 			this.typesHeures.add( new TypeHeure("REH"   , (float) 1.0  ) );
 			this.typesHeures.add( new TypeHeure("HP"    , (float) 1.0  ) );
-
+		}
+		else {
 			for ( TypeHeure typeHeure : this.typesHeures )
 				this.requetes.insertTypeHeure(typeHeure);
 		}
@@ -258,13 +254,17 @@ public class ControleurMetier {
 					this.requetes.updateTypeHeure(typeHeure);
 				else
 					this.requetes.insertTypeHeure(typeHeure);
+				
 			}
 
+			// gérer le warning
 			for (TypeHeure typeHeure : this.requetes.getTypesHeures()) {
 				if (!typesHeures.contains(typeHeure))
 					System.out.println("type_heure non supprimable");
 			}
+
 		} catch (SQLException e) { System.out.println("INSERT TYPE_HEURE IMPOSSIBLE"); e.printStackTrace(); }
+
 	}
 
 

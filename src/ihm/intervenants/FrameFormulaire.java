@@ -124,7 +124,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		this.ddlstIntervenant.addItem("Enseignant");
 	}
 
-	public void ajouterLigne(){
+	public void ajouterLigne() {
 		try {
 			this.panelMere.ajouterLigne(this.ddlstIntervenant.getSelectedItem().toString(),
 										this.txtNom.getText(),
