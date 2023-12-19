@@ -16,6 +16,7 @@ import javax.swing.*;
 import ihm.accueil.FrameAccueil;
 
 import java.util.List;
+import java.util.Map;
 
 import metier.Heure;
 import metier.Intervenant;
@@ -116,9 +117,6 @@ public class PanelInter extends JPanel implements ActionListener {
         }
     }
 
-	public void genererCSV() {
-
-	}
 
 	public JComboBox<String> init() {
 		this.listInter = this.panelMere.getControleur().getCtrl().metier().getIntervenants();
@@ -131,6 +129,62 @@ public class PanelInter extends JPanel implements ActionListener {
 		return ddlst;
 	}
 
+	public void generateIntervenantsCSV(List<Intervenant> intervenants, String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            // Entête du CSV
+            writer.write("Catégorie;Nom;Prénom;Service Dû;Max Heures Autorisé;Coeff TP;Total Heures Impairs;Total Heures Pairs;Total Heures");
+
+            // Écriture des données pour chaque intervenant
+            for (Intervenant intervenant : intervenants) {
+                writer.newLine();
+                writer.write(
+                        intervenant.getStatut() + ";" +
+                        intervenant.getNom() + ";" +
+                        intervenant.getPrenom() + ";" +
+                        intervenant.getNbEqTD() + ";" +
+                        getMaxHeuresAutorisees(intervenant) + ";" +
+                        getCoefficientTP(intervenant) + ";" +
+                        getTotalHeuresParSemestre(intervenant, "impair") + ";" +
+                        getTotalHeuresParSemestre(intervenant, "pair") + ";" +
+                        intervenant.getNbHeures()
+                );
+            }
+
+            System.out.println("Fichier CSV généré avec succès à l'emplacement : " + filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private float getMaxHeuresAutorisees(Intervenant intervenant) {
+        // À compléter avec la logique appropriée pour obtenir le maximum d'heures autorisé
+        // Par exemple, vous pourriez avoir une méthode dans la classe Intervenant qui retourne cette valeur.
+        return 0.0f; // Exemple, à remplacer avec la logique réelle
+    }
+
+    private float getCoefficientTP(Intervenant intervenant) {
+        // À compléter avec la logique appropriée pour obtenir le coefficient TP
+        // Par exemple, vous pourriez avoir une méthode dans la classe Intervenant qui retourne cette valeur.
+        return 0.0f; // Exemple, à remplacer avec la logique réelle
+    }
+
+    private float getTotalHeuresParSemestre(Intervenant intervenant, String semestreType) {
+        Map<String, Float> heuresParSemestre = intervenant.getNbHeuresParSemestre();
+        float totalHeures = 0.0f;
+
+        for (Map.Entry<String, Float> entry : heuresParSemestre.entrySet()) {
+            String semestre = entry.getKey();
+            float heures = entry.getValue();
+
+            if ((semestreType.equals("impair") && semestre.endsWith("1")) ||
+                (semestreType.equals("pair") && semestre.endsWith("2"))) {
+                totalHeures += heures;
+            }
+        }
+
+        return totalHeures;
+    }
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnGenererHtml){
@@ -141,7 +195,7 @@ public class PanelInter extends JPanel implements ActionListener {
 			}
 		}
 		if(e.getSource() == this.btnGenererCSV) {
-			this.genererCSV();
+			this.generateIntervenantsCSV(this.listInter, "./Etats/Intervenants/CSV/Intervenants.csv");
 		}
 		if(e.getSource() == this.btnRetour) {
 			this.panelMere.changerPanel(new PanelEtats(this.frame));

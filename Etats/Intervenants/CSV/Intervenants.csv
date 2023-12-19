@@ -1,0 +1,4 @@
+Catégorie;Nom;Prénom;Service Dû;Max Heures Autorisé;Coeff TP;Total Heures Impairs;Total Heures Pairs;Total Heures
+Enseignant (180h, 350h max, coeffTP=1.0);Chabrier;Pierre;277.5;0.0;0.0;43.0;4.0;57.0
+Chercheur (120h, 250h max, coeffTP=1.0);Levy;Sylvain;249.0;0.0;0.0;20.0;35.0;52.82
+Vacataire (100h, 200h max, coeffTP=0.0);Vatanen;Ari;102.0;0.0;0.0;0.0;0.0;20.58
