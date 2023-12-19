@@ -54,7 +54,7 @@ public class PanelEtats extends JPanel implements ActionListener{
 		}
 
 		if(e.getSource() ==  this.btnModule){
-			this.panelModule = new PanelModule(this.frame, this);
+			this.frame.changerPanel(new PanelModule(this.frame, this));
 		}
 	}
 }
