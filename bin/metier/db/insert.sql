@@ -5,8 +5,8 @@ VALUES
 	( 1, 'Ressource', 'S1', 'Algorithmique et Structures de Données', 'Algo & Structures', 'ASD201', 40, 1, 2, 12, 48 ),
 	( 2, 'SAE',       'S2', 'Base de Données Avancées', 'BDA', 'BDA301',                             30, 0, 2, 10, 40 ),
 	( 3, 'Stage',     'S3', 'Réseaux Informatiques', 'Réseaux', 'RESEAU401',                         60, 2, 1, 14, 56 ),
-	( 4, 'PPP',       'S1', 'Mathématiques Discrètes', 'Math Discrète', 'MATH101',                   35, 1, 1, 12, 36 ),
-	( 5, 'Ressource', 'S2', 'Développement Web Avancé', 'Web Avancé', 'WEB401',                      25, 0, 2, 10, 40 )
+	( 4, 'PPP',       'S1', 'Mathématiques Discrètes', 'Math Discrète', 'MATH101',                   40, 1, 1, 12, 36 ),
+	( 5, 'Ressource', 'S2', 'Développement Web Avancé', 'Web Avancé', 'WEB401',                      30, 0, 2, 10, 40 )
 	;
 
 

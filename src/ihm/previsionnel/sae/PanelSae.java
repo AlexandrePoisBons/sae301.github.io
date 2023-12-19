@@ -32,7 +32,7 @@ public class PanelSae extends JPanel{
 		this.module    = m;
 
 		this.frame.setTitle("Prévisionnel - Module: SAE");
-		
+
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -43,7 +43,7 @@ public class PanelSae extends JPanel{
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
-		
+
 		this.pNordSae   = new PNordSae(this, this.module);
 		this.pNordSae.setValues();
 		this.pCentreSae = new PCentreSae(this, this.module);
@@ -52,13 +52,17 @@ public class PanelSae extends JPanel{
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add(this.pNordSae, BorderLayout.NORTH);
 		this.add(this.pCentreSae, BorderLayout.CENTER);
-		this.add(this.panelSudSae, BorderLayout.SOUTH);
+		this.add(this.pSudSae, BorderLayout.SOUTH);
+
+		System.out.println("dono")
+
 	}
 
 	public void enregistrer(Module m) {
 		List<Heure> heures = this.pCentreSae.getHeures(m);
 
 		m.setHeures(heures);
+		System.out.println("EHOH-EHOH"+heures.size());
 		this.panelMere.ajouterModule(m);
 
 		this.frame.changerPanel(new PanelPrevi(this.frame));
@@ -68,13 +72,14 @@ public class PanelSae extends JPanel{
 		List<Heure> heures = this.pCentreSae.getHeures(newModule);
 
 		newModule.setHeures(heures);
+		System.out.println(oldModule.getHeures().size()+" EHOH-EHOH "+newModule.getHeures().size());
 		this.panelMere.updateModule(oldModule, newModule);
 
 		this.frame.changerPanel(new PanelPrevi(this.frame));
 	}
 
 	public void setErreur(String message){
-		this.panelSudSae.setErreur(message);
+		this.pSudSae.setErreur(message);
 	}
 
 
@@ -82,7 +87,7 @@ public class PanelSae extends JPanel{
 	public int getNbEtd()        { return this.panelMere.getNbEtd();       }
 	public int getNbGpTd()       { return this.panelMere.getNbGpTd();      }
 	public int getNbGpTp()       { return this.panelMere.getNbGpTp();      }
-	public String getCode()         { return this.pNordSae.getCode();         }
+	public String getCode()         { return this.pNordSae.getCode(); }
 	public String getLibelle()      { return this.pNordSae.getLibelle();      }
 	public String getLibelleCourt() { return this.pNordSae.getLibelleCourt(); }
 	public Module getModule ()      { return this.module;                     }

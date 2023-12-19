@@ -88,7 +88,7 @@ public class PanelCenterPrevi extends JPanel {
 
 		for(Module m : this.getCurrentSemestre().getModules()) {
 			if ( m.getIdModule() == newModule.getIdModule()) {
-				this.frame.getControleur().getCtrl().metier().updateModule(oldModule, newModule);
+				System.out.println("ajout: "+this.frame.getControleur().getCtrl().metier().updateModule(oldModule, newModule));
 				for (PanelSemestre panelSemestre : this.listSemestre) {
 					if ( newModule.getSemestre().equals("S"+panelSemestre.getIdSemestre()) ){
 						panelSemestre.ajouterModule(newModule);

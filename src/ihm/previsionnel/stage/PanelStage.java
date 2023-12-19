@@ -23,7 +23,7 @@ public class PanelStage extends JPanel {
 	private PanelPrevi panelMere;
 	private PNordStage pNordStage;
 	private PCentreStage pCentreStage;
-	private PanelSudStage panelSudStage;
+	private PanelSudStage pSudStage;
 	private Module module;
 
 	public PanelStage(FrameAccueil frame, PanelPrevi panelMere, Module m) {
@@ -44,19 +44,19 @@ public class PanelStage extends JPanel {
 
 		this.pNordStage = new PNordStage(this);
 		this.pCentreStage = new PCentreStage(this);
-		this.panelSudStage = new PanelSudStage(this.frame, this.panelMere, this);
+		this.pSudStage = new PanelSudStage(this.frame, this.panelMere, this);
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add(this.pNordStage, BorderLayout.NORTH);
 		this.add(this.pCentreStage, BorderLayout.CENTER);
-		this.add(this.panelSudStage, BorderLayout.SOUTH);
+		this.add(this.pSudStage, BorderLayout.SOUTH);
 	}
 
 
 	public String getSemestre()     { return this.panelMere.getSemestre();      }
-	public String getNbEtd()        { return this.panelMere.getNbEtd();         }
-	public String getNbGpTd()       { return this.panelMere.getNbGpTd();        }
-	public String getNbGpTp()       { return this.panelMere.getNbGpTp();        }
+	public int getNbEtd()        { return this.panelMere.getNbEtd();         }
+	public int getNbGpTd()       { return this.panelMere.getNbGpTd();        }
+	public int getNbGpTp()       { return this.panelMere.getNbGpTp();        }
 	public String getCode()         { return this.pNordStage.getCode();         }
 	public String getLibelle()      { return this.pNordStage.getLibelle();      }
 	public String getLibelleCourt() { return this.pNordStage.getLibelleCourt(); }

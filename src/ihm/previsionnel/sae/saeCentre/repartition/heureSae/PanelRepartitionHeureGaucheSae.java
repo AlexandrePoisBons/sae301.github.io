@@ -20,10 +20,12 @@ public class PanelRepartitionHeureGaucheSae extends JPanel{
 
 
 		JPanel panelHC	= new JPanel();
-		for(int cpt=0; cpt < 4; cpt++){
+		
+		for(int cpt=0; cpt < 4; cpt++) {
 			JTextField jtf = new JTextField(3);
 			this.ensJTextField.add(jtf);
 		}
+
 		panelHC.setLayout(new GridBagLayout());
 		GridBagConstraints gbcH = new GridBagConstraints();
 

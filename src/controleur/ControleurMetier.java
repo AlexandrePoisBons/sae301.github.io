@@ -67,32 +67,34 @@ public class ControleurMetier {
 			}
 			this.modules.add(module);
 
+			System.out.println("C'EST TERMINE GROS");
 			return true;
 		} catch ( SQLException e ) { return false; }
 	}
 
 	public boolean updateModule(Module oldModule, Module newModule) {
 		for (int i = 0; i < oldModule.getHeures().size(); i++) {
-			//System.out.println(oldModule.getHeures().get(i).getIdHeure()+" donova stp fais que ca marche "+newModule.getHeures().get(i).getIdHeure());
+			System.out.println(oldModule.getHeures().get(i).getIdHeure()+" donova stp fais que ca marche "+newModule.getHeures().get(i).getIdHeure());
 		}
 		try {
-			System.out.println();
+			// this.requetes.updateModule(newModule);
 			for (Heure heure : oldModule.getHeures()) {
-				//System.out.println("flo :" + heure);
-				this.requetes.updateHeure(heure);
+				System.out.println("flo :" + heure);
+				// this.requetes.deleteHeure(heure);
+				System.out.println("delete heure");
 				this.requetes.deleteHeureModule(heure, oldModule);
-				//System.out.println("delete heure-module");
+				System.out.println("delete heure-module");
 				for (Intervenant intervenant : heure.getIntervenants()) {
 					this.requetes.deleteIntervenantHeure(intervenant, heure);
-					//System.out.println("delete intervenant-heure");
-					this.requetes.deleteHeure(heure);
+					System.out.println("delete intervenant-heure");
+					//this.requetes.deleteHeure(heure);
 					this.requetes.deleteIntervenantModule(intervenant, oldModule);
-					//System.out.println("delete intervenant-module");
+					System.out.println("delete intervenant-module");
 				}
-				//this.requetes.deleteHeure(heure);
-				//System.out.println("delete heure: "+heure.getIdHeure());
+				this.requetes.deleteHeure(heure);
+				System.out.println("delete heure: "+heure.getIdHeure());
 			}
-			/*
+
 			System.out.println("ON INSERT");
 			for (Heure heure : newModule.getHeures()) {
 				this.requetes.insertHeure(heure);
@@ -105,7 +107,8 @@ public class ControleurMetier {
 			this.requetes.updateModule(newModule);
 			this.modules.remove(this.getModuleById(oldModule.getIdModule()));
 			this.modules.add(newModule);
-			*/
+
+			System.out.println("C'EST FINI GARS");
 			return true;
 		} catch ( SQLException e ) { return false; }
 	}

@@ -32,7 +32,7 @@ public class TypeHeure {
 	}
 
 	public TypeHeure( String nomTypeHeure, float coeff ) {
-		this.idTypeHeure  = nbTypeHeure++;
+		this.idTypeHeure  = ++nbTypeHeure;
 		this.nomTypeHeure = nomTypeHeure;
 		this.coeff        = coeff;
 	}

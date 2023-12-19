@@ -46,7 +46,7 @@ public class PanelRessources extends JPanel {
 
 		this.pRNord   = new PRNord   (this, this.module);
 		this.pRCentre = new PRCentre (this, this.module);
-		this.pSud     = new PanelSud (this.frame, this.panelMere, this, this.module);
+		this.panelSud = new PanelSud (this.frame, this.panelMere, this, this.module);
 
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement

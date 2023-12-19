@@ -65,8 +65,8 @@ public class PanelAffectSae extends JPanel {
 
 	public void setHeures(List<Heure> heures) {
 		// this.heures = heures;
-		for (Heure heure : heures) {
-			this.ajouterHeure(heure);
+		for (int i=0; i<heures.size();i++) {
+			this.ajouterHeure(heures.get(i));
 		}
 	}
 
@@ -76,7 +76,6 @@ public class PanelAffectSae extends JPanel {
 
 	public void ajouterHeure(Heure heure) {
 		this.module.ajouterHeure(heure);
-
 		Object[] objs = new Object[6];
 		objs[0] = heure.getIntervenants().get(0).getNom()+" "+heure.getIntervenants().get(0).getPrenom().substring(0,1)+".";
 		objs[1] = heure.getTypeHeure().getNomTypeHeure();

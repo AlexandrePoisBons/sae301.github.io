@@ -97,7 +97,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		if ( e.getSource() == this.btnCreer ) {
 			Module module = Module.creerModuleVide();
 			switch (this.ddlstBox.getSelectedItem().toString()) {
-				case "Ressources" -> this.frame.changerPanel( new PanelRessources(this.frame, this, module) );
+				case "Ressource" -> this.frame.changerPanel( new PanelRessources (this.frame, this, module) );
 				case "SAE"       -> this.frame.changerPanel( new PanelSae        (this.frame, this, module) );
 				case "Stage"     -> this.frame.changerPanel( new PanelStage      (this.frame, this, module) );
 				case "PPP"       -> this.frame.changerPanel( new PanelPpp        (this.frame, this, module) );
@@ -108,19 +108,19 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		if(e.getSource() == this.ddlstBox){
 			this.btnCreer.setText("Créer " + this.ddlstBox.getSelectedItem().toString());
 		}
-		
+
 		if (e.getSource() == this.btnModifier) {
 			Module m = this.panelCenterPrevi.getCurrentSemestre().getCurrentModule();
-			if(m != null){
+			System.out.println(m+"EH BEH");
+			if (m != null) {
 				switch(this.panelCenterPrevi.getCurrentSemestre().getCurrentModule().getTypeModule()) {
-				case "SAE"       -> this.frame.changerPanel(new PanelSae         (this.frame, this, m ) );
-				case "Ressource" -> this.frame.changerPanel(new PanelRessources  (this.frame, this, m ) );
-				case "Stage"     -> this.frame.changerPanel(new PanelStage       (this.frame, this, m ) );
-				case "PPP"       -> this.frame.changerPanel(new PanelPpp         (this.frame, this, m ) );
-				default          -> System.err.println("TypeModule inexistant");
- 			}
-			}
-			else {
+					case "Ressource" -> this.frame.changerPanel(new PanelRessources (this.frame, this, m ) );
+					case "SAE"       -> this.frame.changerPanel(new PanelSae        (this.frame, this, m ) );
+					case "Stage"     -> this.frame.changerPanel(new PanelStage      (this.frame, this, m ) );
+					case "PPP"       -> this.frame.changerPanel(new PanelPpp        (this.frame, this, m ) );
+					default          -> System.err.println("TypeModule inexistant");
+				}
+			} else {
 				System.err.println("Sélectionner une ligne");
 			}
 		}

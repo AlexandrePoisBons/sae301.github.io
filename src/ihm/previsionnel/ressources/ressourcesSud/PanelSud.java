@@ -76,15 +76,15 @@ public class PanelSud extends JPanel implements ActionListener {
 		String code         = this.panelRessources.getCode();
 
 		int nbEtudiants;
-		try { nbEtudiants = Integer.parseInt(this.panelPrevi.getNbEtd()); }
+		try { nbEtudiants = this.panelPrevi.getNbEtd(); }
 		catch (NumberFormatException e) { nbEtudiants = 0;}
 
 		int nbGpTD;
-		try { nbGpTD = Integer.parseInt(this.panelPrevi.getNbGpTd()); }
+		try { nbGpTD = this.panelPrevi.getNbGpTd(); }
 		catch (NumberFormatException e) { nbGpTD = 0; }
 
 		int nbGpTP;
-		try { nbGpTP = Integer.parseInt(this.panelPrevi.getNbGpTp()); }
+		try { nbGpTP = this.panelPrevi.getNbGpTp(); }
 		catch (NumberFormatException e) { nbGpTP = 0; }
 	
 		int nbSemaines = 0;
