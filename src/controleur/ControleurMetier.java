@@ -35,7 +35,6 @@ public class ControleurMetier {
 
 		this.requetes = new Requetes();
 
-		
 		this.statuts      = new ArrayList<Statut>();
 		this.typesHeures  = new ArrayList<TypeHeure>();
 		this.intervenants = new ArrayList<Intervenant>();
@@ -57,7 +56,16 @@ public class ControleurMetier {
 	public boolean ajouterModule(Module module) {
 		try {
 			this.requetes.insertModule(module);
+			for (Heure heure : module.getHeures()) {
+				this.requetes.insertHeure(heure);
+				this.requetes.insertHeureModule(heure, module);
+				for (Intervenant intervenant : heure.getIntervenants()) {
+					this.requetes.insertIntervenantHeure(intervenant, heure);
+					this.requetes.insertIntervenantModule(intervenant, module);
+				}
+			}
 			this.modules.add(module);
+
 			return true;
 		} catch ( SQLException e ) { return false; }
 	}
@@ -203,12 +211,7 @@ public class ControleurMetier {
 
 
 
-		// apres ca: on pourra afficher les intervenants dans Intervenants (et avec toutes les valeurs)
-		                                // les méthodes et l'implémentation est normalement deja faite
-
-		
 		this.typesHeures  = this.requetes.getTypesHeures();
-		
 
 		if ( this.typesHeures.size() == 0 ) {
 			this.typesHeures.add( new TypeHeure("CM"    , (float) 1.5  ) );
@@ -218,7 +221,8 @@ public class ControleurMetier {
 			this.typesHeures.add( new TypeHeure("Sae"   , (float) 1.0  ) );
 			this.typesHeures.add( new TypeHeure("REH"   , (float) 1.0  ) );
 			this.typesHeures.add( new TypeHeure("HP"    , (float) 1.0  ) );
-
+		}
+		else {
 			for ( TypeHeure typeHeure : this.typesHeures )
 				this.requetes.insertTypeHeure(typeHeure);
 		}
@@ -230,7 +234,7 @@ public class ControleurMetier {
 	public List<Statut>      getStatuts()      { return this.statuts;      }
 	public List<TypeHeure>   getTypesHeures()  { return this.typesHeures;  }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
-	public List<Module>      getModules()      { System.out.println(this.modules+"donovaaaa"); return this.modules; }
+	public List<Module>      getModules()      { return this.modules; }
 
 	public void majStatuts(List<Statut> statuts) {
 		try {
@@ -241,12 +245,33 @@ public class ControleurMetier {
 					this.requetes.insertStatut(statut);
 			}
 
+			// gérer le warning
 			for (Statut statut : this.requetes.getStatuts()) {
 				if (!statuts.contains(statut))
-					this.requetes.deleteStatut(statut);
+					System.out.println("statut non supprimable");
 			}
 
-		} catch (SQLException e ) {  System.out.println("INSERT STATUT IMPOSSIBLE"); e.printStackTrace(); }
+		} catch (SQLException e ) { System.out.println("INSERT STATUT IMPOSSIBLE"); e.printStackTrace(); }
+
+	}
+
+	public void majTypesHeures(List<TypeHeure> typesHeures) {
+		try{
+			for (TypeHeure typeHeure : typesHeures) {
+				if ( this.requetes.existsTypeHeure(typeHeure.getIdTypeHeure()) )
+					this.requetes.updateTypeHeure(typeHeure);
+				else
+					this.requetes.insertTypeHeure(typeHeure);
+				
+			}
+
+			// gérer le warning
+			for (TypeHeure typeHeure : this.requetes.getTypesHeures()) {
+				if (!typesHeures.contains(typeHeure))
+					System.out.println("type_heure non supprimable");
+			}
+
+		} catch (SQLException e) { System.out.println("INSERT TYPE_HEURE IMPOSSIBLE"); e.printStackTrace(); }
 
 	}
 

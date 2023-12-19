@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import ihm.previsionnel.ressources.ressourcesCentre.PanelRepartition;
 import metier.Heure;
 import metier.Module;
 import metier.TypeHeure;
@@ -55,25 +56,15 @@ public class PanelAffect extends JPanel {
 
 	public void setHeures(List<Heure> heures) {
 		Object[] objs;
-		System.out.println(heures);
-		System.out.println("taille: "+heures.size());
 		for (Heure heure : heures) {
-			System.out.println(heure.getIntervenants());
 			objs = new Object[6];
-			System.out.println("donova");
-			for (Intervenant intervenant : heure.getIntervenants()) {
-				System.out.println("dd");
-				if ( intervenant.getHeures().contains(heure) ) {
-					System.out.println("dono "+heure.getIntervenants().size());
-					objs[0] = intervenant.getNom();
-					objs[1] = heure.getTypeHeure().getNomTypeHeure();
-					objs[2] = heure.getDuree();
-					objs[3] = "";
-					objs[4] = "tot";
-					objs[5] = heure.getCommentaire();
-					this.ajouterLigne(objs);
-				}
-			}
+			objs[0] = heure.getIntervenants().get(0).getNom()+" "+heure.getIntervenants().get(0).getPrenom().substring(0,1);
+			objs[1] = heure.getTypeHeure().getNomTypeHeure();
+			objs[2] = heure.getDuree();
+			objs[3] = "";
+			objs[4] = "tot";
+			objs[5] = heure.getCommentaire();
+			this.ajouterLigne(objs);
 		}
 	}
 
@@ -81,18 +72,34 @@ public class PanelAffect extends JPanel {
 		this.dtm.addRow(objs);
 	}
 
-	public ArrayList<Heure> getDataHeures(Module module, TypeHeure typeHeure) {
-		ArrayList<Heure> heures = new ArrayList<>();
+	public List<Heure> getDataHeures(Module module) {
+		List<Heure> heures = new ArrayList<>();
 
 		float duree = 0;
 		//duree  = this.dtm.getValueAt(, 6).toString();
 
 		int nb = this.dtm.getRowCount();
 
-		Heure tmp;
+		List<TypeHeure> ths = this.panelMere.getTypesHeures();
+
+		Heure tmpH;
+		TypeHeure tmpTH = null;
 		for (int i = 0; i < nb; i++) {
-			tmp = Heure.creerHeure(module, typeHeure, duree, this.dtm.getValueAt(i,6).toString());
-			heures.add(tmp);
+			for (TypeHeure typeHeure : ths)
+				if (typeHeure.getNomTypeHeure().equals(this.dtm.getValueAt(i, 1).toString()))
+					tmpTH = typeHeure;
+			tmpH = Heure.creerHeure(module, tmpTH, duree, this.dtm.getValueAt(i,5).toString());
+
+			List<Intervenant> thI = this.panelMere.getIntervenants();
+			for (Intervenant intervenant : thI) {
+				String int1Name = intervenant.getNom()+" "+intervenant.getPrenom().substring(0,1)+".";
+				String int2Name = this.dtm.getValueAt(i, 0).toString();
+				if( int1Name.equals(int2Name) ){
+					tmpH.ajouterIntervenant(intervenant);
+				}
+			}
+
+			heures.add(tmpH);
 		}
 
 		return heures;
@@ -101,4 +108,5 @@ public class PanelAffect extends JPanel {
 	public void supprimer() {
 		this.dtm.removeRow(this.tableauAffect.getSelectedRow());
 	}
+
 }

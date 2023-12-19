@@ -75,7 +75,7 @@ public class Module implements Comparable<Module> {
 	 * @return Retourne un objet Module si les paramètres sont valides, null sinon
 	 */
 	private Module( String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
-		this.idModule     = Module.nbModules++;
+		this.idModule     = ++Module.nbModules;
 		this.typeModule   = typeModule;
 		this.semestre     = semestre;
 		this.libelle      = libelle;
@@ -128,7 +128,7 @@ public class Module implements Comparable<Module> {
 	public int               getNbSemaines()   { return this.nbSemaines;   }
 	public int               getNbHeures()     { return this.nbHeures;     }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
-	public List<Heure>       getHeures()       { return this.heures;       }
+	public List<Heure>       getHeures()     { return this.heures;       }
 
 	// Setters
 	public void setIdModule( int idModule )            { this.idModule     = idModule;     }
@@ -141,6 +141,7 @@ public class Module implements Comparable<Module> {
 	public void setNbGpTD( int nbGpTD )                { this.nbGpTD       = nbGpTD;       }
 	public void setNbGpTP( int nbGpTP )                { this.nbGpTP       = nbGpTP;       }
 	public void setNbSemaines( int nbSemaines )        { this.nbSemaines   = nbSemaines;   }
+	public void setNbHeures( int nbHeures )            { this.nbHeures     = nbHeures;     }
 	public void setHeures ( List<Heure> heures )       { this.heures       = heures;       }
 	public void setIntervenant(List<Intervenant> i )   { this.intervenants = i;            }
 

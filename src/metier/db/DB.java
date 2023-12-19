@@ -2,22 +2,28 @@ package metier.db;
 
 import java.sql.*;
 
+import controleur.Infos;
 import metier.*;
 
 public class DB {
 	private Connection connec;
 	private static DB dbInstance;
+	private Infos infos;
 
 	public static void main(String[] args) { DB db = DB.getInstance(); }
 
 	private DB() {
+		this.infos = new Infos();
 		try {
 			Class.forName("org.postgresql.Driver");
 			System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","coucou");
+			String url = "jdbc:postgresql://localhost:5432/" + this.infos.getDatabase();
+			String login = this.infos.getLogin();
+			String password = this.infos.getPassword();
+			connec = DriverManager.getConnection(url,login,password);
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 		} catch (SQLException e) { e.printStackTrace(); }
 	}

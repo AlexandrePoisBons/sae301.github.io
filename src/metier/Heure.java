@@ -31,7 +31,7 @@ public class Heure implements Comparable<Heure> {
 	 */
 	public static Heure creerHeure( Module module, TypeHeure typeHeure, float duree, String commentaire)
 	{
-		if ( module == null || typeHeure == null || duree <= 0 )
+		if ( module == null || typeHeure == null || duree < 0 )
 			return null;
 
 		return new Heure( module, typeHeure, duree, commentaire);
@@ -54,7 +54,7 @@ public class Heure implements Comparable<Heure> {
 	 * @return            Une heure validé par la factory
 	 */
 	private Heure( Module module, TypeHeure typeHeure, float duree, String commentaire) {
-		this.idHeure     = nbHeures++;
+		this.idHeure     = ++nbHeures;
 		this.module      = module;
 		this.typeHeure   = typeHeure;
 		this.duree       = duree;
@@ -100,6 +100,7 @@ public class Heure implements Comparable<Heure> {
 		return "Heure [idHeure="+this.idHeure + ", idModule=" + this.module.getIdModule() + ", idTypeHeure=" + this.typeHeure.getIdTypeHeure() + ", duree=" + this.duree + ", commentaire=" + this.commentaire+"]";
 	}
 
+	
 	public int compareTo(Heure h) {
 		return ((Integer)this.idHeure).compareTo((Integer)h.getIdHeure());
 	}

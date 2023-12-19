@@ -8,7 +8,7 @@ import metier.db.Requetes;
  * @version 1.0
  */
 public class TypeHeure {
-	private static int    nbTypeHeure = Requetes.getNbTypeHeures();
+	private static int nbTypeHeure = Requetes.getNbTypeHeures();
 
 	private int    idTypeHeure;
 	private String nomTypeHeure;
@@ -20,8 +20,25 @@ public class TypeHeure {
 	 * @param coeff        Le coefficient du type d'heure
 	 * @return Un objet de type TypeHeure
 	 */
+
+	public static TypeHeure creerTypeHeure(String nomTypeHeure, float coeff) {
+		return new TypeHeure(nomTypeHeure, coeff);
+	}
+
+	public static TypeHeure initTypeHeure(int idTypeHeure, String nomTypeHeure, float coeff) {
+		if ( idTypeHeure>=1 )
+			return new TypeHeure(idTypeHeure, nomTypeHeure, coeff);
+		return null;
+	}
+
 	public TypeHeure( String nomTypeHeure, float coeff ) {
 		this.idTypeHeure  = nbTypeHeure++;
+		this.nomTypeHeure = nomTypeHeure;
+		this.coeff        = coeff;
+	}
+
+	private TypeHeure(int idTypeHeure, String nomTypeHeure, float coeff) {
+		this.idTypeHeure  = idTypeHeure;
 		this.nomTypeHeure = nomTypeHeure;
 		this.coeff        = coeff;
 	}
