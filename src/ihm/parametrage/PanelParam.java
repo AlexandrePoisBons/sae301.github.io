@@ -132,6 +132,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		//Ajout dans panel retour
 		this.panelSud.add(this.btnRetour, FlowLayout.LEFT);
 		this.panelSud.add(this.btnEnregistrer, FlowLayout.LEFT);
+		this.panelSud.add(this.lblErreur);
 
 		// Ajout des panels
 		this.add(this.panelTableaux   , BorderLayout.WEST);
@@ -261,7 +262,9 @@ public class PanelParam extends JPanel implements ActionListener{
 			this.ensTypeHeure.remove(this.ensTypeHeure.get(ligneSelectionne));
 			System.out.println("Type d'heure supprimé");
 		} else {
-			System.out.println("ligne non selectionné");
+			this.lblErreur.setText("Veuillez sélectionner un type d'heure");
+			this.repaint();
+			this.revalidate();
 		}
 	}
 
@@ -344,6 +347,8 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		this.lblErreur.setText("");
+
 		if(e.getSource() == this.btnAjoutCoef) {
 			this.ajouter(new PanelFormulaireCoef(this, null));
 		}

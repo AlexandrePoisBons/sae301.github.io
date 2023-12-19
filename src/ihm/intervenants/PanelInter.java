@@ -168,6 +168,7 @@ public class PanelInter extends JPanel implements ActionListener {
 
 		if (e.getSource() == this.btnSupprimer) {
 			try {
+				this.lblErreur.setText("");
 				this.supprimer();	
 			} catch (Exception err) {
 				this.lblErreur.setText("Il n'y a pas de ligne à supprimer");
