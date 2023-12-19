@@ -21,7 +21,7 @@ import metier.TypeHeure;
 public class PCentreSae extends JPanel{
 	private PanelSae            panelMere;
 	private PanelRepartitionSae panelRepartitionSae;
-	private ProgNatSae          pProgNatSae;
+	private ProgNatSae          panelProgNatSae;
 	private Module              module;
 
 	public PCentreSae(PanelSae panelMere, Module m) {
@@ -30,7 +30,7 @@ public class PCentreSae extends JPanel{
 		this.setLayout(new BorderLayout());
 
 		this.panelRepartitionSae 	= new PanelRepartitionSae(this);
-		this.pProgNatSae 			= new ProgNatSae();
+		this.panelProgNatSae 			= new ProgNatSae();
 
 		JPanel panelN = new JPanel();
 		panelN.setLayout(new GridBagLayout());
@@ -46,7 +46,7 @@ public class PCentreSae extends JPanel{
 		panelN.add(new JLabel("Répartition"), gbc);
 
 		panelC.add(this.panelRepartitionSae, BorderLayout.CENTER);
-		panelC.add(this.pProgNatSae, BorderLayout.WEST);
+		panelC.add(this.panelProgNatSae, BorderLayout.WEST);
 
 		this.add(panelC, BorderLayout.CENTER);
 		this.add(panelN, BorderLayout.NORTH);
@@ -64,7 +64,7 @@ public class PCentreSae extends JPanel{
 	public HashMap<String, Integer> getData() {
 
 		HashMap<String,Integer> map = new HashMap<>();
-		HashMap<String,Integer> mapN = this.pProgNatSae.getHeuresTot();
+		HashMap<String,Integer> mapN = this.panelProgNatSae.getHeuresTot();
 		HashMap<String,Integer> mapR = this.panelRepartitionSae.getNbSemaines();
 
 		for ( String type : mapN.keySet() )

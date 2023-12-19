@@ -61,7 +61,12 @@ public class PanelInter extends JPanel implements ActionListener {
 		//Coloration du label d'erreurs en rouge
 		this.lblErreur.setForeground(java.awt.Color.RED);
 
-		this.dtm = new DefaultTableModel();
+		this.dtm = new DefaultTableModel(){
+			@Override
+			public boolean isCellEditable(int row, int col){
+				return false;
+			}
+		};
 
 		this.dtm.addColumn("Categorie");
 		this.dtm.addColumn("Nom");

@@ -7,13 +7,12 @@ import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+
 
 import javax.swing.JLabel;
 
 
-public class PanelRepartitionHDroite extends JPanel implements FocusListener{
+public class PanelRepartitionHDroite extends JPanel {
 	//4,3
 	private JPanel panelN;
 	private JPanel panelC;
@@ -25,6 +24,7 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener{
 		this.ensTxtFld = new ArrayList<JTextField>();
 		for(int i = 0; i < 15; i++){
             JTextField textField = new JTextField(3);
+			if(i != 3){textField.setEditable(false);}
             this.ensTxtFld.add(textField); 
         }
 		
@@ -101,15 +101,4 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener{
 		this.add(this.panelC, BorderLayout.CENTER);
 	}
 
-	@Override
-	public void focusGained(FocusEvent e) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'focusGained'");
-	}
-
-	@Override
-	public void focusLost(FocusEvent e) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'focusLost'");
-	}
 }

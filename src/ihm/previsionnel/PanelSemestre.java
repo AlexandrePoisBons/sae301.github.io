@@ -67,10 +67,14 @@ public class PanelSemestre extends JPanel {
 		// }
 
 
-		this.dtm = new DefaultTableModel(null, new String[] {"Liste des modules :"});
+		this.dtm = new DefaultTableModel(null, new String[] {"Liste des modules", "", "", ""}) {
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				return false;
+			}
+		};
 
 		this.tabModule = new JTable(this.dtm);
-
 		DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
 		headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.LEFT);
 		headerRenderer.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK)); // Ajoute une bordure inférieure
@@ -133,12 +137,23 @@ public class PanelSemestre extends JPanel {
 		this.dtm.addRow(s);
 	}
 
-	public Module getCurrentModule() { return this.modules.get(this.tabModule.getSelectedRow()); }
+	public Module getCurrentModule() { 
+		if(this.tabModule.getSelectedRow() != -1) {
+			return this.modules.get(this.tabModule.getSelectedRow());
+		}
+		return null;
+	}
 
 	public void removeModule() throws SQLException{
-		this.ctrl.metier().supprimerModule(this.getCurrentModule());
-		this.modules.remove(this.tabModule.getSelectedRow());
-		this.dtm.removeRow (this.tabModule.getSelectedRow());
+		if(this.tabModule.getSelectedRow() != -1){
+			this.ctrl.metier().supprimerModule(this.getCurrentModule());
+			this.modules.remove(this.tabModule.getSelectedRow());
+			this.dtm.removeRow (this.tabModule.getSelectedRow());
+		}
+		else {
+			System.err.println("Sélectionner une ligne");
+		}
+		
 	}
 
 	public List<Module> getModules() { return this.modules; }

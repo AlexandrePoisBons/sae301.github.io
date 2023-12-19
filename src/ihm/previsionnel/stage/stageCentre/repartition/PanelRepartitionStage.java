@@ -33,7 +33,7 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 		this.panelRepH 	= new PanelRepHStage					(this)				;
 		this.panelAffect	 		= new PanelAffectStage			(this)				;	
 		this.btnAjouter 			= new JButton					("Ajouter")	;
-		this.btnSuppr				= new JButton					("Supprimmer")	;	
+		this.btnSuppr				= new JButton					("Supprimer")	;	
 
 		//Ajout des boutons au panel de boutons
 		panelBtn.add(this.btnAjouter)								;

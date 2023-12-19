@@ -23,7 +23,12 @@ public class PanelAffect extends JPanel {
 	public PanelAffect(PanelRepartition panelMere) {
 		this.panelMere = panelMere;
 
-		this.dtm = new DefaultTableModel();
+		this.dtm = new DefaultTableModel(){
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				return false;
+			}
+		};
 		dtm.addColumn("Intervenant");
 		dtm.addColumn("type");
 		dtm.addColumn("nb semaines");
@@ -106,7 +111,12 @@ public class PanelAffect extends JPanel {
 	}
 
 	public void supprimer() {
-		this.dtm.removeRow(this.tableauAffect.getSelectedRow());
+		if(this.tableauAffect.getSelectedRow() != -1) {
+			this.dtm.removeRow(this.tableauAffect.getSelectedRow());
+		}
+		else {
+			System.err.println("Sélectionner une ligne");
+		}
 	}
 
 }
