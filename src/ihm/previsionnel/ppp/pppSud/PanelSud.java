@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 //Import des classes Java
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ public class PanelSud extends JPanel implements ActionListener {
 	private PanelPrevi   panelPrevi;
 	private JButton      boutonEnregistrer;
 	private JButton      boutonAnnuler;
+	private JLabel       lblErreur;
 	private JPanel       panelWest;
 	private PanelPpp     panelPpp;
 
@@ -28,11 +30,15 @@ public class PanelSud extends JPanel implements ActionListener {
 		this.panelPpp = panelPpp;
 		this.setLayout(new BorderLayout());
 
-		this.panelWest = new JPanel();
+		this.panelWest         = new JPanel();
 		this.boutonEnregistrer = new JButton("Enregistrer");
-		this.boutonAnnuler = new JButton("Annuler");
+		this.boutonAnnuler     = new JButton("Annuler");
+		this.lblErreur         = new JLabel("");
+		this.lblErreur.setForeground(java.awt.Color.RED);
+
 		this.panelWest.add(this.boutonEnregistrer);
 		this.panelWest.add(this.boutonAnnuler);
+		this.panelWest.add(this.lblErreur);
 
 		this.add(this.panelWest, BorderLayout.WEST);
 
@@ -85,6 +91,15 @@ public class PanelSud extends JPanel implements ActionListener {
 
 		System.out.println(module.toString());
 
+	}
+
+	public void setErreur(String message) {
+		if(message.equals("erreur")){
+			this.lblErreur.setText("Choisir une ligne");
+		}
+		else{
+			this.lblErreur.setText("");
+		}
 	}
 
 }

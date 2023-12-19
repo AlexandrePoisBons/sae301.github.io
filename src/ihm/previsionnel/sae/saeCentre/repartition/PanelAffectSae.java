@@ -121,8 +121,7 @@ public class PanelAffectSae extends JPanel {
 			this.dtm.removeRow(this.tableauAffect.getSelectedRow());
 		}
 		else {
-			System.err.println("Sélectionner une ligne");
-		}	}
-
-
+			this.panelMere.setErreur("erreur");
+		}	
+	}
 }

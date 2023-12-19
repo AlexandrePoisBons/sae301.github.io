@@ -52,9 +52,11 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter){
 			new FrameFormulaire(this);
+			this.setErreur("");
 		}
 		if(e.getSource() == this.btnSuppr){
 			//this.panelAffect.supprimer();
+			this.setErreur("");
 		}
 	}
 
@@ -71,6 +73,10 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 
 	public void ajouterLigne(String string, String text, int int1, int int2, String text2) {
 		this.panelAffect.ajouterLigne(string, text, int1, int2, text2);
+	}
+
+	public void setErreur(String message) {
+		this.panelMere.setErreur(message);
 	}
 
 }

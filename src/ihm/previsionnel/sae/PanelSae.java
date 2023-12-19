@@ -23,7 +23,7 @@ public class PanelSae extends JPanel{
 	private PanelPrevi panelMere;
 	private PNordSae pNordSae;
 	private PCentreSae pCentreSae;
-	private PanelSudSae pSudSae;
+	private PanelSudSae panelSudSae;
 	private Module module;
 	private Module oldModule;
 
@@ -47,17 +47,17 @@ public class PanelSae extends JPanel{
 		if ( this.module != null ) {
 			this.pNordSae   = new PNordSae(this, this.module);
 			this.pCentreSae = new PCentreSae(this, this.module);
-			this.pSudSae    = new PanelSudSae(this.frame, this.panelMere, this, this.module);
+			this.panelSudSae    = new PanelSudSae(this.frame, this.panelMere, this, this.module);
 		} else {
 			this.pNordSae   = new PNordSae(this, null);
 			this.pCentreSae = new PCentreSae(this, null);
-			this.pSudSae    = new PanelSudSae(this.frame, this.panelMere, this, null);
+			this.panelSudSae    = new PanelSudSae(this.frame, this.panelMere, this, null);
 		}
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add(this.pNordSae, BorderLayout.NORTH);
 		this.add(this.pCentreSae, BorderLayout.CENTER);
-		this.add(this.pSudSae, BorderLayout.SOUTH);
+		this.add(this.panelSudSae, BorderLayout.SOUTH);
 	}
 
 	public void enregistrer(Module m) {
@@ -78,6 +78,10 @@ public class PanelSae extends JPanel{
 		this.panelMere.updateModule(oldModule, newModule);
 
 		this.frame.changerPanel(new PanelPrevi(this.frame));
+	}
+
+	public void setErreur(String message){
+		this.panelSudSae.setErreur(message);
 	}
 
 

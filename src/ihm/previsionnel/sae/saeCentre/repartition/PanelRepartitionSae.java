@@ -55,9 +55,11 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 		if(e.getSource() == this.btnAjouter) {
 			new FrameFormulaire(this);
 			this.panelAffect.ajouter();
+			this.setErreur("");
 		}
 		if(e.getSource() == this.btnSuppr) {
 			this.panelAffect.supprimer();
+			this.setErreur("");
 		}
 	}
 
@@ -73,5 +75,9 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public void ajouterLigne(Object[] objs) { this.panelAffect.ajouterLigne(objs); }
 
 	public List<Heure> getHeures(Module m) { return this.panelAffect.getDataHeures(m); }
+
+	public void setErreur(String message) {
+		this.panelMere.setErreur(message);
+	}
 
 }

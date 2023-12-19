@@ -161,6 +161,9 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	public void supprimer() {
 		this.dtm.removeRow(this.tableauInter.getSelectedRow());
+		this.lblErreur.setText("");
+		this.repaint();
+		this.revalidate();
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -168,7 +171,7 @@ public class PanelInter extends JPanel implements ActionListener {
 		
 		if (e.getSource() == this.btnAjouter) {
 			this.panelFormulaire = new FrameFormulaire(this);
-			//this.panelFormulaire.ajouterLigne();
+			this.lblErreur.setText("");
 			this.panelFormulaire.setVisible(true);
 			this.panelFormulaire.repaint();
 		}

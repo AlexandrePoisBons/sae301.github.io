@@ -9,9 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import ihm.accueil.*;
-import ihm.previsionnel.*;
 import ihm.previsionnel.ressources.ressourcesCentre.PRCentre;
-import ihm.previsionnel.ressources.ressourcesCentre.progNat.ProgNat;
 import ihm.previsionnel.ressources.ressourcesNord.PRNord;
 import ihm.previsionnel.ressources.ressourcesSud.PanelSud;
 import metier.Heure;
@@ -24,7 +22,7 @@ public class PanelRessources extends JPanel {
 	private PanelPrevi  panelMere;
 	private PRNord      pRNord;
 	private PRCentre    pRCentre;
-	private PanelSud    pSud;
+	private PanelSud    panelSud;
 	private Module module;
 
 	public PanelRessources(FrameAccueil frame, PanelPrevi framePrevi, Module m) {
@@ -49,18 +47,18 @@ public class PanelRessources extends JPanel {
 		if ( this.module != null ) {
 			this.pRNord   = new PRNord   (this, this.module);
 			this.pRCentre = new PRCentre (this, this.module);
-			this.pSud     = new PanelSud (this.frame, this.panelMere, this, this.module);
+			this.panelSud     = new PanelSud (this.frame, this.panelMere, this, this.module);
 		} else {
 			this.pRNord   = new PRNord   (this, null);
 			this.pRCentre = new PRCentre (this, null);
-			this.pSud     = new PanelSud (this.frame, this.panelMere, this, null);
+			this.panelSud     = new PanelSud (this.frame, this.panelMere, this, null);
 		}
 
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add( this.pRNord,   BorderLayout.NORTH);
 		this.add( this.pRCentre, BorderLayout.CENTER);
-		this.add( this.pSud,     BorderLayout.SOUTH);
+		this.add( this.panelSud,     BorderLayout.SOUTH);
 	}
 
 
@@ -73,7 +71,9 @@ public class PanelRessources extends JPanel {
 
 	}
 
-
+	public void setErreur(String message){
+		this.panelSud.setErreur(message);
+	}
 
 	public String getSemestre()     { return this.panelMere.getSemestre();  }
 	public String getNbEtd()        { return this.panelMere.getNbEtd();     }
