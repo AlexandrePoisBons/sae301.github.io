@@ -2,7 +2,6 @@ package metier.db;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import controleur.Infos;

@@ -29,8 +29,9 @@ public class PanelRepH extends JPanel{
 		this.add(this.panelRepartitionHDroite);
 	}
 
-	public HashMap<String, Integer> getRepartitionHeures() {
-		return this.panelRepartitionHGauche.getRepartitionHeures();
+	public HashMap<String, Integer> getNbSemaines() {
+		return this.panelRepartitionHGauche.getNbSemaines();
 	}
+
 
 }

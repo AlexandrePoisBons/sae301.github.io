@@ -5,9 +5,16 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import java.util.HashMap;
+import metier.Heure;
+import metier.Intervenant;
+import metier.TypeHeure;
+import metier.Module;
 
-public class PanelAffectSae extends JPanel{
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class PanelAffectSae extends JPanel {
 	private PanelRepartitionSae panelMere;
 	private JTable tableauAffect;
 	private DefaultTableModel dtm;
@@ -44,6 +51,64 @@ public class PanelAffectSae extends JPanel{
 			this.dtm.addRow(objs);
 		}
 
+	}
+
+	public void setHeures(List<Heure> heures) {
+		Object[] objs;
+		for (Heure heure : heures) {
+			System.out.println("\n \n\n");
+			System.out.println(heure);
+			System.out.println("\n \n\n");
+			objs = new Object[6];
+			objs[0] = heure.getIntervenants().get(0).getNom()+" "+heure.getIntervenants().get(0).getPrenom().substring(0,1)+".";
+			objs[1] = heure.getTypeHeure().getNomTypeHeure();
+			objs[2] = heure.getDuree();
+			objs[3] = heure.getDuree()*heure.getTypeHeure().getCoeff();
+			objs[4] = heure.getCommentaire();
+			this.ajouterLigne(objs);
+		}
+	}
+
+	public void ajouterLigne(Object[] objs) {
+		this.dtm.addRow(objs);
+	}
+
+
+	public List<Heure> getDataHeures(Module module) {
+		List<Heure> heures = new ArrayList<>();
+
+
+		int nb = this.dtm.getRowCount();
+
+		List<TypeHeure> ths = this.panelMere.getTypesHeures();
+
+		Heure tmpH;
+		TypeHeure tmpTH = null;
+		for (int i = 0; i < nb; i++) {
+			for (TypeHeure typeHeure : ths)
+				if (typeHeure.getNomTypeHeure().equals(this.dtm.getValueAt(i, 1).toString()))
+					tmpTH = typeHeure;
+			tmpH = Heure.creerHeure(module, tmpTH, Float.parseFloat(this.dtm.getValueAt(i, 3).toString()), this.dtm.getValueAt(i,4).toString());
+
+			List<Intervenant> thI = this.panelMere.getIntervenants();
+			System.out.println("ehhehehehehehee"+thI.size());
+			for (Intervenant intervenant : thI) {
+				String int1Name = intervenant.getNom()+" "+intervenant.getPrenom().substring(0,1)+".";
+				String int2Name = this.dtm.getValueAt(i, 0).toString();
+				System.out.println("aaaa");
+				if( int1Name.equals(int2Name) ){
+					System.out.println("jout");
+					tmpH.ajouterIntervenant(intervenant);
+				}
+			}
+
+			heures.add(tmpH);
+		}
+
+
+		System.out.println(" COMBIEN D'HEURES ??"+heures.size());
+
+		return heures;
 	}
 
 	public void supprimer() {
