@@ -164,6 +164,8 @@ public class PanelInter extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		this.lblErreur.setText("");
+		
 		if (e.getSource() == this.btnAjouter) {
 			this.panelFormulaire = new FrameFormulaire(this);
 			//this.panelFormulaire.ajouterLigne();
