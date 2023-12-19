@@ -81,6 +81,6 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 		if(e.getSource() == this.btnParam){this.frame.changerPanel(new PanelParam(this.frame)	);}
 		if(e.getSource() == this.btnPrevi){this.frame.changerPanel(new PanelPrevi(this.frame)	);}
 		if(e.getSource() == this.btnInter){this.frame.changerPanel(new PanelInter(this.frame)   );}
-		if(e.getSource() == this.btnEtats){this.frame.changerPanel(new PanelEtats()				);}
+		if(e.getSource() == this.btnEtats){this.frame.changerPanel(new PanelEtats(this.frame)	);}
 	}
 }

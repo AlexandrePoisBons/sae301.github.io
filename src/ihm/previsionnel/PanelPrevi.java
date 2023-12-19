@@ -127,5 +127,4 @@ public class PanelPrevi extends JPanel implements ActionListener {
 			this.frame.changerPanel(new PanelAcceuil(this.frame));
 		}
 	}
-
 }
