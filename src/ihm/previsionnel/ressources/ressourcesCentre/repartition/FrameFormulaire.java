@@ -117,7 +117,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		if(e.getSource() == this.btnAnnuler){
-			
+			this.dispose();
 		}
 	}
 

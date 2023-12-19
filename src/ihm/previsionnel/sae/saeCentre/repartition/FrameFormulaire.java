@@ -97,7 +97,6 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 			
 		}
 		if(e.getSource() == this.btnAnnuler){
-			
 		}
 	}
 

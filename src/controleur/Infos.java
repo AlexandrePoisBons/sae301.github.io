@@ -38,7 +38,6 @@ public class Infos {
 	private void traiteLigne(String ligne) {
 		// public Tweet(String compte, String dateT, String langue, int nbAbonnes, String texteTweet, int nbRetweet, int nbFavoris)
 		String[] decString = ligne.split(":");
-
 		switch (decString[0]) {
 			case "database" -> this.database = decString[1];
 			case "login" -> this.login = decString[1];
