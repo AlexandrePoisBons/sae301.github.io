@@ -1,7 +1,5 @@
 package controleur;
 
-
-
 public class Controleur {
 
 	private ControleurMetier metier;
