@@ -38,7 +38,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 		this.panelRepH 	            = new PanelRepH					(this)		    ;
 		this.panelAffect	 		= new PanelAffectSae			(this, this.module);
 		this.btnAjouter 			= new JButton					("Ajouter")   	;
-		this.btnSuppr				= new JButton					("Supprimmer")	;	
+		this.btnSuppr				= new JButton					("Supprimer")	;	
 
 		//Ajout des boutons au panel de boutons
 		panelBtn.add(this.btnAjouter)								;
@@ -55,11 +55,13 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter) {
-			new FrameFormulaire(this, this.module);
-			// this.panelAffect.ajouter();
+			new FrameFormulaire(this,this.module);
+			//this.panelAffect.ajouter();
+			this.setErreur("");
 		}
 		if(e.getSource() == this.btnSuppr) {
 			this.panelAffect.supprimer();
+			this.setErreur("");
 		}
 	}
 
@@ -75,5 +77,9 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
 
 	public List<Heure> getHeures(Module m) { return this.panelAffect.getDataHeures(); }
+
+	public void setErreur(String message) {
+		this.panelMere.setErreur(message);
+	}
 
 }

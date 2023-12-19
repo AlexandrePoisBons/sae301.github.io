@@ -45,11 +45,6 @@ public class ProgNat extends JPanel{
 		this.txtOE.setEditable(false);
 		this.txtOEWrite.setEditable(false);
 
-		//Rendre non coché
-		this.checkValid.setSelected(false);
-		this.checkValid.setEnabled(false);
-
-
 
 		//Layouts
 		//this.setLayout(new BorderLayout());

@@ -27,7 +27,12 @@ public class PanelAffectSae extends JPanel {
 
 		this.heures = new ArrayList<>();
 
-		this.dtm = new DefaultTableModel();
+		this.dtm = new DefaultTableModel(){
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				return false;
+			}
+		};
 		dtm.addColumn("Intervenant");
 		dtm.addColumn("type");
 		dtm.addColumn("nb h");
@@ -122,9 +127,11 @@ public class PanelAffectSae extends JPanel {
 	}
 
 	public void supprimer() {
-		this.heures.remove(this.tableauAffect.getSelectedRow());
-		this.dtm.removeRow(this.tableauAffect.getSelectedRow());
+		if(this.tableauAffect.getSelectedRow() != -1) {
+			this.dtm.removeRow(this.tableauAffect.getSelectedRow());
+		}
+		else {
+			this.panelMere.setErreur("erreur");
+		}	
 	}
-
-
 }

@@ -61,7 +61,12 @@ public class PanelInter extends JPanel implements ActionListener {
 		//Coloration du label d'erreurs en rouge
 		this.lblErreur.setForeground(java.awt.Color.RED);
 
-		this.dtm = new DefaultTableModel();
+		this.dtm = new DefaultTableModel(){
+			@Override
+			public boolean isCellEditable(int row, int col){
+				return false;
+			}
+		};
 
 		this.dtm.addColumn("Categorie");
 		this.dtm.addColumn("Nom");
@@ -156,12 +161,17 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	public void supprimer() {
 		this.dtm.removeRow(this.tableauInter.getSelectedRow());
+		this.lblErreur.setText("");
+		this.repaint();
+		this.revalidate();
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		this.lblErreur.setText("");
+		
 		if (e.getSource() == this.btnAjouter) {
 			this.panelFormulaire = new FrameFormulaire(this);
-			//this.panelFormulaire.ajouterLigne();
+			this.lblErreur.setText("");
 			this.panelFormulaire.setVisible(true);
 			this.panelFormulaire.repaint();
 		}

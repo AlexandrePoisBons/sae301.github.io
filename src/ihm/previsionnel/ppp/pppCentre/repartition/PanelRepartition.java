@@ -61,6 +61,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter){
 			new FrameFormulaire(this);
+			this.setErreur("");
 		}
 		if(e.getSource() == this.btnSuppr){
 			this.panelAffect.supprimer();
@@ -73,6 +74,10 @@ public class PanelRepartition extends JPanel implements ActionListener{
 
 	public List<Intervenant> getIntervenants(){
 		return this.panelMere.getIntervenants();
+	}
+
+	public void setErreur(String message) {
+		this.panelMere.setErreur(message);
 	}
 
 }

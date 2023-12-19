@@ -61,4 +61,8 @@ public class PanelPppCentre extends JPanel{
 	public List<Intervenant> getIntervenants(){
 		return this.panelMere.getIntervenants();
 	}
+
+	public void setErreur(String message) {
+		this.panelMere.setErreur(message);
+	}
 }

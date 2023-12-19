@@ -52,7 +52,7 @@ public class PanelSae extends JPanel{
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add(this.pNordSae, BorderLayout.NORTH);
 		this.add(this.pCentreSae, BorderLayout.CENTER);
-		this.add(this.pSudSae, BorderLayout.SOUTH);
+		this.add(this.panelSudSae, BorderLayout.SOUTH);
 	}
 
 	public void enregistrer(Module m) {
@@ -71,6 +71,10 @@ public class PanelSae extends JPanel{
 		this.panelMere.updateModule(oldModule, newModule);
 
 		this.frame.changerPanel(new PanelPrevi(this.frame));
+	}
+
+	public void setErreur(String message){
+		this.panelSudSae.setErreur(message);
 	}
 
 

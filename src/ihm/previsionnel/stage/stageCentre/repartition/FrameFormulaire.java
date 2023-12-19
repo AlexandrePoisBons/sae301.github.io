@@ -89,6 +89,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == this.btnValider){
 			this.ajouterLigne();
+			this.dispose();
 		}
 		if(e.getSource() == this.btnAnnuler){
 			this.dispose();

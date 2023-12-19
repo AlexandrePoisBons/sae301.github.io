@@ -19,7 +19,7 @@ public class PanelPpp extends JPanel {
 	private PanelPrevi  panelMere;
 	private PanelPppNord      panelPppNord;
 	private PanelPppCentre    panelPppCentre;
-	private PanelSud    pSud;
+	private PanelSud    panelSud;
 	private Module module;
 
 	public PanelPpp(FrameAccueil frame, PanelPrevi framePrevi, Module m) {
@@ -39,12 +39,12 @@ public class PanelPpp extends JPanel {
 
 		this.panelPppNord = new PanelPppNord(this);
 		this.panelPppCentre = new PanelPppCentre(this);
-		this.pSud = new PanelSud(this.frame, this.panelMere, this);
+		this.panelSud = new PanelSud(this.frame, this.panelMere, this);
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add(this.panelPppNord, BorderLayout.NORTH);
 		this.add(this.panelPppCentre, BorderLayout.CENTER);
-		this.add(this.pSud, BorderLayout.SOUTH);
+		this.add(this.panelSud, BorderLayout.SOUTH);
 	}
 
 	public String getSemestre()     { return this.panelMere.getSemestre();      }
@@ -64,6 +64,10 @@ public class PanelPpp extends JPanel {
 
 	public List<Intervenant> getIntervenants() {
 		return this.frame.getControleur().getCtrl().metier().getIntervenants();
+	}
+
+	public void setErreur(String message) {
+		this.panelSud.setErreur(message);
 	}
 
 }

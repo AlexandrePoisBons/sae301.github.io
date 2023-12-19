@@ -66,7 +66,10 @@ public class PCentreStage extends JPanel {
 		return this.panelMere.getIntervenants();
 	}
 
-
+	public void setErreur(String message) {
+		this.panelMere.setErreur(message);
+	}
+	
 	/* A DECOMENTER 
 	public Object[] getHeuresProgNat() {
 		return this.pProgNatStage.getHeuresTot();

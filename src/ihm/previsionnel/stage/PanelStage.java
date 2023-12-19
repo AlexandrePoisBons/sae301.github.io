@@ -23,7 +23,7 @@ public class PanelStage extends JPanel {
 	private PanelPrevi panelMere;
 	private PNordStage pNordStage;
 	private PCentreStage pCentreStage;
-	private PanelSudStage pSudStage;
+	private PanelSudStage panelSudStage;
 	private Module module;
 
 	public PanelStage(FrameAccueil frame, PanelPrevi panelMere, Module m) {
@@ -44,12 +44,12 @@ public class PanelStage extends JPanel {
 
 		this.pNordStage = new PNordStage(this);
 		this.pCentreStage = new PCentreStage(this);
-		this.pSudStage = new PanelSudStage(this.frame, this.panelMere, this);
+		this.panelSudStage = new PanelSudStage(this.frame, this.panelMere, this);
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add(this.pNordStage, BorderLayout.NORTH);
 		this.add(this.pCentreStage, BorderLayout.CENTER);
-		this.add(this.pSudStage, BorderLayout.SOUTH);
+		this.add(this.panelSudStage, BorderLayout.SOUTH);
 	}
 
 
@@ -70,6 +70,10 @@ public class PanelStage extends JPanel {
 
 	public List<Intervenant> getIntervenants(){
 		return this.frame.getControleur().getCtrl().metier().getIntervenants();
+	}
+
+	public void setErreur(String message) {
+		this.panelSudStage.setErreur(message);
 	}
 
 }
