@@ -12,16 +12,21 @@ import javax.swing.*;
 import ihm.previsionnel.sae.PanelSae;
 import ihm.previsionnel.sae.saeCentre.progNatSae.ProgNatSae;
 import ihm.previsionnel.sae.saeCentre.repartition.PanelRepartitionSae;
+import metier.Heure;
 import metier.Intervenant;
+import metier.Module;
+import metier.TypeHeure;
 
 
 public class PCentreSae extends JPanel{
-		private PanelSae 			panelMere;
-		private PanelRepartitionSae panelRepartitionSae;
-		private ProgNatSae 			pProgNatSae;
+	private PanelSae            panelMere;
+	private PanelRepartitionSae panelRepartitionSae;
+	private ProgNatSae          pProgNatSae;
+	private Module              module;
 
-		public PCentreSae(PanelSae panelMere){
+	public PCentreSae(PanelSae panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
 		this.setLayout(new BorderLayout());
 
 		this.panelRepartitionSae 	= new PanelRepartitionSae(this);
@@ -45,13 +50,22 @@ public class PCentreSae extends JPanel{
 
 		this.add(panelC, BorderLayout.CENTER);
 		this.add(panelN, BorderLayout.NORTH);
+
+		if ( this.module != null ){
+			this.setData();
+			System.out.println("!= null");
+		}
+		else
+			System.out.println("== null");
 	}
+
+	public List<Heure> getHeures(Module m) { return this.panelRepartitionSae.getHeures(m); }
 
 	public HashMap<String, Integer> getData() {
 
 		HashMap<String,Integer> map = new HashMap<>();
 		HashMap<String,Integer> mapN = this.pProgNatSae.getHeuresTot();
-		HashMap<String,Integer> mapR = this.panelRepartitionSae.getRepartitionHeures();
+		HashMap<String,Integer> mapR = this.panelRepartitionSae.getNbSemaines();
 
 		for ( String type : mapN.keySet() )
 			if ( mapN.get(type) != 0 && mapR.get(type) != 0 )
@@ -60,13 +74,10 @@ public class PCentreSae extends JPanel{
 		return map;
 	}
 
-	// public String getSemestre() { return this.pProgNatSae.getSemestre(); }
-	// public String getNbEtd() { return this.pCentreSae.getNbEtd(); }
-	// public String getNbGpTd() { return this.pCentreSae.getNbGpTd(); }
-	// public String getNbGpTp() { return this.pCentreSae.getNbGpTp(); }
+	public void setData() { this.panelRepartitionSae.setHeures(this.module.getHeures()); }
 
-	public List<Intervenant> getIntervenants(){
-		return this.panelMere.getIntervenants();
-	}
+
+	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
+	public List<TypeHeure>   getTypesHeures()  { return this.panelMere.getTypesHeures();  }
 
 }

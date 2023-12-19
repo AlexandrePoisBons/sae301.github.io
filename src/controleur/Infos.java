@@ -3,7 +3,7 @@ package controleur;
 import java.util.Scanner;
 
 public class Infos {
-	
+
 	private String password;
 	private String login;
 	private String database;
@@ -38,7 +38,6 @@ public class Infos {
 	private void traiteLigne(String ligne) {
 		// public Tweet(String compte, String dateT, String langue, int nbAbonnes, String texteTweet, int nbRetweet, int nbFavoris)
 		String[] decString = ligne.split(":");
-		System.out.println("split");
 
 		switch (decString[0]) {
 			case "database" -> this.database = decString[1];

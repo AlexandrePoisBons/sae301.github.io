@@ -82,18 +82,41 @@ public class PanelCenterPrevi extends JPanel {
 		}
 	}
 
-	public void ajouterModule(Module module) {
-		for( Module m: this.getCurrentSemestre().getModules() ) {
-			if ( m.getIdModule() == module.getIdModule() ) {
-				this.frame.getControleur().getCtrl().metier().ajouterModule(module);
-				for (PanelSemestre panelSemestre : listSemestre) {
-					if (module.getSemestre().equals("S"+panelSemestre.getIdSemestre()))
-						panelSemestre.ajouterModule(module);
+	public void updateModule(Module oldModule, Module newModule) {
+		this.getCurrentSemestre().updateModule(newModule);
+		for(Module m : this.getCurrentSemestre().getModules()){
+			if ( m.getIdModule() == newModule.getIdModule()){
+				this.frame.getControleur().getCtrl().metier().updateModule(oldModule, newModule);
+				for (PanelSemestre panelSemestre : this.listSemestre) {
+					if ( newModule.getSemestre().equals("S"+panelSemestre.getIdSemestre()) ){
+						panelSemestre.ajouterModule(newModule);
+					}
 				}
 				return;
 			}
 		}
-		this.getCurrentSemestre().getModules().add(module);
+
+	}
+
+	public void ajouterModule(Module module) {
+		this.getCurrentSemestre().ajouterModule(module);
+		for( Module m : this.getCurrentSemestre().getModules() ) {
+			System.out.println(m);
+			System.out.println(m.getIdModule()+" dono "+module.getIdModule());
+			if ( m.getIdModule() == module.getIdModule() ) {
+				System.out.println("donova");
+				this.frame.getControleur().getCtrl().metier().ajouterModule(module);
+				System.out.println("donovaa");
+				for (PanelSemestre panelSemestre : this.listSemestre) {
+					if (module.getSemestre().equals("S"+panelSemestre.getIdSemestre())){
+						System.out.println("stp donova");
+						panelSemestre.ajouterModule(module);
+					}
+				}
+				return;
+			}
+		}
+
 	}
 
 	public int    getNumCurrentModule() { return this.modules.getSelectedIndex();               }

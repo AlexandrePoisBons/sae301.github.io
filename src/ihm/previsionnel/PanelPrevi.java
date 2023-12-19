@@ -90,6 +90,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	public String getNbGpTp()     { return this.panelCenterPrevi.getNbGpTp();     }
 	public int    getNbSemaines() { return this.panelCenterPrevi.getNbSemaines(); }
 	public void   ajouterModule(Module module) { this.panelCenterPrevi.ajouterModule(module); }
+	public void   updateModule( Module oldModule, Module newModule) { this.panelCenterPrevi.updateModule(oldModule, newModule); }
 
 	//Permets de faire une action en fonction du bouton cliqué
 	@Override
@@ -102,7 +103,6 @@ public class PanelPrevi extends JPanel implements ActionListener {
 				case "PPP"       -> this.frame.changerPanel( new PanelPpp       (this.frame, this, null) );
 				default -> System.err.println("TypeModule inexistant");
 			}
-			
 		}
 
 		if(e.getSource() == this.ddlstBox){

@@ -14,7 +14,10 @@ import javax.swing.border.EmptyBorder;
 //Imports classes externes
 import ihm.previsionnel.sae.saeCentre.PCentreSae;
 import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepH;
+import metier.Heure;
 import metier.Intervenant;
+import metier.TypeHeure;
+import metier.Module;
 
 public class PanelRepartitionSae extends JPanel implements ActionListener {
 	private PCentreSae panelMere;
@@ -58,16 +61,17 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 		}
 	}
 
-	public HashMap<String,Integer> getRepartitionHeures() {
-		return this.panelRepH.getRepartitionHeures();
-	}
+	public HashMap<String,Integer> getData() { return this.panelMere.getData(); }
 
-	public HashMap<String,Integer> getData(){
-		return this.panelMere.getData();
-	}
+	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 
-	public List<Intervenant> getIntervenants(){
-		return this.panelMere.getIntervenants();
-	}
+	public HashMap<String,Integer> getNbSemaines() { return this.panelRepH.getNbSemaines(); }
+	public HashMap<String,Integer> getTabData() { return this.panelMere.getData(); }
+	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
+	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
+
+	public void ajouterLigne(Object[] objs) { this.panelAffect.ajouterLigne(objs); }
+
+	public List<Heure> getHeures(Module m) { return this.panelAffect.getDataHeures(m); }
 
 }

@@ -8,6 +8,7 @@ import java.awt.Insets;
 import javax.swing.*;
 
 import ihm.previsionnel.sae.PanelSae;
+import metier.Module;
 
 public class PNordSae extends JPanel{
 	private PanelSae panelMere;
@@ -23,8 +24,11 @@ public class PNordSae extends JPanel{
 	private JTextField txtNbGpTd;
 	private JTextField txtNbGpTp;
 
-	public PNordSae(PanelSae panelMere) {
+	private Module module;
+
+	public PNordSae(PanelSae panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
 
 		this.setLayout(new BorderLayout());
 
@@ -98,11 +102,20 @@ public class PNordSae extends JPanel{
 
 		this.add(this.panelCentre, BorderLayout.WEST);
 
+		if (module != null)
+			this.setData();
+
 		this.setValues();
+
 
 		this.setVisible(true);
 	}
 
+	private void setData() {
+		this.txtCode.setText(this.module.getCode());
+		this.txtLibCourt.setText(this.module.getLibelleCourt());
+		this.txtLibLong.setText(this.module.getLibelle());
+	}
 
 	private void setValues() {
 		this.txtTypeModule.setText("SAE");
@@ -112,9 +125,9 @@ public class PNordSae extends JPanel{
 		this.txtNbGpTp.setText(this.panelMere.getNbGpTp());
 	}
 
-    public String getLibelle()      { return this.txtLibLong.getText();  }
-    public String getLibelleCourt() { return this.txtLibCourt.getText(); }
-    public String getCode()         { return this.txtCode.getText();     }
+	public String getLibelle()      { return this.txtLibLong.getText();  }
+	public String getLibelleCourt() { return this.txtLibCourt.getText(); }
+	public String getCode()         { return this.txtCode.getText();     }
 
 
 

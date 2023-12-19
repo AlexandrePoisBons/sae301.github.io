@@ -97,10 +97,10 @@ public class Heure implements Comparable<Heure> {
 	 * @return une chaine de caractère représentant l'heure
 	 */
 	public String toString() {
-		return "Heure [idHeure="+this.idHeure + ", idModule=" + this.module.getIdModule() + ", idTypeHeure=" + this.typeHeure.getIdTypeHeure() + ", duree=" + this.duree + ", commentaire=" + this.commentaire+"]";
+		return "Heure [idHeure="+this.idHeure + ", idModule=" + this.module.getIdModule() + ", idTypeHeure=" + this.typeHeure.getIdTypeHeure() + ", duree=" + this.duree + ", commentaire=" + this.commentaire+", intervenants="+this.intervenants+"]";
 	}
 
-	
+
 	public int compareTo(Heure h) {
 		return ((Integer)this.idHeure).compareTo((Integer)h.getIdHeure());
 	}

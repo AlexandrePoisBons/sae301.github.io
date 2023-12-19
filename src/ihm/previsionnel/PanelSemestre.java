@@ -127,6 +127,12 @@ public class PanelSemestre extends JPanel {
 		this.dtm.addRow(s);
 	}
 
+	public void updateModule(Module module) {
+		this.modules.remove(this.tabModule.getSelectedRow());
+		String[] s = {module.getCode()};
+		this.dtm.addRow(s);
+	}
+
 	public Module getCurrentModule() { return this.modules.get(this.tabModule.getSelectedRow()); }
 
 	public void removeModule() throws SQLException{

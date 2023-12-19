@@ -70,6 +70,34 @@ public class ControleurMetier {
 		} catch ( SQLException e ) { return false; }
 	}
 
+	public boolean updateModule(Module oldModule, Module newModule) {
+		try {
+			for (Heure heure : oldModule.getHeures()) {
+				this.requetes.deleteHeureModule(heure, oldModule);
+				for (Intervenant intervenant : heure.getIntervenants()) {
+					this.requetes.deleteIntervenantHeure(intervenant, heure);
+					this.requetes.deleteIntervenantModule(intervenant, oldModule);
+				}
+				this.requetes.deleteHeure(heure);
+			}
+
+			System.out.println("ON INSERT");
+			for (Heure heure : newModule.getHeures()) {
+				this.requetes.insertHeure(heure);
+				this.requetes.insertHeureModule(heure, oldModule);
+				for (Intervenant intervenant : heure.getIntervenants()) {
+					this.requetes.insertIntervenantHeure(intervenant, heure);
+					this.requetes.insertIntervenantModule(intervenant, oldModule);
+				}
+			}
+			this.requetes.updateModule(newModule);
+			this.modules.remove(this.getModuleById(oldModule.getIdModule()));
+			this.modules.add(newModule);
+
+			return true;
+		} catch ( SQLException e ) { return false; }
+	}
+
 	public boolean ajouterStatut(Statut statut) throws SQLException {
 		this.requetes.insertStatut(statut);
 		this.statuts.add(statut);
@@ -109,6 +137,29 @@ public class ControleurMetier {
 		this.typesHeures.remove(typeHeure);
 		return false;
 	}
+
+
+	public Heure getHeureById( int idHeure ) {
+		for (Heure heure : this.heures)
+			if (heure.getIdHeure() == idHeure)
+				return heure;
+		return null;
+	}
+
+	public Intervenant getIntervenantById( int idIntervenant ) {
+		for (Intervenant intervenant : this.intervenants)
+			if (intervenant.getIdIntervenant() == idIntervenant)
+				return intervenant;
+		return null;
+	}
+
+	public Module getModuleById( int idModule ) {
+		for (Module module : this.modules)
+			if (module.getIdModule() == idModule)
+				return module;
+		return null;
+	}
+
 
 
 

@@ -22,16 +22,23 @@ public class PanelSudSae extends JPanel implements ActionListener{
 	private JButton boutonAnnuler;
 	private JPanel panelWest;
 	private PanelSae panelSae;
+	private Module module;
+	private Module oldModule;
 
-	public PanelSudSae(FrameAccueil frame, PanelPrevi panelPrevi, PanelSae panelSae) {
+	public PanelSudSae(FrameAccueil frame, PanelPrevi panelPrevi, PanelSae panelSae, Module m) {
 		this.frame = frame;
 		this.panelPrevi = panelPrevi;
 		this.panelSae = panelSae;
+		this.oldModule = m;
+		this.module = m;
+
 		this.setLayout(new BorderLayout());
 
 		this.panelWest = new JPanel();
+
 		this.boutonEnregistrer = new JButton("Enregistrer");
 		this.boutonAnnuler = new JButton("Annuler");
+
 		this.panelWest.add(this.boutonEnregistrer);
 		this.panelWest.add(this.boutonAnnuler);
 
@@ -53,39 +60,62 @@ public class PanelSudSae extends JPanel implements ActionListener{
 
 	public void enregistrer() {
 
-	String typeModule   = "SAE";
-	String semestre     = this.panelSae.getSemestre();
-	String libelle      = this.panelSae.getLibelle();
-	String libelleCourt = this.panelSae.getLibelleCourt();
-	String code         = this.panelSae.getCode();
-	
-	int nbEtudiants;
-	try { nbEtudiants = Integer.parseInt(this.panelPrevi.getNbEtd()); }
-	catch (NumberFormatException e) { nbEtudiants = 0;}
+		String typeModule   = "SAE";
+		String semestre     = this.panelSae.getSemestre();
+		String libelle      = this.panelSae.getLibelle();
+		String libelleCourt = this.panelSae.getLibelleCourt();
+		String code         = this.panelSae.getCode();
+		
+		int nbEtudiants;
+		try { nbEtudiants = Integer.parseInt(this.panelPrevi.getNbEtd()); }
+		catch (NumberFormatException e) { nbEtudiants = 0;}
 
-	int nbGpTD;
-	try { nbGpTD = Integer.parseInt(this.panelPrevi.getNbGpTd()); }
-	catch (NumberFormatException e) { nbGpTD = 0; }
+		int nbGpTD;
+		try { nbGpTD = Integer.parseInt(this.panelPrevi.getNbGpTd()); }
+		catch (NumberFormatException e) { nbGpTD = 0; }
 
-	int nbGpTP;
-	try { nbGpTP = Integer.parseInt(this.panelPrevi.getNbGpTp()); }
-	catch (NumberFormatException e) { nbGpTP = 0; }
+		int nbGpTP;
+		try { nbGpTP = Integer.parseInt(this.panelPrevi.getNbGpTp()); }
+		catch (NumberFormatException e) { nbGpTP = 0; }
 
-	int nbSemaines = 0;
-	int nbHeures   = 0;
+		int nbSemaines = 0;
+		int nbHeures   = 0;
 
-	HashMap<String, Integer> map = this.panelSae.getDataHeures();
+		HashMap<String, Integer> map = this.panelSae.getDataHeures();
+
+
 		for (String heure : map.keySet() ){
 			if (map.get(heure) > nbSemaines)
 				nbSemaines = map.get(heure);
 			nbHeures+= map.get(heure);
 		}
 
-		Module module = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
+		Module m = this.panelSae.getModule();
 
-		System.out.println(this.frame.getControleur().getCtrl().metier().ajouterModule( module ));
+		if ( this.module == null ) {
+			m = Module.creerModule(typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures);
+			this.panelSae.enregistrer(m);
+			System.out.println("IL EST NULL");
+		} else {
+			this.module.setTypeModule(m.getTypeModule());
+			this.module.setSemestre(m.getSemestre());
+			this.module.setLibelle(m.getLibelle());
+			this.module.setLibelleCourt(m.getLibelleCourt());
+			this.module.setCode(m.getCode());
+			this.module.setNbEtudiants(m.getNbEtudiants());
+			this.module.setNbGpTD(m.getNbGpTD());
+			this.module.setNbGpTP(m.getNbGpTP());
+			this.module.setNbSemaines(m.getNbSemaines());
+			this.module.setNbHeures(m.getNbHeures());
+			this.panelSae.update(this.oldModule, this.module);
+			System.out.println(this.module.toString());
+			System.out.println("IL EST PAS NULL "+this.module.getHeures().size());
+		}
 
-		System.out.println(module.toString());
+		// Module module = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
+
+		// System.out.println(this.frame.getControleur().getCtrl().metier().ajouterModule( module ));
+
 	}
 
 }

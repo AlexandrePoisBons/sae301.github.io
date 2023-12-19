@@ -12,7 +12,7 @@ import javax.swing.*;
 
 public class PanelRepartitionHeureGaucheSae extends JPanel{
 	private PanelRepH panelMere;
-	private ArrayList<JTextField> 	ensJTextField;
+	private ArrayList<JTextField> ensJTextField;
 
 	public PanelRepartitionHeureGaucheSae(PanelRepH panelRepH){
 		this.panelMere = panelRepH;
@@ -60,7 +60,7 @@ public class PanelRepartitionHeureGaucheSae extends JPanel{
 	}
 
 
-	public HashMap<String, Integer> getRepartitionHeures() {
+	public HashMap<String, Integer> getNbSemaines() {
 		HashMap<String, Integer> map = new HashMap<>();
 	
 		try { map.put("SAE", Integer.parseInt(this.ensJTextField.get(0).getText())); }
