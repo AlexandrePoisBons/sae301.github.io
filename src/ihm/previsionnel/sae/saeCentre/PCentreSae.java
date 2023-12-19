@@ -29,7 +29,7 @@ public class PCentreSae extends JPanel{
 		this.module = m;
 		this.setLayout(new BorderLayout());
 
-		this.panelRepartitionSae 	= new PanelRepartitionSae(this);
+		this.panelRepartitionSae 	= new PanelRepartitionSae(this, this.module);
 		this.pProgNatSae 			= new ProgNatSae();
 
 		JPanel panelN = new JPanel();

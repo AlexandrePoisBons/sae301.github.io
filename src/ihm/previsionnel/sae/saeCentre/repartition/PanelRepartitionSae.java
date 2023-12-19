@@ -25,16 +25,18 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	private PanelAffectSae panelAffect;
 	private JButton btnAjouter;
 	private JButton btnSuppr;
+	private Module module;
 
-	public PanelRepartitionSae(PCentreSae panelMere) {
+	public PanelRepartitionSae(PCentreSae panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
 		JPanel panelBtn = new JPanel();
 
 		this.panelRepH 	            = new PanelRepH					(this)		    ;
-		this.panelAffect	 		= new PanelAffectSae			(this)		    ;	
+		this.panelAffect	 		= new PanelAffectSae			(this, this.module);
 		this.btnAjouter 			= new JButton					("Ajouter")   	;
 		this.btnSuppr				= new JButton					("Supprimmer")	;	
 
@@ -53,8 +55,8 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter) {
-			new FrameFormulaire(this);
-			this.panelAffect.ajouter();
+			new FrameFormulaire(this, this.module);
+			// this.panelAffect.ajouter();
 		}
 		if(e.getSource() == this.btnSuppr) {
 			this.panelAffect.supprimer();
@@ -70,8 +72,8 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
 
-	public void ajouterLigne(Object[] objs) { this.panelAffect.ajouterLigne(objs); }
+	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
 
-	public List<Heure> getHeures(Module m) { return this.panelAffect.getDataHeures(m); }
+	public List<Heure> getHeures(Module m) { return this.panelAffect.getDataHeures(); }
 
 }

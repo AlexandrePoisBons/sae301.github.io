@@ -65,17 +65,17 @@ public class PanelSudSae extends JPanel implements ActionListener{
 		String libelle      = this.panelSae.getLibelle();
 		String libelleCourt = this.panelSae.getLibelleCourt();
 		String code         = this.panelSae.getCode();
-		
+
 		int nbEtudiants;
-		try { nbEtudiants = Integer.parseInt(this.panelPrevi.getNbEtd()); }
+		try { nbEtudiants = this.panelPrevi.getNbEtd(); }
 		catch (NumberFormatException e) { nbEtudiants = 0;}
 
 		int nbGpTD;
-		try { nbGpTD = Integer.parseInt(this.panelPrevi.getNbGpTd()); }
+		try { nbGpTD = this.panelPrevi.getNbGpTd(); }
 		catch (NumberFormatException e) { nbGpTD = 0; }
 
 		int nbGpTP;
-		try { nbGpTP = Integer.parseInt(this.panelPrevi.getNbGpTp()); }
+		try { nbGpTP = this.panelPrevi.getNbGpTp(); }
 		catch (NumberFormatException e) { nbGpTP = 0; }
 
 		int nbSemaines = 0;
@@ -92,10 +92,18 @@ public class PanelSudSae extends JPanel implements ActionListener{
 
 		Module m = this.panelSae.getModule();
 
-		if ( this.module == null ) {
-			m = Module.creerModule(typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures);
+		if ( this.module.getLibelle().length() >= 1 ) {
+			m.setTypeModule(typeModule);
+			m.setSemestre(semestre);
+			m.setLibelle(libelle);
+			m.setLibelleCourt(libelleCourt);
+			m.setCode(code);
+			m.setNbEtudiants(nbEtudiants);
+			m.setNbGpTD(nbGpTD);
+			m.setNbGpTP(nbGpTP);
+			m.setNbSemaines(nbSemaines);
+			m.setNbHeures(nbHeures);
 			this.panelSae.enregistrer(m);
-			System.out.println("IL EST NULL");
 		} else {
 			this.module.setTypeModule(m.getTypeModule());
 			this.module.setSemestre(m.getSemestre());
@@ -108,8 +116,6 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			this.module.setNbSemaines(m.getNbSemaines());
 			this.module.setNbHeures(m.getNbHeures());
 			this.panelSae.update(this.oldModule, this.module);
-			System.out.println(this.module.toString());
-			System.out.println("IL EST PAS NULL "+this.module.getHeures().size());
 		}
 
 		// Module module = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );

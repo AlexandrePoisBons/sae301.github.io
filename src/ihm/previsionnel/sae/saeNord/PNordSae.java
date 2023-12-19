@@ -102,27 +102,32 @@ public class PNordSae extends JPanel{
 
 		this.add(this.panelCentre, BorderLayout.WEST);
 
-		if (module != null)
-			this.setData();
-
-		this.setValues();
+		this.setModuleData();
 
 
 		this.setVisible(true);
 	}
 
-	private void setData() {
+	private void setModuleData() {
+		this.txtTypeModule.setText("Ressource");
+		this.txtSemestre.setText(this.panelMere.getSemestre());
+		this.txtNbEtd.setText(this.panelMere.getNbEtd()+"");
+		this.txtNbGpTd.setText(this.panelMere.getNbGpTd()+"");
+		this.txtNbGpTp.setText(this.panelMere.getNbGpTp()+"");
 		this.txtCode.setText(this.module.getCode());
 		this.txtLibCourt.setText(this.module.getLibelleCourt());
 		this.txtLibLong.setText(this.module.getLibelle());
 	}
 
-	private void setValues() {
-		this.txtTypeModule.setText("SAE");
-		this.txtSemestre.setText(this.panelMere.getSemestre());
-		this.txtNbEtd.setText(this.panelMere.getNbEtd());
-		this.txtNbGpTd.setText(this.panelMere.getNbGpTd());
-		this.txtNbGpTp.setText(this.panelMere.getNbGpTp());
+	public void setValues() {
+		this.module.setTypeModule("Ressource");
+		this.module.setSemestre(this.panelMere.getSemestre());
+		this.module.setNbEtudiants(this.panelMere.getNbEtd());
+		this.module.setNbGpTD(this.panelMere.getNbGpTd());
+		this.module.setNbGpTP(this.panelMere.getNbGpTp());
+		this.module.setCode(this.panelMere.getCode());
+		this.module.setLibelleCourt(this.panelMere.getLibelleCourt());
+		this.module.setLibelle(this.panelMere.getLibelle());
 	}
 
 	public String getLibelle()      { return this.txtLibLong.getText();  }

@@ -55,7 +55,8 @@ public class ControleurMetier {
 
 	public boolean ajouterModule(Module module) {
 		try {
-			this.requetes.insertModule(module);
+			System.out.print("insert module: ");
+			System.out.print(this.requetes.insertModule(module)+"\n");
 			for (Heure heure : module.getHeures()) {
 				this.requetes.insertHeure(heure);
 				this.requetes.insertHeureModule(heure, module);
@@ -71,16 +72,27 @@ public class ControleurMetier {
 	}
 
 	public boolean updateModule(Module oldModule, Module newModule) {
+		for (int i = 0; i < oldModule.getHeures().size(); i++) {
+			//System.out.println(oldModule.getHeures().get(i).getIdHeure()+" donova stp fais que ca marche "+newModule.getHeures().get(i).getIdHeure());
+		}
 		try {
+			System.out.println();
 			for (Heure heure : oldModule.getHeures()) {
+				//System.out.println("flo :" + heure);
+				this.requetes.updateHeure(heure);
 				this.requetes.deleteHeureModule(heure, oldModule);
+				//System.out.println("delete heure-module");
 				for (Intervenant intervenant : heure.getIntervenants()) {
 					this.requetes.deleteIntervenantHeure(intervenant, heure);
+					//System.out.println("delete intervenant-heure");
+					this.requetes.deleteHeure(heure);
 					this.requetes.deleteIntervenantModule(intervenant, oldModule);
+					//System.out.println("delete intervenant-module");
 				}
-				this.requetes.deleteHeure(heure);
+				//this.requetes.deleteHeure(heure);
+				//System.out.println("delete heure: "+heure.getIdHeure());
 			}
-
+			/*
 			System.out.println("ON INSERT");
 			for (Heure heure : newModule.getHeures()) {
 				this.requetes.insertHeure(heure);
@@ -93,7 +105,7 @@ public class ControleurMetier {
 			this.requetes.updateModule(newModule);
 			this.modules.remove(this.getModuleById(oldModule.getIdModule()));
 			this.modules.add(newModule);
-
+			*/
 			return true;
 		} catch ( SQLException e ) { return false; }
 	}

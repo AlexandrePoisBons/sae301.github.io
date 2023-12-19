@@ -18,9 +18,14 @@ public class PanelAffectSae extends JPanel {
 	private PanelRepartitionSae panelMere;
 	private JTable tableauAffect;
 	private DefaultTableModel dtm;
+	private List<Heure> heures;
+	private Module module;
 
-	public PanelAffectSae(PanelRepartitionSae panelMere) {
+	public PanelAffectSae(PanelRepartitionSae panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
+
+		this.heures = new ArrayList<>();
 
 		this.dtm = new DefaultTableModel();
 		dtm.addColumn("Intervenant");
@@ -37,47 +42,52 @@ public class PanelAffectSae extends JPanel {
 		this.add(scroll);
 	}
 
-	public void ajouter() {
+	// public void ajouter() {
 
-		HashMap<String,Integer> map = this.panelMere.getData();
+	// 	HashMap<String,Integer> map = this.panelMere.getData();
 
-		Object[] objs = new Object[5];
-		for ( String type : map.keySet() ) {
-			objs[0] = "";
-			objs[1] = type;
-			objs[2] = 999;
-			objs[3] = 999;
-			objs[4] = "";
-			this.dtm.addRow(objs);
-		}
+	// 	Object[] objs = new Object[5];
+	// 	for ( String type : map.keySet() ) {
+	// 		objs[0] = "";
+	// 		objs[1] = type;
+	// 		objs[2] = 999;
+	// 		objs[3] = 999;
+	// 		objs[4] = "";
+	// 		this.dtm.addRow(objs);
+	// 	}
 
-	}
+	// }
 
 	public void setHeures(List<Heure> heures) {
-		Object[] objs;
+		// this.heures = heures;
 		for (Heure heure : heures) {
-			System.out.println("\n \n\n");
-			System.out.println(heure);
-			System.out.println("\n \n\n");
-			objs = new Object[6];
-			objs[0] = heure.getIntervenants().get(0).getNom()+" "+heure.getIntervenants().get(0).getPrenom().substring(0,1)+".";
-			objs[1] = heure.getTypeHeure().getNomTypeHeure();
-			objs[2] = heure.getDuree();
-			objs[3] = heure.getDuree()*heure.getTypeHeure().getCoeff();
-			objs[4] = heure.getCommentaire();
-			this.ajouterLigne(objs);
+			this.ajouterHeure(heure);
 		}
 	}
 
-	public void ajouterLigne(Object[] objs) {
+	private void ajouterLigne(Object[] objs) {
 		this.dtm.addRow(objs);
 	}
 
+	public void ajouterHeure(Heure heure) {
+		this.module.ajouterHeure(heure);
 
-	public List<Heure> getDataHeures(Module module) {
+		Object[] objs = new Object[6];
+		objs[0] = heure.getIntervenants().get(0).getNom()+" "+heure.getIntervenants().get(0).getPrenom().substring(0,1)+".";
+		objs[1] = heure.getTypeHeure().getNomTypeHeure();
+		objs[2] = heure.getDuree();
+		objs[3] = heure.getDuree()*heure.getTypeHeure().getCoeff();
+		objs[4] = heure.getCommentaire();
+		this.ajouterLigne(objs);
+	}
+
+
+	public List<Heure> getDataHeures() {
 		List<Heure> heures = new ArrayList<>();
 
+		return this.module.getHeures();
 
+/*
 		int nb = this.dtm.getRowCount();
 
 		List<TypeHeure> ths = this.panelMere.getTypesHeures();
@@ -108,10 +118,11 @@ public class PanelAffectSae extends JPanel {
 
 		System.out.println(" COMBIEN D'HEURES ??"+heures.size());
 
-		return heures;
+		return heures;*/
 	}
 
 	public void supprimer() {
+		this.heures.remove(this.tableauAffect.getSelectedRow());
 		this.dtm.removeRow(this.tableauAffect.getSelectedRow());
 	}
 

@@ -31,8 +31,10 @@ public class Heure implements Comparable<Heure> {
 	 */
 	public static Heure creerHeure( Module module, TypeHeure typeHeure, float duree, String commentaire)
 	{
-		if ( module == null || typeHeure == null || duree < 0 )
+		if ( module == null || typeHeure == null || duree < 0 ){
+			System.out.println("il est nulllllllllllllllllllll");
 			return null;
+		}
 
 		return new Heure( module, typeHeure, duree, commentaire);
 	}

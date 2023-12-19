@@ -53,6 +53,10 @@ public class Module implements Comparable<Module> {
 		return new Module( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures);
 	}
 
+	public static Module creerModuleVide() {
+		return new Module("","","","","",0,0,0,0,0);
+	}
+
 	public static Module initModule( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
 		if ( idModule < 0 || typeModule == null || typeModule.isEmpty() || semestre == null || semestre.isEmpty() || libelle == null || libelle.isEmpty() || libelleCourt == null || libelleCourt.isEmpty() || code == null || code.isEmpty() || nbEtudiants < 0 || nbGpTD < 0 || nbGpTP < 0 || nbSemaines < 0 || nbHeures < 0 )
 			return null;
@@ -128,7 +132,7 @@ public class Module implements Comparable<Module> {
 	public int               getNbSemaines()   { return this.nbSemaines;   }
 	public int               getNbHeures()     { return this.nbHeures;     }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
-	public List<Heure>       getHeures()     { return this.heures;       }
+	public List<Heure>       getHeures()       { return this.heures;       }
 
 	// Setters
 	public void setIdModule( int idModule )            { this.idModule     = idModule;     }

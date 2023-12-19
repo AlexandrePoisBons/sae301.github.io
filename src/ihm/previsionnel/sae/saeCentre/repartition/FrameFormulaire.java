@@ -14,9 +14,11 @@ import javax.swing.*;
 import javax.swing.event.CellEditorListener;
 import javax.swing.table.TableCellEditor;
 
+import metier.Heure;
 import metier.Intervenant;
 import metier.Statut;
 import metier.TypeHeure;
+import metier.Module;
 
 public class FrameFormulaire extends JFrame implements ActionListener{
 	private PanelRepartitionSae     panelMere;
@@ -29,10 +31,12 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	private JTextField              txtCommentaire;
 	private JButton                 btnValider;
 	private JButton                 btnAnnuler;
+	private Module module;
 
-	public FrameFormulaire(PanelRepartitionSae panelMere){
+	public FrameFormulaire(PanelRepartitionSae panelMere, Module module) {
 		this.panelMere       = panelMere;
-		
+		this.module = module;
+
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -131,13 +135,11 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 
 
 	private void valider() {
-		Object[] objs = new Object[6];
-		Intervenant intervenant = (Intervenant)(this.ddlstIntervenant.getSelectedItem());
-		objs[0] = intervenant.getNom()+" "+intervenant.getPrenom().substring(0,1)+".";
-		objs[1] = ((TypeHeure)this.ddlstTypesHeures.getSelectedItem()).getNomTypeHeure();
-		objs[2] = this.txtNbH.getText();
-		objs[3] = this.txtTotEqtd.getText();
-		objs[4] = this.txtCommentaire.getText();
-		this.panelMere.ajouterLigne(objs);
+		System.out.println("module: "+this.module);
+		System.out.println("typeHeure: "+(TypeHeure)this.ddlstTypesHeures.getSelectedItem());
+		Heure heure = Heure.creerHeure(this.module, ((TypeHeure)this.ddlstTypesHeures.getSelectedItem()), Float.parseFloat(this.txtNbH.getText()), this.txtCommentaire.getText() );
+		heure.ajouterIntervenant((Intervenant)this.ddlstIntervenant.getSelectedItem());
+		this.panelMere.ajouterHeure(heure);
 	}
+
 }

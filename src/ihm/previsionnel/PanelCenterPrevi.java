@@ -83,9 +83,11 @@ public class PanelCenterPrevi extends JPanel {
 	}
 
 	public void updateModule(Module oldModule, Module newModule) {
-		this.getCurrentSemestre().updateModule(newModule);
-		for(Module m : this.getCurrentSemestre().getModules()){
-			if ( m.getIdModule() == newModule.getIdModule()){
+		this.getCurrentSemestre().getModules().remove(oldModule);
+		this.getCurrentSemestre().getModules().add(newModule);
+
+		for(Module m : this.getCurrentSemestre().getModules()) {
+			if ( m.getIdModule() == newModule.getIdModule()) {
 				this.frame.getControleur().getCtrl().metier().updateModule(oldModule, newModule);
 				for (PanelSemestre panelSemestre : this.listSemestre) {
 					if ( newModule.getSemestre().equals("S"+panelSemestre.getIdSemestre()) ){
@@ -101,15 +103,10 @@ public class PanelCenterPrevi extends JPanel {
 	public void ajouterModule(Module module) {
 		this.getCurrentSemestre().ajouterModule(module);
 		for( Module m : this.getCurrentSemestre().getModules() ) {
-			System.out.println(m);
-			System.out.println(m.getIdModule()+" dono "+module.getIdModule());
 			if ( m.getIdModule() == module.getIdModule() ) {
-				System.out.println("donova");
 				this.frame.getControleur().getCtrl().metier().ajouterModule(module);
-				System.out.println("donovaa");
 				for (PanelSemestre panelSemestre : this.listSemestre) {
 					if (module.getSemestre().equals("S"+panelSemestre.getIdSemestre())){
-						System.out.println("stp donova");
 						panelSemestre.ajouterModule(module);
 					}
 				}
@@ -120,9 +117,9 @@ public class PanelCenterPrevi extends JPanel {
 	}
 
 	public int    getNumCurrentModule() { return this.modules.getSelectedIndex();               }
-	public String getNbEtd()            { return this.getCurrentSemestre().getNbEtd();          }
-	public String getNbGpTd()           { return this.getCurrentSemestre().getNbGpTd();         }
-	public String getNbGpTp()           { return this.getCurrentSemestre().getNbGpTp();         }
+	public int getNbEtd()            { return this.getCurrentSemestre().getNbEtd();          }
+	public int getNbGpTd()           { return this.getCurrentSemestre().getNbGpTd();         }
+	public int getNbGpTp()           { return this.getCurrentSemestre().getNbGpTp();         }
 	public int    getNbSemaines()       { return this.getCurrentSemestre().getNbSemaines();     }
 
 }

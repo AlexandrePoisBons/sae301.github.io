@@ -20,20 +20,19 @@ import metier.TypeHeure;
 
 public class PanelSae extends JPanel{
 	private FrameAccueil frame;
-	private PanelPrevi panelMere;
-	private PNordSae pNordSae;
-	private PCentreSae pCentreSae;
-	private PanelSudSae pSudSae;
-	private Module module;
-	private Module oldModule;
+	private PanelPrevi   panelMere;
+	private PNordSae     pNordSae;
+	private PCentreSae   pCentreSae;
+	private PanelSudSae  pSudSae;
+	private Module       module;
 
 	public PanelSae(FrameAccueil frame, PanelPrevi panelMere, Module m) {
-		this.frame = frame;
+		this.frame     = frame;
 		this.panelMere = panelMere;
-
-		this.module = m;
+		this.module    = m;
 
 		this.frame.setTitle("Prévisionnel - Module: SAE");
+		
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -44,15 +43,11 @@ public class PanelSae extends JPanel{
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
-		if ( this.module != null ) {
-			this.pNordSae   = new PNordSae(this, this.module);
-			this.pCentreSae = new PCentreSae(this, this.module);
-			this.pSudSae    = new PanelSudSae(this.frame, this.panelMere, this, this.module);
-		} else {
-			this.pNordSae   = new PNordSae(this, null);
-			this.pCentreSae = new PCentreSae(this, null);
-			this.pSudSae    = new PanelSudSae(this.frame, this.panelMere, this, null);
-		}
+		
+		this.pNordSae   = new PNordSae(this, this.module);
+		this.pNordSae.setValues();
+		this.pCentreSae = new PCentreSae(this, this.module);
+		this.pSudSae    = new PanelSudSae(this.frame, this.panelMere, this, this.module);
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add(this.pNordSae, BorderLayout.NORTH);
@@ -67,12 +62,10 @@ public class PanelSae extends JPanel{
 		this.panelMere.ajouterModule(m);
 
 		this.frame.changerPanel(new PanelPrevi(this.frame));
-
 	}
 
 	public void update(Module oldModule, Module newModule) {
 		List<Heure> heures = this.pCentreSae.getHeures(newModule);
-
 
 		newModule.setHeures(heures);
 		this.panelMere.updateModule(oldModule, newModule);
@@ -82,9 +75,9 @@ public class PanelSae extends JPanel{
 
 
 	public String getSemestre()     { return this.panelMere.getSemestre();    }
-	public String getNbEtd()        { return this.panelMere.getNbEtd();       }
-	public String getNbGpTd()       { return this.panelMere.getNbGpTd();      }
-	public String getNbGpTp()       { return this.panelMere.getNbGpTp();      }
+	public int getNbEtd()        { return this.panelMere.getNbEtd();       }
+	public int getNbGpTd()       { return this.panelMere.getNbGpTd();      }
+	public int getNbGpTp()       { return this.panelMere.getNbGpTp();      }
 	public String getCode()         { return this.pNordSae.getCode();         }
 	public String getLibelle()      { return this.pNordSae.getLibelle();      }
 	public String getLibelleCourt() { return this.pNordSae.getLibelleCourt(); }
@@ -95,4 +88,5 @@ public class PanelSae extends JPanel{
 
 	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
 	public List<TypeHeure> getTypesHeures() { return frame.getControleur().getCtrl().metier().getTypesHeures(); }
+
 }

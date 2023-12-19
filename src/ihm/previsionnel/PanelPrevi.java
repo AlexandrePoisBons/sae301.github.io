@@ -10,7 +10,6 @@ import ihm.previsionnel.stage.PanelStage;
 import metier.Module;
 
 // Imports classes Java
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -85,9 +84,9 @@ public class PanelPrevi extends JPanel implements ActionListener {
 
 
 	public String getSemestre()   { return "S"+this.panelCenterPrevi.getCurrentSemestre().getIdSemestre();   }
-	public String getNbEtd()      { return this.panelCenterPrevi.getNbEtd();      }
-	public String getNbGpTd()     { return this.panelCenterPrevi.getNbGpTd();     }
-	public String getNbGpTp()     { return this.panelCenterPrevi.getNbGpTp();     }
+	public int getNbEtd()      { return this.panelCenterPrevi.getNbEtd();      }
+	public int getNbGpTd()     { return this.panelCenterPrevi.getNbGpTd();     }
+	public int getNbGpTp()     { return this.panelCenterPrevi.getNbGpTp();     }
 	public int    getNbSemaines() { return this.panelCenterPrevi.getNbSemaines(); }
 	public void   ajouterModule(Module module) { this.panelCenterPrevi.ajouterModule(module); }
 	public void   updateModule( Module oldModule, Module newModule) { this.panelCenterPrevi.updateModule(oldModule, newModule); }
@@ -96,11 +95,12 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ( e.getSource() == this.btnCreer ) {
+			Module module = Module.creerModuleVide();
 			switch (this.ddlstBox.getSelectedItem().toString()) {
-				case "Ressources" -> this.frame.changerPanel( new PanelRessources(this.frame, this, null) );
-				case "SAE"       -> this.frame.changerPanel( new PanelSae       (this.frame, this, null) );
-				case "Stage"     -> this.frame.changerPanel( new PanelStage     (this.frame, this, null) );
-				case "PPP"       -> this.frame.changerPanel( new PanelPpp       (this.frame, this, null) );
+				case "Ressources" -> this.frame.changerPanel( new PanelRessources(this.frame, this, module) );
+				case "SAE"       -> this.frame.changerPanel( new PanelSae        (this.frame, this, module) );
+				case "Stage"     -> this.frame.changerPanel( new PanelStage      (this.frame, this, module) );
+				case "PPP"       -> this.frame.changerPanel( new PanelPpp        (this.frame, this, module) );
 				default -> System.err.println("TypeModule inexistant");
 			}
 		}

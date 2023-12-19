@@ -19,18 +19,18 @@ public class PanelRepartitionHeureDroiteSae extends JPanel implements FocusListe
 		this.panelC = new JPanel();
 		this.ensTxtFld = new ArrayList<JTextField>();
 		for(int i = 0; i < 2; i++){
-            JTextField textField = new JTextField(3);
-            this.ensTxtFld.add(textField); 
-        }
+			JTextField textField = new JTextField(3);
+			this.ensTxtFld.add(textField); 
+		}
 		
 		this.panelC.setLayout(new GridBagLayout());
 		GridBagConstraints gbcC = new GridBagConstraints();
 
 
 		// Ajout des composants avec GridBagLayout
-        gbcC.gridx = 0;
-        gbcC.gridy = 0;
-        gbcC.insets = new Insets(9, 0, 2, 0);
+		gbcC.gridx = 0;
+		gbcC.gridy = 0;
+		gbcC.insets = new Insets(9, 0, 2, 0);
 		gbcC.gridx = 4;
 		this.panelC.add(new JLabel("Σ"), gbcC);
 		gbcC.insets = new Insets(0, 0, 2, 0);
