@@ -21,9 +21,9 @@ public class TypeHeure {
 	 * @return Un objet de type TypeHeure
 	 */
 
-	public static TypeHeure creerTypeHeure(String nomTypeHeure, float coeff) {
-		return new TypeHeure(nomTypeHeure, coeff);
-	}
+	//public static TypeHeure creerTypeHeure(String nomTypeHeure, float coeff) {
+	// 	return new TypeHeure(nomTypeHeure, coeff);
+	// }
 
 	public static TypeHeure initTypeHeure(int idTypeHeure, String nomTypeHeure, float coeff) {
 		if ( idTypeHeure>=1 )
@@ -31,7 +31,7 @@ public class TypeHeure {
 		return null;
 	}
 
-	public TypeHeure( String nomTypeHeure, float coeff ) {
+	private TypeHeure( String nomTypeHeure, float coeff ) {
 		this.idTypeHeure  = ++nbTypeHeure;
 		this.nomTypeHeure = nomTypeHeure;
 		this.coeff        = coeff;

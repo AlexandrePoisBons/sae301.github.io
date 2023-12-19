@@ -783,7 +783,7 @@ public class Requetes {
 
 		ResultSet rs = selectH.executeQuery(req);
 		while( rs.next() ) {
-			Heure h = Heure.creerHeure( Module.creerModule( rs.getString("type_module"),
+			Heure h = Heure.creerHeure( Module.initModule( rs.getInt("id_module"), rs.getString("type_module"),
 															rs.getString("semestre"),
 															rs.getString("libelle"),
 															rs.getString("libelle_court"),
@@ -793,7 +793,7 @@ public class Requetes {
 															rs.getInt("nb_gp_tp"),
 															rs.getInt("nb_semaines"),
 															rs.getInt("nb_heures")),
-										new TypeHeure      (rs.getString("nom_type_heure"),
+										TypeHeure.initTypeHeure(rs.getInt("id_type_heure"),rs.getString("nom_type_heure"),
 															rs.getFloat("coeff") ),
 												rs.getInt("duree"),
 												rs.getString("commentaire"));
@@ -971,7 +971,7 @@ public class Requetes {
 			                                              rs.getInt("nb_gp_tp"),
 			                                              rs.getInt("nb_semaines"),
 			                                              rs.getInt("nb_heures")),
-			                           new TypeHeure ( rs.getString("nom_type_heure"),
+			                           TypeHeure.initTypeHeure(rs.getInt("id_type_heure"), rs.getString("nom_type_heure"),
 			                                           rs.getFloat("coeff") ),
 			                           rs.getInt("duree"),
 			                           rs.getString("commentaire") );
@@ -980,7 +980,7 @@ public class Requetes {
 		rs.close();
 		return listeH;
 	}
-	
+
 	public ArrayList<Intervenant> initIntervenants() throws SQLException {
 		Statement selectI = connec.createStatement();
 		ArrayList<Intervenant> listeI = new ArrayList<Intervenant>();

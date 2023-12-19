@@ -47,14 +47,14 @@ public class PanelSae extends JPanel{
 		this.pNordSae   = new PNordSae(this, this.module);
 		this.pNordSae.setValues();
 		this.pCentreSae = new PCentreSae(this, this.module);
+		System.out.println("dono");
 		this.pSudSae    = new PanelSudSae(this.frame, this.panelMere, this, this.module);
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add(this.pNordSae, BorderLayout.NORTH);
+		
 		this.add(this.pCentreSae, BorderLayout.CENTER);
 		this.add(this.pSudSae, BorderLayout.SOUTH);
-
-		System.out.println("dono")
 
 	}
 
@@ -62,7 +62,6 @@ public class PanelSae extends JPanel{
 		List<Heure> heures = this.pCentreSae.getHeures(m);
 
 		m.setHeures(heures);
-		System.out.println("EHOH-EHOH"+heures.size());
 		this.panelMere.ajouterModule(m);
 
 		this.frame.changerPanel(new PanelPrevi(this.frame));
@@ -72,7 +71,6 @@ public class PanelSae extends JPanel{
 		List<Heure> heures = this.pCentreSae.getHeures(newModule);
 
 		newModule.setHeures(heures);
-		System.out.println(oldModule.getHeures().size()+" EHOH-EHOH "+newModule.getHeures().size());
 		this.panelMere.updateModule(oldModule, newModule);
 
 		this.frame.changerPanel(new PanelPrevi(this.frame));

@@ -279,19 +279,19 @@ public class ControleurMetier {
 
 		this.typesHeures  = this.requetes.getTypesHeures();
 
-		if ( this.typesHeures.size() == 0 ) {
-			this.typesHeures.add( new TypeHeure("CM"    , (float) 1.5  ) );
-			this.typesHeures.add( new TypeHeure("TD"    , (float) 1.0  ) );
-			this.typesHeures.add( new TypeHeure("TP"    , (float) 1.0  ) );
-			this.typesHeures.add( new TypeHeure("Tutoré", (float) 1.0  ) );
-			this.typesHeures.add( new TypeHeure("Sae"   , (float) 1.0  ) );
-			this.typesHeures.add( new TypeHeure("REH"   , (float) 1.0  ) );
-			this.typesHeures.add( new TypeHeure("HP"    , (float) 1.0  ) );
-		}
-		else {
-			for ( TypeHeure typeHeure : this.typesHeures )
-				this.requetes.insertTypeHeure(typeHeure);
-		}
+		// if ( this.typesHeures.size() == 0 ) {
+		// 	this.typesHeures.add( TypeHeure.init("CM"    , (float) 1.5  ) );
+		// 	this.typesHeures.add( TypeHeure.init("TD"    , (float) 1.0  ) );
+		// 	this.typesHeures.add( TypeHeure.init("TP"    , (float) 1.0  ) );
+		// 	this.typesHeures.add( TypeHeure.init("Tutoré", (float) 1.0  ) );
+		// 	this.typesHeures.add( TypeHeure.init("Sae"   , (float) 1.0  ) );
+		// 	this.typesHeures.add( TypeHeure.init("REH"   , (float) 1.0  ) );
+		// 	this.typesHeures.add( TypeHeure.init("HP"    , (float) 1.0  ) );
+		// }
+		// else {
+		// 	for ( TypeHeure typeHeure : this.typesHeures )
+		// 		this.requetes.insertTypeHeure(typeHeure);
+		// }
 
 
 		System.out.println("--- FIN INITIALISATION ---");

@@ -108,7 +108,7 @@ public class PNordSae extends JPanel{
 	}
 
 	private void setModuleData() {
-		this.txtTypeModule.setText("Ressource");
+		this.txtTypeModule.setText("SAE")
 		this.txtSemestre.setText(this.panelMere.getSemestre());
 		this.txtNbEtd.setText(this.panelMere.getNbEtd()+"");
 		this.txtNbGpTd.setText(this.panelMere.getNbGpTd()+"");
@@ -119,7 +119,7 @@ public class PNordSae extends JPanel{
 	}
 
 	public void setValues() {
-		this.module.setTypeModule("Ressource");
+		this.module.setTypeModule("SAE");
 		this.module.setSemestre(this.panelMere.getSemestre());
 		this.module.setNbEtudiants(this.panelMere.getNbEtd());
 		this.module.setNbGpTD(this.panelMere.getNbGpTd());

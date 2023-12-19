@@ -12,9 +12,10 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
-public class PanelRepartitionHeureDroiteSae extends JPanel implements FocusListener{
+public class PanelRepartitionHeureDroiteSae extends JPanel implements FocusListener {
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
+
 	public PanelRepartitionHeureDroiteSae() {
 
 		this.panelC = new JPanel();

@@ -107,7 +107,6 @@ public class PanelSudSae extends JPanel implements ActionListener{
 		Module m = this.panelSae.getModule();
 
 		if ( this.module.getLibelle().length() < 1 ) {
-			System.out.println("CREATION");
 			m.setTypeModule(typeModule);
 			m.setSemestre(semestre);
 			m.setLibelle(libelle);
@@ -119,9 +118,7 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			m.setNbSemaines(nbSemaines);
 			m.setNbHeures(nbHeures);
 			this.panelSae.enregistrer(m);
-			System.out.println("CREATION");
 		} else {
-			System.out.println("MAJ");
 			this.module.setTypeModule(m.getTypeModule());
 			this.module.setSemestre(m.getSemestre());
 			this.module.setLibelle(m.getLibelle());
@@ -133,7 +130,6 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			this.module.setNbSemaines(m.getNbSemaines());
 			this.module.setNbHeures(m.getNbHeures());
 			this.panelSae.update(this.oldModule, this.module);
-			System.out.println("MAJ");
 		}
 
 		// Module module = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );

@@ -64,8 +64,9 @@ public class PanelAffectSae extends JPanel {
 	// }
 
 	public void setHeures(List<Heure> heures) {
+		int nb = heures.size();
 		// this.heures = heures;
-		for (int i=0; i<heures.size();i++) {
+		for (int i=0; i<nb;i++) {
 			this.ajouterHeure(heures.get(i));
 		}
 	}

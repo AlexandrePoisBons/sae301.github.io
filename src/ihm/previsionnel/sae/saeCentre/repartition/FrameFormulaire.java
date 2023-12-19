@@ -135,8 +135,6 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 
 
 	private void valider() {
-		System.out.println("module: "+this.module);
-		System.out.println("typeHeure: "+(TypeHeure)this.ddlstTypesHeures.getSelectedItem());
 		Heure heure = Heure.creerHeure(this.module, ((TypeHeure)this.ddlstTypesHeures.getSelectedItem()), Float.parseFloat(this.txtNbH.getText()), this.txtCommentaire.getText() );
 		heure.ajouterIntervenant((Intervenant)this.ddlstIntervenant.getSelectedItem());
 		this.panelMere.ajouterHeure(heure);

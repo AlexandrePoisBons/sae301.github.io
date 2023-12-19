@@ -105,7 +105,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 			}
 		}
 
-		if(e.getSource() == this.ddlstBox){
+		if (e.getSource() == this.ddlstBox) {
 			this.btnCreer.setText("Créer " + this.ddlstBox.getSelectedItem().toString());
 		}
 
@@ -114,10 +114,10 @@ public class PanelPrevi extends JPanel implements ActionListener {
 			System.out.println(m+"EH BEH");
 			if (m != null) {
 				switch(this.panelCenterPrevi.getCurrentSemestre().getCurrentModule().getTypeModule()) {
-					case "Ressource" -> this.frame.changerPanel(new PanelRessources (this.frame, this, m ) );
-					case "SAE"       -> this.frame.changerPanel(new PanelSae        (this.frame, this, m ) );
-					case "Stage"     -> this.frame.changerPanel(new PanelStage      (this.frame, this, m ) );
-					case "PPP"       -> this.frame.changerPanel(new PanelPpp        (this.frame, this, m ) );
+					case "Ressource" -> {this.frame.changerPanel(new PanelRessources (this.frame, this, m ) );}
+					case "SAE"       -> {this.frame.changerPanel(new PanelSae        (this.frame, this, m ) );}
+					case "Stage"     -> {this.frame.changerPanel(new PanelStage      (this.frame, this, m ) );}
+					case "PPP"       -> {this.frame.changerPanel(new PanelPpp        (this.frame, this, m ) );}
 					default          -> System.err.println("TypeModule inexistant");
 				}
 			} else {
@@ -126,7 +126,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		}
 		if(e.getSource() == this.btnSupprimer) {
 			try { this.panelCenterPrevi.getCurrentSemestre().removeModule(); }
-			catch(SQLException eq) {System.out.println("Sélectionner une ligne pour la supprimer");; }
+			catch(SQLException eq) {System.out.println("Sélectionner une ligne pour la supprimer"); }
 		}
 		if(e.getSource() == this.btnRetour){
 			this.frame.changerPanel(new PanelAcceuil(this.frame));
