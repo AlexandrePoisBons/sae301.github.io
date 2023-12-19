@@ -159,6 +159,8 @@ public class PanelInter extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		this.lblErreur.setText("");
+		
 		if (e.getSource() == this.btnAjouter) {
 			this.panelFormulaire = new FrameFormulaire(this);
 			//this.panelFormulaire.ajouterLigne();
@@ -168,7 +170,6 @@ public class PanelInter extends JPanel implements ActionListener {
 
 		if (e.getSource() == this.btnSupprimer) {
 			try {
-				this.lblErreur.setText("");
 				this.supprimer();	
 			} catch (Exception err) {
 				this.lblErreur.setText("Il n'y a pas de ligne à supprimer");
