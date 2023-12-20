@@ -17,17 +17,18 @@ import metier.Intervenant;
 import metier.TypeHeure;
 import metier.Module;
 
-public class FrameFormulaire extends JFrame implements ActionListener, FocusListener{
-	private PanelRepartitionSae     panelMere;
-	private JPanel                  panelFormulaire;
-	private JComboBox<String>     ddlstIntervenant;
-	private JComboBox<String>       ddlstTypesHeures;
-	private JTextField              txtNbH; 
-	private JTextField              txtTotEqtd;
-	private JTextField              txtCommentaire;
-	private JButton                 btnValider;
-	private JButton                 btnAnnuler;
-	private Module module;
+public class FrameFormulaire extends JFrame implements ActionListener, FocusListener {
+
+	private PanelRepartitionSae panelMere;
+	private JPanel              panelFormulaire;
+	private JComboBox<String>   ddlstIntervenant;
+	private JComboBox<String>   ddlstTypesHeures;
+	private JTextField          txtNbH; 
+	private JTextField          txtTotEqtd;
+	private JTextField          txtCommentaire;
+	private JButton             btnValider;
+	private JButton             btnAnnuler;
+	private Module              module;
 
 	public FrameFormulaire(PanelRepartitionSae panelMere, Module m) {
 		this.panelMere = panelMere;
