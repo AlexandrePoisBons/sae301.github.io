@@ -108,7 +108,7 @@ public class PNordSae extends JPanel{
 	}
 
 	private void setModuleData() {
-		this.txtTypeModule.setText("SAE")
+		this.txtTypeModule.setText("SAE");
 		this.txtSemestre.setText(this.panelMere.getSemestre());
 		this.txtNbEtd.setText(this.panelMere.getNbEtd()+"");
 		this.txtNbGpTd.setText(this.panelMere.getNbGpTd()+"");
