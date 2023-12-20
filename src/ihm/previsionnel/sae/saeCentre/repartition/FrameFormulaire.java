@@ -17,17 +17,18 @@ import metier.Intervenant;
 import metier.TypeHeure;
 import metier.Module;
 
-public class FrameFormulaire extends JFrame implements ActionListener, FocusListener{
-	private PanelRepartitionSae     panelMere;
-	private JPanel                  panelFormulaire;
-	private JComboBox<String>     ddlstIntervenant;
-	private JComboBox<String>       ddlstTypesHeures;
-	private JTextField              txtNbH; 
-	private JTextField              txtTotEqtd;
-	private JTextField              txtCommentaire;
-	private JButton                 btnValider;
-	private JButton                 btnAnnuler;
-	private Module module;
+public class FrameFormulaire extends JFrame implements ActionListener, FocusListener {
+
+	private PanelRepartitionSae panelMere;
+	private JPanel              panelFormulaire;
+	private JComboBox<String>   ddlstIntervenant;
+	private JComboBox<String>   ddlstTypesHeures;
+	private JTextField          txtNbH; 
+	private JTextField          txtTotEqtd;
+	private JTextField          txtCommentaire;
+	private JButton             btnValider;
+	private JButton             btnAnnuler;
+	private Module              module;
 
 	public FrameFormulaire(PanelRepartitionSae panelMere, Module m) {
 		this.panelMere = panelMere;
@@ -147,16 +148,15 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 			}
 		}
 		Heure heure = Heure.creerHeure(this.module,
-		                               ((TypeHeure)this.ddlstTypesHeures.getSelectedItem()),
+									   (typeHeure),
 									   0,0,
-		                                Float.parseFloat(this.txtNbH.getText()),
-		                                this.txtCommentaire.getText() );
-		heure.ajouterIntervenant((Intervenant)this.ddlstIntervenant.getSelectedItem());
+										Float.parseFloat(this.txtNbH.getText()),
+										this.txtCommentaire.getText() );
 		
 		heure.ajouterIntervenant(intervenant);
 		this.panelMere.ajouterHeure(heure);
 	}
-	
+
 
 	@Override
 	public void focusGained(FocusEvent e) {}
