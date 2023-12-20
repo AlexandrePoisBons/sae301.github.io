@@ -101,12 +101,9 @@ public class PRNord extends JPanel {
 
 		this.add(this.panelCentre, BorderLayout.WEST);
 
+		this.setModuleData();
 
 		this.setVisible(true);
-
-		this.setValues();
-
-		this.setModuleData();
 
 	}
 
@@ -127,9 +124,9 @@ public class PRNord extends JPanel {
 		this.module.setNbEtudiants(this.panelMere.getNbEtd());
 		this.module.setNbGpTD(this.panelMere.getNbGpTd());
 		this.module.setNbGpTP(this.panelMere.getNbGpTp());
-		this.module.setCode(this.panelMere.getCode());
-		this.module.setLibelleCourt(this.panelMere.getLibelleCourt());
-		this.module.setLibelle(this.panelMere.getLibelle());
+		this.module.setCode(this.txtCode.getText());
+		this.module.setLibelleCourt(this.txtLibCourt.getText());
+		this.module.setLibelle(this.txtLibLong.getText());
 	}
 
 	public String getLibelle()      { return this.txtLibLong.getText();  }

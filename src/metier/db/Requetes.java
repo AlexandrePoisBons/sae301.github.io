@@ -70,9 +70,9 @@ public class Requetes {
 			this.psUpdateI = this.connec.prepareStatement("UPDATE Intervenant SET nom=?, prenom=?, nb_equivalent_td=?, nom_statut=? WHERE id_intervenant=?;");
 
 			this.psSelectH = this.connec.prepareStatement("SELECT * FROM Heure WHERE id_heure=?;");
-			this.psInsertH = this.connec.prepareStatement("INSERT INTO Heure (id_heure, id_module, id_type_heure, duree, commentaire) VALUES(?,?,?,?,?);");
+			this.psInsertH = this.connec.prepareStatement("INSERT INTO Heure (id_heure, id_module, id_type_heure, nb_semaines, nb_gp_nb_h, duree, commentaire) VALUES(?,?,?,?,?,?,?);");
 			this.psDeleteH = this.connec.prepareStatement("DELETE FROM Heure WHERE id_heure=?;");
-			this.psUpdateH = this.connec.prepareStatement("UPDATE Heure SET id_module=?, id_type_heure=?, duree=?, commentaire=? WHERE id_heure=?;");
+			this.psUpdateH = this.connec.prepareStatement("UPDATE Heure SET id_module=?, id_type_heure=?, nb_semaines=?, nb_gp_nb_h=?, duree=?, commentaire=? WHERE id_heure=?;");
 
 			this.psSelectTH = this.connec.prepareStatement("SELECT * FROM Type_Heure WHERE id_type_heure=?;");
 			this.psInsertTH = this.connec.prepareStatement("INSERT INTO Type_Heure VALUES(?,?,?);");
@@ -217,20 +217,23 @@ public class Requetes {
 
 
 	public void insertHeure(Heure heure) {
+		System.out.println("insert heure");
 		try{
 			if ( !this.existsHeure(heure.getIdHeure()) ) {
 				this.psInsertH.setInt(1, heure.getIdHeure());
 				this.psInsertH.setInt(2, heure.getModule().getIdModule());
 				this.psInsertH.setInt(3, heure.getTypeHeure().getIdTypeHeure());
-				this.psInsertH.setFloat(4, heure.getDuree());
-				this.psInsertH.setString(5,heure.getCommentaire());
-				System.out.println("donova: "+this.psInsertH.executeUpdate());
+				this.psInsertH.setInt(4, heure.getNbSemaines());
+				this.psInsertH.setInt(5, heure.getNbGpNbH());
+				this.psInsertH.setFloat(6, heure.getDuree());
+				this.psInsertH.setString(7,heure.getCommentaire());
+				this.psInsertH.executeUpdate();
 				System.out.println(heure.toString());
 			} else {
 				System.out.println("Heure id_heure = "+heure.getIdHeure()+" deja existant");
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
-		
+
 	}
 
 	public void deleteHeure(Heure heure) throws SQLException {
@@ -238,6 +241,7 @@ public class Requetes {
 		if ( this.existsHeure(heure.getIdHeure()) ) {
 			this.psDeleteH.setInt(1, heure.getIdHeure());
 			this.psDeleteH.executeUpdate();
+			System.out.println("delete heureeeeee");
 		} else {
 			System.out.println("Heure id_heure = "+heure.getIdHeure()+" inexistant");
 		}
@@ -247,9 +251,11 @@ public class Requetes {
 		if ( this.existsHeure(heure.getIdHeure()) ) {
 			this.psUpdateH.setInt(1, heure.getModule().getIdModule());
 			this.psUpdateH.setInt(2, heure.getTypeHeure().getIdTypeHeure());
-			this.psUpdateH.setFloat(3, heure.getDuree());
-			this.psUpdateH.setString(4,heure.getCommentaire());
-			this.psUpdateH.setInt(5,heure.getIdHeure());
+			this.psUpdateH.setInt(3, heure.getNbSemaines());
+			this.psUpdateH.setInt(4, heure.getNbGpNbH());
+			this.psUpdateH.setFloat(5, heure.getDuree());
+			this.psUpdateH.setString(6,heure.getCommentaire());
+			this.psUpdateH.setInt(7,heure.getIdHeure());
 			this.psUpdateH.executeUpdate();
 		} else {
 			System.out.println("Heure id_heure = "+heure.getIdHeure()+" inexistant");
@@ -795,6 +801,8 @@ public class Requetes {
 															rs.getInt("nb_heures")),
 										TypeHeure.initTypeHeure(rs.getInt("id_type_heure"),rs.getString("nom_type_heure"),
 															rs.getFloat("coeff") ),
+												rs.getInt("nb_semaines"),
+												rs.getInt("nb_gp_nb_h"),
 												rs.getInt("duree"),
 												rs.getString("commentaire"));
 			listeH.add(h);
@@ -973,6 +981,8 @@ public class Requetes {
 			                                              rs.getInt("nb_heures")),
 			                           TypeHeure.initTypeHeure(rs.getInt("id_type_heure"), rs.getString("nom_type_heure"),
 			                                           rs.getFloat("coeff") ),
+									   rs.getInt("nb_semaines"),
+									   rs.getInt("nb_gp_nb_h"),
 			                           rs.getInt("duree"),
 			                           rs.getString("commentaire") );
 			listeH.add(h);

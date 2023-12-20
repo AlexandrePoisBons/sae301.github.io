@@ -111,6 +111,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 
 		if (e.getSource() == this.btnModifier) {
 			Module m = this.panelCenterPrevi.getCurrentSemestre().getCurrentModule();
+			// System.out.println("COUCOU TOI COMMENT NIKTM"+m.getHeures());
 			System.out.println(m+"EH BEH");
 			if (m != null) {
 				switch(this.panelCenterPrevi.getCurrentSemestre().getCurrentModule().getTypeModule()) {

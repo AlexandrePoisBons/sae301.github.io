@@ -55,7 +55,7 @@ public class PCentreSae extends JPanel{
 			this.setData();
 	}
 
-	public List<Heure> getHeures(Module m) { return this.panelRepartitionSae.getHeures(m); }
+	public List<Heure> getHeures() { return this.panelRepartitionSae.getHeures(); }
 
 	public HashMap<String, Integer> getData() {
 

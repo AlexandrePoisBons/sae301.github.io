@@ -16,20 +16,23 @@ import java.awt.BorderLayout;
 import java.util.HashMap;
 
 public class PanelSud extends JPanel implements ActionListener {
-	private FrameAccueil frame;
-	private PanelPrevi panelPrevi;
-	private JButton boutonEnregistrer;
-	private JButton boutonAnnuler;
-	private JLabel  lblErreur;
-	private JPanel panelWest;
+	private FrameAccueil    frame;
+	private PanelPrevi      panelPrevi;
+	private JButton         boutonEnregistrer;
+	private JButton         boutonAnnuler;
+	private JLabel          lblErreur;
+	private JPanel          panelWest;
 	private PanelRessources panelRessources;
-	private Module module;
+	private Module          module;
+	private Module          oldModule;
 
-	public PanelSud(FrameAccueil frame, PanelPrevi panelPrevi, PanelRessources panelRessources, Module module) {
+	public PanelSud(FrameAccueil frame, PanelPrevi panelPrevi, PanelRessources panelRessources, Module m) {
 		this.frame = frame;
 		this.panelPrevi        = panelPrevi;
 		this.panelRessources = panelRessources;
-		this.module = module;
+		this.oldModule = m;
+		this.module = m;
+
 		this.setLayout(new BorderLayout());
 
 		this.panelWest         = new JPanel();
@@ -75,17 +78,11 @@ public class PanelSud extends JPanel implements ActionListener {
 		String libelleCourt = this.panelRessources.getLibelleCourt();
 		String code         = this.panelRessources.getCode();
 
-		int nbEtudiants;
-		try { nbEtudiants = this.panelPrevi.getNbEtd(); }
-		catch (NumberFormatException e) { nbEtudiants = 0;}
+		int nbEtudiants = this.panelPrevi.getNbEtd(); 
 
-		int nbGpTD;
-		try { nbGpTD = this.panelPrevi.getNbGpTd(); }
-		catch (NumberFormatException e) { nbGpTD = 0; }
+		int nbGpTD = this.panelPrevi.getNbGpTd();
 
-		int nbGpTP;
-		try { nbGpTP = this.panelPrevi.getNbGpTp(); }
-		catch (NumberFormatException e) { nbGpTP = 0; }
+		int nbGpTP = this.panelPrevi.getNbGpTp();
 	
 		int nbSemaines = 0;
 		int nbHeures   = 0;
@@ -99,8 +96,17 @@ public class PanelSud extends JPanel implements ActionListener {
 
 		Module m = this.panelRessources.getModule();
 
-		if ( this.module == null ) {
-			m = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
+		if ( this.module.getLibelle().length() < 1 ) {
+			m.setTypeModule(typeModule);
+			m.setSemestre(semestre);
+			m.setLibelle(libelle);
+			m.setLibelleCourt(libelleCourt);
+			m.setCode(code);
+			m.setNbEtudiants(nbEtudiants);
+			m.setNbGpTD(nbGpTD);
+			m.setNbGpTP(nbGpTP);
+			m.setNbSemaines(nbSemaines);
+			m.setNbHeures(nbHeures);
 			this.panelRessources.enregistrer(m);
 		} else {
 			this.module.setTypeModule(m.getTypeModule());
@@ -113,10 +119,9 @@ public class PanelSud extends JPanel implements ActionListener {
 			this.module.setNbGpTP(m.getNbGpTP());
 			this.module.setNbSemaines(m.getNbSemaines());
 			this.module.setNbHeures(m.getNbHeures());
-			this.panelRessources.enregistrer(this.module);
+			this.panelRessources.update(this.oldModule, this.module);
 		}
 
-		// m = Module.initModule( this.module.getIdModule(), typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
 	}
 
 }

@@ -27,7 +27,7 @@ public class PRCentre extends JPanel {
 		this.module = m;
 		this.setLayout(new BorderLayout());
 
-		this.panelRepartition = new PanelRepartition(this);
+		this.panelRepartition = new PanelRepartition(this, this.module);
 		this.pProgNat         = new ProgNat();
 
 		JPanel panelN = new JPanel();
@@ -50,16 +50,12 @@ public class PRCentre extends JPanel {
 		this.add(panelN, BorderLayout.NORTH);
 
 
-		if ( this.module != null ){
+		if ( this.module != null )
 			this.setData();
-			System.out.println("!= null");
-		} else {
-			System.out.println("== null");
-		}
 
 	}
 
-	public List<Heure> getHeures(Module m) { return this.panelRepartition.getHeures(m); }
+	public List<Heure> getHeures() { return this.panelRepartition.getHeures(); }
 
 	public HashMap<String,Integer> getData() {
 		HashMap<String,Integer> map = new HashMap<>();
@@ -73,9 +69,7 @@ public class PRCentre extends JPanel {
 		return map;
 	}
 
-	public void setData() {
-		this.panelRepartition.setHeures(this.module.getHeures());
-	}
+	public void setData() { this.panelRepartition.setHeures(this.module.getHeures()); }
 
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
