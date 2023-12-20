@@ -1,31 +1,27 @@
 package ihm.previsionnel.sae.saeCentre.repartition;
 
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.EventObject;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.CellEditorListener;
-import javax.swing.table.TableCellEditor;
+
 
 import metier.Heure;
 import metier.Intervenant;
-import metier.Statut;
 import metier.TypeHeure;
 import metier.Module;
 
-public class FrameFormulaire extends JFrame implements ActionListener{
+public class FrameFormulaire extends JFrame implements ActionListener, FocusListener{
 	private PanelRepartitionSae     panelMere;
 	private JPanel                  panelFormulaire;
-	private JComboBox<Intervenant>  ddlstIntervenant;
-	private JComboBox<TypeHeure>    ddlstTypesHeures;
-	private JTextField              txtType; 
+	private JComboBox<String>     ddlstIntervenant;
+	private JComboBox<String>       ddlstTypesHeures;
 	private JTextField              txtNbH; 
 	private JTextField              txtTotEqtd;
 	private JTextField              txtCommentaire;
@@ -55,9 +51,9 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		gbc.anchor = GridBagConstraints.WEST;
 
 		this.remplirListe(this.panelMere.getIntervenants(), this.panelMere.getTypesHeures());
-		this.txtType        = new JTextField(15);
 		this.txtNbH         = new JTextField(15);
 		this.txtTotEqtd     = new JTextField(15);
+		this.txtTotEqtd.setEditable(false);
 		this.txtCommentaire = new JTextField(15);
 		this.btnValider     = new JButton("Valider");
 		this.btnAnnuler     = new JButton("Annuler");
@@ -95,6 +91,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 
 		this.btnValider.addActionListener(this);
 		this.btnAnnuler.addActionListener(this);
+		this.txtNbH.addFocusListener(this);
 
 		this.add(this.panelFormulaire);
 
@@ -115,34 +112,65 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		this.txtCommentaire.setText("");
 		this.txtNbH.setText("");
 		this.txtTotEqtd.setText("");
-		this.txtType.setText("");
 		this.dispose();
 	}
 
 	public void remplirListe(List<Intervenant> intervenants, List<TypeHeure> typesHeures) {
-		Intervenant[] tabInter = new Intervenant[intervenants.size()];
-		TypeHeure[] tabTypesHeures = new TypeHeure[typesHeures.size()];
+		String[] tabInter = new String[intervenants.size()];
+		String[] tabTypesHeures = new String[typesHeures.size()];
 
 		for(int i=0;i<intervenants.size();i++)
-			tabInter[i] = intervenants.get(i);
+			tabInter[i] = intervenants.get(i).getNom() + " " + intervenants.get(i).getPrenom();
 		
-		for (int i = 0; i < tabTypesHeures.length; i++)
-			tabTypesHeures[i] = typesHeures.get(i);
+		for (int i = 0; i < tabTypesHeures.length; i++){
+			if(typesHeures.get(i).getNomTypeHeure().equals("SAE") || typesHeures.get(i).getNomTypeHeure().equals("TUT"))
+				tabTypesHeures[i] = typesHeures.get(i).getNomTypeHeure();
+		}
 		
-		this.ddlstIntervenant = new JComboBox<>(tabInter);
-		this.ddlstTypesHeures = new JComboBox<>(tabTypesHeures);
+		this.ddlstIntervenant = new JComboBox<String>(tabInter);
+		this.ddlstTypesHeures = new JComboBox<String>(tabTypesHeures);
 	}
 
 
 
 	private void valider() {
+		TypeHeure typeHeure = null;
+		Intervenant intervenant   = null;
+		for (TypeHeure tH : this.panelMere.getTypesHeures()) {
+			if(this.ddlstTypesHeures.getSelectedItem().toString() == tH.getNomTypeHeure()){
+				typeHeure = tH;
+			}
+		}
+		for (Intervenant inter : this.panelMere.getIntervenants()) {
+			if(this.ddlstIntervenant.getSelectedItem().toString().equals(inter.getNom() + " " + inter.getPrenom())) {
+				intervenant = inter;
+			}
+		}
 		Heure heure = Heure.creerHeure(this.module,
 		                               ((TypeHeure)this.ddlstTypesHeures.getSelectedItem()),
 									   0,0,
 		                                Float.parseFloat(this.txtNbH.getText()),
 		                                this.txtCommentaire.getText() );
 		heure.ajouterIntervenant((Intervenant)this.ddlstIntervenant.getSelectedItem());
+		
+		heure.ajouterIntervenant(intervenant);
 		this.panelMere.ajouterHeure(heure);
+	}
+	
+
+	@Override
+	public void focusGained(FocusEvent e) {}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		float coef = 0.0f;
+		for(TypeHeure tH : this.panelMere.getTypesHeures()){
+			if(this.ddlstTypesHeures.getSelectedItem().toString() == tH.getNomTypeHeure()){
+				coef = tH.getCoeff();
+			}
+		}
+		int calcul = (int) (Integer.parseInt(this.txtNbH.getText()) * coef);
+		this.txtTotEqtd.setText("" + calcul);
 	}
 
 }

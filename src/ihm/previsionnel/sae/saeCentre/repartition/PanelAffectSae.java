@@ -62,7 +62,6 @@ public class PanelAffectSae extends JPanel {
 	// }
 
 	public void setHeures(List<Heure> heures) {
-		int nb = heures.size();
 		this.heures = heures;
 		for (Heure heure: heures) {
 			this.ajouterLigne(heure);
@@ -136,5 +135,18 @@ public class PanelAffectSae extends JPanel {
 		else {
 			this.panelMere.setErreur("erreur");
 		}	
+	}
+
+	public void setHeureAffecte() {
+		int hSae = 0;
+		int hTut = 0;
+		for(int i=0;i<this.tableauAffect.getRowCount();i++) {
+			if(this.dtm.getValueAt(i, 1).equals("SAE")){
+				hSae += Integer.parseInt(this.dtm.getValueAt(i, 2).toString());
+			}
+			if(this.dtm.getValueAt(i, 1).equals("TUT")){
+				hTut += Integer.parseInt(this.dtm.getValueAt(i, 2).toString());
+			}
+		}
 	}
 }
