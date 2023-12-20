@@ -139,6 +139,7 @@ public class PanelSemestre extends JPanel {
 	public void removeModule() throws SQLException {
 		if(this.tabModule.getSelectedRow() != -1){
 			this.ctrl.metier().supprimerModule(this.getCurrentModule());
+			System.out.println(this.modules.remove(this.tabModule.getSelectedRow()));
 			this.modules.remove(this.tabModule.getSelectedRow());
 			this.dtm.removeRow (this.tabModule.getSelectedRow());
 		}
