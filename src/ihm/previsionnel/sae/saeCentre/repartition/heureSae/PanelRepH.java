@@ -33,5 +33,9 @@ public class PanelRepH extends JPanel{
 		return this.panelRepartitionHGauche.getNbSemaines();
 	}
 
+	public void setSommePromo(int somme) {
+		this.panelRepartitionHDroite.setSommePromo(somme);
+	}
+
 
 }

@@ -39,7 +39,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		JPanel panelSud        = new JPanel();
 		this.panelCenterPrevi  = new PanelCenterPrevi	(this.frame);
 		this.btnCreer          = new JButton("Créer ressources");
-		String[] typeModules   = {"Ressources", "SAE", "Stage", "PPP"};
+		String[] typeModules   = {"Ressource", "SAE", "Stage", "PPP"};
 		this.ddlstBox          = new JComboBox<String>(typeModules);
 		this.btnModifier       = new JButton("Modifier");
 		this.btnSupprimer      = new JButton("Supprimer");
@@ -111,7 +111,6 @@ public class PanelPrevi extends JPanel implements ActionListener {
 
 		if (e.getSource() == this.btnModifier) {
 			Module m = this.panelCenterPrevi.getCurrentSemestre().getCurrentModule();
-			System.out.println(m+"EH BEH");
 			if (m != null) {
 				switch(this.panelCenterPrevi.getCurrentSemestre().getCurrentModule().getTypeModule()) {
 					case "Ressource" -> {this.frame.changerPanel(new PanelRessources (this.frame, this, m ) );}

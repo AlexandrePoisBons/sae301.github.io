@@ -92,7 +92,10 @@ public class PanelSemestre extends JPanel {
 		// Affichage
 		this.setVisible(true);
 
+
 	}
+
+	
 
 	// Getters
 	public int getIdSemestre() { return this.id;                    }
@@ -106,6 +109,12 @@ public class PanelSemestre extends JPanel {
 		for (Module module : this.modules) {
 			String[] s = {module.getCode(), module.getLibelle()};
 			this.dtm.addRow(s);
+		}
+		if ( this.modules.size() >= 1 ){
+			this.txtNbEtd.setText(this.modules.get(0).getNbEtudiants()+"");
+			this.txtNbGpTd.setText(this.modules.get(0).getNbGpTD()+"");
+			this.txtNbGpTp.setText(this.modules.get(0).getNbGpTP()+"");
+			this.txtNbSemaine.setText(this.modules.get(0).getNbSemaines()+"");
 		}
 	}
 

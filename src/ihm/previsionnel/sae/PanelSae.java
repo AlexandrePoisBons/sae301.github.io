@@ -82,10 +82,10 @@ public class PanelSae extends JPanel{
 
 
 	public String getSemestre()     { return this.panelMere.getSemestre();    }
-	public int getNbEtd()        { return this.panelMere.getNbEtd();       }
-	public int getNbGpTd()       { return this.panelMere.getNbGpTd();      }
-	public int getNbGpTp()       { return this.panelMere.getNbGpTp();      }
-	public String getCode()         { return this.pNordSae.getCode(); }
+	public int    getNbEtd()        { return this.panelMere.getNbEtd();       }
+	public int    getNbGpTd()       { return this.panelMere.getNbGpTd();      }
+	public int    getNbGpTp()       { return this.panelMere.getNbGpTp();      }
+	public String getCode()         { return this.pNordSae.getCode();         }
 	public String getLibelle()      { return this.pNordSae.getLibelle();      }
 	public String getLibelleCourt() { return this.pNordSae.getLibelleCourt(); }
 	public Module getModule ()      { return this.module;                     }
