@@ -27,7 +27,6 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 	private JPanel                  panelFormulaire;
 	private JComboBox<String>  ddlstIntervenant;
 	private JComboBox<String>  ddlstTypesHeures;
-	private JTextField              txtType;
 	private JTextField              txtNbSemaines;
 	private JTextField              txtTotEqtd;
 	private JTextField              txtCommentaire;
@@ -57,7 +56,6 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		gbc.anchor = GridBagConstraints.WEST;
 
 		this.remplirListe(this.panelMere.getIntervenants(), this.panelMere.getTypesHeures());
-		this.txtType         = new JTextField(15);
 		this.txtNbSemaines   = new JTextField(15);
 		this.txtTotEqtd      = new JTextField(15);
 		this.txtCommentaire  = new JTextField(15);
@@ -145,14 +143,14 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 			}
 		}
 
-		Heure heure = Heure.creerHeure(this.module,
+		/*Heure heure = Heure.creerHeure(this.module,
 									   (typeHeure),
 									   0,0,
 										Float.parseFloat(this.txt.getText()),
-										this.txtCommentaire.getText() );
+										this.txtCommentaire.getText() );*/
 
-		heure.ajouterIntervenant(intervenant);
-		this.panelMere.ajouterHeure(heure);
+		//heure.ajouterIntervenant(intervenant);
+		//this.panelMere.ajouterHeure(heure);
 	}
 
 
@@ -167,8 +165,8 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 				coef = tH.getCoeff();
 			}
 		}
-		int calcul = (int) (Integer.parseInt(this.txtNbH.getText()) * coef);
-		this.txtTotEqtd.setText("" + calcul);
+		//int calcul = (int) (Integer.parseInt(this.txtNbH.getText()) * coef);
+		//this.txtTotEqtd.setText("" + calcul);
 	}
 
 

@@ -61,10 +61,11 @@ public class PanelCenterPrevi extends JPanel {
 	public PanelSemestre getCurrentSemestre() {
 		int i = this.modules.getSelectedIndex();
 
-		for ( PanelSemestre panelSemestre : this.listSemestre )
-			if (panelSemestre.getIdSemestre() == i+1)
+		for ( PanelSemestre panelSemestre : this.listSemestre ){
+			if (panelSemestre.getIdSemestre() == i+1) {
 				return panelSemestre;
-
+			}
+		}
 		return null;
 	}
 
