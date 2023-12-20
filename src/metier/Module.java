@@ -26,6 +26,7 @@ public class Module implements Comparable<Module> {
 	private int    nbGpTP;
 	private int    nbSemaines;
 	private int    nbHeures;
+	private boolean valide;
 
 	private HashMap<String, Double> heureParType;
 	
@@ -46,22 +47,22 @@ public class Module implements Comparable<Module> {
 	 * @param nbHeures     Nombre d'heures du module
 	 * @return Retourne un objet Module si les paramètres sont valides, null sinon
 	 */
-	public static Module creerModule( String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+	public static Module creerModule( String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures, boolean valide ) {
 		if ( typeModule == null || typeModule.isEmpty() || semestre == null || semestre.isEmpty() || libelle == null || libelle.isEmpty() || libelleCourt == null || libelleCourt.isEmpty() || code == null || code.isEmpty() || nbEtudiants < 0 || nbGpTD < 0 || nbGpTP < 0 || nbSemaines < 0 || nbHeures < 0 )
 			return null;
 
-		return new Module( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures);
+		return new Module( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures, valide);
 	}
 
 	public static Module creerModuleVide() {
-		return new Module("","","","","",0,0,0,0,0);
+		return new Module("","","","","",0,0,0,0,0,false);
 	}
 
-	public static Module initModule( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+	public static Module initModule( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures, boolean valide ) {
 		if ( idModule < 0 || typeModule == null || typeModule.isEmpty() || semestre == null || semestre.isEmpty() || libelle == null || libelle.isEmpty() || libelleCourt == null || libelleCourt.isEmpty() || code == null || code.isEmpty() || nbEtudiants < 0 || nbGpTD < 0 || nbGpTP < 0 || nbSemaines < 0 || nbHeures < 0 )
 			return null;
 
-		return new Module( idModule, typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures);
+		return new Module( idModule, typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures, valide);
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class Module implements Comparable<Module> {
 	 * @param nbHeures     Nombre d'heures du module
 	 * @return Retourne un objet Module si les paramètres sont valides, null sinon
 	 */
-	private Module( String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+	private Module( String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures, boolean valide ) {
 		this.idModule     = ++Module.nbModules;
 		this.typeModule   = typeModule;
 		this.semestre     = semestre;
@@ -90,6 +91,7 @@ public class Module implements Comparable<Module> {
 		this.nbGpTP       = nbGpTP;
 		this.nbSemaines   = nbSemaines;
 		this.nbHeures     = nbHeures;
+		this.valide = valide;
 
 		this.intervenants = new ArrayList<Intervenant>();
 		this.heures       = new ArrayList<Heure>();
@@ -98,7 +100,7 @@ public class Module implements Comparable<Module> {
 		initHash();
 	}
 
-	private Module( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures ) {
+	private Module( int idModule, String typeModule, String semestre, String libelle, String libelleCourt, String code, int nbEtudiants, int nbGpTD, int nbGpTP, int nbSemaines, int nbHeures, boolean valide ) {
 		this.idModule     = idModule;
 		this.typeModule   = typeModule;
 		this.semestre     = semestre;
@@ -133,6 +135,7 @@ public class Module implements Comparable<Module> {
 	public int               getNbHeures()     { return this.nbHeures;     }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
 	public List<Heure>       getHeures()       { return this.heures;       }
+	public boolean           isValide()        { return this.valide;       }
 
 	// Setters
 	public void setIdModule( int idModule )            { this.idModule     = idModule;     }
@@ -148,7 +151,7 @@ public class Module implements Comparable<Module> {
 	public void setNbHeures( int nbHeures )            { this.nbHeures     = nbHeures;     }
 	public void setHeures ( List<Heure> heures )       { this.heures       = heures;       }
 	public void setIntervenant(List<Intervenant> i )   { this.intervenants = i;            }
-
+	public void setValide(boolean valide)              { this.valide       = valide;       }
 
 	public void ajouterIntervenant(Intervenant i) { 
 		this.intervenants.add(i);

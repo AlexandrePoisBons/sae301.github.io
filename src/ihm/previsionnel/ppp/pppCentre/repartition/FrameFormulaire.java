@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
@@ -15,22 +17,30 @@ import javax.swing.*;
 import javax.swing.event.CellEditorListener;
 import javax.swing.table.TableCellEditor;
 
+import metier.Heure;
 import metier.Intervenant;
 import metier.Statut;
+import metier.TypeHeure;
+import metier.Module;
 
-public class FrameFormulaire extends JFrame implements ActionListener{
+public class FrameFormulaire extends JFrame implements ActionListener, FocusListener {
 	private PanelRepartition        panelMere;
 	private JPanel                  panelFormulaire;
-	private JComboBox<Intervenant>  ddlstIntervenant;
-	private JTextField              txtType; 
+	private JComboBox<String>  ddlstIntervenants;
+	private JComboBox<String>  ddlstTypesHeures;
 	private JTextField              txtNbH; 
 	private JTextField              txtTotEqtd;
 	private JTextField              txtCommentaire;
 	private JButton                 btnValider;
 	private JButton                 btnAnnuler;
 
-	public FrameFormulaire(PanelRepartition panelMere){
+	private Module module;
+
+	public FrameFormulaire(PanelRepartition panelMere, Module m) {
 		this.panelMere       = panelMere;
+		this.module = m;
+
+
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -43,11 +53,10 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 
 		this.panelFormulaire.setLayout(new GridBagLayout());
 
-		GridBagConstraints gbc 	= new GridBagConstraints();		
+		GridBagConstraints gbc 	= new GridBagConstraints();
 		gbc.anchor = GridBagConstraints.WEST;
 		
-		this.remplirListe(this.panelMere.getIntervenants());
-		this.txtType         = new JTextField(15);
+		this.remplirListe(this.panelMere.getIntervenants(), this.panelMere.getTypesHeures());
 		this.txtNbH          = new JTextField(15);
 		this.txtTotEqtd      = new JTextField(15);
 		this.txtCommentaire  = new JTextField(15);
@@ -67,9 +76,9 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		this.panelFormulaire.add(new JLabel("commentaire"				), gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		this.panelFormulaire.add(this.ddlstIntervenant		, gbc);
+		this.panelFormulaire.add(this.ddlstIntervenants		, gbc);
 		gbc.gridy = 1;
-		this.panelFormulaire.add(this.txtType, gbc);
+		this.panelFormulaire.add(this.ddlstTypesHeures, gbc);
 		gbc.gridy = 2;
 		this.panelFormulaire.add(this.txtNbH	, gbc);
 		gbc.gridy = 3;
@@ -93,21 +102,70 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		this.setVisible(true);
 	}	
 
-	public void actionPerformed(ActionEvent e){
-		if(e.getSource() == this.btnValider){
-			
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == this.btnValider) {
+			this.valider();
+			this.dispose();
 		}
 		if(e.getSource() == this.btnAnnuler){
 			this.dispose();
 		}
 	}
 
-	public void remplirListe(List<Intervenant> intervenants){
-		Intervenant[] tabInter = new Intervenant[intervenants.size()];
-		for(int i=0;i<intervenants.size();i++){
-			tabInter[i] = intervenants.get(i);
+
+	public void remplirListe(List<Intervenant> intervenants, List<TypeHeure> typesHeures) {
+		String[] tabInter = new String[intervenants.size()];
+		String[] tabTypesHeures = new String[typesHeures.size()];
+
+		for(int i=0;i<intervenants.size();i++)
+			tabInter[i] = intervenants.get(i).getNom() + " " + intervenants.get(i).getPrenom();
+		
+		for (int i = 0; i < tabTypesHeures.length; i++){
+			if(typesHeures.get(i).getNomTypeHeure().equals("SAE") || typesHeures.get(i).getNomTypeHeure().equals("TUT"))
+				tabTypesHeures[i] = typesHeures.get(i).getNomTypeHeure();
 		}
-		this.ddlstIntervenant = new JComboBox<>(tabInter);
+		
+		this.ddlstIntervenants = new JComboBox<String>(tabInter);
+		this.ddlstTypesHeures = new JComboBox<String>(tabTypesHeures);
+	}
+
+	private void valider() {
+		TypeHeure typeHeure = null;
+		Intervenant intervenant   = null;
+		for (TypeHeure tH : this.panelMere.getTypesHeures()) {
+			if(this.ddlstTypesHeures.getSelectedItem().toString() == tH.getNomTypeHeure()){
+				typeHeure = tH;
+			}
+		}
+		for (Intervenant inter : this.panelMere.getIntervenants()) {
+			if(this.ddlstIntervenants.getSelectedItem().toString().equals(inter.getNom() + " " + inter.getPrenom())) {
+				intervenant = inter;
+			}
+		}
+		Heure heure = Heure.creerHeure(this.module,
+		                               (typeHeure),
+									   0,0,
+		                                Float.parseFloat(this.txtNbH.getText()),
+		                                this.txtCommentaire.getText() );
+		
+		heure.ajouterIntervenant(intervenant);
+		this.panelMere.ajouterHeure(heure);
+		this.panelMere.setHeureAffecte();
+	}
+
+	@Override
+	public void focusGained(FocusEvent e) {}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		float coef = 0.0f;
+		for(TypeHeure tH : this.panelMere.getTypesHeures()){
+			if(this.ddlstTypesHeures.getSelectedItem().toString().equals(tH.getNomTypeHeure())){
+				coef = tH.getCoeff();
+			}
+		}
+		int calcul = (int) (Integer.parseInt(this.txtNbH.getText()) * coef);
+		this.txtTotEqtd.setText("" + calcul);
 	}
 
 }

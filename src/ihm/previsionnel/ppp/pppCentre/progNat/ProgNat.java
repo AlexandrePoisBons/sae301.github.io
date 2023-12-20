@@ -5,11 +5,15 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.Color;
 
-public class ProgNat extends JPanel{
+public class ProgNat extends JPanel implements ActionListener, FocusListener{
 	private JPanel panelPrincipal;
 	private JPanel panelValidation;
 	private JTextField txtHTutWrite;
@@ -24,6 +28,7 @@ public class ProgNat extends JPanel{
 	private JTextField txtTotalSomme;
 	private JCheckBox checkValid;
 
+	private int sommeAction;
 
 	public ProgNat() {
 		this.setLayout(new BorderLayout());
@@ -48,7 +53,7 @@ public class ProgNat extends JPanel{
 		this.panelPrincipal.setLayout(new BorderLayout());
 		this.panelPrincipal.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
-		
+
 		//Rendre certain champ de sasie non modifiable
 		this.txtCM.setEditable(false);
 		this.txtTD.setEditable(false);
@@ -76,7 +81,7 @@ public class ProgNat extends JPanel{
 		this.panelPrincipal.add(new JLabel("TP"), gbc);
 		gbc.gridx = 6;
 		this.panelPrincipal.add(new JLabel("Σ"), gbc);
-		
+
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		gbc.insets = new Insets(0, 0, 2, 0);
@@ -119,23 +124,133 @@ public class ProgNat extends JPanel{
 	}
 
 
-	public HashMap<String,Integer> getHeuresTot(){
+	public HashMap<String, Integer> getHeuresTot() {
+
 		HashMap<String,Integer> map = new HashMap<>();
 
-		try { map.put("CM", Integer.parseInt(this.txtCMWrite.getText())); }
-		catch(NumberFormatException e) { map.put("CM", 0); }
-		
-		try { map.put("TD", Integer.parseInt(this.txtTDWrite.getText())); }
-		catch(NumberFormatException e) { map.put("TD", 0); }
-		
+		try { map.put("Ponct", Integer.parseInt(this.txtHPonctWrite.getText())); }
+		catch(NumberFormatException e) { map.put("SAE", 0); }
+
 		try { map.put("TUT", Integer.parseInt(this.txtHTutWrite.getText())); }
-		catch(NumberFormatException e) { map.put("TUT", 0); }
-		
-		try { map.put("HP", Integer.parseInt(this.txtHPonctWrite.getText())); }
-		catch(NumberFormatException e) { map.put("HP", 0); }
+		catch (NumberFormatException e) { map.put("TUT",0); }
 
 		return map;
 	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		if(e.getSource() == this.txtHPonctWrite) {
+			//Vérification que l'utilsateur rentre un nombre entier supérieur ou égal à 0
+			/*try {
+				int val = Integer.parseInt(this.txtHSae.getText());
+				if(val < 0) {
+					this.txtHSae.setText("0");
+				}
+			}
+			catch(NumberFormatException ex) {
+				System.out.println("Erreur de saisie, veuillez entrer un nombre entier supérieur ou égal à 0");
+			}
+			//addition des heures saisies dans les champs
+			try {
+				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+				if(this.txtHSae.getText().equals(Integer.toString(this.sommeAction)) && this.txtHTut.getText().equals("")) {
+					System.out.println("Cette valeur a déjas été prise en compte");
+				}
+				else
+					this.sommeAction += Integer.parseInt(this.txtHSae.getText());
+
+			}
+			catch(NumberFormatException ex) {
+				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+			}*/
+			//pour que le focus passe au champ suivant quand  l'utilisteur clique sur "entrée"
+			this.txtHPonctWrite.transferFocus();
+		}
+
+
+		else if(e.getSource() == this.txtHTutWrite) {
+			//Vérification que l'utilsateur rentre un nombre entier supérieur ou égal à 0
+			/*try {
+				int val = Integer.parseInt(this.txtHTut.getText());
+				if(val < 0) {
+					this.txtHTut.setText("0");
+				}
+			}
+			catch(NumberFormatException ex) {
+				System.out.println("Erreur de saisie, veuillez entrer un nombre entier supérieur ou égal à 0");
+			}
+			//addition des heures saisies dans les champs
+			try {
+				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+				if(this.txtHTut.getText().equals(Integer.toString(this.sommeAction)) && this.txtHSae.getText().equals("")) {
+					System.out.println("Cette valeur a déjas été prise en compte");
+				}
+				else
+					this.sommeAction += Integer.parseInt(this.txtHTut.getText());
+
+			}
+			catch(NumberFormatException ex) {
+				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+			}*/
+			//pour que le focus passe au champ d'avant quand  l'utilisteur clique sur "entrée"
+			this.txtHTutWrite.transferFocusBackward();
+		}
+
+		this.txtSomme.setText(Integer.toString(this.sommeAction));
+
+		this.txtSomme.repaint();
+		this.txtSomme.revalidate();
+	}
+
+
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		//Addition des heures saisies dans les champs
+		int somme = 0;
+		
+		try {
+			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.txtHPonctWrite.getText().equals(Integer.toString(somme)) && this.txtHPonctWrite.getText().equals("")){
+				System.out.println("Cette valeur a déjas été prise en compte");
+			}
+			else
+				somme += Integer.parseInt(this.txtHPonctWrite.getText()); 
+		}
+		catch(NumberFormatException ex) {
+			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+		try {
+			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.txtHTutWrite.getText().equals(Integer.toString(somme)) && this.txtHTutWrite.getText().equals("")){
+				System.out.println("Cette valeur a déjas été prise en compte");
+			}
+			else
+				somme += Integer.parseInt(this.txtHTutWrite.getText());
+		}
+		catch(NumberFormatException ex) {
+			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+		this.txtSomme.setText(Integer.toString(somme));
+		this.txtSomme.repaint();
+		this.txtSomme.revalidate();
+	}
+	@Override
+	public void focusGained(FocusEvent e) {}
+
+
+	public boolean estValide() {
+		return this.checkValid.isSelected();
+	}
+
+	public int getSommePN() {
+		return this.sommeAction;
+	}
+
+
+
 
 
 

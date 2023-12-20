@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 public class PanelRepartitionHeureDroiteSae extends JPanel {
+
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
 
@@ -44,6 +45,7 @@ public class PanelRepartitionHeureDroiteSae extends JPanel {
 		gbcC.gridy = 3;
 		gbcC.gridx = 4;
 		this.panelC.add(this.ensTxtFld.get(1), gbcC);
+
 		this.add(this.panelC);
 	}
 

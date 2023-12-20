@@ -80,9 +80,9 @@ public class Requetes {
 			this.psUpdateTH = this.connec.prepareStatement("UPDATE Type_Heure SET coeff=? WHERE id_type_heure=?;");
 
 			this.psSelectM = this.connec.prepareStatement("SELECT * FROM Module WHERE id_module=?;");
-			this.psInsertM = this.connec.prepareStatement("INSERT INTO Module VALUES(?,?,?,?,?,?,?,?,?,?,?);");
+			this.psInsertM = this.connec.prepareStatement("INSERT INTO Module VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
 			this.psDeleteM = this.connec.prepareStatement("DELETE FROM Module CASCADE WHERE id_module=?;");
-			this.psUpdateM = this.connec.prepareStatement("UPDATE Module SET type_module=?, semestre=?, libelle=?, libelle_court=?, code=?, nb_etudiants=?, nb_gp_td=?, nb_gp_tp=?, nb_semaines=?, nb_heures=? WHERE id_module=?;");
+			this.psUpdateM = this.connec.prepareStatement("UPDATE Module SET type_module=?, semestre=?, libelle=?, libelle_court=?, code=?, nb_etudiants=?, nb_gp_td=?, nb_gp_tp=?, nb_semaines=?, nb_heures=?, valide=? WHERE id_module=?;");
 
 			this.psSelectS = this.connec.prepareStatement("SELECT * FROM Statut WHERE nom_statut=?;");
 			this.psInsertS = this.connec.prepareStatement("INSERT INTO Statut VALUES(?,?,?,?);");
@@ -265,6 +265,7 @@ public class Requetes {
 	public static int getNbHeures()
 	{
 		int nbHeures = 0;
+		
 		Infos infos = new Infos();
 
 		try {
@@ -349,7 +350,10 @@ public class Requetes {
 	}
 
 	public static int getNbTypeHeures() {
+
 		int nbTypeHeures = 0;
+
+		Infos infos = new Infos();
 
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -357,7 +361,10 @@ public class Requetes {
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","coucou");
+			String url = "jdbc:postgresql://localhost:5432/"+infos.getDatabase();
+			String login = infos.getLogin();
+			String password = infos.getPassword();
+			Connection connec = DriverManager.getConnection(url,url,password);
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
@@ -405,6 +412,7 @@ public class Requetes {
 			this.psInsertM.setInt    ( 9,  module.getNbGpTP()       );
 			this.psInsertM.setInt    ( 10, module.getNbSemaines()   );
 			this.psInsertM.setInt    ( 11, module.getNbHeures()     );
+			this.psInsertM.setBoolean(12, module.isValide()         );
 
 			this.psInsertM.execute();
 
@@ -443,7 +451,10 @@ public class Requetes {
 			this.psUpdateM.setInt(8, module.getNbGpTP());
 			this.psUpdateM.setInt(9, module.getNbSemaines());
 			this.psUpdateM.setInt(10, module.getNbHeures());
-			this.psUpdateM.setInt(11, module.getIdModule());
+			this.psUpdateM.setBoolean(11, module.isValide());
+
+			this.psUpdateM.setInt(12, module.getIdModule());
+
 			this.psUpdateM.executeUpdate();
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" inexistant");
@@ -454,16 +465,20 @@ public class Requetes {
 	{
 		int nbModules = 0;
 
+		Infos infos = new Infos();
+
 		try {
 			Class.forName("org.postgresql.Driver");
 			System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			Connection connec = DriverManager.getConnection("jdbc:postgresql://localhost:5432/astre","postgres","coucou");
+			String url = "jdbc:postgresql://localhost:5432/"+infos.getDatabase();
+			String login = infos.getLogin();
+			String password = infos.getPassword();
+			Connection connec = DriverManager.getConnection(url,login,password);
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
-			
 			try {
 				PreparedStatement  psGetNbModules =  connec.prepareStatement("SELECT COUNT(*) FROM Module;");
 				ResultSet rs = psGetNbModules.executeQuery();
@@ -798,13 +813,14 @@ public class Requetes {
 															rs.getInt("nb_gp_td"), 
 															rs.getInt("nb_gp_tp"),
 															rs.getInt("nb_semaines"),
-															rs.getInt("nb_heures")),
+															rs.getInt("nb_heures"),
+															rs.getBoolean("valide")),
 										TypeHeure.initTypeHeure(rs.getInt("id_type_heure"),rs.getString("nom_type_heure"),
 															rs.getFloat("coeff") ),
 												rs.getInt("nb_semaines"),
 												rs.getInt("nb_gp_nb_h"),
 												rs.getInt("duree"),
-												rs.getString("commentaire"));
+												rs.getString("commentaire") );
 			listeH.add(h);
 		}
 		rs.close();
@@ -832,7 +848,8 @@ public class Requetes {
 			                               rs.getInt    ("nb_gp_td"      ),
 			                               rs.getInt    ("nb_gp_tp"      ),
 			                               rs.getInt    ("nb_semaines"   ),
-			                               rs.getInt    ("nb_heures"     ));
+			                               rs.getInt    ("nb_heures"     ),
+			                               rs.getBoolean("valide") );
 			listeI.add(m);
 		}
 		rs.close();
@@ -978,7 +995,8 @@ public class Requetes {
 			                                              rs.getInt("nb_gp_td"), 
 			                                              rs.getInt("nb_gp_tp"),
 			                                              rs.getInt("nb_semaines"),
-			                                              rs.getInt("nb_heures")),
+			                                              rs.getInt("nb_heures"),
+			                                              rs.getBoolean("valide")),
 			                           TypeHeure.initTypeHeure(rs.getInt("id_type_heure"), rs.getString("nom_type_heure"),
 			                                           rs.getFloat("coeff") ),
 									   rs.getInt("nb_semaines"),
@@ -1030,7 +1048,8 @@ public class Requetes {
 			                              rs.getInt    ("nb_gp_td"      ),
 			                              rs.getInt    ("nb_gp_tp"      ),
 			                              rs.getInt    ("nb_semaines"   ),
-			                              rs.getInt    ("nb_heures"     ) );
+			                              rs.getInt    ("nb_heures"     ),
+			                              rs.getBoolean("valide") );
 			listeI.add(m);
 		}
 		rs.close();

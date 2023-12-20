@@ -27,6 +27,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	private PanelAffectSae panelAffect;
 	private JButton btnAjouter;
 	private JButton btnSuppr;
+
 	private Module module;
 
 	public PanelRepartitionSae(PCentreSae panelMere, Module m) {
@@ -52,8 +53,8 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 		this.add(panelBtn         , BorderLayout.SOUTH);
 
 		//Ajout des
-		this.btnAjouter.addActionListener	(this);
-		this.btnSuppr.addActionListener		(this);
+		this.btnAjouter.addActionListener(this);
+		this.btnSuppr.addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -74,10 +75,10 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
 	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
+	public int getSommeAffecte() { return this.panelRepH.getSommeAffecte(); }
 
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
-
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);
@@ -100,7 +101,5 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 		this.panelRepH.setHeureAffecte(hSae, hTut);
 	}
 
-	public int getSommeAffecte() {
-		return this.panelRepH.getSommeAffecte();
-	}
+
 }

@@ -6,6 +6,8 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.util.HashMap;
+
+import metier.Heure;
 import metier.Intervenant;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import ihm.previsionnel.stage.stageCentre.PCentreStage;
 import ihm.previsionnel.stage.stageSud.PanelSudStage;
 import ihm.previsionnel.stage.stageNord.PNordStage;
 import metier.Module;
+import metier.TypeHeure;
 
 public class PanelStage extends JPanel {
 	private FrameAccueil  frame;
@@ -31,7 +34,9 @@ public class PanelStage extends JPanel {
 		this.panelMere = panelMere;
 		this.module    = m;
 
+
 		this.frame.setTitle("Prévisionnel - Module: Stage");
+
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -43,14 +48,38 @@ public class PanelStage extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
-		this.pNordStage   = new PNordStage(this);
-		this.pCentreStage = new PCentreStage(this);
-		this.pSudStage    = new PanelSudStage(this.frame, this.panelMere, this);
+		this.pNordStage   = new PNordStage(this, this.module);
+		this.pNordStage.setValues();
+		this.pCentreStage = new PCentreStage(this, this.module);
+		this.pSudStage    = new PanelSudStage(this.frame, this.panelMere, this, this.module);
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add( this.pNordStage,   BorderLayout.NORTH  );
 		this.add( this.pCentreStage, BorderLayout.CENTER );
 		this.add( this.pSudStage,    BorderLayout.SOUTH  );
+	}
+
+
+	public void enregistrer(Module m) {
+		List<Heure> heures = this.pCentreStage.getHeures();
+
+		m.setHeures(heures);
+		this.panelMere.ajouterModule(m);
+
+		this.frame.changerPanel(new PanelPrevi(this.frame));
+	}
+
+	public void update(Module oldModule, Module newModule) {
+		List<Heure> heures = this.pCentreStage.getHeures();
+
+		newModule.setHeures(heures);
+		this.panelMere.updateModule(oldModule, newModule);
+
+		this.frame.changerPanel(new PanelPrevi(this.frame));
+	}
+
+	public void setErreur(String message) {
+		this.pSudStage.setErreur(message);
 	}
 
 
@@ -66,10 +95,8 @@ public class PanelStage extends JPanel {
 	public HashMap<String, Integer> getDataHeures() { return this.pCentreStage.getData(); }
 	public HashMap<String,Integer>  getData()       { return this.pCentreStage.getData(); }
 	
-	public List<Intervenant> getIntervenants(){ return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
+	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
+	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }
 
-	public void setErreur(String message) {
-		this.pSudStage.setErreur(message);
-	}
 
 }

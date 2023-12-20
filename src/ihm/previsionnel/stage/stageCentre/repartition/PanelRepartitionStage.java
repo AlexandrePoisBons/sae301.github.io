@@ -9,12 +9,17 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 //Imports classes externes
 import ihm.previsionnel.stage.stageCentre.PCentreStage;
 import ihm.previsionnel.stage.stageCentre.repartition.heureStage.PanelRepHStage;
+import metier.Heure;
 import metier.Intervenant;
+import metier.Module;
+import metier.TypeHeure;
 
 public class PanelRepartitionStage extends JPanel implements ActionListener{
 	private PCentreStage panelMere;
@@ -22,16 +27,19 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 	private PanelAffectStage panelAffect;
 	private JButton btnAjouter;
 	private JButton btnSuppr;
+	private Module module;
 
-	public PanelRepartitionStage(PCentreStage panelMere) {
+	public PanelRepartitionStage(PCentreStage panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
+
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(0, 5, 0, 0));
 
 		JPanel panelBtn = new JPanel();
 
 		this.panelRepH 	= new PanelRepHStage					(this)				;
-		this.panelAffect	 		= new PanelAffectStage			(this)				;	
+		this.panelAffect	 		= new PanelAffectStage			(this, this.module)				;	
 		this.btnAjouter 			= new JButton					("Ajouter")	;
 		this.btnSuppr				= new JButton					("Supprimer")	;	
 
@@ -51,34 +59,45 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 	//A DECOMMENTER
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter){
-			new FrameFormulaire(this);
+			new FrameFormulaire(this, this.module);
 			this.setErreur("");
 		}
 		if(e.getSource() == this.btnSuppr){
-			//this.panelAffect.supprimer();
+			this.panelAffect.supprimer();
 			this.setErreur("");
 		}
 	}
 
-	public HashMap<String,Integer> getRepartitionHeures() {
-		return this.panelRepH.getRepartitionHeures();
-	}
+	public HashMap<String,Integer> getData() { return this.panelMere.getData(); }
+	public HashMap<String,Integer> getNbSemaines() { return this.panelRepH.getNbSemaines(); }
+	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
+	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
+	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
+	public int getSommeAffecte() { return this.panelRepH.getSommeAffecte(); }
 
-	public HashMap<String,Integer> getData(){
-		return this.panelMere.getData();
-	}
-	public List<Intervenant> getIntervenants(){
-		return this.panelMere.getIntervenants();
-	}
-
-	public void ajouterLigne(String string, String text, int int1, int int2, String text2) {
-		this.panelAffect.ajouterLigne(string, text, int1, int2, text2);
-	}
+	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
+	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);
 	}
 
-}
+	public void setHeureAffecte() {
+		System.out.println("panelRepartitionSae");
+		DefaultTableModel dtm = this.panelAffect.getDtm();
+		JTable tableauAffect  = this.panelAffect.getTableauAffect();
+		int hSae = 0;
+		int hTut = 0;
+		for(int i=0;i<tableauAffect.getRowCount();i++) {
+			if(dtm.getValueAt(i, 1).equals("SAE")){
+				hSae += Float.parseFloat(dtm.getValueAt(i, 2).toString());
+			}
+			if(dtm.getValueAt(i, 1).equals("TUT")){
+				hTut += Float.parseFloat(dtm.getValueAt(i, 2).toString());
+			}
+		}
+		this.panelRepH.setHeureAffecte(hSae, hTut);
+	}
 
-	
+
+}

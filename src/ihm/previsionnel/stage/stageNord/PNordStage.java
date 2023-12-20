@@ -8,6 +8,7 @@ import java.awt.Insets;
 import javax.swing.*;
 
 import ihm.previsionnel.stage.PanelStage;
+import metier.Module;
 
 public class PNordStage extends JPanel{
 	private PanelStage panelMere;
@@ -23,8 +24,11 @@ public class PNordStage extends JPanel{
 	private JTextField txtNbGpTd;
 	private JTextField txtNbGpTp;
 
-	public PNordStage(PanelStage panelMere) {
+	private Module module;
+
+	public PNordStage(PanelStage panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
 
 		this.setLayout(new BorderLayout());
 
@@ -97,19 +101,37 @@ public class PNordStage extends JPanel{
 		this.panelCentre.add(this.txtNbGpTp, gbc);
 
 		this.add(this.panelCentre, BorderLayout.WEST);
-		this.setValues();
+
+		this.setModuleData();
 
 		this.setVisible(true);
 	}
 
-	private void setValues() {
-		this.txtTypeModule.setText("Stage/suivi");
+	private void setModuleData() {
+		this.txtTypeModule.setText("Stage");
 		this.txtSemestre.setText(this.panelMere.getSemestre());
-		this.txtNbEtd.setText("" + this.panelMere.getNbEtd());
-		this.txtNbGpTd.setText("" + this.panelMere.getNbGpTd());
-		this.txtNbGpTp.setText("" + this.panelMere.getNbGpTp());
+		this.txtNbEtd.setText(this.panelMere.getNbEtd()+"");
+		this.txtNbGpTd.setText(this.panelMere.getNbGpTd()+"");
+		this.txtNbGpTp.setText(this.panelMere.getNbGpTp()+"");
+		this.txtCode.setText(this.module.getCode());
+		this.txtLibCourt.setText(this.module.getLibelleCourt());
+		this.txtLibLong.setText(this.module.getLibelle());
 	}
+
+	public void setValues() {
+		this.module.setTypeModule("Stage");
+		this.module.setSemestre(this.panelMere.getSemestre());
+		this.module.setNbEtudiants(this.panelMere.getNbEtd());
+		this.module.setNbGpTD(this.panelMere.getNbGpTd());
+		this.module.setNbGpTP(this.panelMere.getNbGpTp());
+		this.module.setCode(this.txtCode.getText());
+		this.module.setLibelleCourt(this.txtLibCourt.getText());
+		this.module.setLibelle(this.txtLibLong.getText());
+	}
+
 	public String getLibelle()      { return this.txtLibLong.getText();  }
 	public String getLibelleCourt() { return this.txtLibCourt.getText(); }
 	public String getCode()         { return this.txtCode.getText();     }
+
+
 }

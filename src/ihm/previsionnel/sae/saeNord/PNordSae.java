@@ -134,5 +134,4 @@ public class PNordSae extends JPanel{
 	public String getCode()         { return this.txtCode.getText();     }
 
 
-
 }

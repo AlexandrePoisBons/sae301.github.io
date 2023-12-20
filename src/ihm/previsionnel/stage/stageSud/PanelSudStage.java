@@ -25,16 +25,21 @@ public class PanelSudStage extends JPanel implements ActionListener{
 	private JLabel       lblErreur;
 	private JPanel panelWest;
 	private PanelStage panelStage;
+	private Module module;
+	private Module oldModule;
 
 
-	public PanelSudStage(FrameAccueil frame, PanelPrevi panelPrevi, PanelStage panelStage) {
+	public PanelSudStage(FrameAccueil frame, PanelPrevi panelPrevi, PanelStage panelStage, Module m) {
 		this.frame      = frame;
 		this.panelStage = panelStage;
 		this.panelPrevi = panelPrevi;
+		this.oldModule = m;
+		this.module = m;
 
 		this.setLayout(new BorderLayout());
 
 		this.panelWest         = new JPanel();
+
 		this.boutonEnregistrer = new JButton("Enregistrer");
 		this.boutonAnnuler     = new JButton("Annuler");
 		this.lblErreur         = new JLabel("");
@@ -59,6 +64,15 @@ public class PanelSudStage extends JPanel implements ActionListener{
 		}
 	}
 
+	public void setErreur(String message) {
+		if(message.equals("erreur")) {
+			this.lblErreur.setText("Choisir une ligne");
+		}
+		else{
+			this.lblErreur.setText("");
+		}
+	}
+
 	public void enregistrer() {
 		String typeModule   = "Stage";
 		String semestre     = this.panelStage.getSemestre();
@@ -78,21 +92,36 @@ public class PanelSudStage extends JPanel implements ActionListener{
 			nbHeures+= map.get(heure);
 		}
 
-		Module module = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
+		Module m = this.panelStage.getModule();
 
-		System.out.println(this.frame.getControleur().getCtrl().metier().ajouterModule( module ));
+		if ( this.module.getLibelle().length() < 1 ) {
+			m.setTypeModule(typeModule);
+			m.setSemestre(semestre);
+			m.setLibelle(libelle);
+			m.setLibelleCourt(libelleCourt);
+			m.setCode(code);
+			m.setNbEtudiants(nbEtudiants);
+			m.setNbGpTD(nbGpTD);
+			m.setNbGpTP(nbGpTP);
+			m.setNbSemaines(nbSemaines);
+			m.setNbHeures(nbHeures);
+			this.panelStage.enregistrer(m);
+		} else {
+			this.module.setTypeModule(m.getTypeModule());
+			this.module.setSemestre(m.getSemestre());
+			this.module.setLibelle(m.getLibelle());
+			this.module.setLibelleCourt(m.getLibelleCourt());
+			this.module.setCode(m.getCode());
+			this.module.setNbEtudiants(m.getNbEtudiants());
+			this.module.setNbGpTD(m.getNbGpTD());
+			this.module.setNbGpTP(m.getNbGpTP());
+			this.module.setNbSemaines(m.getNbSemaines());
+			this.module.setNbHeures(m.getNbHeures());
+			this.panelStage.update(this.oldModule, this.module);
+		}
 
-		System.out.println(module.toString());
 	}
 
-	public void setErreur(String message) {
-		if(message.equals("erreur")){
-			this.lblErreur.setText("Choisir une ligne");
-			this.repaint();
-		}
-		else {
-			this.lblErreur.setText("");
-			this.repaint();
-		}
-	}
+
+
 }
