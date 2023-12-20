@@ -111,7 +111,6 @@ public class PanelPrevi extends JPanel implements ActionListener {
 
 		if (e.getSource() == this.btnModifier) {
 			Module m = this.panelCenterPrevi.getCurrentSemestre().getCurrentModule();
-			System.out.println(m+"EH BEH");
 			if (m != null) {
 				switch(this.panelCenterPrevi.getCurrentSemestre().getCurrentModule().getTypeModule()) {
 					case "Ressource" -> {this.frame.changerPanel(new PanelRessources (this.frame, this, m ) );}
