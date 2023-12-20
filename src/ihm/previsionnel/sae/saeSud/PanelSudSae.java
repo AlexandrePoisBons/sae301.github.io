@@ -120,5 +120,8 @@ public class PanelSudSae extends JPanel implements ActionListener{
 		}
 
 	}
+	public boolean estValide() {
+		return this.panelSae.estValide();
+	}
 
 }

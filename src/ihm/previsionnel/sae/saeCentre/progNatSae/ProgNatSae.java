@@ -177,7 +177,6 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 
 		this.txtSomme.repaint();
 		this.txtSomme.revalidate();
-		
 	}
 
 
@@ -215,4 +214,13 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 	}
 	@Override
 	public void focusGained(FocusEvent e) {}
+
+
+	public boolean estValide() {
+		return this.checkValid.isSelected();
+	}
+
+	public int getSommePN() {
+		return this.sommeAction;
+	}
 }

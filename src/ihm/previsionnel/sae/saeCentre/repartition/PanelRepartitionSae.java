@@ -84,5 +84,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	}
 
 
-
+	public int getSommeAffecte() {
+		return this.panelRepH.getSommeAffecte();
+	}
 }

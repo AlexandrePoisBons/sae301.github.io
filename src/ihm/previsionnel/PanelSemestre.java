@@ -118,7 +118,7 @@ public class PanelSemestre extends JPanel {
 
 	public void ajouterModule(Module module) {
 		this.modules.add(module);
-		String[] s = {module.getCode()};
+		String[] s = {module.getCode(), module.getLibelle()};
 		this.dtm.addRow(s);
 	}
 
