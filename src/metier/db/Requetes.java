@@ -265,7 +265,7 @@ public class Requetes {
 	public static int getNbHeures()
 	{
 		int nbHeures = 0;
-		
+
 		Infos infos = new Infos();
 
 		try {
@@ -364,7 +364,7 @@ public class Requetes {
 			String url = "jdbc:postgresql://localhost:5432/"+infos.getDatabase();
 			String login = infos.getLogin();
 			String password = infos.getPassword();
-			Connection connec = DriverManager.getConnection(url,url,password);
+			Connection connec = DriverManager.getConnection(url,login,password);
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
