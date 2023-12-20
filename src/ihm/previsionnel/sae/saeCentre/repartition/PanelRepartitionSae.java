@@ -84,19 +84,23 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	}
 
 	public void setHeureAffecte() {
+		System.out.println("panelRepartitionSae");
 		DefaultTableModel dtm = this.panelAffect.getDtm();
 		JTable tableauAffect  = this.panelAffect.getTableauAffect();
 		int hSae = 0;
 		int hTut = 0;
 		for(int i=0;i<tableauAffect.getRowCount();i++) {
 			if(dtm.getValueAt(i, 1).equals("SAE")){
-				hSae += Integer.parseInt(dtm.getValueAt(i, 2).toString());
+				hSae += Float.parseFloat(dtm.getValueAt(i, 2).toString());
 			}
 			if(dtm.getValueAt(i, 1).equals("TUT")){
-				hTut += Integer.parseInt(dtm.getValueAt(i, 2).toString());
+				hTut += Float.parseFloat(dtm.getValueAt(i, 2).toString());
 			}
 		}
 		this.panelRepH.setHeureAffecte(hSae, hTut);
 	}
 
+	public int getSommeAffecte() {
+		return this.panelRepH.getSommeAffecte();
+	}
 }

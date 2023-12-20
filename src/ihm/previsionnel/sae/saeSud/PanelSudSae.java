@@ -93,7 +93,6 @@ public class PanelSudSae extends JPanel implements ActionListener{
 
 		Module m = this.panelSae.getModule();
 
-		System.out.println(this.module.getLibelle()+" coucouuuuu");
 		if ( this.module.getLibelle().length() < 1 ) {
 			m.setTypeModule(typeModule);
 			m.setSemestre(semestre);
@@ -105,7 +104,6 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			m.setNbGpTP(nbGpTP);
 			m.setNbSemaines(nbSemaines);
 			m.setNbHeures(nbHeures);
-			System.out.println("\nDONOVAAAAAA\n"+m.getHeures());
 			this.panelSae.enregistrer(m);
 		} else {
 			this.module.setTypeModule(m.getTypeModule());
@@ -122,6 +120,9 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			this.panelSae.update(this.oldModule, this.module);
 		}
 
+	}
+	public boolean estValide() {
+		return this.panelSae.estValide();
 	}
 
 }

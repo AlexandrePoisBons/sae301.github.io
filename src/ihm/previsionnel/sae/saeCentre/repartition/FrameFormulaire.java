@@ -147,16 +147,15 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 			}
 		}
 		Heure heure = Heure.creerHeure(this.module,
-		                               ((TypeHeure)this.ddlstTypesHeures.getSelectedItem()),
+		                               (typeHeure),
 									   0,0,
 		                                Float.parseFloat(this.txtNbH.getText()),
 		                                this.txtCommentaire.getText() );
-		heure.ajouterIntervenant((Intervenant)this.ddlstIntervenant.getSelectedItem());
 		
 		heure.ajouterIntervenant(intervenant);
 		this.panelMere.ajouterHeure(heure);
+		this.panelMere.setHeureAffecte();
 	}
-	
 
 	@Override
 	public void focusGained(FocusEvent e) {}
