@@ -53,4 +53,13 @@ public class PanelRepartitionHeureDroiteSae extends JPanel {
 		this.revalidate();
 	}
 
+	public void setSommeAffecte(int somme) {
+		this.ensTxtFld.get(1).setText("" + somme);
+		this.repaint();
+		this.revalidate();
+	}
+
+	public int getSommeAffecte() {
+		return Integer.parseInt(this.ensTxtFld.get(1).getText());
+	}
 }

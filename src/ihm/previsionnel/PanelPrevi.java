@@ -81,8 +81,6 @@ public class PanelPrevi extends JPanel implements ActionListener {
 
 
 
-
-
 	public String getSemestre()   { return "S"+this.panelCenterPrevi.getCurrentSemestre().getIdSemestre();   }
 	public int getNbEtd()      { return this.panelCenterPrevi.getNbEtd();      }
 	public int getNbGpTd()     { return this.panelCenterPrevi.getNbGpTd();     }
@@ -125,7 +123,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		}
 		if(e.getSource() == this.btnSupprimer) {
 			try { this.panelCenterPrevi.getCurrentSemestre().removeModule(); }
-			catch(SQLException eq) {System.out.println("Sélectionner une ligne pour la supprimer"); }
+			catch(SQLException eq) {System.out.println("Sélectionner une ligne pour la supprimer");}
 		}
 		if(e.getSource() == this.btnRetour){
 			this.frame.changerPanel(new PanelAcceuil(this.frame));

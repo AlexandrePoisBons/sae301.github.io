@@ -17,21 +17,24 @@ import metier.Intervenant;
 import metier.TypeHeure;
 import metier.Module;
 
-public class FrameFormulaire extends JFrame implements ActionListener, FocusListener{
-	private PanelRepartitionSae     panelMere;
-	private JPanel                  panelFormulaire;
-	private JComboBox<String>     ddlstIntervenant;
-	private JComboBox<String>       ddlstTypesHeures;
-	private JTextField              txtNbH; 
-	private JTextField              txtTotEqtd;
-	private JTextField              txtCommentaire;
-	private JButton                 btnValider;
-	private JButton                 btnAnnuler;
-	private Module module;
+public class FrameFormulaire extends JFrame implements ActionListener, FocusListener {
 
-	public FrameFormulaire(PanelRepartitionSae panelMere, Module module) {
-		this.panelMere       = panelMere;
-		this.module = module;
+	private PanelRepartitionSae panelMere;
+	private JPanel              panelFormulaire;
+	private JComboBox<String>   ddlstIntervenant;
+	private JComboBox<String>   ddlstTypesHeures;
+	private JTextField          txtNbH; 
+	private JTextField          txtTotEqtd;
+	private JTextField          txtCommentaire;
+	private JButton             btnValider;
+	private JButton             btnAnnuler;
+	private Module              module;
+
+	public FrameFormulaire(PanelRepartitionSae panelMere, Module m) {
+
+		this.panelMere = panelMere;
+		this.module    = m;
+
 
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
@@ -98,21 +101,15 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnValider){
+		if(e.getSource() == this.btnValider) {
 			this.valider();
 			this.dispose();
 		}
 		if(e.getSource() == this.btnAnnuler){
-			this.annuler();
+			this.dispose();
 		}
 	}
 
-	public void annuler() {
-		this.txtCommentaire.setText("");
-		this.txtNbH.setText("");
-		this.txtTotEqtd.setText("");
-		this.dispose();
-	}
 
 	public void remplirListe(List<Intervenant> intervenants, List<TypeHeure> typesHeures) {
 		String[] tabInter = new String[intervenants.size()];
@@ -145,9 +142,15 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 				intervenant = inter;
 			}
 		}
-		Heure heure = Heure.creerHeure(this.module, typeHeure, Float.parseFloat(this.txtNbH.getText()), this.txtCommentaire.getText() );
+		Heure heure = Heure.creerHeure(this.module,
+		                               (typeHeure),
+									   0,0,
+		                                Float.parseFloat(this.txtNbH.getText()),
+		                                this.txtCommentaire.getText() );
+		
 		heure.ajouterIntervenant(intervenant);
 		this.panelMere.ajouterHeure(heure);
+		this.panelMere.setHeureAffecte();
 	}
 
 	@Override
@@ -157,7 +160,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 	public void focusLost(FocusEvent e) {
 		float coef = 0.0f;
 		for(TypeHeure tH : this.panelMere.getTypesHeures()){
-			if(this.ddlstTypesHeures.getSelectedItem().toString() == tH.getNomTypeHeure()){
+			if(this.ddlstTypesHeures.getSelectedItem().toString().equals(tH.getNomTypeHeure())){
 				coef = tH.getCoeff();
 			}
 		}

@@ -51,11 +51,13 @@ public class PCentreSae extends JPanel{
 		this.add(panelC, BorderLayout.CENTER);
 		this.add(panelN, BorderLayout.NORTH);
 
+
 		if ( this.module != null )
 			this.setData();
+
 	}
 
-	public List<Heure> getHeures(Module m) { return this.panelRepartitionSae.getHeures(m); }
+	public List<Heure> getHeures() { return this.panelRepartitionSae.getHeures(); }
 
 	public HashMap<String, Integer> getData() {
 
@@ -78,5 +80,17 @@ public class PCentreSae extends JPanel{
 
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.panelMere.getTypesHeures();  }
+
+	public boolean estValide() {
+		return this.panelProgNatSae.estValide();
+	}
+
+	public int getSommeAffecte() {
+		return this.panelRepartitionSae.getSommeAffecte();
+	}
+
+	public int getSommePN() {
+		return this.panelProgNatSae.getSommePN();
+	}
 
 }

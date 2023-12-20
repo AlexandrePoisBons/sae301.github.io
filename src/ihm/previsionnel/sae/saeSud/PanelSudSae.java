@@ -28,11 +28,11 @@ public class PanelSudSae extends JPanel implements ActionListener{
 	private Module       oldModule;
 
 	public PanelSudSae(FrameAccueil frame, PanelPrevi panelPrevi, PanelSae panelSae, Module m) {
-		this.frame = frame;
+		this.frame      = frame;
 		this.panelPrevi = panelPrevi;
-		this.panelSae = panelSae;
-		this.oldModule = m;
-		this.module = m;
+		this.panelSae   = panelSae;
+		this.oldModule  = m;
+		this.module     = m;
 
 		this.setLayout(new BorderLayout());
 
@@ -62,8 +62,8 @@ public class PanelSudSae extends JPanel implements ActionListener{
 		}
 	}
 
-	public void setErreur(String message){
-		if(message.equals("erreur")){
+	public void setErreur(String message) {
+		if(message.equals("erreur")) {
 			this.lblErreur.setText("Choisir une ligne");
 		}
 		else{
@@ -73,32 +73,19 @@ public class PanelSudSae extends JPanel implements ActionListener{
 
 
 	public void enregistrer() {
-
 		String typeModule   = "SAE";
 		String semestre     = this.panelSae.getSemestre();
 		String libelle      = this.panelSae.getLibelle();
 		String libelleCourt = this.panelSae.getLibelleCourt();
 		String code         = this.panelSae.getCode();
-
-		int nbEtudiants;
-		try { nbEtudiants = this.panelPrevi.getNbEtd(); }
-		catch (NumberFormatException e) { nbEtudiants = 0;}
-
-		int nbGpTD;
-		try { nbGpTD = this.panelPrevi.getNbGpTd(); }
-		catch (NumberFormatException e) { nbGpTD = 0; }
-
-		int nbGpTP;
-		try { nbGpTP = this.panelPrevi.getNbGpTp(); }
-		catch (NumberFormatException e) { nbGpTP = 0; }
-
-		int nbSemaines = 0;
-		int nbHeures   = 0;
+		int    nbEtudiants  = this.panelPrevi.getNbEtd();
+		int    nbGpTD       = this.panelPrevi.getNbGpTd();
+		int    nbGpTP       = this.panelPrevi.getNbGpTp();
+		int    nbSemaines   = 0;
+		int    nbHeures     = 0;
 
 		HashMap<String, Integer> map = this.panelSae.getDataHeures();
-
-
-		for (String heure : map.keySet() ){
+		for (String heure : map.keySet()) {
 			if (map.get(heure) > nbSemaines)
 				nbSemaines = map.get(heure);
 			nbHeures+= map.get(heure);
@@ -132,10 +119,9 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			this.panelSae.update(this.oldModule, this.module);
 		}
 
-		// Module module = Module.creerModule( typeModule, semestre, libelle, libelleCourt, code, nbEtudiants, nbGpTD, nbGpTP, nbSemaines, nbHeures );
-
-		// System.out.println(this.frame.getControleur().getCtrl().metier().ajouterModule( module ));
-
+	}
+	public boolean estValide() {
+		return this.panelSae.estValide();
 	}
 
 }

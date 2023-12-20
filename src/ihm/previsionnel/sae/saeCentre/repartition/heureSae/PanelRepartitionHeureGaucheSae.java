@@ -39,9 +39,9 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 		gbcH.gridx = 1;
 		gbcH.gridy = 0;
 		gbcH.insets = new Insets(10, 0, 2, 0);
-		panelHC.add(new JLabel("nbSem")	, gbcH);
+		panelHC.add(new JLabel("h Sae")	, gbcH);
 		gbcH.gridx = 2;
-		panelHC.add(new JLabel("nbH")	, gbcH);
+		panelHC.add(new JLabel("h Tut")	, gbcH);
 
 
 		gbcH.gridx = 0;
@@ -92,6 +92,14 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 		this.panelMere.setSommePromo(somme);
 	}
 
+	public void setSommeAffecte() {
+		int somme = 0;
+		for(int i=2;i<this.ensJTextField.size();i++) {
+			somme += Integer.parseInt(this.ensJTextField.get(i).getText());
+		}
+		this.panelMere.setSommeAffecte(somme);
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -140,7 +148,13 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 	@Override
 	public void focusGained(FocusEvent e) {}
 
-
+	public void setHeureAffecte(int hSae, int hTut) {
+		System.out.println("panelHeureDroite");
+		this.ensJTextField.get(2).setText("" + hSae);
+		this.ensJTextField.get(3).setText("" + hTut);
+		this.repaint();
+		this.revalidate();
+	}
 
 
 }

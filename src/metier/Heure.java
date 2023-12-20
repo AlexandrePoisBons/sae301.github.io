@@ -16,9 +16,11 @@ public class Heure implements Comparable<Heure> {
 	private int         idHeure;
 	private Module      module;
 	private TypeHeure   typeHeure;
+	private int         nbSemaines;
+	private int         nbGpnbH;
 	private float       duree;
 	private String      commentaire;
-	
+
 	private List<Intervenant> intervenants;
 
 	/**
@@ -29,22 +31,22 @@ public class Heure implements Comparable<Heure> {
 	 * @param commentaire Un commentaire sur l'heure saisie par l'utilisateur
 	 * @return une heure ou null
 	 */
-	public static Heure creerHeure( Module module, TypeHeure typeHeure, float duree, String commentaire)
+	public static Heure creerHeure( Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire)
 	{
 		if ( module == null || typeHeure == null || duree < 0 ){
 			System.out.println("il est nulllllllllllllllllllll");
 			return null;
 		}
 
-		return new Heure( module, typeHeure, duree, commentaire);
+		return new Heure( module, typeHeure, nbSemaines, nbGpnbH, duree, commentaire);
 	}
 
-	public static Heure initHeure( int idHeure, Module module, TypeHeure typeHeure, float duree, String commentaire)
+	public static Heure initHeure( int idHeure, Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire)
 	{
 		if ( idHeure < 0 || module == null || typeHeure == null || duree <= 0 )
 			return null;
 
-		return new Heure( idHeure, module, typeHeure, duree, commentaire);
+		return new Heure( idHeure, module, typeHeure, nbSemaines, nbGpnbH, duree, commentaire);
 	}
 
 	/**
@@ -55,20 +57,24 @@ public class Heure implements Comparable<Heure> {
 	 * @param commentaire Un commentaire sur l'heure saisie par l'utilisateur
 	 * @return            Une heure validé par la factory
 	 */
-	private Heure( Module module, TypeHeure typeHeure, float duree, String commentaire) {
+	private Heure( Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire) {
 		this.idHeure     = ++nbHeures;
 		this.module      = module;
 		this.typeHeure   = typeHeure;
+		this.nbSemaines  = nbSemaines;
+		this.nbGpnbH     = nbGpnbH;
 		this.duree       = duree;
 		this.commentaire = commentaire;
 
 		this.intervenants = new ArrayList<Intervenant>();
 	}
 
-	private Heure (int idHeure, Module module, TypeHeure typeHeure, float duree, String commentaire) {
+	private Heure (int idHeure, Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire) {
 		this.idHeure     = idHeure;
 		this.module      = module;
 		this.typeHeure   = typeHeure;
+		this.nbSemaines  = nbSemaines;
+		this.nbGpnbH     = nbGpnbH;
 		this.duree       = duree;
 		this.commentaire = commentaire;
 
@@ -79,6 +85,8 @@ public class Heure implements Comparable<Heure> {
 	public int               getIdHeure()      { return this.idHeure;      }
 	public Module            getModule()       { return this.module;       }
 	public TypeHeure         getTypeHeure()    { return this.typeHeure;    }
+	public int               getNbSemaines()   { return this.nbSemaines;   }
+	public int               getNbGpNbH()      { return this.nbGpnbH;      }
 	public float             getDuree()        { return this.duree;        }
 	public String            getCommentaire()  { return this.commentaire;  }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
@@ -87,6 +95,8 @@ public class Heure implements Comparable<Heure> {
 	public void setIdHeure( int idHeure )                       { this.idHeure      = idHeure;            }
 	public void setModule(Module module)                        { this.module       = module;             }
 	public void setTypeHeure(TypeHeure typeHeure)               { this.typeHeure    = typeHeure;          }
+	public void setNbSemaines(int nbSemaines)                   { this.nbSemaines   = nbSemaines;         }
+	public void setNbGpNbH(int nbGpnbH)                         { this.nbGpnbH      = nbGpnbH;            }
 	public void setDuree(float duree)                           { this.duree        = duree;              }
 	public void setCommentaire(String commentaire)              { this.commentaire  = commentaire;        }
 	public void setIntervenants(List<Intervenant> intervenants) { this.intervenants = intervenants;       }

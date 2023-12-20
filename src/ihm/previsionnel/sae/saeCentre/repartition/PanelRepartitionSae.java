@@ -9,7 +9,9 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 //Imports classes externes
 import ihm.previsionnel.sae.saeCentre.PCentreSae;
@@ -30,6 +32,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public PanelRepartitionSae(PCentreSae panelMere, Module m) {
 		this.panelMere = panelMere;
 		this.module = m;
+
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
@@ -56,7 +59,6 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter) {
 			new FrameFormulaire(this,this.module);
-			//this.panelAffect.ajouter();
 			this.setErreur("");
 		}
 		if(e.getSource() == this.btnSuppr) {
@@ -65,21 +67,40 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 		}
 	}
 
+
+
 	public HashMap<String,Integer> getData() { return this.panelMere.getData(); }
-
-	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
-
 	public HashMap<String,Integer> getNbSemaines() { return this.panelRepH.getNbSemaines(); }
-	public HashMap<String,Integer> getTabData() { return this.panelMere.getData(); }
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
+	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
 
+	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
 
-	public List<Heure> getHeures(Module m) { return this.panelAffect.getDataHeures(); }
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);
 	}
 
+	public void setHeureAffecte() {
+		System.out.println("panelRepartitionSae");
+		DefaultTableModel dtm = this.panelAffect.getDtm();
+		JTable tableauAffect  = this.panelAffect.getTableauAffect();
+		int hSae = 0;
+		int hTut = 0;
+		for(int i=0;i<tableauAffect.getRowCount();i++) {
+			if(dtm.getValueAt(i, 1).equals("SAE")){
+				hSae += Float.parseFloat(dtm.getValueAt(i, 2).toString());
+			}
+			if(dtm.getValueAt(i, 1).equals("TUT")){
+				hTut += Float.parseFloat(dtm.getValueAt(i, 2).toString());
+			}
+		}
+		this.panelRepH.setHeureAffecte(hSae, hTut);
+	}
+
+	public int getSommeAffecte() {
+		return this.panelRepH.getSommeAffecte();
+	}
 }
