@@ -11,7 +11,9 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import ihm.previsionnel.ressources.ressourcesCentre.repartition.FrameFormulaire;
 import ihm.previsionnel.ressources.ressourcesCentre.repartition.PanelAffect;
@@ -40,8 +42,8 @@ public class PanelRepartition extends JPanel implements ActionListener {
 		JPanel panelBoutons = new JPanel();
 
 		this.panelRepartitionHeure 	= new PanelRepartitionHeure	(this)				;
-		this.panelAffect	 		= new PanelAffect(this);
-		panelBoutons	 			= new JPanel				(    )				;
+		this.panelAffect	 		= new PanelAffect(this, this.module);
+		panelBoutons	 			= new JPanel				()				;
 		this.btnAjouter 			= new JButton				("Ajouter")	;
 		this.btnSuppr				= new JButton				("Supprimer")	;
 
@@ -73,28 +75,27 @@ public class PanelRepartition extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == this.btnSuppr) {
 			this.panelAffect.supprimer();
+			this.setErreur("");
 		}
 	}
 
-	
 
-	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
-
-	public HashMap<String,Integer> getNbSemaines() { return this.panelRepartitionHeure.getNbSemaines(); }
 
 	public HashMap<String,Integer> getData() { return this.panelMere.getData(); }
-
+	public HashMap<String,Integer> getNbSemaines() { return this.panelRepartitionHeure.getNbSemaines(); }
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
+	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
 
+	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
 
-	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);
 	}
 
 
-	
+
+
 }

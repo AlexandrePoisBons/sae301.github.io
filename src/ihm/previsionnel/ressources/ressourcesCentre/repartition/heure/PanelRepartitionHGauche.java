@@ -6,17 +6,22 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.*;
 
-public class PanelRepartitionHGauche extends JPanel{
+public class PanelRepartitionHGauche extends JPanel implements FocusListener, ActionListener{
 	private PanelRepartitionHeure 	panelMere		;
 	private JPanel 					panelHeure;
 	private JPanel 					panelTotal		;
 	private ArrayList<JTextField> 	ensJTextField	;
+	private int sommeAction;
 
 	public PanelRepartitionHGauche(PanelRepartitionHeure panelMere){
 		this.panelMere = panelMere;
@@ -87,9 +92,14 @@ public class PanelRepartitionHGauche extends JPanel{
 		this.panelHeure.add(panelHN, BorderLayout.NORTH);
 		this.panelHeure.add(panelHC, BorderLayout.CENTER);
 
+		for(int i=0;i<this.ensJTextField.size()/2;i++){
+			this.ensJTextField.get(i).addActionListener(this);
+			this.ensJTextField.get(i).addFocusListener(this);
+		}
+
 		this.add(this.panelHeure);
 		this.add(panelB);
-		
+
 	}
 
 	public HashMap<String, Integer> getNbSemaines(){
@@ -104,5 +114,62 @@ public class PanelRepartitionHGauche extends JPanel{
 
 		return map;
 	}
+
+	public void setSommePromo(int somme) {
+		this.panelMere.setSommePromo(somme);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		if(e.getSource() == this.ensJTextField.get(0)) {
+			//pour que le focus passe au champ suivant quand  l'utilisteur clique sur "entrée"
+			this.ensJTextField.get(0).transferFocus();
+		}
+		else if(e.getSource() == this.ensJTextField.get(1)) {
+
+			this.ensJTextField.get(1).transferFocusBackward();
+		}
+
+		this.setSommePromo(Integer.parseInt(this.ensJTextField.get(0).getText()) + Integer.parseInt(this.ensJTextField.get(1).getText()));		
+	}
+
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		//Addition des heures saisies dans les champs
+		int somme = 0;
+		
+		try {
+			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.ensJTextField.get(0).getText().equals(Integer.toString(somme)) && this.ensJTextField.get(1).getText().equals("")){
+				System.out.println("Cette valeur a déjas été prise en compte");
+			}
+			else
+				somme += Integer.parseInt(this.ensJTextField.get(0).getText()); 
+		}
+		catch(NumberFormatException ex) {
+			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+		
+		try {
+			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.ensJTextField.get(0).getText().equals(Integer.toString(somme)) && this.ensJTextField.get(0).getText().equals("")){
+				System.out.println("Cette valeur a déjas été prise en compte");
+			}
+			else
+				somme += Integer.parseInt(this.ensJTextField.get(1).getText());
+		}
+		catch(NumberFormatException ex) {
+			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+		this.setSommePromo(somme);
+	}
+
+
+	@Override
+	public void focusGained(FocusEvent e) {}
+
+
 
 }

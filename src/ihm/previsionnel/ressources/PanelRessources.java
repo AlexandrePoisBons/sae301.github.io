@@ -56,11 +56,11 @@ public class PanelRessources extends JPanel {
 
 	public void enregistrer(Module m) {
 		List<Heure> heures = this.pRCentre.getHeures();
+
 		m.setHeures(heures);
 		this.panelMere.ajouterModule(m);
 
 		this.frame.changerPanel(new PanelPrevi(this.frame));
-
 	}
 
 	public void update(Module oldModule, Module newModule) {

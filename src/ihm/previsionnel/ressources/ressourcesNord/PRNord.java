@@ -118,7 +118,7 @@ public class PRNord extends JPanel {
 		this.txtLibLong.setText(this.module.getLibelle());
 	}
 
-	private void setValues() {
+	public void setValues() {
 		this.module.setTypeModule("Ressource");
 		this.module.setSemestre(this.panelMere.getSemestre());
 		this.module.setNbEtudiants(this.panelMere.getNbEtd());

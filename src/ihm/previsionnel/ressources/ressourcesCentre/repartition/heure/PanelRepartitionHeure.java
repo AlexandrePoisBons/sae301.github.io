@@ -32,5 +32,14 @@ public class PanelRepartitionHeure extends JPanel{
 	public HashMap<String, Integer> getNbSemaines() {
 		return this.panelRepartitionHGauche.getNbSemaines();
 	}
-	
+
+	public void setSommePromo(int somme) {
+		this.panelRepartitionHDroite.setSommePromo(somme);
+	}
+
+	public void setHeureAffecte(int hSae, int hTut) {
+		this.panelRepartitionHDroite.setHeureAffecte(hSae, hTut);
+	}
+
+
 }
