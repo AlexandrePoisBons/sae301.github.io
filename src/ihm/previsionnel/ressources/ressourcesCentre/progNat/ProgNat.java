@@ -5,10 +5,14 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.HashMap;
 import java.awt.Color;
 
-public class ProgNat extends JPanel{
+public class ProgNat extends JPanel implements FocusListener, ActionListener{
 	private JPanel panelPrincipal;
 	private JPanel panelValidation;
 	private JTextField txtCMWrite;
@@ -99,6 +103,17 @@ public class ProgNat extends JPanel{
 		this.add(this.panelPrincipal, BorderLayout.NORTH);
 		this.add(this.panelValidation, BorderLayout.CENTER);
 
+		//implémentation des listener
+		this.txtCMWrite.addFocusListener(this);
+		this.txtTDWrite.addFocusListener(this);
+		this.txtTPWrite.addFocusListener(this);
+		this.txtOEWrite.addFocusListener(this);
+
+		this.txtCMWrite.addActionListener(this);
+		this.txtTDWrite.addActionListener(this);
+		this.txtTPWrite.addActionListener(this);
+		this.txtOEWrite.addActionListener(this);
+
 		this.setVisible(true);
 	}
 
@@ -117,7 +132,75 @@ public class ProgNat extends JPanel{
 	}
 
 
+	
 
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == this.txtCMWrite) {
+			this.txtCMWrite.transferFocus();
+		}
+		else if(e.getSource() == this.txtTDWrite) {
+			this.txtTDWrite.transferFocus();
+		}
+		else if(e.getSource() == this.txtTPWrite) {
+			//pour que le focus revienne à la première case
+			this.txtTPWrite.transferFocusDownCycle();;
 
-}//"Total (eqtd) promo"));
+		}
+
+
+		
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		//Addition des heures saisies dans les champs
+		int somme = 0;
+
+		try {
+			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.txtCMWrite.getText().equals(Integer.toString(somme)) && (this.txtTPWrite.getText().equals("")&&this.txtTDWrite.getText().equals(""))) {
+				System.out.println("Cette valeur a déjas été prise en compte");
+			}
+			else {
+				somme += Integer.parseInt(this.txtCMWrite.getText());
+			}
+		} catch (Exception err) {
+			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+
+		try {
+			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.txtTDWrite.getText().equals(Integer.toString(somme)) && (this.txtTPWrite.getText().equals("")&&this.txtCMWrite.getText().equals(""))) {
+				System.out.println("Cette valeur a déjas été prise en compte");
+			}
+			else {
+				somme += Integer.parseInt(this.txtTDWrite.getText());
+			}
+		} catch (Exception err) {
+			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+
+		try {
+			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.txtTPWrite.getText().equals(Integer.toString(somme)) && (this.txtCMWrite.getText().equals("")&&this.txtTDWrite.getText().equals(""))) {
+				System.out.println("Cette valeur a déjas été prise en compte");
+			}
+			else {
+				somme += Integer.parseInt(this.txtTPWrite.getText());
+			}
+		} catch (Exception err) {
+			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+
+		this.txtOEWrite.setText(Integer.toString(somme));
+		this.txtOEWrite.repaint();
+		this.txtOEWrite.revalidate();
+	}
+
+	//Méthode inutilisée mais obligatoire
+	@Override
+	public void focusGained(FocusEvent e) {}
+
+}
