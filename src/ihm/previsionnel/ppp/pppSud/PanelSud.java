@@ -63,17 +63,11 @@ public class PanelSud extends JPanel implements ActionListener {
 		String libelleCourt = this.panelPpp.getLibelleCourt();
 		String code         = this.panelPpp.getCode();
 
-		int nbEtudiants;
-		try { nbEtudiants = Integer.parseInt(this.panelPrevi.getNbEtd()); }
-		catch (NumberFormatException e) { nbEtudiants = 0;}
+		int nbEtudiants = this.panelPrevi.getNbEtd();
 
-		int nbGpTD;
-		try { nbGpTD = Integer.parseInt(this.panelPrevi.getNbGpTd()); }
-		catch (NumberFormatException e) { nbGpTD = 0; }
+		int nbGpTD = this.panelPrevi.getNbGpTd();
 
-		int nbGpTP;
-		try { nbGpTP = Integer.parseInt(this.panelPrevi.getNbGpTp()); }
-		catch (NumberFormatException e) { nbGpTP = 0; }
+		int nbGpTP = this.panelPrevi.getNbGpTp();
 	
 		int nbSemaines = 0;
 		int nbHeures   = 0;

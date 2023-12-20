@@ -32,6 +32,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public PanelRepartitionSae(PCentreSae panelMere, Module m) {
 		this.panelMere = panelMere;
 		this.module = m;
+		// System.out.println("COUCOU TOI COMMENT NIKTM"+this.module.getHeures());
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
@@ -58,7 +59,6 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter) {
 			new FrameFormulaire(this,this.module);
-			//this.panelAffect.ajouter();
 			this.setErreur("");
 		}
 		if(e.getSource() == this.btnSuppr) {
@@ -72,13 +72,12 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 
 	public HashMap<String,Integer> getNbSemaines() { return this.panelRepH.getNbSemaines(); }
-	public HashMap<String,Integer> getTabData() { return this.panelMere.getData(); }
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
 
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
 
-	public List<Heure> getHeures(Module m) { return this.panelAffect.getDataHeures(); }
+	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);

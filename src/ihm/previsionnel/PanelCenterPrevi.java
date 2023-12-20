@@ -83,20 +83,15 @@ public class PanelCenterPrevi extends JPanel {
 	}
 
 	public void updateModule(Module oldModule, Module newModule) {
-		this.getCurrentSemestre().getModules().remove(oldModule);
-		this.getCurrentSemestre().getModules().add(newModule);
 
 		for(Module m : this.getCurrentSemestre().getModules()) {
 			if ( m.getIdModule() == newModule.getIdModule()) {
-				for (PanelSemestre panelSemestre : this.listSemestre) {
-					if ( newModule.getSemestre().equals("S"+panelSemestre.getIdSemestre()) ){
-						panelSemestre.ajouterModule(newModule);
-					}
-				}
+				this.frame.getControleur().getCtrl().metier().updateModule(oldModule, newModule);
+				this.getCurrentSemestre().getModules().remove(oldModule);
+				this.getCurrentSemestre().getModules().add(newModule);
 				return;
 			}
 		}
-
 	}
 
 	public void ajouterModule(Module module) {
@@ -115,10 +110,10 @@ public class PanelCenterPrevi extends JPanel {
 
 	}
 
-	public int    getNumCurrentModule() { return this.modules.getSelectedIndex();               }
-	public int getNbEtd()            { return this.getCurrentSemestre().getNbEtd();          }
-	public int getNbGpTd()           { return this.getCurrentSemestre().getNbGpTd();         }
-	public int getNbGpTp()           { return this.getCurrentSemestre().getNbGpTp();         }
-	public int    getNbSemaines()       { return this.getCurrentSemestre().getNbSemaines();     }
+	public int getNumCurrentModule() { return this.modules.getSelectedIndex();           }
+	public int getNbEtd()            { return this.getCurrentSemestre().getNbEtd();      }
+	public int getNbGpTd()           { return this.getCurrentSemestre().getNbGpTd();     }
+	public int getNbGpTp()           { return this.getCurrentSemestre().getNbGpTp();     }
+	public int getNbSemaines()       { return this.getCurrentSemestre().getNbSemaines(); }
 
 }

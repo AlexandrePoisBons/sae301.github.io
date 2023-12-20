@@ -54,6 +54,7 @@ public class ControleurMetier {
 	}
 
 	public boolean ajouterModule(Module module) {
+		System.out.println("AJOUT MODULE");
 		try {
 			System.out.print("insert module: ");
 			System.out.print(this.requetes.insertModule(module)+"\n");
@@ -63,6 +64,7 @@ public class ControleurMetier {
 				for (Intervenant intervenant : heure.getIntervenants()) {
 					this.requetes.insertIntervenantHeure(intervenant, heure);
 					this.requetes.insertIntervenantModule(intervenant, module);
+					System.out.println("tout au fond");
 				}
 			}
 			this.modules.add(module);
@@ -73,6 +75,7 @@ public class ControleurMetier {
 	}
 
 	public boolean updateModule(Module oldModule, Module newModule) {
+		System.out.println("UPDATE MODULE");
 		for (int i = 0; i < oldModule.getHeures().size(); i++) {
 			System.out.println(oldModule.getHeures().get(i).getIdHeure()+" donova stp fais que ca marche "+newModule.getHeures().get(i).getIdHeure());
 		}

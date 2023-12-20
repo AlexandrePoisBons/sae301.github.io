@@ -11,23 +11,24 @@ import java.awt.Color;
 
 
 public class ProgNatStage extends JPanel{
-	private JPanel panelPrincipal;
-	private JPanel panelValidation;
+	private JPanel     panelPrincipal;
+	private JPanel     panelValidation;
 	private JTextField txtHSae;
 	private JTextField txtHTut;
 	private JTextField txtSomme;
-	private JCheckBox checkValid;
+	private JCheckBox  checkValid;
 
 	public ProgNatStage() {
 		this.setLayout(new BorderLayout());
 
 		//Initialisation des composants
-		this.panelPrincipal = new JPanel();
+		this.panelPrincipal  = new JPanel();
 		this.panelValidation = new JPanel();
-		this.txtHSae = new JTextField(2);
-		this.txtHTut = new JTextField(2);
-		this.txtSomme = new JTextField(4);
-		this.checkValid = new JCheckBox();
+		this.txtHSae         = new JTextField(2);
+		this.txtHTut         = new JTextField(2);
+		this.txtSomme        = new JTextField(4);
+		this.checkValid      = new JCheckBox();
+
 		this.panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		
 		//Rendre certain champ de sasie non modifiable
@@ -36,8 +37,6 @@ public class ProgNatStage extends JPanel{
 		//Rendre non coché
 		this.checkValid.setSelected(false);
 		this.checkValid.setEnabled(false);
-
-
 
 		//Layouts
 		//this.setLayout(new BorderLayout());
@@ -83,8 +82,8 @@ public class ProgNatStage extends JPanel{
 		this.panelValidation.add(new JLabel("Validation"));
 		this.panelValidation.add(this.checkValid);
 
-		this.add(this.panelPrincipal, BorderLayout.NORTH);
-		this.add(this.panelValidation, BorderLayout.CENTER);
+		this.add( this.panelPrincipal,  BorderLayout.NORTH  );
+		this.add( this.panelValidation, BorderLayout.CENTER );
 
 		this.setVisible(true);
 	}

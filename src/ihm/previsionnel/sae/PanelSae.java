@@ -30,7 +30,7 @@ public class PanelSae extends JPanel{
 		this.frame     = frame;
 		this.panelMere = panelMere;
 		this.module    = m;
-
+		// System.out.println("COUCOU TOI COMMENT NIKTM"+this.module.getHeures());
 		this.frame.setTitle("Prévisionnel - Module: SAE");
 
 		//Définition de la taille et la position de la fenêtre
@@ -47,19 +47,17 @@ public class PanelSae extends JPanel{
 		this.pNordSae   = new PNordSae(this, this.module);
 		this.pNordSae.setValues();
 		this.pCentreSae = new PCentreSae(this, this.module);
-		System.out.println("dono");
 		this.pSudSae    = new PanelSudSae(this.frame, this.panelMere, this, this.module);
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add(this.pNordSae, BorderLayout.NORTH);
-		
 		this.add(this.pCentreSae, BorderLayout.CENTER);
 		this.add(this.pSudSae, BorderLayout.SOUTH);
 
 	}
 
 	public void enregistrer(Module m) {
-		List<Heure> heures = this.pCentreSae.getHeures(m);
+		List<Heure> heures = this.pCentreSae.getHeures();
 
 		m.setHeures(heures);
 		this.panelMere.ajouterModule(m);
@@ -68,7 +66,7 @@ public class PanelSae extends JPanel{
 	}
 
 	public void update(Module oldModule, Module newModule) {
-		List<Heure> heures = this.pCentreSae.getHeures(newModule);
+		List<Heure> heures = this.pCentreSae.getHeures();
 
 		newModule.setHeures(heures);
 		this.panelMere.updateModule(oldModule, newModule);
@@ -94,6 +92,6 @@ public class PanelSae extends JPanel{
 	public HashMap<String,Integer>  getData() { return this.pCentreSae.getData(); }
 
 	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
-	public List<TypeHeure> getTypesHeures() { return frame.getControleur().getCtrl().metier().getTypesHeures(); }
+	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures(); }
 
 }

@@ -29,9 +29,10 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 	private JButton                 btnAnnuler;
 	private Module module;
 
-	public FrameFormulaire(PanelRepartitionSae panelMere, Module module) {
-		this.panelMere       = panelMere;
-		this.module = module;
+	public FrameFormulaire(PanelRepartitionSae panelMere, Module m) {
+		this.panelMere = panelMere;
+		this.module    = m;
+
 
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
@@ -98,7 +99,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnValider){
+		if(e.getSource() == this.btnValider) {
 			this.valider();
 			this.dispose();
 		}
@@ -145,10 +146,17 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 				intervenant = inter;
 			}
 		}
-		Heure heure = Heure.creerHeure(this.module, typeHeure, Float.parseFloat(this.txtNbH.getText()), this.txtCommentaire.getText() );
+		Heure heure = Heure.creerHeure(this.module,
+		                               ((TypeHeure)this.ddlstTypesHeures.getSelectedItem()),
+									   0,0,
+		                                Float.parseFloat(this.txtNbH.getText()),
+		                                this.txtCommentaire.getText() );
+		heure.ajouterIntervenant((Intervenant)this.ddlstIntervenant.getSelectedItem());
+		
 		heure.ajouterIntervenant(intervenant);
 		this.panelMere.ajouterHeure(heure);
 	}
+	
 
 	@Override
 	public void focusGained(FocusEvent e) {}

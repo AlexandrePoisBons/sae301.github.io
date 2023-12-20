@@ -52,6 +52,8 @@ Create table Heure (
     id_heure integer primary key,
     id_module integer REFERENCES Module(id_module) ON DELETE CASCADE,
     id_type_heure integer REFERENCES Type_Heure(id_type_heure) ON DELETE CASCADE,
+    nb_semaines integer,
+    nb_gp_nb_h integer,
     duree integer NOT NULL CHECK(duree >= 0),
     commentaire VARCHAR(250)
 );

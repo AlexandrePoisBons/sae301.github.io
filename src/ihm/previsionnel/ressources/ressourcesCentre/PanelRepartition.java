@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import ihm.previsionnel.ressources.ressourcesCentre.repartition.FrameFormulaire;
 import ihm.previsionnel.ressources.ressourcesCentre.repartition.PanelAffect;
@@ -26,12 +27,15 @@ public class PanelRepartition extends JPanel implements ActionListener {
 	private PanelAffect panelAffect;
 	private JButton btnAjouter;
 	private JButton btnSuppr;
+	private Module module;
 
-	public PanelRepartition(PRCentre panelMere) {
+	public PanelRepartition(PRCentre panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
 		JPanel pnlAlignementNordCentre = new JPanel();
 		this.setLayout(new BorderLayout());
 		pnlAlignementNordCentre.setLayout(new GridBagLayout());
+		this.setBorder(new EmptyBorder(0, 5, 0, 10)); /* PEUT ETRE PAS -> depend du design */
 
 		JPanel panelBoutons = new JPanel();
 
@@ -64,7 +68,7 @@ public class PanelRepartition extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.btnAjouter) {
-			new FrameFormulaire(this);
+			new FrameFormulaire(this, this.module);
 			this.setErreur("");
 		}
 		if (e.getSource() == this.btnSuppr) {
@@ -72,18 +76,20 @@ public class PanelRepartition extends JPanel implements ActionListener {
 		}
 	}
 
+	
+
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 
 	public HashMap<String,Integer> getNbSemaines() { return this.panelRepartitionHeure.getNbSemaines(); }
 
-	public HashMap<String,Integer> getTabData() { return this.panelMere.getData(); }
+	public HashMap<String,Integer> getData() { return this.panelMere.getData(); }
 
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
 
-	public void ajouterLigne(Object[] objs) { this.panelAffect.ajouterLigne(objs); }
+	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
 
-	public List<Heure> getHeures(Module m) { return this.panelAffect.getDataHeures(m); }
+	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);

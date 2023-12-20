@@ -19,61 +19,57 @@ import ihm.previsionnel.stage.stageNord.PNordStage;
 import metier.Module;
 
 public class PanelStage extends JPanel {
-	private FrameAccueil frame;
-	private PanelPrevi panelMere;
-	private PNordStage pNordStage;
-	private PCentreStage pCentreStage;
+	private FrameAccueil  frame;
+	private PanelPrevi    panelMere;
+	private PNordStage    pNordStage;
+	private PCentreStage  pCentreStage;
 	private PanelSudStage pSudStage;
-	private Module module;
+	private Module        module;
 
 	public PanelStage(FrameAccueil frame, PanelPrevi panelMere, Module m) {
-		this.frame = frame;
+		this.frame     = frame;
 		this.panelMere = panelMere;
-		this.module = m;
+		this.module    = m;
 
 		this.frame.setTitle("Prévisionnel - Module: Stage");
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		int xSize = (int)(largeur*0.75);
-		int ySize = (int)(hauteur*0.85);
+		int xSize   = (int)(largeur*0.75);
+		int ySize   = (int)(hauteur*0.85);
+
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
-		this.pNordStage = new PNordStage(this);
+		this.pNordStage   = new PNordStage(this);
 		this.pCentreStage = new PCentreStage(this);
-		this.pSudStage = new PanelSudStage(this.frame, this.panelMere, this);
+		this.pSudStage    = new PanelSudStage(this.frame, this.panelMere, this);
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
-		this.add(this.pNordStage, BorderLayout.NORTH);
-		this.add(this.pCentreStage, BorderLayout.CENTER);
-		this.add(this.pSudStage, BorderLayout.SOUTH);
+		this.add( this.pNordStage,   BorderLayout.NORTH  );
+		this.add( this.pCentreStage, BorderLayout.CENTER );
+		this.add( this.pSudStage,    BorderLayout.SOUTH  );
 	}
 
 
 	public String getSemestre()     { return this.panelMere.getSemestre();      }
-	public int getNbEtd()        { return this.panelMere.getNbEtd();         }
-	public int getNbGpTd()       { return this.panelMere.getNbGpTd();        }
-	public int getNbGpTp()       { return this.panelMere.getNbGpTp();        }
+	public int    getNbEtd()        { return this.panelMere.getNbEtd();         }
+	public int    getNbGpTd()       { return this.panelMere.getNbGpTd();        }
+	public int    getNbGpTp()       { return this.panelMere.getNbGpTp();        }
 	public String getCode()         { return this.pNordStage.getCode();         }
 	public String getLibelle()      { return this.pNordStage.getLibelle();      }
 	public String getLibelleCourt() { return this.pNordStage.getLibelleCourt(); }
-	public Module getModule() { return this.module; }
+	public Module getModule()       { return this.module;                       }
 
 	public HashMap<String, Integer> getDataHeures() { return this.pCentreStage.getData(); }
-
-	public HashMap<String,Integer> getData() {
-		return this.pCentreStage.getData();
-	}
-
-	public List<Intervenant> getIntervenants(){
-		return this.frame.getControleur().getCtrl().metier().getIntervenants();
-	}
+	public HashMap<String,Integer>  getData()       { return this.pCentreStage.getData(); }
+	
+	public List<Intervenant> getIntervenants(){ return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
 
 	public void setErreur(String message) {
-		this.panelSudStage.setErreur(message);
+		this.pSudStage.setErreur(message);
 	}
 
 }

@@ -28,9 +28,10 @@ public class PanelSudStage extends JPanel implements ActionListener{
 
 
 	public PanelSudStage(FrameAccueil frame, PanelPrevi panelPrevi, PanelStage panelStage) {
-		this.frame = frame;
+		this.frame      = frame;
 		this.panelStage = panelStage;
 		this.panelPrevi = panelPrevi;
+
 		this.setLayout(new BorderLayout());
 
 		this.panelWest         = new JPanel();
@@ -39,9 +40,9 @@ public class PanelSudStage extends JPanel implements ActionListener{
 		this.lblErreur         = new JLabel("");
 		this.lblErreur.setForeground(java.awt.Color.RED);
 
-		this.panelWest.add(this.boutonEnregistrer);
-		this.panelWest.add(this.boutonAnnuler);
-		this.panelWest.add(this.lblErreur);
+		this.panelWest.add( this.boutonEnregistrer );
+		this.panelWest.add( this.boutonAnnuler     );
+		this.panelWest.add( this.lblErreur         );
 
 		this.add(this.panelWest, BorderLayout.WEST);
 
@@ -64,21 +65,11 @@ public class PanelSudStage extends JPanel implements ActionListener{
 		String libelle      = this.panelStage.getLibelle();
 		String libelleCourt = this.panelStage.getLibelleCourt();
 		String code         = this.panelStage.getCode();
-		
-		int nbEtudiants;
-		try { nbEtudiants = Integer.parseInt(this.panelPrevi.getNbEtd()); }
-		catch (NumberFormatException e) { nbEtudiants = 0;}
-
-		int nbGpTD;
-		try { nbGpTD = Integer.parseInt(this.panelPrevi.getNbGpTd()); }
-		catch (NumberFormatException e) { nbGpTD = 0; }
-
-		int nbGpTP;
-		try { nbGpTP = Integer.parseInt(this.panelPrevi.getNbGpTp()); }
-		catch (NumberFormatException e) { nbGpTP = 0; }
-	
-		int nbSemaines = 0;
-		int nbHeures   = 0;
+		int    nbEtudiants  = this.panelPrevi.getNbEtd();
+		int    nbGpTD       = this.panelPrevi.getNbGpTd(); 
+		int    nbGpTP       = this.panelPrevi.getNbGpTp(); 
+		int    nbSemaines   = 0;
+		int    nbHeures     = 0;
 
 		HashMap<String, Integer> map = this.panelStage.getDataHeures();
 		for (String heure : map.keySet() ){

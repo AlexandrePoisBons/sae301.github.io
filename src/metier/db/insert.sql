@@ -16,6 +16,9 @@ VALUES
 	( 1, 'TD', 1    ),
 	( 2, 'TP', 0.66 ),
 	( 3, 'CM', 1.5  ),
+	( 4, 'TUT', 1   ),
+	( 5, 'REH', 1   ),
+	( 6, 'SAE', 1   )
 	;
 
 -- Insertions dans la table Statut
@@ -37,18 +40,18 @@ VALUES
 
 
 -- Insertions dans la table Heure
-INSERT INTO Heure (id_heure, id_module, id_type_heure, duree, commentaire)
+INSERT INTO Heure (id_heure, id_module, id_type_heure, nb_semaines, nb_gp_nb_h, duree, commentaire)
 VALUES
-	( 1,  1, 1, 10, 'TD Ressource: Algo 10h'   ),
-	( 2,  1, 2, 20, 'TP Ressource: Algo 20h'   ),
-	( 3,  1, 1, 15, 'TD Ressource: Algo 15h'   ),
-	( 4,  1, 3, 16, 'CM Ressource: Algo 16h'   ),
-	( 5,  2, 1, 35, 'TD SAE: BADO Avancée 35h' ),
-	( 6,  2, 3, 4,  'CM SAE: BADO Avancée 4h'  ),
-	( 7,  3, 2, 7,  'TP Stage: Réseaux 7h'     ),
-	( 8,  3, 2, 13, 'TP Stage: Réseaux 13h'    ),
-	( 9,  3, 3, 8,  'CM Stage: Réseaux 8h'     ),
-	( 10, 4, 1, 2,  'TD PPP: Maths 2h'         )
+	( 1,  1, 1, 12, 48, 10, 'TD Ressource: Algo 10h'   ),
+	( 2,  1, 2, 12, 48, 20, 'TP Ressource: Algo 20h'   ),
+	( 3,  1, 1, 12, 48, 15, 'TD Ressource: Algo 15h'   ),
+	( 4,  1, 3, 12, 48, 16, 'CM Ressource: Algo 16h'   ),
+	( 5,  2, 1, 10, 40, 35, 'TD SAE: BADO Avancée 35h' ),
+	( 6,  2, 3, 10, 40, 4,  'CM SAE: BADO Avancée 4h'  ),
+	( 7,  3, 2, 14, 56, 7,  'TP Stage: Réseaux 7h'     ),
+	( 8,  3, 2, 14, 56, 13, 'TP Stage: Réseaux 13h'    ),
+	( 9,  3, 3, 14, 56, 8,  'CM Stage: Réseaux 8h'     ),
+	( 10, 4, 1, 12, 36, 2,  'TD PPP: Maths 2h'         )
 	;
 
 

@@ -41,8 +41,8 @@ public class PanelSemestre extends JPanel {
 		this.id 	= idSemestre;
 
 		// JPanels
-		JPanel panelNord		= new JPanel()	;
-		JPanel panelCentre	 	= new JPanel()	;
+		JPanel panelNord   = new JPanel();
+		JPanel panelCentre = new JPanel();
 
 		// Layout
 		this.setLayout			(new BorderLayout());
@@ -73,14 +73,14 @@ public class PanelSemestre extends JPanel {
 		this.tabModule.setBorder(tableBorder);
 
 		// Ajout des composants
-		panelNord.add	(new JLabel("nb gp TD")         );
-		panelNord.add	(this.txtNbGpTd                 );
-		panelNord.add	(new JLabel("nb gp TP")         );
-		panelNord.add	(this.txtNbGpTp	                );
-		panelNord.add	(new JLabel("nb Etd")           );
-		panelNord.add	(this.txtNbEtd                  );
-		panelNord.add	(new JLabel("nb semaines")      );
-		panelNord.add	(this.txtNbSemaine              );
+		panelNord.add	( new JLabel("nb gp TD")    );
+		panelNord.add	( this.txtNbGpTd            );
+		panelNord.add	( new JLabel("nb gp TP")    );
+		panelNord.add	( this.txtNbGpTp            );
+		panelNord.add	( new JLabel("nb Etd")      );
+		panelNord.add	( this.txtNbEtd             );
+		panelNord.add	( new JLabel("nb semaines") );
+		panelNord.add	( this.txtNbSemaine         );
 		//panelCentre.add	(new JLabel("Liste des modules :")  , BorderLayout.NORTH  );
 		panelCentre.add (new JScrollPane(this.tabModule), BorderLayout.CENTER );
 
@@ -92,17 +92,15 @@ public class PanelSemestre extends JPanel {
 		// Affichage
 		this.setVisible(true);
 
-
 	}
 
-	
 
 	// Getters
-	public int getIdSemestre() { return this.id;                    }
-	public int getNbEtd()      { return Integer.parseInt(this.txtNbEtd.getText());    }
-	public int getNbGpTd()     { return Integer.parseInt(this.txtNbGpTd.getText());   }
-	public int getNbGpTp()     { return Integer.parseInt(this.txtNbGpTp.getText());   }
-	public int getNbSemaines() { return Integer.parseInt(this.txtNbSemaine.getText());}
+	public int getIdSemestre() { return this.id;                                       }
+	public int getNbEtd()      { return Integer.parseInt(this.txtNbEtd.getText());     }
+	public int getNbGpTd()     { return Integer.parseInt(this.txtNbGpTd.getText());    }
+	public int getNbGpTp()     { return Integer.parseInt(this.txtNbGpTp.getText());    }
+	public int getNbSemaines() { return Integer.parseInt(this.txtNbSemaine.getText()); }
 
 	public void setModules(List<Module> list) {
 		this.modules = list;
@@ -125,19 +123,20 @@ public class PanelSemestre extends JPanel {
 	}
 
 	public void updateModule(Module module) {
-		this.modules.remove(this.tabModule.getSelectedRow());
+		try{this.removeModule();} catch(SQLException e) {e.printStackTrace();}
 		String[] s = {module.getCode()};
 		this.dtm.addRow(s);
 	}
 
-	public Module getCurrentModule() { 
+	public Module getCurrentModule() {
 		if(this.tabModule.getSelectedRow() != -1) {
+			System.out.println(this.modules.size()+" COUCOU TOI COMMENT NIKTM"+this.modules.get(this.tabModule.getSelectedRow()).getHeures());
 			return this.modules.get(this.tabModule.getSelectedRow());
 		}
 		return null;
 	}
 
-	public void removeModule() throws SQLException{
+	public void removeModule() throws SQLException {
 		if(this.tabModule.getSelectedRow() != -1){
 			this.ctrl.metier().supprimerModule(this.getCurrentModule());
 			this.modules.remove(this.tabModule.getSelectedRow());
@@ -146,7 +145,6 @@ public class PanelSemestre extends JPanel {
 		else {
 			System.err.println("Sélectionner une ligne");
 		}
-		
 	}
 
 	public List<Module> getModules() { return this.modules; }

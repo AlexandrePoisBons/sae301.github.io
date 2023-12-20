@@ -11,7 +11,6 @@ import metier.TypeHeure;
 import metier.Module;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class PanelAffectSae extends JPanel {
@@ -23,9 +22,8 @@ public class PanelAffectSae extends JPanel {
 
 	public PanelAffectSae(PanelRepartitionSae panelMere, Module m) {
 		this.panelMere = panelMere;
-		this.module = m;
-
-		this.heures = new ArrayList<>();
+		this.module    = m;
+		this.heures    = new ArrayList<>();
 
 		this.dtm = new DefaultTableModel(){
 			@Override
@@ -64,32 +62,37 @@ public class PanelAffectSae extends JPanel {
 	// }
 
 	public void setHeures(List<Heure> heures) {
-		// this.heures = heures;
-		for (int i=0; i<heures.size();i++) {
-			this.ajouterHeure(heures.get(i));
+		this.heures = heures;
+		for (Heure heure: heures) {
+			this.ajouterLigne(heure);
 		}
 	}
 
-	private void ajouterLigne(Object[] objs) {
-		this.dtm.addRow(objs);
-	}
-
-	public void ajouterHeure(Heure heure) {
-		this.module.ajouterHeure(heure);
-		Object[] objs = new Object[6];
+	private void ajouterLigne(Heure heure) {
+		Object[] objs = new Object[5];
 		objs[0] = heure.getIntervenants().get(0).getNom()+" "+heure.getIntervenants().get(0).getPrenom().substring(0,1)+".";
 		objs[1] = heure.getTypeHeure().getNomTypeHeure();
 		objs[2] = heure.getDuree();
 		objs[3] = heure.getDuree()*heure.getTypeHeure().getCoeff();
 		objs[4] = heure.getCommentaire();
-		this.ajouterLigne(objs);
+		this.dtm.addRow(objs);
+	}
+
+	public void ajouterHeure(Heure heure) {
+		System.out.println("\nAJOUT HEURE eh zebi\n");
+		this.module.ajouterHeure(heure);
+
+		this.ajouterLigne(heure);
 	}
 
 
 	public List<Heure> getDataHeures() {
 		List<Heure> heures = new ArrayList<>();
 
-		return this.module.getHeures();
+		System.out.println("\n\n\n");
+		System.out.println(this.module.getHeures());
+		System.out.println("\n\n\n");
+		return this.heures;
 
 /*
 		int nb = this.dtm.getRowCount();
