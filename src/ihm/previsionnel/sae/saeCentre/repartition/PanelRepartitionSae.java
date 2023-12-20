@@ -9,7 +9,9 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 //Imports classes externes
 import ihm.previsionnel.sae.saeCentre.PCentreSae;
@@ -79,6 +81,22 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);
+	}
+
+	public void setHeureAffecte() {
+		DefaultTableModel dtm = this.panelAffect.getDtm();
+		JTable tableauAffect  = this.panelAffect.getTableauAffect();
+		int hSae = 0;
+		int hTut = 0;
+		for(int i=0;i<tableauAffect.getRowCount();i++) {
+			if(dtm.getValueAt(i, 1).equals("SAE")){
+				hSae += Integer.parseInt(dtm.getValueAt(i, 2).toString());
+			}
+			if(dtm.getValueAt(i, 1).equals("TUT")){
+				hTut += Integer.parseInt(dtm.getValueAt(i, 2).toString());
+			}
+		}
+		this.panelRepH.setHeureAffecte(hSae, hTut);
 	}
 
 }

@@ -53,4 +53,11 @@ public class PanelRepartitionHeureDroiteSae extends JPanel {
 		this.revalidate();
 	}
 
+	public void setHeureAffecte(int hSae, int hTut) {
+		this.ensTxtFld.get(2).setText("" + hSae);
+		this.ensTxtFld.get(3).setText("" + hTut);
+		this.repaint();
+		this.revalidate();
+	}
+
 }

@@ -137,16 +137,10 @@ public class PanelAffectSae extends JPanel {
 		}	
 	}
 
-	public void setHeureAffecte() {
-		int hSae = 0;
-		int hTut = 0;
-		for(int i=0;i<this.tableauAffect.getRowCount();i++) {
-			if(this.dtm.getValueAt(i, 1).equals("SAE")){
-				hSae += Integer.parseInt(this.dtm.getValueAt(i, 2).toString());
-			}
-			if(this.dtm.getValueAt(i, 1).equals("TUT")){
-				hTut += Integer.parseInt(this.dtm.getValueAt(i, 2).toString());
-			}
-		}
+	public DefaultTableModel getDtm(){
+		return this.dtm;
+	}
+	public JTable getTableauAffect(){
+		return this.tableauAffect;
 	}
 }

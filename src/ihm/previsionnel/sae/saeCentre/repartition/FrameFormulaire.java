@@ -165,7 +165,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 	public void focusLost(FocusEvent e) {
 		float coef = 0.0f;
 		for(TypeHeure tH : this.panelMere.getTypesHeures()){
-			if(this.ddlstTypesHeures.getSelectedItem().toString() == tH.getNomTypeHeure()){
+			if(this.ddlstTypesHeures.getSelectedItem().toString().equals(tH.getNomTypeHeure())){
 				coef = tH.getCoeff();
 			}
 		}
