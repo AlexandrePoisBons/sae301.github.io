@@ -45,21 +45,6 @@ public class PanelAffectSae extends JPanel {
 		this.add(scroll);
 	}
 
-	// public void ajouter() {
-
-	// 	HashMap<String,Integer> map = this.panelMere.getData();
-
-	// 	Object[] objs = new Object[5];
-	// 	for ( String type : map.keySet() ) {
-	// 		objs[0] = "";
-	// 		objs[1] = type;
-	// 		objs[2] = 999;
-	// 		objs[3] = 999;
-	// 		objs[4] = "";
-	// 		this.dtm.addRow(objs);
-	// 	}
-
-	// }
 
 	public void setHeures(List<Heure> heures) {
 		this.heures = heures;
@@ -79,53 +64,13 @@ public class PanelAffectSae extends JPanel {
 	}
 
 	public void ajouterHeure(Heure heure) {
-		System.out.println("\nAJOUT HEURE eh zebi\n");
 		this.module.ajouterHeure(heure);
 
 		this.ajouterLigne(heure);
 	}
 
-
 	public List<Heure> getDataHeures() {
-		List<Heure> heures = new ArrayList<>();
-
-		System.out.println("\n\n\n");
-		System.out.println(this.module.getHeures());
-		System.out.println("\n\n\n");
 		return this.heures;
-
-/*
-		int nb = this.dtm.getRowCount();
-
-		List<TypeHeure> ths = this.panelMere.getTypesHeures();
-
-		Heure tmpH;
-		TypeHeure tmpTH = null;
-		for (int i = 0; i < nb; i++) {
-			for (TypeHeure typeHeure : ths)
-				if (typeHeure.getNomTypeHeure().equals(this.dtm.getValueAt(i, 1).toString()))
-					tmpTH = typeHeure;
-			tmpH = Heure.creerHeure(module, tmpTH, Float.parseFloat(this.dtm.getValueAt(i, 3).toString()), this.dtm.getValueAt(i,4).toString());
-
-			List<Intervenant> thI = this.panelMere.getIntervenants();
-			System.out.println("ehhehehehehehee"+thI.size());
-			for (Intervenant intervenant : thI) {
-				String int1Name = intervenant.getNom()+" "+intervenant.getPrenom().substring(0,1)+".";
-				String int2Name = this.dtm.getValueAt(i, 0).toString();
-				System.out.println("aaaa");
-				if( int1Name.equals(int2Name) ){
-					System.out.println("jout");
-					tmpH.ajouterIntervenant(intervenant);
-				}
-			}
-
-			heures.add(tmpH);
-		}
-
-
-		System.out.println(" COMBIEN D'HEURES ??"+heures.size());
-
-		return heures;*/
 	}
 
 	public void supprimer() {
@@ -134,13 +79,15 @@ public class PanelAffectSae extends JPanel {
 		}
 		else {
 			this.panelMere.setErreur("erreur");
-		}	
+		}
 	}
 
-	public DefaultTableModel getDtm(){
+	public DefaultTableModel getDtm() {
 		return this.dtm;
 	}
-	public JTable getTableauAffect(){
+
+	public JTable getTableauAffect() {
 		return this.tableauAffect;
 	}
+
 }

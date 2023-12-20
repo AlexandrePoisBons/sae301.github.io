@@ -31,6 +31,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 	private Module              module;
 
 	public FrameFormulaire(PanelRepartitionSae panelMere, Module m) {
+
 		this.panelMere = panelMere;
 		this.module    = m;
 
@@ -105,16 +106,10 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 			this.dispose();
 		}
 		if(e.getSource() == this.btnAnnuler){
-			this.annuler();
+			this.dispose();
 		}
 	}
 
-	public void annuler() {
-		this.txtCommentaire.setText("");
-		this.txtNbH.setText("");
-		this.txtTotEqtd.setText("");
-		this.dispose();
-	}
 
 	public void remplirListe(List<Intervenant> intervenants, List<TypeHeure> typesHeures) {
 		String[] tabInter = new String[intervenants.size()];

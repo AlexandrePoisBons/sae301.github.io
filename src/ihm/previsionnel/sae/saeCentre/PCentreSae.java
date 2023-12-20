@@ -51,8 +51,10 @@ public class PCentreSae extends JPanel{
 		this.add(panelC, BorderLayout.CENTER);
 		this.add(panelN, BorderLayout.NORTH);
 
+
 		if ( this.module != null )
 			this.setData();
+
 	}
 
 	public List<Heure> getHeures() { return this.panelRepartitionSae.getHeures(); }

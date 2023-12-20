@@ -79,16 +79,14 @@ public class PanelSud extends JPanel implements ActionListener {
 		String code         = this.panelRessources.getCode();
 
 		int nbEtudiants = this.panelPrevi.getNbEtd(); 
-
-		int nbGpTD = this.panelPrevi.getNbGpTd();
-
-		int nbGpTP = this.panelPrevi.getNbGpTp();
+		int nbGpTD      = this.panelPrevi.getNbGpTd();
+		int nbGpTP      = this.panelPrevi.getNbGpTp();
 	
 		int nbSemaines = 0;
 		int nbHeures   = 0;
 
 		HashMap<String, Integer> map = this.panelRessources.getDataHeures();
-		for (String heure : map.keySet() ){
+		for (String heure : map.keySet()) {
 			if (map.get(heure) > nbSemaines)
 				nbSemaines = map.get(heure);
 			nbHeures += map.get(heure);

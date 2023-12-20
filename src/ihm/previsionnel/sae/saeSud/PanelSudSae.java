@@ -62,8 +62,8 @@ public class PanelSudSae extends JPanel implements ActionListener{
 		}
 	}
 
-	public void setErreur(String message){
-		if(message.equals("erreur")){
+	public void setErreur(String message) {
+		if(message.equals("erreur")) {
 			this.lblErreur.setText("Choisir une ligne");
 		}
 		else{
@@ -85,7 +85,7 @@ public class PanelSudSae extends JPanel implements ActionListener{
 		int    nbHeures     = 0;
 
 		HashMap<String, Integer> map = this.panelSae.getDataHeures();
-		for (String heure : map.keySet() ){
+		for (String heure : map.keySet()) {
 			if (map.get(heure) > nbSemaines)
 				nbSemaines = map.get(heure);
 			nbHeures+= map.get(heure);
@@ -116,7 +116,6 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			this.module.setNbGpTP(m.getNbGpTP());
 			this.module.setNbSemaines(m.getNbSemaines());
 			this.module.setNbHeures(m.getNbHeures());
-			System.out.println("\nDONOVAAAAAA\n"+this.module.getHeures());
 			this.panelSae.update(this.oldModule, this.module);
 		}
 

@@ -18,7 +18,7 @@ import metier.Intervenant;
 import metier.Module;
 import metier.TypeHeure;
 
-public class PanelSae extends JPanel{
+public class PanelSae extends JPanel {
 	private FrameAccueil frame;
 	private PanelPrevi   panelMere;
 	private PNordSae     pNordSae;
@@ -30,7 +30,8 @@ public class PanelSae extends JPanel{
 		this.frame     = frame;
 		this.panelMere = panelMere;
 		this.module    = m;
-		// System.out.println("COUCOU TOI COMMENT NIKTM"+this.module.getHeures());
+
+
 		this.frame.setTitle("Prévisionnel - Module: SAE");
 
 		//Définition de la taille et la position de la fenêtre
@@ -74,7 +75,7 @@ public class PanelSae extends JPanel{
 		this.frame.changerPanel(new PanelPrevi(this.frame));
 	}
 
-	public void setErreur(String message){
+	public void setErreur(String message) {
 		this.pSudSae.setErreur(message);
 	}
 
@@ -89,7 +90,7 @@ public class PanelSae extends JPanel{
 	public Module getModule ()      { return this.module;                     }
 
 	public HashMap<String, Integer> getDataHeures() { return this.pCentreSae.getData(); }
-	public HashMap<String,Integer>  getData() { return this.pCentreSae.getData(); }
+	public HashMap<String,Integer>  getData()       { return this.pCentreSae.getData(); }
 
 	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures(); }

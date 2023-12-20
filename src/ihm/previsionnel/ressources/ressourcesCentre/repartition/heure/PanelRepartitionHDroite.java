@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 
 
 public class PanelRepartitionHDroite extends JPanel {
-	//4,3
 	private JPanel panelN;
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
@@ -23,10 +22,10 @@ public class PanelRepartitionHDroite extends JPanel {
 		this.panelC = new JPanel();
 		this.ensTxtFld = new ArrayList<JTextField>();
 		for(int i = 0; i < 15; i++){
-            JTextField textField = new JTextField(3);
+			JTextField textField = new JTextField(3);
 			if(i != 3){textField.setEditable(false);}
-            this.ensTxtFld.add(textField); 
-        }
+			this.ensTxtFld.add(textField); 
+		}
 		
 		this.setLayout(new BorderLayout());
 		this.panelN.setLayout(new GridBagLayout());
@@ -39,9 +38,9 @@ public class PanelRepartitionHDroite extends JPanel {
 		this.panelN.add(new JLabel("                    heures"), gbcN);
 
 		// Ajout des composants avec GridBagLayout
-        gbcC.gridx = 0;
-        gbcC.gridy = 0;
-        gbcC.insets = new Insets(0, 3, 5, 0);
+		gbcC.gridx = 0;
+		gbcC.gridy = 0;
+		gbcC.insets = new Insets(0, 3, 5, 0);
 
 		//Ajout des éléments
 		this.panelC.add(new JLabel("CM"), gbcC);
@@ -100,5 +99,20 @@ public class PanelRepartitionHDroite extends JPanel {
 		this.add(this.panelN, BorderLayout.NORTH);
 		this.add(this.panelC, BorderLayout.CENTER);
 	}
+
+
+	public void setSommePromo(int somme) {
+		this.ensTxtFld.get(0).setText("" + somme);
+		this.repaint();
+		this.revalidate();
+	}
+
+	public void setHeureAffecte(int hSae, int hTut) {
+		this.ensTxtFld.get(2).setText("" + hSae);
+		this.ensTxtFld.get(3).setText("" + hTut);
+		this.repaint();
+		this.revalidate();
+	}
+
 
 }

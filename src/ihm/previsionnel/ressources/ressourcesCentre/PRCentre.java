@@ -71,12 +71,12 @@ public class PRCentre extends JPanel {
 
 	public void setData() { this.panelRepartition.setHeures(this.module.getHeures()); }
 
-	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
-	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
-
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);
 	}
+
+	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
+	public List<TypeHeure>   getTypesHeures()  { return this.panelMere.getTypesHeures();  }
 
 
 }
