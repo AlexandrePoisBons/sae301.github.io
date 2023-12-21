@@ -39,7 +39,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 
 		JPanel panelBtn = new JPanel();
 
-		this.panelRepH 	            = new PanelRepH					(this)		    ;
+		this.panelRepH 	            = new PanelRepH					(this, this.module)		    ;
 		this.panelAffect	 		= new PanelAffectSae			(this, this.module);
 		this.btnAjouter 			= new JButton					("Ajouter")   	;
 		this.btnSuppr				= new JButton					("Supprimer")	;	
@@ -84,6 +84,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	}
 
 	public void setHeureAffecte() {
+		System.out.println("la");
 		DefaultTableModel dtm = this.panelAffect.getDtm();
 		JTable tableauAffect  = this.panelAffect.getTableauAffect();
 		int hSae = 0;
@@ -99,5 +100,8 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 		this.panelRepH.setHeureAffecte(hSae, hTut);
 	}
 
+	public void actualiserSomme() {
+		this.panelRepH.actualiserSomme();
+	}
 
 }

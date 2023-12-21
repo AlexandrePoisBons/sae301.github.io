@@ -85,10 +85,16 @@ public class PanelRessources extends JPanel {
 	public String getLibelleCourt() { return this.pRNord.getLibelleCourt(); }
 	public Module getModule()       { return this.module;                   }
 
+	public boolean estValide() { return this.pRCentre.estValide(); }
+
 	public HashMap<String, Integer> getDataHeures() { return this.pRCentre.getData(); }
 	public HashMap<String,Integer>  getData()       { return this.pRCentre.getData(); }
 
 	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }
+
+	//pour mettre à jour les données dans pCentre
+	public int getNbGpTdMaj(){return this.pRNord.getTxtNbGpTd();}
+	public int getNbGpTpMaj(){return this.pRNord.getTxtNbGpTp();}
 
 }

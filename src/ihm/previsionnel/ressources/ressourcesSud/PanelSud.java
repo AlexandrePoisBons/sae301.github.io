@@ -83,6 +83,8 @@ public class PanelSud extends JPanel implements ActionListener {
 		int nbEtudiants = this.panelPrevi.getNbEtd(); 
 		int nbGpTD      = this.panelPrevi.getNbGpTd();
 		int nbGpTP      = this.panelPrevi.getNbGpTp();
+
+		boolean valide = this.panelRessources.estValide();
 	
 		int nbSemaines = 0;
 		int nbHeures   = 0;
