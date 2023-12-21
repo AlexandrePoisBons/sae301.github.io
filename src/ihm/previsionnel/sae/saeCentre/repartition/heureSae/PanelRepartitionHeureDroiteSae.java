@@ -6,25 +6,21 @@ import javax.swing.JTextField;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
 public class PanelRepartitionHeureDroiteSae extends JPanel {
-
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
 
 	public PanelRepartitionHeureDroiteSae() {
-
 		this.panelC = new JPanel();
 		this.ensTxtFld = new ArrayList<JTextField>();
 		
 		for(int i = 0; i < 2; i++){
 			JTextField textField = new JTextField(3);
-			textField.setEnabled(false);
+			textField.setEditable(false);
 			this.ensTxtFld.add(textField); 
 		}
 		
@@ -47,6 +43,8 @@ public class PanelRepartitionHeureDroiteSae extends JPanel {
 		this.panelC.add(this.ensTxtFld.get(1), gbcC);
 
 		this.add(this.panelC);
+
+		
 	}
 
 	public void setSommePromo(int somme) {

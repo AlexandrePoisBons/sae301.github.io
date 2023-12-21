@@ -64,7 +64,6 @@ public class Requetes {
 	private PreparedStatement psDeleteHM;
 	private PreparedStatement psUpdateHM;
 
-	private PreparedStatement psDeleteHeureByTypeHeure;
 
 	public Requetes() {
 		this.db     = DB.getInstance();
@@ -110,8 +109,6 @@ public class Requetes {
 			this.psInsertHM = this.connec.prepareStatement("INSERT INTO Heure_Module VALUES(?,?);");
 			this.psDeleteHM = this.connec.prepareStatement("DELETE FROM Heure_Module WHERE id_heure=? AND id_module=?;");
 			this.psUpdateHM = this.connec.prepareStatement("UPDATE Heure_Module SET id_heure=?, id_module=? WHERE id_heure=? AND id_module=?;");
-
-			this.psDeleteHeureByTypeHeure = this.connec.prepareStatement("DELETE FROM Heure WHERE id_type_heure=?;");
 
 		} catch( SQLException e ) { e.printStackTrace(); }
 
@@ -333,13 +330,15 @@ public class Requetes {
 		return cptLig > 0;
 	}
 
-	// continue gars ici
+
 	public void insertTypeHeure( TypeHeure typeHeure ) throws SQLException {
 
 		if ( !this.existsTypeHeure(typeHeure.getIdTypeHeure()) ) {
+
 			this.psInsertTH.setInt(1, typeHeure.getIdTypeHeure());
 			this.psInsertTH.setString(2, typeHeure.getNomTypeHeure());
 			this.psInsertTH.setFloat(3, typeHeure.getCoeff());
+
 			this.psInsertTH.executeUpdate();
 		} else {
 			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" deja existant");
@@ -351,10 +350,8 @@ public class Requetes {
 
 		if ( this.existsTypeHeure(typeHeure.getIdTypeHeure()) ) {
 
-			this.psDeleteHeureByTypeHeure.setInt(1, typeHeure.getIdTypeHeure());
-			this.psDeleteHeureByTypeHeure.executeUpdate();
-
 			this.psDeleteTH.setInt(1, typeHeure.getIdTypeHeure());
+
 			this.psDeleteTH.executeUpdate();
 		} else {
 			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
@@ -365,8 +362,10 @@ public class Requetes {
 	public void updateTypeHeure(TypeHeure typeHeure) throws SQLException {
 
 		if ( this.existsTypeHeure(typeHeure.getIdTypeHeure()) ) {
+
 			this.psUpdateTH.setFloat(1, typeHeure.getCoeff());
 			this.psUpdateTH.setInt(2, typeHeure.getIdTypeHeure());
+
 			this.psUpdateTH.executeUpdate();
 		} else {
 			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
@@ -375,30 +374,32 @@ public class Requetes {
 
 	public static int getNbTypeHeures() {
 
-		int nbTypeHeures = 0;
+		int nbTypeHeures = -1;
 
 		Infos infos = new Infos();
 
 		try {
 			Class.forName("org.postgresql.Driver");
 			System.out.println ("CHARGEMENT DU PILOTE OK");
-		} catch (ClassNotFoundException e) { e.printStackTrace(); }
+		} catch ( ClassNotFoundException e ) { e.printStackTrace(); }
 
 		try {
 			String url = "jdbc:postgresql://localhost:5432/"+infos.getDatabase();
 			String login = infos.getLogin();
 			String password = infos.getPassword();
+
 			Connection connec = DriverManager.getConnection(url,login,password);
+
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
 				Statement sGetNbTypeHeures =  connec.createStatement();
 				ResultSet rs = sGetNbTypeHeures.executeQuery("SELECT COUNT(*) FROM Type_Heure");
 				while ( rs.next() ) nbTypeHeures = rs.getInt(1);
-			} catch (SQLException e) { e.printStackTrace(); }
+			} catch ( SQLException e ) { e.printStackTrace(); }
 
 			connec.close();
-		} catch (SQLException e) { e.printStackTrace(); }
+		} catch ( SQLException e ) { e.printStackTrace(); }
 
 		return nbTypeHeures;
 	}
@@ -410,7 +411,7 @@ public class Requetes {
 	/*               Module                   */
 	/*----------------------------------------*/
 
-	public boolean existsModule(int idModule) throws SQLException {
+	public boolean existsModule( int idModule ) throws SQLException {
 
 		this.psSelectM.setInt(1, idModule);
 		ResultSet rs = this.psSelectM.executeQuery();
@@ -422,9 +423,10 @@ public class Requetes {
 	}
 
 
-	public boolean insertModule(Module module) throws SQLException {
+	public boolean insertModule( Module module ) throws SQLException {
 
 		if ( !this.existsModule(module.getIdModule()) ) {
+
 			this.psInsertM.setInt    ( 1,  module.getIdModule()     );
 			this.psInsertM.setString ( 2,  module.getTypeModule()   );
 			this.psInsertM.setString ( 3,  module.getSemestre()     );
@@ -441,7 +443,6 @@ public class Requetes {
 			this.psInsertM.execute();
 
 			return true;
-
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" deja existant");
 			return false;
@@ -452,7 +453,9 @@ public class Requetes {
 	public void deleteModule(Module module) throws SQLException {
 
 		if ( this.existsModule(module.getIdModule()) ) {
+
 			this.psDeleteM.setInt(1, module.getIdModule());
+
 			this.psDeleteM.executeUpdate();
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" inexistant");
@@ -460,8 +463,10 @@ public class Requetes {
 	}
 
 
-	public void updateModule(Module module) throws SQLException {
+	public void updateModule( Module module ) throws SQLException {
+
 		if ( this.existsModule(module.getIdModule()) ) {
+
 			this.psUpdateM.setString(1, module.getTypeModule());
 			this.psUpdateM.setString(2,module.getSemestre());
 			this.psUpdateM.setString(3, module.getLibelle());
@@ -484,7 +489,7 @@ public class Requetes {
 
 	public static int getNbModules()
 	{
-		int nbModules = 0;
+		int nbModules = -1;
 
 		Infos infos = new Infos();
 
@@ -517,7 +522,7 @@ public class Requetes {
 	/*               Statut                   */
 	/*----------------------------------------*/
 
-	public boolean existsStatut(String nomStatut) throws SQLException {
+	public boolean existsStatut( String nomStatut ) throws SQLException {
 
 		this.psSelectS.setString(1, nomStatut);
 		ResultSet rs = this.psSelectS.executeQuery();
@@ -528,13 +533,15 @@ public class Requetes {
 		return cptLig > 0;
 	}
 
-	public void insertStatut(Statut statut) throws SQLException {
+	public void insertStatut( Statut statut ) throws SQLException {
 
 		if ( !this.existsStatut(statut.getNomStatut()) ) {
+
 			this.psInsertS.setString(1, statut.getNomStatut());
 			this.psInsertS.setInt(2, statut.getNbHeureService());
 			this.psInsertS.setInt(3, statut.getNbHeuresMax());
 			this.psInsertS.setFloat(4, statut.getCoeffTP());
+
 			this.psInsertS.executeUpdate();
 		} else {
 			System.out.println("statut id_statut = "+statut.getNomStatut()+" deja existant");
@@ -542,10 +549,12 @@ public class Requetes {
 	}
 
 
-	public void deleteStatut(Statut statut) throws SQLException {
+	public void deleteStatut( Statut statut ) throws SQLException {
 
 		if ( this.existsStatut(statut.getNomStatut()) ) {
+
 			this.psDeleteS.setString(1, statut.getNomStatut());
+
 			this.psDeleteS.executeUpdate();
 		} else {
 			System.out.println("Statut nom_statut = "+statut.getNomStatut()+" inexistant");
@@ -553,13 +562,15 @@ public class Requetes {
 	}
 
 
-	public void updateStatut(Statut statut) throws SQLException {
+	public void updateStatut( Statut statut ) throws SQLException {
 
 		if ( this.existsStatut(statut.getNomStatut()) ) {
+
 			this.psUpdateS.setInt(1, statut.getNbHeureService());
 			this.psUpdateS.setInt(2, statut.getNbHeuresMax());
 			this.psUpdateS.setFloat(3, statut.getCoeffTP());
 			this.psUpdateS.setString(4, statut.getNomStatut());
+
 			this.psUpdateS.executeUpdate();
 		} else {
 			System.out.println("Statut nom_statut = "+statut.getNomStatut()+" inexistant");
@@ -572,10 +583,11 @@ public class Requetes {
 	/*----------------------------------------*/
 
 
-	public boolean existsIntervenantModule(int idIntervenant, int idModule) throws SQLException {
+	public boolean existsIntervenantModule( int idIntervenant, int idModule ) throws SQLException {
 
 		this.psSelectIM.setInt(1, idIntervenant);
 		this.psSelectIM.setInt(2, idModule);
+
 		ResultSet rs = this.psSelectIM.executeQuery();
 
 		int cptLig = 0;
@@ -585,16 +597,18 @@ public class Requetes {
 	}
 
 
-	public void insertIntervenantModule(ArrayList<Intervenant> intervenants, Module module) throws SQLException {
-		for (Intervenant intervenant : intervenants)
-			this.insertIntervenantModule(intervenant,module);
+	public void insertIntervenantModule( List<Intervenant> intervenants, Module module ) throws SQLException {
+		for ( Intervenant intervenant : intervenants )
+			this.insertIntervenantModule( intervenant, module );
 	}
 
-	public void insertIntervenantModule(Intervenant intervenant, Module module) throws SQLException {
+	public void insertIntervenantModule( Intervenant intervenant, Module module ) throws SQLException {
 
 		if ( !this.existsIntervenantModule(intervenant.getIdIntervenant(), module.getIdModule()) ) {
+
 			this.psInsertIM.setInt(1, intervenant.getIdIntervenant());
 			this.psInsertIM.setInt(2, module.getIdModule());
+
 			this.psInsertIM.executeUpdate();
 		} else {
 			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" deja existant");
@@ -602,11 +616,13 @@ public class Requetes {
 	}
 
 
-	public void deleteIntervenantModule(Intervenant intervenant, Module module) throws SQLException {
+	public void deleteIntervenantModule( Intervenant intervenant, Module module ) throws SQLException {
 
 		if ( this.existsIntervenantModule(intervenant.getIdIntervenant(), module.getIdModule()) ) {
+
 			this.psDeleteIM.setInt(1, intervenant.getIdIntervenant());
 			this.psDeleteIM.setInt(2, module.getIdModule());
+
 			this.psDeleteIM.executeUpdate();
 		} else {
 			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" inexistant");
@@ -614,13 +630,15 @@ public class Requetes {
 	}
 
 
-	public void updateIntervenantModule(Intervenant intervenant, Module module) throws SQLException {
+	public void updateIntervenantModule( Intervenant intervenant, Module module ) throws SQLException {
 
 		if ( this.existsIntervenantModule(intervenant.getIdIntervenant(), module.getIdModule()) ) {
+
 			this.psUpdateIM.setInt(1, intervenant.getIdIntervenant());
 			this.psUpdateIM.setInt(2, module.getIdModule());
 			this.psUpdateIM.setInt(1, intervenant.getIdIntervenant());
 			this.psUpdateIM.setInt(2, module.getIdModule());
+
 			this.psUpdateIM.executeUpdate();
 		} else {
 			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" inexistant");
@@ -633,10 +651,11 @@ public class Requetes {
 	/*           Intervenant_Heure            */
 	/*----------------------------------------*/
 
-	public boolean existsIntervenantHeure(int idIntervenant, int idHeure) throws SQLException {
+	public boolean existsIntervenantHeure( int idIntervenant, int idHeure ) throws SQLException {
 
 		this.psSelectIH.setInt(1, idIntervenant);
 		this.psSelectIH.setInt(2, idHeure);
+
 		ResultSet rs = this.psSelectIH.executeQuery();
 
 		int cptLig = 0;
@@ -646,40 +665,46 @@ public class Requetes {
 	}
 
 
-	public void insertIntervenantHeure(ArrayList<Intervenant> intervenants, Heure heure) throws SQLException {
-		for (Intervenant intervenant : intervenants)
-			this.insertIntervenantHeure(intervenant, heure);
+	public void insertIntervenantHeure( List<Intervenant> intervenants, Heure heure ) throws SQLException {
+		for ( Intervenant intervenant : intervenants )
+			this.insertIntervenantHeure( intervenant, heure );
 	}
 
-	public void insertIntervenantHeure(Intervenant intervenant, Heure heure) throws SQLException {
+	public void insertIntervenantHeure( Intervenant intervenant, Heure heure ) throws SQLException {
 
 		if ( !this.existsIntervenantHeure(intervenant.getIdIntervenant(), heure.getIdHeure()) ) {
+
 			this.psInsertIH.setInt(1, intervenant.getIdIntervenant());
 			this.psInsertIH.setInt(2, heure.getIdHeure());
+
 			this.psInsertIH.executeUpdate();
 		} else {
 			System.out.println("IntervenantHeure id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" deja existant");
 		}
 	}
 
-	public void deleteIntervenantHeure(Intervenant intervenant, Heure heure) throws SQLException {
+	public void deleteIntervenantHeure( Intervenant intervenant, Heure heure ) throws SQLException {
 
 		if ( this.existsIntervenantHeure(intervenant.getIdIntervenant(), heure.getIdHeure()) ) {
+
 			this.psDeleteIH.setInt(1, intervenant.getIdIntervenant());
 			this.psDeleteIH.setInt(2, heure.getIdHeure());
+
 			this.psDeleteIH.executeUpdate();
 		} else {
 			System.out.println("Intervenant id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" inexistant");
 		}
 	}
 
-	public void updateIntervenantHeure(Intervenant intervenant, Heure heure) throws SQLException {
+	public void updateIntervenantHeure( Intervenant intervenant, Heure heure ) throws SQLException {
 
 		if ( this.existsIntervenantHeure(intervenant.getIdIntervenant(), heure.getIdHeure()) ) {
+
 			this.psUpdateIH.setInt(1, intervenant.getIdIntervenant());
 			this.psUpdateIH.setInt(2, heure.getIdHeure());
 			this.psUpdateIH.setInt(1, intervenant.getIdIntervenant());
 			this.psUpdateIH.setInt(2, heure.getIdHeure());
+
 			this.psUpdateIH.executeUpdate();
 		} else {
 			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" inexistant");
@@ -691,10 +716,11 @@ public class Requetes {
 	/*             Heure_Module               */
 	/*----------------------------------------*/
 
-	public boolean existsHeureModule(int idHeure, int idModule) throws SQLException {
+	public boolean existsHeureModule( int idHeure, int idModule ) throws SQLException {
 
 		this.psSelectHM.setInt(1, idHeure);
 		this.psSelectHM.setInt(2,idModule);
+
 		ResultSet rs = this.psSelectHM.executeQuery();
 
 		int cptLig = 0;
@@ -703,16 +729,18 @@ public class Requetes {
 		return cptLig > 0;
 	}
 
-	public void insertHeureModule(List<Heure> heures, Module module) throws SQLException {
-		for (Heure heure : heures)
-			this.insertHeureModule(heure, module);
+	public void insertHeureModule( List<Heure> heures, Module module ) throws SQLException {
+		for ( Heure heure : heures )
+			this.insertHeureModule( heure, module );
 	}
 
-	public void insertHeureModule(Heure heure, Module module) throws SQLException {
+	public void insertHeureModule( Heure heure, Module module ) throws SQLException {
 
 		if ( !this.existsHeureModule(heure.getIdHeure(), module.getIdModule()) ) {
+
 			this.psInsertHM.setInt(1, heure.getIdHeure());
 			this.psInsertHM.setInt(2, module.getIdModule());
+
 			this.psInsertHM.executeUpdate();
 		} else {
 			System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" deja existant");
@@ -720,11 +748,13 @@ public class Requetes {
 	}
 
 
-	public void deleteHeureModule(Heure heure, Module module) throws SQLException {
+	public void deleteHeureModule( Heure heure, Module module ) throws SQLException {
 
 		if ( this.existsHeureModule(heure.getIdHeure(), module.getIdModule()) ) {
+
 			this.psDeleteHM.setInt(1, heure.getIdHeure());
 			this.psDeleteHM.setInt(2, module.getIdModule());
+
 			this.psDeleteHM.executeUpdate();
 		} else {
 			System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" inexistant");
@@ -732,13 +762,15 @@ public class Requetes {
 	}
 
 
-	public void updateHeureModule(Heure heure, Module module) throws SQLException {
+	public void updateHeureModule( Heure heure, Module module ) throws SQLException {
 
 		if ( this.existsHeureModule(heure.getIdHeure(), module.getIdModule()) ) {
+
 			this.psUpdateHM.setInt(1, heure.getIdHeure());
 			this.psUpdateHM.setInt(2, module.getIdModule());
 			this.psUpdateHM.setInt(1, heure.getIdHeure());
 			this.psUpdateHM.setInt(2, module.getIdModule());
+
 			this.psUpdateHM.executeUpdate();
 		} else {
 			System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" inexistant");
@@ -751,22 +783,25 @@ public class Requetes {
 	 * GETTERS *
 	 ***********/
 
-	private ArrayList<Intervenant> getIntervenants(String req) throws SQLException {
+	private ArrayList<Intervenant> getIntervenants( String req ) throws SQLException {
+
 		Statement selectI = connec.createStatement();
 		ArrayList<Intervenant> listeI = new ArrayList<Intervenant>();
 
 		ResultSet rs = selectI.executeQuery(req);
+
 		while( rs.next() ) {
 			Intervenant i = Intervenant.creerIntervenant( rs.getString("prenom"),
 			                                              rs.getString("nom"),
-			                                              new Statut(rs.getString("nom_statut"),
-			                                                         rs.getInt("nb_heures_service"),
-			                                                         rs.getInt("nb_heures_maxi"),
-			                                                         rs.getInt("coeff_tp") ),
-			                                              rs.getFloat("nb_equivalent_td"));
+			                                              new Statut( rs.getString("nom_statut"),
+			                                                          rs.getInt("nb_heures_service"),
+			                                                          rs.getInt("nb_heures_maxi"),
+			                                                          rs.getInt("coeff_tp") ),
+			                                              rs.getFloat("nb_equivalent_td") );
 			listeI.add(i);
 		}
 		rs.close();
+
 		return listeI;
 	}
 
@@ -775,19 +810,22 @@ public class Requetes {
 	}
 
 
-	private ArrayList<Statut> getStatuts(String req) throws SQLException {
+	private ArrayList<Statut> getStatuts( String req ) throws SQLException {
+
 		Statement selectS = connec.createStatement();
 		ArrayList<Statut> listeS  = new ArrayList<Statut>();
 
 		ResultSet rs = selectS.executeQuery(req);
+
 		while( rs.next() ) {
-			Statut s = new Statut( rs.getString("nom_statut"  ),
-			                       rs.getInt("nb_heures_service" ), 
+			Statut s = new Statut( rs.getString("nom_statut"),
+			                       rs.getInt("nb_heures_service"),
 			                       rs.getInt("nb_heures_maxi"),
 			                       rs.getFloat("coeff_tp") );
 			listeS.add(s);
 		}
-		rs.close(); 
+		rs.close();
+
 		return listeS;
 	}
 
@@ -796,18 +834,21 @@ public class Requetes {
 	}
 
 
-	private ArrayList<TypeHeure> getTypesHeures(String req) throws SQLException {
+	private ArrayList<TypeHeure> getTypesHeures( String req ) throws SQLException {
+
 		Statement selectTH = connec.createStatement();
 		ArrayList<TypeHeure> listeTH  = new ArrayList<TypeHeure>();
 
 		ResultSet rs = selectTH.executeQuery(req);
+
 		while( rs.next() ) {
 			TypeHeure th = TypeHeure.initTypeHeure( rs.getInt("id_type_heure"),
 			                                        rs.getString("nom_type_heure"),
 			                                        rs.getFloat("coeff") );
 			listeTH.add(th);
 		}
-		rs.close(); 
+		rs.close();
+
 		return listeTH;
 	}
 
@@ -816,32 +857,37 @@ public class Requetes {
 	}
 
 
-	private ArrayList<Heure> getHeures(String req) throws SQLException {
+	private ArrayList<Heure> getHeures( String req ) throws SQLException {
+
 		Statement selectH = connec.createStatement();
 		ArrayList<Heure> listeH = new ArrayList<Heure>();
 
 		ResultSet rs = selectH.executeQuery(req);
+
 		while( rs.next() ) {
-			Heure h = Heure.creerHeure( Module.initModule( rs.getInt("id_module"), rs.getString("type_module"),
-															rs.getString("semestre"),
-															rs.getString("libelle"),
-															rs.getString("libelle_court"),
-															rs.getString("code"),
-															rs.getInt("nb_etudiants"),
-															rs.getInt("nb_gp_td"), 
-															rs.getInt("nb_gp_tp"),
-															rs.getInt("nb_semaines"),
-															rs.getInt("nb_heures"),
-															rs.getBoolean("valide")),
-										TypeHeure.initTypeHeure(rs.getInt("id_type_heure"),rs.getString("nom_type_heure"),
-															rs.getFloat("coeff") ),
-												rs.getInt("nb_semaines"),
-												rs.getInt("nb_gp_nb_h"),
-												rs.getInt("duree"),
-												rs.getString("commentaire") );
+			Heure h = Heure.creerHeure( Module.initModule( rs.getInt("id_module"),
+			                                               rs.getString("type_module"),
+			                                               rs.getString("semestre"),
+			                                               rs.getString("libelle"),
+			                                               rs.getString("libelle_court"),
+			                                               rs.getString("code"),
+			                                               rs.getInt("nb_etudiants"),
+			                                               rs.getInt("nb_gp_td"), 
+			                                               rs.getInt("nb_gp_tp"),
+			                                               rs.getInt("nb_semaines"),
+			                                               rs.getInt("nb_heures"),
+			                                               rs.getBoolean("valide") ),
+			                            TypeHeure.initTypeHeure( rs.getInt("id_type_heure"),
+			                                                     rs.getString("nom_type_heure"),
+			                                                     rs.getFloat("coeff") ),
+			                            rs.getInt("nb_semaines"),
+			                            rs.getInt("nb_gp_nb_h"),
+			                            rs.getInt("duree"),
+			                            rs.getString("commentaire") );
 			listeH.add(h);
 		}
 		rs.close();
+
 		return listeH;
 	}
 
@@ -851,12 +897,14 @@ public class Requetes {
 
 
 
-	private ArrayList<Module> getModules(String req) throws SQLException {
+	private ArrayList<Module> getModules( String req ) throws SQLException {
+
 		Statement selectNP = connec.createStatement();
 		ArrayList<Module> listeI = new ArrayList<Module>();
 
 		ResultSet rs = selectNP.executeQuery(req);
-		while(rs.next()){
+
+		while( rs.next() ) {
 			Module m = Module.creerModule( rs.getString ("type_module"   ),
 			                               rs.getString ("semestre"      ),
 			                               rs.getString ("libelle"       ),
@@ -879,8 +927,7 @@ public class Requetes {
 	}
 
 
-
-	private Integer[][] getHeuresParModule(String req) throws SQLException {
+	private Integer[][] getHeuresParModule( String req ) throws SQLException {
 		Integer idHeure;
 		Integer idModule;
 		int size;
@@ -890,7 +937,7 @@ public class Requetes {
 		ResultSet s = selectHM.executeQuery("SELECT * FROM Heure_Module;");
 
 		size=0;
-		while (s.next()) size++;
+		while ( s.next() ) size++;
 
 		Integer[][] map = new Integer[size][2];
 
@@ -898,11 +945,12 @@ public class Requetes {
 
 		cpt=0;
 		while( rs.next() ) {
-			idHeure = rs.getInt(1);
+			idHeure  = rs.getInt(1);
 			idModule = rs.getInt(2);
 			
 			map[cpt][0] = idHeure;
 			map[cpt][1] = idModule;
+
 			cpt++;
 		}
 		rs.close();
@@ -916,7 +964,7 @@ public class Requetes {
 	}
 
 
-	private Integer[][] getIntervenantsParHeure(String req) throws SQLException {
+	private Integer[][] getIntervenantsParHeure( String req ) throws SQLException {
 		Integer idIntervenant;
 		Integer idHeure;
 		int size;
@@ -926,7 +974,7 @@ public class Requetes {
 		ResultSet s = selectIH.executeQuery("SELECT * FROM Intervenant_Heure;");
 
 		size=0;
-		while (s.next()) size++;
+		while ( s.next() ) size++;
 
 		Integer[][] map = new Integer[size][2];
 
@@ -939,6 +987,7 @@ public class Requetes {
 			
 			map[cpt][0] = idIntervenant;
 			map[cpt][1] = idHeure;
+
 			cpt++;
 		}
 		rs.close();
@@ -952,7 +1001,6 @@ public class Requetes {
 	}
 
 
-
 	private Integer[][] getIntervenantsParModule(String req) throws SQLException {
 		Integer idIntervenant;
 		Integer idModule;
@@ -963,7 +1011,7 @@ public class Requetes {
 		ResultSet s = selectHM.executeQuery("SELECT * FROM Intervenant_Module;");
 
 		size=0;
-		while (s.next()) size++;
+		while ( s.next() ) size++;
 
 		Integer[][] map = new Integer[size][2];
 
@@ -976,6 +1024,7 @@ public class Requetes {
 			
 			map[cpt][0] = idIntervenant;
 			map[cpt][1] = idModule;
+
 			cpt++;
 		}
 		rs.close();
@@ -996,11 +1045,13 @@ public class Requetes {
 	 ************/
 
 	public ArrayList<Heure> initHeures() throws SQLException {
+
 		Statement selectH = connec.createStatement();
 		ArrayList<Heure> listeH = new ArrayList<Heure>();
 
 		String req = "SELECT * FROM Heure h JOIN Module m ON m.id_module = h.id_module JOIN Type_Heure t ON t.id_type_heure = h.id_type_heure;";
 		ResultSet rs = selectH.executeQuery(req);
+
 		while( rs.next() ) {
 			Heure h = Heure.initHeure( rs.getInt("id_heure"),
 			                           Module.initModule( rs.getInt("id_module"),
@@ -1015,24 +1066,28 @@ public class Requetes {
 			                                              rs.getInt("nb_semaines"),
 			                                              rs.getInt("nb_heures"),
 			                                              rs.getBoolean("valide")),
-			                           TypeHeure.initTypeHeure(rs.getInt("id_type_heure"), rs.getString("nom_type_heure"),
-			                                           rs.getFloat("coeff") ),
-									   rs.getInt("nb_semaines"),
-									   rs.getInt("nb_gp_nb_h"),
+			                           TypeHeure.initTypeHeure( rs.getInt("id_type_heure"),
+			                                                    rs.getString("nom_type_heure"),
+			                                                    rs.getFloat("coeff") ),
+			                           rs.getInt("nb_semaines"),
+			                           rs.getInt("nb_gp_nb_h"),
 			                           rs.getInt("duree"),
 			                           rs.getString("commentaire") );
 			listeH.add(h);
 		}
 		rs.close();
+
 		return listeH;
 	}
 
 	public ArrayList<Intervenant> initIntervenants() throws SQLException {
+
 		Statement selectI = connec.createStatement();
 		ArrayList<Intervenant> listeI = new ArrayList<Intervenant>();
 
 		String req = "SELECT * FROM Intervenant i JOIN Statut s ON s.nom_statut = i.nom_statut;";
 		ResultSet rs = selectI.executeQuery(req);
+
 		while( rs.next() ) {
 			Intervenant i = Intervenant.initIntervenant( rs.getInt("id_intervenant"),
 			                                             rs.getString("prenom"),
@@ -1045,16 +1100,18 @@ public class Requetes {
 			listeI.add(i);
 		}
 		rs.close();
+
 		return listeI;
 	}
 
 	public ArrayList<Module> initModules() throws SQLException {
+
 		Statement selectNP = connec.createStatement();
 		ArrayList<Module> listeI = new ArrayList<Module>();
 
 		String req = "SELECT * FROM Module";
-
 		ResultSet rs = selectNP.executeQuery(req);
+
 		while(rs.next()){
 			Module m = Module.initModule( rs.getInt("id_module"),
 			                              rs.getString ("type_module"   ),
@@ -1071,11 +1128,10 @@ public class Requetes {
 			listeI.add(m);
 		}
 		rs.close();
+
 		return listeI;
 	}
 
 
-
 }
-
 

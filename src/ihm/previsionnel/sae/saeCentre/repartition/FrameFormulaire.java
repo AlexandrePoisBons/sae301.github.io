@@ -104,6 +104,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnValider) {
 			this.valider();
+			this.panelMere.actualiserSomme();
 			this.dispose();
 		}
 		if(e.getSource() == this.btnAnnuler){
@@ -114,14 +115,24 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 
 	public void remplirListe(List<Intervenant> intervenants, List<TypeHeure> typesHeures) {
 		String[] tabInter = new String[intervenants.size()];
-		String[] tabTypesHeures = new String[typesHeures.size()];
+		int cpt = 0;
+		int[] heure = new int[typesHeures.size()];
 
-		for(int i=0;i<intervenants.size();i++)
+		for(int i=0;i<intervenants.size();i++) {
 			tabInter[i] = intervenants.get(i).getNom() + " " + intervenants.get(i).getPrenom();
+		}
+			
+		for(int i=0;i< typesHeures.size();i++){
+			if(typesHeures.get(i).getNomTypeHeure().equals("SAE") || typesHeures.get(i).getNomTypeHeure().equals("TUT")) {
+				heure[cpt] = i;
+				cpt++;
+			}
+		}
+
+		String[] tabTypesHeures = new String[cpt];
 		
 		for (int i = 0; i < tabTypesHeures.length; i++){
-			if(typesHeures.get(i).getNomTypeHeure().equals("SAE") || typesHeures.get(i).getNomTypeHeure().equals("TUT"))
-				tabTypesHeures[i] = typesHeures.get(i).getNomTypeHeure();
+			tabTypesHeures[i] = typesHeures.get(heure[i]).getNomTypeHeure();
 		}
 		
 		this.ddlstIntervenants = new JComboBox<String>(tabInter);

@@ -83,6 +83,7 @@ public class PanelSudSae extends JPanel implements ActionListener{
 		int    nbGpTP       = this.panelPrevi.getNbGpTp();
 		int    nbSemaines   = 0;
 		int    nbHeures     = 0;
+		boolean valide = this.panelSae.estValide();
 
 		HashMap<String, Integer> map = this.panelSae.getDataHeures();
 		for (String heure : map.keySet()) {
@@ -104,6 +105,7 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			m.setNbGpTP(nbGpTP);
 			m.setNbSemaines(nbSemaines);
 			m.setNbHeures(nbHeures);
+			m.setValide(valide);
 			this.panelSae.enregistrer(m);
 		} else {
 			this.module.setTypeModule(m.getTypeModule());
@@ -116,6 +118,7 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			this.module.setNbGpTP(m.getNbGpTP());
 			this.module.setNbSemaines(m.getNbSemaines());
 			this.module.setNbHeures(m.getNbHeures());
+			this.module.setValide(m.isValide());
 			this.panelSae.update(this.oldModule, this.module);
 		}
 

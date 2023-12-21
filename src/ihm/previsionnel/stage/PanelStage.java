@@ -91,6 +91,7 @@ public class PanelStage extends JPanel {
 	public String getLibelle()      { return this.pNordStage.getLibelle();      }
 	public String getLibelleCourt() { return this.pNordStage.getLibelleCourt(); }
 	public Module getModule()       { return this.module;                       }
+	public boolean estValide()      { return this.pCentreStage.estValide();     }
 
 	public HashMap<String, Integer> getDataHeures() { return this.pCentreStage.getData(); }
 	public HashMap<String,Integer>  getData()       { return this.pCentreStage.getData(); }

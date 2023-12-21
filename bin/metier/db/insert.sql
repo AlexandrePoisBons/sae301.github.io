@@ -13,12 +13,13 @@ VALUES
 -- Insertions dans la table Type_Heure
 INSERT INTO Type_Heure (id_type_heure, nom_type_heure, coeff)
 VALUES
-	( 1, 'TD', 1    ),
-	( 2, 'TP', 0.66 ),
-	( 3, 'CM', 1.5  ),
-	( 4, 'TUT', 1   ),
-	( 5, 'REH', 1   ),
-	( 6, 'SAE', 1   )
+	( 1, 'TD',  1    ),
+	( 2, 'TP',  0.66 ),
+	( 3, 'CM',  1.5  ),
+	( 4, 'TUT', 1    ),
+	( 5, 'REH', 1    ),
+	( 6, 'SAE', 1    ),
+	( 7, 'HP',  1    )
 	;
 
 -- Insertions dans la table Statut

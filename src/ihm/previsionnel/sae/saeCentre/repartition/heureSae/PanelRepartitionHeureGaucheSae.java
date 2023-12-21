@@ -12,13 +12,19 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
+import metier.Heure;
+import metier.Module;
+import metier.TypeHeure;
+
 public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListener, ActionListener {
 
 	private PanelRepH panelMere;
+	private Module m;
 	private ArrayList<JTextField> ensJTextField;
 	private int sommeAction;
 
-	public PanelRepartitionHeureGaucheSae(PanelRepH panelRepH) {
+	public PanelRepartitionHeureGaucheSae(PanelRepH panelRepH, Module m) {
+		this.m = m;
 		this.panelMere = panelRepH;
 		this.ensJTextField = new ArrayList<JTextField>();
 
@@ -26,7 +32,7 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 		JPanel panelHC	= new JPanel();
 		
 		for(int cpt=0; cpt < 4; cpt++) {
-			JTextField jtf = new JTextField(3);
+			JTextField jtf = new JTextField("" +0, 3);
 			this.ensJTextField.add(jtf);
 			if(cpt>1){
 				jtf.setEditable(false);
@@ -68,6 +74,21 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 		this.add(panelHC);
 		//implémentation des listener
 
+		int hTut = 0;
+		int hSae = 0;
+		for (Heure h : this.m.getHeures()) {
+			if(h.getTypeHeure().getNomTypeHeure().equals("TUT")){
+				hTut += h.getDuree();
+				System.out.println("hTut : " + hTut);
+			}
+			if(h.getTypeHeure().getNomTypeHeure().equals("SAE")) {
+				hSae += h.getDuree();
+				System.out.println("hSae : " + hSae);
+			}
+		}
+		this.setHeureAffecte(hSae, hTut);
+		this.actualiserSomme();
+
 		for(int i=0;i<this.ensJTextField.size()/2;i++){
 			this.ensJTextField.get(i).addActionListener(this);
 			this.ensJTextField.get(i).addFocusListener(this);
@@ -91,14 +112,6 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 
 	public void setSommePromo(int somme) {
 		this.panelMere.setSommePromo(somme);
-	}
-
-	public void setSommeAffecte() {
-		int somme = 0;
-		for(int i=2;i<this.ensJTextField.size();i++) {
-			somme += Integer.parseInt(this.ensJTextField.get(i).getText());
-		}
-		this.panelMere.setSommeAffecte(somme);
 	}
 
 	@Override
@@ -155,6 +168,15 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 		this.ensJTextField.get(3).setText("" + hTut);
 		this.repaint();
 		this.revalidate();
+	}
+
+
+	public void actualiserSomme() {
+		int somme = 0;
+		for(int i=2;i<this.ensJTextField.size();i++) {
+			somme += Integer.parseInt(this.ensJTextField.get(i).getText());
+		}
+		this.panelMere.setSommeAffecte(somme);
 	}
 
 

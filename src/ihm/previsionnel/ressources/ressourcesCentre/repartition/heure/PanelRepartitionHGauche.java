@@ -17,7 +17,9 @@ import java.util.HashMap;
 import javax.swing.*;
 
 public class PanelRepartitionHGauche extends JPanel implements FocusListener, ActionListener{
+
 	private PanelRepartitionHeure 	panelMere		;
+
 	private JPanel 					panelHeure;
 	private JPanel 					panelTotal		;
 	private ArrayList<JTextField> 	ensJTextField	;
@@ -116,6 +118,10 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 		catch(NumberFormatException e) { map.put("TP", 0); }
 
 		return map;
+	}
+
+	public int getNbHeureSemaine(int i) {
+		return Integer.parseInt(this.ensJTextField.get(i).getText());
 	}
 
 	/*public void setSommeCM(int somme) {
