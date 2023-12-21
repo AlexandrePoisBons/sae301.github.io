@@ -101,10 +101,26 @@ public class PanelRepartitionHDroite extends JPanel {
 	}
 
 
-	public void setSommePromo(int somme) {
+	public void setSommeCM(int somme) {
+		this.ensTxtFld.get(2).setText("" + somme);
+		this.repaint();
+		this.revalidate();
+	}
+
+	public void setSommeTD(int somme) {
 		this.ensTxtFld.get(0).setText("" + somme);
 		this.repaint();
 		this.revalidate();
+	}
+
+	public void setSommeTP(int somme) {
+		this.ensTxtFld.get(1).setText("" + somme);
+		this.repaint();
+		this.revalidate();
+	}
+
+	public void setSommeTotal(int somme){
+		
 	}
 
 	public void setHeureAffecte(int hSae, int hTut) {

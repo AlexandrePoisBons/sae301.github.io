@@ -13,7 +13,6 @@ public class Controleur {
 		System.out.println(infos.getDatabase()+"="+infos.getLogin()+":"+infos.getPassword());
 		this.metier = new ControleurMetier(this);
 		this.ihm    = new ControleurIHM(this);
-
 	}
 
 	public ControleurMetier metier() { return this.metier; }
