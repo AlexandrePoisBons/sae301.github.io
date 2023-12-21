@@ -5,12 +5,15 @@ import java.util.List;
 
 import metier.db.Requetes;
 
+
 /**
- * Classe Heure : représente une heure de cours avec ses intervenant et son module lié
- * @author Alexandre Pois--Bons - Florian Janot
+ * Classe Heure représentant une heure de cours avec ses intervenant et son module lié
+ * @author Serlogic
  * @version 1.0
  */
+
 public class Heure implements Comparable<Heure> {
+
 	private static int  nbHeures = Requetes.getNbHeures();
 
 	private int         idHeure;
@@ -31,17 +34,15 @@ public class Heure implements Comparable<Heure> {
 	 * @param commentaire Un commentaire sur l'heure saisie par l'utilisateur
 	 * @return une heure ou null
 	 */
-	public static Heure creerHeure( Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire)
+	public static Heure creerHeure( Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire )
 	{
-		if ( module == null || typeHeure == null || duree < 0 ){
-			System.out.println("il est nulllllllllllllllllllll");
+		if ( module == null || typeHeure == null || duree < 0 )
 			return null;
-		}
 
 		return new Heure( module, typeHeure, nbSemaines, nbGpnbH, duree, commentaire);
 	}
 
-	public static Heure initHeure( int idHeure, Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire)
+	public static Heure initHeure( int idHeure, Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire )
 	{
 		if ( idHeure < 0 || module == null || typeHeure == null || duree <= 0 )
 			return null;
@@ -57,7 +58,7 @@ public class Heure implements Comparable<Heure> {
 	 * @param commentaire Un commentaire sur l'heure saisie par l'utilisateur
 	 * @return            Une heure validé par la factory
 	 */
-	private Heure( Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire) {
+	private Heure( Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire ) {
 		this.idHeure     = ++nbHeures;
 		this.module      = module;
 		this.typeHeure   = typeHeure;
@@ -69,7 +70,7 @@ public class Heure implements Comparable<Heure> {
 		this.intervenants = new ArrayList<Intervenant>();
 	}
 
-	private Heure (int idHeure, Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire) {
+	private Heure( int idHeure, Module module, TypeHeure typeHeure, int nbSemaines, int nbGpnbH, float duree, String commentaire ) {
 		this.idHeure     = idHeure;
 		this.module      = module;
 		this.typeHeure   = typeHeure;
@@ -92,16 +93,18 @@ public class Heure implements Comparable<Heure> {
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
 
 	// Setters
-	public void setIdHeure( int idHeure )                       { this.idHeure      = idHeure;            }
-	public void setModule(Module module)                        { this.module       = module;             }
-	public void setTypeHeure(TypeHeure typeHeure)               { this.typeHeure    = typeHeure;          }
-	public void setNbSemaines(int nbSemaines)                   { this.nbSemaines   = nbSemaines;         }
-	public void setNbGpNbH(int nbGpnbH)                         { this.nbGpnbH      = nbGpnbH;            }
-	public void setDuree(float duree)                           { this.duree        = duree;              }
-	public void setCommentaire(String commentaire)              { this.commentaire  = commentaire;        }
-	public void setIntervenants(List<Intervenant> intervenants) { this.intervenants = intervenants;       }
-	public void ajouterIntervenant(Intervenant intervenant)     { this.intervenants.add(intervenant);     }
-	public void supprimerIntervenant(Intervenant intervenant)   { this.intervenants.remove(intervenant);  }
+	public void setIdHeure           ( int               idHeure      ) { this.idHeure      = idHeure;           }
+	public void setModule            ( Module            module       ) { this.module       = module;            }
+	public void setTypeHeure         ( TypeHeure         typeHeure    ) { this.typeHeure    = typeHeure;         }
+	public void setNbSemaines        ( int               nbSemaines   ) { this.nbSemaines   = nbSemaines;        }
+	public void setNbGpNbH           ( int               nbGpnbH      ) { this.nbGpnbH      = nbGpnbH;           }
+	public void setDuree             ( float             duree        ) { this.duree        = duree;             }
+	public void setCommentaire       ( String            commentaire  ) { this.commentaire  = commentaire;       }
+	public void setIntervenants      ( List<Intervenant> intervenants ) { this.intervenants = intervenants;      }
+
+
+	public void ajouterIntervenant   ( Intervenant intervenant ) { this.intervenants.add(intervenant);    }
+	public void supprimerIntervenant ( Intervenant intervenant ) { this.intervenants.remove(intervenant); }
 
 
 	/**
@@ -109,12 +112,12 @@ public class Heure implements Comparable<Heure> {
 	 * @return une chaine de caractère représentant l'heure
 	 */
 	public String toString() {
-		return "Heure [idHeure="+this.idHeure + ", idModule=" + this.module.getIdModule() + ", idTypeHeure=" + this.typeHeure.getIdTypeHeure() + ", duree=" + this.duree + ", commentaire=" + this.commentaire+", intervenants="+this.intervenants+"]";
+		return "Heure [idHeure="+this.idHeure + ", idModule=" + this.module.getIdModule() + ", idTypeHeure=" + this.typeHeure.getIdTypeHeure() + ", duree=" + this.duree + ", commentaire=" + this.commentaire+", intervenants=("+this.intervenants+")]";
 	}
 
 
-	public int compareTo(Heure h) {
-		return ((Integer)this.idHeure).compareTo((Integer)h.getIdHeure());
+	public int compareTo( Heure h ) {
+		return ((Integer) this.idHeure ).compareTo((Integer) h.getIdHeure() );
 	}
 
 	

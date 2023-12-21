@@ -6,26 +6,30 @@ import controleur.Infos;
 import metier.*;
 
 public class DB {
-	private Connection connec;
-	private static DB dbInstance;
-	private Infos infos;
 
-	public static void main(String[] args) { DB db = DB.getInstance(); }
+	private static DB dbInstance;
+
+	private Connection connec;
+	private Infos      infos;
 
 	private DB() {
+
 		this.infos = new Infos();
+
 		try {
 			Class.forName("org.postgresql.Driver");
 			System.out.println ("CHARGEMENT DU PILOTE OK");
-		} catch (ClassNotFoundException e) { e.printStackTrace(); }
+		} catch ( ClassNotFoundException e ) { e.printStackTrace(); }
 
 		try {
 			String url = "jdbc:postgresql://localhost:5432/" + this.infos.getDatabase();
 			String login = this.infos.getLogin();
 			String password = this.infos.getPassword();
+
 			connec = DriverManager.getConnection(url,login,password);
+
 			System.out.println("CONNEXION A LA BADO: REUSSIE");
-		} catch (SQLException e) { e.printStackTrace(); }
+		} catch ( SQLException e ) { e.printStackTrace(); }
 	}
 
 	public static DB getInstance() {
@@ -36,4 +40,5 @@ public class DB {
 	public void close() throws SQLException { this.connec.close(); }
 
 	public Connection getConnection() { return this.connec; }
+
 }

@@ -8,7 +8,7 @@ public class ControleurIHM {
 	private Controleur ctrl;
 
 
-	public ControleurIHM(Controleur ctrl) {
+	public ControleurIHM( Controleur ctrl ) {
 		this.ctrl = ctrl;
 		this.frame = new FrameAccueil(this);
 	}
