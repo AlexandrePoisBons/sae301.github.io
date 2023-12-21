@@ -144,9 +144,7 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener{
 			this.txtTDWrite.transferFocus();
 		}
 		else if(e.getSource() == this.txtTPWrite) {
-			//pour que le focus revienne à la première case
-			this.txtTPWrite.transferFocusDownCycle();;
-
+			this.txtTPWrite.transferFocus();
 		}
 
 
