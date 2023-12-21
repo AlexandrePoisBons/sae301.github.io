@@ -6,19 +6,22 @@ import java.util.List;
 
 import metier.db.Requetes;
 
+
 /**
  * Classe Intervenant représentant les personnes du corps enseignants intervenant dans les modules
- * @author Alexandre Pois--Bons - Florian Janot
+ * @author Serlogic
  * @version 1.0
  */
+
 public class Intervenant implements Comparable<Intervenant> {
+
 	private static int nbIntervenant = Requetes.getNbIntervenants();
 
-	private int    idIntervenant;
 	private String prenom;
 	private String nom;
 	private Statut statut;
 	private float  nbEqTD;
+	private int    idIntervenant;
 
 	private List<Heure>  heures;
 	private List<Module> modules;
@@ -72,7 +75,7 @@ public class Intervenant implements Comparable<Intervenant> {
 		this.nbEqTD        = nbEqTD;
 
 		this.heures  = new ArrayList<Heure>();
-		this.modules = new ArrayList<Module>(); 
+		this.modules = new ArrayList<Module>();
 	}
 
 	// Getters
@@ -85,19 +88,19 @@ public class Intervenant implements Comparable<Intervenant> {
 	public List<Module>  getModules()       { return this.modules;       }
 
 	// Setters
-	public void setIdIntervenant(int idIntervenant) { this.idIntervenant = idIntervenant; }
-	public void setPrenom( String prenom )          { this.prenom        = prenom;        }
-	public void setNom(String nom)                  { this.nom           = nom;           }
-	public void setStatut(Statut statut)            { this.statut        = statut;        }
-	public void setNbEqTD( float nbEqTD )           { this.nbEqTD        = nbEqTD;        }
-
+	public void setIdIntervenant ( int idIntervenant ) { this.idIntervenant = idIntervenant; }
+	public void setPrenom        ( String prenom     ) { this.prenom        = prenom;        }
+	public void setNom           ( String nom        ) { this.nom           = nom;           }
+	public void setStatut        ( Statut statut     ) { this.statut        = statut;        }
+	public void setNbEqTD        ( float nbEqTD      ) { this.nbEqTD        = nbEqTD;        }
+ 
 	// Ajout et suppression d'heure
-	public void ajouterHeure(Heure h)   { this.heures.add(h);    }
-	public void supprimerHeure(Heure h) { this.heures.remove(h); }
+	public void ajouterHeure   ( Heure h ) { this.heures.add(h);    }
+	public void supprimerHeure ( Heure h ) { this.heures.remove(h); }
 
 	// Ajout et suppression de module
-	public void ajouterModule(Module m)   { this.modules.add(m);    }
-	public void supprimerModule(Module m) { this.modules.remove(m); }
+	public void ajouterModule   ( Module m ) { this.modules.add(m);    }
+	public void supprimerModule ( Module m ) { this.modules.remove(m); }
 
 	// Calcul du nombre d'heures affectées à l'intervenant équivalent TD
 	public float getNbHeures() {
@@ -111,25 +114,15 @@ public class Intervenant implements Comparable<Intervenant> {
 	public HashMap<String, Float> getNbHeuresParSemestre() {
 		HashMap<String, Float> map = new HashMap<>();
 
-		System.out.println("\n\n HEURES de Intervenant nom="+this.nom);
-		for (Heure heure : this.heures) {
-			System.out.println(heure.toString());
-		}
-
 		for ( Heure heure : this.heures ) {
-			if ( !map.containsKey(heure.getModule().getSemestre()) ){
+			if ( !map.containsKey(heure.getModule().getSemestre()) ) {
 				map.put(heure.getModule().getSemestre(), heure.getDuree());
-			}
-			else {
+			} else {
 				Float f = map.get(heure.getModule().getSemestre());
 				f += heure.getDuree();
 				map.remove(heure.getModule().getSemestre());
 				map.put(heure.getModule().getSemestre(), f);
 			}
-		}
-
-		for (String s : map.keySet()) {
-			System.out.println(s+" : "+map.get(s));
 		}
 
 		if ( !map.containsKey("S1") ) map.put("S1", (float)0.0);
@@ -141,21 +134,12 @@ public class Intervenant implements Comparable<Intervenant> {
 		return map;
 	}
 
-
-	// Vérification des modules de l'intervenant
-	public void verificationModule( Module m )
-	{
-		for ( Heure h : this.heures )
-			if ( ! (h.getModule() == m) )
-				this.modules.remove(m);
-	}
-
 	/**
 	 * Méthode toString de la classe Intervenant
 	 * @return L'intervenant sous forme de chaîne de caractère
 	 */
 	public String toString() {
-		return this.idIntervenant + " " + this.prenom + " " + this.nom + " (" + this.statut + ", " + this.nbEqTD + "eqTD)";
+		return "Intervenant [idIntervenant="+ this.idIntervenant + ", prenom=" + this.prenom + ", nom=" + this.nom + ", nomStatut=" + this.statut.getNomStatut() + ", nbEqTD=" + this.nbEqTD + "h]";
 	}
 
 	public int compareTo(Intervenant i) {

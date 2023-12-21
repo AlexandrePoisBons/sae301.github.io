@@ -4,26 +4,22 @@ import metier.db.Requetes;
 
 /**
  * Classe TypeHeure désignant les différents types d'heures possibles ( CM, TD, TP, etc. )
- * @author Alexandre Pois--Bons - Florian Janot
- * @version 1.0
+ * @author Serlogic
+ * @version 2.0
  */
 public class TypeHeure {
+
 	private static int nbTypeHeure = Requetes.getNbTypeHeures();
 
-	private int    idTypeHeure;
 	private String nomTypeHeure;
 	private float  coeff;
+	private int    idTypeHeure;
 
-	/**
-	 * Constructeur de TypeHeure
-	 * @param nomTypeHeure Le nom du type d'heure
-	 * @param coeff        Le coefficient du type d'heure
-	 * @return Un objet de type TypeHeure
-	 */
 
-	public static TypeHeure initTypeHeure(int idTypeHeure, String nomTypeHeure, float coeff) {
+	public static TypeHeure initTypeHeure( int idTypeHeure, String nomTypeHeure, float coeff ) {
 		if ( idTypeHeure>=1 )
 			return new TypeHeure(idTypeHeure, nomTypeHeure, coeff);
+
 		return null;
 	}
 
@@ -33,7 +29,7 @@ public class TypeHeure {
 		this.coeff        = coeff;
 	}
 
-	private TypeHeure(int idTypeHeure, String nomTypeHeure, float coeff) {
+	private TypeHeure( int idTypeHeure, String nomTypeHeure, float coeff ) {
 		this.idTypeHeure  = idTypeHeure;
 		this.nomTypeHeure = nomTypeHeure;
 		this.coeff        = coeff;
@@ -45,16 +41,16 @@ public class TypeHeure {
 	public float  getCoeff()        { return this.coeff;        }
 
 	// Setters
-	public void setIdTypeHeure( int idTypeHeure )     { this.idTypeHeure  = idTypeHeure;  }
-	public void setNomTypeHeure(String nomTypeHeure ) { this.nomTypeHeure = nomTypeHeure; }
-	public void setCoeff( float coeff )               { this.coeff        = coeff;        }
+	public void setIdTypeHeure ( int    idTypeHeure  ) { this.idTypeHeure  = idTypeHeure;  }
+	public void setNomTypeHeure( String nomTypeHeure ) { this.nomTypeHeure = nomTypeHeure; }
+	public void setCoeff       ( float  coeff        ) { this.coeff        = coeff;        }
 
 	/**
 	 * Méthode toString de TypeHeure
 	 * @return Une chaîne de caractères représentant le type d'heure
 	 */
 	public String toString() {
-		return "TypeHeure [i"+this.idTypeHeure + " " + this.nomTypeHeure + " coeff=" + this.coeff + "]"; 
+		return "TypeHeure [idTypeHeure="+this.idTypeHeure + ", nomTypeHeure=" + this.nomTypeHeure + ", coeff=" + this.coeff + "]"; 
 	}
 
 }
