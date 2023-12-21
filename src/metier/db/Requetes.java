@@ -132,14 +132,13 @@ public class Requetes {
 
 
 	public void insertIntervenant( Intervenant intervenant ) throws SQLException {
-		System.out.println("insert intervenant");
 		if ( !this.existsIntervenant(intervenant.getIdIntervenant()) ) {
 			this.psInsertI.setInt(1, intervenant.getIdIntervenant());
 			this.psInsertI.setString(2, intervenant.getNom());
 			this.psInsertI.setString(3, intervenant.getPrenom());
 			this.psInsertI.setFloat(4, intervenant.getNbEqTD());
 			this.psInsertI.setString(5, intervenant.getStatut().getNomStatut());
-			System.out.println("retour: "+this.psInsertI.executeUpdate());
+			this.psInsertI.executeUpdate();
 		} else {
 			System.out.println("Intervenant id_intervenant="+intervenant.getIdIntervenant()+" deja existant");
 		}
@@ -217,7 +216,6 @@ public class Requetes {
 
 
 	public void insertHeure(Heure heure) {
-		System.out.println("insert heure");
 		try{
 			if ( !this.existsHeure(heure.getIdHeure()) ) {
 				this.psInsertH.setInt(1, heure.getIdHeure());
@@ -228,7 +226,6 @@ public class Requetes {
 				this.psInsertH.setFloat(6, heure.getDuree());
 				this.psInsertH.setString(7,heure.getCommentaire());
 				this.psInsertH.executeUpdate();
-				System.out.println(heure.toString());
 			} else {
 				System.out.println("Heure id_heure = "+heure.getIdHeure()+" deja existant");
 			}
@@ -241,7 +238,6 @@ public class Requetes {
 		if ( this.existsHeure(heure.getIdHeure()) ) {
 			this.psDeleteH.setInt(1, heure.getIdHeure());
 			this.psDeleteH.executeUpdate();
-			System.out.println("delete heureeeeee");
 		} else {
 			System.out.println("Heure id_heure = "+heure.getIdHeure()+" inexistant");
 		}
@@ -417,6 +413,7 @@ public class Requetes {
 			this.psInsertM.execute();
 
 			return true;
+
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" deja existant");
 			return false;
@@ -427,14 +424,8 @@ public class Requetes {
 	public void deleteModule(Module module) throws SQLException {
 
 		if ( this.existsModule(module.getIdModule()) ) {
-
-			// this.psDeleteHeureByModule.setInt(1, module.getIdModule());
-			// this.psDeleteHeureByModule.executeUpdate();
-
 			this.psDeleteM.setInt(1, module.getIdModule());
-			System.out.println("coucou"+module.getIdModule());
 			this.psDeleteM.executeUpdate();
-			System.out.println("salut");
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" inexistant");
 		}
@@ -588,9 +579,7 @@ public class Requetes {
 		if ( this.existsIntervenantModule(intervenant.getIdIntervenant(), module.getIdModule()) ) {
 			this.psDeleteIM.setInt(1, intervenant.getIdIntervenant());
 			this.psDeleteIM.setInt(2, module.getIdModule());
-			System.out.println("donooooo");
 			this.psDeleteIM.executeUpdate();
-			System.out.println("vaaa");
 		} else {
 			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" inexistant");
 		}
@@ -697,7 +686,6 @@ public class Requetes {
 			this.psInsertHM.setInt(1, heure.getIdHeure());
 			this.psInsertHM.setInt(2, module.getIdModule());
 			this.psInsertHM.executeUpdate();
-			System.out.println("insert faite");
 		} else {
 			System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" deja existant");
 		}
