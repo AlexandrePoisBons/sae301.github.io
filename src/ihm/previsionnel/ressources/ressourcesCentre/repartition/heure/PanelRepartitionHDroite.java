@@ -108,6 +108,7 @@ public class PanelRepartitionHDroite extends JPanel {
 	public void setSommeTD(int somme) {
 		this.ensTxtFld.get(0).setText("" + somme);
 		this.sommeAction += somme;
+		System.out.println(this.sommeAction);
 		this.repaint();
 		this.revalidate();
 		this.setSommeTotal();
@@ -135,6 +136,7 @@ public class PanelRepartitionHDroite extends JPanel {
 			somme+=Integer.parseInt(this.ensTxtFld.get(3).getText());
 
 			System.out.println("somme : " + somme);
+		this.ensTxtFld.get(4).setText("");
 		this.ensTxtFld.get(4).setText("" + somme);
 		this.repaint();
 		this.revalidate();

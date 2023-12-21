@@ -21,10 +21,6 @@ public class TypeHeure {
 	 * @return Un objet de type TypeHeure
 	 */
 
-	//public static TypeHeure creerTypeHeure(String nomTypeHeure, float coeff) {
-	// 	return new TypeHeure(nomTypeHeure, coeff);
-	// }
-
 	public static TypeHeure initTypeHeure(int idTypeHeure, String nomTypeHeure, float coeff) {
 		if ( idTypeHeure>=1 )
 			return new TypeHeure(idTypeHeure, nomTypeHeure, coeff);
