@@ -17,7 +17,10 @@ public class PanelRepartitionHDroite extends JPanel {
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
 
+	private int sommeAction;
+
 	public PanelRepartitionHDroite(){
+		this.sommeAction = 0;
 		this.panelN = new JPanel();
 		this.panelC = new JPanel();
 		this.ensTxtFld = new ArrayList<JTextField>();
@@ -101,26 +104,41 @@ public class PanelRepartitionHDroite extends JPanel {
 	}
 
 
-	public void setSommeCM(int somme) {
-		this.ensTxtFld.get(2).setText("" + somme);
-		this.repaint();
-		this.revalidate();
-	}
 
 	public void setSommeTD(int somme) {
 		this.ensTxtFld.get(0).setText("" + somme);
+		this.sommeAction += somme;
 		this.repaint();
 		this.revalidate();
+		this.setSommeTotal();
 	}
 
 	public void setSommeTP(int somme) {
 		this.ensTxtFld.get(1).setText("" + somme);
+		this.sommeAction += somme;
 		this.repaint();
 		this.revalidate();
+		this.setSommeTotal();
 	}
 
-	public void setSommeTotal(int somme){
-		
+	public void setSommeCM(int somme) {
+		this.ensTxtFld.get(2).setText("" + somme);
+		this.sommeAction += somme;
+		this.repaint();
+		this.revalidate();
+		this.setSommeTotal();
+	}
+
+	public void setSommeTotal(){
+		int somme = this.sommeAction;
+		if(!this.ensTxtFld.get(3).getText().equals(""))
+			somme+=Integer.parseInt(this.ensTxtFld.get(3).getText());
+
+			System.out.println("somme : " + somme);
+		this.ensTxtFld.get(4).setText("" + somme);
+		this.repaint();
+		this.revalidate();
+		//this.sommeAction = 0;
 	}
 
 	public void setHeureAffecte(int hSae, int hTut) {
