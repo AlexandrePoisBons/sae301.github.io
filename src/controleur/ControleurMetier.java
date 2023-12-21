@@ -262,13 +262,13 @@ public class ControleurMetier {
 		this.typesHeures  = this.requetes.getTypesHeures();
 
 		if ( this.typesHeures.size() == 0 ) {
-			this.typesHeures.add( TypeHeure.initTypeHeure(1,"TD" , (float) 1.0   ) );
-			this.typesHeures.add( TypeHeure.initTypeHeure(2,"TP" , (float) 0.66  ) );
-			this.typesHeures.add( TypeHeure.initTypeHeure(3,"CM" , (float) 1.5   ) );
-			this.typesHeures.add( TypeHeure.initTypeHeure(4,"TUT", (float) 1.0   ) );
-			this.typesHeures.add( TypeHeure.initTypeHeure(6,"REH", (float) 1.0   ) );
-			this.typesHeures.add( TypeHeure.initTypeHeure(5,"Sae", (float) 1.0   ) );
-			// this.typesHeures.add( TypeHeure.initTypeHeure(7,"HP"    , (float) 1.0  ) );
+			this.typesHeures.add( TypeHeure.initTypeHeure( 1, "TD",  (float) 1.0  ) );
+			this.typesHeures.add( TypeHeure.initTypeHeure( 2, "TP",  (float) 0.66 ) );
+			this.typesHeures.add( TypeHeure.initTypeHeure( 3, "CM",  (float) 1.5  ) );
+			this.typesHeures.add( TypeHeure.initTypeHeure( 4, "TUT", (float) 1.0  ) );
+			this.typesHeures.add( TypeHeure.initTypeHeure( 6, "REH", (float) 1.0  ) );
+			this.typesHeures.add( TypeHeure.initTypeHeure( 5, "Sae", (float) 1.0  ) );
+			this.typesHeures.add( TypeHeure.initTypeHeure( 7, "HP",  (float) 1.0  ) );
 		}
 
 

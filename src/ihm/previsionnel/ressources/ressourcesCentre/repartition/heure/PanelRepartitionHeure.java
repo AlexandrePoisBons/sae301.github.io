@@ -23,7 +23,7 @@ public class PanelRepartitionHeure extends JPanel{
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 		this.panelRepartitionHGauche = new PanelRepartitionHGauche(this);
-		this.panelRepartitionHDroite = new PanelRepartitionHDroite();
+		this.panelRepartitionHDroite = new PanelRepartitionHDroite(this);
 
 		this.add(this.panelRepartitionHGauche);
 		this.add(this.panelRepartitionHDroite);
@@ -53,5 +53,10 @@ public class PanelRepartitionHeure extends JPanel{
 		this.panelRepartitionHDroite.setHeureAffecte(hSae, hTut);
 	}
 
+	public int getNbGpTd(){return this.panelMere.getNbGpTd();}
+	public int getNbGpTp(){return this.panelMere.getNbGpTp();}
 
+	public int getNbHeureSemaine(int i){
+		return this.panelRepartitionHGauche.getNbHeureSemaine(i);
+	}
 }

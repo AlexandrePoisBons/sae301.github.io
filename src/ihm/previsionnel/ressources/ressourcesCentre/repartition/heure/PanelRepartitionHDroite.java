@@ -14,13 +14,20 @@ import javax.swing.JLabel;
 
 
 public class PanelRepartitionHDroite extends JPanel implements FocusListener, ActionListener{
+	//Constante coefficient de conversion des heures de CM en heures TD (1h de TD = 1.5h CM)
+	private static final double COEFF_CM_TD = 1.5;
+
+	private PanelRepartitionHeure panelMere;
+
 	private JPanel panelN;
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
 
 	private int sommeActionTD, sommeActionTP, sommeActionCM;
+	private int clcCM, clcTD, clcTP;
 
-	public PanelRepartitionHDroite(){
+	public PanelRepartitionHDroite(PanelRepartitionHeure panelMere){
+		this.panelMere = panelMere;
 		this.sommeActionTD = this.sommeActionTP = this.sommeActionCM = 0;
 		this.panelN = new JPanel();
 		this.panelC = new JPanel();
@@ -107,11 +114,14 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 		this.ensTxtFld.get(3).addFocusListener(this);
 	}
 
+	public PanelRepartitionHDroite(){}
+
 
 
 	public void setSommeTD(int somme) {
 		this.ensTxtFld.get(0).setText("" + somme);
 		this.sommeActionTD = somme;
+		this.clcTD = this.sommeActionTD*this.panelMere.getNbGpTd();
 		this.repaint();
 		this.revalidate();
 	}
@@ -119,6 +129,7 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 	public void setSommeTP(int somme) {
 		this.ensTxtFld.get(1).setText("" + somme);
 		this.sommeActionTP = somme;
+		this.clcTP = this.sommeActionTP*this.panelMere.getNbGpTp();
 		this.repaint();
 		this.revalidate();
 	}
@@ -126,6 +137,7 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 	public void setSommeCM(int somme) {
 		this.ensTxtFld.get(2).setText("" + somme);
 		this.sommeActionCM = somme;
+		this.clcCM = (int) (this.sommeActionCM*COEFF_CM_TD);
 		this.repaint();
 		this.revalidate();
 	}
@@ -134,7 +146,14 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 
 	public void setSommeTotal(){
 		int somme = this.sommeActionTD + this.sommeActionTP + this.sommeActionCM;
+		int sommeAffecte = this.clcCM + this.clcTD + this.clcTP;
+		this.sommeActionTD = this.sommeActionTP = this.sommeActionCM = 0;
+
 		this.ensTxtFld.get(4).setText("" + somme);
+		this.ensTxtFld.get(5).setText("" + clcCM);
+		this.ensTxtFld.get(6).setText("" + clcTD);
+		this.ensTxtFld.get(7).setText("" + clcTP);
+		this.ensTxtFld.get(8).setText("" + sommeAffecte);
 		this.repaint();
 		this.revalidate();
 	}
@@ -142,7 +161,14 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 	//Ajout de la valeur de jtxtfld3 dans jtxtfld4
 	public void setSommeTotal(int val){
 		int somme = this.sommeActionTD + this.sommeActionTP + this.sommeActionCM+val;
+		int sommeAffecte = this.clcCM + this.clcTD + this.clcTP;
+		this.sommeActionTD = this.sommeActionTP = this.sommeActionCM = 0;
+
 		this.ensTxtFld.get(4).setText("" + somme);
+		this.ensTxtFld.get(5).setText("" + clcCM);
+		this.ensTxtFld.get(6).setText("" + clcTD);
+		this.ensTxtFld.get(7).setText("" + clcTP);
+		this.ensTxtFld.get(8).setText("" + sommeAffecte);
 		this.repaint();
 		this.revalidate();
 	}

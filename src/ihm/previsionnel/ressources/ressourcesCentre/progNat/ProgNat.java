@@ -1,6 +1,9 @@
 package ihm.previsionnel.ressources.ressourcesCentre.progNat;
 
 import javax.swing.*;
+
+import ihm.previsionnel.ressources.ressourcesCentre.PRCentre;
+
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -13,6 +16,11 @@ import java.util.HashMap;
 import java.awt.Color;
 
 public class ProgNat extends JPanel implements FocusListener, ActionListener{
+	//Constante coefficient de conversion des heures de CM en heures TD (1h de TD = 1.5h CM)
+	private static final double COEFF_CM_TD = 1.5;
+
+	private PRCentre panelMere;
+
 	private JPanel panelPrincipal;
 	private JPanel panelValidation;
 	private JTextField txtCMWrite;
@@ -26,7 +34,8 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener{
 	private JCheckBox checkValid;
 
 
-	public ProgNat() {
+	public ProgNat(PRCentre panelMere) {
+		this.panelMere = panelMere;
 		this.setLayout(new BorderLayout());
 		//Initialisation des composants
 		this.panelPrincipal = new JPanel();
@@ -163,6 +172,10 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener{
 			}
 			else {
 				somme += Integer.parseInt(this.txtCMWrite.getText());
+				//calcul du txtField CM non modifiable (txtField modifiable * coeffCM_TD)
+				this.txtCM.setText(Integer.toString((int)(Integer.parseInt(this.txtCMWrite.getText())*COEFF_CM_TD)));
+				this.txtCM.repaint();
+				this.txtCM.revalidate();
 			}
 		} catch (Exception err) {
 			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
@@ -175,6 +188,10 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener{
 			}
 			else {
 				somme += Integer.parseInt(this.txtTDWrite.getText());
+				//calcul du txtField TD non modifiable (txtField modifiable * nbGpTD de panelMere)
+				this.txtTD.setText(Integer.toString((int)(Integer.parseInt(this.txtTDWrite.getText())*this.panelMere.getNbGpTd())));
+				this.txtTD.repaint();
+				this.txtTD.revalidate();
 			}
 		} catch (Exception err) {
 			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
@@ -187,6 +204,10 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener{
 			}
 			else {
 				somme += Integer.parseInt(this.txtTPWrite.getText());
+				//calcul du txtField TP non modifiable (txtField modifiable * nbGpTP de panelMere)
+				this.txtTP.setText(Integer.toString((int)(Integer.parseInt(this.txtTPWrite.getText())*this.panelMere.getNbGpTp())));
+				this.txtTP.repaint();
+				this.txtTP.revalidate();
 			}
 		} catch (Exception err) {
 			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
@@ -195,6 +216,11 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener{
 		this.txtOEWrite.setText(Integer.toString(somme));
 		this.txtOEWrite.repaint();
 		this.txtOEWrite.revalidate();
+
+		this.txtOE.setText(Integer.toString(Integer.parseInt(this.txtCM.getText()) + Integer.parseInt(this.txtTD.getText()) + Integer.parseInt(this.txtTP.getText())));
+		this.txtOE.repaint();
+		this.txtOE.revalidate();
+
 	}
 
 	//Méthode inutilisée mais obligatoire
