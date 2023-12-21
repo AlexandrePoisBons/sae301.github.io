@@ -22,9 +22,12 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 	private JPanel 					panelTotal		;
 	private ArrayList<JTextField> 	ensJTextField	;
 	private int sommeAction;
+	private int cptTD, cptTP, cptCM;
 
 	public PanelRepartitionHGauche(PanelRepartitionHeure panelMere){
 		this.panelMere = panelMere;
+		this.cptTD = this.cptTP = this.cptCM = 0;
+
 		this.panelHeure = new JPanel();
 		this.ensJTextField = new ArrayList<JTextField>();
 
@@ -115,7 +118,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 		return map;
 	}
 
-	public void setSommeCM(int somme) {
+	/*public void setSommeCM(int somme) {
 		this.panelMere.setSommeCM(somme);
 	}
 
@@ -125,7 +128,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 
 	public void setSommeTP(int somme) {
 		this.panelMere.setSommeTP(somme);
-	}
+	}*/
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -166,11 +169,14 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 			else
 				if(this.ensJTextField.get(1).getText().equals(""))
 					somme += Integer.parseInt(this.ensJTextField.get(0).getText()); 
-				else
+				else{
 					somme = Integer.parseInt(this.ensJTextField.get(1).getText())*Integer.parseInt(this.ensJTextField.get(0).getText());
+					this.panelMere.setSommeTD(somme);
+				}
 			}
+
 			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+				System.out.println("");
 			}
 
 			try {
@@ -181,14 +187,16 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 				else
 					if(this.ensJTextField.get(0).getText().equals(""))
 						somme += Integer.parseInt(this.ensJTextField.get(1).getText()); 
-					else
+					else{
 						somme = Integer.parseInt(this.ensJTextField.get(1).getText())*Integer.parseInt(this.ensJTextField.get(0).getText());
-			}
-			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+						this.panelMere.setSommeTD(somme);
+					}
 			}
 
-			this.panelMere.setSommeTD(somme);
+			catch(NumberFormatException ex) {
+				System.out.println("");
+			}
+
 			
 		} catch (Exception ex) {
 			System.err.println("Erreur lors du calcul des heures TD");
@@ -205,11 +213,14 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 				else
 					if(this.ensJTextField.get(3).getText().equals(""))
 						somme += Integer.parseInt(this.ensJTextField.get(2).getText()); 
-					else
-						somme = Integer.parseInt(this.ensJTextField.get(2).getText())*Integer.parseInt(this.ensJTextField.get(3).getText());			
+					else{
+						somme = Integer.parseInt(this.ensJTextField.get(2).getText())*Integer.parseInt(this.ensJTextField.get(3).getText());
+						this.panelMere.setSommeTP(somme);
+					}			
 				}
+
 			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+				System.out.println("");
 			}
 
 			try {
@@ -220,14 +231,17 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 				else
 					if(this.ensJTextField.get(2).getText().equals(""))
 						somme += Integer.parseInt(this.ensJTextField.get(3).getText()); 
-					else
+					else{
 						somme = Integer.parseInt(this.ensJTextField.get(2).getText())*Integer.parseInt(this.ensJTextField.get(3).getText());
-			}
-			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+						this.panelMere.setSommeTP(somme);
+					}
 			}
 
-			this.panelMere.setSommeTP(somme);
+			catch(NumberFormatException ex) {
+				System.out.println("");
+			}
+
+			
 			
 		} catch (Exception ex) {
 			System.err.println("Erreur lors du calcul des heures TD");
@@ -244,11 +258,14 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 				else
 					if(this.ensJTextField.get(5).getText().equals(""))
 						somme += Integer.parseInt(this.ensJTextField.get(4).getText()); 
-					else
+					else{
 						somme = Integer.parseInt(this.ensJTextField.get(4).getText())*Integer.parseInt(this.ensJTextField.get(5).getText());
+						this.panelMere.setSommeCM(somme);
+					}
 			}
+
 			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+				System.out.println("");
 			}
 
 			try {
@@ -259,18 +276,23 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 				else
 					if(this.ensJTextField.get(4).getText().equals(""))
 						somme += Integer.parseInt(this.ensJTextField.get(5).getText()); 
-					else
+					else{
 						somme = Integer.parseInt(this.ensJTextField.get(4).getText())*Integer.parseInt(this.ensJTextField.get(5).getText());
-			}
-			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+						this.panelMere.setSommeCM(somme);
+					}
 			}
 
-			this.panelMere.setSommeCM(somme);
+			catch(NumberFormatException ex) {
+				System.out.println("");
+			}
+
+			
 			
 		} catch (Exception ex) {
 			System.err.println("Erreur lors du calcul des heures TD");
 		}
+
+		this.panelMere.setSommeTotal();	
 	}
 
 
