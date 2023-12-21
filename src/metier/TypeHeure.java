@@ -54,7 +54,7 @@ public class TypeHeure {
 	 * @return Une chaîne de caractères représentant le type d'heure
 	 */
 	public String toString() {
-		return this.idTypeHeure + " " + this.nomTypeHeure + " (coeff=" + this.coeff + ")"; 
+		return "TypeHeure [i"+this.idTypeHeure + " " + this.nomTypeHeure + " coeff=" + this.coeff + "]"; 
 	}
 
 }
