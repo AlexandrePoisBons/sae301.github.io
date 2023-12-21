@@ -17,7 +17,7 @@ public class PanelRepartitionHeure extends JPanel{
 
 	public PanelRepartitionHeure(PanelRepartition panelMere){
 		this.panelMere = panelMere;
-		this.setLayout(new GridLayout(1,1));
+		//this.setLayout(new GridLayout(1,1));
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 		this.panelRepartitionHGauche = new PanelRepartitionHGauche(this);

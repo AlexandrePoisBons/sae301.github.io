@@ -68,6 +68,8 @@ public class PanelSud extends JPanel implements ActionListener {
 		else {
 			this.lblErreur.setText("");
 		}
+		this.repaint();
+		this.revalidate();
 	}
 
 	public void enregistrer() {

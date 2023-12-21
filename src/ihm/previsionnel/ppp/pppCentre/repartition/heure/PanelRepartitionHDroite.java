@@ -1,7 +1,6 @@
 package ihm.previsionnel.ppp.pppCentre.repartition.heure;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -14,7 +13,6 @@ import javax.swing.JLabel;
 
 
 public class PanelRepartitionHDroite extends JPanel{
-	//4,3
 	private JPanel panelN;
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
@@ -25,6 +23,14 @@ public class PanelRepartitionHDroite extends JPanel{
 		this.ensTxtFld = new ArrayList<JTextField>();
 		for(int i = 0; i < 18; i++){
 			JTextField textField = new JTextField(3);
+			if(i == 3 || i == 4){
+				textField.setEnabled(true);
+				System.out.println("jsuis dedans lo");
+			}
+			else{
+				textField.setEnabled(false);
+				System.out.println("lo dedans jsuis");
+			}
 			this.ensTxtFld.add(textField); 
 		}
 		
@@ -34,18 +40,11 @@ public class PanelRepartitionHDroite extends JPanel{
 		this.panelC.setLayout(new GridBagLayout());
 		GridBagConstraints gbcC = new GridBagConstraints();
 
-		gbcN.gridy = 2;
-		gbcN.gridx = 0;
-		this.panelC.add(new JLabel("Total promo (eqtd)", JLabel.RIGHT	), gbcN);
-		gbcN.gridy = 3;
-		gbcN.gridx = 0;
-		this.panelC.add(new JLabel("Total affect (eqtd)", JLabel.RIGHT	), 		gbcN);
-
 
 		gbcN.gridy = 0;
-		gbcN.gridx = 4;
+		gbcN.gridx = 3;
 		this.panelN.add(new JLabel("      heures"), gbcN);
-		gbcN.gridx = 5;
+		gbcN.gridx = 4;
 		this.panelN.add(new JLabel("     heures"), gbcN);
 
 		// Ajout des composants avec GridBagLayout
@@ -65,8 +64,8 @@ public class PanelRepartitionHDroite extends JPanel{
 		gbcC.gridx = 5;
 		this.panelC.add(new JLabel("ponctuelles"), gbcC);
 		gbcC.gridx = 6;
-		gbcC.insets = new Insets(0, 150, 5, 0);
-		this.panelC.add(new JLabel("OE"), gbcC);
+		gbcC.insets = new Insets(0, 50, 5, 0);
+		this.panelC.add(new JLabel("Σ"), gbcC);
 		gbcC.gridx = 1;
 		gbcC.gridy = 1;
 		gbcC.insets = new Insets(0, 3, 5, 0);
@@ -84,7 +83,7 @@ public class PanelRepartitionHDroite extends JPanel{
 		this.panelC.add(this.ensTxtFld.get(4), gbcC);
 		//
 		gbcC.gridx = 6;
-		gbcC.insets = new Insets(0, 150, 5, 0);
+		gbcC.insets = new Insets(0, 50, 5, 0);
 		this.panelC.add(this.ensTxtFld.get(5), gbcC);
 		gbcC.insets = new Insets(0, 3, 8, 0);
 		gbcC.gridx = 1;
@@ -103,7 +102,7 @@ public class PanelRepartitionHDroite extends JPanel{
 		this.panelC.add(this.ensTxtFld.get(10), gbcC);
 		//
 		gbcC.gridx = 6;
-		gbcC.insets = new Insets(0, 150, 5, 0);
+		gbcC.insets = new Insets(0, 50, 5, 0);
 		this.panelC.add(this.ensTxtFld.get(11), gbcC);
 		gbcC.insets = new Insets(0, 3, 8, 0);
 		gbcC.gridx = 1;
@@ -121,7 +120,7 @@ public class PanelRepartitionHDroite extends JPanel{
 		gbcC.gridx = 5;
 		this.panelC.add(this.ensTxtFld.get(16), gbcC);
 		//
-		gbcC.insets = new Insets(0, 150, 5, 0);
+		gbcC.insets = new Insets(0, 50, 5, 0);
 		gbcC.gridx = 6;
 		this.panelC.add(this.ensTxtFld.get(17), gbcC);
 

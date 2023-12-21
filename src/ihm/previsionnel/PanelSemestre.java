@@ -118,13 +118,13 @@ public class PanelSemestre extends JPanel {
 
 	public void ajouterModule(Module module) {
 		this.modules.add(module);
-		String[] s = {module.getCode(), module.getLibelle()};
+		String[] s = {module.getCode(), module.getLibelle(), "test" , ""+module.isValide()};
 		this.dtm.addRow(s);
 	}
 
 	public void updateModule(Module module) {
 		try{this.removeModule();} catch(SQLException e) {e.printStackTrace();}
-		String[] s = {module.getCode()};
+		String[] s = {module.getCode(), module.getLibelle(), "test", ""+module.isValide()};
 		this.dtm.addRow(s);
 	}
 
@@ -137,9 +137,9 @@ public class PanelSemestre extends JPanel {
 	}
 
 	public void removeModule() throws SQLException {
+		System.out.println(this.tabModule.getSelectedRow());
 		if(this.tabModule.getSelectedRow() != -1){
 			this.ctrl.metier().supprimerModule(this.getCurrentModule());
-			System.out.println(this.modules.remove(this.tabModule.getSelectedRow()));
 			this.modules.remove(this.tabModule.getSelectedRow());
 			this.dtm.removeRow (this.tabModule.getSelectedRow());
 		}

@@ -61,9 +61,6 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener{
 		this.txtSomme.setEditable(false);
 		this.txtTotalSomme.setEditable(false);
 
-		//Rendre non coché
-		this.checkValid.setSelected(false);
-		this.checkValid.setEnabled(false);
 
 		// Ajout des composants avec GridBagLayout
         gbc.gridx = 1;
@@ -241,7 +238,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener{
 	public void focusGained(FocusEvent e) {}
 
 
-	public boolean estValide() {
+	public boolean isValide() {
 		return this.checkValid.isSelected();
 	}
 

@@ -45,14 +45,14 @@ Create table Intervenant (
     nom VARCHAR(25),
     prenom VARCHAR(25),
     nb_equivalent_td float,
-    nom_statut VARCHAR(10) REFERENCES Statut(nom_statut) ON DELETE CASCADE
+    nom_statut VARCHAR(10) REFERENCES Statut(nom_statut)
 );
 
 
 Create table Heure (
     id_heure integer primary key,
-    id_module integer REFERENCES Module(id_module) ON DELETE CASCADE,
-    id_type_heure integer REFERENCES Type_Heure(id_type_heure) ON DELETE CASCADE,
+    id_module integer REFERENCES Module(id_module),
+    id_type_heure integer REFERENCES Type_Heure(id_type_heure),
     nb_semaines integer,
     nb_gp_nb_h integer,
     duree integer NOT NULL CHECK(duree >= 0),
