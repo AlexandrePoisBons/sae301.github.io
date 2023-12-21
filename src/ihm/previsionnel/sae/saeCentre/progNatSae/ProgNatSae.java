@@ -46,9 +46,9 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		// Ajout des composants avec GridBagLayout
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(11, 0, 2, 0);
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(11, 0, 2, 0);
 		this.panelPrincipal.add(new JLabel("h Sae"), gbc);
 		gbc.gridx = 2;
 		this.panelPrincipal.add(new JLabel("h Tut"), gbc);

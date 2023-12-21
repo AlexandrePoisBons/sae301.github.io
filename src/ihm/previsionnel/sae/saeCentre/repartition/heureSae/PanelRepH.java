@@ -17,7 +17,7 @@ public class PanelRepH extends JPanel{
 	private PanelRepartitionHeureGaucheSae panelRepartitionHGauche;
 	private PanelRepartitionHeureDroiteSae panelRepartitionHDroite;
 
-	public PanelRepH(PanelRepartitionSae panelMere){
+	public PanelRepH(PanelRepartitionSae panelMere) {
 		this.panelMere = panelMere;
 		this.setLayout(new GridLayout(1,2));
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));

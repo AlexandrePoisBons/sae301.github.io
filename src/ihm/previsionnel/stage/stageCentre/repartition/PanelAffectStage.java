@@ -1,18 +1,27 @@
 package ihm.previsionnel.stage.stageCentre.repartition;
 import java.awt.Dimension;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import metier.Module;
+import metier.Heure;
 
 
 public class PanelAffectStage extends JPanel {
 	private PanelRepartitionStage panelMere;
 	private JTable tableauAffect;
 	private DefaultTableModel dtm;
+	private List<Heure> heures;
+	private Module module;
 
-	public PanelAffectStage(PanelRepartitionStage panelMere) {
+	public PanelAffectStage(PanelRepartitionStage panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
+		this.heures = new ArrayList<>();
 
 		this.dtm = new DefaultTableModel(){
 			@Override
@@ -20,6 +29,7 @@ public class PanelAffectStage extends JPanel {
 				return false;
 			}
 		};
+
 		dtm.addColumn("Intervenant");
 		dtm.addColumn("type");
 		dtm.addColumn("nb h");
@@ -35,20 +45,31 @@ public class PanelAffectStage extends JPanel {
 	}
 
 
-	public void ajouter() {
-
-		HashMap<String,Integer> map = this.panelMere.getData();
-
-		Object[] objs = new Object[5];
-		for ( String type : map.keySet() ) {
-			objs[0] = "";
-			objs[1] = type;
-			objs[2] = map.get(type);
-			objs[3] = 999;
-			objs[4] = "";
-			this.dtm.addRow(objs);
+	public void setHeures(List<Heure> heures) {
+		this.heures = heures;
+		for (Heure heure: heures) {
+			this.ajouterLigne(heure);
 		}
+	}
 
+	private void ajouterLigne(Heure heure) {
+		Object[] objs = new Object[5];
+		objs[0] = heure.getIntervenants().get(0).getNom()+" "+heure.getIntervenants().get(0).getPrenom().substring(0,1)+".";
+		objs[1] = heure.getTypeHeure().getNomTypeHeure();
+		objs[2] = heure.getDuree();
+		objs[3] = heure.getDuree()*heure.getTypeHeure().getCoeff();
+		objs[4] = heure.getCommentaire();
+		this.dtm.addRow(objs);
+	}
+
+	public void ajouterHeure(Heure heure) {
+		this.module.ajouterHeure(heure);
+
+		this.ajouterLigne(heure);
+	}
+
+	public List<Heure> getDataHeures() {
+		return this.heures;
 	}
 
 	public void supprimer() {
@@ -60,14 +81,14 @@ public class PanelAffectStage extends JPanel {
 		}
 	}
 
-
-	public void ajouterLigne(String string, String text, int int1, int int2, String text2) {
-		Object[] objs = new Object[5];
-		objs[0] = string;
-		objs[1] = text;
-		objs[2] = int1;
-		objs[3] = int2;
-		objs[4] = text2;
-		this.dtm.addRow(objs);
+	public DefaultTableModel getDtm() {
+		return this.dtm;
 	}
+
+	public JTable getTableauAffect() {
+		return this.tableauAffect;
+	}
+
+
+
 }

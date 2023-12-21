@@ -18,7 +18,7 @@ import metier.Module;
 import metier.TypeHeure;
 
 
-public class PCentreSae extends JPanel{
+public class PCentreSae extends JPanel {
 	private PanelSae            panelMere;
 	private PanelRepartitionSae panelRepartitionSae;
 	private ProgNatSae          panelProgNatSae;
@@ -27,6 +27,7 @@ public class PCentreSae extends JPanel{
 	public PCentreSae(PanelSae panelMere, Module m) {
 		this.panelMere = panelMere;
 		this.module = m;
+
 		this.setLayout(new BorderLayout());
 
 		this.panelRepartitionSae 	= new PanelRepartitionSae(this, this.module);
@@ -72,7 +73,7 @@ public class PCentreSae extends JPanel{
 		return map;
 	}
 
-	public void setData() { this.panelRepartitionSae.setHeures(this.module.getHeures()); }
+	private void setData() { this.panelRepartitionSae.setHeures(this.module.getHeures()); }
 
 	public void setErreur(String message){
 		this.panelMere.setErreur(message);

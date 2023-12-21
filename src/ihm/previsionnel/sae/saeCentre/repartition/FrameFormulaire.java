@@ -21,13 +21,14 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 
 	private PanelRepartitionSae panelMere;
 	private JPanel              panelFormulaire;
-	private JComboBox<String>   ddlstIntervenant;
+	private JComboBox<String>   ddlstIntervenants;
 	private JComboBox<String>   ddlstTypesHeures;
-	private JTextField          txtNbH; 
+	private JTextField          txtNbH;
 	private JTextField          txtTotEqtd;
 	private JTextField          txtCommentaire;
 	private JButton             btnValider;
 	private JButton             btnAnnuler;
+
 	private Module              module;
 
 	public FrameFormulaire(PanelRepartitionSae panelMere, Module m) {
@@ -73,7 +74,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		this.panelFormulaire.add(new JLabel("commentaire"				), gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		this.panelFormulaire.add(this.ddlstIntervenant, gbc);
+		this.panelFormulaire.add(this.ddlstIntervenants, gbc);
 		gbc.gridy = 1;
 		this.panelFormulaire.add(this.ddlstTypesHeures, gbc);
 		gbc.gridy = 2;
@@ -123,7 +124,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 				tabTypesHeures[i] = typesHeures.get(i).getNomTypeHeure();
 		}
 		
-		this.ddlstIntervenant = new JComboBox<String>(tabInter);
+		this.ddlstIntervenants = new JComboBox<String>(tabInter);
 		this.ddlstTypesHeures = new JComboBox<String>(tabTypesHeures);
 	}
 
@@ -138,7 +139,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 			}
 		}
 		for (Intervenant inter : this.panelMere.getIntervenants()) {
-			if(this.ddlstIntervenant.getSelectedItem().toString().equals(inter.getNom() + " " + inter.getPrenom())) {
+			if(this.ddlstIntervenants.getSelectedItem().toString().equals(inter.getNom() + " " + inter.getPrenom())) {
 				intervenant = inter;
 			}
 		}

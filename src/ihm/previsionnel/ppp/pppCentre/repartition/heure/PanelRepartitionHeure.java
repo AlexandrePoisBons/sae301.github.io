@@ -12,7 +12,7 @@ import ihm.previsionnel.ppp.pppCentre.repartition.PanelRepartition;
 
 public class PanelRepartitionHeure extends JPanel{
 	private PanelRepartition panelMere;
-	//private PanelRepartitionHGauche panelRepartitionHGauche;
+	private PanelRepartitionHGauche panelRepartitionHGauche;
 	private PanelRepartitionHDroite panelRepartitionHDroite;
 
 	public PanelRepartitionHeure(PanelRepartition panelMere){
@@ -20,15 +20,32 @@ public class PanelRepartitionHeure extends JPanel{
 		this.setLayout(new GridLayout(1,1));
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
-		//this.panelRepartitionHGauche = new PanelRepartitionHGauche(this);
+		this.panelRepartitionHGauche = new PanelRepartitionHGauche(this);
 		this.panelRepartitionHDroite = new PanelRepartitionHDroite();
 
-		//this.add(this.panelRepartitionHGauche);
+		this.add(this.panelRepartitionHGauche);
 		this.add(this.panelRepartitionHDroite);
 	}
 
 	public HashMap<String, Integer> getNbSemaines() {
-		return this.panelRepartitionHDroite.getRepartitionHeures();
+		return this.panelRepartitionHGauche.getNbSemaines();
+	}
+
+	public void setSommePromo(int somme) {
+		this.panelRepartitionHDroite.setSommePromo(somme);
+	}
+
+	public void setHeureAffecte(int hSae, int hTut) {
+		System.out.println("panelRepH");
+		this.panelRepartitionHGauche.setHeureAffecte(hSae, hTut);
+	}
+
+	public void setSommeAffecte(int somme) {
+		this.panelRepartitionHDroite.setSommeAffecte(somme);
+	}
+
+	public int getSommeAffecte() {
+		return this.panelRepartitionHDroite.getSommeAffecte();
 	}
 	
 }

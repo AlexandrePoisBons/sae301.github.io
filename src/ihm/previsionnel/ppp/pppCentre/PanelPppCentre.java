@@ -12,19 +12,25 @@ import javax.swing.*;
 import ihm.previsionnel.ppp.PanelPpp;
 import ihm.previsionnel.ppp.pppCentre.progNat.ProgNat;
 import ihm.previsionnel.ppp.pppCentre.repartition.PanelRepartition;
+import metier.Heure;
 import metier.Intervenant;
+import metier.Module;
+import metier.TypeHeure;
 
-public class PanelPppCentre extends JPanel{
-	private PanelPpp 	panelMere;
-	private PanelRepartition 	panelRepartition;
-	private ProgNat 			pProgNat;
+public class PanelPppCentre extends JPanel {
+	private PanelPpp panelMere;
+	private PanelRepartition panelRepartition;
+	private ProgNat pProgNat;
+	private Module module;
 
-	public PanelPppCentre(PanelPpp panelMere){
+	public PanelPppCentre(PanelPpp panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
+
 		this.setLayout(new BorderLayout());
 
-		this.panelRepartition 	= new PanelRepartition(this);
-		this.pProgNat 			= new ProgNat();
+		this.panelRepartition = new PanelRepartition(this, this.module);
+		this.pProgNat = new ProgNat();
 
 		JPanel panelN = new JPanel();
 		panelN.setLayout(new GridBagLayout());
@@ -44,25 +50,46 @@ public class PanelPppCentre extends JPanel{
 
 		this.add(panelC, BorderLayout.CENTER);
 		this.add(panelN, BorderLayout.NORTH);
+
+
+		if ( this.module != null )
+			this.setData();
+
 	}
 
-	public HashMap<String,Integer> getData() {
-		HashMap<String,Integer> map = new HashMap<>();
-		HashMap<String,Integer> mapH = this.pProgNat.getHeuresTot();
-		HashMap<String,Integer> mapS = this.panelRepartition.getNbSemaines();
+	public List<Heure> getHeures() { return this.panelRepartition.getHeures(); }
 
-		for ( String type : mapH.keySet() )
-			if ( mapH.get(type) != 0 && mapS.get(type) != 0 )
-				map.put(type, mapS.get(type));
+	public HashMap<String, Integer> getData() {
+
+		HashMap<String,Integer> map = new HashMap<>();
+		HashMap<String,Integer> mapN = this.pProgNat.getHeuresTot();
+		HashMap<String,Integer> mapR = this.panelRepartition.getNbSemaines();
+
+		for ( String type : mapN.keySet() )
+			if ( mapN.get(type) != 0 && mapR.get(type) != 0 )
+				map.put(type, mapR.get(type));
 
 		return map;
 	}
 
-	public List<Intervenant> getIntervenants(){
-		return this.panelMere.getIntervenants();
+	private void setData() { this.panelRepartition.setHeures(this.module.getHeures()); }
+
+	public void setErreur(String message){
+		this.panelMere.setErreur(message);
 	}
 
-	public void setErreur(String message) {
-		this.panelMere.setErreur(message);
+	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
+	public List<TypeHeure>   getTypesHeures()  { return this.panelMere.getTypesHeures();  }
+
+	public boolean estValide() {
+		return this.pProgNat.estValide();
+	}
+
+	public int getSommeAffecte() {
+		return this.panelRepartition.getSommeAffecte();
+	}
+
+	public int getSommePN() {
+		return this.pProgNat.getSommePN();
 	}
 }

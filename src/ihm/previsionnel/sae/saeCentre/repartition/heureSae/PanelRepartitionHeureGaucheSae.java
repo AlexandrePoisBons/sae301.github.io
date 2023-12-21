@@ -12,12 +12,13 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
-public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListener, ActionListener{
+public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListener, ActionListener {
+
 	private PanelRepH panelMere;
 	private ArrayList<JTextField> ensJTextField;
 	private int sommeAction;
 
-	public PanelRepartitionHeureGaucheSae(PanelRepH panelRepH){
+	public PanelRepartitionHeureGaucheSae(PanelRepH panelRepH) {
 		this.panelMere = panelRepH;
 		this.ensJTextField = new ArrayList<JTextField>();
 

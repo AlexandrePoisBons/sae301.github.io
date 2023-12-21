@@ -9,13 +9,11 @@ import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 import javax.swing.JLabel;
 
 
-public class PanelRepartitionHDroite extends JPanel implements FocusListener{
+public class PanelRepartitionHDroite extends JPanel{
 	//4,3
 	private JPanel panelN;
 	private JPanel panelC;
@@ -26,9 +24,9 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener{
 		this.panelC = new JPanel();
 		this.ensTxtFld = new ArrayList<JTextField>();
 		for(int i = 0; i < 18; i++){
-            JTextField textField = new JTextField(3);
-            this.ensTxtFld.add(textField); 
-        }
+			JTextField textField = new JTextField(3);
+			this.ensTxtFld.add(textField); 
+		}
 		
 		this.setLayout(new BorderLayout());
 		this.panelN.setLayout(new GridBagLayout());
@@ -51,9 +49,9 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener{
 		this.panelN.add(new JLabel("     heures"), gbcN);
 
 		// Ajout des composants avec GridBagLayout
-        gbcC.gridx = 1;
-        gbcC.gridy = 0;
-        gbcC.insets = new Insets(0, 3, 5, 0);
+		gbcC.gridx = 1;
+		gbcC.gridy = 0;
+		gbcC.insets = new Insets(0, 3, 5, 0);
 
 		//Ajout des éléments
 		this.panelC.add(new JLabel("CM"), gbcC);
@@ -131,37 +129,21 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener{
 		this.add(this.panelC, BorderLayout.CENTER);
 	}
 
-	@Override
-	public void focusGained(FocusEvent e) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'focusGained'");
+
+	public void setSommePromo(int somme) {
+		this.ensTxtFld.get(0).setText("" + somme);
+		this.repaint();
+		this.revalidate();
 	}
 
-	@Override
-	public void focusLost(FocusEvent e) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'focusLost'");
+	public void setSommeAffecte(int somme) {
+		this.ensTxtFld.get(1).setText("" + somme);
+		this.repaint();
+		this.revalidate();
 	}
 
-	public HashMap<String, Integer> getRepartitionHeures() {
-		HashMap<String, Integer> map = new HashMap<>();
-	
-		try { map.put("CM", Integer.parseInt(this.ensTxtFld.get(0).getText())); }
-		catch (NumberFormatException e) { map.put("CM", 0); }
-
-		try { map.put("TD", Integer.parseInt(this.ensTxtFld.get(1).getText())); }
-		catch (NumberFormatException e) { map.put("TD", 0); }
-
-		try { map.put("TP", Integer.parseInt(this.ensTxtFld.get(2).getText())); }
-		catch (NumberFormatException e) { map.put("TP", 0); }
-
-		try { map.put("TUT", Integer.parseInt(this.ensTxtFld.get(3).getText())); }
-		catch (NumberFormatException e) { map.put("TUT", 0); }
-
-		try { map.put("HP", Integer.parseInt(this.ensTxtFld.get(4).getText())); }
-		catch (NumberFormatException e) { map.put("HP", 0); }
-
-		return map;
+	public int getSommeAffecte() {
+		return Integer.parseInt(this.ensTxtFld.get(1).getText());
 	}
 
 

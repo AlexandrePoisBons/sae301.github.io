@@ -9,6 +9,9 @@ import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import metier.Intervenant;
+import metier.Module;
+import metier.TypeHeure;
+import metier.Heure;
 import java.util.List;
 
 import ihm.previsionnel.stage.stageCentre.repartition.PanelRepartitionStage;
@@ -20,12 +23,16 @@ public class PCentreStage extends JPanel {
 	private PanelRepartitionStage panelRepartitionStage;
 	private ProgNatStage pProgNatStage;
 
-	public PCentreStage(PanelStage panelMere){
+	private Module module;
+
+	public PCentreStage(PanelStage panelMere, Module m){
 		this.panelMere = panelMere;
+		this.module = m;
+
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
-		this.panelRepartitionStage 	= new PanelRepartitionStage(this);
+		this.panelRepartitionStage 	= new PanelRepartitionStage(this,this.module);
 		this.pProgNatStage 			= new ProgNatStage();
 
 		JPanel panelN = new JPanel();
@@ -47,13 +54,19 @@ public class PCentreStage extends JPanel {
 
 		this.add(panelC, BorderLayout.CENTER);
 		this.add(panelN, BorderLayout.NORTH);
+
+		if ( this.module != null )
+			this.setData();
+
 	}
+
+	public List<Heure> getHeures() { return this.panelRepartitionStage.getHeures(); }
 
 	public HashMap<String, Integer> getData() {
 
 		HashMap<String,Integer> map = new HashMap<>();
 		HashMap<String,Integer> mapN = this.pProgNatStage.getHeuresTot();
-		HashMap<String,Integer> mapR = this.panelRepartitionStage.getRepartitionHeures();
+		HashMap<String,Integer> mapR = this.panelRepartitionStage.getNbSemaines();
 
 		for ( String type : mapN.keySet() )
 			if ( mapN.get(type) != 0 && mapR.get(type) != 0 )
@@ -62,16 +75,25 @@ public class PCentreStage extends JPanel {
 		return map;
 	}
 
-	public List<Intervenant> getIntervenants(){
-		return this.panelMere.getIntervenants();
-	}
+	private void setData() { this.panelRepartitionStage.setHeures(this.module.getHeures()); }
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);
 	}
-	
-	/* A DECOMENTER 
-	public Object[] getHeuresProgNat() {
-		return this.pProgNatStage.getHeuresTot();
-	}*/
+
+	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
+	public List<TypeHeure>   getTypesHeures()  { return this.panelMere.getTypesHeures();  }
+
+	public boolean estValide() {
+		return this.pProgNatStage.estValide();
+	}
+
+	public int getSommeAffecte() {
+		return this.panelRepartitionStage.getSommeAffecte();
+	}
+
+	public int getSommePN() {
+		return this.pProgNatStage.getSommePN();
+	}
+
 }
