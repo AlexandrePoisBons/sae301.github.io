@@ -8,11 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import ihm.previsionnel.ressources.ressourcesCentre.PanelRepartition;
 import metier.Heure;
 import metier.Module;
-import metier.TypeHeure;
-import metier.Intervenant;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class PanelAffect extends JPanel {

@@ -139,6 +139,20 @@ public class ControleurMetier {
 	}
 
 	public boolean supprimerModule(Module module) throws SQLException {
+
+
+		System.out.println("donova :"+module.getIntervenants().size());
+		for (Intervenant intervenant : module.getIntervenants()) {
+			this.requetes.deleteIntervenantModule(intervenant,module);
+		}
+
+		// this.requetes.deleteModule(module);
+
+		for (Heure heure : module.getHeures()) {
+			this.requetes.deleteHeure(heure);
+			this.requetes.deleteHeureModule(heure,module);
+			this.heures.remove(heure);
+		}
 		this.requetes.deleteModule(module);
 		this.modules.remove(module);
 		return false;

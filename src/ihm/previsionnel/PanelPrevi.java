@@ -122,7 +122,8 @@ public class PanelPrevi extends JPanel implements ActionListener {
 			}
 		}
 		if(e.getSource() == this.btnSupprimer) {
-			try { this.panelCenterPrevi.getCurrentSemestre().removeModule(); }
+			try { this.panelCenterPrevi.getCurrentSemestre().removeModule();
+			System.out.println("rentré"); }
 			catch(SQLException eq) {System.out.println("Sélectionner une ligne pour la supprimer");}
 		}
 		if(e.getSource() == this.btnRetour){

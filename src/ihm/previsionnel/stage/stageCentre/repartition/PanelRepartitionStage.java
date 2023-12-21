@@ -64,7 +64,6 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 		}
 		if(e.getSource() == this.btnSuppr){
 			this.panelAffect.supprimer();
-			this.setErreur("");
 		}
 	}
 
@@ -83,7 +82,6 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 	}
 
 	public void setHeureAffecte() {
-		System.out.println("panelRepartitionSae");
 		DefaultTableModel dtm = this.panelAffect.getDtm();
 		JTable tableauAffect  = this.panelAffect.getTableauAffect();
 		int hSae = 0;

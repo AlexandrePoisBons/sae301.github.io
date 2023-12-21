@@ -118,10 +118,8 @@ public class PanelSud extends JPanel implements ActionListener {
 		}
 
 	}
-	public boolean estValide() {
-		return this.panelPpp.estValide();
+	
+	public boolean isValide() {
+		return this.panelPpp.isValide();
 	}
-
-
-
 }

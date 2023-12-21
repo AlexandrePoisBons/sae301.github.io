@@ -75,7 +75,6 @@ public class PanelRepartition extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == this.btnSuppr) {
 			this.panelAffect.supprimer();
-			this.setErreur("");
 		}
 	}
 

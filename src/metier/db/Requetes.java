@@ -81,7 +81,7 @@ public class Requetes {
 
 			this.psSelectM = this.connec.prepareStatement("SELECT * FROM Module WHERE id_module=?;");
 			this.psInsertM = this.connec.prepareStatement("INSERT INTO Module VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
-			this.psDeleteM = this.connec.prepareStatement("DELETE FROM Module CASCADE WHERE id_module=?;");
+			this.psDeleteM = this.connec.prepareStatement("DELETE FROM Module WHERE id_module=?;");
 			this.psUpdateM = this.connec.prepareStatement("UPDATE Module SET type_module=?, semestre=?, libelle=?, libelle_court=?, code=?, nb_etudiants=?, nb_gp_td=?, nb_gp_tp=?, nb_semaines=?, nb_heures=?, valide=? WHERE id_module=?;");
 
 			this.psSelectS = this.connec.prepareStatement("SELECT * FROM Statut WHERE nom_statut=?;");
@@ -428,11 +428,13 @@ public class Requetes {
 
 		if ( this.existsModule(module.getIdModule()) ) {
 
-			this.psDeleteHeureByModule.setInt(1, module.getIdModule());
-			this.psDeleteHeureByModule.executeUpdate();
+			// this.psDeleteHeureByModule.setInt(1, module.getIdModule());
+			// this.psDeleteHeureByModule.executeUpdate();
 
 			this.psDeleteM.setInt(1, module.getIdModule());
+			System.out.println("coucou"+module.getIdModule());
 			this.psDeleteM.executeUpdate();
+			System.out.println("salut");
 		} else {
 			System.out.println("Module id_module = "+module.getIdModule()+" inexistant");
 		}
