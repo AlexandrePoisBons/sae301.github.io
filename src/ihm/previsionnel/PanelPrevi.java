@@ -73,9 +73,6 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.btnRetour          .addActionListener(this);
 
 		List<Module> alModule = this.frame.getControleur().getCtrl().metier().getModules();
-		// Module m = Module.creerModule("coucou", "a", "a", "a", "a", 0, 0, 0, 0, 0);
-		// alModule.add(m);
-		// System.out.println("coucou"+alModule);
 		this.panelCenterPrevi.setModules( alModule );
 	}
 
@@ -122,8 +119,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 			}
 		}
 		if(e.getSource() == this.btnSupprimer) {
-			try { this.panelCenterPrevi.getCurrentSemestre().removeModule();
-			System.out.println("rentré"); }
+			try { this.panelCenterPrevi.getCurrentSemestre().removeModule(); }
 			catch(SQLException eq) {System.out.println("Sélectionner une ligne pour la supprimer");}
 		}
 		if(e.getSource() == this.btnRetour){

@@ -28,10 +28,13 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 		gbc.anchor = GridBagConstraints.WEST;
 
 		this.txtTypeHeure       = new JTextField(15);
-		this.txtTypeHeure.setEditable(false);
 		this.txtCoeff          	= new JTextField(15);
 		this.btnValider         = new JButton("Valider");
 		this.btnAnnuler         = new JButton("Annuler");
+
+		if(typeHeure != null) {
+			this.txtTypeHeure.setEditable(false);
+		}
 
 		gbc.gridy = 0;
 		gbc.gridx = 0;
@@ -91,9 +94,6 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 			this.typeHeure.setCoeff(coeff);
 		
 
-		System.out.println("id   : "+this.typeHeure.getIdTypeHeure());
-		System.out.println("nom  : "+this.typeHeure.getNomTypeHeure());
-		System.out.println("coeff: "+this.typeHeure.getCoeff());
 
 		if ( this.typeHeure != null )
 			this.panelMere.majTypeHeure(this.typeHeure, this.typeHeure);
@@ -101,7 +101,6 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 
 		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
 		if (coeff == 0.0f) {
-			System.out.println("Vérifier vos valeurs");
 		}
 		else {
 			this.panelMere.ajouterTypeHeure(this.typeHeure);
@@ -110,7 +109,6 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 		}
 		this.effacer();
 
-		System.out.println("\n\nTYPE HEURE:\t"+this.typeHeure.toString());
 
 	}
 

@@ -127,16 +127,15 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 			this.panelMere.ajouterLigne(this.ddlstIntervenant.getSelectedItem().toString(),
 										this.txtNom.getText(),
 										this.txtPrenom.getText(),
-										this.txtHServ.getText(),
-										this.txtHMax.getText(),
-										this.txtCoefTP.getText());
+										Integer.parseInt(this.txtHServ.getText()),
+										Integer.parseInt(this.txtHMax.getText()),
+										Float.parseFloat(this.txtCoefTP.getText()));
 			this.panelMere.revalidate();
 			this.panelMere.repaint();
 		} catch (Exception err) {
 			this.lblErreur.setText("Erreur, vérifier vos valeurs");
 			this.repaint();
 			this.revalidate();
-			//System.err.println("Erreur, vérifier vos valeurs");
 		}
 	}
 }

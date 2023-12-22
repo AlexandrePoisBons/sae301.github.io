@@ -19,9 +19,6 @@ public class PanelEtats extends JPanel implements ActionListener{
 	private JButton btnModule;
 	private JButton btnRetour;
 
-	private PanelInter  panelInter;
-	private PanelModule panelModule;
-
 	public PanelEtats(FrameAccueil frame){
 		this.frame = frame;
 		this.setLayout(new BorderLayout());

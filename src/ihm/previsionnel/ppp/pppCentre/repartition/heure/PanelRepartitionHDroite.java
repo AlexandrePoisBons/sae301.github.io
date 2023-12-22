@@ -44,7 +44,6 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 				System.out.println("jsuis dedans lo");
 			} else {
 				textField.setEditable(false);
-				System.out.println("lo dedans jsuis");
 			}
 			this.ensTxtFld.add(textField);
 		}
