@@ -177,7 +177,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					somme += Integer.parseInt(this.ensJTextField.get(0).getText()); 
 				else{
 					somme = Integer.parseInt(this.ensJTextField.get(1).getText())*Integer.parseInt(this.ensJTextField.get(0).getText());
-					this.panelMere.setSommeTD(somme);
+					this.panelMere.setSommeCM(somme);
 				}
 			}
 
@@ -195,7 +195,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 						somme += Integer.parseInt(this.ensJTextField.get(1).getText()); 
 					else{
 						somme = Integer.parseInt(this.ensJTextField.get(1).getText())*Integer.parseInt(this.ensJTextField.get(0).getText());
-						this.panelMere.setSommeTD(somme);
+						this.panelMere.setSommeCM(somme);
 					}
 			}
 
@@ -221,7 +221,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 						somme += Integer.parseInt(this.ensJTextField.get(2).getText()); 
 					else{
 						somme = Integer.parseInt(this.ensJTextField.get(2).getText())*Integer.parseInt(this.ensJTextField.get(3).getText());
-						this.panelMere.setSommeTP(somme);
+						this.panelMere.setSommeTD(somme);
 					}			
 				}
 
@@ -239,7 +239,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 						somme += Integer.parseInt(this.ensJTextField.get(3).getText()); 
 					else{
 						somme = Integer.parseInt(this.ensJTextField.get(2).getText())*Integer.parseInt(this.ensJTextField.get(3).getText());
-						this.panelMere.setSommeTP(somme);
+						this.panelMere.setSommeTD(somme);
 					}
 			}
 
@@ -266,7 +266,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 						somme += Integer.parseInt(this.ensJTextField.get(4).getText()); 
 					else{
 						somme = Integer.parseInt(this.ensJTextField.get(4).getText())*Integer.parseInt(this.ensJTextField.get(5).getText());
-						this.panelMere.setSommeCM(somme);
+						this.panelMere.setSommeTP(somme);
 					}
 			}
 
@@ -284,7 +284,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 						somme += Integer.parseInt(this.ensJTextField.get(5).getText()); 
 					else{
 						somme = Integer.parseInt(this.ensJTextField.get(4).getText())*Integer.parseInt(this.ensJTextField.get(5).getText());
-						this.panelMere.setSommeCM(somme);
+						this.panelMere.setSommeTP(somme);
 					}
 			}
 
