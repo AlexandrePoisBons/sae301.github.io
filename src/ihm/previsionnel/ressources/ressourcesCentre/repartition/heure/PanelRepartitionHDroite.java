@@ -161,6 +161,16 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 		this.revalidate();
 	}
 
+	// calcul du total des heures affectées
+	public void setSommeTotalAffecte() {
+		int calcul = Integer.parseInt(this.ensTxtFld.get(10).getText()) + 
+					 Integer.parseInt(this.ensTxtFld.get(11).getText()) +
+					 Integer.parseInt(this.ensTxtFld.get(12).getText()) +
+					 Integer.parseInt(this.ensTxtFld.get(13).getText());
+
+		this.ensTxtFld.get(14).setText("" + calcul);
+	}
+
 	//Ajout de la valeur de jtxtfld3 dans jtxtfld4
 	/*public void setSommeTotal(int val){
 		int somme = this.sommeActionTD + this.sommeActionTP + this.sommeActionCM+val;
@@ -176,9 +186,12 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 		this.revalidate();
 	}*/
 
-	public void setHeureAffecte(int hSae, int hTut) {
-		this.ensTxtFld.get(2).setText("" + hSae);
-		this.ensTxtFld.get(3).setText("" + hTut);
+	public void setHeureAffecte(int heureCM, int heureTD, int heureTP, int heureHP) {
+		this.ensTxtFld.get(10).setText("" + heureCM);
+		this.ensTxtFld.get(11).setText("" + heureTD);
+		this.ensTxtFld.get(12).setText("" + heureTP);
+		this.ensTxtFld.get(13).setText("" + heureHP);
+		this.setSommeTotalAffecte();
 		this.repaint();
 		this.revalidate();
 	}

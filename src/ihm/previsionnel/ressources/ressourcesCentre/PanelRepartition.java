@@ -101,4 +101,27 @@ public class PanelRepartition extends JPanel implements ActionListener {
 		return this.panelRepartitionHeure.getNbHeureSemaine(i);
 	}
 
+	public void setHeureAffecte() {
+		DefaultTableModel dtm = this.panelAffect.getDtm();
+		int heureCM = 0;
+		int heureTD = 0;
+		int heureTP = 0;
+		int heureHP = 0;
+		for(int i=0;i<dtm.getRowCount();i++) {
+			if(dtm.getValueAt(i, 1).toString().equals("CM")){
+				heureCM += Integer.parseInt(dtm.getValueAt(i, 4).toString());
+			}
+			if(dtm.getValueAt(i, 1).toString().equals("TD")){
+				heureTD += Integer.parseInt(dtm.getValueAt(i, 4).toString());
+			}
+			if(dtm.getValueAt(i, 1).toString().equals("TP")){
+				heureTP += Integer.parseInt(dtm.getValueAt(i, 4).toString());
+			}
+			if(dtm.getValueAt(i, 1).toString().equals("HP")){
+				heureHP += Integer.parseInt(dtm.getValueAt(i, 4).toString());
+			}
+		}
+		this.panelRepartitionHeure.serHeureAffecte(heureCM, heureTD, heureTP, heureHP);
+	}
+
 }

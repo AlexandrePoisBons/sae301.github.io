@@ -49,14 +49,14 @@ public class PanelRepartitionHeure extends JPanel{
 		this.panelRepartitionHDroite.setSommeTotal();
 	}
 
-	public void setHeureAffecte(int hSae, int hTut) {
-		this.panelRepartitionHDroite.setHeureAffecte(hSae, hTut);
-	}
-
 	public int getNbGpTd(){return this.panelMere.getNbGpTd();}
 	public int getNbGpTp(){return this.panelMere.getNbGpTp();}
 
 	public int getNbHeureSemaine(int i){
 		return this.panelRepartitionHGauche.getNbHeureSemaine(i);
+	}
+
+	public void serHeureAffecte(int heureCM, int heureTD, int heureTP, int heureHP) {
+		this.panelRepartitionHDroite.setHeureAffecte(heureCM, heureTD, heureTP, heureHP);
 	}
 }

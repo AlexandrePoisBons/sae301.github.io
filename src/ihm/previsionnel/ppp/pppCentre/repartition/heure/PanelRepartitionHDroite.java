@@ -145,5 +145,27 @@ public class PanelRepartitionHDroite extends JPanel{
 		return Integer.parseInt(this.ensTxtFld.get(1).getText());
 	}
 
+	public void setSommeAffecte() {
+		int calcul = Integer.parseInt(this.ensTxtFld.get(12).getText()) + 
+					 Integer.parseInt(this.ensTxtFld.get(13).getText()) + 
+					 Integer.parseInt(this.ensTxtFld.get(14).getText()) + 
+					 Integer.parseInt(this.ensTxtFld.get(15).getText()) + 
+					 Integer.parseInt(this.ensTxtFld.get(16).getText());
+		this.ensTxtFld.get(17).setText("" + calcul);
+	}
+
+
+	public void setHeureAffecte(int hCM, int hTD, int hTP, int hTut, int hHP) {
+		this.ensTxtFld.get(12).setText("" + hCM);
+		this.ensTxtFld.get(13).setText("" + hTD);
+		this.ensTxtFld.get(14).setText("" + hTP);
+		this.ensTxtFld.get(15).setText("" + hTut);
+		this.ensTxtFld.get(16).setText("" + hHP);
+		this.setSommeAffecte();
+		this.repaint();
+		this.revalidate();
+
+	}
+
 
 }

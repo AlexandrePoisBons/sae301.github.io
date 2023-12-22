@@ -58,8 +58,8 @@ public class PanelAffect extends JPanel {
 		objs[0] = heure.getIntervenants().get(0).getNom()+" "+heure.getIntervenants().get(0).getPrenom().substring(0,1)+".";
 		objs[1] = heure.getTypeHeure().getNomTypeHeure();
 		objs[2] = heure.getNbSemaines();
-		objs[3] = heure.getDuree();
-		objs[4] = heure.getDuree()*heure.getTypeHeure().getCoeff();
+		objs[3] = heure.getNbGpNbH();
+		objs[4] = (int)(heure.getDuree()*heure.getTypeHeure().getCoeff());
 		objs[5] = heure.getCommentaire();
 		this.dtm.addRow(objs);
 	}
@@ -88,6 +88,11 @@ public class PanelAffect extends JPanel {
 	}
 	public JTable getTableauAffect(){
 		return this.tableauAffect;
+	}
+
+
+	public void setHeureAffecte() {
+		this.panelMere.setHeureAffecte();
 	}
 
 }

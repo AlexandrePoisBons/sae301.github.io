@@ -94,17 +94,34 @@ public class PanelRepartition extends JPanel implements ActionListener{
 	public void setHeureAffecte() {
 		DefaultTableModel dtm = this.panelAffect.getDtm();
 		JTable tableauAffect  = this.panelAffect.getTableauAffect();
-		int hSae = 0;
+		int hHP  = 0;
 		int hTut = 0;
+		int hCM  = 0;
+		int hTD  = 0;
+		int hTP  = 0;
+
 		for(int i=0;i<tableauAffect.getRowCount();i++) {
-			if(dtm.getValueAt(i, 1).equals("SAE")){
-				hSae += Float.parseFloat(dtm.getValueAt(i, 2).toString());
+			if(dtm.getValueAt(i, 1).equals("HP")){
+				hHP += Float.parseFloat(dtm.getValueAt(i, 4).toString());
 			}
 			if(dtm.getValueAt(i, 1).equals("TUT")){
-				hTut += Float.parseFloat(dtm.getValueAt(i, 2).toString());
+				hTut += Float.parseFloat(dtm.getValueAt(i, 4).toString());
+			}
+			if(dtm.getValueAt(i, 1).equals("TD")){
+				hTD += Float.parseFloat(dtm.getValueAt(i, 4).toString());
+			}
+			if(dtm.getValueAt(i, 1).equals("TP")){
+				hTP += Float.parseFloat(dtm.getValueAt(i, 4).toString());
+			}
+			if(dtm.getValueAt(i, 1).equals("CM")){
+				hCM += Float.parseFloat(dtm.getValueAt(i, 4).toString());
 			}
 		}
-		this.panelRepartitionHeure.setHeureAffecte(hSae, hTut);
+		this.panelRepartitionHeure.setHeureAffecte(hCM, hTD, hTP, hTut, hHP);
+	}
+
+	public int getNbHeureSemaine(int i) {
+		return this.panelRepartitionHeure.getNbHeureSemaine(i);
 	}
 
 }

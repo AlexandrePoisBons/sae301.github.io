@@ -116,6 +116,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnValider){
 			this.valider();
+			this.setHeureAffecte();
 			this.dispose();
 		}
 		if(e.getSource() == this.btnAnnuler){
@@ -143,7 +144,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		int cpt = 0;
 
 		for(int i=0;i<intervenants.size();i++) {
-			tabInter[i] = intervenants.get(i).getNom()+" "+intervenants.get(i).getPrenom()+".";
+			tabInter[i] = intervenants.get(i).getNom()+" "+intervenants.get(i).getPrenom();
 		}
 
 		for(int i=0;i<typesHeures.size();i++) {
@@ -171,6 +172,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 	private void valider() {
 		TypeHeure typeHeure     = null;
 		Intervenant intervenant = null;
+		Heure heure = null;
 		for (TypeHeure tH : this.panelMere.getTypesHeures()) {
 			if(this.ddlstTypesHeures.getSelectedItem().toString() == tH.getNomTypeHeure()){
 				typeHeure = tH;
@@ -182,15 +184,34 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 			}
 		}
 
-		Heure heure = Heure.creerHeure( this.module,
+		if(!(this.ddlstTypesHeures.getSelectedItem().toString().equals("HP"))){
+			heure = Heure.creerHeure( this.module,
 									    (typeHeure),
 									    Integer.parseInt(this.txtNbSemaines.getText()),
 									    Integer.parseInt(this.txtNbH.getText()),
 										Float.parseFloat(this.txtTotEqtd.getText()),
 										this.txtCommentaire.getText() );
+		}
+		else {
+			heure = Heure.creerHeure( this.module,
+									  (typeHeure),
+									  0,
+									  Integer.parseInt(this.txtNbH.getText()),
+									  Float.parseFloat(this.txtTotEqtd.getText()),
+									  this.txtCommentaire.getText());
+		}
+		
 
 		heure.ajouterIntervenant(intervenant);
 		this.panelMere.ajouterHeure(heure);
+	}
+
+	public void setHeureAffecte() {
+		this.panelMere.setHeureAffecte();
+	}
+
+	public String getNbGp(){
+		return this.txtNbH.getText();
 	}
 
 
@@ -199,7 +220,6 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		float coef = 0.0f;
 		int nbHSemaine = 0;
 		int nbSemaine = 0;
 		int nbGp = 0;
@@ -216,13 +236,14 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 				nbHSemaine = 1;
 		}
 
-		nbSemaine = Integer.parseInt(this.txtNbSemaines.getText());
-		nbGp      = Integer.parseInt(this.txtNbH.getText());
-		System.out.println("nb heure par semaine : " + nbHSemaine);
-		System.out.println("nb semaine : " + nbSemaine);
-		System.out.println("nb de groupe : " + nbGp);
-		calcul    = nbSemaine * nbGp * nbHSemaine;
-		
+		if(!(this.ddlstTypesHeures.getSelectedItem().toString().equals("HP"))){
+			nbSemaine = Integer.parseInt(this.txtNbSemaines.getText());
+			nbGp      = Integer.parseInt(this.txtNbH.getText());
+			calcul    = nbSemaine * nbGp * nbHSemaine;
+		}
+		else {
+			calcul = Integer.parseInt(this.txtNbH.getText());
+		}
 		this.txtTotEqtd.setText("" + calcul);
 	}
 }

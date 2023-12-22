@@ -178,4 +178,8 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 		this.revalidate();
 	}
 
+	public int getNbHeureSemaine(int i) {
+		return Integer.parseInt(this.ensJTextField.get(i).getText());
+	}
+
 }

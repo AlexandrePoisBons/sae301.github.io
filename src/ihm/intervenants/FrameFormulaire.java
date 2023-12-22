@@ -120,8 +120,6 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 			tabStatut[i] = statuts.get(i).getNomStatut();
 		}
 		this.ddlstIntervenant = new JComboBox<String>(tabStatut);
-		//ajouter un catégorie
-		this.ddlstIntervenant.addItem("Enseignant");
 	}
 
 	public void ajouterLigne() {
