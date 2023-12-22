@@ -153,8 +153,6 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 		this.ensTxtFld.get(1).setText("" + somme);
 		this.sommeActionTD = somme;
 		this.clcTD = this.sommeActionTD * this.panelMere.getNbGpTd();
-		//this.repaint();
-		//this.revalidate();
 	}
 	public void setSommeTD(){this.ensTxtFld.get(1).setText("0");}
 
@@ -162,8 +160,6 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 		this.ensTxtFld.get(2).setText("" + somme);
 		this.sommeActionTP = somme;
 		this.clcTP = this.sommeActionTP * this.panelMere.getNbGpTp();
-		//this.repaint();
-		//this.revalidate();
 	}
 	public void setSommeTP(){this.ensTxtFld.get(2).setText("0");}
 
@@ -171,8 +167,6 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 		this.ensTxtFld.get(0).setText("" + somme);
 		this.sommeActionCM = somme;
 		this.clcCM = (int) (this.sommeActionCM * COEFF_CM_TD);
-		//this.repaint();
-		//this.revalidate();
 	}
 	public void setSommeCM(){this.ensTxtFld.get(0).setText("0");}
 

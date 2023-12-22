@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.awt.Color;
 
 public class ProgNat extends JPanel implements ActionListener, FocusListener {
+	//Constante coefficient de conversion des heures de CM en heures TD (1h de TD = 1.5h CM)
 	private static final double COEFF_CM_TD = 1.5;
 
 	private PanelPppCentre panelMere;
@@ -198,9 +199,6 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		// Addition des heures saisies dans les champs
-
-		//int totalSomme = 0;
 		if (e.getSource() == this.txtHPonctWrite) {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans

@@ -23,6 +23,10 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 	private ArrayList<JTextField> ensJTextField;
 	private int sommeAction;
 
+	private int sommeHSae = 0;
+	private int sommeHTut = 0;
+	private int totalSomme = 0;
+
 	public PanelRepartitionHeureGaucheSae(PanelRepH panelRepH, Module m) {
 		this.m = m;
 		this.panelMere = panelRepH;
@@ -32,7 +36,7 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 		JPanel panelHC	= new JPanel();
 		
 		for(int cpt=0; cpt < 4; cpt++) {
-			JTextField jtf = new JTextField("" +0, 3);
+			JTextField jtf = new JTextField(3);
 			this.ensJTextField.add(jtf);
 			if(cpt>1){
 				jtf.setEditable(false);
@@ -125,39 +129,45 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 
 			this.ensJTextField.get(1).transferFocusBackward();
 		}
-
-		this.setSommePromo(Integer.parseInt(this.ensJTextField.get(0).getText()) + Integer.parseInt(this.ensJTextField.get(1).getText()));		
 	}
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		//Addition des heures saisies dans les champs
-		int somme = 0;
-		
-		try {
-			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-			if(this.ensJTextField.get(0).getText().equals(Integer.toString(somme)) && this.ensJTextField.get(1).getText().equals("")){
-				System.out.println("Cette valeur a déjas été prise en compte");
+		if (e.getSource() == this.ensJTextField.get(0)) {
+			try {
+				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
+				// somme
+				if (this.ensJTextField.get(0).getText().equals(Integer.toString(this.sommeHSae))
+						&& this.ensJTextField.get(1).getText().equals("")){
+					System.out.println("Cette valeur a déjas été prise en compte");
+				} else {
+					if (this.ensJTextField.get(0).getText().equals(""))
+						this.ensJTextField.get(0).setText("0");
+					this.sommeHSae = Integer.parseInt(this.ensJTextField.get(0).getText());
+				}
+			} catch (Exception err) {
+				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
 			}
-			else
-				somme += Integer.parseInt(this.ensJTextField.get(0).getText()); 
 		}
-		catch(NumberFormatException ex) {
-			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
-		}
-		
-		try {
-			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-			if(this.ensJTextField.get(0).getText().equals(Integer.toString(somme)) && this.ensJTextField.get(0).getText().equals("")){
-				System.out.println("Cette valeur a déjas été prise en compte");
+
+		if (e.getSource() == this.ensJTextField.get(1)) {
+			try {
+				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
+				// somme
+				if (this.ensJTextField.get(1).getText().equals(Integer.toString(this.sommeHTut))
+						&& this.ensJTextField.get(0).getText().equals("")) {
+					System.out.println("Cette valeur a déjas été prise en compte");
+				} else {
+					if (this.ensJTextField.get(1).getText().equals(""))
+						this.ensJTextField.get(1).setText("0");
+					this.sommeHTut = Integer.parseInt(this.ensJTextField.get(1).getText());
+				}
+			} catch (Exception err) {
+				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
 			}
-			else
-				somme += Integer.parseInt(this.ensJTextField.get(1).getText());
 		}
-		catch(NumberFormatException ex) {
-			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
-		}
-		this.setSommePromo(somme);
+		this.totalSomme = this.sommeHSae + this.sommeHTut;
+		this.setSommePromo(this.totalSomme);
 	}
 	@Override
 	public void focusGained(FocusEvent e) {}

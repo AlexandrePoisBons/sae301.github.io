@@ -159,7 +159,7 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 							this.panelMere.setSommeCM();
 							this.panelMere.setSommeTotal();
 						}
-							
+						
 						else {
 							somme = Integer.parseInt(this.ensJTextField.get(1).getText())
 									* Integer.parseInt(this.ensJTextField.get(0).getText());

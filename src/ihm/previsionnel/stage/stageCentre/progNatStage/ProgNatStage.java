@@ -28,6 +28,11 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 	private JCheckBox  checkValid;
 	private int sommeAction;
 
+	private int sommeHSae = 0;
+	private int sommeHTut = 0;
+
+	private int totalSomme = 0;
+
 	public ProgNatStage(PCentreStage panelMere) {
 		this.panelMere = panelMere;
 		this.setLayout(new BorderLayout());
@@ -128,42 +133,48 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		else if(e.getSource() == this.txtHTut) {
 			this.txtHTut.transferFocusBackward();
 		}
-
-		this.txtSomme.setText(Integer.toString(this.sommeAction));
-		this.txtSomme.repaint();
-		this.txtSomme.revalidate();
 	}
 
 
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		//Addition des heures saisies dans les champs
-		int somme = 0;
-		
+		if(e.getSource() == this.txtHSae){
 		try {
 			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-			if(this.txtHSae.getText().equals(Integer.toString(somme)) && this.txtHTut.getText().equals("")){
+			if(this.txtHSae.getText().equals(Integer.toString(this.sommeHSae)) && this.txtHTut.getText().equals("")){
 				System.out.println("Cette valeur a déjas été prise en compte");
 			}
-			else
-				somme += Integer.parseInt(this.txtHSae.getText()); 
+			else{
+				if (this.txtHSae.getText().equals(""))
+					this.txtHSae.setText("0");
+				this.sommeHSae = Integer.parseInt(this.txtHSae.getText()); 
+			}
 		}
 		catch(NumberFormatException ex) {
 			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
 		}
+		}
+
+		if(e.getSource() == this.txtHTut){
 		try {
 			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-			if(this.txtHTut.getText().equals(Integer.toString(somme)) && this.txtHSae.getText().equals("")){
+			if(this.txtHTut.getText().equals(Integer.toString(this.sommeHTut)) && this.txtHSae.getText().equals("")){
 				System.out.println("Cette valeur a déjas été prise en compte");
 			}
-			else
-				somme += Integer.parseInt(this.txtHTut.getText());
+			else{
+				if (this.txtHTut.getText().equals(""))
+					this.txtHTut.setText("0");
+				this.sommeHTut = Integer.parseInt(this.txtHTut.getText());
+			}
 		}
 		catch(NumberFormatException ex) {
 			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
 		}
-		this.txtSomme.setText(Integer.toString(somme));
+		}
+
+		this.totalSomme = this.sommeHSae + this.sommeHTut;
+		this.txtSomme.setText(Integer.toString(this.totalSomme));
 		this.txtSomme.repaint();
 		this.txtSomme.revalidate();
 	}

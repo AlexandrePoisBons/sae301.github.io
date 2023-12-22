@@ -23,12 +23,9 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 	private JPanel 					panelHeure;
 	private JPanel 					panelTotal		;
 	private ArrayList<JTextField> 	ensJTextField	;
-	private int sommeAction;
-	private int cptTD, cptTP, cptCM;
 
 	public PanelRepartitionHGauche(PanelRepartitionHeure panelMere){
 		this.panelMere = panelMere;
-		this.cptTD = this.cptTP = this.cptCM = 0;
 
 		this.panelHeure = new JPanel();
 		this.ensJTextField = new ArrayList<JTextField>();
@@ -40,7 +37,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 		JPanel panelHC	= new JPanel();
 		JPanel panelB 	= new JPanel();
 		for(int cpt=0; cpt < 6; cpt++){
-			JTextField jtf = new JTextField("0", 3);
+			JTextField jtf = new JTextField(3);
 			this.ensJTextField.add(jtf);	
 		}
 
@@ -126,167 +123,216 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		if(e.getSource() == this.ensJTextField.get(0)) {
-			//pour que le focus passe au champ suivant quand  l'utilisteur clique sur "entrée"
+		if (e.getSource() == this.ensJTextField.get(0)) {
+			// pour que le focus passe au champ suivant quand l'utilisteur clique sur
+			// "entrée"
 			this.ensJTextField.get(0).transferFocus();
-		}
-		else if(e.getSource() == this.ensJTextField.get(1)) {
+		} else if (e.getSource() == this.ensJTextField.get(1)) {
 
 			this.ensJTextField.get(1).transferFocus();
-		}
-		else if(e.getSource() == this.ensJTextField.get(2)) {
+		} else if (e.getSource() == this.ensJTextField.get(2)) {
 			this.ensJTextField.get(2).transferFocus();
-		}
-		else if(e.getSource() == this.ensJTextField.get(3)) {
+		} else if (e.getSource() == this.ensJTextField.get(3)) {
 			this.ensJTextField.get(3).transferFocus();
-		}
-		else if(e.getSource() == this.ensJTextField.get(4)) {
+		} else if (e.getSource() == this.ensJTextField.get(4)) {
 			this.ensJTextField.get(4).transferFocus();
-		}
-		else if(e.getSource() == this.ensJTextField.get(5)) {
+		} else if (e.getSource() == this.ensJTextField.get(5)) {
 			this.ensJTextField.get(5).transferFocus();
 		}
-	}
 
+	}
 
 	@Override
 	public void focusLost(FocusEvent e) {
 		try {
-			//Addition des heures saisies dans les champs
-			int somme = 0;
-			try {
-			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-			if(this.ensJTextField.get(0).getText().equals(Integer.toString(somme)) && this.ensJTextField.get(1).getText().equals("")){
-				System.out.println("Cette valeur a déjas été prise en compte");
-			}
-			else
-				if(this.ensJTextField.get(1).getText().equals(""))
-					somme += Integer.parseInt(this.ensJTextField.get(0).getText()); 
-				else{
-					somme = Integer.parseInt(this.ensJTextField.get(1).getText())*Integer.parseInt(this.ensJTextField.get(0).getText());
-					this.panelMere.setSommeCM(somme);
-				}
-			}
-
-			catch(NumberFormatException ex) {
-				System.out.println("");
-			}
-
-			try {
-				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-				if(this.ensJTextField.get(1).getText().equals(Integer.toString(somme)) && this.ensJTextField.get(0).getText().equals("")){
-					System.out.println("Cette valeur a déjas été prise en compte");
-				}
-				else
-					if(this.ensJTextField.get(0).getText().equals(""))
-						somme += Integer.parseInt(this.ensJTextField.get(1).getText()); 
-					else{
-						somme = Integer.parseInt(this.ensJTextField.get(1).getText())*Integer.parseInt(this.ensJTextField.get(0).getText());
-						this.panelMere.setSommeCM(somme);
+			// Addition des heures saisies dans les champs
+			int somme = -1;
+			if (e.getSource() == this.ensJTextField.get(0)) {
+					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
+					// somme
+					if (this.ensJTextField.get(0).getText().equals(Integer.toString(somme))
+							&& this.ensJTextField.get(1).getText().equals("")) {
+						System.out.println("Cette valeur a déjas été prise en compte");
+					} else {
+						if (this.ensJTextField.get(0).getText().equals(""))
+							this.ensJTextField.get(0).setText("0");
+						if (this.ensJTextField.get(1).getText().equals("0")||this.ensJTextField.get(1).getText().equals("")){
+							somme += Integer.parseInt(this.ensJTextField.get(0).getText());
+							this.panelMere.setSommeCM();
+							this.panelMere.setSommeTotal();
+						}
+						
+						else {
+							somme = Integer.parseInt(this.ensJTextField.get(1).getText())
+									* Integer.parseInt(this.ensJTextField.get(0).getText());
+							this.panelMere.setSommeCM(somme);
+							this.panelMere.setSommeTotal();
+						}
 					}
 			}
 
-			catch(NumberFormatException ex) {
-				System.out.println("");
+			if (e.getSource() == this.ensJTextField.get(1)) {
+				try {
+					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
+					// somme
+					if (this.ensJTextField.get(1).getText().equals(Integer.toString(somme))
+							&& this.ensJTextField.get(0).getText().equals("")) {
+						System.out.println("Cette valeur a déjas été prise en compte");
+					} else{
+						if (this.ensJTextField.get(1).getText().equals(""))
+							this.ensJTextField.get(1).setText("0");
+						if (this.ensJTextField.get(0).getText().equals("0")||this.ensJTextField.get(0).getText().equals("")){	
+							somme += Integer.parseInt(this.ensJTextField.get(1).getText());
+							this.panelMere.setSommeCM();
+							this.panelMere.setSommeTotal();
+						}
+						else {
+							somme = Integer.parseInt(this.ensJTextField.get(1).getText())
+									* Integer.parseInt(this.ensJTextField.get(0).getText());
+							this.panelMere.setSommeCM(somme);
+							this.panelMere.setSommeTotal();
+						}
+					}
+				}
+
+				catch (NumberFormatException ex) {
+					System.out.print("");
+				}
 			}
 
-			
 		} catch (Exception ex) {
-			System.err.println("Erreur lors du calcul des heures TD");
+			System.err.print("");
 		}
 
 		try {
-			//Addition des heures saisies dans les champs
-			int somme = 0;
-			try {
-				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-				if(this.ensJTextField.get(2).getText().equals(Integer.toString(somme)) && this.ensJTextField.get(3).getText().equals("")){
-					System.out.println("Cette valeur a déjas été prise en compte");
-				}
-				else
-					if(this.ensJTextField.get(3).getText().equals(""))
-						somme += Integer.parseInt(this.ensJTextField.get(2).getText()); 
-					else{
-						somme = Integer.parseInt(this.ensJTextField.get(2).getText())*Integer.parseInt(this.ensJTextField.get(3).getText());
-						this.panelMere.setSommeTD(somme);
-					}			
-				}
-
-			catch(NumberFormatException ex) {
-				System.out.println("");
-			}
-
-			try {
-				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-				if(this.ensJTextField.get(3).getText().equals(Integer.toString(somme)) && this.ensJTextField.get(2).getText().equals("")){
-					System.out.println("Cette valeur a déjas été prise en compte");
-				}
-				else
-					if(this.ensJTextField.get(2).getText().equals(""))
-						somme += Integer.parseInt(this.ensJTextField.get(3).getText()); 
-					else{
-						somme = Integer.parseInt(this.ensJTextField.get(2).getText())*Integer.parseInt(this.ensJTextField.get(3).getText());
-						this.panelMere.setSommeTD(somme);
+			// Addition des heures saisies dans les champs
+			int somme = -1;
+			if (e.getSource() == this.ensJTextField.get(2)) {
+				try {
+					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
+					// somme
+					if (this.ensJTextField.get(2).getText().equals(Integer.toString(somme))
+							&& this.ensJTextField.get(3).getText().equals("")) {
+						System.out.println("Cette valeur a déjas été prise en compte");
+					} else {
+						if (this.ensJTextField.get(2).getText().equals(""))
+							this.ensJTextField.get(2).setText("0");
+						if (this.ensJTextField.get(3).getText().equals("0")||this.ensJTextField.get(3).getText().equals("")){
+							somme += Integer.parseInt(this.ensJTextField.get(2).getText());
+							this.panelMere.setSommeTD();
+							this.panelMere.setSommeTotal();
+						}
+						else {
+							somme = Integer.parseInt(this.ensJTextField.get(2).getText())
+									* Integer.parseInt(this.ensJTextField.get(3).getText());
+							this.panelMere.setSommeTD(somme);
+							this.panelMere.setSommeTotal();
+						}
 					}
+				}
+
+				catch (NumberFormatException ex) {
+					System.out.print("");
+				}
 			}
 
-			catch(NumberFormatException ex) {
-				System.out.println("");
-			}
+			if (e.getSource() == this.ensJTextField.get(3)) {
+				try {
+					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
+					// somme
+					if (this.ensJTextField.get(3).getText().equals(Integer.toString(somme))
+							&& this.ensJTextField.get(2).getText().equals("")) {
+						System.out.println("Cette valeur a déjas été prise en compte");
+					} else {
+						if (this.ensJTextField.get(3).getText().equals(""))
+							this.ensJTextField.get(3).setText("0");
+						if (this.ensJTextField.get(2).getText().equals("0")||this.ensJTextField.get(2).getText().equals("")){
+							somme += Integer.parseInt(this.ensJTextField.get(3).getText());
+							this.panelMere.setSommeTD();
+							this.panelMere.setSommeTotal();
+						}
+						else {
+							somme = Integer.parseInt(this.ensJTextField.get(2).getText())
+									* Integer.parseInt(this.ensJTextField.get(3).getText());
+							this.panelMere.setSommeTD(somme);
+							this.panelMere.setSommeTotal();
+						}
+					}
+				}
 
-			
-			
+				catch (NumberFormatException ex) {
+					System.out.print("");
+				}
+			}
 		} catch (Exception ex) {
-			System.err.println("Erreur lors du calcul des heures TD");
+			System.err.print("");
 		}
 
 		try {
-			//Addition des heures saisies dans les champs
-			int somme = 0;
-			try {
-				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-				if(this.ensJTextField.get(4).getText().equals(Integer.toString(somme)) && this.ensJTextField.get(5).getText().equals("")){
-					System.out.println("Cette valeur a déjas été prise en compte");
-				}
-				else
-					if(this.ensJTextField.get(5).getText().equals(""))
-						somme += Integer.parseInt(this.ensJTextField.get(4).getText()); 
-					else{
-						somme = Integer.parseInt(this.ensJTextField.get(4).getText())*Integer.parseInt(this.ensJTextField.get(5).getText());
-						this.panelMere.setSommeTP(somme);
+			// Addition des heures saisies dans les champs
+			int somme = -1;
+
+			if (e.getSource() == this.ensJTextField.get(4)) {
+				try {
+					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
+					// somme
+					if (this.ensJTextField.get(4).getText().equals(Integer.toString(somme))
+							&& this.ensJTextField.get(5).getText().equals("")) {
+						System.out.println("Cette valeur a déjas été prise en compte");
+					} else {
+						if (this.ensJTextField.get(4).getText().equals(""))
+							this.ensJTextField.get(4).setText("0");
+						if (this.ensJTextField.get(5).getText().equals("0")||this.ensJTextField.get(5).getText().equals("")){
+							somme += Integer.parseInt(this.ensJTextField.get(4).getText());
+							this.panelMere.setSommeTP();
+							this.panelMere.setSommeTotal();
+						}
+						else {
+							somme = Integer.parseInt(this.ensJTextField.get(4).getText())
+									* Integer.parseInt(this.ensJTextField.get(5).getText());
+							this.panelMere.setSommeTP(somme);
+							this.panelMere.setSommeTotal();
+						}
 					}
-			}
-
-			catch(NumberFormatException ex) {
-				System.out.println("");
-			}
-
-			try {
-				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-				if(this.ensJTextField.get(5).getText().equals(Integer.toString(somme)) && this.ensJTextField.get(4).getText().equals("")){
-					System.out.println("Cette valeur a déjas été prise en compte");
 				}
-				else
-					if(this.ensJTextField.get(4).getText().equals(""))
-						somme += Integer.parseInt(this.ensJTextField.get(5).getText()); 
-					else{
-						somme = Integer.parseInt(this.ensJTextField.get(4).getText())*Integer.parseInt(this.ensJTextField.get(5).getText());
-						this.panelMere.setSommeTP(somme);
+
+				catch (NumberFormatException ex) {
+					System.out.print("");
+				}
+			}
+
+			if (e.getSource() == this.ensJTextField.get(5)) {
+				try {
+					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
+					// somme
+					if (this.ensJTextField.get(5).getText().equals(Integer.toString(somme))
+							&& this.ensJTextField.get(4).getText().equals("")) {
+						System.out.println("Cette valeur a déjas été prise en compte");
+					} else {
+						if (this.ensJTextField.get(5).getText().equals(""))
+							this.ensJTextField.get(5).setText("0");
+						if (this.ensJTextField.get(4).getText().equals("0")||this.ensJTextField.get(4).getText().equals("")){
+							somme += Integer.parseInt(this.ensJTextField.get(5).getText());
+							this.panelMere.setSommeTP();
+							this.panelMere.setSommeTotal();
+						}
+						else {
+							somme = Integer.parseInt(this.ensJTextField.get(4).getText())
+									* Integer.parseInt(this.ensJTextField.get(5).getText());
+							this.panelMere.setSommeTP(somme);
+							this.panelMere.setSommeTotal();
+						}
 					}
+				}
+
+				catch (NumberFormatException ex) {
+					System.out.print("");
+				}
 			}
 
-			catch(NumberFormatException ex) {
-				System.out.println("");
-			}
-
-			
-			
 		} catch (Exception ex) {
-			System.err.println("Erreur lors du calcul des heures TD");
+			System.err.print("");//mettez rien, je sais plus comment j'ai fait mais les try catch sont obligatoires pour le bon fonctionnement des calculs et ça marche donc touchez pas
 		}
-
-		this.panelMere.setSommeTotal();	
 	}
 	@Override
 	public void focusGained(FocusEvent e) {}
