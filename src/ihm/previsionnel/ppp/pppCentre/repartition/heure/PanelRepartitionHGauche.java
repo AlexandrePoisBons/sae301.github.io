@@ -144,7 +144,7 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 	public void focusLost(FocusEvent e) {
 		try {
 			// Addition des heures saisies dans les champs
-			int somme = 0;
+			int somme = -1;
 			if (e.getSource() == this.ensJTextField.get(0)) {
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
@@ -154,8 +154,12 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					} else {
 						if (this.ensJTextField.get(0).getText().equals(""))
 							this.ensJTextField.get(0).setText("0");
-						if (this.ensJTextField.get(1).getText().equals("0"))
+						if (this.ensJTextField.get(1).getText().equals("0")||this.ensJTextField.get(1).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(0).getText());
+							this.panelMere.setSommeCM();
+							this.panelMere.setSommeTotal();
+						}
+							
 						else {
 							somme = Integer.parseInt(this.ensJTextField.get(1).getText())
 									* Integer.parseInt(this.ensJTextField.get(0).getText());
@@ -175,8 +179,11 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					} else{
 						if (this.ensJTextField.get(1).getText().equals(""))
 							this.ensJTextField.get(1).setText("0");
-						if (this.ensJTextField.get(0).getText().equals("0"))
+						if (this.ensJTextField.get(0).getText().equals("0")||this.ensJTextField.get(0).getText().equals("")){	
 							somme += Integer.parseInt(this.ensJTextField.get(1).getText());
+							this.panelMere.setSommeCM();
+							this.panelMere.setSommeTotal();
+						}
 						else {
 							somme = Integer.parseInt(this.ensJTextField.get(1).getText())
 									* Integer.parseInt(this.ensJTextField.get(0).getText());
@@ -197,7 +204,7 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 
 		try {
 			// Addition des heures saisies dans les champs
-			int somme = 0;
+			int somme = -1;
 			if (e.getSource() == this.ensJTextField.get(2)) {
 				try {
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
@@ -208,8 +215,11 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					} else {
 						if (this.ensJTextField.get(2).getText().equals(""))
 							this.ensJTextField.get(2).setText("0");
-						if (this.ensJTextField.get(3).getText().equals("0"))
+						if (this.ensJTextField.get(3).getText().equals("0")||this.ensJTextField.get(3).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(2).getText());
+							this.panelMere.setSommeTD();
+							this.panelMere.setSommeTotal();
+						}
 						else {
 							somme = Integer.parseInt(this.ensJTextField.get(2).getText())
 									* Integer.parseInt(this.ensJTextField.get(3).getText());
@@ -234,8 +244,11 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					} else {
 						if (this.ensJTextField.get(3).getText().equals(""))
 							this.ensJTextField.get(3).setText("0");
-						if (this.ensJTextField.get(2).getText().equals("0"))
+						if (this.ensJTextField.get(2).getText().equals("0")||this.ensJTextField.get(2).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(3).getText());
+							this.panelMere.setSommeTD();
+							this.panelMere.setSommeTotal();
+						}
 						else {
 							somme = Integer.parseInt(this.ensJTextField.get(2).getText())
 									* Integer.parseInt(this.ensJTextField.get(3).getText());
@@ -255,7 +268,7 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 
 		try {
 			// Addition des heures saisies dans les champs
-			int somme = 0;
+			int somme = -1;
 
 			if (e.getSource() == this.ensJTextField.get(4)) {
 				try {
@@ -267,8 +280,11 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					} else {
 						if (this.ensJTextField.get(4).getText().equals(""))
 							this.ensJTextField.get(4).setText("0");
-						if (this.ensJTextField.get(5).getText().equals("0"))
+						if (this.ensJTextField.get(5).getText().equals("0")||this.ensJTextField.get(5).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(4).getText());
+							this.panelMere.setSommeTP();
+							this.panelMere.setSommeTotal();
+						}
 						else {
 							somme = Integer.parseInt(this.ensJTextField.get(4).getText())
 									* Integer.parseInt(this.ensJTextField.get(5).getText());
@@ -293,8 +309,11 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					} else {
 						if (this.ensJTextField.get(5).getText().equals(""))
 							this.ensJTextField.get(5).setText("0");
-						if (this.ensJTextField.get(4).getText().equals("0"))
+						if (this.ensJTextField.get(4).getText().equals("0")||this.ensJTextField.get(4).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(5).getText());
+							this.panelMere.setSommeTP();
+							this.panelMere.setSommeTotal();
+						}
 						else {
 							somme = Integer.parseInt(this.ensJTextField.get(4).getText())
 									* Integer.parseInt(this.ensJTextField.get(5).getText());
