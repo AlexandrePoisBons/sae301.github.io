@@ -284,7 +284,6 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 	public void focusGained(FocusEvent e) {}
 
 	public void setHeureAffecte(int hSae, int hTut) {
-		System.out.println("panelHeureDroite");
 		this.ensJTextField.get(2).setText("" + hSae);
 		this.ensJTextField.get(3).setText("" + hTut);
 		this.repaint();

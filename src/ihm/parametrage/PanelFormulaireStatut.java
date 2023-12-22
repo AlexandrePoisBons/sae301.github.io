@@ -110,7 +110,7 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 		int nbHeuresMax = 0;
 		float coeff = 1.0f;
 
-		try { nbHeuresService = Integer.parseInt(this.txtNbHeuresService.getText()); System.out.println(this.txtNbHeuresService.getText()); }
+		try { nbHeuresService = Integer.parseInt(this.txtNbHeuresService.getText()); }
 		catch ( NumberFormatException e ) {
 			this.lblErreur.setText(this.txtNbHeuresService.getText() + " : pas un Integer"); 
 			this.repaint();
@@ -130,10 +130,6 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 			this.repaint();
 			this.revalidate();
 		}
-
-		System.out.println("nbHeuresService: "+nbHeuresService);
-		System.out.println("nbHeuresMax    : "+nbHeuresMax);
-		System.out.println("coeff          : "+coeff);
 
 		Statut s = new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff);
 

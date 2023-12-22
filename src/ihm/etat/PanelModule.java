@@ -73,7 +73,6 @@ public class PanelModule extends JPanel implements ActionListener {
 
 	public void genererHtml(Module module) {
 		StringBuilder html = new StringBuilder();
-		System.out.println("test");
 
 		// Entête de la page HTML avec le titre
 		html.append("<html>\n<head>\n<title>Récapitulatif de ").append(module.getCode()).append(" ").append(module.getTypeModule()).append("</title>\n</head>\n<body>\n");

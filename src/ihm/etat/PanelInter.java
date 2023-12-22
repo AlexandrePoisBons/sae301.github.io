@@ -84,7 +84,6 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	public void genererHtml(Intervenant intervenant) {
 		StringBuilder html = new StringBuilder();
-		System.out.println("test");
 
 		// Entête de la page HTML avec le titre
 		html.append("<html>\n<head>\n<title>Récapitulatif de ").append(intervenant.getPrenom()).append(" ").append(intervenant.getNom()).append("</title>\n</head>\n<body>\n");

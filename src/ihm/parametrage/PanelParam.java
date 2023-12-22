@@ -164,7 +164,6 @@ public class PanelParam extends JPanel implements ActionListener{
 		}
 
 		for (TypeHeure typeHeure : typeHeures) {
-			System.out.println(typeHeure.toString());
 			this.ajouterTypeHeure(typeHeure);
 		}
 
@@ -185,7 +184,6 @@ public class PanelParam extends JPanel implements ActionListener{
 
 		this.dtmStatut.addRow(objs);
 		this.ensStatut.add(statut);
-		System.out.println("taille: " + ensStatut.size());
 	}
 
 	// Modifier des statuts
@@ -218,7 +216,6 @@ public class PanelParam extends JPanel implements ActionListener{
 			this.lblErreur.setText("");
 			this.repaint();
 			this.revalidate();
-			System.out.println("statut suppr");
 		} else {
 			this.lblErreur.setText("Veuillez sélectionner un statut");
 			this.repaint();
@@ -231,7 +228,6 @@ public class PanelParam extends JPanel implements ActionListener{
 
 		this.dtmCoef.addRow(objs);
 		this.ensTypeHeure.add(tH);
-		System.out.println("taille: " + ensTypeHeure.size());
 	}
 
 	public void modifierTypeHeure() {
@@ -260,7 +256,6 @@ public class PanelParam extends JPanel implements ActionListener{
 		if (ligneSelectionne != -1) {
 			this.dtmCoef.removeRow(ligneSelectionne);
 			this.ensTypeHeure.remove(this.ensTypeHeure.get(ligneSelectionne));
-			System.out.println("Type d'heure supprimé");
 		} else {
 			this.lblErreur.setText("Veuillez sélectionner un type d'heure");
 			this.repaint();
@@ -272,7 +267,6 @@ public class PanelParam extends JPanel implements ActionListener{
 		for (TypeHeure typeHeure : this.ensTypeHeure) {
 			if ( typeHeure.getNomTypeHeure().equals(oldTH.getNomTypeHeure()) ){
 				typeHeure.setCoeff(newTH.getCoeff());
-				System.out.println("TypeHeure MAJ");
 				return true;
 			}
 		}
