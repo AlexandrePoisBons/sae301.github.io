@@ -212,14 +212,14 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 
 
 	public void setHeureAffecte(int hCM, int hTD, int hTP, int hTut, int hHP) {
-		this.ensTxtFld.get(12).setText("" + hCM);
-		this.ensTxtFld.get(13).setText("" + hTD);
-		this.ensTxtFld.get(14).setText("" + hTP);
-		this.ensTxtFld.get(15).setText("" + hTut);
-		this.ensTxtFld.get(16).setText("" + hHP);
-		this.setSommeAffecte();
-		this.repaint();
-		this.revalidate();
+		this.ensTxtFld.get(12).setText("" + hCM)	;
+		this.ensTxtFld.get(13).setText("" + hTD)	;
+		this.ensTxtFld.get(14).setText("" + hTP)	;
+		this.ensTxtFld.get(15).setText("" + hTut)	;
+		this.ensTxtFld.get(16).setText("" + hHP)	;
+		this.setSommeAffecte()						;
+		this.repaint()								;
+		this.revalidate()							;
 
 	}
 	@Override
