@@ -100,4 +100,6 @@ public class PanelStage extends JPanel {
 	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }
 
 
+
+
 }

@@ -2,6 +2,10 @@ package ihm.previsionnel.stage.stageCentre.progNatStage;
 
 //import classes java
 import javax.swing.*;
+
+import ihm.previsionnel.stage.stageCentre.PCentreStage;
+import ihm.previsionnel.stage.stageCentre.repartition.heureStage.PanelRepHStage;
+
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -15,6 +19,7 @@ import java.awt.Color;
 
 
 public class ProgNatStage extends JPanel implements ActionListener, FocusListener{
+	private PCentreStage panelMere;
 	private JPanel     panelPrincipal;
 	private JPanel     panelValidation;
 	private JTextField txtHSae;
@@ -23,7 +28,8 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 	private JCheckBox  checkValid;
 	private int sommeAction;
 
-	public ProgNatStage() {
+	public ProgNatStage(PCentreStage panelMere) {
+		this.panelMere = panelMere;
 		this.setLayout(new BorderLayout());
 
 		//Initialisation des composants
@@ -39,12 +45,8 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		//Rendre certain champ de sasie non modifiable
 		this.txtSomme.setEditable(false);
 
-		//Rendre non coché
-		this.checkValid.setSelected(false);
-		this.checkValid.setEnabled(false);
 
 		//Layouts
-		//this.setLayout(new BorderLayout());
 		this.panelPrincipal.setLayout(new BorderLayout());
 		this.panelPrincipal.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -91,6 +93,13 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		this.add( this.panelValidation, BorderLayout.CENTER );
 
 		this.setVisible(true);
+
+		//Ajout des listeners
+		this.txtHSae.addActionListener(this);
+		this.txtHTut.addActionListener(this);
+		this.txtHSae.addFocusListener(this);
+		this.txtHTut.addFocusListener(this);
+		
 	}
 
 
@@ -112,64 +121,15 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 	public void actionPerformed(ActionEvent e) {
 
 		if(e.getSource() == this.txtHSae) {
-			//Vérification que l'utilsateur rentre un nombre entier supérieur ou égal à 0
-			/*try {
-				int val = Integer.parseInt(this.txtHSae.getText());
-				if(val < 0) {
-					this.txtHSae.setText("0");
-				}
-			}
-			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier supérieur ou égal à 0");
-			}
-			//addition des heures saisies dans les champs
-			try {
-				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-				if(this.txtHSae.getText().equals(Integer.toString(this.sommeAction)) && this.txtHTut.getText().equals("")) {
-					System.out.println("Cette valeur a déjas été prise en compte");
-				}
-				else
-					this.sommeAction += Integer.parseInt(this.txtHSae.getText());
-
-			}
-			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
-			}*/
-			//pour que le focus passe au champ suivant quand  l'utilisteur clique sur "entrée"
 			this.txtHSae.transferFocus();
 		}
 
 
 		else if(e.getSource() == this.txtHTut) {
-			//Vérification que l'utilsateur rentre un nombre entier supérieur ou égal à 0
-			/*try {
-				int val = Integer.parseInt(this.txtHTut.getText());
-				if(val < 0) {
-					this.txtHTut.setText("0");
-				}
-			}
-			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier supérieur ou égal à 0");
-			}
-			//addition des heures saisies dans les champs
-			try {
-				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-				if(this.txtHTut.getText().equals(Integer.toString(this.sommeAction)) && this.txtHSae.getText().equals("")) {
-					System.out.println("Cette valeur a déjas été prise en compte");
-				}
-				else
-					this.sommeAction += Integer.parseInt(this.txtHTut.getText());
-
-			}
-			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
-			}*/
-			//pour que le focus passe au champ d'avant quand  l'utilisteur clique sur "entrée"
 			this.txtHTut.transferFocusBackward();
 		}
 
 		this.txtSomme.setText(Integer.toString(this.sommeAction));
-
 		this.txtSomme.repaint();
 		this.txtSomme.revalidate();
 	}
@@ -218,6 +178,4 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 	public int getSommePN() {
 		return this.sommeAction;
 	}
-
-
 }

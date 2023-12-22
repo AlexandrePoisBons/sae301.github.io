@@ -24,6 +24,8 @@ public class PanelRepartitionHeureDroiteStage extends JPanel {
 			JTextField textField = new JTextField(3);
 			this.ensTxtFld.add(textField); 
 		}
+
+		this.ensTxtFld.get(1).setEditable(false);
 		
 		this.panelC.setLayout(new GridBagLayout());
 		GridBagConstraints gbcC = new GridBagConstraints();

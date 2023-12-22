@@ -58,7 +58,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		gbc.anchor = GridBagConstraints.WEST;
 		
 		this.remplirListe(this.panelMere.getIntervenants(), this.panelMere.getTypesHeures());
-		this.lblNbGpNbH      = new JLabel("nb groupe");
+		this.lblNbGpNbH      = new JLabel("Nb groupe");
 		this.txtNbSemaine    = new JTextField(15);
 		this.txtNbH          = new JTextField(15);
 		this.txtTotEqtd      = new JTextField(15);

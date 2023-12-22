@@ -33,7 +33,7 @@ public class PCentreStage extends JPanel {
 		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
 		this.panelRepartitionStage 	= new PanelRepartitionStage(this,this.module);
-		this.pProgNatStage 			= new ProgNatStage();
+		this.pProgNatStage 			= new ProgNatStage(this);
 
 		JPanel panelN = new JPanel();
 		panelN.setLayout(new GridBagLayout());
@@ -95,5 +95,6 @@ public class PCentreStage extends JPanel {
 	public int getSommePN() {
 		return this.pProgNatStage.getSommePN();
 	}
+
 
 }

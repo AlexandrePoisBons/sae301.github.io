@@ -84,17 +84,21 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 	public void setHeureAffecte() {
 		DefaultTableModel dtm = this.panelAffect.getDtm();
 		JTable tableauAffect  = this.panelAffect.getTableauAffect();
-		int hSae = 0;
+		int hREH = 0;
 		int hTut = 0;
 		for(int i=0;i<tableauAffect.getRowCount();i++) {
-			if(dtm.getValueAt(i, 1).equals("SAE")){
-				hSae += Float.parseFloat(dtm.getValueAt(i, 2).toString());
+			if(dtm.getValueAt(i, 1).equals("REH")){
+				hREH += Float.parseFloat(dtm.getValueAt(i, 2).toString());
 			}
 			if(dtm.getValueAt(i, 1).equals("TUT")){
 				hTut += Float.parseFloat(dtm.getValueAt(i, 2).toString());
 			}
 		}
-		this.panelRepH.setHeureAffecte(hSae, hTut);
+		this.panelRepH.setHeureAffecte(hREH, hTut);
+	}
+
+	public void setSommeAffecte() {
+		this.panelRepH.setSommeAffecte();
 	}
 
 

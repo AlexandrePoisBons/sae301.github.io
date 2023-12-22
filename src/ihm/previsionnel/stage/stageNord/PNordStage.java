@@ -132,6 +132,9 @@ public class PNordStage extends JPanel{
 	public String getLibelle()      { return this.txtLibLong.getText();  }
 	public String getLibelleCourt() { return this.txtLibCourt.getText(); }
 	public String getCode()         { return this.txtCode.getText();     }
+	public int getTxtNbEtd()     { return Integer.parseInt(this.txtNbEtd.getText() );}
+	public int getTxtNbGpTd()    { return Integer.parseInt(this.txtNbGpTd.getText()) ;}
+	public int getTxtNbGpTp()    { return Integer.parseInt(this.txtNbGpTp.getText()) ;}
 
 
 }

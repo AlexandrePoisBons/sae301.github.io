@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.Color;
 
@@ -43,16 +42,16 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener{
 		//Initialisation des composants
 		this.panelPrincipal  = new JPanel();
 		this.panelValidation = new JPanel();
-		this.txtHTutWrite    = new JTextField(4);
-		this.txtHPonctWrite  = new JTextField(4);
-		this.txtCMWrite      = new JTextField(4);
-		this.txtTDWrite      = new JTextField(4);
-		this.txtTPWrite      = new JTextField(4);
-		this.txtCM           = new JTextField(4);
-		this.txtTD           = new JTextField(4);
-		this.txtTP           = new JTextField(4);
-		this.txtSomme        = new JTextField(4);
-		this.txtTotalSomme   = new JTextField(4);
+		this.txtHTutWrite    = new JTextField("0", 4);
+		this.txtHPonctWrite  = new JTextField("0", 4);
+		this.txtCMWrite      = new JTextField("0", 4);
+		this.txtTDWrite      = new JTextField("0", 4);
+		this.txtTPWrite      = new JTextField("0", 4);
+		this.txtCM           = new JTextField("0", 4);
+		this.txtTD           = new JTextField("0", 4);
+		this.txtTP           = new JTextField("0", 4);
+		this.txtSomme        = new JTextField("0", 4);
+		this.txtTotalSomme   = new JTextField("0", 4);
 		this.checkValid      = new JCheckBox();
 		this.panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
@@ -261,8 +260,6 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener{
 		}
 
 		this.txtSomme.setText(Integer.toString(somme));
-		this.txtSomme.repaint();
-		this.txtSomme.revalidate();
 
 		this.txtTotalSomme.setText(Integer.toString(Integer.parseInt(this.txtCM.getText()) + Integer.parseInt(this.txtTD.getText()) + Integer.parseInt(this.txtTP.getText())));
 		this.txtTotalSomme.repaint();

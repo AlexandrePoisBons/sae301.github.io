@@ -56,6 +56,8 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		this.btnValider      = new JButton("Valider");
 		this.btnAnnuler      = new JButton("Annuler");
 
+		this.txtTotEqtd.setEditable(false);
+
 		gbc.gridy = 0;
 		gbc.gridx = 0;
 		this.panelFormulaire.add(new JLabel("Intervenants"), gbc);
@@ -89,6 +91,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 
 		this.btnValider.addActionListener(this);
 		this.btnAnnuler.addActionListener(this);
+		this.txtNbH.addFocusListener(this);
 
 		this.add(this.panelFormulaire);
 
@@ -98,6 +101,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == this.btnValider){
 			this.valider();
+			this.panelMere.setSommeAffecte();
 			this.dispose();
 		}
 		if(e.getSource() == this.btnAnnuler){
@@ -107,14 +111,25 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 
 	public void remplirListe(List<Intervenant> intervenants, List<TypeHeure> typesHeures) {
 		String[] tabInter = new String[intervenants.size()];
-		String[] tabTypesHeures = new String[typesHeures.size()];
-
-		for(int i=0;i<intervenants.size();i++)
-			tabInter[i] = intervenants.get(i).getNom() + " " + intervenants.get(i).getPrenom();
+		int[] heures = new int[typesHeures.size()];
+		int cpt = 0; 
 		
-		for (int i = 0; i < tabTypesHeures.length; i++){
-			if(typesHeures.get(i).getNomTypeHeure().equals("REH") || typesHeures.get(i).getNomTypeHeure().equals("TUT"))
-				tabTypesHeures[i] = typesHeures.get(i).getNomTypeHeure();
+
+		for(int i=0;i<intervenants.size();i++) {
+			tabInter[i] = intervenants.get(i).getNom() + " " + intervenants.get(i).getPrenom();
+		}
+			
+		for(int i = 0; i < typesHeures.size(); i++) {
+			if(typesHeures.get(i).getNomTypeHeure().equals("REH") || 
+			   typesHeures.get(i).getNomTypeHeure().equals("TUT")) {
+				heures[cpt] = i;
+				cpt++;
+			   }
+		}
+		
+		String[] tabTypesHeures = new String[cpt];
+		for (int i = 0; i < cpt; i++){
+			tabTypesHeures[i] = typesHeures.get(heures[i]).getNomTypeHeure();
 		}
 		
 		this.ddlstIntervenants = new JComboBox<String>(tabInter);

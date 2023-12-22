@@ -71,7 +71,7 @@ public class PanelSud extends JPanel implements ActionListener {
 
 
 	public void enregistrer() {
-		String typeModule   = "SAE";
+		String typeModule   = "PPP";
 		String semestre     = this.panelPpp.getSemestre();
 		String libelle      = this.panelPpp.getLibelle();
 		String libelleCourt = this.panelPpp.getLibelleCourt();

@@ -38,9 +38,8 @@ public class PanelRepHStage extends JPanel{
 		this.panelRepartitionHDroite.setSommePromo(somme);
 	}
 
-	public void setHeureAffecte(int hSae, int hTut) {
-		System.out.println("panelRepH");
-		this.panelRepartitionHGauche.setHeureAffecte(hSae, hTut);
+	public void setHeureAffecte(int hREH, int hTut) {
+		this.panelRepartitionHGauche.setHeureAffecte(hREH, hTut);
 	}
 
 	public void setSommeAffecte(int somme) {
@@ -49,6 +48,11 @@ public class PanelRepHStage extends JPanel{
 
 	public int getSommeAffecte() {
 		return this.panelRepartitionHDroite.getSommeAffecte();
+	}
+
+
+	public void setSommeAffecte() {
+		this.panelRepartitionHGauche.setSommeAffecte();
 	}
 
 

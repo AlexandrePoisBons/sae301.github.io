@@ -1,9 +1,7 @@
 package ihm.previsionnel.stage.stageCentre.repartition.heureStage;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +12,6 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
-import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepH;
 
 public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionListener, FocusListener {
 
@@ -27,8 +24,11 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 
 
 		JPanel panelHC	= new JPanel();
-		for(int cpt=0; cpt < 6; cpt++){
+		for(int cpt=0; cpt < 4; cpt++){
 			JTextField jtf = new JTextField(3);
+			if(cpt>1){
+				jtf.setEditable(false);
+			}
 			this.ensJTextField.add(jtf);	
 		}
 		panelHC.setLayout(new GridBagLayout());
@@ -38,9 +38,9 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 		gbcH.gridx = 1;
 		gbcH.gridy = 0;
 		gbcH.insets = new Insets(10, 0, 2, 0);
-		panelHC.add(new JLabel("nbSem")		, gbcH);
+		panelHC.add(new JLabel("REH")		, gbcH);
 		gbcH.gridx = 2;
-		panelHC.add(new JLabel("nbH")	, gbcH);
+		panelHC.add(new JLabel("h TUT")	, gbcH);
 
 
 		gbcH.gridx = 0;
@@ -58,10 +58,10 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 		gbcH.gridy = 2;
 		gbcH.gridx = 1;
 		gbcH.insets = new Insets(0, 0, 2, 0);
-		panelHC.add(this.ensJTextField.get(3), gbcH);
+		panelHC.add(this.ensJTextField.get(2), gbcH);
 		gbcH.gridx = 2;
 		gbcH.insets = new Insets(0, 0, 2, 0);
-		panelHC.add(this.ensJTextField.get(4), gbcH);
+		panelHC.add(this.ensJTextField.get(3), gbcH);
 
 		this.add(panelHC);
 
@@ -146,9 +146,8 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 	@Override
 	public void focusGained(FocusEvent e) {}
 
-	public void setHeureAffecte(int hSae, int hTut) {
-		System.out.println("panelHeureDroite");
-		this.ensJTextField.get(2).setText("" + hSae);
+	public void setHeureAffecte(int hREH, int hTut) {
+		this.ensJTextField.get(2).setText("" + hREH);
 		this.ensJTextField.get(3).setText("" + hTut);
 		this.repaint();
 		this.revalidate();
