@@ -2,33 +2,51 @@ package ihm.previsionnel.ppp.pppCentre.repartition.heure;
 
 import java.util.ArrayList;
 
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JLabel;
 
 
-public class PanelRepartitionHDroite extends JPanel{
+public class PanelRepartitionHDroite extends JPanel implements ActionListener, FocusListener{
+	//Constante coefficient de conversion des heures de CM en heures TD (1h de TD = 1.5h CM)
+	private static final double COEFF_CM_TD = 1.5;
+
+	private PanelRepartitionHeure panelMere;
 	private JPanel panelN;
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
 
-	public PanelRepartitionHDroite(){
+	private int sommeActionTD, sommeActionTP, sommeActionCM;
+	private int clcCM, clcTD, clcTP;
+	private int valTut, valPonct;
+
+
+	public PanelRepartitionHDroite(PanelRepartitionHeure panelMere){
+		this.panelMere = panelMere;
+		this.sommeActionTD = this.sommeActionTP = this.sommeActionCM = 0;
+		this.valTut = this.valPonct = 0;
 		this.panelN = new JPanel();
 		this.panelC = new JPanel();
 		this.ensTxtFld = new ArrayList<JTextField>();
 		for(int i = 0; i < 18; i++){
 			JTextField textField = new JTextField(3);
 			if(i == 3 || i == 4){
-				textField.setEnabled(true);
+				textField.setEditable(true);
 				System.out.println("jsuis dedans lo");
 			}
 			else{
-				textField.setEnabled(false);
+				textField.setEditable(false);
 				System.out.println("lo dedans jsuis");
 			}
 			this.ensTxtFld.add(textField); 
@@ -126,17 +144,55 @@ public class PanelRepartitionHDroite extends JPanel{
 
 		this.add(this.panelN, BorderLayout.NORTH);
 		this.add(this.panelC, BorderLayout.CENTER);
+
+		this.setVisible(true);
+
+		//initialisation des listener
+		for(int cpt=0; cpt < 18; cpt++){
+			this.ensTxtFld.get(cpt).addActionListener(this);
+			this.ensTxtFld.get(cpt).addFocusListener(this);
+		}
 	}
 
 
-	public void setSommePromo(int somme) {
-		this.ensTxtFld.get(0).setText("" + somme);
+	public void setSommeTD(int somme) {
+		this.ensTxtFld.get(1).setText("" + somme);
+		this.sommeActionTD = somme;
+		this.clcTD = this.sommeActionTD*this.panelMere.getNbGpTd();
 		this.repaint();
 		this.revalidate();
 	}
 
-	public void setSommeAffecte(int somme) {
-		this.ensTxtFld.get(1).setText("" + somme);
+	public void setSommeTP(int somme) {
+		this.ensTxtFld.get(2).setText("" + somme);
+		this.sommeActionTP = somme;
+		this.clcTP = this.sommeActionTP*this.panelMere.getNbGpTp();
+		this.repaint();
+		this.revalidate();
+	}
+
+	public void setSommeCM(int somme) {
+		this.ensTxtFld.get(0).setText("" + somme);
+		this.sommeActionCM = somme;
+		this.clcCM = (int) (this.sommeActionCM*COEFF_CM_TD);
+		this.repaint();
+		this.revalidate();
+	}
+
+	
+
+	public void setSommeTotal(){
+		int somme = this.sommeActionTD + this.sommeActionTP + this.sommeActionCM + this.valTut+this.valPonct;
+		int sommeAffecte = this.clcCM + this.clcTD + this.clcTP+this.valTut+this.valPonct;
+		//this.sommeActionTD = this.sommeActionTP = this.sommeActionCM = 0;
+
+		this.ensTxtFld.get(5).setText("" + somme);
+		this.ensTxtFld.get(6).setText("" + clcCM);
+		this.ensTxtFld.get(7).setText("" + clcTD);
+		this.ensTxtFld.get(8).setText("" + clcTP);
+		this.ensTxtFld.get(9).setText("" + this.valTut);
+		this.ensTxtFld.get(10).setText("" + this.valPonct);
+		this.ensTxtFld.get(11).setText("" + sommeAffecte);
 		this.repaint();
 		this.revalidate();
 	}
@@ -144,6 +200,64 @@ public class PanelRepartitionHDroite extends JPanel{
 	public int getSommeAffecte() {
 		return Integer.parseInt(this.ensTxtFld.get(1).getText());
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == this.ensTxtFld.get(3)){
+			this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
+			this.setSommeTotal();
+			this.ensTxtFld.get(3).transferFocus();
+			this.repaint();
+			this.revalidate();
+		}
+		else if(e.getSource() == this.ensTxtFld.get(4)){
+			this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
+			this.setSommeTotal();
+			this.ensTxtFld.get(4).transferFocusBackward();
+			this.repaint();
+			this.revalidate();
+		}
+	}
+	@Override
+	public void focusLost(FocusEvent e) {
+		try {
+			if(Integer.parseInt(this.ensTxtFld.get(3).getText()) > 0){
+				this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
+				this.setSommeTotal();
+				this.repaint();
+				this.revalidate();
+			}
+			else{
+				this.ensTxtFld.get(3).setText("0");
+				this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
+				this.setSommeTotal();
+				this.repaint();
+				this.revalidate();
+			}
+		} catch (Exception er) {
+			System.err.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+
+		try {
+			if(Integer.parseInt(this.ensTxtFld.get(4).getText()) > 0){
+				this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
+				this.setSommeTotal();
+				this.repaint();
+				this.revalidate();
+			}
+			else{
+				this.ensTxtFld.get(4).setText("0");
+				this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
+				this.setSommeTotal();
+				this.repaint();
+				this.revalidate();
+			}
+		} catch (Exception er) {
+			System.err.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+	}
+	@Override
+	public void focusGained(FocusEvent e) {}
 
 
 }

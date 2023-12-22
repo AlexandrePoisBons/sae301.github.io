@@ -124,18 +124,6 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 		return Integer.parseInt(this.ensJTextField.get(i).getText());
 	}
 
-	/*public void setSommeCM(int somme) {
-		this.panelMere.setSommeCM(somme);
-	}
-
-	public void setSommeTD(int somme) {
-		this.panelMere.setSommeTD(somme);
-	}
-
-	public void setSommeTP(int somme) {
-		this.panelMere.setSommeTP(somme);
-	}*/
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -300,11 +288,6 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 
 		this.panelMere.setSommeTotal();	
 	}
-
-
 	@Override
 	public void focusGained(FocusEvent e) {}
-
-
-
 }

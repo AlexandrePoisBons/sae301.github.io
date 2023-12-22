@@ -35,7 +35,7 @@ public class PanelPpp extends JPanel {
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		int xSize = (int)(largeur*0.75);
+		int xSize = (int)(largeur*0.8);
 		int ySize = (int)(hauteur*0.9);
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
@@ -100,5 +100,10 @@ public class PanelPpp extends JPanel {
 	public int getSommePN() {
 		return this.panelPppCentre.getSommePN();
 	}
+
+	
+	//pour mettre à jour les données dans pCentre
+	public int getNbGpTdMaj(){return this.panelPppNord.getTxtNbGpTd();}
+	public int getNbGpTpMaj(){return this.panelPppNord.getTxtNbGpTp();}
 
 }

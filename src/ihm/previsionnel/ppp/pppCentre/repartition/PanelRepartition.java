@@ -107,4 +107,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 		this.panelRepartitionHeure.setHeureAffecte(hSae, hTut);
 	}
 
+	public int getNbGpTd() {return this.panelMere.getNbGpTd();}
+	public int getNbGpTp() {return this.panelMere.getNbGpTp();}
+
 }
