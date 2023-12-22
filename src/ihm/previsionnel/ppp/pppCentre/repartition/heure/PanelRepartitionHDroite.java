@@ -2,7 +2,6 @@ package ihm.previsionnel.ppp.pppCentre.repartition.heure;
 
 import java.util.ArrayList;
 
-
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
@@ -17,9 +16,9 @@ import java.awt.event.FocusListener;
 
 import javax.swing.JLabel;
 
-
-public class PanelRepartitionHDroite extends JPanel implements ActionListener, FocusListener{
-	//Constante coefficient de conversion des heures de CM en heures TD (1h de TD = 1.5h CM)
+public class PanelRepartitionHDroite extends JPanel implements ActionListener, FocusListener {
+	// Constante coefficient de conversion des heures de CM en heures TD (1h de TD =
+	// 1.5h CM)
 	private static final double COEFF_CM_TD = 1.5;
 
 	private PanelRepartitionHeure panelMere;
@@ -31,33 +30,30 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 	private int clcCM, clcTD, clcTP;
 	private int valTut, valPonct;
 
-
-	public PanelRepartitionHDroite(PanelRepartitionHeure panelMere){
+	public PanelRepartitionHDroite(PanelRepartitionHeure panelMere) {
 		this.panelMere = panelMere;
 		this.sommeActionTD = this.sommeActionTP = this.sommeActionCM = 0;
 		this.valTut = this.valPonct = 0;
 		this.panelN = new JPanel();
 		this.panelC = new JPanel();
 		this.ensTxtFld = new ArrayList<JTextField>();
-		for(int i = 0; i < 18; i++){
+		for (int i = 0; i < 18; i++) {
 			JTextField textField = new JTextField(3);
-			if(i == 3 || i == 4){
+			if (i == 3 || i == 4) {
 				textField.setEditable(true);
 				System.out.println("jsuis dedans lo");
-			}
-			else{
+			} else {
 				textField.setEditable(false);
 				System.out.println("lo dedans jsuis");
 			}
-			this.ensTxtFld.add(textField); 
+			this.ensTxtFld.add(textField);
 		}
-		
+
 		this.setLayout(new BorderLayout());
 		this.panelN.setLayout(new GridBagLayout());
 		GridBagConstraints gbcN = new GridBagConstraints();
 		this.panelC.setLayout(new GridBagLayout());
 		GridBagConstraints gbcC = new GridBagConstraints();
-
 
 		gbcN.gridy = 0;
 		gbcN.gridx = 3;
@@ -70,7 +66,7 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 		gbcC.gridy = 0;
 		gbcC.insets = new Insets(0, 3, 5, 0);
 
-		//Ajout des éléments
+		// Ajout des éléments
 		this.panelC.add(new JLabel("CM"), gbcC);
 		gbcC.gridx = 2;
 		this.panelC.add(new JLabel("TD"), gbcC);
@@ -113,10 +109,10 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 		gbcC.gridx = 3;
 		this.panelC.add(this.ensTxtFld.get(8), gbcC);
 		gbcC.insets = new Insets(0, 9, 8, 0);
-		gbcC.gridx = 4;                                                                              
+		gbcC.gridx = 4;
 		this.panelC.add(this.ensTxtFld.get(9), gbcC);
 		//
-		gbcC.gridx = 5;                                                                              
+		gbcC.gridx = 5;
 		this.panelC.add(this.ensTxtFld.get(10), gbcC);
 		//
 		gbcC.gridx = 6;
@@ -147,51 +143,52 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 
 		this.setVisible(true);
 
-		//initialisation des listener
-		for(int cpt=0; cpt < 18; cpt++){
+		// initialisation des listener
+		for (int cpt = 0; cpt < 18; cpt++) {
 			this.ensTxtFld.get(cpt).addActionListener(this);
 			this.ensTxtFld.get(cpt).addFocusListener(this);
 		}
 	}
 
-
 	public void setSommeTD(int somme) {
 		this.ensTxtFld.get(1).setText("" + somme);
 		this.sommeActionTD = somme;
-		this.clcTD = this.sommeActionTD*this.panelMere.getNbGpTd();
-		this.repaint();
-		this.revalidate();
+		this.clcTD = this.sommeActionTD * this.panelMere.getNbGpTd();
+		//this.repaint();
+		//this.revalidate();
 	}
 
 	public void setSommeTP(int somme) {
 		this.ensTxtFld.get(2).setText("" + somme);
 		this.sommeActionTP = somme;
-		this.clcTP = this.sommeActionTP*this.panelMere.getNbGpTp();
-		this.repaint();
-		this.revalidate();
+		this.clcTP = this.sommeActionTP * this.panelMere.getNbGpTp();
+		//this.repaint();
+		//this.revalidate();
 	}
 
 	public void setSommeCM(int somme) {
 		this.ensTxtFld.get(0).setText("" + somme);
 		this.sommeActionCM = somme;
-		this.clcCM = (int) (this.sommeActionCM*COEFF_CM_TD);
-		this.repaint();
-		this.revalidate();
+		this.clcCM = (int) (this.sommeActionCM * COEFF_CM_TD);
+		//this.repaint();
+		//this.revalidate();
 	}
 
-	
-
-	public void setSommeTotal(){
-		int somme = this.sommeActionTD + this.sommeActionTP + this.sommeActionCM + this.valTut+this.valPonct;
-		int sommeAffecte = this.clcCM + this.clcTD + this.clcTP+this.valTut+this.valPonct;
-		//this.sommeActionTD = this.sommeActionTP = this.sommeActionCM = 0;
+	public void setSommeTotal() {
+		int somme = this.sommeActionTD + this.sommeActionTP + this.sommeActionCM + this.valTut + this.valPonct;
+		int sommeAffecte = this.clcCM + this.clcTD + this.clcTP + this.valTut + this.valPonct;
 
 		this.ensTxtFld.get(5).setText("" + somme);
-		this.ensTxtFld.get(6).setText("" + clcCM);
-		this.ensTxtFld.get(7).setText("" + clcTD);
-		this.ensTxtFld.get(8).setText("" + clcTP);
-		this.ensTxtFld.get(9).setText("" + this.valTut);
-		this.ensTxtFld.get(10).setText("" + this.valPonct);
+		if(this.clcCM>0)
+			this.ensTxtFld.get(6).setText("" + clcCM);
+		if(this.clcTD > 0)
+			this.ensTxtFld.get(7).setText("" + clcTD);
+		if(this.clcTP > 0)
+			this.ensTxtFld.get(8).setText("" + clcTP);
+		if(this.valTut > 0)
+			this.ensTxtFld.get(9).setText("" + valTut);
+		if(this.valPonct > 0)
+			this.ensTxtFld.get(10).setText("" + valPonct);
 		this.ensTxtFld.get(11).setText("" + sommeAffecte);
 		this.repaint();
 		this.revalidate();
@@ -202,83 +199,91 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 	}
 
 	public void setSommeAffecte() {
-		int calcul = Integer.parseInt(this.ensTxtFld.get(12).getText()) + 
-					 Integer.parseInt(this.ensTxtFld.get(13).getText()) + 
-					 Integer.parseInt(this.ensTxtFld.get(14).getText()) + 
-					 Integer.parseInt(this.ensTxtFld.get(15).getText()) + 
-					 Integer.parseInt(this.ensTxtFld.get(16).getText());
+		int calcul = Integer.parseInt(this.ensTxtFld.get(12).getText()) +
+				Integer.parseInt(this.ensTxtFld.get(13).getText()) +
+				Integer.parseInt(this.ensTxtFld.get(14).getText()) +
+				Integer.parseInt(this.ensTxtFld.get(15).getText()) +
+				Integer.parseInt(this.ensTxtFld.get(16).getText());
 		this.ensTxtFld.get(17).setText("" + calcul);
 	}
 
-
 	public void setHeureAffecte(int hCM, int hTD, int hTP, int hTut, int hHP) {
-		this.ensTxtFld.get(12).setText("" + hCM)	;
-		this.ensTxtFld.get(13).setText("" + hTD)	;
-		this.ensTxtFld.get(14).setText("" + hTP)	;
-		this.ensTxtFld.get(15).setText("" + hTut)	;
-		this.ensTxtFld.get(16).setText("" + hHP)	;
-		this.setSommeAffecte()						;
-		this.repaint()								;
-		this.revalidate()							;
+		this.ensTxtFld.get(12).setText("" + hCM);
+		this.ensTxtFld.get(13).setText("" + hTD);
+		this.ensTxtFld.get(14).setText("" + hTP);
+		this.ensTxtFld.get(15).setText("" + hTut);
+		this.ensTxtFld.get(16).setText("" + hHP);
+		this.setSommeAffecte();
+		this.repaint();
+		this.revalidate();
 
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.ensTxtFld.get(3)){
+		if (e.getSource() == this.ensTxtFld.get(3)) {
+			if (this.ensTxtFld.get(3).getText().equals(""))
+				this.ensTxtFld.get(3).setText("0");
 			this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
-			this.setSommeTotal();
+			//this.setSommeTotal();
 			this.ensTxtFld.get(3).transferFocus();
 			this.repaint();
 			this.revalidate();
-		}
-		else if(e.getSource() == this.ensTxtFld.get(4)){
+		} else if (e.getSource() == this.ensTxtFld.get(4)) {
+			if (this.ensTxtFld.get(4).getText().equals(""))
+				this.ensTxtFld.get(4).setText("0");
 			this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
-			this.setSommeTotal();
+			//this.setSommeTotal();
 			this.ensTxtFld.get(4).transferFocusBackward();
 			this.repaint();
 			this.revalidate();
 		}
 	}
+
 	@Override
 	public void focusLost(FocusEvent e) {
-		try {
-			if(Integer.parseInt(this.ensTxtFld.get(3).getText()) > 0){
-				this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
-				this.setSommeTotal();
-				this.repaint();
-				this.revalidate();
+		if (e.getSource() == this.ensTxtFld.get(3)) {
+			try {
+				if (this.ensTxtFld.get(3).getText().equals(""))
+					this.ensTxtFld.get(3).setText("0");
+				if (Integer.parseInt(this.ensTxtFld.get(3).getText()) > 0) {
+					this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
+					this.setSommeTotal();
+					this.repaint();
+					this.revalidate();
+				} else {
+					this.ensTxtFld.get(3).setText("0");
+					this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
+					this.repaint();
+					this.revalidate();
+				}
+			} catch (Exception er) {
+				System.err.println("Erreur de saisie, veuillez entrer un nombre entier");
 			}
-			else{
-				this.ensTxtFld.get(3).setText("0");
-				this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
-				this.setSommeTotal();
-				this.repaint();
-				this.revalidate();
-			}
-		} catch (Exception er) {
-			System.err.println("Erreur de saisie, veuillez entrer un nombre entier");
 		}
-
-		try {
-			if(Integer.parseInt(this.ensTxtFld.get(4).getText()) > 0){
-				this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
-				this.setSommeTotal();
-				this.repaint();
-				this.revalidate();
+		if (e.getSource() == this.ensTxtFld.get(4)) {
+			try {
+				if (this.ensTxtFld.get(4).getText().equals(""))
+					this.ensTxtFld.get(4).setText("0");
+				if (Integer.parseInt(this.ensTxtFld.get(4).getText()) > 0) {
+					this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
+					this.setSommeTotal();
+					this.repaint();
+					this.revalidate();
+				} else {
+					this.ensTxtFld.get(4).setText("0");
+					this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
+					this.repaint();
+					this.revalidate();
+				}
+			} catch (Exception er) {
+				System.err.println("Erreur de saisie, veuillez entrer un nombre entier");
 			}
-			else{
-				this.ensTxtFld.get(4).setText("0");
-				this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
-				this.setSommeTotal();
-				this.repaint();
-				this.revalidate();
-			}
-		} catch (Exception er) {
-			System.err.println("Erreur de saisie, veuillez entrer un nombre entier");
 		}
 	}
-	@Override
-	public void focusGained(FocusEvent e) {}
 
+	@Override
+	public void focusGained(FocusEvent e) {
+	}
 
 }

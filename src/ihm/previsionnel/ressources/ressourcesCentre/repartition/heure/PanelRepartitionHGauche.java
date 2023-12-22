@@ -40,7 +40,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 		JPanel panelHC	= new JPanel();
 		JPanel panelB 	= new JPanel();
 		for(int cpt=0; cpt < 6; cpt++){
-			JTextField jtf = new JTextField(3);
+			JTextField jtf = new JTextField("0", 3);
 			this.ensJTextField.add(jtf);	
 		}
 
