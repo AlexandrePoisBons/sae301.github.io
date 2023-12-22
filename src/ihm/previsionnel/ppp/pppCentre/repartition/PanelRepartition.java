@@ -124,4 +124,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 		return this.panelRepartitionHeure.getNbHeureSemaine(i);
 	}
 
+	public int getNbGpTd() {return this.panelMere.getNbGpTd();}
+	public int getNbGpTp() {return this.panelMere.getNbGpTp();}
+
 }

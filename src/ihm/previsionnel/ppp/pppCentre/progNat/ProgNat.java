@@ -1,5 +1,7 @@
 package ihm.previsionnel.ppp.pppCentre.progNat;
 
+import ihm.previsionnel.ppp.pppCentre.PanelPppCentre;
+
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
@@ -14,6 +16,10 @@ import java.util.HashMap;
 import java.awt.Color;
 
 public class ProgNat extends JPanel implements ActionListener, FocusListener{
+	private static final double COEFF_CM_TD = 1.5;
+
+	private PanelPppCentre panelMere;
+
 	private JPanel panelPrincipal;
 	private JPanel panelValidation;
 	private JTextField txtHTutWrite;
@@ -30,7 +36,8 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener{
 
 	private int sommeAction;
 
-	public ProgNat() {
+	public ProgNat(PanelPppCentre panelMere) {
+		this.panelMere = panelMere;
 		this.setLayout(new BorderLayout());
 
 		//Initialisation des composants
@@ -117,6 +124,19 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener{
 		this.add(this.panelPrincipal, BorderLayout.NORTH);
 		this.add(this.panelValidation, BorderLayout.CENTER);
 
+		//Ajout des listeners
+		this.txtHPonctWrite.addActionListener(this);
+		this.txtHTutWrite.addActionListener(this);
+		this.txtCMWrite.addActionListener(this);
+		this.txtTDWrite.addActionListener(this);
+		this.txtTPWrite.addActionListener(this);
+		this.txtHPonctWrite.addFocusListener(this);
+		this.txtHTutWrite.addFocusListener(this);
+		this.txtCMWrite.addFocusListener(this);
+		this.txtTDWrite.addFocusListener(this);
+		this.txtTPWrite.addFocusListener(this);
+		
+
 		this.setVisible(true);
 	}
 
@@ -139,66 +159,28 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener{
 	public void actionPerformed(ActionEvent e) {
 
 		if(e.getSource() == this.txtHPonctWrite) {
-			//Vérification que l'utilsateur rentre un nombre entier supérieur ou égal à 0
-			/*try {
-				int val = Integer.parseInt(this.txtHSae.getText());
-				if(val < 0) {
-					this.txtHSae.setText("0");
-				}
-			}
-			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier supérieur ou égal à 0");
-			}
-			//addition des heures saisies dans les champs
-			try {
-				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-				if(this.txtHSae.getText().equals(Integer.toString(this.sommeAction)) && this.txtHTut.getText().equals("")) {
-					System.out.println("Cette valeur a déjas été prise en compte");
-				}
-				else
-					this.sommeAction += Integer.parseInt(this.txtHSae.getText());
-
-			}
-			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
-			}*/
-			//pour que le focus passe au champ suivant quand  l'utilisteur clique sur "entrée"
+			
 			this.txtHPonctWrite.transferFocus();
 		}
-
-
 		else if(e.getSource() == this.txtHTutWrite) {
-			//Vérification que l'utilsateur rentre un nombre entier supérieur ou égal à 0
-			/*try {
-				int val = Integer.parseInt(this.txtHTut.getText());
-				if(val < 0) {
-					this.txtHTut.setText("0");
-				}
-			}
-			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier supérieur ou égal à 0");
-			}
-			//addition des heures saisies dans les champs
-			try {
-				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-				if(this.txtHTut.getText().equals(Integer.toString(this.sommeAction)) && this.txtHSae.getText().equals("")) {
-					System.out.println("Cette valeur a déjas été prise en compte");
-				}
-				else
-					this.sommeAction += Integer.parseInt(this.txtHTut.getText());
-
-			}
-			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
-			}*/
-			//pour que le focus passe au champ d'avant quand  l'utilisteur clique sur "entrée"
-			this.txtHTutWrite.transferFocusBackward();
+			
+			this.txtHTutWrite.transferFocus();
 		}
 
-		this.txtSomme.setText(Integer.toString(this.sommeAction));
+		else if(e.getSource() == this.txtCMWrite) {
+			
+			this.txtCMWrite.transferFocus();
+		}
 
-		this.txtSomme.repaint();
-		this.txtSomme.revalidate();
+		else if(e.getSource() == this.txtTDWrite) {
+			
+			this.txtTDWrite.transferFocus();
+		}
+
+		else if(e.getSource() == this.txtTPWrite) {
+			
+			this.txtTPWrite.transferFocus();
+		}
 	}
 
 
@@ -230,9 +212,61 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener{
 		catch(NumberFormatException ex) {
 			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
 		}
+		try {
+			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.txtCMWrite.getText().equals(Integer.toString(somme)) && (this.txtTPWrite.getText().equals("")&&this.txtTDWrite.getText().equals(""))) {
+				System.out.println("Cette valeur a déjas été prise en compte");
+			}
+			else {
+				somme += Integer.parseInt(this.txtCMWrite.getText());
+				//calcul du txtField CM non modifiable (txtField modifiable * coeffCM_TD)
+				this.txtCM.setText(Integer.toString((int)(Integer.parseInt(this.txtCMWrite.getText())*COEFF_CM_TD)));
+				this.txtCM.repaint();
+				this.txtCM.revalidate();
+			}
+		} catch (Exception err) {
+			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+
+		try {
+			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.txtTDWrite.getText().equals(Integer.toString(somme)) && (this.txtTPWrite.getText().equals("")&&this.txtCMWrite.getText().equals(""))) {
+				System.out.println("Cette valeur a déjas été prise en compte");
+			}
+			else {
+				somme += Integer.parseInt(this.txtTDWrite.getText());
+				//calcul du txtField TD non modifiable (txtField modifiable * nbGpTD de panelMere)
+				this.txtTD.setText(Integer.toString((int)(Integer.parseInt(this.txtTDWrite.getText())*this.panelMere.getNbGpTd())));
+				this.txtTD.repaint();
+				this.txtTD.revalidate();
+			}
+		} catch (Exception err) {
+			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+
+		try {
+			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.txtTPWrite.getText().equals(Integer.toString(somme)) && (this.txtCMWrite.getText().equals("")&&this.txtTDWrite.getText().equals(""))) {
+				System.out.println("Cette valeur a déjas été prise en compte");
+			}
+			else {
+				somme += Integer.parseInt(this.txtTPWrite.getText());
+				//calcul du txtField TP non modifiable (txtField modifiable * nbGpTP de panelMere)
+				this.txtTP.setText(Integer.toString((int)(Integer.parseInt(this.txtTPWrite.getText())*this.panelMere.getNbGpTp())));
+				this.txtTP.repaint();
+				this.txtTP.revalidate();
+			}
+		} catch (Exception err) {
+			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+		}
+
 		this.txtSomme.setText(Integer.toString(somme));
 		this.txtSomme.repaint();
 		this.txtSomme.revalidate();
+
+		this.txtTotalSomme.setText(Integer.toString(Integer.parseInt(this.txtCM.getText()) + Integer.parseInt(this.txtTD.getText()) + Integer.parseInt(this.txtTP.getText())));
+		this.txtTotalSomme.repaint();
+		this.txtTotalSomme.revalidate();
 	}
 	@Override
 	public void focusGained(FocusEvent e) {}
@@ -245,12 +279,4 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener{
 	public int getSommePN() {
 		return this.sommeAction;
 	}
-
-
-
-
-
-
-
-
-}//"Total (eqtd) promo"));
+}

@@ -30,7 +30,7 @@ public class PanelPppCentre extends JPanel {
 		this.setLayout(new BorderLayout());
 
 		this.panelRepartition = new PanelRepartition(this, this.module);
-		this.pProgNat = new ProgNat();
+		this.pProgNat = new ProgNat(this);
 
 		JPanel panelN = new JPanel();
 		panelN.setLayout(new GridBagLayout());
@@ -92,4 +92,9 @@ public class PanelPppCentre extends JPanel {
 	public int getSommePN() {
 		return this.pProgNat.getSommePN();
 	}
+
+	public int getNbGpTd() { return this.panelMere.getNbGpTdMaj(); }
+	public int getNbGpTp() { return this.panelMere.getNbGpTpMaj(); }
+
+	public boolean estValide() { return true; }
 }

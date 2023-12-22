@@ -21,7 +21,7 @@ public class PanelRepartitionHeure extends JPanel{
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 		this.panelRepartitionHGauche = new PanelRepartitionHGauche(this);
-		this.panelRepartitionHDroite = new PanelRepartitionHDroite();
+		this.panelRepartitionHDroite = new PanelRepartitionHDroite(this);
 
 		this.add(this.panelRepartitionHGauche);
 		this.add(this.panelRepartitionHDroite);
@@ -31,17 +31,17 @@ public class PanelRepartitionHeure extends JPanel{
 		return this.panelRepartitionHGauche.getNbSemaines();
 	}
 
-	public void setSommePromo(int somme) {
+	/*public void setSommePromo(int somme) {
 		this.panelRepartitionHDroite.setSommePromo(somme);
-	}
+	}*/
 
 	public void setHeureAffecte(int hCM, int hTD, int hTP, int hTut, int hHP) {
 		this.panelRepartitionHDroite.setHeureAffecte(hCM, hTD, hTP, hTut, hHP);
 	}
-
+/* 
 	public void setSommeAffecte(int somme) {
 		this.panelRepartitionHDroite.setSommeAffecte(somme);
-	}
+	}*/
 
 	public int getSommeAffecte() {
 		return this.panelRepartitionHDroite.getSommeAffecte();
@@ -50,5 +50,24 @@ public class PanelRepartitionHeure extends JPanel{
 	public int getNbHeureSemaine(int i) {
 		return this.panelRepartitionHGauche.getNbHeureSemaine(i);
 	}
+	public void setSommeCM(int somme) {
+		this.panelRepartitionHDroite.setSommeCM(somme);
+	}
+
+	public void setSommeTD(int somme) {
+		this.panelRepartitionHDroite.setSommeTD(somme);
+	}
+
+	public void setSommeTP(int somme) {
+		this.panelRepartitionHDroite.setSommeTP(somme);
+	}
+
+	public void setSommeTotal(){
+		this.panelRepartitionHDroite.setSommeTotal();
+	}
+
+	public int getNbGpTd(){return this.panelMere.getNbGpTd();}
+	public int getNbGpTp(){return this.panelMere.getNbGpTp();}
+
 	
 }

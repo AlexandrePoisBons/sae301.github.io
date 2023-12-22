@@ -43,6 +43,7 @@ public class PanelRessources extends JPanel {
 
 
 		this.pRNord   = new PRNord   (this, this.module);
+		this.pRNord.setValues();
 		this.pRCentre = new PRCentre (this, this.module);
 		this.panelSud = new PanelSud (this.frame, this.panelMere, this, this.module);
 

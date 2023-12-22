@@ -21,8 +21,8 @@ import java.awt.Toolkit;
 
 public class PanelParam extends JPanel implements ActionListener{
 
-	private ArrayList<Statut>       ensStatut;
-	private ArrayList<TypeHeure>    ensTypeHeure;
+	private List<Statut>       ensStatut;
+	private List<TypeHeure>    ensTypeHeure;
 	private PanelFormulaireStatut   panelFormulaireStatut;
 	private PanelFormulaireCoef     panelFormulaireCoef;
 
@@ -323,7 +323,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.dtmStatut.removeRow(r);
 	}
 
-	public ArrayList<Statut> getListStatut() {
+	public List<Statut> getListStatut() {
 		return this.ensStatut;
 	}
 
