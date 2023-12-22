@@ -49,7 +49,7 @@ public class PanelModule extends JPanel implements ActionListener {
 		this.panelSud        = new JPanel();
 		this.btnGenererHtml  = new JButton("Genérer html");
 		this.btnRetour       = new JButton("Retour");
-		this.ddlstModule      = this.init();
+		this.ddlstModule     = this.init();
 
 		this.panelPrincipal.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -59,6 +59,8 @@ public class PanelModule extends JPanel implements ActionListener {
 		gbc.insets = new Insets(5, 5, 5, 5);
 		this.panelPrincipal.add(new JLabel("Génération d'un fichier html pour un module choisi"), gbc);
 		gbc.gridy = 1;
+		this.panelPrincipal.add(this.ddlstModule, gbc);
+		gbc.gridy = 2;
 		this.panelPrincipal.add(this.btnGenererHtml, gbc);
 
 		this.panelSud.add(this.btnRetour);
