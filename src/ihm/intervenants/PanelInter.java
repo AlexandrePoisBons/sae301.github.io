@@ -12,6 +12,7 @@ import javax.swing.table.TableColumn;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.awt.BorderLayout;
@@ -33,9 +34,13 @@ public class PanelInter extends JPanel implements ActionListener {
 	private DefaultTableModel dtm;
 	private JLabel lblErreur;
 
+	private List<Intervenant> intervenants;
+
 	public PanelInter(FrameAccueil frAcceuil) {
 		// Synchronisation des pages
 		this.frame = frAcceuil;
+
+		this.intervenants = new ArrayList<>();
 
 		// Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()
@@ -115,6 +120,7 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	public void init() {
 		List<Intervenant> list = this.frame.getControleur().getCtrl().metier().getIntervenants();
+		this.intervenants = list;
 		String categorie, nom, prenom;
 		Integer nbHeures, nbHeuresMax;
 		Float coeff;
@@ -161,6 +167,7 @@ public class PanelInter extends JPanel implements ActionListener {
 	}
 
 	public void supprimer() {
+		this.intervenants.remove(this.tableauInter.getSelectedRow());
 		this.dtm.removeRow(this.tableauInter.getSelectedRow());
 		this.lblErreur.setText("");
 		this.repaint();
@@ -179,7 +186,7 @@ public class PanelInter extends JPanel implements ActionListener {
 
 		if (e.getSource() == this.btnSupprimer) {
 			try {
-				this.supprimer();	
+				this.supprimer();
 			} catch (Exception err) {
 				this.lblErreur.setText("Il n'y a pas de ligne à supprimer");
 				this.repaint();
@@ -220,9 +227,9 @@ public class PanelInter extends JPanel implements ActionListener {
 					}
 				}
 			}
-			
+
 			if(bOk) {
-				this.ajouterintervenant();
+				this.enregistrer();
 				this.frame.changerPanel(new PanelAcceuil(this.frame));
 			}
 		}
@@ -235,20 +242,24 @@ public class PanelInter extends JPanel implements ActionListener {
 	// Méthode permettant d'ajouter les nouveaux intervenants à la bd 
 
 	// Ne fonctionne pas !!!!!
-	private void ajouterintervenant() {
-		for(int i=0;i<this.dtm.getRowCount();i++){
+	private void enregistrer() {
+		int i=0;
+		System.out.println("dono "+this.intervenants.size());
+		for(Intervenant intervenant: this.intervenants) {
+			System.out.println("inter "+i);
 			for (Statut statut : this.frame.getControleur().getCtrl().metier().getStatuts()) {
 				if(statut.getNomStatut().equals(this.dtm.getValueAt(i, 0))) {
-					System.out.println("rentré");
-					Intervenant intervenant = Intervenant.creerIntervenant(""+this.dtm.getValueAt(i, 1), ""+this.dtm.getValueAt(i, 2), statut, Float.parseFloat(this.dtm.getValueAt(i, 5).toString()));
-					if(this.frame.getControleur().getCtrl().metier().getIntervenants().contains(intervenant)){
-						System.out.println("test");
+					System.out.println("statut");
+					if ( !this.frame.getControleur().getCtrl().metier().getIntervenants().contains(intervenant)) {
+						System.out.println("contient pas");
+						Intervenant inter = Intervenant.creerIntervenant(""+this.dtm.getValueAt(i, 1), ""+this.dtm.getValueAt(i, 2), statut, Float.parseFloat(this.dtm.getValueAt(i, 5).toString()));
+						this.frame.getControleur().getCtrl().metier().ajouterIntervenant(inter);
 					}
 				}
 			}
+			i++;
 		}
 	}
-		
 
 	public List<Statut> getStatuts() {
 		return this.frame.getControleur().getCtrl().metier().getStatuts();
@@ -258,6 +269,10 @@ public class PanelInter extends JPanel implements ActionListener {
 		this.dtm.addRow(values);
 		this.repaint();
 		this.revalidate();
+	}
+
+	public void ajouterIntervenant(Intervenant intervenant){
+		this.intervenants.add(intervenant);
 	}
 
 	public void ajouterLigne(String categorie, String nom, String prenom, Integer hServ, Integer hMax, Float coeff) {

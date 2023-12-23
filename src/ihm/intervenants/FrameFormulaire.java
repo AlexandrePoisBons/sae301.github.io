@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.swing.*;
 
+import metier.Intervenant;
 import metier.Statut;
 
 public class FrameFormulaire extends JFrame implements ActionListener{
@@ -130,6 +131,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 										Integer.parseInt(this.txtHServ.getText()),
 										Integer.parseInt(this.txtHMax.getText()),
 										Float.parseFloat(this.txtCoefTP.getText()));
+			//Intervenant int = Intervenant.creerIntervenant(this.txtPrenom.getText(), this.txtNom.getText(), null, )
 			this.panelMere.revalidate();
 			this.panelMere.repaint();
 		} catch (Exception err) {
