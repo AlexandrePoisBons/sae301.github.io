@@ -24,14 +24,14 @@ public class PCentreSae extends JPanel {
 	private ProgNatSae          panelProgNatSae;
 	private Module              module;
 
-	public PCentreSae(PanelSae panelMere, Module m) {
+	public PCentreSae( PanelSae panelMere, Module m ) {
 		this.panelMere = panelMere;
 		this.module = m;
 
 		this.setLayout(new BorderLayout());
 
-		this.panelRepartitionSae 	= new PanelRepartitionSae(this, this.module);
-		this.panelProgNatSae 		= new ProgNatSae();
+		this.panelRepartitionSae = new PanelRepartitionSae(this, this.module);
+		this.panelProgNatSae     = new ProgNatSae(this, this.module);
 
 		JPanel panelN = new JPanel();
 		panelN.setLayout(new GridBagLayout());
@@ -82,9 +82,7 @@ public class PCentreSae extends JPanel {
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.panelMere.getTypesHeures();  }
 
-	public boolean estValide() {
-		return this.panelProgNatSae.estValide();
-	}
+	public boolean estValide() { return this.panelProgNatSae.estValide(); }
 
 	public int getSommeAffecte() {
 		return this.panelRepartitionSae.getSommeAffecte();

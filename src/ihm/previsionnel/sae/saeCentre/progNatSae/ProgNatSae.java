@@ -2,7 +2,7 @@ package ihm.previsionnel.sae.saeCentre.progNatSae;
 //import classes java
 import javax.swing.*;
 
-import ihm.previsionnel.stage.stageCentre.PCentreStage;
+import ihm.previsionnel.sae.saeCentre.PCentreSae;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
@@ -15,8 +15,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 
+import metier.Module;
+
 public class ProgNatSae extends JPanel implements FocusListener, ActionListener {
-	private PCentreStage panelMere;
+	private PCentreSae panelMere;
 	private JPanel panelPrincipal;
 	private JPanel panelValidation;
 	private JTextField txtHSae;
@@ -25,13 +27,17 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 	private JCheckBox checkValid;
 	private int sommeAction;
 
+	private Module module;
+
 	private int sommeHSae = 0;
 	private int sommeHTut = 0;
 
 	private int totalSomme = 0;
 
-	public ProgNatSae(PCentreStage panelMere) {
+	public ProgNatSae(PCentreSae panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
+
 		this.setLayout(new BorderLayout());
 
 		//Initialisation des composants
@@ -42,6 +48,7 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 		this.txtHTut = new JTextField(2);
 		this.txtSomme = new JTextField(4);
 		this.checkValid = new JCheckBox();
+		this.checkValid.setSelected(this.module.isValide());
 		this.panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 		//Rendre certain champ de sasie non modifiable
@@ -121,9 +128,6 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 
 		return map;
 	}
-	//constructeur vide
-	public ProgNatSae() {}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -189,9 +193,7 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 	public void focusGained(FocusEvent e) {}
 
 
-	public boolean estValide() {
-		return this.checkValid.isSelected();
-	}
+	public boolean estValide() { return this.checkValid.isSelected(); }
 
 	public int getSommePN() {
 		return this.sommeAction;

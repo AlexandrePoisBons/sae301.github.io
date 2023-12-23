@@ -264,7 +264,6 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 
 	// Méthode inutilisée mais obligatoire
 	@Override
-	public void focusGained(FocusEvent e) {
-	}
+	public void focusGained(FocusEvent e) { }
 
 }

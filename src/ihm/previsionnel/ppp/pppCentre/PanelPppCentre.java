@@ -30,7 +30,7 @@ public class PanelPppCentre extends JPanel {
 		this.setLayout(new BorderLayout());
 
 		this.panelRepartition = new PanelRepartition(this, this.module);
-		this.pProgNat = new ProgNat(this);
+		this.pProgNat = new ProgNat(this, this.module);
 
 		JPanel panelN = new JPanel();
 		panelN.setLayout(new GridBagLayout());
@@ -81,8 +81,8 @@ public class PanelPppCentre extends JPanel {
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.panelMere.getTypesHeures();  }
 
-	public boolean isValide() {
-		return this.pProgNat.isValide();
+	public boolean estValide() {
+		return this.pProgNat.estValide();
 	}
 
 	public int getSommeAffecte() {
@@ -96,5 +96,4 @@ public class PanelPppCentre extends JPanel {
 	public int getNbGpTd() { return this.panelMere.getNbGpTdMaj(); }
 	public int getNbGpTp() { return this.panelMere.getNbGpTpMaj(); }
 
-	public boolean estValide() { return true; }
 }

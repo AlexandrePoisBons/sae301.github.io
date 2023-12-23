@@ -146,7 +146,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 	public void focusLost(FocusEvent e) {
 		try {
 			// Addition des heures saisies dans les champs
-			int somme = -1;
+			int somme = 0; // avant: -1
 			if (e.getSource() == this.ensJTextField.get(0)) {
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
@@ -206,7 +206,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 
 		try {
 			// Addition des heures saisies dans les champs
-			int somme = -1;
+			int somme = 0; //avant: -1
 			if (e.getSource() == this.ensJTextField.get(2)) {
 				try {
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
@@ -270,7 +270,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 
 		try {
 			// Addition des heures saisies dans les champs
-			int somme = -1;
+			int somme = 0; //avant: -1
 
 			if (e.getSource() == this.ensJTextField.get(4)) {
 				try {
@@ -331,7 +331,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 			}
 
 		} catch (Exception ex) {
-			System.err.print("");//mettez rien, je sais plus comment j'ai fait mais les try catch sont obligatoires pour le bon fonctionnement des calculs et ça marche donc touchez pas
+			System.err.print(""); //mettez rien, je sais plus comment j'ai fait mais les try catch sont obligatoires pour le bon fonctionnement des calculs et ça marche donc touchez pas
 		}
 	}
 	@Override

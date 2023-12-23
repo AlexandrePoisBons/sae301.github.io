@@ -32,8 +32,8 @@ public class PCentreStage extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.setBorder(new EmptyBorder(0, 5, 0, 10));
 
-		this.panelRepartitionStage 	= new PanelRepartitionStage(this,this.module);
-		this.pProgNatStage 			= new ProgNatStage(this);
+		this.panelRepartitionStage = new PanelRepartitionStage(this,this.module);
+		this.pProgNatStage         = new ProgNatStage(this, this.module);
 
 		JPanel panelN = new JPanel();
 		panelN.setLayout(new GridBagLayout());
@@ -84,9 +84,7 @@ public class PCentreStage extends JPanel {
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.panelMere.getTypesHeures();  }
 
-	public boolean estValide() {
-		return this.pProgNatStage.estValide();
-	}
+	public boolean estValide() { return this.pProgNatStage.estValide(); }
 
 	public int getSommeAffecte() {
 		return this.panelRepartitionStage.getSommeAffecte();

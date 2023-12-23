@@ -38,7 +38,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		// création des composants
 		JPanel panelSud        = new JPanel();
 		this.panelCenterPrevi  = new PanelCenterPrevi	(this.frame);
-		this.btnCreer          = new JButton("Créer ressources");
+		this.btnCreer          = new JButton("Créer Ressource");
 		String[] typeModules   = {"Ressource", "SAE", "Stage", "PPP"};
 		this.ddlstBox          = new JComboBox<String>(typeModules);
 		this.btnModifier       = new JButton("Modifier");

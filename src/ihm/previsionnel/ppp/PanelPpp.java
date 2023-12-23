@@ -89,9 +89,7 @@ public class PanelPpp extends JPanel {
 	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }
 
-	public boolean isValide() {
-		return this.panelPppCentre.isValide();
-	}
+	public boolean isValide() { return this.panelPppCentre.estValide(); }
 
 	public int getSommeAffecte() {
 		return this.panelPppCentre.getSommeAffecte();

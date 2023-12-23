@@ -95,9 +95,7 @@ public class PanelSae extends JPanel {
 	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }
 
-	public boolean estValide() {
-		return this.pCentreSae.estValide();
-	}
+	public boolean estValide() { return this.pCentreSae.estValide(); }
 
 	public int getSommeAffecte() {
 		return this.pCentreSae.getSommeAffecte();

@@ -17,6 +17,7 @@ import java.awt.event.FocusListener;
 import java.util.HashMap;
 import java.awt.Color;
 
+import metier.Module;
 
 public class ProgNatStage extends JPanel implements ActionListener, FocusListener{
 	private PCentreStage panelMere;
@@ -28,13 +29,16 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 	private JCheckBox  checkValid;
 	private int sommeAction;
 
+	private Module module;
+
 	private int sommeHSae = 0;
 	private int sommeHTut = 0;
 
 	private int totalSomme = 0;
 
-	public ProgNatStage(PCentreStage panelMere) {
+	public ProgNatStage(PCentreStage panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
 		this.setLayout(new BorderLayout());
 
 		//Initialisation des composants
@@ -44,6 +48,7 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		this.txtHTut         = new JTextField(2);
 		this.txtSomme        = new JTextField(4);
 		this.checkValid      = new JCheckBox();
+		this.checkValid.setSelected(this.module.isValide());
 
 		this.panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		

@@ -14,6 +14,8 @@ import java.awt.event.FocusListener;
 import java.util.HashMap;
 import java.awt.Color;
 
+import metier.Module;
+
 public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	//Constante coefficient de conversion des heures de CM en heures TD (1h de TD = 1.5h CM)
 	private static final double COEFF_CM_TD = 1.5;
@@ -33,6 +35,8 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	private JTextField txtSomme;
 	private JTextField txtTotalSomme;
 	private JCheckBox checkValid;
+	
+	private Module module;
 
 	private int sommeAction;
 	private int sommeTotSansCoeff;
@@ -49,8 +53,10 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 
 	
 
-	public ProgNat(PanelPppCentre panelMere) {
+	public ProgNat(PanelPppCentre panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
+
 		this.setLayout(new BorderLayout());
 
 		// Initialisation des composants
@@ -67,6 +73,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 		this.txtSomme = new JTextField(4);
 		this.txtTotalSomme = new JTextField(4);
 		this.checkValid = new JCheckBox();
+		this.checkValid.setSelected(this.module.isValide());
 		this.panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 		// Layouts
@@ -313,9 +320,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	public void focusGained(FocusEvent e) {
 	}
 
-	public boolean isValide() {
-		return this.checkValid.isSelected();
-	}
+	public boolean estValide() { return this.checkValid.isSelected(); }
 
 	public int getSommePN() {
 		return this.sommeAction;

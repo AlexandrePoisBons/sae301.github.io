@@ -122,7 +122,7 @@ public class PanelSud extends JPanel implements ActionListener {
 			this.module.setNbGpTP(m.getNbGpTP());
 			this.module.setNbSemaines(m.getNbSemaines());
 			this.module.setNbHeures(m.getNbHeures());
-			this.module.setValide(valide);
+			this.module.setValide(m.isValide());
 			this.panelRessources.update(this.oldModule, this.module);
 		}
 
