@@ -146,42 +146,44 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		if(Integer.parseInt(this.txtHSae.getText()) < 0)
+		if(Integer.parseInt(this.txtHSae.getText()) < 0){
+			System.out.println("< 0");
 			this.txtHSae.setText("0");
+		}
 		if(Integer.parseInt(this.txtHTut.getText()) < 0)
 			this.txtHTut.setText("0");
 		if(e.getSource() == this.txtHSae){
-		try {
-			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-			if(this.txtHSae.getText().equals(Integer.toString(this.sommeHSae)) && this.txtHTut.getText().equals("")){
-				System.out.println("Cette valeur a déjas été prise en compte");
+			try {
+				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+				if(this.txtHSae.getText().equals(Integer.toString(this.sommeHSae)) && this.txtHTut.getText().equals("")){
+					System.out.println("Cette valeur a déjas été prise en compte");
+				}
+				else{
+					if (this.txtHSae.getText().equals("") || Integer.parseInt(this.txtHSae.getText()) < 0)
+						this.txtHSae.setText("0");
+					this.sommeHSae = Integer.parseInt(this.txtHSae.getText()); 
+				}
 			}
-			else{
-				if (this.txtHSae.getText().equals("") || Integer.parseInt(this.txtHSae.getText()) < 0)
-					this.txtHSae.setText("0");
-				this.sommeHSae = Integer.parseInt(this.txtHSae.getText()); 
+			catch(NumberFormatException ex) {
+				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
 			}
-		}
-		catch(NumberFormatException ex) {
-			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
-		}
 		}
 
 		if(e.getSource() == this.txtHTut){
-		try {
-			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-			if(this.txtHTut.getText().equals(Integer.toString(this.sommeHTut)) && this.txtHSae.getText().equals("")){
-				System.out.println("Cette valeur a déjas été prise en compte");
+			try {
+				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+				if(this.txtHTut.getText().equals(Integer.toString(this.sommeHTut)) && this.txtHSae.getText().equals("")){
+					System.out.println("Cette valeur a déjas été prise en compte");
+				}
+				else{
+					if (this.txtHTut.getText().equals("")|| Integer.parseInt(this.txtHTut.getText()) < 0)
+						this.txtHTut.setText("0");
+					this.sommeHTut = Integer.parseInt(this.txtHTut.getText());
+				}
 			}
-			else{
-				if (this.txtHTut.getText().equals("")|| Integer.parseInt(this.txtHTut.getText()) < 0)
-					this.txtHTut.setText("0");
-				this.sommeHTut = Integer.parseInt(this.txtHTut.getText());
+			catch(NumberFormatException ex) {
+				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
 			}
-		}
-		catch(NumberFormatException ex) {
-			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
-		}
 		}
 
 		this.totalSomme = this.sommeHSae + this.sommeHTut;
@@ -189,6 +191,7 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 		this.txtSomme.repaint();
 		this.txtSomme.revalidate();
 	}
+
 	@Override
 	public void focusGained(FocusEvent e) {}
 
