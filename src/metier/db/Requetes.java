@@ -438,7 +438,7 @@ public class Requetes {
 			this.psInsertM.setInt    ( 9,  module.getNbGpTP()       );
 			this.psInsertM.setInt    ( 10, module.getNbSemaines()   );
 			this.psInsertM.setInt    ( 11, module.getNbHeures()     );
-			this.psInsertM.setBoolean(12, module.isValide()         );
+			this.psInsertM.setBoolean( 12, module.isValide()         );
 
 			this.psInsertM.execute();
 

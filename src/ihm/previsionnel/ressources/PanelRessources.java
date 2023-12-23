@@ -95,7 +95,7 @@ public class PanelRessources extends JPanel {
 	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }
 
 	//pour mettre à jour les données dans pCentre
-	public int getNbGpTdMaj(){return this.pRNord.getTxtNbGpTd();}
-	public int getNbGpTpMaj(){return this.pRNord.getTxtNbGpTp();}
+	public int getNbGpTdMaj() { return this.pRNord.getTxtNbGpTd(); }
+	public int getNbGpTpMaj() { return this.pRNord.getTxtNbGpTp(); }
 
 }

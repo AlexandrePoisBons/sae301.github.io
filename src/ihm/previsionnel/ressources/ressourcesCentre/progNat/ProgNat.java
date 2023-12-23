@@ -15,6 +15,8 @@ import java.awt.event.FocusListener;
 import java.util.HashMap;
 import java.awt.Color;
 
+import metier.Module;
+
 public class ProgNat extends JPanel implements FocusListener, ActionListener {
 	// Constante coefficient de conversion des heures de CM en heures TD (1h de TD =
 	// 1.5h CM)
@@ -34,6 +36,8 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 	private JTextField txtOE;
 	private JCheckBox checkValid;
 
+	private Module module;
+
 	private int sommeCM = 0;
 	private int sommeTD = 0;
 	private int sommeTP = 0;
@@ -44,8 +48,10 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 	private int sommeTDAvecCoeff = 0;
 	private int sommeTPAvecCoeff = 0;
 
-	public ProgNat(PRCentre panelMere) {
+	public ProgNat(PRCentre panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
+
 		this.setLayout(new BorderLayout());
 		// Initialisation des composants
 		this.panelPrincipal = new JPanel();
@@ -59,6 +65,7 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 		this.txtTP = new JTextField(4);
 		this.txtOE = new JTextField(4);
 		this.checkValid = new JCheckBox();
+		this.checkValid.setSelected(this.module.isValide());
 		this.panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 		// Rendre certain champ de sasie non modifiable
@@ -252,6 +259,8 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 		this.txtOE.revalidate();
 
 	}
+
+	public boolean estValide() { return this.checkValid.isSelected(); }
 
 	// Méthode inutilisée mais obligatoire
 	@Override
