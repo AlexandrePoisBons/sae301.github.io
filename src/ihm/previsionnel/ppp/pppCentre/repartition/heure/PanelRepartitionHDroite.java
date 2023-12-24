@@ -218,7 +218,10 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.ensTxtFld.get(3)) {
-			if (this.ensTxtFld.get(3).getText().equals(""))
+			if(this.panelMere.estChiffre(this.ensTxtFld.get(3).getText())==false) {
+				this.ensTxtFld.get(3).setText("0");
+			}
+			if (this.ensTxtFld.get(3).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(3).getText()) < 0)
 				this.ensTxtFld.get(3).setText("0");
 			this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
 			//this.setSommeTotal();
@@ -226,7 +229,10 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 			this.repaint();
 			this.revalidate();
 		} else if (e.getSource() == this.ensTxtFld.get(4)) {
-			if (this.ensTxtFld.get(4).getText().equals(""))
+			if(this.panelMere.estChiffre(this.ensTxtFld.get(4).getText())==false) {
+				this.ensTxtFld.get(4).setText("0");
+			}
+			if (this.ensTxtFld.get(4).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(4).getText()) < 0)
 				this.ensTxtFld.get(4).setText("0");
 			this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
 			//this.setSommeTotal();
@@ -239,8 +245,11 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 	@Override
 	public void focusLost(FocusEvent e) {
 		if (e.getSource() == this.ensTxtFld.get(3)) {
+			if(this.panelMere.estChiffre(this.ensTxtFld.get(3).getText())==false) {
+				this.ensTxtFld.get(3).setText("0");
+			}
 			try {
-				if (this.ensTxtFld.get(3).getText().equals(""))
+				if (this.ensTxtFld.get(3).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(3).getText()) < 0)
 					this.ensTxtFld.get(3).setText("0");
 				if (Integer.parseInt(this.ensTxtFld.get(3).getText()) > 0) {
 					this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
@@ -258,8 +267,11 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 			}
 		}
 		if (e.getSource() == this.ensTxtFld.get(4)) {
+			if(this.panelMere.estChiffre(this.ensTxtFld.get(4).getText())==false) {
+				this.ensTxtFld.get(4).setText("0");
+			}
 			try {
-				if (this.ensTxtFld.get(4).getText().equals(""))
+				if (this.ensTxtFld.get(4).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(4).getText()) < 0)
 					this.ensTxtFld.get(4).setText("0");
 				if (Integer.parseInt(this.ensTxtFld.get(4).getText()) > 0) {
 					this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());

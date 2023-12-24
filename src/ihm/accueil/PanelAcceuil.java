@@ -23,6 +23,12 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 	private JButton btnInter;
 	private JButton btnEtats;
 
+	//Insertion du logo
+	private JLabel logo = new JLabel(new ImageIcon("img/Logo.png"));
+
+	//Insertion du logo de l'entreprise
+	private JLabel logoEntreprise = new JLabel(new ImageIcon("img/LogoEntreprise.png"));
+
 	//Constructeur
 	public PanelAcceuil(FrameAccueil frame){
 		//Synchronisation des pages
@@ -40,9 +46,11 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		int xSize = (int)(largeur*0.3);
-		int ySize = (int)(hauteur*0.3);
+		int ySize = (int)(hauteur*0.44);
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
+
+
 		//Composants
 		panelCentre   = new JPanel();	
 		panelHaut     = new JPanel();
@@ -56,7 +64,30 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 
 		panelCentre.setLayout(new GridLayout(4, 1, 10, 5));
 
+				//Mettre la  fenetre en blanc
+		this.setBackground(java.awt.Color.WHITE);
+		panelCentre.setBackground(java.awt.Color.WHITE);
+		panelHaut.setBackground(java.awt.Color.WHITE);
+		panelBas.setBackground(java.awt.Color.WHITE);
+		panelGauche.setBackground(java.awt.Color.WHITE);
+		panelDroite.setBackground(java.awt.Color.WHITE);
+
+
+		//Reduire la longueur des boutons (marche pas mais les rend tous a la meme taille donc on garde)
+		this.btnParam.setPreferredSize(new java.awt.Dimension(150, 30));
+		this.btnPrevi.setPreferredSize(new java.awt.Dimension(150, 30));
+		this.btnInter.setPreferredSize(new java.awt.Dimension(150, 30));
+		this.btnEtats.setPreferredSize(new java.awt.Dimension(150, 30));
+
+		//Ajout de "Developped by" en bas de la fenetre et du logo
+		//mettre le petit r a cote de Serlogic & Co est un symbole de marque deposee
+		panelBas.add(new JLabel("Developped by :    Serlogic & Co \u00AE"));
+		panelBas.add(this.logoEntreprise);
+		panelBas.add(new JLabel("   Version 1.0"));
+		
+
 		//Ajout des composants
+		panelHaut.add(this.logo);
 		panelCentre.add(this.btnParam);
 		panelCentre.add(this.btnPrevi);
 		panelCentre.add(this.btnInter);

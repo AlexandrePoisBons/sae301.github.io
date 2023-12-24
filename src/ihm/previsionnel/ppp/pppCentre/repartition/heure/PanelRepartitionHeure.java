@@ -26,6 +26,15 @@ public class PanelRepartitionHeure extends JPanel{
 		this.add(this.panelRepartitionHGauche);
 		this.add(this.panelRepartitionHDroite);
 	}
+	public boolean estChiffre(String texte) {
+        // Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
+        for (char c : texte.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 	public HashMap<String, Integer> getNbSemaines() {
 		return this.panelRepartitionHGauche.getNbSemaines();

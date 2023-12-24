@@ -163,6 +163,15 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 
 		return map;
 	}
+	private boolean estChiffre(String texte) {
+        // Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
+        for (char c : texte.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -182,11 +191,13 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
+				if(this.estChiffre(this.txtCMWrite.getText()) == false)
+					this.txtCMWrite.setText("0");
 				if (this.txtCMWrite.getText().equals(Integer.toString(this.sommeCM))
 						&& (this.txtTPWrite.getText().equals("") && this.txtTDWrite.getText().equals(""))) {
 					System.out.println("Cette valeur a déjas été prise en compte");
 				} else {
-					if (this.txtCMWrite.getText().equals(""))
+					if (this.txtCMWrite.getText().equals("") ||Integer.parseInt(this.txtCMWrite.getText()) < 0 )
 						this.txtCMWrite.setText("0");
 					this.sommeCM = Integer.parseInt(this.txtCMWrite.getText());
 					// calcul du txtField CM non modifiable (txtField modifiable * coeffCM_TD)
@@ -204,11 +215,13 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
+				if(this.estChiffre(this.txtTDWrite.getText()) == false)
+					this.txtTDWrite.setText("0");
 				if (this.txtTDWrite.getText().equals(Integer.toString(this.sommeTD))
 						&& (this.txtTPWrite.getText().equals("") && this.txtCMWrite.getText().equals(""))) {
 					System.out.println("Cette valeur a déjas été prise en compte");
 				} else {
-					if (this.txtTDWrite.getText().equals(""))
+					if (this.txtTDWrite.getText().equals("") || Integer.parseInt(this.txtTDWrite.getText()) < 0)
 						this.txtTDWrite.setText("0");
 					this.sommeTD = Integer.parseInt(this.txtTDWrite.getText());
 					// calcul du txtField TD non modifiable (txtField modifiable * nbGpTD de
@@ -228,11 +241,13 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
+				if(this.estChiffre(this.txtTPWrite.getText()) == false)
+					this.txtTPWrite.setText("0");
 				if (this.txtTPWrite.getText().equals(Integer.toString(this.sommeTP))
 						&& (this.txtCMWrite.getText().equals("") && this.txtTDWrite.getText().equals(""))) {
 					System.out.println("Cette valeur a déjas été prise en compte");
 				} else {
-					if (this.txtTPWrite.getText().equals(""))
+					if (this.txtTPWrite.getText().equals("") || Integer.parseInt(this.txtTPWrite.getText()) < 0	)
 						this.txtTPWrite.setText("0");
 					this.sommeTP = Integer.parseInt(this.txtTPWrite.getText());
 					// calcul du txtField TP non modifiable (txtField modifiable * nbGpTP de

@@ -137,11 +137,14 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
+				if(this.panelMere.estChiffre(this.ensJTextField.get(0).getText())==false) {
+					this.ensJTextField.get(0).setText("0");
+				}
 				if (this.ensJTextField.get(0).getText().equals(Integer.toString(this.sommeHSae))
 						&& this.ensJTextField.get(1).getText().equals("")){
 					System.out.println("Cette valeur a déjas été prise en compte");
 				} else {
-					if (this.ensJTextField.get(0).getText().equals(""))
+					if (this.ensJTextField.get(0).getText().equals("") || Integer.parseInt(this.ensJTextField.get(0).getText()) < 0)
 						this.ensJTextField.get(0).setText("0");
 					this.sommeHSae = Integer.parseInt(this.ensJTextField.get(0).getText());
 				}
@@ -154,11 +157,14 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
+				if(this.panelMere.estChiffre(this.ensJTextField.get(1).getText())==false) {
+					this.ensJTextField.get(1).setText("0");
+				}
 				if (this.ensJTextField.get(1).getText().equals(Integer.toString(this.sommeHTut))
 						&& this.ensJTextField.get(0).getText().equals("")) {
 					System.out.println("Cette valeur a déjas été prise en compte");
 				} else {
-					if (this.ensJTextField.get(1).getText().equals(""))
+					if (this.ensJTextField.get(1).getText().equals("")|| Integer.parseInt(this.ensJTextField.get(1).getText()) < 0)
 						this.ensJTextField.get(1).setText("0");
 					this.sommeHTut = Integer.parseInt(this.ensJTextField.get(1).getText());
 				}

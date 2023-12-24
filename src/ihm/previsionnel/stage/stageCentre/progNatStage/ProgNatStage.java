@@ -126,6 +126,16 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		return map;
 	}
 
+	private boolean estChiffre(String texte) {
+        // Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
+        for (char c : texte.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -147,11 +157,13 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		if(e.getSource() == this.txtHSae){
 		try {
 			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.estChiffre(this.txtHSae.getText()) == false)
+					this.txtHSae.setText("0");
 			if(this.txtHSae.getText().equals(Integer.toString(this.sommeHSae)) && this.txtHTut.getText().equals("")){
 				System.out.println("Cette valeur a déjas été prise en compte");
 			}
 			else{
-				if (this.txtHSae.getText().equals(""))
+				if (this.txtHSae.getText().equals("") || Integer.parseInt(this.txtHSae.getText()) < 0)
 					this.txtHSae.setText("0");
 				this.sommeHSae = Integer.parseInt(this.txtHSae.getText()); 
 			}
@@ -164,11 +176,13 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		if(e.getSource() == this.txtHTut){
 		try {
 			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+			if(this.estChiffre(this.txtHTut.getText()) == false)
+				this.txtHTut.setText("0");
 			if(this.txtHTut.getText().equals(Integer.toString(this.sommeHTut)) && this.txtHSae.getText().equals("")){
 				System.out.println("Cette valeur a déjas été prise en compte");
 			}
 			else{
-				if (this.txtHTut.getText().equals(""))
+				if (this.txtHTut.getText().equals("") || Integer.parseInt(this.txtHTut.getText()) < 0)
 					this.txtHTut.setText("0");
 				this.sommeHTut = Integer.parseInt(this.txtHTut.getText());
 			}

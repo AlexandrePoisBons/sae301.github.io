@@ -184,7 +184,10 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 	@Override
 	public void actionPerformed(java.awt.event.ActionEvent e) {
 		if (e.getSource() == this.ensTxtFld.get(3)) {
-			if (this.ensTxtFld.get(3).getText().equals(""))
+			if(this.panelMere.estChiffre(this.ensTxtFld.get(3).getText())==false) {
+				this.ensTxtFld.get(3).setText("0");
+			}
+			if (this.ensTxtFld.get(3).getText().equals("")|| Integer.parseInt(this.ensTxtFld.get(3).getText()) < 0)
 				this.ensTxtFld.get(3).setText("0");
 			this.val = Integer.parseInt(this.ensTxtFld.get(3).getText());
 			//this.setSommeTotal();
@@ -199,8 +202,11 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 	@Override
 	public void focusLost(java.awt.event.FocusEvent e) {
 		if (e.getSource() == this.ensTxtFld.get(3)) {
+			if(this.panelMere.estChiffre(this.ensTxtFld.get(3).getText())==false) {
+				this.ensTxtFld.get(3).setText("0");
+			}
 			try {
-				if (this.ensTxtFld.get(3).getText().equals(""))
+				if (this.ensTxtFld.get(3).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(3).getText()) < 0)
 					this.ensTxtFld.get(3).setText("0");
 				if (Integer.parseInt(this.ensTxtFld.get(3).getText()) > 0) {
 					this.val = Integer.parseInt(this.ensTxtFld.get(3).getText());

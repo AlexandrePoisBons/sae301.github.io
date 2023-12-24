@@ -146,15 +146,18 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 	public void focusLost(FocusEvent e) {
 		try {
 			// Addition des heures saisies dans les champs
-			int somme = 0; // avant: -1
+			int somme = -1; // avant: 0
 			if (e.getSource() == this.ensJTextField.get(0)) {
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
+					if(this.panelMere.estChiffre(this.ensJTextField.get(0).getText())==false) {
+						this.ensJTextField.get(0).setText("0");
+					}
 					if (this.ensJTextField.get(0).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(1).getText().equals("")) {
 						System.out.println("Cette valeur a déjas été prise en compte");
 					} else {
-						if (this.ensJTextField.get(0).getText().equals(""))
+						if (this.ensJTextField.get(0).getText().equals("")|| Integer.parseInt(this.ensJTextField.get(0).getText())<0)
 							this.ensJTextField.get(0).setText("0");
 						if (this.ensJTextField.get(1).getText().equals("0")||this.ensJTextField.get(1).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(0).getText());
@@ -175,11 +178,14 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 				try {
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
+					if(this.panelMere.estChiffre(this.ensJTextField.get(1).getText())==false) {
+						this.ensJTextField.get(1).setText("0");
+					}
 					if (this.ensJTextField.get(1).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(0).getText().equals("")) {
 						System.out.println("Cette valeur a déjas été prise en compte");
 					} else{
-						if (this.ensJTextField.get(1).getText().equals(""))
+						if (this.ensJTextField.get(1).getText().equals("") || Integer.parseInt(this.ensJTextField.get(1).getText())<0)
 							this.ensJTextField.get(1).setText("0");
 						if (this.ensJTextField.get(0).getText().equals("0")||this.ensJTextField.get(0).getText().equals("")){	
 							somme += Integer.parseInt(this.ensJTextField.get(1).getText());
@@ -211,11 +217,14 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 				try {
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
+					if(this.panelMere.estChiffre(this.ensJTextField.get(2).getText())==false) {
+						this.ensJTextField.get(2).setText("0");
+					}
 					if (this.ensJTextField.get(2).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(3).getText().equals("")) {
 						System.out.println("Cette valeur a déjas été prise en compte");
 					} else {
-						if (this.ensJTextField.get(2).getText().equals(""))
+						if (this.ensJTextField.get(2).getText().equals("") || Integer.parseInt(this.ensJTextField.get(2).getText())<0)
 							this.ensJTextField.get(2).setText("0");
 						if (this.ensJTextField.get(3).getText().equals("0")||this.ensJTextField.get(3).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(2).getText());
@@ -240,11 +249,14 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 				try {
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
+					if(this.panelMere.estChiffre(this.ensJTextField.get(3).getText())==false) {
+						this.ensJTextField.get(3).setText("0");
+					}
 					if (this.ensJTextField.get(3).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(2).getText().equals("")) {
 						System.out.println("Cette valeur a déjas été prise en compte");
 					} else {
-						if (this.ensJTextField.get(3).getText().equals(""))
+						if (this.ensJTextField.get(3).getText().equals("") || Integer.parseInt(this.ensJTextField.get(3).getText())<0)
 							this.ensJTextField.get(3).setText("0");
 						if (this.ensJTextField.get(2).getText().equals("0")||this.ensJTextField.get(2).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(3).getText());
@@ -276,11 +288,14 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 				try {
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
+					if(this.panelMere.estChiffre(this.ensJTextField.get(4).getText())==false) {
+						this.ensJTextField.get(2).setText("0");
+					}
 					if (this.ensJTextField.get(4).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(5).getText().equals("")) {
 						System.out.println("Cette valeur a déjas été prise en compte");
 					} else {
-						if (this.ensJTextField.get(4).getText().equals(""))
+						if (this.ensJTextField.get(4).getText().equals("") || Integer.parseInt(this.ensJTextField.get(4).getText())<0)
 							this.ensJTextField.get(4).setText("0");
 						if (this.ensJTextField.get(5).getText().equals("0")||this.ensJTextField.get(5).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(4).getText());
@@ -305,11 +320,14 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 				try {
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
+					if(this.panelMere.estChiffre(this.ensJTextField.get(5).getText())==false) {
+						this.ensJTextField.get(5).setText("0");
+					}
 					if (this.ensJTextField.get(5).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(4).getText().equals("")) {
 						System.out.println("Cette valeur a déjas été prise en compte");
 					} else {
-						if (this.ensJTextField.get(5).getText().equals(""))
+						if (this.ensJTextField.get(5).getText().equals("") || Integer.parseInt(this.ensJTextField.get(5).getText())<0)
 							this.ensJTextField.get(5).setText("0");
 						if (this.ensJTextField.get(4).getText().equals("0")||this.ensJTextField.get(4).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(5).getText());
