@@ -18,6 +18,6 @@ public class Controleur {
 		this.ihm    = new ControleurIHM(this);
 	}
 
-	public ControleurMetier metier() { return this.metier; }
+	public ControleurMetier metier() { return this.metier;}
 
 }
