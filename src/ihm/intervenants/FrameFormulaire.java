@@ -40,7 +40,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 
 		this.panelFormulaire.setLayout(new GridBagLayout());
 
-		GridBagConstraints gbc 	= new GridBagConstraints();		
+		GridBagConstraints gbc 	= new GridBagConstraints();
 		gbc.anchor = GridBagConstraints.WEST;
 		
 		this.remplirListe(this.panelMere.getStatuts());
@@ -102,20 +102,19 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		this.add(this.panelFormulaire);
 
 		this.setVisible(true);
-	}	
+	}
 
-	public void actionPerformed(ActionEvent e){
+	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnValider){
-			this.ajouterLigne();
+			this.valider();
 			this.dispose();
 		}
 		if(e.getSource() == this.btnAnnuler){
-			
 			this.dispose();
 		}
 	}
 
-	public void remplirListe(List<Statut> statuts){
+	private void remplirListe(List<Statut> statuts){
 		String[] tabStatut = new String[statuts.size()];
 		for(int i=0;i<statuts.size();i++){
 			tabStatut[i] = statuts.get(i).getNomStatut();
@@ -123,14 +122,14 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		this.ddlstIntervenant = new JComboBox<String>(tabStatut);
 	}
 
-	public void ajouterLigne() {
+	public void valider() {
 		try {
-			this.panelMere.ajouterLigne(this.ddlstIntervenant.getSelectedItem().toString(),
-										this.txtNom.getText(),
-										this.txtPrenom.getText(),
-										Integer.parseInt(this.txtHServ.getText()),
-										Integer.parseInt(this.txtHMax.getText()),
-										Float.parseFloat(this.txtCoefTP.getText()));
+			// this.panelMere.ajouterLigne(this.ddlstIntervenant.getSelectedItem().toString(),
+			// 							this.txtNom.getText(),
+			// 							this.txtPrenom.getText(),
+			// 							Integer.parseInt(this.txtHServ.getText()),
+			// 							Integer.parseInt(this.txtHMax.getText()),
+			// 							Float.parseFloat(this.txtCoefTP.getText()));
 			//Intervenant int = Intervenant.creerIntervenant(this.txtPrenom.getText(), this.txtNom.getText(), null, )
 			this.panelMere.revalidate();
 			this.panelMere.repaint();
@@ -140,4 +139,5 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 			this.revalidate();
 		}
 	}
+
 }

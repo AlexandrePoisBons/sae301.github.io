@@ -36,11 +36,12 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	private List<Intervenant> intervenants;
 
-	public PanelInter(FrameAccueil frAcceuil) {
+	public PanelInter( FrameAccueil frAcceuil ) {
 		// Synchronisation des pages
 		this.frame = frAcceuil;
 
-		this.intervenants = new ArrayList<>();
+		this.intervenants = this.frame.getControleur().getCtrl().metier().getIntervenants();
+
 
 		// Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()
@@ -119,22 +120,20 @@ public class PanelInter extends JPanel implements ActionListener {
 	}
 
 	public void init() {
-		List<Intervenant> list = this.frame.getControleur().getCtrl().metier().getIntervenants();
-		this.intervenants = list;
 		String categorie, nom, prenom;
-		Integer nbHeures, nbHeuresMax;
+		Float nbHeures, nbHeuresMax;
 		Float coeff;
 		Float s1, s2, s3, s4, s5, s6;
 		Float totPair, totImpair, tot;
 
 		Object[] vals = new Object[15];
-		for (Intervenant intervenant : list) {
+		for (Intervenant intervenant : this.intervenants) {
 			HashMap<String, Float> map = intervenant.getNbHeuresParSemestre();
 			categorie = intervenant.getStatut().getNomStatut();
 			nom = intervenant.getNom();
 			prenom = intervenant.getPrenom();
-			nbHeures = (int) intervenant.getNbHeures();
-			nbHeuresMax = (int) intervenant.getNbEqTD();
+			nbHeures = intervenant.getNbHeures();
+			nbHeuresMax = intervenant.getNbEqTD();
 			coeff = intervenant.getStatut().getCoeffTP();
 			s1 = map.get("S1");
 			s2 = map.get("S2");
@@ -241,29 +240,13 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	// Méthode permettant d'ajouter les nouveaux intervenants à la bd 
 
-	// Ne fonctionne pas !!!!!
 	private void enregistrer() {
-		int i=0;
-		System.out.println("dono "+this.intervenants.size());
-		for(Intervenant intervenant: this.intervenants) {
-			System.out.println("inter "+i);
-			for (Statut statut : this.frame.getControleur().getCtrl().metier().getStatuts()) {
-				if(statut.getNomStatut().equals(this.dtm.getValueAt(i, 0))) {
-					System.out.println("statut");
-					if ( !this.frame.getControleur().getCtrl().metier().getIntervenants().contains(intervenant)) {
-						System.out.println("contient pas");
-						Intervenant inter = Intervenant.creerIntervenant(""+this.dtm.getValueAt(i, 1), ""+this.dtm.getValueAt(i, 2), statut, Float.parseFloat(this.dtm.getValueAt(i, 5).toString()));
-						this.frame.getControleur().getCtrl().metier().ajouterIntervenant(inter);
-					}
-				}
-			}
-			i++;
-		}
+
+
+
+
 	}
 
-	public List<Statut> getStatuts() {
-		return this.frame.getControleur().getCtrl().metier().getStatuts();
-	}
 
 	public void ajouterLigne(Object[] values) {
 		this.dtm.addRow(values);
@@ -271,53 +254,11 @@ public class PanelInter extends JPanel implements ActionListener {
 		this.revalidate();
 	}
 
-	public void ajouterIntervenant(Intervenant intervenant){
-		this.intervenants.add(intervenant);
-	}
+	public List<Statut> getStatuts() { return this.frame.getControleur().getCtrl().metier().getStatuts(); }
+
 
 	public void ajouterLigne(String categorie, String nom, String prenom, Integer hServ, Integer hMax, Float coeff) {
-		List<Intervenant> list = this.frame.getControleur().getCtrl().metier().getIntervenants();
-		Float s1 = (float) 0.0;
-		Float s2 = (float) 0.0;
-		Float s3 = (float) 0.0;
-		Float s4 = (float) 0.0;
-		Float s5 = (float) 0.0;
-		Float s6 = (float) 0.0;
-		Float totPair = (float) 0.0;
-		Float totImpair = (float) 0.0;
-		Float tot = (float) 0.0;
-		
-		Object[] vals = new Object[15];
-		for (Intervenant intervenant : list) {
-			if (intervenant.getStatut().getNomStatut() == nom && intervenant.getPrenom() == prenom) {
-				// calculer les semestres
-				s1 = intervenant.getNbHeuresParSemestre().get("S1");
-				s2 = intervenant.getNbHeuresParSemestre().get("S2");
-				s3 = intervenant.getNbHeuresParSemestre().get("S3");
-				s4 = intervenant.getNbHeuresParSemestre().get("S4");
-				s5 = intervenant.getNbHeuresParSemestre().get("S5");
-				s6 = intervenant.getNbHeuresParSemestre().get("S6");
-				totPair = s2 + s4 + s6;
-				totImpair = s1 + s3 + s5;
-				tot = totPair + totImpair;
-			}
-		}
-		vals[0] = categorie; // categorie
-		vals[1] = nom; // nom
-		vals[2] = prenom; // prenom
-		vals[3] = hServ; // heures de service
-		vals[4] = hMax; // heures max
-		vals[5] = coeff; // coeff TP
-		vals[6] = s1; // S1
-		vals[7] = s3; // S3
-		vals[8] = s5; // S5
-		vals[9] = totImpair; // sTot : total des semestes impaires
-		vals[10] = s2; // S2
-		vals[11] = s4; // S4
-		vals[12] = s6; // S6
-		vals[13] = totPair; // sTot : total des semestres pairs
-		vals[14] = tot; // Total des semestres
-		this.ajouterLigne(vals);
-	
+
 	}
+
 }

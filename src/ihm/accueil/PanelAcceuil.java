@@ -81,10 +81,9 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 
 		//Ajout de "Developped by" en bas de la fenetre et du logo
 		//mettre le petit r a cote de Serlogic & Co est un symbole de marque deposee
-		panelBas.add(new JLabel("Developped by :    Serlogic & Co \u00AE"));
+		panelBas.add(new JLabel("Developped by :    Serlogic \u00AE"));
 		panelBas.add(this.logoEntreprise);
 		panelBas.add(new JLabel("   Version 1.0"));
-		
 
 		//Ajout des composants
 		panelHaut.add(this.logo);
@@ -108,10 +107,11 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 
 
 	//Permets de changer de panel en fonction du bouton cliqué 
-	public void actionPerformed(ActionEvent e){
-		if(e.getSource() == this.btnParam){this.frame.changerPanel(new PanelParam(this.frame)	);}
-		if(e.getSource() == this.btnPrevi){this.frame.changerPanel(new PanelPrevi(this.frame)	);}
-		if(e.getSource() == this.btnInter){this.frame.changerPanel(new PanelInter(this.frame)   );}
-		if(e.getSource() == this.btnEtats){this.frame.changerPanel(new PanelEtats(this.frame)	);}
+	public void actionPerformed(ActionEvent e) {
+		if ( e.getSource() == this.btnPrevi ) { this.frame.changerPanel( new PanelPrevi(this.frame) ); }
+		if ( e.getSource() == this.btnParam ) { this.frame.changerPanel( new PanelParam(this.frame) ); }
+		if ( e.getSource() == this.btnInter ) { this.frame.changerPanel( new PanelInter(this.frame) ); }
+		if ( e.getSource() == this.btnEtats ) { this.frame.changerPanel( new PanelEtats(this.frame) ); }
 	}
+
 }
