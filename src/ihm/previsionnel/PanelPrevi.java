@@ -22,13 +22,13 @@ import javax.swing.*;
 
 public class PanelPrevi extends JPanel implements ActionListener {
 	//Attributs
-	private FrameAccueil 		frame;
-	private PanelCenterPrevi 	panelCenterPrevi;
-	private JButton 			btnCreer;
-	private JComboBox<String>   ddlstBox;
-	private JButton 			btnModifier;
-	private JButton 			btnSupprimer;
-	private JButton             btnRetour;
+	private FrameAccueil      frame;
+	private PanelCenterPrevi  panelCenterPrevi;
+	private JButton           btnCreer;
+	private JComboBox<String> ddlstBox;
+	private JButton           btnModifier;
+	private JButton           btnSupprimer;
+	private JButton           btnRetour;
 
 	//Constructeur
 	public PanelPrevi(FrameAccueil frAccueil) {

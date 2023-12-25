@@ -130,7 +130,6 @@ public class PanelSemestre extends JPanel {
 
 	public Module getCurrentModule() {
 		if(this.tabModule.getSelectedRow() != -1) {
-			System.out.println(this.modules.size()+" COUCOU TOI COMMENT NIKTM"+this.modules.get(this.tabModule.getSelectedRow()).getHeures());
 			return this.modules.get(this.tabModule.getSelectedRow());
 		}
 		return null;
