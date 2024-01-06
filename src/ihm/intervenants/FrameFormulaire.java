@@ -115,7 +115,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		}
 	}
 
-	private void remplirListe(List<Statut> statuts){
+	private void remplirListe(List<Statut> statuts) {
 		this.statuts = statuts;
 		String[] tabStatut = new String[statuts.size()];
 		for(int i=0;i<statuts.size();i++){
