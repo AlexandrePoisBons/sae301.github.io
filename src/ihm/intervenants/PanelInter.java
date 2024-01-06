@@ -12,6 +12,7 @@ import javax.swing.table.TableColumn;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +46,7 @@ public class PanelInter extends JPanel implements ActionListener {
 
 		// Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()
-				- (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.05);
+		            - (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		int xSize = (int) (largeur * 0.70);
 		int ySize = (int) (hauteur * 0.5);
@@ -166,8 +167,12 @@ public class PanelInter extends JPanel implements ActionListener {
 	}
 
 	public void supprimer() {
-		this.intervenants.remove(this.tableauInter.getSelectedRow());
-		this.dtm.removeRow(this.tableauInter.getSelectedRow());
+		int lig = this.tableauInter.getSelectedRow();
+		this.dtm.removeRow(lig);
+		try{
+			this.frame.getControleur().getCtrl().metier().supprimerIntervenant(this.intervenants.get(lig));
+		} catch ( SQLException e) { this.lblErreur.setText("Impossible de supprimer cet Intervenant"); }
+		this.intervenants.remove(lig);
 		this.lblErreur.setText("");
 		this.repaint();
 		this.revalidate();
@@ -194,56 +199,37 @@ public class PanelInter extends JPanel implements ActionListener {
 		}
 
 		if (e.getSource() == this.btnEnregistrer) {
-			boolean bOk = true;
-			for (int i = 0; i < this.dtm.getRowCount() && bOk; i++) {
-				for (int j = 0; j < this.dtm.getColumnCount() && bOk; j++) {
-					if (j < 3) {
-						if (!(this.dtm.getValueAt(i, j) instanceof String)) {
-							bOk = false;
-							this.lblErreur.setText("Erreur, veuillez vérifier que le type de données est bien un STRING");
-							this.repaint();
-							this.revalidate();
-						}
-					}
-
-					if (j == 3 || j == 4) {
-						if (!(this.dtm.getValueAt(i, j) instanceof Integer)) {
-							bOk = false;
-							this.lblErreur.setText("Erreur, veuillez vérifier que le type de données est bien un INTEGER");
-							this.repaint();
-							this.revalidate();
-						}
-					}
-
-					if (j > 4) {
-						if (!(this.dtm.getValueAt(i, j) instanceof Float)) {
-							System.out.println(this.dtm.getValueAt(i, j));
-							bOk = false;
-							this.lblErreur.setText("Erreur, veuillez vérifier que le type de données est bien un FLOAT");
-							this.repaint();
-							this.revalidate();
-						}
-					}
-				}
-			}
-
-			if(bOk) {
-				this.enregistrer();
-				this.frame.changerPanel(new PanelAcceuil(this.frame));
-			}
+			this.enregistrer();
+			this.frame.changerPanel(new PanelAcceuil(this.frame));
 		}
 
 		if (e.getSource() == this.btnAnnuler) {
 			this.frame.changerPanel(new PanelAcceuil(frame));
 		}
+
 	}
 
 	// Méthode permettant d'ajouter les nouveaux intervenants à la bd 
 
 	private void enregistrer() {
 
+		int i = this.intervenants.size();
+		System.out.println("dono: "+i);
 
+		Intervenant tmp;
+		for (int j = 0; j < i; j++) {
+			System.out.println("j:"+j);
+			tmp = this.intervenants.get(j);
+			if ( tmp.getIdIntervenant() == -1 ) {
+				Intervenant inter = Intervenant.creerIntervenant(tmp.getPrenom(), tmp.getNom(), tmp.getStatut(), tmp.getNbEqTD());
+				System.out.println("remove: "+this.intervenants.remove(tmp));
+				//this.intervenants.add(inter);
+				System.out.println("ajout: "+this.frame.getControleur().getCtrl().metier().ajouterIntervenant(inter));
+			}
+		}
 
+		System.out.println("enregistré = "+this.intervenants.size());
+		System.out.println(this.intervenants);
 
 	}
 
@@ -256,9 +242,22 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	public List<Statut> getStatuts() { return this.frame.getControleur().getCtrl().metier().getStatuts(); }
 
+	public void ajouterIntervenant( Intervenant intervenant ) {
+		this.intervenants.add(intervenant);
+		System.out.println("add intervenant");
+		System.out.println(this.intervenants);
+	}
 
-	public void ajouterLigne(String categorie, String nom, String prenom, Integer hServ, Integer hMax, Float coeff) {
-
+	public void ajouterLigne(String statut, String nom, String prenom, Integer hServ, Integer hMax, Float coeff) {
+		Object[] objs = new Object[15];
+		objs[0] = statut;
+		objs[1] = nom;
+		objs[2] = prenom;
+		objs[3] = Float.parseFloat(""+hServ);
+		objs[4] = Float.parseFloat(""+hMax);
+		objs[5] = coeff;
+		objs[6] = 0.0f; objs[7] = 0.0f; objs[8] = 0.0f; objs[9] = 0.0f; objs[10] = 0.0f; objs[11] = 0.0f; objs[12] = 0.0f; objs[13] = 0.0f; objs[14] = 0.0f;
+		this.ajouterLigne(objs);
 	}
 
 }

@@ -16,8 +16,8 @@ import metier.Statut;
 public class FrameFormulaire extends JFrame implements ActionListener{
 	private PanelInter              panelMere;
 	private JPanel                  panelFormulaire;
-	private JComboBox<String>       ddlstIntervenant;
-	private JTextField              txtNom; 
+	private JComboBox<String>       ddlstStatut;
+	private JTextField              txtNom;
 	private JTextField              txtPrenom;
 	private JTextField              txtHServ;
 	private JTextField              txtHMax;
@@ -25,8 +25,9 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	private JButton                 btnValider;
 	private JButton                 btnAnnuler;
 	private JLabel                  lblErreur;
+	private List<Statut>            statuts;
 
-	public FrameFormulaire(PanelInter panelMere){
+	public FrameFormulaire(PanelInter panelMere) {
 		this.panelMere       = panelMere;
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
@@ -72,7 +73,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		this.panelFormulaire.add(this.ddlstIntervenant, gbc);
+		this.panelFormulaire.add(this.ddlstStatut, gbc);
 		gbc.gridy = 1;
 		this.panelFormulaire.add(this.txtNom, gbc);
 		gbc.gridy = 2;
@@ -115,22 +116,31 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	}
 
 	private void remplirListe(List<Statut> statuts){
+		this.statuts = statuts;
 		String[] tabStatut = new String[statuts.size()];
 		for(int i=0;i<statuts.size();i++){
 			tabStatut[i] = statuts.get(i).getNomStatut();
 		}
-		this.ddlstIntervenant = new JComboBox<String>(tabStatut);
+		this.ddlstStatut = new JComboBox<String>(tabStatut);
 	}
 
 	public void valider() {
 		try {
-			// this.panelMere.ajouterLigne(this.ddlstIntervenant.getSelectedItem().toString(),
-			// 							this.txtNom.getText(),
-			// 							this.txtPrenom.getText(),
-			// 							Integer.parseInt(this.txtHServ.getText()),
-			// 							Integer.parseInt(this.txtHMax.getText()),
-			// 							Float.parseFloat(this.txtCoefTP.getText()));
-			//Intervenant int = Intervenant.creerIntervenant(this.txtPrenom.getText(), this.txtNom.getText(), null, )
+			String stt = this.ddlstStatut.getSelectedItem().toString();
+			Statut statut = null;
+			for (Statut s : this.statuts) {
+				if (s.getNomStatut().equals(stt))
+					statut = s;
+			}
+			Intervenant inter = Intervenant.tempIntervenant(this.txtPrenom.getText(), this.txtNom.getText(), statut, 0);
+			this.panelMere.ajouterLigne( stt,
+			                             this.txtNom.getText(),
+			                             this.txtPrenom.getText(),
+			                             Integer.parseInt(this.txtHServ.getText()),
+			                             Integer.parseInt(this.txtHMax.getText()),
+			                             Float.parseFloat(this.txtCoefTP.getText()) );
+
+			this.panelMere.ajouterIntervenant(inter);
 			this.panelMere.revalidate();
 			this.panelMere.repaint();
 		} catch (Exception err) {

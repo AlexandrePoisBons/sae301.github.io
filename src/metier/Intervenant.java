@@ -41,6 +41,12 @@ public class Intervenant implements Comparable<Intervenant> {
 		return new Intervenant( prenom, nom, statut, nbEqTD);
 	}
 
+	public static Intervenant tempIntervenant( String prenom, String nom, Statut statut, float nbEqTD ) {
+		if ( prenom == null || nom == null || statut == null || nbEqTD < 0 )
+			return null;
+		return new Intervenant(-1, prenom, nom, statut, nbEqTD);
+	}
+
 	public static Intervenant initIntervenant( int idIntervenant, String prenom, String nom, Statut statut, float nbEqTD ) {
 		if ( idIntervenant < 0 || prenom == null || nom == null || statut == null || nbEqTD < 0  )
 			return null;
@@ -57,7 +63,7 @@ public class Intervenant implements Comparable<Intervenant> {
 	 * @return       L'objet Intervenant précédement validé via la factory
 	 */
 	private Intervenant( String prenom, String nom, Statut statut, float nbEqTD ) {
-		this.idIntervenant = Intervenant.nbIntervenant++;
+		this.idIntervenant = ++Intervenant.nbIntervenant;
 		this.prenom        = prenom;
 		this.nom           = nom;
 		this.statut        = statut;
