@@ -79,9 +79,9 @@ public class PanelPrevi extends JPanel implements ActionListener {
 
 
 	public String getSemestre()   { return "S"+this.panelCenterPrevi.getCurrentSemestre().getIdSemestre();   }
-	public int getNbEtd()      { return this.panelCenterPrevi.getNbEtd();      }
-	public int getNbGpTd()     { return this.panelCenterPrevi.getNbGpTd();     }
-	public int getNbGpTp()     { return this.panelCenterPrevi.getNbGpTp();     }
+	public int    getNbEtd()      { return this.panelCenterPrevi.getNbEtd();      }
+	public int    getNbGpTd()     { return this.panelCenterPrevi.getNbGpTd();     }
+	public int    getNbGpTp()     { return this.panelCenterPrevi.getNbGpTp();     }
 	public int    getNbSemaines() { return this.panelCenterPrevi.getNbSemaines(); }
 	public void   ajouterModule(Module module) { this.panelCenterPrevi.ajouterModule(module); }
 	public void   updateModule( Module oldModule, Module newModule) { this.panelCenterPrevi.updateModule(oldModule, newModule); }
@@ -89,34 +89,38 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	//Permets de faire une action en fonction du bouton cliqué
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if ( e.getSource() == this.btnCreer ) {
-			Module module = Module.creerModuleVide();
-			switch (this.ddlstBox.getSelectedItem().toString()) {
-				case "Ressource" -> this.frame.changerPanel( new PanelRessources (this.frame, this, module) );
-				case "SAE"       -> this.frame.changerPanel( new PanelSae        (this.frame, this, module) );
-				case "Stage"     -> this.frame.changerPanel( new PanelStage      (this.frame, this, module) );
-				case "PPP"       -> this.frame.changerPanel( new PanelPpp        (this.frame, this, module) );
-				default -> System.err.println("TypeModule inexistant");
-			}
-		}
-
-		if (e.getSource() == this.ddlstBox) {
-			this.btnCreer.setText("Créer " + this.ddlstBox.getSelectedItem().toString());
-		}
-
-		if (e.getSource() == this.btnModifier) {
-			Module m = this.panelCenterPrevi.getCurrentSemestre().getCurrentModule();
-			if (m != null) {
-				switch(this.panelCenterPrevi.getCurrentSemestre().getCurrentModule().getTypeModule()) {
-					case "Ressource" -> {this.frame.changerPanel(new PanelRessources (this.frame, this, m ) );}
-					case "SAE"       -> {this.frame.changerPanel(new PanelSae        (this.frame, this, m ) );}
-					case "Stage"     -> {this.frame.changerPanel(new PanelStage      (this.frame, this, m ) );}
-					case "PPP"       -> {this.frame.changerPanel(new PanelPpp        (this.frame, this, m ) );}
-					default          -> System.err.println("TypeModule inexistant");
+		if ( this.check() ) {
+			if ( e.getSource() == this.btnCreer ) {
+				Module module = Module.creerModuleVide();
+				switch (this.ddlstBox.getSelectedItem().toString()) {
+					case "Ressource" -> this.frame.changerPanel( new PanelRessources (this.frame, this, module) );
+					case "SAE"       -> this.frame.changerPanel( new PanelSae        (this.frame, this, module) );
+					case "Stage"     -> this.frame.changerPanel( new PanelStage      (this.frame, this, module) );
+					case "PPP"       -> this.frame.changerPanel( new PanelPpp        (this.frame, this, module) );
+					default -> System.err.println("TypeModule inexistant");
 				}
-			} else {
-				System.err.println("Sélectionner une ligne");
 			}
+
+			if (e.getSource() == this.ddlstBox) {
+				this.btnCreer.setText("Créer " + this.ddlstBox.getSelectedItem().toString());
+			}
+
+			if (e.getSource() == this.btnModifier) {
+				Module m = this.panelCenterPrevi.getCurrentSemestre().getCurrentModule();
+				if (m != null) {
+					switch(this.panelCenterPrevi.getCurrentSemestre().getCurrentModule().getTypeModule()) {
+						case "Ressource" -> {this.frame.changerPanel(new PanelRessources (this.frame, this, m ) );}
+						case "SAE"       -> {this.frame.changerPanel(new PanelSae        (this.frame, this, m ) );}
+						case "Stage"     -> {this.frame.changerPanel(new PanelStage      (this.frame, this, m ) );}
+						case "PPP"       -> {this.frame.changerPanel(new PanelPpp        (this.frame, this, m ) );}
+						default          -> System.err.println("TypeModule inexistant");
+					}
+				} else {
+					System.err.println("Sélectionner une ligne");
+				}
+			}
+		} else {
+			//set label erreur: "Veuillez entrer des valeurs correctes"
 		}
 		if(e.getSource() == this.btnSupprimer) {
 			try { this.panelCenterPrevi.getCurrentSemestre().removeModule(); }
@@ -126,4 +130,18 @@ public class PanelPrevi extends JPanel implements ActionListener {
 			this.frame.changerPanel(new PanelAcceuil(this.frame));
 		}
 	}
+
+
+	public boolean check() {
+		if ( this.panelCenterPrevi.getNbEtd() != 0
+		  && this.panelCenterPrevi.getNbGpTd() != 0
+		  && this.panelCenterPrevi.getNbGpTp() != 0
+		  && this.panelCenterPrevi.getNbSemaines() != 0)
+			return true;
+		else
+			return false;
+	}
+
+
+
 }
