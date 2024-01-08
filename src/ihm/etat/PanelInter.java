@@ -10,12 +10,15 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 import javax.swing.*;
 
 import ihm.accueil.FrameAccueil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,16 +27,17 @@ import metier.Intervenant;
 import metier.Module;
 
 public class PanelInter extends JPanel implements ActionListener {
-	private FrameAccueil       frame;
-	private PanelEtats         panelMere;
-	private JPanel             panelPrincipal;
-	private JPanel             panelSud;
-	private JButton            btnGenererHtml;
-	private JButton            btnGenererCSV;
-	private JButton            btnRetour;
-	private JComboBox<String>  ddlstInter;
-	private List<Intervenant>  listInter;
-	private List<Heure>  listVerif;
+	private FrameAccueil                 frame;
+	private PanelEtats                   panelMere;
+	private JPanel                       panelPrincipal;
+	private JPanel                       panelSud;
+	private JButton                      btnGenererHtml;
+	private JButton                      btnGenererCSV;
+	private JButton                      btnRetour;
+	private JComboBox<String>            ddlstInter;
+	private List<Intervenant>            listInter;
+	private List<Heure>  	             listVerif;
+	private HashMap<String, List<Heure>> hashSemestre;
 
 
 	public PanelInter(FrameAccueil frame, PanelEtats panelMere) {
@@ -56,6 +60,7 @@ public class PanelInter extends JPanel implements ActionListener {
 		this.btnRetour       = new JButton("Retour");
 		this.ddlstInter      = this.init();
 		this.listVerif 		 = new ArrayList<Heure>();
+		this.hashSemestre    = new HashMap<String, List<Heure>>();
 
 		this.panelPrincipal.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -98,24 +103,79 @@ public class PanelInter extends JPanel implements ActionListener {
 		// Tableau HTML
 		html.append("<table border=\"1\">\n");
 		// En-tête du tableau
-		html.append("<tr>\n<th>Code</th>\n<th>Module</th>\n<th>Type d'heure</th>\n<th>Nombre d'heures</th>\n</tr>\n");
+		html.append("<tr>\n<th>Code</th>\n<th>Module</th>\n<th>Type d'heure</th>\n<th>Nombre d'heures</th>\n<th>Semestre</th>\n</tr>\n");
 
 		// Remplissage du tableau avec les modules et les heures associées
 		for (Module module : intervenant.getModules()) {
+			// Pour chaque module, on parcourt les heures associées
 			for (Heure heure : module.getHeures()) {
 				if(heure.getIntervenants().contains(intervenant) && !(this.listVerif.contains(heure))) {
-					html.append("<tr>\n<td>").append(module.getCode()).append("</td>\n<td>").append(module.getLibelle()).append("</td>\n<td>").append(heure.getTypeHeure().getNomTypeHeure()).append("</td>\n<td>").append(heure.getDuree()).append("</td>\n</tr>\n");
+					html.append("<tr>\n");
+					html.append("<td>").append(module.getCode()).append("</td>\n");
+					html.append("<td>").append(module.getLibelle()).append("</td>\n");
+					html.append("<td>").append(heure.getTypeHeure().getNomTypeHeure()).append("</td>\n");
+					html.append("<td>").append(heure.getDuree()).append("</td>\n");
+					html.append("<td>").append(module.getSemestre()).append("</td>\n");
+					html.append("</tr>\n");
 					this.listVerif.add(heure);
 				}
 			}
+
+			if(this.hashSemestre.containsKey(module.getSemestre())) {
+				this.hashSemestre.get(module.getSemestre()).addAll(this.listVerif);
+			} else {
+				this.hashSemestre.put(module.getSemestre(), new ArrayList<Heure>(this.listVerif));
+			}
+
+			// On vide la liste des heures pour le prochain semestre
+			this.listVerif.clear();
 		}
+		
 		// Fin du tableau et de la page HTML
-		html.append("</table>\n</body>\n</html>");
+		html.append("</table>");
+		html.append("<br>");
+		html.append("<br>");
+		html.append("<br>");
+		html.append("<br>");
+		// Tableau semestre
+		html.append("<table border=\"1\">\n");
+		// En-tête du tableau
+		html.append("<tr>\n<th>S1</th>\n<th>s3</th>\n <th>S5</th>\n<th>TotImpair</th>\n<th>S2</th>\n<th>S4</th>\n<th>S6</th>\n<th>TotPair</th>\n<th>Tot</th>\n</tr>\n");
+		html.append("<tr>\n");
+		html.append("<td>").append(this.getNbHeuresParSemestre("S1")).append("</td>\n");
+		html.append("<td>").append(this.getNbHeuresParSemestre("S3")).append("</td>\n");
+		html.append("<td>").append(this.getNbHeuresParSemestre("S5")).append("</td>\n");
+		html.append("<td>").append(this.getNbHeuresParSemestre("S1") + this.getNbHeuresParSemestre("S3") + this.getNbHeuresParSemestre("S5")).append("</td>\n");
+		html.append("<td>").append(this.getNbHeuresParSemestre("S2")).append("</td>\n");
+		html.append("<td>").append(this.getNbHeuresParSemestre("S4")).append("</td>\n");
+		html.append("<td>").append(this.getNbHeuresParSemestre("S6")).append("</td>\n");
+		html.append("<td>").append(this.getNbHeuresParSemestre("S2") + this.getNbHeuresParSemestre("S4") + this.getNbHeuresParSemestre("S6")).append("</td>\n");
+		html.append("<td>").append(this.getNbHeuresParSemestre("S1") + this.getNbHeuresParSemestre("S3") + this.getNbHeuresParSemestre("S5") + this.getNbHeuresParSemestre("S2") + this.getNbHeuresParSemestre("S4") + this.getNbHeuresParSemestre("S6")).append("</td>\n");
+
+		html.append("</tr>\n");
+		html.append("</table>");
+		//fin body et html
+		html.append("</body>\n</html>");
 		this.ecrireFichierHTML(html.toString(), "./Etats/Intervenants/Html/" + intervenant.getNom() + "_" + intervenant.getPrenom() + ".html");
 	}
 
+	private int getNbHeuresParSemestre(String semestre) {
+		int nbHeures = 0;
+		//verif si le semestre est null
+		if(this.hashSemestre.get(semestre) == null) {
+			return 0;
+		}
+		for (Heure heure : this.hashSemestre.get(semestre)) {
+			if (heure.getModule().getSemestre().equals(semestre)) {
+				nbHeures += heure.getDuree();
+			}
+		}
+
+		return nbHeures;
+	}
+
 	private void ecrireFichierHTML(String htmlContent, String filePath) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath), StandardCharsets.UTF_8))) {
 			// Écriture de la chaîne HTML dans le fichier
 			writer.write(htmlContent);
 		} catch (IOException e) {
@@ -136,7 +196,7 @@ public class PanelInter extends JPanel implements ActionListener {
 	}
 
 	public void generateIntervenantsCSV(List<Intervenant> intervenants, String filePath) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath), StandardCharsets.UTF_8))) {
 			// Entête du CSV
 			writer.write("Catégorie;Nom;Prénom;Service Dû;Max Heures Autorisé;Coeff TP;Total Heures Impairs;Total Heures Pairs;Total Heures");
 

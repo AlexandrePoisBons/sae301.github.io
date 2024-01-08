@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 import javax.swing.*;
 
@@ -80,7 +82,9 @@ public class PanelModule extends JPanel implements ActionListener {
 		html.append("<html>\n<head>\n<title>Récapitulatif de ").append(module.getCode()).append(" ").append(module.getTypeModule()).append("</title>\n</head>\n<body>\n");
 
 		// Titre de la page
-		html.append("<h1>Récapitulatif de ").append(module.getTypeModule()).append("</h1>\n");
+		html.append("<h1>Récapitulatif de ").append(module.getCode() + module.getLibelle()).append("</h1>\n");
+
+		html.append("<p>Les heures de ce module sont réparties sur " + module.getNbSemaines() + " </p>\n");
 
 		// Tableau HTML
 		html.append("<table border=\"1\">\n");
@@ -88,24 +92,33 @@ public class PanelModule extends JPanel implements ActionListener {
 		html.append("<tr>\n<th>Nom Intervenant</th>\n<th>Type d'heure</th>\n<th>Nombre d'heures</th>\n</tr>\n");
 
 		// Remplissage du tableau avec les modules et les heures associées
-		for (Intervenant i : module.getIntervenants()) {
-			for (Heure heure : module.getHeures()) {
+
+		System.out.println("donova: " + module.getHeures().size());
+		for (Heure heure : module.getHeures()) {
+			System.out.println("dono: "+heure.getIntervenants().size());
+			for (Intervenant i : heure.getIntervenants()) {
 				html.append("<tr>\n<td>").append(i.getNom() + "_" + i.getPrenom()).append("</td>\n<td>").append(heure.getTypeHeure().getNomTypeHeure()).append("</td>\n<td>").append(heure.getDuree()).append("</td>\n</tr>\n");
 			}
 		}
+
+		// for (Intervenant i : module.getIntervenants()) {
+		// 	for (Heure heure : module.getHeures()) {
+		// 		// Ligne du tableau
+		// 		}
+		// }
 		// Fin du tableau et de la page HTML
 		html.append("</table>\n</body>\n</html>");
-		this.ecrireFichierHTML(html.toString(), "./Etats/Modules/" +  module.getCode()  + "_" + module.getTypeModule() + ".html");
+		this.ecrireFichierHTML(html.toString(), "./Etats/Modules/" +  module.getCode()  + "_" + module.getLibelle() + ".html");
 	}
 
 	private void ecrireFichierHTML(String htmlContent, String filePath) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            // Écriture de la chaîne HTML dans le fichier
-            writer.write(htmlContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath), StandardCharsets.UTF_8))) {
+			// Écriture de la chaîne HTML dans le fichier
+			writer.write(htmlContent);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public JComboBox<String> init() {
 		this.listModule = this.panelMere.getControleur().getCtrl().metier().getModules();
@@ -121,11 +134,13 @@ public class PanelModule extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnGenererHtml){
-			for (Module module : this.listModule) {
-					if((module.getCode() + " " + module.getLibelleCourt()).equals(this.ddlstModule.getSelectedItem())) {
-					this.genererHtml(module);
+			Module m = null;
+			for(Module module : this.frame.getControleur().getCtrl().metier().getModules()) {
+				if(this.ddlstModule.getSelectedItem().equals(module.getCode() + " " + module.getLibelleCourt())) {
+					m = module;
 				}
 			}
+			this.genererHtml(m);
 		}
 		if(e.getSource() == this.btnRetour) {
 			this.panelMere.changerPanel(new PanelEtats(this.frame));

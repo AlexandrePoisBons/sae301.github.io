@@ -80,6 +80,7 @@ public class ControleurMetier {
 					this.requetes.deleteIntervenantModule(intervenant, oldModule);
 				}
 				this.requetes.deleteHeure(heure);
+				this.heures.remove(heure);
 			}
 
 			for ( Heure heure : newModule.getHeures() ) {
@@ -89,6 +90,7 @@ public class ControleurMetier {
 					this.requetes.insertIntervenantHeure(intervenant, heure);
 					this.requetes.insertIntervenantModule(intervenant, oldModule);
 				}
+				this.heures.add(heure);
 			}
 			this.requetes.updateModule( newModule );
 			this.modules.remove( this.getModuleById( oldModule.getIdModule() ) );
