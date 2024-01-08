@@ -326,23 +326,38 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 		if (e.getSource() == this.txtCMWrite) {
 			if (this.estChiffre(this.txtCMWrite.getText()) == false) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.txtCMWrite);
+			}
+			else{
+				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.txtCMWrite);
 			}
 		}
+		
 
 		if (e.getSource() == this.txtTDWrite) {
 			if (this.estChiffre(this.txtTDWrite.getText()) == false) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.txtTDWrite);
+			}
+			else{
+				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.txtTDWrite);
 			}
 		}
+		
 
 		if (e.getSource() == this.txtTPWrite) {
 			if (this.estChiffre(this.txtTPWrite.getText()) == false) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.txtTPWrite);
+			}
+			else{
+				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.txtTPWrite);
 			}
 		}
+		
 
 	 }
 
