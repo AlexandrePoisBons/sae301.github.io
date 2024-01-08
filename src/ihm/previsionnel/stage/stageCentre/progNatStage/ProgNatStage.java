@@ -50,6 +50,8 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		this.txtHSae         = new JTextField(2);
 		this.txtHTut         = new JTextField(2);
 		this.txtSomme        = new JTextField(4);
+		this.labelErreur = new JLabel("");
+		this.labelErreur.setForeground(Color.RED);
 		this.checkValid      = new JCheckBox();
 		this.checkValid.setSelected(this.module.isValide());
 
@@ -60,7 +62,7 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 
 
 		//Layouts
-		this.panelPrincipal.setLayout(new BorderLayout());
+		pnlCentre.setLayout(new BorderLayout());
 		this.panelPrincipal.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 
@@ -102,8 +104,11 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		this.panelValidation.add(new JLabel("Validation"));
 		this.panelValidation.add(this.checkValid);
 
-		this.add( this.panelPrincipal,  BorderLayout.NORTH  );
-		this.add( this.panelValidation, BorderLayout.CENTER );
+		pnlCentre.add(this.panelValidation,  BorderLayout.NORTH);
+		pnlCentre.add(this.labelErreur, BorderLayout.CENTER);
+
+		this.add( this.panelPrincipal,  BorderLayout.NORTH);
+		this.add( pnlCentre, BorderLayout.CENTER );
 
 		this.setVisible(true);
 
@@ -192,7 +197,7 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 			}
 		}
 		catch(NumberFormatException ex) {
-			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+			System.out.print("");
 		}
 		}
 
@@ -215,7 +220,7 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 			}
 		}
 		catch(NumberFormatException ex) {
-			System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+			System.out.print("");
 		}
 		}
 
