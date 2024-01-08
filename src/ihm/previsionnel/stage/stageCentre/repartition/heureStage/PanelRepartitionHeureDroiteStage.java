@@ -5,18 +5,25 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
+import ihm.previsionnel.stage.stageCentre.repartition.PanelRepartitionStage;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 
-public class PanelRepartitionHeureDroiteStage extends JPanel {
+
+public class PanelRepartitionHeureDroiteStage extends JPanel  {
 
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
+	private PanelRepHStage panelMere;
 
-	public PanelRepartitionHeureDroiteStage() {
+	private int val;
 
+	public PanelRepartitionHeureDroiteStage(PanelRepHStage panelMere) {
+		this.panelMere = panelMere;
+		this.val = 0;
 		this.panelC = new JPanel();
 		this.ensTxtFld = new ArrayList<JTextField>();
 
@@ -25,6 +32,7 @@ public class PanelRepartitionHeureDroiteStage extends JPanel {
 			this.ensTxtFld.add(textField); 
 		}
 
+		this.ensTxtFld.get(0).setEditable(false);
 		this.ensTxtFld.get(1).setEditable(false);
 		
 		this.panelC.setLayout(new GridBagLayout());
@@ -46,6 +54,7 @@ public class PanelRepartitionHeureDroiteStage extends JPanel {
 		this.panelC.add(this.ensTxtFld.get(1), gbcC);
 
 		this.add(this.panelC);
+
 	}
 
 
@@ -64,6 +73,4 @@ public class PanelRepartitionHeureDroiteStage extends JPanel {
 	public int getSommeAffecte() {
 		return Integer.parseInt(this.ensTxtFld.get(1).getText());
 	}
-
-
 }

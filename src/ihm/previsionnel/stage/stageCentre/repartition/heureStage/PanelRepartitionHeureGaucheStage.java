@@ -147,7 +147,7 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 					this.sommeHSae = Integer.parseInt(this.ensJTextField.get(0).getText());
 				}
 			} catch (Exception err) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+				System.out.print("");
 			}
 		}
 
@@ -170,7 +170,7 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 					this.sommeHTut = Integer.parseInt(this.ensJTextField.get(1).getText());
 				}
 			} catch (Exception err) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+				System.out.print("");
 			}
 		}
 		this.totalSomme = this.sommeHSae + this.sommeHTut;

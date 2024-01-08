@@ -23,7 +23,7 @@ public class PanelRepHStage extends JPanel{
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 		this.panelRepartitionHGauche = new PanelRepartitionHeureGaucheStage(this);
-		this.panelRepartitionHDroite = new PanelRepartitionHeureDroiteStage();
+		this.panelRepartitionHDroite = new PanelRepartitionHeureDroiteStage(this);
 
 		this.add(this.panelRepartitionHGauche);
 		this.add(this.panelRepartitionHDroite);
