@@ -121,6 +121,7 @@ public class ControleurMetier {
 	/*  Delete */
 	public boolean supprimerIntervenant( Intervenant intervenant ) throws SQLException {
 
+		System.out.println("nulleuh");
 		this.requetes.deleteIntervenant(intervenant);
 		this.intervenants.remove(intervenant);
 

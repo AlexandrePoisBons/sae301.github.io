@@ -205,6 +205,11 @@ public class PanelParam extends JPanel implements ActionListener{
 			this.panelFormulaireStatut.repaint();
 			this.panelFormulaireStatut.setVisible(true);
 		}
+		else {
+			this.lblErreur.setText("Veuillez sélectionner un statut");
+			this.repaint();
+			this.revalidate();
+		}
 	}
 
 	// Supprimer Statut
@@ -247,6 +252,11 @@ public class PanelParam extends JPanel implements ActionListener{
 			this.panelFormulaireCoef.revalidate();
 			this.panelFormulaireCoef.repaint();
 			this.panelFormulaireCoef.setVisible(true);
+		}
+		else {
+			this.lblErreur.setText("Veuillez sélectionner un type d'heure");
+			this.repaint();
+			this.revalidate();
 		}
 	}
 

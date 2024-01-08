@@ -41,7 +41,10 @@ public class PanelInter extends JPanel implements ActionListener {
 		// Synchronisation des pages
 		this.frame = frAcceuil;
 
-		this.intervenants = this.frame.getControleur().getCtrl().metier().getIntervenants();
+		//this.intervenants = new ArrayList<>();
+
+		List<Intervenant> list = this.frame.getControleur().getCtrl().metier().getIntervenants();
+		this.intervenants = new ArrayList<>(list);
 
 
 		// Définition de la taille et la position de la fenêtre
@@ -169,19 +172,20 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	public void supprimer() {
 		int lig = this.tableauInter.getSelectedRow();
-		this.dtm.removeRow(lig);
-		try{
-			this.frame.getControleur().getCtrl().metier().supprimerIntervenant(this.intervenants.get(lig));
-		} catch ( SQLException e) { this.lblErreur.setText("Impossible de supprimer cet Intervenant"); }
-		this.intervenants.remove(lig);
-		this.lblErreur.setText("");
-		this.repaint();
-		this.revalidate();
+		
+		if ( this.intervenants.get(lig).getHeures().size() > 0 ) {
+			this.lblErreur.setText("Impossible de supprimer cet Intervenant");
+		} else {
+			this.dtm.removeRow(lig);
+			this.intervenants.remove(lig); // on est baisé: ca change l'objet qui est stocké que sous forme d'adresse memoire
+			this.lblErreur.setText("");
+		}
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		this.lblErreur.setText("");
-		
+
 		if (e.getSource() == this.btnAjouter) {
 			this.panelFormulaire = new FrameFormulaire(this);
 			this.lblErreur.setText("");
@@ -192,11 +196,11 @@ public class PanelInter extends JPanel implements ActionListener {
 		if (e.getSource() == this.btnSupprimer) {
 			try {
 				this.supprimer();
-			} catch (Exception err) {
-				this.lblErreur.setText("Il n'y a pas de ligne à supprimer");
-				this.repaint();
-				this.revalidate();
+			} catch (Exception ex) {
+				this.lblErreur.setText("Aucune ligne à supprimer");
 			}
+			this.repaint();
+			this.revalidate();
 		}
 
 		if (e.getSource() == this.btnEnregistrer) {
@@ -210,27 +214,31 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	}
 
+
 	// Méthode permettant d'ajouter les nouveaux intervenants à la bd 
 
 	private void enregistrer() {
 
 		int i = this.intervenants.size();
-		System.out.println("dono: "+i);
 
-		Intervenant tmp;
-		for (int j = 0; j < i; j++) {
-			System.out.println("j:"+j);
-			tmp = this.intervenants.get(j);
-			if ( tmp.getIdIntervenant() == -1 ) {
-				Intervenant inter = Intervenant.creerIntervenant(tmp.getPrenom(), tmp.getNom(), tmp.getStatut(), tmp.getNbEqTD());
-				System.out.println("remove: "+this.intervenants.remove(tmp));
-				//this.intervenants.add(inter);
-				System.out.println("ajout: "+this.frame.getControleur().getCtrl().metier().ajouterIntervenant(inter));
+		for (Intervenant intervenant : this.frame.getControleur().getCtrl().metier().getIntervenants()) {
+			if ( !this.intervenants.contains(intervenant) ) {
+				try {
+					this.frame.getControleur().getCtrl().metier().supprimerIntervenant(intervenant);
+				} catch (SQLException e) { }
 			}
 		}
 
-		System.out.println("enregistré = "+this.intervenants.size());
-		System.out.println(this.intervenants);
+		Intervenant tmp;
+		for (int j = 0; j < i; j++) {
+			tmp = this.intervenants.get(j);
+			if ( tmp.getIdIntervenant() == -1 ) {
+				Intervenant inter = Intervenant.creerIntervenant(tmp.getPrenom(), tmp.getNom(), tmp.getStatut(), tmp.getNbEqTD());
+				this.intervenants.remove(tmp);
+				//this.intervenants.add(inter);
+				this.frame.getControleur().getCtrl().metier().ajouterIntervenant(inter);
+			}
+		}
 
 	}
 
@@ -245,8 +253,6 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	public void ajouterIntervenant( Intervenant intervenant ) {
 		this.intervenants.add(intervenant);
-		System.out.println("add intervenant");
-		System.out.println(this.intervenants);
 	}
 
 	public void ajouterLigne(String statut, String nom, String prenom, Integer hServ, Integer hMax, Float coeff) {

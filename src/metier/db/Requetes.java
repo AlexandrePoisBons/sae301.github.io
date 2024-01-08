@@ -150,12 +150,12 @@ public class Requetes {
 	}
 
 	public void deleteIntervenant( Intervenant intervenant ) throws SQLException {
-
+		System.out.println("zero");
 		if ( this.existsIntervenant(intervenant.getIdIntervenant()) ) {
-
+			System.out.println("un");
 			this.psDeleteI.setInt(1, intervenant.getIdIntervenant());
-	
-			this.psDeleteI.executeUpdate();
+			System.out.println("deux");
+			System.out.println("donovastp "+this.psDeleteI.executeUpdate());
 		} else {
 			System.out.println("Intervenant id_intervenant="+intervenant.getIdIntervenant()+" inexistant");
 		}
