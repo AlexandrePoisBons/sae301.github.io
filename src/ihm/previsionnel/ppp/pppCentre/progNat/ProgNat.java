@@ -178,14 +178,14 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	}
 
 	private boolean estChiffre(String texte) {
-        // Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
-        for (char c : texte.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
+		// Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
+		for (char c : texte.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
