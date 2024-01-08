@@ -48,7 +48,8 @@ public class PanelEtats extends JPanel implements ActionListener{
 		this.btnRetour.addActionListener(this);
 		this.btnInter.addActionListener(this);
 		this.btnModule.addActionListener(this);
-		
+
+		this.frame.setTitle("États");
 	}
 
 	public ControleurIHM getControleur() {

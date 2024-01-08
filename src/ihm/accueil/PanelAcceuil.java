@@ -45,10 +45,11 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 		//Positionnement de la frame
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		int xSize = (int)(largeur*0.3);
-		int ySize = (int)(hauteur*0.44);
+		int xSize   = (int)(largeur*0.3);
+		int ySize   = (int)(hauteur*0.44);
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
+		this.frame.setTitle("Accueil");
 
 
 		//Composants
