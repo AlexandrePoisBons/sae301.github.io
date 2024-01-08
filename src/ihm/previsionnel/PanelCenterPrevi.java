@@ -117,4 +117,8 @@ public class PanelCenterPrevi extends JPanel {
 	public int getNbGpTp()           { return this.getCurrentSemestre().getNbGpTp();     }
 	public int getNbSemaines()       { return this.getCurrentSemestre().getNbSemaines(); }
 
+	public boolean moduleSelectionne() {
+		return this.getCurrentSemestre().moduleSelectionne();
+	}
+
 }

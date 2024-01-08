@@ -84,7 +84,7 @@ public class PanelSud extends JPanel implements ActionListener {
 		int nbGpTD      = this.panelPrevi.getNbGpTd();
 		int nbGpTP      = this.panelPrevi.getNbGpTp();
 
-		boolean valide = this.panelRessources.estValide();
+		boolean valide  = this.panelRessources.estValide();
 
 		int nbSemaines = 0;
 		int nbHeures   = 0;
@@ -122,10 +122,8 @@ public class PanelSud extends JPanel implements ActionListener {
 			this.module.setNbGpTP(m.getNbGpTP());
 			this.module.setNbSemaines(m.getNbSemaines());
 			this.module.setNbHeures(m.getNbHeures());
-			this.module.setValide(m.isValide());
+			this.module.setValide(valide);
 			this.panelRessources.update(this.oldModule, this.module);
 		}
-
 	}
-
 }

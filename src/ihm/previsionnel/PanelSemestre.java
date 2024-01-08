@@ -155,18 +155,20 @@ public class PanelSemestre extends JPanel {
 	}
 
 	public void removeModule() throws SQLException {
-		System.out.println(this.tabModule.getSelectedRow());
 		if(this.tabModule.getSelectedRow() != -1){
 			this.ctrl.metier().supprimerModule(this.getCurrentModule());
 			this.modules.remove(this.tabModule.getSelectedRow());
 			this.dtm.removeRow (this.tabModule.getSelectedRow());
-		}
-		else {
-			System.err.println("Sélectionner une ligne");
 		}
 	}
 
 	public List<Module> getModules() { return this.modules; }
 
 
+	public boolean moduleSelectionne() {
+		if(this.tabModule.getSelectedRow() != -1){
+			return true;
+		}
+		return false;
+	}
 }
