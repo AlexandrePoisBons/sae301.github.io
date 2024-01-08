@@ -83,6 +83,7 @@ public class PanelInter extends JPanel implements ActionListener {
 		this.btnGenererCSV .addActionListener(this);
 		this.btnRetour     . addActionListener(this);
 
+		this.frame.setTitle("États - Intervenant");
 	}
 
 	public void genererHtml(Intervenant intervenant) {

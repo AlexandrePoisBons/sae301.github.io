@@ -76,13 +76,14 @@ public class PanelAffect extends JPanel {
 
 	public void supprimer() {
 		if(this.tableauAffect.getSelectedRow() != -1) {
+			this.heures.remove(this.tableauAffect.getSelectedRow());
 			this.dtm.removeRow(this.tableauAffect.getSelectedRow());
 		}
 		else {
 			this.panelMere.setErreur("erreur");
 		}
 	}
-
+	
 	public DefaultTableModel getDtm() {
 		return this.dtm;
 	}

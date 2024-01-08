@@ -70,7 +70,7 @@ public class PanelModule extends JPanel implements ActionListener {
 
 		this.btnGenererHtml.addActionListener(this);
 		this.btnRetour     . addActionListener(this);
-
+		this.frame.setTitle("États - Module");
 	}
 
 	public void genererHtml(Module module) {

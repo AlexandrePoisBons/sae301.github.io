@@ -118,6 +118,7 @@ public class PanelInter extends JPanel implements ActionListener {
 		this.init();
 
 		this.setVisible(true);
+		this.frame.setTitle("Liste des intervenants");
 	}
 
 	public void init() {

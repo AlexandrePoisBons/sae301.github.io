@@ -60,6 +60,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		int ySize = (int)(hauteur*0.55);
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
+		this.frame.setTitle("Paramétrage");
 
 		// Creation des éléments de la page 
 		this.panelFormulaireStatut     = new PanelFormulaireStatut();

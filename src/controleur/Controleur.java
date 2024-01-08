@@ -19,6 +19,6 @@ public class Controleur {
 
 	}
 
-	public ControleurMetier metier() { return this.metier;}
+	public ControleurMetier metier() { return this.metier; }
 
 }
