@@ -9,6 +9,7 @@ import ihm.previsionnel.sae.PanelSae;
 import ihm.previsionnel.stage.PanelStage;
 import metier.Module;
 
+import java.awt.Color;
 // Imports classes Java
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -29,6 +30,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	private JButton           btnModifier;
 	private JButton           btnSupprimer;
 	private JButton           btnRetour;
+	private JLabel            lblErreur;
 
 	//Constructeur
 	public PanelPrevi(FrameAccueil frAccueil) {
@@ -44,7 +46,8 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.btnModifier       = new JButton("Modifier");
 		this.btnSupprimer      = new JButton("Supprimer");
 		this.btnRetour         = new JButton("Retour");
-
+		this.lblErreur         = new JLabel();
+		this.lblErreur.setForeground(Color.RED);
 
 		//Layout
 		this.setLayout(new GridBagLayout());
@@ -62,6 +65,8 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.add(panelCenterPrevi, gbc);
 		gbc.gridy = 1;
 		this.add(panelSud, gbc);
+		gbc.gridy = 2;
+		this.add(this.lblErreur, gbc);
 
 
 		//ActionListeners
@@ -88,7 +93,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 
 	//Permets de faire une action en fonction du bouton cliqué
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 		if ( this.check() ) {
 			if ( e.getSource() == this.btnCreer ) {
 				Module module = Module.creerModuleVide();
@@ -99,10 +104,6 @@ public class PanelPrevi extends JPanel implements ActionListener {
 					case "PPP"       -> this.frame.changerPanel( new PanelPpp        (this.frame, this, module) );
 					default -> System.err.println("TypeModule inexistant");
 				}
-			}
-
-			if (e.getSource() == this.ddlstBox) {
-				this.btnCreer.setText("Créer " + this.ddlstBox.getSelectedItem().toString());
 			}
 
 			if (e.getSource() == this.btnModifier) {
@@ -120,11 +121,24 @@ public class PanelPrevi extends JPanel implements ActionListener {
 				}
 			}
 		} else {
-			//set label erreur: "Veuillez entrer des valeurs correctes"
+			this.lblErreur.setText("Veuillez entrer des valeurs correctes");
+			this.repaint();
 		}
+
+		if (e.getSource() == this.ddlstBox) {
+			this.btnCreer.setText("Créer " + this.ddlstBox.getSelectedItem().toString());
+		}
+
 		if(e.getSource() == this.btnSupprimer) {
-			try { this.panelCenterPrevi.getCurrentSemestre().removeModule(); }
-			catch(SQLException eq) {System.out.println("Sélectionner une ligne pour la supprimer");}
+			if(this.panelCenterPrevi.moduleSelectionne()) {
+				try {
+					this.panelCenterPrevi.getCurrentSemestre().removeModule();
+				} catch (SQLException e1) {}
+			}
+			else {
+				this.lblErreur.setText("Veuillez seléctionner une ligne");
+				this.repaint();
+			}
 		}
 		if(e.getSource() == this.btnRetour){
 			this.frame.changerPanel(new PanelAcceuil(this.frame));
@@ -133,13 +147,15 @@ public class PanelPrevi extends JPanel implements ActionListener {
 
 
 	public boolean check() {
-		if ( this.panelCenterPrevi.getNbEtd() != 0
-		  && this.panelCenterPrevi.getNbGpTd() != 0
-		  && this.panelCenterPrevi.getNbGpTp() != 0
-		  && this.panelCenterPrevi.getNbSemaines() != 0)
+		if ( this.panelCenterPrevi.getNbEtd()      != 0 &&
+		     this.panelCenterPrevi.getNbGpTd()     != 0 &&
+		     this.panelCenterPrevi.getNbGpTp()     != 0 &&
+		     this.panelCenterPrevi.getNbSemaines() != 0) {
 			return true;
-		else
+		}
+		else {
 			return false;
+		}
 	}
 
 

@@ -91,22 +91,13 @@ public class PanelModule extends JPanel implements ActionListener {
 		// En-tête du tableau
 		html.append("<tr>\n<th>Nom Intervenant</th>\n<th>Type d'heure</th>\n<th>Nombre d'heures</th>\n</tr>\n");
 
-		// Remplissage du tableau avec les modules et les heures associées
-
-		System.out.println("donova: " + module.getHeures().size());
-		for (Heure heure : module.getHeures()) {
-			System.out.println("dono: "+heure.getIntervenants().size());
-			for (Intervenant i : heure.getIntervenants()) {
-				html.append("<tr>\n<td>").append(i.getNom() + "_" + i.getPrenom()).append("</td>\n<td>").append(heure.getTypeHeure().getNomTypeHeure()).append("</td>\n<td>").append(heure.getDuree()).append("</td>\n</tr>\n");
+		for(Heure heure : module.getHeures()) {
+			for(Intervenant i : heure.getIntervenants()) {
+				html.append("<tr>\n<td>").append(i.getNom() + " " + i.getPrenom()).append("</td>\n<td>").append(heure.getTypeHeure().getNomTypeHeure()).append("</td>\n<td>").append(heure.getDuree()).append("</td>\n</tr>\n");
 			}
 		}
 
-		// for (Intervenant i : module.getIntervenants()) {
-		// 	for (Heure heure : module.getHeures()) {
-		// 		// Ligne du tableau
-		// 		}
-		// }
-		// Fin du tableau et de la page HTML
+		//Fin du tableau et de la page HTML
 		html.append("</table>\n</body>\n</html>");
 		this.ecrireFichierHTML(html.toString(), "./Etats/Modules/" +  module.getCode()  + "_" + module.getLibelle() + ".html");
 	}

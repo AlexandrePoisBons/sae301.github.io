@@ -65,6 +65,7 @@ public class PanelRessources extends JPanel {
 	}
 
 	public void update(Module oldModule, Module newModule) {
+		System.out.println("aller stp "+newModule.isValide());
 		List<Heure> heures = this.pRCentre.getHeures();
 
 		newModule.setHeures(heures);
