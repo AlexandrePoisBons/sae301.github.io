@@ -15,6 +15,7 @@ import javax.swing.*;
 
 import ihm.accueil.FrameAccueil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ public class PanelInter extends JPanel implements ActionListener {
 	private JButton            btnRetour;
 	private JComboBox<String>  ddlstInter;
 	private List<Intervenant>  listInter;
+	private List<Heure>  listVerif;
 
 
 	public PanelInter(FrameAccueil frame, PanelEtats panelMere) {
@@ -53,6 +55,7 @@ public class PanelInter extends JPanel implements ActionListener {
 		this.btnGenererCSV   = new JButton("Genérer CSV");
 		this.btnRetour       = new JButton("Retour");
 		this.ddlstInter      = this.init();
+		this.listVerif 		 = new ArrayList<Heure>();
 
 		this.panelPrincipal.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -99,7 +102,10 @@ public class PanelInter extends JPanel implements ActionListener {
 		// Remplissage du tableau avec les modules et les heures associées
 		for (Module module : intervenant.getModules()) {
 			for (Heure heure : module.getHeures()) {
-				html.append("<tr>\n<td>").append(module.getCode()).append("</td>\n<td>").append(module.getLibelle()).append("</td>\n<td>").append(heure.getTypeHeure().getNomTypeHeure()).append("</td>\n<td>").append(heure.getDuree()).append("</td>\n</tr>\n");
+				if(heure.getIntervenants().contains(intervenant) && !(this.listVerif.contains(heure))) {
+					html.append("<tr>\n<td>").append(module.getCode()).append("</td>\n<td>").append(module.getLibelle()).append("</td>\n<td>").append(heure.getTypeHeure().getNomTypeHeure()).append("</td>\n<td>").append(heure.getDuree()).append("</td>\n</tr>\n");
+					this.listVerif.add(heure);
+				}
 			}
 		}
 		// Fin du tableau et de la page HTML
@@ -108,13 +114,13 @@ public class PanelInter extends JPanel implements ActionListener {
 	}
 
 	private void ecrireFichierHTML(String htmlContent, String filePath) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            // Écriture de la chaîne HTML dans le fichier
-            writer.write(htmlContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+			// Écriture de la chaîne HTML dans le fichier
+			writer.write(htmlContent);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 
 	public JComboBox<String> init() {
@@ -129,60 +135,60 @@ public class PanelInter extends JPanel implements ActionListener {
 	}
 
 	public void generateIntervenantsCSV(List<Intervenant> intervenants, String filePath) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            // Entête du CSV
-            writer.write("Catégorie;Nom;Prénom;Service Dû;Max Heures Autorisé;Coeff TP;Total Heures Impairs;Total Heures Pairs;Total Heures");
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+			// Entête du CSV
+			writer.write("Catégorie;Nom;Prénom;Service Dû;Max Heures Autorisé;Coeff TP;Total Heures Impairs;Total Heures Pairs;Total Heures");
 
-            // Écriture des données pour chaque intervenant
-            for (Intervenant intervenant : intervenants) {
-                writer.newLine();
-                writer.write(
-                        intervenant.getStatut() + ";" +
-                        intervenant.getNom() + ";" +
-                        intervenant.getPrenom() + ";" +
-                        intervenant.getNbEqTD() + ";" +
-                        getMaxHeuresAutorisees(intervenant) + ";" +
-                        getCoefficientTP(intervenant) + ";" +
-                        getTotalHeuresParSemestre(intervenant, "impair") + ";" +
-                        getTotalHeuresParSemestre(intervenant, "pair") + ";" +
-                        intervenant.getNbHeures()
-                );
-            }
+			// Écriture des données pour chaque intervenant
+			for (Intervenant intervenant : intervenants) {
+				writer.newLine();
+				writer.write(
+						intervenant.getStatut() + ";" +
+						intervenant.getNom() + ";" +
+						intervenant.getPrenom() + ";" +
+						intervenant.getNbEqTD() + ";" +
+						getMaxHeuresAutorisees(intervenant) + ";" +
+						getCoefficientTP(intervenant) + ";" +
+						getTotalHeuresParSemestre(intervenant, "impair") + ";" +
+						getTotalHeuresParSemestre(intervenant, "pair") + ";" +
+						intervenant.getNbHeures()
+				);
+			}
 
-            System.out.println("Fichier CSV généré avec succès à l'emplacement : " + filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+			System.out.println("Fichier CSV généré avec succès à l'emplacement : " + filePath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    private float getMaxHeuresAutorisees(Intervenant intervenant) {
-        // À compléter avec la logique appropriée pour obtenir le maximum d'heures autorisé
-        // Par exemple, vous pourriez avoir une méthode dans la classe Intervenant qui retourne cette valeur.
-        return 0.0f; // Exemple, à remplacer avec la logique réelle
-    }
+	private float getMaxHeuresAutorisees(Intervenant intervenant) {
+		// À compléter avec la logique appropriée pour obtenir le maximum d'heures autorisé
+		// Par exemple, vous pourriez avoir une méthode dans la classe Intervenant qui retourne cette valeur.
+		return 0.0f; // Exemple, à remplacer avec la logique réelle
+	}
 
-    private float getCoefficientTP(Intervenant intervenant) {
-        // À compléter avec la logique appropriée pour obtenir le coefficient TP
-        // Par exemple, vous pourriez avoir une méthode dans la classe Intervenant qui retourne cette valeur.
-        return 0.0f; // Exemple, à remplacer avec la logique réelle
-    }
+	private float getCoefficientTP(Intervenant intervenant) {
+		// À compléter avec la logique appropriée pour obtenir le coefficient TP
+		// Par exemple, vous pourriez avoir une méthode dans la classe Intervenant qui retourne cette valeur.
+		return 0.0f; // Exemple, à remplacer avec la logique réelle
+	}
 
-    private float getTotalHeuresParSemestre(Intervenant intervenant, String semestreType) {
-        Map<String, Float> heuresParSemestre = intervenant.getNbHeuresParSemestre();
-        float totalHeures = 0.0f;
+	private float getTotalHeuresParSemestre(Intervenant intervenant, String semestreType) {
+		Map<String, Float> heuresParSemestre = intervenant.getNbHeuresParSemestre();
+		float totalHeures = 0.0f;
 
-        for (Map.Entry<String, Float> entry : heuresParSemestre.entrySet()) {
-            String semestre = entry.getKey();
-            float heures = entry.getValue();
+		for (Map.Entry<String, Float> entry : heuresParSemestre.entrySet()) {
+			String semestre = entry.getKey();
+			float heures = entry.getValue();
 
-            if ((semestreType.equals("impair") && semestre.endsWith("1")) ||
-                (semestreType.equals("pair") && semestre.endsWith("2"))) {
-                totalHeures += heures;
-            }
-        }
+			if ((semestreType.equals("impair") && semestre.endsWith("1")) ||
+				(semestreType.equals("pair") && semestre.endsWith("2"))) {
+				totalHeures += heures;
+			}
+		}
 
-        return totalHeures;
-    }
+		return totalHeures;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
