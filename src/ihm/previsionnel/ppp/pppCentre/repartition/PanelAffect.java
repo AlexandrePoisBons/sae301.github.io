@@ -83,7 +83,7 @@ public class PanelAffect extends JPanel {
 			this.panelMere.setErreur("erreur");
 		}
 	}
-	
+
 	public DefaultTableModel getDtm() {
 		return this.dtm;
 	}

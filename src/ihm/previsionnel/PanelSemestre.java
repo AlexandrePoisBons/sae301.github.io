@@ -96,12 +96,31 @@ public class PanelSemestre extends JPanel {
 
 
 	// Getters
-	public int getIdSemestre() { return this.id;                                       }
-	public int getNbEtd()      { return Integer.parseInt(this.txtNbEtd.getText());     }
-	public int getNbGpTd()     { return Integer.parseInt(this.txtNbGpTd.getText());    }
-	public int getNbGpTp()     { return Integer.parseInt(this.txtNbGpTp.getText());    }
-	public int getNbSemaines() { return Integer.parseInt(this.txtNbSemaine.getText()); }
-
+	public int getIdSemestre() { return this.id; }
+	public int getNbEtd() {
+		try {
+			int i = Integer.parseInt(this.txtNbEtd.getText());
+			return i;
+		} catch (NumberFormatException e) { return 0; }
+	}
+	public int getNbGpTd() {
+		try {
+			int i = Integer.parseInt(this.txtNbGpTd.getText());
+			return i;
+		} catch (NumberFormatException e) { return 0; }
+	}
+	public int getNbGpTp() { 
+		try {
+			int i = Integer.parseInt(this.txtNbGpTp.getText());
+			return i;
+		} catch (NumberFormatException e) { return 0; }
+	}
+	public int getNbSemaines() {
+		try {
+			int i = Integer.parseInt(this.txtNbSemaine.getText());
+			return i;
+		} catch (NumberFormatException e) { return 0; }
+	}
 	public void setModules(List<Module> list) {
 		this.modules = list;
 		for (Module module : this.modules) {

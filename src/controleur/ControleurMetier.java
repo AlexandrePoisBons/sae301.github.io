@@ -284,17 +284,20 @@ public class ControleurMetier {
 
 		try {
 			for ( Statut statut : statuts ) {
-				if ( this.requetes.existsStatut(statut.getNomStatut()) )
+				if ( this.requetes.existsStatut(statut.getNomStatut()) ) {
 					this.requetes.updateStatut(statut);
-				else
+				}
+				else {
 					this.requetes.insertStatut(statut);
+					this.statuts.add(statut);
+				}
 			}
 
 			// gérer le warning
-			for ( Statut statut : this.requetes.getStatuts() ) {
-				if ( !statuts.contains(statut) )
-					System.out.println("statut non supprimable");
-			}
+			// for ( Statut statut : this.requetes.getStatuts() ) {
+			// 	if ( !statuts.contains(statut) )
+			// 		System.out.println("statut non supprimable");
+			// }
 
 		} catch (SQLException e ) { System.out.println("INSERT STATUT IMPOSSIBLE"); e.printStackTrace(); }
 
@@ -304,17 +307,20 @@ public class ControleurMetier {
 
 		try {
 			for ( TypeHeure typeHeure : typesHeures ) {
-				if ( this.requetes.existsTypeHeure(typeHeure.getIdTypeHeure()) )
+				if ( this.requetes.existsTypeHeure(typeHeure.getIdTypeHeure()) ){
 					this.requetes.updateTypeHeure(typeHeure);
-				else
+				}
+				else {
 					this.requetes.insertTypeHeure(typeHeure);
+					this.typesHeures.add(typeHeure);
+				}
 			}
 
-			// gérer le warning
-			for ( TypeHeure typeHeure : this.requetes.getTypesHeures() ) {
-				if ( !typesHeures.contains(typeHeure) )
-					System.out.println("type_heure non supprimable");
-			}
+			// // gérer le warning
+			// for ( TypeHeure typeHeure : this.requetes.getTypesHeures() ) {
+			// 	if ( !typesHeures.contains(typeHeure) )
+			// 		System.out.println("type_heure non supprimable");
+			// }
 
 		} catch (SQLException e) { System.out.println("INSERT TYPE_HEURE IMPOSSIBLE"); e.printStackTrace(); }
 

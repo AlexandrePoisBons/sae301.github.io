@@ -307,8 +307,11 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	public void enregistrer() {
+		System.out.println("coucou 1");
 		this.frame.getControleur().getCtrl().metier().majTypesHeures(this.ensTypeHeure);
+		System.out.println("coucou 2");
 		this.frame.getControleur().getCtrl().metier().majStatuts(this.ensStatut);
+		System.out.println("coucou 3");
 	}
 
 	//Supprimer Ligne
@@ -364,6 +367,8 @@ public class PanelParam extends JPanel implements ActionListener{
 		}
 		if(e.getSource() == this.btnEnregistrer) {
 			this.enregistrer();
+			this.frame.dispose();
+			this.frame = new FrameAccueil(this.frame.getControleur());
 		}
 		if(e.getSource() == this.btnRetour){
 			this.frame.changerPanel(new PanelAcceuil(frame));

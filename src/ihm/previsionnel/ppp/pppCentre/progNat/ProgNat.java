@@ -191,25 +191,18 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == this.txtHPonctWrite) {
-
 			this.txtHPonctWrite.transferFocus();
-		} else if (e.getSource() == this.txtHTutWrite) {
-
+		}
+		else if (e.getSource() == this.txtHTutWrite) {
 			this.txtHTutWrite.transferFocus();
 		}
-
 		else if (e.getSource() == this.txtCMWrite) {
-
 			this.txtCMWrite.transferFocus();
 		}
-
 		else if (e.getSource() == this.txtTDWrite) {
-
 			this.txtTDWrite.transferFocus();
 		}
-
 		else if (e.getSource() == this.txtTPWrite) {
-
 			this.txtTPWrite.transferFocus();
 		}
 	}
@@ -346,4 +339,5 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	public int getSommePN() {
 		return this.sommeAction;
 	}
+
 }
