@@ -244,6 +244,8 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		else {
 			calcul = Integer.parseInt(this.txtNbH.getText());
 		}
+		System.out.println("donova: "+calcul);
 		this.txtTotEqtd.setText("" + calcul);
 	}
+
 }

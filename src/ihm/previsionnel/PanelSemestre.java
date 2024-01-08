@@ -101,25 +101,25 @@ public class PanelSemestre extends JPanel {
 		try {
 			int i = Integer.parseInt(this.txtNbEtd.getText());
 			return i;
-		} catch (NumberFormatException e) { return 0; }
+		} catch (NumberFormatException e) { return -1; }
 	}
 	public int getNbGpTd() {
 		try {
 			int i = Integer.parseInt(this.txtNbGpTd.getText());
 			return i;
-		} catch (NumberFormatException e) { return 0; }
+		} catch (NumberFormatException e) { return -1; }
 	}
 	public int getNbGpTp() { 
 		try {
 			int i = Integer.parseInt(this.txtNbGpTp.getText());
 			return i;
-		} catch (NumberFormatException e) { return 0; }
+		} catch (NumberFormatException e) { return -1; }
 	}
 	public int getNbSemaines() {
 		try {
 			int i = Integer.parseInt(this.txtNbSemaine.getText());
 			return i;
-		} catch (NumberFormatException e) { return 0; }
+		} catch (NumberFormatException e) { return -1; }
 	}
 	public void setModules(List<Module> list) {
 		this.modules = list;

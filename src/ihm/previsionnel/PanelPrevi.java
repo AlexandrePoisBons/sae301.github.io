@@ -147,14 +147,15 @@ public class PanelPrevi extends JPanel implements ActionListener {
 	}
 
 	public boolean check() {
-		if ( this.panelCenterPrevi.getNbEtd()      != 0 &&
-		     this.panelCenterPrevi.getNbGpTd()     != 0 &&
-		     this.panelCenterPrevi.getNbGpTp()     != 0 &&
-		     this.panelCenterPrevi.getNbSemaines() != 0) {
+		if ( this.panelCenterPrevi.getNbEtd()      != -1 &&
+		     this.panelCenterPrevi.getNbGpTd()     != -1 &&
+		     this.panelCenterPrevi.getNbGpTp()     != -1 &&
+		     this.panelCenterPrevi.getNbSemaines() != -1 ) {
 			return true;
 		}
 		else {
 			return false;
 		}
 	}
+
 }
