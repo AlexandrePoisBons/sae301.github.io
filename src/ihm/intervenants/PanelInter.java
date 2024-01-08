@@ -41,7 +41,10 @@ public class PanelInter extends JPanel implements ActionListener {
 		// Synchronisation des pages
 		this.frame = frAcceuil;
 
-		this.intervenants = this.frame.getControleur().getCtrl().metier().getIntervenants();
+		//this.intervenants = new ArrayList<>();
+
+		List<Intervenant> list = this.frame.getControleur().getCtrl().metier().getIntervenants();
+		this.intervenants = new ArrayList<>(list);
 
 
 		// Définition de la taille et la position de la fenêtre
@@ -169,15 +172,15 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	public void supprimer() {
 		int lig = this.tableauInter.getSelectedRow();
-		System.out.println("eh zebi "+this.frame.getControleur().getCtrl().metier().getIntervenants().size());
+		
 		if ( this.intervenants.get(lig).getHeures().size() > 0 ) {
 			this.lblErreur.setText("Impossible de supprimer cet Intervenant");
 		} else {
 			this.dtm.removeRow(lig);
-			this.intervenants.remove(lig); // on est baisé: ca change l'objet qui est stocké que sous forme d'adresse memoire partout
+			this.intervenants.remove(lig); // on est baisé: ca change l'objet qui est stocké que sous forme d'adresse memoire
 			this.lblErreur.setText("");
 		}
-		System.out.println("eh zebi "+this.frame.getControleur().getCtrl().metier().getIntervenants().size());
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -211,37 +214,30 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	}
 
+
 	// Méthode permettant d'ajouter les nouveaux intervenants à la bd 
 
 	private void enregistrer() {
 
 		int i = this.intervenants.size();
 
-		System.out.println("\n\n inters \n"+this.intervenants);
-		System.out.println("\n\n ctrl \n"+this.frame.getControleur().getCtrl().metier().getIntervenants()+"\n");
-
 		for (Intervenant intervenant : this.frame.getControleur().getCtrl().metier().getIntervenants()) {
-			System.out.println("cou couu"+this.intervenants.size());
 			if ( !this.intervenants.contains(intervenant) ) {
 				try {
-					System.out.println("coucou");
 					this.frame.getControleur().getCtrl().metier().supprimerIntervenant(intervenant);
-				} catch (SQLException e) { System.out.println("donovaaa"); }
+				} catch (SQLException e) { }
 			}
 		}
-
 
 		Intervenant tmp;
 		for (int j = 0; j < i; j++) {
 			tmp = this.intervenants.get(j);
-
 			if ( tmp.getIdIntervenant() == -1 ) {
 				Intervenant inter = Intervenant.creerIntervenant(tmp.getPrenom(), tmp.getNom(), tmp.getStatut(), tmp.getNbEqTD());
 				this.intervenants.remove(tmp);
 				//this.intervenants.add(inter);
 				this.frame.getControleur().getCtrl().metier().ajouterIntervenant(inter);
 			}
-
 		}
 
 	}
