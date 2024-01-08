@@ -75,6 +75,8 @@ public class PCentreStage extends JPanel {
 		return map;
 	}
 
+	public void setLabelErreur(String message) { this.pProgNatStage.setLabelErreur(message); }
+
 	private void setData() { this.panelRepartitionStage.setHeures(this.module.getHeures()); }
 
 	public void setErreur(String message) {

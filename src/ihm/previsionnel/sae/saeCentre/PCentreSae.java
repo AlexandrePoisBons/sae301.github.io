@@ -73,6 +73,9 @@ public class PCentreSae extends JPanel {
 		return map;
 	}
 
+	public void setLabelErreur(String message) { this.panelProgNatSae.setLabelErreur(message); }
+
+
 	private void setData() { this.panelRepartitionSae.setHeures(this.module.getHeures()); }
 
 	public void setErreur(String message){

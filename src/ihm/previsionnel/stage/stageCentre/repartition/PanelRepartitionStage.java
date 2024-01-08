@@ -55,6 +55,8 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 		this.btnAjouter.addActionListener	(this);
 		this.btnSuppr.addActionListener		(this);
 	}
+	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
+
 
 	//A DECOMMENTER
 	public void actionPerformed(ActionEvent e) {

@@ -1,5 +1,6 @@
 package ihm.previsionnel.stage.stageCentre.repartition.heureStage;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -101,6 +102,16 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 		this.panelMere.setSommeAffecte(somme);
 	}
 
+	
+	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
+	//méthode pour gérer la couleur du cadre en fonction de la validité de la saisie
+	public void setCouleurErreur(boolean b, JTextField txt) {
+		if (b == true) {
+			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+		} else {
+			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -122,7 +133,8 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
 				if(this.panelMere.estChiffre(this.ensJTextField.get(0).getText())==false) {
-					this.ensJTextField.get(0).setText("0");
+					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+					this.setCouleurErreur(true, this.ensJTextField.get(0));
 				}
 				if (this.ensJTextField.get(0).getText().equals(Integer.toString(this.sommeHSae))
 						&& this.ensJTextField.get(1).getText().equals("")){
@@ -130,6 +142,8 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 				} else {
 					if (this.ensJTextField.get(0).getText().equals("") || Integer.parseInt(this.ensJTextField.get(0).getText()) < 0)
 						this.ensJTextField.get(0).setText("0");
+					this.setLabelErreur("");
+					this.setCouleurErreur(false, this.ensJTextField.get(0));
 					this.sommeHSae = Integer.parseInt(this.ensJTextField.get(0).getText());
 				}
 			} catch (Exception err) {
@@ -142,7 +156,8 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
 				if(this.panelMere.estChiffre(this.ensJTextField.get(1).getText())==false) {
-					this.ensJTextField.get(1).setText("0");
+					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+					this.setCouleurErreur(true, this.ensJTextField.get(1));
 				}
 				if (this.ensJTextField.get(1).getText().equals(Integer.toString(this.sommeHTut))
 						&& this.ensJTextField.get(0).getText().equals("")) {
@@ -150,6 +165,8 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 				} else {
 					if (this.ensJTextField.get(1).getText().equals("")|| Integer.parseInt(this.ensJTextField.get(1).getText()) < 0)
 						this.ensJTextField.get(1).setText("0");
+					this.setLabelErreur("");
+					this.setCouleurErreur(false, this.ensJTextField.get(1));
 					this.sommeHTut = Integer.parseInt(this.ensJTextField.get(1).getText());
 				}
 			} catch (Exception err) {
@@ -160,7 +177,30 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 		this.setSommePromo(this.totalSomme);
 	}
 	@Override
-	public void focusGained(FocusEvent e) {}
+	public void focusGained(FocusEvent e) {
+		// ré-affichage du label erreur si il y a une erreur dans un des txtField
+		if (e.getSource() == this.ensJTextField.get(0)) {
+			if (this.panelMere.estChiffre(this.ensJTextField.get(0).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensJTextField.get(0));
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensJTextField.get(0));
+			}
+		}
+
+		if (e.getSource() == this.ensJTextField.get(1)) {
+			if (this.panelMere.estChiffre(this.ensJTextField.get(1).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensJTextField.get(1));
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensJTextField.get(1));
+			}
+		}
+	}
 
 	public void setHeureAffecte(int hREH, int hTut) {
 		this.ensJTextField.get(2).setText("" + hREH);

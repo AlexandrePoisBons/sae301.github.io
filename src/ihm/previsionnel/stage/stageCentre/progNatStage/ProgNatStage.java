@@ -29,6 +29,8 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 	private JCheckBox  checkValid;
 	private int sommeAction;
 
+	private JLabel labelErreur;
+
 	private Module module;
 
 	private int sommeHSae = 0;
@@ -42,6 +44,7 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		this.setLayout(new BorderLayout());
 
 		//Initialisation des composants
+		JPanel pnlCentre	= new JPanel();
 		this.panelPrincipal  = new JPanel();
 		this.panelValidation = new JPanel();
 		this.txtHSae         = new JTextField(2);
@@ -136,6 +139,22 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
         return true;
     }
 
+	//méthode pour gérer la couleur du cadre en fonction de la validité de la saisie
+	public void setCouleurErreur(boolean b, JTextField txt) {
+		if (b == true) {
+			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+		} else {
+			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+		}
+	}
+
+	//méthode pour set le labelErreur
+	public void setLabelErreur(String s) {
+		this.labelErreur.setText(s);
+		this.labelErreur.repaint();
+		this.labelErreur.revalidate();
+	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -157,14 +176,18 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		if(e.getSource() == this.txtHSae){
 		try {
 			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-			if(this.estChiffre(this.txtHSae.getText()) == false)
-					this.txtHSae.setText("0");
+			if(this.estChiffre(this.txtHSae.getText()) == false){
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.txtHSae);
+			}
 			if(this.txtHSae.getText().equals(Integer.toString(this.sommeHSae)) && this.txtHTut.getText().equals("")){
 				System.out.println("Cette valeur a déjas été prise en compte");
 			}
 			else{
 				if (this.txtHSae.getText().equals("") || Integer.parseInt(this.txtHSae.getText()) < 0)
 					this.txtHSae.setText("0");
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.txtHSae);
 				this.sommeHSae = Integer.parseInt(this.txtHSae.getText()); 
 			}
 		}
@@ -176,14 +199,18 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		if(e.getSource() == this.txtHTut){
 		try {
 			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-			if(this.estChiffre(this.txtHTut.getText()) == false)
-				this.txtHTut.setText("0");
+			if(this.estChiffre(this.txtHTut.getText()) == false){
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.txtHTut);
+			}
 			if(this.txtHTut.getText().equals(Integer.toString(this.sommeHTut)) && this.txtHSae.getText().equals("")){
 				System.out.println("Cette valeur a déjas été prise en compte");
 			}
 			else{
 				if (this.txtHTut.getText().equals("") || Integer.parseInt(this.txtHTut.getText()) < 0)
 					this.txtHTut.setText("0");
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.txtHTut);
 				this.sommeHTut = Integer.parseInt(this.txtHTut.getText());
 			}
 		}
@@ -198,7 +225,30 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		this.txtSomme.revalidate();
 	}
 	@Override
-	public void focusGained(FocusEvent e) {}
+	public void focusGained(FocusEvent e) {
+		// ré-affichage du label erreur si il y a une erreur dans un des txtField
+		if (e.getSource() == this.txtHSae) {
+			if (this.estChiffre(this.txtHSae.getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.txtHSae);
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.txtHSae);
+			}
+		}
+
+		if (e.getSource() == this.txtHTut) {
+			if (this.estChiffre(this.txtHTut.getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.txtHTut);
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.txtHTut);
+			}
+		}
+	}
 
 
 	public boolean estValide() {

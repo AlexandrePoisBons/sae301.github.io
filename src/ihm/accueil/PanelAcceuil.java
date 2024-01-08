@@ -84,7 +84,7 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 		//mettre le petit r a cote de Serlogic & Co est un symbole de marque deposee
 		panelBas.add(new JLabel("Developped by :    Serlogic \u00AE"));
 		panelBas.add(this.logoEntreprise);
-		panelBas.add(new JLabel("   Version 1.0"));
+		panelBas.add(new JLabel("   Version 1.0 - beta"));
 
 		//Ajout des composants
 		panelHaut.add(this.logo);

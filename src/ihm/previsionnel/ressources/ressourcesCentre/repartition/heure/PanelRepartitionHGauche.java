@@ -1,7 +1,7 @@
 package ihm.previsionnel.ressources.ressourcesCentre.repartition.heure;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -104,6 +104,16 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 
 	}
 
+	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
+	//méthode pour gérer la couleur du cadre en fonction de la validité de la saisie
+	public void setCouleurErreur(boolean b, JTextField txt) {
+		if (b == true) {
+			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+		} else {
+			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+		}
+	}
+
 	public HashMap<String, Integer> getNbSemaines(){
 		HashMap<String, Integer> map = new HashMap<>();
 
@@ -151,7 +161,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
 					if(this.panelMere.estChiffre(this.ensJTextField.get(0).getText())==false) {
-						this.ensJTextField.get(0).setText("0");
+						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+						this.setCouleurErreur(true, this.ensJTextField.get(0));
 					}
 					if (this.ensJTextField.get(0).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(1).getText().equals("")) {
@@ -159,6 +170,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					} else {
 						if (this.ensJTextField.get(0).getText().equals("")|| Integer.parseInt(this.ensJTextField.get(0).getText())<0)
 							this.ensJTextField.get(0).setText("0");
+						this.setLabelErreur("");
+						this.setCouleurErreur(false, this.ensJTextField.get(0));
 						if (this.ensJTextField.get(1).getText().equals("0")||this.ensJTextField.get(1).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(0).getText());
 							this.panelMere.setSommeCM();
@@ -179,7 +192,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
 					if(this.panelMere.estChiffre(this.ensJTextField.get(1).getText())==false) {
-						this.ensJTextField.get(1).setText("0");
+						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+						this.setCouleurErreur(true, this.ensJTextField.get(1));
 					}
 					if (this.ensJTextField.get(1).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(0).getText().equals("")) {
@@ -187,6 +201,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					} else{
 						if (this.ensJTextField.get(1).getText().equals("") || Integer.parseInt(this.ensJTextField.get(1).getText())<0)
 							this.ensJTextField.get(1).setText("0");
+						this.setLabelErreur("");
+						this.setCouleurErreur(false, this.ensJTextField.get(1));
 						if (this.ensJTextField.get(0).getText().equals("0")||this.ensJTextField.get(0).getText().equals("")){	
 							somme += Integer.parseInt(this.ensJTextField.get(1).getText());
 							this.panelMere.setSommeCM();
@@ -218,7 +234,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
 					if(this.panelMere.estChiffre(this.ensJTextField.get(2).getText())==false) {
-						this.ensJTextField.get(2).setText("0");
+						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+						this.setCouleurErreur(true, this.ensJTextField.get(2));
 					}
 					if (this.ensJTextField.get(2).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(3).getText().equals("")) {
@@ -226,6 +243,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					} else {
 						if (this.ensJTextField.get(2).getText().equals("") || Integer.parseInt(this.ensJTextField.get(2).getText())<0)
 							this.ensJTextField.get(2).setText("0");
+						this.setLabelErreur("");
+						this.setCouleurErreur(false, this.ensJTextField.get(2));
 						if (this.ensJTextField.get(3).getText().equals("0")||this.ensJTextField.get(3).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(2).getText());
 							this.panelMere.setSommeTD();
@@ -250,7 +269,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
 					if(this.panelMere.estChiffre(this.ensJTextField.get(3).getText())==false) {
-						this.ensJTextField.get(3).setText("0");
+						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+						this.setCouleurErreur(true, this.ensJTextField.get(3));
 					}
 					if (this.ensJTextField.get(3).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(2).getText().equals("")) {
@@ -258,6 +278,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					} else {
 						if (this.ensJTextField.get(3).getText().equals("") || Integer.parseInt(this.ensJTextField.get(3).getText())<0)
 							this.ensJTextField.get(3).setText("0");
+						this.setLabelErreur("");
+						this.setCouleurErreur(false, this.ensJTextField.get(3));
 						if (this.ensJTextField.get(2).getText().equals("0")||this.ensJTextField.get(2).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(3).getText());
 							this.panelMere.setSommeTD();
@@ -289,7 +311,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
 					if(this.panelMere.estChiffre(this.ensJTextField.get(4).getText())==false) {
-						this.ensJTextField.get(2).setText("0");
+						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+						this.setCouleurErreur(true, this.ensJTextField.get(4));
 					}
 					if (this.ensJTextField.get(4).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(5).getText().equals("")) {
@@ -297,6 +320,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					} else {
 						if (this.ensJTextField.get(4).getText().equals("") || Integer.parseInt(this.ensJTextField.get(4).getText())<0)
 							this.ensJTextField.get(4).setText("0");
+						this.setLabelErreur("");
+						this.setCouleurErreur(false, this.ensJTextField.get(4));
 						if (this.ensJTextField.get(5).getText().equals("0")||this.ensJTextField.get(5).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(4).getText());
 							this.panelMere.setSommeTP();
@@ -321,7 +346,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 					// somme
 					if(this.panelMere.estChiffre(this.ensJTextField.get(5).getText())==false) {
-						this.ensJTextField.get(5).setText("0");
+						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+						this.setCouleurErreur(true, this.ensJTextField.get(5));
 					}
 					if (this.ensJTextField.get(5).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(4).getText().equals("")) {
@@ -329,6 +355,8 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					} else {
 						if (this.ensJTextField.get(5).getText().equals("") || Integer.parseInt(this.ensJTextField.get(5).getText())<0)
 							this.ensJTextField.get(5).setText("0");
+						this.setLabelErreur("");
+						this.setCouleurErreur(false, this.ensJTextField.get(5));
 						if (this.ensJTextField.get(4).getText().equals("0")||this.ensJTextField.get(4).getText().equals("")){
 							somme += Integer.parseInt(this.ensJTextField.get(5).getText());
 							this.panelMere.setSommeTP();
@@ -353,5 +381,74 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 		}
 	}
 	@Override
-	public void focusGained(FocusEvent e) {}
+	public void focusGained(FocusEvent e) {
+		// ré-affichage du label erreur si il y a une erreur dans un des txtField
+		if (e.getSource() == this.ensJTextField.get(0)) {
+			if (this.panelMere.estChiffre(this.ensJTextField.get(0).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensJTextField.get(0));
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensJTextField.get(0));
+			}
+		}
+
+		if (e.getSource() == this.ensJTextField.get(1)) {
+			if (this.panelMere.estChiffre(this.ensJTextField.get(1).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensJTextField.get(1));
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensJTextField.get(1));
+			}
+		}
+
+		if (e.getSource() == this.ensJTextField.get(2)) {
+			if (this.panelMere.estChiffre(this.ensJTextField.get(2).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensJTextField.get(2));
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensJTextField.get(2));
+			}
+		}
+
+		if (e.getSource() == this.ensJTextField.get(3)) {
+			if (this.panelMere.estChiffre(this.ensJTextField.get(3).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensJTextField.get(3));
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensJTextField.get(3));
+			}
+		}
+
+		if (e.getSource() == this.ensJTextField.get(4)) {
+			if (this.panelMere.estChiffre(this.ensJTextField.get(4).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensJTextField.get(4));
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensJTextField.get(4));
+			}
+		}
+
+		if (e.getSource() == this.ensJTextField.get(5)) {
+			if (this.panelMere.estChiffre(this.ensJTextField.get(5).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensJTextField.get(5));
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensJTextField.get(5));
+			}
+		}
+
+
+	}
 }

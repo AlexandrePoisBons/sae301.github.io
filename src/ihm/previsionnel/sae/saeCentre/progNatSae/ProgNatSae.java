@@ -27,6 +27,8 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 	private JCheckBox checkValid;
 	private int sommeAction;
 
+	private JLabel labelErreur;
+
 	private Module module;
 
 	private int sommeHSae = 0;
@@ -42,12 +44,17 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 
 		//Initialisation des composants
 		this.sommeAction = 0;
+		JPanel pnlCentre = new JPanel();
 		this.panelPrincipal = new JPanel();
 		this.panelValidation = new JPanel();
 		this.txtHSae = new JTextField(2);
 		this.txtHTut = new JTextField(2);
 		this.txtSomme = new JTextField(4);
 		this.checkValid = new JCheckBox();
+
+		this.labelErreur = new JLabel("");
+		//set la couleur du label erreur en rouge
+		this.labelErreur.setForeground(Color.RED);
 		this.checkValid.setSelected(this.module.isValide());
 		this.panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
@@ -58,7 +65,7 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 
 		//Layouts
 		//this.setLayout(new BorderLayout());
-		this.panelPrincipal.setLayout(new BorderLayout());
+		pnlCentre.setLayout(new BorderLayout());
 		this.panelPrincipal.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 
@@ -100,9 +107,12 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 		this.panelValidation.add(new JLabel("Validation"));
 		this.panelValidation.add(this.checkValid);
 
-		this.add(this.panelPrincipal, BorderLayout.NORTH);
-		this.add(this.panelValidation, BorderLayout.CENTER);
+		pnlCentre.add(this.panelValidation, BorderLayout.NORTH);
+		pnlCentre.add(this.labelErreur, BorderLayout.WEST);
 
+		this.add(this.panelPrincipal, BorderLayout.NORTH);
+		this.add(pnlCentre, BorderLayout.CENTER);
+		
 		//implémentation des listener
 		this.txtHSae.addFocusListener(this);
 		this.txtHTut.addFocusListener(this);
@@ -139,6 +149,22 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
         return true;
     }
 
+	//méthode pour gérer la couleur du cadre en fonction de la validité de la saisie
+	public void setCouleurErreur(boolean b, JTextField txt) {
+		if (b == true) {
+			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+		} else {
+			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+		}
+	}
+
+	//méthode pour set le labelErreur
+	public void setLabelErreur(String s) {
+		this.labelErreur.setText(s);
+		this.labelErreur.repaint();
+		this.labelErreur.revalidate();
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -159,38 +185,46 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 		if(e.getSource() == this.txtHSae){
 			try {
 				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-				if(this.estChiffre(this.txtHSae.getText()) == false)
-					this.txtHSae.setText("0");
+				if(this.estChiffre(this.txtHSae.getText()) == false){
+					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+					this.setCouleurErreur(true, this.txtHSae);
+				}
 				if(this.txtHSae.getText().equals(Integer.toString(this.sommeHSae)) && this.txtHTut.getText().equals("")){
 					System.out.println("Cette valeur a déjas été prise en compte");
 				}
 				else{
 					if (this.txtHSae.getText().equals("") || Integer.parseInt(this.txtHSae.getText()) < 0)
 						this.txtHSae.setText("0");
+					this.setLabelErreur("");
+					this.setCouleurErreur(false, this.txtHSae);
 					this.sommeHSae = Integer.parseInt(this.txtHSae.getText()); 
 				}
 			}
 			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+				System.out.print("");
 			}
 		}
 
 		if(e.getSource() == this.txtHTut){
 			try {
 				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-				if(this.estChiffre(this.txtHTut.getText()) == false)
-					this.txtHTut.setText("0");
+				if(this.estChiffre(this.txtHTut.getText()) == false){
+					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+					this.setCouleurErreur(true, this.txtHTut);
+				}
 				if(this.txtHTut.getText().equals(Integer.toString(this.sommeHTut)) && this.txtHSae.getText().equals("")){
 					System.out.println("Cette valeur a déjas été prise en compte");
 				}
 				else{
 					if (this.txtHTut.getText().equals("")|| Integer.parseInt(this.txtHTut.getText()) < 0)
 						this.txtHTut.setText("0");
+					this.setLabelErreur("");
+					this.setCouleurErreur(false, this.txtHTut);
 					this.sommeHTut = Integer.parseInt(this.txtHTut.getText());
 				}
 			}
 			catch(NumberFormatException ex) {
-				System.out.println("Erreur de saisie, veuillez entrer un nombre entier");
+				System.out.print("");
 			}
 		}
 
@@ -201,7 +235,30 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 	}
 
 	@Override
-	public void focusGained(FocusEvent e) {}
+	public void focusGained(FocusEvent e) {
+		// ré-affichage du label erreur si il y a une erreur dans un des txtField
+		if (e.getSource() == this.txtHSae) {
+			if (this.estChiffre(this.txtHSae.getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.txtHSae);
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.txtHSae);
+			}
+		}
+
+		if (e.getSource() == this.txtHTut) {
+			if (this.estChiffre(this.txtHTut.getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.txtHTut);
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.txtHTut);
+			}
+		}
+	}
 
 
 	public boolean estValide() { return this.checkValid.isSelected(); }

@@ -91,6 +91,9 @@ public class PanelRepartition extends JPanel implements ActionListener{
 		this.panelMere.setErreur(message);
 	}
 
+	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
+
+
 	public void setHeureAffecte() {
 		DefaultTableModel dtm = this.panelAffect.getDtm();
 		JTable tableauAffect  = this.panelAffect.getTableauAffect();

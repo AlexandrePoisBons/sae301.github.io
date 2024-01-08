@@ -57,6 +57,8 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 		this.btnSuppr.addActionListener(this);
 	}
 
+	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
+
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter) {
 			new FrameFormulaire(this,this.module);

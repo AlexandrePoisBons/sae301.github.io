@@ -57,6 +57,8 @@ public class PanelPppCentre extends JPanel {
 
 	}
 
+	public void setLabelErreur(String message) { this.pProgNat.setLabelErreur(message); }
+
 	public List<Heure> getHeures() { return this.panelRepartition.getHeures(); }
 
 	public HashMap<String, Integer> getData() {

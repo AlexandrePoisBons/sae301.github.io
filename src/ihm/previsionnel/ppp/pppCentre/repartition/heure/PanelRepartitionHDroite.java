@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Panel;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 public class PanelRepartitionHDroite extends JPanel implements ActionListener, FocusListener {
@@ -149,41 +151,64 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 		}
 	}
 
+	public void setLabelErreur(String message) {
+		this.panelMere.setLabelErreur(message);
+	}
+
+	// méthode pour gérer la couleur du cadre en fonction de la validité de la
+	// saisie
+	public void setCouleurErreur(boolean b, JTextField txt) {
+		if (b == true) {
+			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+		} else {
+			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+		}
+	}
+
 	public void setSommeTD(int somme) {
 		this.ensTxtFld.get(1).setText("" + somme);
 		this.sommeActionTD = somme;
 		this.clcTD = this.sommeActionTD * this.panelMere.getNbGpTd();
 	}
-	public void setSommeTD(){this.ensTxtFld.get(1).setText("0");}
+
+	public void setSommeTD() {
+		this.ensTxtFld.get(1).setText("0");
+	}
 
 	public void setSommeTP(int somme) {
 		this.ensTxtFld.get(2).setText("" + somme);
 		this.sommeActionTP = somme;
 		this.clcTP = this.sommeActionTP * this.panelMere.getNbGpTp();
 	}
-	public void setSommeTP(){this.ensTxtFld.get(2).setText("0");}
+
+	public void setSommeTP() {
+		this.ensTxtFld.get(2).setText("0");
+	}
 
 	public void setSommeCM(int somme) {
 		this.ensTxtFld.get(0).setText("" + somme);
 		this.sommeActionCM = somme;
 		this.clcCM = (int) (this.sommeActionCM * COEFF_CM_TD);
 	}
-	public void setSommeCM(){this.ensTxtFld.get(0).setText("0");}
+
+	public void setSommeCM() {
+		this.ensTxtFld.get(0).setText("0");
+	}
 
 	public void setSommeTotal() {
 		int somme = this.sommeActionTD + this.sommeActionTP + this.sommeActionCM + this.valTut + this.valPonct;
 		int sommeAffecte = this.clcCM + this.clcTD + this.clcTP + this.valTut + this.valPonct;
 
 		this.ensTxtFld.get(5).setText("" + somme);
-		if(this.clcCM>0)
+		if (this.clcCM > 0)
 			this.ensTxtFld.get(6).setText("" + clcCM);
-		if(this.clcTD > 0)
+		if (this.clcTD > 0)
 			this.ensTxtFld.get(7).setText("" + clcTD);
-		if(this.clcTP > 0)
+		if (this.clcTP > 0)
 			this.ensTxtFld.get(8).setText("" + clcTP);
-		if(this.valTut > 0)
+		if (this.valTut > 0)
 			this.ensTxtFld.get(9).setText("" + valTut);
-		if(this.valPonct > 0)
+		if (this.valPonct > 0)
 			this.ensTxtFld.get(10).setText("" + valPonct);
 		this.ensTxtFld.get(11).setText("" + sommeAffecte);
 		this.repaint();
@@ -218,39 +243,58 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.ensTxtFld.get(3)) {
-			if(this.panelMere.estChiffre(this.ensTxtFld.get(3).getText())==false) {
-				this.ensTxtFld.get(3).setText("0");
+			try {
+				if (this.panelMere.estChiffre(this.ensTxtFld.get(3).getText()) == false) {
+					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+					this.setCouleurErreur(true, this.ensTxtFld.get(3));
+				}
+				if (this.ensTxtFld.get(3).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(3).getText()) < 0)
+					this.ensTxtFld.get(3).setText("0");
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensTxtFld.get(3));
+				this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
+				// this.setSommeTotal();
+				this.ensTxtFld.get(3).transferFocus();
+				this.repaint();
+				this.revalidate();
+			} catch (Exception err) {
+				System.out.print("");
 			}
-			if (this.ensTxtFld.get(3).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(3).getText()) < 0)
-				this.ensTxtFld.get(3).setText("0");
-			this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
-			//this.setSommeTotal();
-			this.ensTxtFld.get(3).transferFocus();
-			this.repaint();
-			this.revalidate();
+
 		} else if (e.getSource() == this.ensTxtFld.get(4)) {
-			if(this.panelMere.estChiffre(this.ensTxtFld.get(4).getText())==false) {
-				this.ensTxtFld.get(4).setText("0");
+			try {
+				if (this.panelMere.estChiffre(this.ensTxtFld.get(4).getText()) == false) {
+					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+					this.setCouleurErreur(true, this.ensTxtFld.get(4));
+				}
+				if (this.ensTxtFld.get(4).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(4).getText()) < 0)
+					this.ensTxtFld.get(4).setText("0");
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensTxtFld.get(4));
+				this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
+				// this.setSommeTotal();
+				this.ensTxtFld.get(4).transferFocusBackward();
+				this.repaint();
+				this.revalidate();
+			} catch (Exception err) {
+				System.out.print("");
 			}
-			if (this.ensTxtFld.get(4).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(4).getText()) < 0)
-				this.ensTxtFld.get(4).setText("0");
-			this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
-			//this.setSommeTotal();
-			this.ensTxtFld.get(4).transferFocusBackward();
-			this.repaint();
-			this.revalidate();
+
 		}
 	}
 
 	@Override
 	public void focusLost(FocusEvent e) {
 		if (e.getSource() == this.ensTxtFld.get(3)) {
-			if(this.panelMere.estChiffre(this.ensTxtFld.get(3).getText())==false) {
-				this.ensTxtFld.get(3).setText("0");
+			if (this.panelMere.estChiffre(this.ensTxtFld.get(3).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensTxtFld.get(3));
 			}
 			try {
 				if (this.ensTxtFld.get(3).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(3).getText()) < 0)
 					this.ensTxtFld.get(3).setText("0");
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensTxtFld.get(3));
 				if (Integer.parseInt(this.ensTxtFld.get(3).getText()) > 0) {
 					this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
 					this.setSommeTotal();
@@ -263,16 +307,19 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 					this.revalidate();
 				}
 			} catch (Exception er) {
-				System.err.println("Erreur de saisie, veuillez entrer un nombre entier");
+				System.err.print("");
 			}
 		}
 		if (e.getSource() == this.ensTxtFld.get(4)) {
-			if(this.panelMere.estChiffre(this.ensTxtFld.get(4).getText())==false) {
-				this.ensTxtFld.get(4).setText("0");
+			if (this.panelMere.estChiffre(this.ensTxtFld.get(4).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensTxtFld.get(4));
 			}
 			try {
 				if (this.ensTxtFld.get(4).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(4).getText()) < 0)
 					this.ensTxtFld.get(4).setText("0");
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensTxtFld.get(4));
 				if (Integer.parseInt(this.ensTxtFld.get(4).getText()) > 0) {
 					this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
 					this.setSommeTotal();
@@ -285,13 +332,33 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 					this.revalidate();
 				}
 			} catch (Exception er) {
-				System.err.println("Erreur de saisie, veuillez entrer un nombre entier");
+				System.err.print("");
 			}
 		}
 	}
 
 	@Override
 	public void focusGained(FocusEvent e) {
+		if (e.getSource() == this.ensTxtFld.get(3)) {
+			if (this.panelMere.estChiffre(this.ensTxtFld.get(3).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensTxtFld.get(3));
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensTxtFld.get(3));
+			}
+		}
+		if (e.getSource() == this.ensTxtFld.get(4)) {
+			if (this.panelMere.estChiffre(this.ensTxtFld.get(4).getText()) == false) {
+				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+				this.setCouleurErreur(true, this.ensTxtFld.get(4));
+			}
+			else{
+				this.setLabelErreur("");
+				this.setCouleurErreur(false, this.ensTxtFld.get(4));
+			}
+		}
 	}
 
 }

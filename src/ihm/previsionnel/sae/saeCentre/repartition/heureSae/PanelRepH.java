@@ -32,6 +32,9 @@ public class PanelRepH extends JPanel{
 		this.add(this.panelRepartitionHDroite);
 	}
 
+	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
+
+
 	public boolean estChiffre(String texte) {
         // Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
         for (char c : texte.toCharArray()) {
