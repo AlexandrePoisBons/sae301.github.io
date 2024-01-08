@@ -70,12 +70,12 @@ public class PanelPrevi extends JPanel implements ActionListener {
 
 
 		//ActionListeners
-		this.btnCreer           .addActionListener(this);
-		this.ddlstBox           .addActionListener(this);
-		this.btnRetour          .addActionListener(this);
-		this.btnModifier        .addActionListener(this);
-		this.btnSupprimer       .addActionListener(this);
-		this.btnRetour          .addActionListener(this);
+		this.btnCreer    .addActionListener(this);
+		this.ddlstBox    .addActionListener(this);
+		this.btnRetour   .addActionListener(this);
+		this.btnModifier .addActionListener(this);
+		this.btnSupprimer.addActionListener(this);
+		this.btnRetour   .addActionListener(this);
 
 		List<Module> alModule = this.frame.getControleur().getCtrl().metier().getModules();
 		this.panelCenterPrevi.setModules( alModule );
@@ -117,7 +117,8 @@ public class PanelPrevi extends JPanel implements ActionListener {
 						default          -> System.err.println("TypeModule inexistant");
 					}
 				} else {
-					System.err.println("Sélectionner une ligne");
+					this.lblErreur.setText("Veuillez seléctionner une ligne");
+					this.repaint();
 				}
 			}
 		} else {
@@ -145,7 +146,6 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		}
 	}
 
-
 	public boolean check() {
 		if ( this.panelCenterPrevi.getNbEtd()      != 0 &&
 		     this.panelCenterPrevi.getNbGpTd()     != 0 &&
@@ -157,7 +157,4 @@ public class PanelPrevi extends JPanel implements ActionListener {
 			return false;
 		}
 	}
-
-
-
 }
