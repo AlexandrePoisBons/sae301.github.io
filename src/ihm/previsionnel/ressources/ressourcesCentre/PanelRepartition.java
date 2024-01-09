@@ -41,15 +41,15 @@ public class PanelRepartition extends JPanel implements ActionListener {
 
 		JPanel panelBoutons = new JPanel();
 
-		this.panelRepartitionHeure 	= new PanelRepartitionHeure	(this)				;
-		this.panelAffect	 		= new PanelAffect(this, this.module);
-		panelBoutons	 			= new JPanel				()				;
-		this.btnAjouter 			= new JButton				("Ajouter")	;
-		this.btnSuppr				= new JButton				("Supprimer")	;
+		this.panelRepartitionHeure = new PanelRepartitionHeure(this);
+		this.panelAffect = new PanelAffect(this, this.module);
+		panelBoutons     = new JPanel();
+		this.btnAjouter  = new JButton("Ajouter");
+		this.btnSuppr    = new JButton("Supprimer");
 
 		//Ajout des boutons au panel de boutons
-		panelBoutons.add(this.btnAjouter)								;
-		panelBoutons.add(this.btnSuppr)									;
+		panelBoutons.add(this.btnAjouter);
+		panelBoutons.add(this.btnSuppr);
 
 		//Ajout des panels au panel principal
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -57,29 +57,29 @@ public class PanelRepartition extends JPanel implements ActionListener {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(0, 0, 1, 0);
-		pnlAlignementNordCentre.add		(this.panelRepartitionHeure, gbc)	;
+		pnlAlignementNordCentre.add(this.panelRepartitionHeure, gbc);
 		gbc.gridy = 1;
-		pnlAlignementNordCentre.add		(this.panelAffect, gbc)				;
-		this.add		(pnlAlignementNordCentre, BorderLayout.NORTH)	;
-		this.add		(panelBoutons, BorderLayout.CENTER)				;
+		pnlAlignementNordCentre.add(this.panelAffect, gbc);
+		this.add(pnlAlignementNordCentre, BorderLayout.NORTH);
+		this.add(panelBoutons, BorderLayout.CENTER);
 
 		//Ajout des
-		this.btnAjouter.addActionListener	(this);
-		this.btnSuppr.addActionListener		(this);
+		this.btnAjouter.addActionListener(this);
+		this.btnSuppr.addActionListener(this);
 	}
 
 	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == this.btnAjouter) {
-			if(this.panelRepartitionHeure.txtRempli()){
+		if ( e.getSource() == this.btnAjouter ) {
+			if ( this.panelRepartitionHeure.txtRempli() ) {
 				new FrameFormulaire(this, this.module);
 			}
 			else {
-				this.setLabelErreur("Veuillez renseigner le nombre d'heure par semaine");
+				this.setLabelErreur("Veuillez renseigner le nombre d'heures par semaine");
 			}
 		}
-		if (e.getSource() == this.btnSuppr) {
+		if ( e.getSource() == this.btnSuppr ) {
 			this.panelAffect.supprimer();
 		}
 	}
@@ -99,7 +99,7 @@ public class PanelRepartition extends JPanel implements ActionListener {
 	public int getNbGpTd() {return this.panelMere.getNbGpTd();}
 	public int getNbGpTp() {return this.panelMere.getNbGpTp();}
 
-	public int getNbHeureSemaine(int i){
+	public int getNbHeureSemaine(int i) {
 		return this.panelRepartitionHeure.getNbHeureSemaine(i);
 	}
 
@@ -109,17 +109,17 @@ public class PanelRepartition extends JPanel implements ActionListener {
 		int heureTD = 0;
 		int heureTP = 0;
 		int heureHP = 0;
-		for(int i=0;i<dtm.getRowCount();i++) {
-			if(dtm.getValueAt(i, 1).toString().equals("CM")){
+		for ( int i=0; i<dtm.getRowCount(); i++ ) {
+			if ( dtm.getValueAt(i, 1).toString().equals("CM") ) {
 				heureCM += Integer.parseInt(dtm.getValueAt(i, 4).toString());
 			}
-			if(dtm.getValueAt(i, 1).toString().equals("TD")){
+			if ( dtm.getValueAt(i, 1).toString().equals("TD") ) {
 				heureTD += Integer.parseInt(dtm.getValueAt(i, 4).toString());
 			}
-			if(dtm.getValueAt(i, 1).toString().equals("TP")){
+			if ( dtm.getValueAt(i, 1).toString().equals("TP") ) {
 				heureTP += Integer.parseInt(dtm.getValueAt(i, 4).toString());
 			}
-			if(dtm.getValueAt(i, 1).toString().equals("HP")){
+			if ( dtm.getValueAt(i, 1).toString().equals("HP") ) {
 				heureHP += Integer.parseInt(dtm.getValueAt(i, 4).toString());
 			}
 		}

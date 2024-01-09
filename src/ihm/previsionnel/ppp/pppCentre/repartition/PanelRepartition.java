@@ -73,7 +73,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 				new FrameFormulaire(this, this.module);
 			}
 			else {
-				this.setLabelErreur("Veuillez renseigner le nombre d'heure par semaine");
+				this.setLabelErreur("Veuillez renseigner le nombre d'heures par semaine");
 			}	
 			
 		}
