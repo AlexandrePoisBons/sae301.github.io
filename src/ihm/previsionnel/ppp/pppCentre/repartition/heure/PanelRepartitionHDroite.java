@@ -213,13 +213,13 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 		this.ensTxtFld.get(5).setText("" + somme);
 		if (this.clcCM >= 0 && !this.ensTxtFld.get(0).getText().equals(""))
 			this.ensTxtFld.get(6).setText("" + clcCM);
-		if (this.clcTD >= 0)
+		if (this.clcTD >= 0 && !this.ensTxtFld.get(1).getText().equals(""))
 			this.ensTxtFld.get(7).setText("" + clcTD);
-		if (this.clcTP >= 0)
+		if (this.clcTP >= 0 && !this.ensTxtFld.get(2).getText().equals(""))
 			this.ensTxtFld.get(8).setText("" + clcTP);
-		if (this.valTut >= 0)
+		if (this.valTut >= 0 && !this.ensTxtFld.get(3).getText().equals(""))
 			this.ensTxtFld.get(9).setText("" + valTut);
-		if (this.valPonct >= 0)
+		if (this.valPonct >= 0 && !this.ensTxtFld.get(4).getText().equals(""))
 			this.ensTxtFld.get(10).setText("" + valPonct);
 		this.ensTxtFld.get(11).setText("" + sommeAffecte);
 		this.repaint();
@@ -264,7 +264,7 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.ensTxtFld.get(3));
 				this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
-				// this.setSommeTotal();
+				this.setSommeTotal();
 				this.ensTxtFld.get(3).transferFocus();
 				this.repaint();
 				this.revalidate();
@@ -283,7 +283,7 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.ensTxtFld.get(4));
 				this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
-				// this.setSommeTotal();
+				this.setSommeTotal();
 				this.ensTxtFld.get(4).transferFocusBackward();
 				this.repaint();
 				this.revalidate();
