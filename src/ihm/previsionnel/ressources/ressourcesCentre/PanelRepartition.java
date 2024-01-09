@@ -30,6 +30,7 @@ public class PanelRepartition extends JPanel implements ActionListener {
 	private JButton btnAjouter;
 	private JButton btnSuppr;
 	private Module module;
+	private FrameFormulaire frameFormulaire;
 
 	public PanelRepartition(PRCentre panelMere, Module m) {
 		this.panelMere = panelMere;
@@ -73,7 +74,7 @@ public class PanelRepartition extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if ( e.getSource() == this.btnAjouter ) {
 			if ( this.panelRepartitionHeure.txtRempli() ) {
-				new FrameFormulaire(this, this.module);
+				this.frameFormulaire = new FrameFormulaire(this, this.module);
 			}
 			else {
 				this.setLabelErreur("Veuillez renseigner le nombre d'heures par semaine");
@@ -91,9 +92,9 @@ public class PanelRepartition extends JPanel implements ActionListener {
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
 	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
 	public List<Heure> getDeletedHeures() { return this.panelAffect.getDeletedHeures(); }
-
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
+	public void fermerFrameFormulaire() { this.frameFormulaire.dispose(); }
 
 	public int getNbGpTd() {return this.panelMere.getNbGpTd();}
 	public int getNbGpTp() {return this.panelMere.getNbGpTp();}

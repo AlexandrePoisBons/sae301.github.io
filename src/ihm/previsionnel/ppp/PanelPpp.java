@@ -105,5 +105,6 @@ public class PanelPpp extends JPanel {
 	//pour mettre à jour les données dans pCentre
 	public int getNbGpTdMaj(){return this.panelPppNord.getTxtNbGpTd();}
 	public int getNbGpTpMaj(){return this.panelPppNord.getTxtNbGpTp();}
+	public void fermerFrameFormulaire() { this.panelPppCentre.fermerFrameFormulaire(); }
 
 }

@@ -2,6 +2,7 @@ package ihm.previsionnel.sae.saeCentre.repartition;
 
 //Imports classes Java
 import java.awt.BorderLayout;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	private PanelAffectSae panelAffect;
 	private JButton btnAjouter;
 	private JButton btnSuppr;
+	private FrameFormulaire frameFormulaire;
 
 	private Module module;
 
@@ -45,8 +47,8 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 		this.btnSuppr				= new JButton					("Supprimer")	;	
 
 		//Ajout des boutons au panel de boutons
-		panelBtn.add(this.btnAjouter)								;
-		panelBtn.add(this.btnSuppr)									;
+		panelBtn.add(this.btnAjouter);
+		panelBtn.add(this.btnSuppr);
 
 		this.add(this.panelRepH   , BorderLayout.NORTH);
 		this.add(this.panelAffect , BorderLayout.CENTER);
@@ -61,7 +63,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter) {
-			new FrameFormulaire(this,this.module);
+			this.frameFormulaire = new FrameFormulaire(this,this.module);
 			this.setErreur("");
 		}
 		if(e.getSource() == this.btnSuppr) {
@@ -70,17 +72,17 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	}
 
 
-
-	public HashMap<String,Integer> getData() { return this.panelMere.getData(); }
 	public HashMap<String,Integer> getNbSemaines() { return this.panelRepH.getNbSemaines(); }
+	public HashMap<String,Integer> getData() { return this.panelMere.getData(); }
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
-	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
 	public List<Heure> getDeletedHeures() { return this.panelAffect.getDeletedHeures(); }
+	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
 	public int getSommeAffecte() { return this.panelRepH.getSommeAffecte(); }
 
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
+	public void fermerFrameFormulaire() { this.frameFormulaire.dispose(); }
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);

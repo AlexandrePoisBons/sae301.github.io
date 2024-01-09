@@ -27,6 +27,8 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 	private PanelAffectStage panelAffect;
 	private JButton btnAjouter;
 	private JButton btnSuppr;
+	FrameFormulaire frameFormulaire;
+
 	private Module module;
 
 	public PanelRepartitionStage(PCentreStage panelMere, Module m) {
@@ -61,7 +63,7 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 	//A DECOMMENTER
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter){
-			new FrameFormulaire(this, this.module);
+			this.frameFormulaire = new FrameFormulaire(this, this.module);
 			this.setErreur("");
 		}
 		if(e.getSource() == this.btnSuppr){
@@ -79,6 +81,7 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
+	public void fermerFrameFormulaire() { this.frameFormulaire.dispose(); }
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);

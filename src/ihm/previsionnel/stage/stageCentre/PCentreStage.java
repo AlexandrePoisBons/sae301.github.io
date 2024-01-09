@@ -86,6 +86,7 @@ public class PCentreStage extends JPanel {
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.panelMere.getTypesHeures();  }
 	public List<Heure> getDeletedHeures() { return this.panelRepartitionStage.getDeletedHeures(); }
+	public void fermerFrameFormulaire() { this.panelRepartitionStage.fermerFrameFormulaire(); }
 
 	public boolean estValide() { return this.pProgNatStage.estValide(); }
 

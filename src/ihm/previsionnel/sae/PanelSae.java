@@ -88,6 +88,7 @@ public class PanelSae extends JPanel {
 	public String getLibelle()      { return this.pNordSae.getLibelle();      }
 	public String getLibelleCourt() { return this.pNordSae.getLibelleCourt(); }
 	public Module getModule ()      { return this.module;                     }
+	public void fermerFrameFormulaire() { this.pCentreSae.fermerFrameFormulaire(); }
 
 	public HashMap<String, Integer> getDataHeures() { return this.pCentreSae.getData(); }
 	public HashMap<String,Integer>  getData()       { return this.pCentreSae.getData(); }

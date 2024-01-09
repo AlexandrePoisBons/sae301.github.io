@@ -96,4 +96,6 @@ public class PCentreSae extends JPanel {
 		return this.panelProgNatSae.getSommePN();
 	}
 
+	public void fermerFrameFormulaire() { this.panelRepartitionSae.fermerFrameFormulaire(); }
+
 }
