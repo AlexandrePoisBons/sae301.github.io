@@ -1,8 +1,10 @@
 package ihm.etat;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -33,6 +35,7 @@ public class PanelInter extends JPanel implements ActionListener {
 	private JPanel                       panelSud;
 	private JButton                      btnGenererHtml;
 	private JButton                      btnGenererCSV;
+	private JLabel                       lblMessage;
 	private JButton                      btnRetour;
 	private JComboBox<String>            ddlstInter;
 	private List<Intervenant>            listInter;
@@ -57,13 +60,16 @@ public class PanelInter extends JPanel implements ActionListener {
 		this.panelSud        = new JPanel();
 		this.btnGenererHtml  = new JButton("Genérer html");
 		this.btnGenererCSV   = new JButton("Genérer CSV");
+		this.lblMessage      = new JLabel("");
 		this.btnRetour       = new JButton("Retour");
 		this.ddlstInter      = this.init();
 		this.listVerif 		 = new ArrayList<Heure>();
 		this.hashSemestre    = new HashMap<String, List<Heure>>();
 
+		this.panelSud.setLayout(new GridLayout(2, 1, 0, 10));
 		this.panelPrincipal.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
+
 
 		gbc.gridy = 0;
 		gbc.gridx = 0;
@@ -79,7 +85,8 @@ public class PanelInter extends JPanel implements ActionListener {
 		gbc.gridy = 1;
 		this.panelPrincipal.add(this.btnGenererCSV, gbc);
 
-		this.panelSud.add(this.btnRetour);
+		this.panelSud.add(this.lblMessage);
+		this.panelSud.add(this.btnRetour );
 
 		this.add(this.panelPrincipal, BorderLayout.CENTER);
 		this.add(this.panelSud, BorderLayout.SOUTH);
@@ -178,6 +185,7 @@ public class PanelInter extends JPanel implements ActionListener {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath), StandardCharsets.UTF_8))) {
 			// Écriture de la chaîne HTML dans le fichier
 			writer.write(htmlContent);
+			this.lblMessage.setText("Fichier HTML généré avec succès à l'emplacement : " + filePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -216,7 +224,8 @@ public class PanelInter extends JPanel implements ActionListener {
 				);
 			}
 
-			System.out.println("Fichier CSV généré avec succès à l'emplacement : " + filePath);
+			this.lblMessage.setText("Fichier CSV généré avec succès à l'emplacement : " + filePath);
+			this.repaint();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

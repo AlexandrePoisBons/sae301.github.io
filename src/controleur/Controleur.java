@@ -1,12 +1,14 @@
 package controleur;
 
+import ihm.accueil.FrameConnexion;
+
 public class Controleur {
 
 	private ControleurMetier metier;
 	private ControleurIHM    ihm;
 	private Infos            infos;
 
-	public static void main(String[] args) { new Controleur(); }
+	public static void main(String[] args) { new FrameConnexion(); }
 
 	public Controleur() {
 
