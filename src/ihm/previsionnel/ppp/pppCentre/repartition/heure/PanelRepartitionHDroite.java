@@ -19,8 +19,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 public class PanelRepartitionHDroite extends JPanel implements ActionListener, FocusListener {
-	// Constante coefficient de conversion des heures de CM en heures TD (1h de TD =
-	// 1.5h CM)
+	// Constante coefficient de conversion des heures de CM en heures TD (1h de TD = 1.5h CM)
 	private static final double COEFF_CM_TD = 1.5;
 
 	private PanelRepartitionHeure panelMere;
@@ -43,7 +42,6 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 			JTextField textField = new JTextField(3);
 			if (i == 3 || i == 4) {
 				textField.setEditable(true);
-				System.out.println("jsuis dedans lo");
 			} else {
 				textField.setEditable(false);
 			}
@@ -169,46 +167,59 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 		this.ensTxtFld.get(1).setText("" + somme);
 		this.sommeActionTD = somme;
 		this.clcTD = this.sommeActionTD * this.panelMere.getNbGpTd();
+		//this.setSommeTotal();
 	}
 
 	public void setSommeTD() {
 		this.ensTxtFld.get(1).setText("0");
+		this.ensTxtFld.get(7).setText("0");
+		this.repaint();
+		this.revalidate();
 	}
 
 	public void setSommeTP(int somme) {
 		this.ensTxtFld.get(2).setText("" + somme);
 		this.sommeActionTP = somme;
 		this.clcTP = this.sommeActionTP * this.panelMere.getNbGpTp();
+		//this.setSommeTotal();
 	}
 
 	public void setSommeTP() {
 		this.ensTxtFld.get(2).setText("0");
+		this.ensTxtFld.get(8).setText("0");
+		this.repaint();
+		this.revalidate();
 	}
 
 	public void setSommeCM(int somme) {
 		this.ensTxtFld.get(0).setText("" + somme);
 		this.sommeActionCM = somme;
 		this.clcCM = (int) (this.sommeActionCM * COEFF_CM_TD);
+		//this.setSommeTotal();
 	}
 
 	public void setSommeCM() {
 		this.ensTxtFld.get(0).setText("0");
+		this.ensTxtFld.get(6).setText("0");
+		this.repaint();
+		this.revalidate();
 	}
 
 	public void setSommeTotal() {
 		int somme = this.sommeActionTD + this.sommeActionTP + this.sommeActionCM + this.valTut + this.valPonct;
 		int sommeAffecte = this.clcCM + this.clcTD + this.clcTP + this.valTut + this.valPonct;
+		
 
 		this.ensTxtFld.get(5).setText("" + somme);
-		if (this.clcCM > 0)
+		if (this.clcCM >= 0 && !this.ensTxtFld.get(0).getText().equals(""))
 			this.ensTxtFld.get(6).setText("" + clcCM);
-		if (this.clcTD > 0)
+		if (this.clcTD >= 0)
 			this.ensTxtFld.get(7).setText("" + clcTD);
-		if (this.clcTP > 0)
+		if (this.clcTP >= 0)
 			this.ensTxtFld.get(8).setText("" + clcTP);
-		if (this.valTut > 0)
+		if (this.valTut >= 0)
 			this.ensTxtFld.get(9).setText("" + valTut);
-		if (this.valPonct > 0)
+		if (this.valPonct >= 0)
 			this.ensTxtFld.get(10).setText("" + valPonct);
 		this.ensTxtFld.get(11).setText("" + sommeAffecte);
 		this.repaint();
