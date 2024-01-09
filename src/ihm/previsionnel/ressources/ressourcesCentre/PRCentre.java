@@ -82,6 +82,7 @@ public class PRCentre extends JPanel {
 	public int getNbGpTp() { return this.panelMere.getNbGpTpMaj(); }
 
 	public boolean estValide() { return this.pProgNat.estValide(); }
+	public void fermerFrameFormulaire() { this.panelRepartition.fermerFrameFormulaire(); }
 
 
 }

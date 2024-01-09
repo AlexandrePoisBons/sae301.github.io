@@ -82,7 +82,7 @@ public class PanelPpp extends JPanel {
 	public String getLibelle()      { return this.panelPppNord.getLibelle();      }
 	public String getLibelleCourt() { return this.panelPppNord.getLibelleCourt(); }
 	public Module getModule ()      { return this.module;                     }
-	
+
 
 	public HashMap<String, Integer> getDataHeures() { return this.panelPppCentre.getData(); }
 	public HashMap<String,Integer>  getData()       { return this.panelPppCentre.getData(); }
@@ -105,5 +105,6 @@ public class PanelPpp extends JPanel {
 	//pour mettre à jour les données dans pCentre
 	public int getNbGpTdMaj(){return this.panelPppNord.getTxtNbGpTd();}
 	public int getNbGpTpMaj(){return this.panelPppNord.getTxtNbGpTp();}
+	public void fermerFrameFormulaire() { this.panelPppCentre.fermerFrameFormulaire(); }
 
 }

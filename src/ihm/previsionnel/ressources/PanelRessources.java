@@ -95,5 +95,6 @@ public class PanelRessources extends JPanel {
 	//pour mettre à jour les données dans pCentre
 	public int getNbGpTdMaj() { return this.pRNord.getTxtNbGpTd(); }
 	public int getNbGpTpMaj() { return this.pRNord.getTxtNbGpTp(); }
+	public void fermerFrameFormulaire() { this.pRCentre.fermerFrameFormulaire(); }
 
 }
