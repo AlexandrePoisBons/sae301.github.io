@@ -1,7 +1,6 @@
 package ihm.etat;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -39,7 +38,7 @@ public class PanelInter extends JPanel implements ActionListener {
 	private JButton                      btnRetour;
 	private JComboBox<String>            ddlstInter;
 	private List<Intervenant>            listInter;
-	private List<Heure>  	             listVerif;
+	private List<Heure>                  listVerif;
 	private HashMap<String, List<Heure>> hashSemestre;
 
 
@@ -113,9 +112,9 @@ public class PanelInter extends JPanel implements ActionListener {
 		html.append("<tr>\n<th>Code</th>\n<th>Module</th>\n<th>Type d'heure</th>\n<th>Nombre d'heures</th>\n<th>Semestre</th>\n</tr>\n");
 
 		// Remplissage du tableau avec les modules et les heures associées
-		for (Module module : intervenant.getModules()) {
+		for ( Module module : intervenant.getModules() ) {
 			// Pour chaque module, on parcourt les heures associées
-			for (Heure heure : module.getHeures()) {
+			for ( Heure heure : module.getHeures() ) {
 				if(heure.getIntervenants().contains(intervenant) && !(this.listVerif.contains(heure))) {
 					html.append("<tr>\n");
 					html.append("<td>").append(module.getCode()).append("</td>\n");
@@ -128,7 +127,7 @@ public class PanelInter extends JPanel implements ActionListener {
 				}
 			}
 
-			if(this.hashSemestre.containsKey(module.getSemestre())) {
+			if ( this.hashSemestre.containsKey(module.getSemestre()) ) {
 				this.hashSemestre.get(module.getSemestre()).addAll(this.listVerif);
 			} else {
 				this.hashSemestre.put(module.getSemestre(), new ArrayList<Heure>(this.listVerif));
@@ -137,7 +136,7 @@ public class PanelInter extends JPanel implements ActionListener {
 			// On vide la liste des heures pour le prochain semestre
 			this.listVerif.clear();
 		}
-		
+
 		// Fin du tableau et de la page HTML
 		html.append("</table>");
 		html.append("<br>");
@@ -166,7 +165,7 @@ public class PanelInter extends JPanel implements ActionListener {
 		this.ecrireFichierHTML(html.toString(), "./Etats/Intervenants/Html/" + intervenant.getNom() + "_" + intervenant.getPrenom() + ".html");
 	}
 
-	private int getNbHeuresParSemestre(String semestre) {
+	private int getNbHeuresParSemestre( String semestre ) {
 		int nbHeures = 0;
 		//verif si le semestre est null
 		if(this.hashSemestre.get(semestre) == null) {
@@ -181,8 +180,8 @@ public class PanelInter extends JPanel implements ActionListener {
 		return nbHeures;
 	}
 
-	private void ecrireFichierHTML(String htmlContent, String filePath) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath), StandardCharsets.UTF_8))) {
+	private void ecrireFichierHTML( String htmlContent, String filePath ) {
+		try ( BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath), StandardCharsets.UTF_8)) ) {
 			// Écriture de la chaîne HTML dans le fichier
 			writer.write(htmlContent);
 			this.lblMessage.setText("Fichier HTML généré avec succès à l'emplacement : " + filePath);
@@ -204,22 +203,22 @@ public class PanelInter extends JPanel implements ActionListener {
 	}
 
 	public void generateIntervenantsCSV(List<Intervenant> intervenants, String filePath) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath), StandardCharsets.UTF_8))) {
+		try ( BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath), StandardCharsets.UTF_8)) ) {
 			// Entête du CSV
 			writer.write("Catégorie;Nom;Prénom;Service Dû;Max Heures Autorisé;Coeff TP;Total Heures Impairs;Total Heures Pairs;Total Heures");
 
 			// Écriture des données pour chaque intervenant
-			for (Intervenant intervenant : intervenants) {
+			for ( Intervenant intervenant : intervenants ) {
 				writer.newLine();
 				writer.write(
-						intervenant.getStatut() + ";" +
-						intervenant.getNom() + ";" +
-						intervenant.getPrenom() + ";" +
-						intervenant.getNbEqTD() + ";" +
-						getMaxHeuresAutorisees(intervenant) + ";" +
-						getCoefficientTP(intervenant) + ";" +
+						intervenant.getStatut()                                       + ";" +
+						intervenant.getNom()                                          + ";" +
+						intervenant.getPrenom()                                       + ";" +
+						intervenant.getNbEqTD()                                       + ";" +
+						getMaxHeuresAutorisees(intervenant)                           + ";" +
+						getCoefficientTP(intervenant)                                 + ";" +
 						getTotalHeuresParSemestre(intervenant, "impair") + ";" +
-						getTotalHeuresParSemestre(intervenant, "pair") + ";" +
+						getTotalHeuresParSemestre(intervenant, "pair")   + ";" +
 						intervenant.getNbHeures()
 				);
 			}
@@ -247,12 +246,12 @@ public class PanelInter extends JPanel implements ActionListener {
 		Map<String, Float> heuresParSemestre = intervenant.getNbHeuresParSemestre();
 		float totalHeures = 0.0f;
 
-		for (Map.Entry<String, Float> entry : heuresParSemestre.entrySet()) {
+		for ( Map.Entry<String, Float> entry : heuresParSemestre.entrySet() ) {
 			String semestre = entry.getKey();
 			float heures = entry.getValue();
 
-			if ((semestreType.equals("impair") && semestre.endsWith("1")) ||
-				(semestreType.equals("pair") && semestre.endsWith("2"))) {
+			if ( (semestreType.equals("impair") && semestre.endsWith("1")) ||
+				 (semestreType.equals("pair")   && semestre.endsWith("2")) ) {
 				totalHeures += heures;
 			}
 		}
@@ -262,18 +261,17 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnGenererHtml){
-			for (Intervenant intervenant : this.listInter) {
-				if((intervenant.getNom() + " " + intervenant.getPrenom()).equals(this.ddlstInter.getSelectedItem())) {
+		if ( e.getSource() == this.btnGenererHtml ) {
+			for ( Intervenant intervenant : this.listInter ) {
+				if ( (intervenant.getNom() + " " + intervenant.getPrenom()).equals(this.ddlstInter.getSelectedItem()) ) {
 					this.genererHtml(intervenant);
 				}
 			}
-		}
-		if(e.getSource() == this.btnGenererCSV) {
+		} else if ( e.getSource() == this.btnGenererCSV ) {
 			this.generateIntervenantsCSV(this.listInter, "./Etats/Intervenants/CSV/Intervenants.csv");
-		}
-		if(e.getSource() == this.btnRetour) {
+		} else if ( e.getSource() == this.btnRetour ) {
 			this.panelMere.changerPanel(new PanelEtats(this.frame));
 		}
 	}
+
 }

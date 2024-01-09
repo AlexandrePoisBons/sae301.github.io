@@ -11,14 +11,14 @@ import metier.Statut;
 
 public class PanelFormulaireStatut extends JPanel implements ActionListener {
 	private PanelParam panelMere;
-	private JTextField txtNomStatut; 
-	private JTextField txtNbHeuresService; 
-	private JTextField txtNbHeuresMax; 
-	private JTextField txtCoeff; 
+	private JTextField txtNomStatut;
+	private JTextField txtNbHeuresService;
+	private JTextField txtNbHeuresMax;
+	private JTextField txtCoeff;
 	private JButton    btnValider;
 	private JButton    btnAnnuler;
 	private Statut     statut;
-	private JLabel    lblErreur;
+	private JLabel     lblErreur;
 
 	public PanelFormulaireStatut() {}
 
@@ -27,13 +27,13 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 		this.statut = statut;
 		this.setLayout(new GridBagLayout());
 
-		GridBagConstraints gbc 	= new GridBagConstraints();
+		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.anchor = GridBagConstraints.WEST;
 
 		this.txtNomStatut       = new JTextField(15);
 		this.txtNbHeuresService = new JTextField(15);
 		this.txtNbHeuresMax     = new JTextField(15);
-		this.txtCoeff          	= new JTextField(15);
+		this.txtCoeff           = new JTextField(15);
 		this.btnValider         = new JButton("Valider");
 		this.btnAnnuler         = new JButton("Annuler");
 		this.lblErreur          = new JLabel("");
@@ -44,22 +44,22 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 
 		gbc.gridy = 0;
 		gbc.gridx = 0;
-		this.add(new JLabel("Nom du statut   "				), gbc);
+		this.add(new JLabel("Nom du statut   "), gbc);
 		gbc.gridy = 1;
 		this.add(new JLabel("Nombre d'heures de service   "), gbc);
 		gbc.gridy = 2;
-		this.add(new JLabel("Nombre d'heures maximum   "	), gbc);
+		this.add(new JLabel("Nombre d'heures maximum   "), gbc);
 		gbc.gridy = 3;
-		this.add(new JLabel("Coefficient   "				), gbc);		
+		this.add(new JLabel("Coefficient   "), gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		this.add(this.txtNomStatut		, gbc);
+		this.add(this.txtNomStatut, gbc);
 		gbc.gridy = 1;
 		this.add(this.txtNbHeuresService, gbc);
 		gbc.gridy = 2;
-		this.add(this.txtNbHeuresMax	, gbc);
+		this.add(this.txtNbHeuresMax, gbc);
 		gbc.gridy = 3;
-		this.add(this.txtCoeff			, gbc);
+		this.add(this.txtCoeff, gbc);
 
 		gbc.gridy = 5;
 		gbc.gridx = 0;
@@ -96,12 +96,12 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 
-		if(e.getSource() == this.btnValider) {
+		if ( e.getSource() == this.btnValider ) {
 			this.valider();
-		}
-		if(e.getSource() == this.btnAnnuler){
+		} else if ( e.getSource() == this.btnAnnuler ) {
 			this.effacer();
 		}
+
 	}
 
 	public void valider() {
@@ -133,23 +133,19 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 
 		Statut s = new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff);
 
-		if ( this.statut != null )
+		if ( this.statut != null ) 
 			this.panelMere.majStatut(this.statut, s);
 
 
 		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
 		if (nbHeuresService == 0 || nbHeuresMax == 0 || coeff == 0.0f) {
 			this.lblErreur.setText("Vérifier vos valeurs");
-		}
-		else {
+		} else {
 			this.panelMere.ajouterStatut(s);
 			if ( statut != null ) this.panelMere.supprimerStatut();
-			this.effacer();
 		}
 
-
 		this.effacer();
-
 	}
 
 	public void effacer() {
@@ -158,8 +154,5 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 		this.txtNbHeuresMax.setText("");
 		this.txtCoeff.setText("");
 	}
-
-
-	
 
 }

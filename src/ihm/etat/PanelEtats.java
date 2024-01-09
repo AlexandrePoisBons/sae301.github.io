@@ -1,11 +1,9 @@
 package ihm.etat;
 
 import java.awt.BorderLayout;
-import java.awt.Frame;
 import java.awt.Toolkit;
 import javax.swing.*;
 
-import controleur.Controleur;
 import controleur.ControleurIHM;
 import ihm.accueil.FrameAccueil;
 import ihm.accueil.PanelAcceuil;
@@ -13,15 +11,17 @@ import ihm.accueil.PanelAcceuil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelEtats extends JPanel implements ActionListener{
+public class PanelEtats extends JPanel implements ActionListener {
+
 	private FrameAccueil frame;
 	private JButton btnInter;
 	private JButton btnModule;
 	private JButton btnRetour;
 
-	public PanelEtats(FrameAccueil frame){
+	public PanelEtats(FrameAccueil frame) {
 		this.frame = frame;
 		this.setLayout(new BorderLayout());
+
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -30,9 +30,9 @@ public class PanelEtats extends JPanel implements ActionListener{
 		this.frame.setSize(xSize, ySize);
 		this.frame.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 
-		this.btnInter 	= new JButton("Intervenant(s)");
-		this.btnModule 	= new JButton("Modules");
-		this.btnRetour  = new JButton("Retour");
+		this.btnInter = new JButton("Intervenant(s)");
+		this.btnModule = new JButton("Modules");
+		this.btnRetour = new JButton("Retour");
 
 		JPanel panelBas  = new JPanel();
 		JPanel panelHaut = new JPanel();
@@ -62,16 +62,13 @@ public class PanelEtats extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() ==  this.btnInter){
+		if (e.getSource() ==  this.btnInter) {
 			this.frame.changerPanel(new PanelInter(this.frame, this));
-		}
-
-		if(e.getSource() ==  this.btnModule){
+		} else if (e.getSource() ==  this.btnModule) {
 			this.frame.changerPanel(new PanelModule(this.frame, this));
-		}
-
-		if(e.getSource() ==  this.btnRetour){
+		} else if (e.getSource() ==  this.btnRetour) {
 			this.frame.changerPanel(new PanelAcceuil(frame));
 		}
 	}
+
 }

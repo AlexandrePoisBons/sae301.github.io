@@ -1,18 +1,17 @@
-package ihm.accueil						;
-//Imports classes externes
-import ihm.previsionnel.*				;
-import ihm.parametrage.PanelParam		;
-import ihm.etat.PanelEtats				;
-import ihm.intervenants.PanelInter		;
+package ihm.accueil;
+
+import ihm.previsionnel.*;
+import ihm.parametrage.PanelParam;
+import ihm.etat.PanelEtats;
+import ihm.intervenants.PanelInter;
 
 //Imports classes Java
-import javax.swing.*					;
-import java.awt.GridLayout				;
+import javax.swing.*;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.BorderLayout			;
-import java.awt.event.ActionListener	;
-import java.awt.event.ActionEvent		;
-
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class PanelAcceuil extends JPanel implements ActionListener {
@@ -30,7 +29,7 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 	private JLabel logoEntreprise = new JLabel(new ImageIcon("img/LogoEntreprise.png"));
 
 	//Constructeur
-	public PanelAcceuil(FrameAccueil frame){
+	public PanelAcceuil(FrameAccueil frame) {
 		//Synchronisation des pages
 		this.frame = frame;
 		JPanel panelCentre;
@@ -65,7 +64,7 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 
 		panelCentre.setLayout(new GridLayout(4, 1, 10, 5));
 
-				//Mettre la  fenetre en blanc
+		// Définit le background global de la fenetre en blanc
 		this.setBackground(java.awt.Color.WHITE);
 		panelCentre.setBackground(java.awt.Color.WHITE);
 		panelHaut.setBackground(java.awt.Color.WHITE);
@@ -74,19 +73,19 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 		panelDroite.setBackground(java.awt.Color.WHITE);
 
 
-		//Reduire la longueur des boutons (marche pas mais les rend tous a la meme taille donc on garde)
+		// Reduit la longueur des boutons
 		this.btnParam.setPreferredSize(new java.awt.Dimension(150, 30));
 		this.btnPrevi.setPreferredSize(new java.awt.Dimension(150, 30));
 		this.btnInter.setPreferredSize(new java.awt.Dimension(150, 30));
 		this.btnEtats.setPreferredSize(new java.awt.Dimension(150, 30));
 
-		//Ajout de "Developped by" en bas de la fenetre et du logo
-		//mettre le petit r a cote de Serlogic & Co est un symbole de marque deposee
+		// Ajout de "Developped by" en bas de la fenetre et du logo
+		// ainsi que le 'r' a cote de Serlogic & Co
 		panelBas.add(new JLabel("Developped by :    Serlogic \u00AE"));
 		panelBas.add(this.logoEntreprise);
 		panelBas.add(new JLabel("   Version 1.0 - beta"));
 
-		//Ajout des composants
+		// Ajout des composants
 		panelHaut.add(this.logo);
 		panelCentre.add(this.btnParam);
 		panelCentre.add(this.btnPrevi);
@@ -95,7 +94,7 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 
 		this.add(panelCentre, BorderLayout.CENTER);
 		this.add(panelHaut  , BorderLayout.NORTH);
-		this.add(panelBas, BorderLayout.SOUTH);
+		this.add(panelBas   , BorderLayout.SOUTH);
 		this.add(panelGauche, BorderLayout.WEST);
 		this.add(panelDroite, BorderLayout.EAST);
 	

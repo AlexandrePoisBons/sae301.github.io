@@ -150,12 +150,9 @@ public class Requetes {
 	}
 
 	public void deleteIntervenant( Intervenant intervenant ) throws SQLException {
-		System.out.println("zero");
 		if ( this.existsIntervenant(intervenant.getIdIntervenant()) ) {
-			System.out.println("un");
 			this.psDeleteI.setInt(1, intervenant.getIdIntervenant());
-			System.out.println("deux");
-			System.out.println("donovastp "+this.psDeleteI.executeUpdate());
+			this.psDeleteI.executeUpdate();
 		} else {
 			System.out.println("Intervenant id_intervenant="+intervenant.getIdIntervenant()+" inexistant");
 		}
@@ -185,17 +182,17 @@ public class Requetes {
 
 		try {
 			Class.forName("org.postgresql.Driver");
-			System.out.println ("CHARGEMENT DU PILOTE OK");
+			// System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			String url = "jdbc:postgresql://localhost:5432/" + infos.getDatabase() ;
+			String url = Infos.URL_DATABASE + infos.getDatabase() ;
 			String login = infos.getLogin();
 			String password = infos.getPassword();
 
 			Connection connec = DriverManager.getConnection(url,login,password);
 
-			System.out.println("CONNEXION A LA BADO: REUSSIE");
+			// System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
 				PreparedStatement psGetNbIntervenant =  connec.prepareStatement("SELECT COUNT(*) FROM Intervenant;");
@@ -286,16 +283,16 @@ public class Requetes {
 
 		try {
 			Class.forName("org.postgresql.Driver");
-			System.out.println ("CHARGEMENT DU PILOTE OK");
+			// System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch ( ClassNotFoundException e ) { e.printStackTrace(); }
 
 		try {
-			String url = "jdbc:postgresql://localhost:5432/"+infos.getDatabase();
+			String url = Infos.URL_DATABASE + infos.getDatabase();
 			String login = infos.getLogin();
 			String password = infos.getPassword();
 
 			Connection connec = DriverManager.getConnection(url,login,password);
-			System.out.println("CONNEXION A LA BADO: REUSSIE");
+			// System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
 
@@ -380,17 +377,17 @@ public class Requetes {
 
 		try {
 			Class.forName("org.postgresql.Driver");
-			System.out.println ("CHARGEMENT DU PILOTE OK");
+			// System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch ( ClassNotFoundException e ) { e.printStackTrace(); }
 
 		try {
-			String url = "jdbc:postgresql://localhost:5432/"+infos.getDatabase();
+			String url = Infos.URL_DATABASE + infos.getDatabase();
 			String login = infos.getLogin();
 			String password = infos.getPassword();
 
 			Connection connec = DriverManager.getConnection(url,login,password);
 
-			System.out.println("CONNEXION A LA BADO: REUSSIE");
+			// System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
 				Statement sGetNbTypeHeures =  connec.createStatement();
@@ -495,15 +492,15 @@ public class Requetes {
 
 		try {
 			Class.forName("org.postgresql.Driver");
-			System.out.println ("CHARGEMENT DU PILOTE OK");
+			// System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			String url = "jdbc:postgresql://localhost:5432/"+infos.getDatabase();
+			String url = Infos.URL_DATABASE + infos.getDatabase();
 			String login = infos.getLogin();
 			String password = infos.getPassword();
 			Connection connec = DriverManager.getConnection(url,login,password);
-			System.out.println("CONNEXION A LA BADO: REUSSIE");
+			// System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
 				PreparedStatement  psGetNbModules =  connec.prepareStatement("SELECT COUNT(*) FROM Module;");

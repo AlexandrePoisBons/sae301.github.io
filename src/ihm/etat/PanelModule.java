@@ -130,17 +130,17 @@ public class PanelModule extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnGenererHtml){
+		if ( e.getSource() == this.btnGenererHtml ) {
 			Module m = null;
-			for(Module module : this.frame.getControleur().getCtrl().metier().getModules()) {
-				if(this.ddlstModule.getSelectedItem().equals(module.getCode() + " " + module.getLibelleCourt())) {
+			for ( Module module : this.frame.getControleur().getCtrl().metier().getModules() ) {
+				if ( this.ddlstModule.getSelectedItem().equals(module.getCode() + " " + module.getLibelleCourt()) ) {
 					m = module;
 				}
 			}
 			this.genererHtml(m);
-		}
-		if(e.getSource() == this.btnRetour) {
+		} else if ( e.getSource() == this.btnRetour ) {
 			this.panelMere.changerPanel(new PanelEtats(this.frame));
 		}
 	}
+
 }

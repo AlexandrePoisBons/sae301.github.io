@@ -1,23 +1,25 @@
 package ihm.accueil;
 
+import controleur.Controleur;
+import controleur.Infos;
+
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import javax.swing.*;
 
-import controleur.Controleur;
-import controleur.Infos;
 
 public class FrameConnexion extends JFrame implements ActionListener{
 
-	private JTextField     txtUrl;
+	private JTextField     txtDatabase;
 	private JTextField     txtLogin;
 	private JPasswordField pswMdp;
 	private JButton        btnConnexion;
@@ -37,10 +39,10 @@ public class FrameConnexion extends JFrame implements ActionListener{
 		this.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 		this.setTitle("Accueil");
 
-		this.txtUrl            = new JTextField(10);
+		this.txtDatabase            = new JTextField(10);
 		this.txtLogin          = new JTextField(10);
 		this.pswMdp            = new JPasswordField(10);
-		this.txtUrl.setText(infos.getDatabase());
+		this.txtDatabase.setText(infos.getDatabase());
 		this.txtLogin.setText(infos.getLogin());
 		this.pswMdp.setText(infos.getPassword());
 		this.btnConnexion      = new JButton("Connexion");
@@ -60,7 +62,7 @@ public class FrameConnexion extends JFrame implements ActionListener{
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(0, 5, 10, 0);
-		panelPrincipal.add(this.txtUrl, gbc);
+		panelPrincipal.add(this.txtDatabase, gbc);
 		gbc.gridy = 1;
 		panelPrincipal.add(this.txtLogin, gbc);
 		gbc.gridy = 2;
@@ -93,15 +95,14 @@ public class FrameConnexion extends JFrame implements ActionListener{
 		String login;
 		String password;
 
-		u = this.txtUrl.getText();
+		u = this.txtDatabase.getText();
 		login = this.txtLogin.getText();
 		password = new String(this.pswMdp.getPassword());
 
 		try {
 			Class.forName("org.postgresql.Driver");
-			System.out.println ("CHARGEMENT DU PILOTE OK");
+			// System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch ( ClassNotFoundException e ) {
-			// e.printStackTrace();
 			System.out.println("\n|| CONNEXION IMPOSSIBLE ||");
 			this.dispose();
 			new FrameConnexion();
@@ -111,18 +112,16 @@ public class FrameConnexion extends JFrame implements ActionListener{
 		try {
 			String url = Infos.URL_DATABASE + u;
 
-			Connection connec = DriverManager.getConnection(url,login,password);
+			DriverManager.getConnection(url,login,password);
 
-			System.out.println("CONNEXION A LA BADO: REUSSIE");
+			// System.out.println("CONNEXION A LA BADO: REUSSIE");
 		} catch ( SQLException e ) {
-			// e.printStackTrace();
 			System.out.println("\n|| CONNEXION IMPOSSIBLE ||");
 			this.dispose();
 			new FrameConnexion();
 			return;
 		}
 
-		System.out.println("coucou twa");
 		Infos.ecrire(u, login, password);
 		this.dispose();
 		new Controleur();

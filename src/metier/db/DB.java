@@ -3,7 +3,6 @@ package metier.db;
 import java.sql.*;
 
 import controleur.Infos;
-import metier.*;
 
 public class DB {
 
@@ -18,17 +17,17 @@ public class DB {
 
 		try {
 			Class.forName("org.postgresql.Driver");
-			System.out.println ("CHARGEMENT DU PILOTE OK");
+			// System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch ( ClassNotFoundException e ) { e.printStackTrace(); }
 
 		try {
-			String url = "jdbc:postgresql://localhost:5432/" + this.infos.getDatabase();
+			String url = Infos.URL_DATABASE + this.infos.getDatabase();
 			String login = this.infos.getLogin();
 			String password = this.infos.getPassword();
 
 			connec = DriverManager.getConnection(url,login,password);
 
-			System.out.println("CONNEXION A LA BADO: REUSSIE");
+			// System.out.println("CONNEXION A LA BADO: REUSSIE");
 		} catch ( SQLException e ) { e.printStackTrace(); }
 	}
 

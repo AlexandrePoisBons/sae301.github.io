@@ -10,11 +10,11 @@ import javax.swing.table.TableCellEditor;
 
 public class ComboBoxCellEditor extends AbstractCellEditor implements TableCellEditor{
 	private JComboBox<String> box;
-	private String[] tabStatut;
 
-	public ComboBoxCellEditor(){
+	public ComboBoxCellEditor() {
 		this.box = new JComboBox<String>();
 	}
+
 	@Override
 	public Object getCellEditorValue() {
 		return box.getSelectedItem();

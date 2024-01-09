@@ -29,8 +29,9 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 
 	public FrameFormulaire(PanelInter panelMere) {
 		this.panelMere       = panelMere;
+
 		//Définition de la taille et la position de la fenêtre
-		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		int xSize = (int)(largeur*0.5);
 		int ySize = (int)(hauteur*0.5);
@@ -86,7 +87,6 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		this.panelFormulaire.add(this.txtHMax, gbc);
 		gbc.gridy = 5;
 		this.panelFormulaire.add(this.txtCoefTP, gbc);
-		
 
 		gbc.gridy = 6;
 		gbc.gridx = 0;
@@ -109,14 +109,12 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.ddlstStatut) {
+		if ( e.getSource() == this.ddlstStatut ) {
 			this.majCoefTp();
-		}
-		if(e.getSource() == this.btnValider){
+		} else if ( e.getSource() == this.btnValider ) {
 			this.valider();
 			this.dispose();
-		}
-		if(e.getSource() == this.btnAnnuler){
+		} else if ( e.getSource() == this.btnAnnuler ) {
 			this.dispose();
 		}
 	}
@@ -133,7 +131,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	private void remplirListe(List<Statut> statuts) {
 		this.statuts = statuts;
 		String[] tabStatut = new String[statuts.size()];
-		for(int i=0;i<statuts.size();i++){
+		for( int i=0; i<statuts.size(); i++ ) {
 			tabStatut[i] = statuts.get(i).getNomStatut();
 		}
 		this.ddlstStatut = new JComboBox<String>(tabStatut);
@@ -143,8 +141,8 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		try {
 			String stt = this.ddlstStatut.getSelectedItem().toString();
 			Statut statut = null;
-			for (Statut s : this.statuts) {
-				if (s.getNomStatut().equals(stt))
+			for ( Statut s : this.statuts ) {
+				if ( s.getNomStatut().equals(stt) )
 					statut = s;
 			}
 			Intervenant inter = Intervenant.tempIntervenant(this.txtPrenom.getText(), this.txtNom.getText(), statut, 0);
@@ -158,7 +156,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 			this.panelMere.ajouterIntervenant(inter);
 			this.panelMere.revalidate();
 			this.panelMere.repaint();
-		} catch (Exception err) {
+		} catch (Exception e) {
 			this.lblErreur.setText("Erreur, vérifier vos valeurs");
 			this.repaint();
 			this.revalidate();

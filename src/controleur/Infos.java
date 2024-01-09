@@ -25,10 +25,6 @@ public class Infos {
 
 		this.initValues();
 
-		System.out.println("database: "+database);
-		System.out.println("login: "+login);
-		System.out.println("password: "+password);
-
 	}
 
 	private boolean initValues() {
@@ -44,7 +40,7 @@ public class Infos {
 			}
 			sc.close();
 		} catch( Exception exc ) {
-			System.out.println("Erreur fichier" + exc);
+			System.out.println("Erreur fichier " + exc);
 			return false;
 		}
 
@@ -75,7 +71,6 @@ public class Infos {
 
 			writer.write(content);
 
-			System.out.println("saved");
 			writer.close();
 		} catch (IOException e) { e.printStackTrace(); }
 

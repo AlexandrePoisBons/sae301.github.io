@@ -8,7 +8,6 @@ import ihm.accueil.PanelAcceuil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +36,7 @@ public class PanelInter extends JPanel implements ActionListener {
 
 	private List<Intervenant> intervenants;
 
-	public PanelInter( FrameAccueil frAcceuil ) {
+	public PanelInter(FrameAccueil frAcceuil) {
 		// Synchronisation des pages
 		this.frame = frAcceuil;
 
@@ -132,7 +131,7 @@ public class PanelInter extends JPanel implements ActionListener {
 		Float totPair, totImpair, tot;
 
 		Object[] vals = new Object[15];
-		for (Intervenant intervenant : this.intervenants) {
+		for ( Intervenant intervenant : this.intervenants ) {
 			HashMap<String, Float> map = intervenant.getNbHeuresParSemestre();
 			categorie = intervenant.getStatut().getNomStatut();
 			nom = intervenant.getNom();
@@ -165,6 +164,7 @@ public class PanelInter extends JPanel implements ActionListener {
 			vals[12] = s6; // S6
 			vals[13] = totPair; // sTot : total des semestres pairs
 			vals[14] = tot; // Total des semestres
+
 			this.ajouterLigne(vals);
 		}
 
@@ -186,14 +186,12 @@ public class PanelInter extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		this.lblErreur.setText("");
 
-		if (e.getSource() == this.btnAjouter) {
+		if ( e.getSource() == this.btnAjouter ) {
 			this.panelFormulaire = new FrameFormulaire(this);
 			this.lblErreur.setText("");
 			this.panelFormulaire.setVisible(true);
 			this.panelFormulaire.repaint();
-		}
-
-		if (e.getSource() == this.btnSupprimer) {
+		} else if ( e.getSource() == this.btnSupprimer ) {
 			try {
 				this.supprimer();
 			} catch (Exception ex) {
@@ -201,14 +199,10 @@ public class PanelInter extends JPanel implements ActionListener {
 			}
 			this.repaint();
 			this.revalidate();
-		}
-
-		if (e.getSource() == this.btnEnregistrer) {
+		} else if ( e.getSource() == this.btnEnregistrer ) {
 			this.enregistrer();
 			this.frame.changerPanel(new PanelAcceuil(this.frame));
-		}
-
-		if (e.getSource() == this.btnAnnuler) {
+		} else if ( e.getSource() == this.btnAnnuler ) {
 			this.frame.changerPanel(new PanelAcceuil(frame));
 		}
 
@@ -221,7 +215,7 @@ public class PanelInter extends JPanel implements ActionListener {
 
 		int i = this.intervenants.size();
 
-		for (Intervenant intervenant : this.frame.getControleur().getCtrl().metier().getIntervenants()) {
+		for ( Intervenant intervenant : this.frame.getControleur().getCtrl().metier().getIntervenants() ) {
 			if ( !this.intervenants.contains(intervenant) ) {
 				try {
 					this.frame.getControleur().getCtrl().metier().supprimerIntervenant(intervenant);
@@ -230,18 +224,16 @@ public class PanelInter extends JPanel implements ActionListener {
 		}
 
 		Intervenant tmp;
-		for (int j = 0; j < i; j++) {
+		for ( int j = 0; j < i; j++ ) {
 			tmp = this.intervenants.get(j);
 			if ( tmp.getIdIntervenant() == -1 ) {
 				Intervenant inter = Intervenant.creerIntervenant(tmp.getPrenom(), tmp.getNom(), tmp.getStatut(), tmp.getNbEqTD());
 				this.intervenants.remove(tmp);
-				//this.intervenants.add(inter);
 				this.frame.getControleur().getCtrl().metier().ajouterIntervenant(inter);
 			}
 		}
 
 	}
-
 
 	public void ajouterLigne(Object[] values) {
 		this.dtm.addRow(values);

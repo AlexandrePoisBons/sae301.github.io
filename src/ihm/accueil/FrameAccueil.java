@@ -4,13 +4,10 @@ import javax.swing.*		;
 
 import controleur.ControleurIHM;
 
-import java.awt.GridBagLayout;
-import java.awt.Toolkit;
 
 public class FrameAccueil extends JFrame {
 	//Attribut(s)
 	private JPanel panel;
-
 	private ControleurIHM ctrl;
 
 	//Constructeur
@@ -24,7 +21,6 @@ public class FrameAccueil extends JFrame {
 
 		//Ajout des composants
 		 this.add(this.panel);
-
 
 		//Permet la fermeture de la fenetre quand on appuie sur la croix
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -129,7 +129,6 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.panelTableaux.add(panelBtnStatut);
 
 
-
 		//Ajout dans panel retour
 		this.panelSud.add(this.btnRetour, FlowLayout.LEFT);
 		this.panelSud.add(this.btnEnregistrer, FlowLayout.LEFT);
@@ -160,24 +159,17 @@ public class PanelParam extends JPanel implements ActionListener{
 		List<Statut> statuts = this.frame.getControleur().getCtrl().metier().getStatuts();
 		List<TypeHeure> typeHeures = this.frame.getControleur().getCtrl().metier().getTypesHeures();
 
-		for (Statut statut : statuts) {
+		for (Statut statut : statuts)
 			this.ajouterStatut(statut);
-		}
 
-		for (TypeHeure typeHeure : typeHeures) {
+		for ( TypeHeure typeHeure : typeHeures ) 
 			this.ajouterTypeHeure(typeHeure);
-		}
 
-	
 	}
 
-	public Statut getCurrentStatut() {
-		return this.ensStatut.get(this.tableauStatut.getSelectedRow());
-	}
+	public Statut getCurrentStatut() { return this.ensStatut.get(this.tableauStatut.getSelectedRow()); }
 
-	public TypeHeure getCurrentTypeHeure() {
-		return this.ensTypeHeure.get(this.tableauCoef.getSelectedRow());
-	}
+	public TypeHeure getCurrentTypeHeure() { return this.ensTypeHeure.get(this.tableauCoef.getSelectedRow()); }
 
 	// Ajout des statut
 	public void ajouterStatut(Statut statut) {
@@ -190,7 +182,8 @@ public class PanelParam extends JPanel implements ActionListener{
 	// Modifier des statuts
 	public void modifierStatut() {
 		int ligneSelectionnee = this.tableauStatut.getSelectedRow();
-		if (ligneSelectionnee != -1) {
+
+		if ( ligneSelectionnee != -1 ) {
 			int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 			int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 			int xSize = (int)(largeur*0.8);
@@ -204,8 +197,7 @@ public class PanelParam extends JPanel implements ActionListener{
 			this.panelFormulaireStatut.revalidate();
 			this.panelFormulaireStatut.repaint();
 			this.panelFormulaireStatut.setVisible(true);
-		}
-		else {
+		} else {
 			this.lblErreur.setText("Veuillez sélectionner un statut");
 			this.repaint();
 			this.revalidate();
@@ -252,8 +244,7 @@ public class PanelParam extends JPanel implements ActionListener{
 			this.panelFormulaireCoef.revalidate();
 			this.panelFormulaireCoef.repaint();
 			this.panelFormulaireCoef.setVisible(true);
-		}
-		else {
+		} else {
 			this.lblErreur.setText("Veuillez sélectionner un type d'heure");
 			this.repaint();
 			this.revalidate();
@@ -264,7 +255,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	public void supprimerTypeHeure() {
 		int ligneSelectionne = this.tableauCoef.getSelectedRow();
 
-		if (ligneSelectionne != -1) {
+		if ( ligneSelectionne != -1 ) {
 			this.dtmCoef.removeRow(ligneSelectionne);
 			this.ensTypeHeure.remove(this.ensTypeHeure.get(ligneSelectionne));
 		} else {
@@ -275,8 +266,8 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	public boolean majTypeHeure(TypeHeure oldTH, TypeHeure newTH) {
-		for (TypeHeure typeHeure : this.ensTypeHeure) {
-			if ( typeHeure.getNomTypeHeure().equals(oldTH.getNomTypeHeure()) ){
+		for ( TypeHeure typeHeure : this.ensTypeHeure ) {
+			if ( typeHeure.getNomTypeHeure().equals(oldTH.getNomTypeHeure()) ) {
 				typeHeure.setCoeff(newTH.getCoeff());
 				return true;
 			}
@@ -317,11 +308,8 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	public void enregistrer() {
-		System.out.println("coucou 1");
 		this.frame.getControleur().getCtrl().metier().majTypesHeures(this.ensTypeHeure);
-		System.out.println("coucou 2");
 		this.frame.getControleur().getCtrl().metier().majStatuts(this.ensStatut);
-		System.out.println("coucou 3");
 	}
 
 	//Supprimer Ligne
@@ -336,52 +324,42 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	public boolean majStatut(Statut oldS, Statut newS) {
-		for (Statut statut : this.ensStatut) {
-			if ( statut.getNomStatut().equals(oldS.getNomStatut()) ){
+		for ( Statut statut : this.ensStatut ) {
+			if ( statut.getNomStatut().equals(oldS.getNomStatut()) ) {
 				statut.setCoeffTP(newS.getCoeffTP());
 				statut.setNomStatut(newS.getNomStatut());
 				statut.setNbHeureService(newS.getNbHeureService());
 				statut.setNbHeuresMax(newS.getNbHeuresMax());
 				return true;
 			}
-
 		}
-
 		return false;
 	}
 
-	public int getLigne() {
-		return this.tableauStatut.getSelectedRow();
-	}
+	public int getLigne() { return this.tableauStatut.getSelectedRow(); }
 
 	public void actionPerformed(ActionEvent e) {
 		this.lblErreur.setText("");
 
-		if(e.getSource() == this.btnAjoutCoef) {
+		if ( e.getSource() == this.btnAjoutCoef ) {
 			this.ajouter(new PanelFormulaireCoef(this, null));
-		}
-		if(e.getSource() == this.btnModifierCoef) {
+		} else if ( e.getSource() == this.btnModifierCoef ) {
 			this.modifierTypeHeure();
-		}
-		if(e.getSource() == this.btnSuppCoef) {
+		} else if (e.getSource() == this.btnSuppCoef ) {
 			this.supprimerTypeHeure();
-		}
-		if(e.getSource() == this.btnAjoutStatut){
+		} else if ( e.getSource() == this.btnAjoutStatut ) {
 			this.ajouter(new PanelFormulaireStatut(this, null));
-		}
-		if(e.getSource() == this.btnSuppStatut) {
+		} else if ( e.getSource() == this.btnSuppStatut ) {
 			this.supprimerStatut();
-		}
-		if(e.getSource() == this.btnModifierStatut) {
+		} else if ( e.getSource() == this.btnModifierStatut ) {
 			this.modifierStatut();
-		}
-		if(e.getSource() == this.btnEnregistrer) {
+		} else if ( e.getSource() == this.btnEnregistrer ) {
 			this.enregistrer();
 			this.frame.dispose();
 			this.frame = new FrameAccueil(this.frame.getControleur());
-		}
-		if(e.getSource() == this.btnRetour){
+		} else if (e.getSource() == this.btnRetour) {
 			this.frame.changerPanel(new PanelAcceuil(frame));
 		}
 	}
+
 }

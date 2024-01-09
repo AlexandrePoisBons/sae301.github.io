@@ -38,7 +38,7 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 		this.panelN = new JPanel();
 		this.panelC = new JPanel();
 		this.ensTxtFld = new ArrayList<JTextField>();
-		for (int i = 0; i < 18; i++) {
+		for ( int i = 0; i < 18; i++ ) {
 			JTextField textField = new JTextField(3);
 			if (i == 3 || i == 4) {
 				textField.setEditable(true);
@@ -143,7 +143,7 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 		this.setVisible(true);
 
 		// initialisation des listener
-		for (int cpt = 0; cpt < 18; cpt++) {
+		for ( int cpt = 0; cpt < 18; cpt++ ) {
 			this.ensTxtFld.get(cpt).addActionListener(this);
 			this.ensTxtFld.get(cpt).addFocusListener(this);
 		}
@@ -156,7 +156,7 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 	// méthode pour gérer la couleur du cadre en fonction de la validité de la
 	// saisie
 	public void setCouleurErreur(boolean b, JTextField txt) {
-		if (b == true) {
+		if (b) {
 			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
 		} else {
 			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
@@ -255,7 +255,7 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.ensTxtFld.get(3)) {
 			try {
-				if (this.panelMere.estChiffre(this.ensTxtFld.get(3).getText()) == false) {
+				if ( !this.panelMere.estChiffre(this.ensTxtFld.get(3).getText()) ) {
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.ensTxtFld.get(3));
 				}
@@ -297,7 +297,7 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 	@Override
 	public void focusLost(FocusEvent e) {
 		if (e.getSource() == this.ensTxtFld.get(3)) {
-			if (this.panelMere.estChiffre(this.ensTxtFld.get(3).getText()) == false) {
+			if ( !this.panelMere.estChiffre(this.ensTxtFld.get(3).getText()) ) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 				this.setCouleurErreur(true, this.ensTxtFld.get(3));
 			}
@@ -309,67 +309,56 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 				if (Integer.parseInt(this.ensTxtFld.get(3).getText()) > 0) {
 					this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
 					this.setSommeTotal();
-					this.repaint();
-					this.revalidate();
 				} else {
 					this.ensTxtFld.get(3).setText("0");
 					this.valTut = Integer.parseInt(this.ensTxtFld.get(3).getText());
-					this.repaint();
-					this.revalidate();
 				}
-			} catch (Exception er) {
-				System.err.print("");
-			}
-		}
-		if (e.getSource() == this.ensTxtFld.get(4)) {
-			if (this.panelMere.estChiffre(this.ensTxtFld.get(4).getText()) == false) {
+				this.repaint();
+					this.revalidate();
+			} catch (Exception er) { }
+		} else if ( e.getSource() == this.ensTxtFld.get(4) ) {
+			if ( !this.panelMere.estChiffre(this.ensTxtFld.get(4).getText()) ) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 				this.setCouleurErreur(true, this.ensTxtFld.get(4));
 			}
 			try {
-				if (this.ensTxtFld.get(4).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(4).getText()) < 0)
+				if ( this.ensTxtFld.get(4).getText().equals("") || Integer.parseInt(this.ensTxtFld.get(4).getText()) < 0 )
 					this.ensTxtFld.get(4).setText("0");
 				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.ensTxtFld.get(4));
 				if (Integer.parseInt(this.ensTxtFld.get(4).getText()) > 0) {
 					this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
 					this.setSommeTotal();
-					this.repaint();
-					this.revalidate();
 				} else {
 					this.ensTxtFld.get(4).setText("0");
 					this.valPonct = Integer.parseInt(this.ensTxtFld.get(4).getText());
-					this.repaint();
-					this.revalidate();
 				}
-			} catch (Exception er) {
-				System.err.print("");
-			}
+				this.repaint();
+				this.revalidate();
+			} catch (Exception er) { }
 		}
 	}
 
 	@Override
 	public void focusGained(FocusEvent e) {
-		if (e.getSource() == this.ensTxtFld.get(3)) {
-			if (this.panelMere.estChiffre(this.ensTxtFld.get(3).getText()) == false) {
+		if ( e.getSource() == this.ensTxtFld.get(3) ) {
+			if ( !this.panelMere.estChiffre(this.ensTxtFld.get(3).getText()) ) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 				this.setCouleurErreur(true, this.ensTxtFld.get(3));
-			}
-			else{
+			} else{
 				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.ensTxtFld.get(3));
 			}
-		}
-		if (e.getSource() == this.ensTxtFld.get(4)) {
-			if (this.panelMere.estChiffre(this.ensTxtFld.get(4).getText()) == false) {
+		} else if ( e.getSource() == this.ensTxtFld.get(4) ) {
+			if ( !this.panelMere.estChiffre(this.ensTxtFld.get(4).getText()) ) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 				this.setCouleurErreur(true, this.ensTxtFld.get(4));
-			}
-			else{
+			} else {
 				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.ensTxtFld.get(4));
 			}
 		}
+
 	}
 
 }

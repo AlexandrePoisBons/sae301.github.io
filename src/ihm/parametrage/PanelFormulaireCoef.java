@@ -32,7 +32,7 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 		this.btnValider         = new JButton("Valider");
 		this.btnAnnuler         = new JButton("Annuler");
 
-		if(typeHeure != null) {
+		if ( typeHeure != null ) {
 			this.txtTypeHeure.setEditable(false);
 		}
 
@@ -76,10 +76,9 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 
-		if(e.getSource() == this.btnValider) {
+		if ( e.getSource() == this.btnValider ) {
 			this.valider();
-		}
-		if(e.getSource() == this.btnAnnuler){
+		} else if ( e.getSource() == this.btnAnnuler ) {
 			this.effacer();
 		}
 	}
@@ -88,27 +87,22 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 		float coeff = 1.0f;
 
 		try { coeff =  Float.parseFloat(this.txtCoeff.getText()); }
-		catch ( NumberFormatException e ) { System.out.println(this.txtCoeff.getText() + " : pas un Float"); }
+	catch ( NumberFormatException e ) { /* System.out.println(this.txtCoeff.getText() + " : pas un Float"); */ }
 
 		if ( this.typeHeure != null )
 			this.typeHeure.setCoeff(coeff);
-		
-
 
 		if ( this.typeHeure != null )
 			this.panelMere.majTypeHeure(this.typeHeure, this.typeHeure);
 
-
 		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
-		if (coeff == 0.0f) {
-		}
-		else {
+		if (coeff != 0.0f) {
 			this.panelMere.ajouterTypeHeure(this.typeHeure);
-			if ( typeHeure != null ) this.panelMere.supprimerTypeHeure();
-			this.effacer();
+			if ( typeHeure != null )
+				this.panelMere.supprimerTypeHeure();
 		}
-		this.effacer();
 
+		this.effacer();
 
 	}
 

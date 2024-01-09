@@ -17,8 +17,6 @@ import java.awt.Color;
 import metier.Module;
 
 public class ProgNat extends JPanel implements ActionListener, FocusListener {
-	// Constante coefficient de conversion des heures de CM en heures TD (1h de TD =
-	// 1.5h CM)
 	private static final double COEFF_CM_TD = 1.5;
 
 	private PanelPppCentre panelMere;
@@ -188,8 +186,8 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	private boolean estChiffre(String texte) {
 		// Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un
 		// chiffre.
-		for (char c : texte.toCharArray()) {
-			if (!Character.isDigit(c)) {
+		for ( char c : texte.toCharArray() ) {
+			if ( !Character.isDigit(c) ) {
 				return false;
 			}
 		}
@@ -199,7 +197,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	// méthode pour gérer la couleur du cadre en fonction de la validité de la
 	// saisie
 	public void setCouleurErreur(boolean b, JTextField txt) {
-		if (b == true) {
+		if ( b ) {
 			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
 		} else {
 			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
@@ -231,30 +229,27 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		if (e.getSource() == this.txtHPonctWrite) {
+		if ( e.getSource() == this.txtHPonctWrite ) {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
-				if (this.estChiffre(this.txtHPonctWrite.getText()) == false) {
+				if ( this.estChiffre(this.txtHPonctWrite.getText()) == false ) {
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.txtHPonctWrite);
 				}
-				if (this.txtHPonctWrite.getText().equals(Integer.toString(sommeHPonct))
+				if ( this.txtHPonctWrite.getText().equals(Integer.toString(sommeHPonct) )
 						&& this.txtHPonctWrite.getText().equals("")) {
 					System.out.println("Cette valeur a déjas été prise en compte");
 				} else {
-					if (this.txtHPonctWrite.getText().equals("") || Integer.parseInt(this.txtHPonctWrite.getText()) < 0)
+					if ( this.txtHPonctWrite.getText().equals("") || Integer.parseInt(this.txtHPonctWrite.getText()) < 0 )
 						this.txtHPonctWrite.setText("0");
 					this.setLabelErreur("");
 					this.setCouleurErreur(false, this.txtHPonctWrite);
 					sommeHPonct = Integer.parseInt(this.txtHPonctWrite.getText());
 				}
-			} catch (NumberFormatException ex) {
-				System.out.print("");
-			}
-		}
+			} catch (NumberFormatException ex) { }
 
-		if (e.getSource() == this.txtHTutWrite) {
+		} else if ( e.getSource() == this.txtHTutWrite ) {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
@@ -272,12 +267,9 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 					this.setCouleurErreur(false, this.txtHTutWrite);
 					sommeHTut = Integer.parseInt(this.txtHTutWrite.getText());
 				}
-			} catch (NumberFormatException ex) {
-				System.out.print("");
-			}
-		}
+			} catch (NumberFormatException ex) { }
 
-		if (e.getSource() == this.txtCMWrite) {
+		} else if ( e.getSource() == this.txtCMWrite ) {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
@@ -301,12 +293,9 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 					this.txtCM.repaint();
 					this.txtCM.revalidate();
 				}
-			} catch (Exception err) {
-				System.out.print("");
-			}
-		}
+			} catch (Exception err) { }
 
-		if (e.getSource() == this.txtTDWrite) {
+		} else if ( e.getSource() == this.txtTDWrite ) {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
@@ -331,12 +320,9 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 					this.txtTD.repaint();
 					this.txtTD.revalidate();
 				}
-			} catch (Exception err) {
-				System.out.print("");
-			}
-		}
+			} catch (Exception err) { }
 
-		if (e.getSource() == this.txtTPWrite) {
+		} else if ( e.getSource() == this.txtTPWrite ) {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
@@ -361,10 +347,9 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 					this.txtTP.repaint();
 					this.txtTP.revalidate();
 				}
-			} catch (Exception err) {
-				System.out.print("");
-			}
+			} catch (Exception err) { }
 		}
+
 		this.sommeTotSansCoeff = sommeHPonct + sommeHTut + sommeCM + sommeTD + sommeTP;
 		this.txtSomme.setText(Integer.toString(this.sommeTotSansCoeff));
 
@@ -377,7 +362,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	@Override
 	public void focusGained(FocusEvent e) {
 		// ré-affichage du label erreur si il y a une erreur dans un des txtField
-		if (e.getSource() == this.txtCMWrite) {
+		if ( e.getSource() == this.txtCMWrite ) {
 			if (this.estChiffre(this.txtCMWrite.getText()) == false) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 				this.setCouleurErreur(true, this.txtCMWrite);
@@ -385,9 +370,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.txtCMWrite);
 			}
-		}
-
-		if (e.getSource() == this.txtTDWrite) {
+		} else if ( e.getSource() == this.txtTDWrite ) {
 			if (this.estChiffre(this.txtTDWrite.getText()) == false) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 				this.setCouleurErreur(true, this.txtTDWrite);
@@ -395,9 +378,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.txtTDWrite);
 			}
-		}
-
-		if (e.getSource() == this.txtTPWrite) {
+		} else if ( e.getSource() == this.txtTPWrite ) {
 			if (this.estChiffre(this.txtTPWrite.getText()) == false) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 				this.setCouleurErreur(true, this.txtTPWrite);
@@ -405,9 +386,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.txtTPWrite);
 			}
-		}
-
-		if (e.getSource() == this.txtHPonctWrite) {
+		} else if ( e.getSource() == this.txtHPonctWrite ) {
 			if (this.estChiffre(this.txtHPonctWrite.getText()) == false) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 				this.setCouleurErreur(true, this.txtHPonctWrite);
@@ -415,9 +394,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.txtHPonctWrite);
 			}
-		}
-
-		if (e.getSource() == this.txtHTutWrite) {
+		} else if ( e.getSource() == this.txtHTutWrite ) {
 			if (this.estChiffre(this.txtHTutWrite.getText()) == false) {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 				this.setCouleurErreur(true, this.txtHTutWrite);
@@ -428,12 +405,8 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 		}
 	}
 
-	public boolean estValide() {
-		return this.checkValid.isSelected();
-	}
+	public boolean estValide() { return this.checkValid.isSelected(); }
 
-	public int getSommePN() {
-		return this.sommeAction;
-	}
+	public int getSommePN() { return this.sommeAction; }
 
 }
