@@ -172,13 +172,13 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 		int sommeAffecte = this.clcCM + this.clcTD + this.clcTP + this.val;
 
 		this.ensTxtFld.get(4).setText("" + somme);
-		if (this.clcCM > 0)
+		if (this.clcCM >= 0 && !this.ensTxtFld.get(0).getText().equals(""))
 			this.ensTxtFld.get(5).setText("" + clcCM);
-		if (this.clcTD > 0)
+		if (this.clcTD >= 0 && !this.ensTxtFld.get(1).getText().equals(""))
 			this.ensTxtFld.get(6).setText("" + clcTD);
-		if (this.clcTP > 0)
+		if (this.clcTP >= 0 && !this.ensTxtFld.get(2).getText().equals(""))
 			this.ensTxtFld.get(7).setText("" + clcTP);
-		if (this.val > 0)
+		if (this.val >= 0 && !this.ensTxtFld.get(3).getText().equals(""))
 			this.ensTxtFld.get(8).setText("" + this.val);
 		this.ensTxtFld.get(9).setText("" + sommeAffecte);
 		this.repaint();
@@ -218,7 +218,7 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 				this.setLabelErreur("");
 				this.setCouleurErreur(false, this.ensTxtFld.get(3));
 				this.val = Integer.parseInt(this.ensTxtFld.get(3).getText());
-				// this.setSommeTotal();
+				this.setSommeTotal();
 				this.ensTxtFld.get(3).transferFocus();
 				this.repaint();
 				this.revalidate();
