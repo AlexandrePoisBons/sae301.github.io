@@ -18,7 +18,6 @@ import javax.swing.*;
 public class PanelRepartitionHGauche extends JPanel implements ActionListener, FocusListener {
 	private PanelRepartitionHeure panelMere;
 	private JPanel panelHeure;
-	private JPanel panelTotal;
 	private ArrayList<JTextField> ensJTextField;
 
 	public PanelRepartitionHGauche(PanelRepartitionHeure panelMere) {
@@ -467,6 +466,16 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 
 	public int getNbHeureSemaine(int i) {
 		return Integer.parseInt(this.ensJTextField.get(i).getText());
+	}
+
+	public boolean txtRempli() {
+		boolean bOk = true;
+		for(int i=1;i<this.ensJTextField.size() && bOk;i+=2) {
+			if(this.ensJTextField.get(i).getText().equals("")) {
+				bOk = false;
+			}
+		}
+		return bOk;
 	}
 
 }

@@ -80,7 +80,7 @@ public class PanelAffect extends JPanel {
 			this.dtm.removeRow(this.tableauAffect.getSelectedRow());
 		}
 		else {
-			this.panelMere.setErreur("erreur");
+			this.panelMere.setLabelErreur("Veuillez sélectionner une ligne");
 		}
 	}
 

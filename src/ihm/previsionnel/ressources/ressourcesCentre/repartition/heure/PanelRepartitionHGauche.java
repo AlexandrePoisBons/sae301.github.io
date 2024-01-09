@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,11 +17,10 @@ import javax.swing.*;
 
 public class PanelRepartitionHGauche extends JPanel implements FocusListener, ActionListener{
 
-	private PanelRepartitionHeure 	panelMere		;
+	private PanelRepartitionHeure 	panelMere;
 
 	private JPanel 					panelHeure;
-	private JPanel 					panelTotal		;
-	private ArrayList<JTextField> 	ensJTextField	;
+	private ArrayList<JTextField> 	ensJTextField;
 
 	public PanelRepartitionHGauche(PanelRepartitionHeure panelMere){
 		this.panelMere = panelMere;
@@ -450,5 +448,15 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 		}
 
 
+	}
+
+	public boolean txtRempli() {
+		boolean bOk = true;
+		for(int i=1;i<this.ensJTextField.size() && bOk;i+=2) {
+			if(this.ensJTextField.get(i).getText().equals("")) {
+				bOk = false;
+			}
+		}
+		return bOk;
 	}
 }

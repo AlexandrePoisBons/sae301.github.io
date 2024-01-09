@@ -74,10 +74,6 @@ public class PanelRessources extends JPanel {
 		this.frame.changerPanel(new PanelPrevi(this.frame));
 	}
 
-	public void setErreur(String message){
-		this.panelSud.setErreur(message);
-	}
-
 	public String getSemestre()     { return this.panelMere.getSemestre();  }
 	public int    getNbEtd()        { return this.panelMere.getNbEtd();     }
 	public int    getNbGpTd()       { return this.panelMere.getNbGpTd();    }

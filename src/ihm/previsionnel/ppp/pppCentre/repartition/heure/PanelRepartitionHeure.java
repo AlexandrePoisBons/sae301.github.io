@@ -50,10 +50,6 @@ public class PanelRepartitionHeure extends JPanel{
 	public void setHeureAffecte(int hCM, int hTD, int hTP, int hTut, int hHP) {
 		this.panelRepartitionHDroite.setHeureAffecte(hCM, hTD, hTP, hTut, hHP);
 	}
-/* 
-	public void setSommeAffecte(int somme) {
-		this.panelRepartitionHDroite.setSommeAffecte(somme);
-	}*/
 
 	public int getSommeAffecte() {
 		return this.panelRepartitionHDroite.getSommeAffecte();
@@ -83,6 +79,10 @@ public class PanelRepartitionHeure extends JPanel{
 
 	public int getNbGpTd(){return this.panelMere.getNbGpTd();}
 	public int getNbGpTp(){return this.panelMere.getNbGpTp();}
+
+	public boolean txtRempli() {
+		return this.panelRepartitionHGauche.txtRempli();
+	}
 
 	
 }

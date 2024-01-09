@@ -52,6 +52,10 @@ public class PanelRepartitionHeure extends JPanel{
 		this.panelRepartitionHDroite.setSommeTotal();
 	}
 
+	public boolean txtRempli(){
+		return this.panelRepartitionHGauche.txtRempli();
+	}
+
 	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
 
 	public boolean estChiffre(String texte) {

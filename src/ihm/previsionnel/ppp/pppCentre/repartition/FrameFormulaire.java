@@ -225,9 +225,9 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 			case "TD" -> 
 				nbHSemaine = this.panelMere.getNbHeureSemaine(3);
 			case "TP" -> 
-				nbHSemaine = this.panelMere.getNbHeureSemaine(1);
-			case "CM" -> 
 				nbHSemaine = this.panelMere.getNbHeureSemaine(5);
+			case "CM" -> 
+				nbHSemaine = this.panelMere.getNbHeureSemaine(1);
 			default -> 
 				nbHSemaine = 1;
 		}

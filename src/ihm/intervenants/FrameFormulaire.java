@@ -49,10 +49,12 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		this.txtPrenom      = new JTextField(15);
 		this.txtHServ       = new JTextField(15);
 		this.txtHMax        = new JTextField(15);
-		this.txtCoefTP      = new JTextField(15);
+		this.txtCoefTP      = new JTextField("1.0", 15);
 		this.btnValider     = new JButton("Valider");
 		this.btnAnnuler     = new JButton("Annuler");
 		this.lblErreur      = new JLabel("");
+
+		this.txtCoefTP.setEditable(false);
 
 		//Colorisation du label d'erreur en rouge
 		this.lblErreur.setForeground(java.awt.Color.RED);
@@ -97,6 +99,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		gbc.gridy = 7;
 		this.panelFormulaire.add(this.lblErreur, gbc);
 
+		this.ddlstStatut.addActionListener(this);
 		this.btnValider.addActionListener(this);
 		this.btnAnnuler.addActionListener(this);
 
@@ -106,12 +109,24 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == this.ddlstStatut) {
+			this.majCoefTp();
+		}
 		if(e.getSource() == this.btnValider){
 			this.valider();
 			this.dispose();
 		}
 		if(e.getSource() == this.btnAnnuler){
 			this.dispose();
+		}
+	}
+
+	private void majCoefTp() {
+		if(this.ddlstStatut.getSelectedItem().equals("Vacataire")){
+			this.txtCoefTP.setText("0.66");
+		}
+		else {
+			this.txtCoefTP.setText("1.0");
 		}
 	}
 
