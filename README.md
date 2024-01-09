@@ -1,12 +1,19 @@
-# Pour les utilisateurs:
+# Pour les utilisateurs :
 
 # Guide d'utilisation de l'Application ASTRE
 
 Bienvenue sur l'application ASTRE ! Ce guide vous fournira des instructions détaillées sur la configuration des paramètres, la saisie du prévisionnel, la gestion des intervenants, et la génération des états au sein de l'application.
 
 ---
+## Prérequis
 
-## Paramétrages
+1. Aller dans le répertoire src/controleur et modifier le fichier infos.txt en y renseignant les différents champs qui sont :
+
+- database : le nom de votre base de donnée
+- login    : le nom d'utilisateur qui se connectera à la base de donnée
+- mdp      : le mot de passe de l'utilisateur à la base de donnée
+
+## Paramétrage
 
 ### 1. Configuration des Types d'Heures
 
@@ -32,7 +39,7 @@ Bienvenue sur l'application ASTRE ! Ce guide vous fournira des instructions dét
 1. Choisissez dans la liste déroulante le module que vous voulez creer
 2. Pour chaque type de module, suivez les instructions ci-dessous :
 
-#### 2.1. Modules Ressources
+#### 2.1. Module Ressources
 
 - Définissez le nombre d'heures-pn par semestre et par catégorie de cours (TD, TP…).
 - Précisez le nombre d'heures par semaine de TD, TP, CM, et heures tutorées.
@@ -50,7 +57,7 @@ Bienvenue sur l'application ASTRE ! Ce guide vous fournira des instructions dét
 
 L'équivalent eqtd sera calculé automatiquement pour chaque ligne. Si des heures ponctuelles sont saisies, le nombre de semaines devient invisible et non saisissable. Le total d'eqtd affectées au module est également calculé automatiquement.
 
-#### 2.2. Modules Saé
+#### 2.2. Module Saé
 
 - Définissez le nombre d'heures-pn Saé par semestre.
 - Précisez le nombre d'heures tutorées par semestre.
@@ -66,7 +73,7 @@ L'équivalent eqtd sera calculé automatiquement pour chaque ligne. Si des heure
 
 L'équivalent eqtd sera calculé automatiquement pour chaque ligne. Le total d'eqtd affectées au module est également calculé automatiquement.
 
-#### 2.3. Modules Stages/Suivi
+#### 2.3. Module Stages/Suivi
 
 - Définissez le nombre d'heures REH.
 - Précisez le nombre d'heures tutorées.

@@ -74,6 +74,7 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
 	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
+	public List<Heure> getDeletedHeures() { return this.panelAffect.getDeletedHeures(); }
 	public int getSommeAffecte() { return this.panelRepH.getSommeAffecte(); }
 
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }

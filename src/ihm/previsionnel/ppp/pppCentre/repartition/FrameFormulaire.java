@@ -222,7 +222,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		int calcul = 0;
 
 		switch(this.ddlstTypesHeures.getSelectedItem().toString()) {
-			case "TD" -> 
+			case "TD" ->
 				nbHSemaine = this.panelMere.getNbHeureSemaine(3);
 			case "TP" -> 
 				nbHSemaine = this.panelMere.getNbHeureSemaine(5);

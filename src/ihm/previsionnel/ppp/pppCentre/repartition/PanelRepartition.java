@@ -88,6 +88,7 @@ public class PanelRepartition extends JPanel implements ActionListener{
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
 	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
 	public int getSommeAffecte() { return this.panelRepartitionHeure.getSommeAffecte(); }
+	public List<Heure> getDeletedHeures() { return this.panelAffect.getDeletedHeures(); }
 
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }

@@ -108,7 +108,7 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 	// méthode pour gérer la couleur du cadre en fonction de la validité de la
 	// saisie
 	public void setCouleurErreur(boolean b, JTextField txt) {
-		if (b == true) {
+		if (b) {
 			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
 		} else {
 			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
@@ -323,7 +323,7 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					}
 					if (this.ensJTextField.get(4).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(5).getText().equals("")) {
-						System.out.println("Cette valeur a déjas été prise en compte");
+						// System.out.println("Cette valeur a déjas été prise en compte");
 					} else {
 						if (this.ensJTextField.get(4).getText().equals("")
 								|| Integer.parseInt(this.ensJTextField.get(4).getText()) < 0)
@@ -359,7 +359,7 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					}
 					if (this.ensJTextField.get(5).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(4).getText().equals("")) {
-						System.out.println("Cette valeur a déjas été prise en compte");
+						// System.out.println("Cette valeur a déjas été prise en compte");
 					} else {
 						if (this.ensJTextField.get(5).getText().equals("")
 								|| Integer.parseInt(this.ensJTextField.get(5).getText()) < 0)

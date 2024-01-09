@@ -4,7 +4,7 @@ import ihm.accueil.*;
 //Import des classes externes au package
 import ihm.previsionnel.*;
 import ihm.previsionnel.sae.PanelSae;
-
+import metier.Heure;
 import metier.Module;
 
 //Import des classes Java
@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.List;
 import java.awt.BorderLayout;
 
 public class PanelSudSae extends JPanel implements ActionListener{
@@ -92,6 +93,8 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			nbHeures+= map.get(heure);
 		}
 
+		List<Heure> deletedHeures = this.panelSae.getDeletedHeures();
+
 		Module m = this.panelSae.getModule();
 
 		if ( this.module.getLibelle().length() < 1 ) {
@@ -106,6 +109,11 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			m.setNbSemaines(nbSemaines);
 			m.setNbHeures(nbHeures);
 			m.setValide(valide);
+
+			for ( Heure heure : m.getHeures() )
+				if ( deletedHeures.contains(heure) )
+					m.getHeures().remove(heure);
+
 			this.panelSae.enregistrer(m);
 		} else {
 			this.module.setTypeModule(m.getTypeModule());
@@ -119,12 +127,16 @@ public class PanelSudSae extends JPanel implements ActionListener{
 			this.module.setNbSemaines(m.getNbSemaines());
 			this.module.setNbHeures(m.getNbHeures());
 			this.module.setValide(valide);
+
+			for( Heure heure : this.module.getHeures() )
+				if ( deletedHeures.contains(heure) )
+					this.module.getHeures().remove(heure);
+
 			this.panelSae.update(this.oldModule, this.module);
 		}
 
 	}
-	public boolean estValide() {
-		return this.panelSae.estValide();
-	}
+
+	// public boolean estValide() { return this.panelSae.estValide(); }
 
 }

@@ -16,11 +16,14 @@ public class PanelAffectStage extends JPanel {
 	private JTable tableauAffect;
 	private DefaultTableModel dtm;
 	private List<Heure> heures;
+	private List<Heure> deletedHeures;
 	private Module module;
 
 	public PanelAffectStage(PanelRepartitionStage panelMere, Module m) {
 		this.panelMere = panelMere;
 		this.module = m;
+
+		this.deletedHeures = new ArrayList<>();
 		this.heures = new ArrayList<>();
 
 		this.dtm = new DefaultTableModel(){
@@ -74,7 +77,8 @@ public class PanelAffectStage extends JPanel {
 
 	public void supprimer() {
 		if(this.tableauAffect.getSelectedRow() != -1) {
-			this.heures.remove(this.tableauAffect.getSelectedRow());
+			this.deletedHeures.add(this.heures.get(this.tableauAffect.getSelectedRow()));
+			// this.heures.remove(this.tableauAffect.getSelectedRow());
 			this.dtm.removeRow(this.tableauAffect.getSelectedRow());
 		}
 		else {
@@ -82,13 +86,9 @@ public class PanelAffectStage extends JPanel {
 		}
 	}
 
-	public DefaultTableModel getDtm() {
-		return this.dtm;
-	}
-
-	public JTable getTableauAffect() {
-		return this.tableauAffect;
-	}
+	public DefaultTableModel getDtm() { return this.dtm; }
+	public JTable getTableauAffect() { return this.tableauAffect; }
+	public List<Heure> getDeletedHeures() { return this.deletedHeures; }
 
 
 

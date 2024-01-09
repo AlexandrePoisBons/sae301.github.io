@@ -85,8 +85,9 @@ public class PanelRessources extends JPanel {
 
 	public boolean estValide() { return this.pRCentre.estValide(); }
 
-	public HashMap<String, Integer> getDataHeures() { return this.pRCentre.getData(); }
-	public HashMap<String,Integer>  getData()       { return this.pRCentre.getData(); }
+	public HashMap<String, Integer> getDataHeures()    { return this.pRCentre.getData();     }
+	public HashMap<String,Integer>  getData()          { return this.pRCentre.getData();     }
+	public List<Heure>              getDeletedHeures() { return pRCentre.getDeletedHeures(); }
 
 	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }

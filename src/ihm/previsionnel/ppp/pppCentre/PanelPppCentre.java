@@ -82,6 +82,7 @@ public class PanelPppCentre extends JPanel {
 
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.panelMere.getTypesHeures();  }
+	public List<Heure>       getDeletedHeures() { return this.panelRepartition.getDeletedHeures(); }
 
 	public boolean estValide() {
 		return this.pProgNat.estValide();
