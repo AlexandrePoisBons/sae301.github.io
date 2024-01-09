@@ -91,6 +91,7 @@ public class PanelSae extends JPanel {
 
 	public HashMap<String, Integer> getDataHeures() { return this.pCentreSae.getData(); }
 	public HashMap<String,Integer>  getData()       { return this.pCentreSae.getData(); }
+	public List<Heure> getDeletedHeures() { return this.pCentreSae.getDeletedHeures(); }
 
 	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }

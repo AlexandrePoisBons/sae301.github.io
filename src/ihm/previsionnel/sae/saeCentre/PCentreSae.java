@@ -84,6 +84,7 @@ public class PCentreSae extends JPanel {
 
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.panelMere.getTypesHeures();  }
+	public List<Heure> getDeletedHeures() { return this.panelRepartitionSae.getDeletedHeures(); }
 
 	public boolean estValide() { return this.panelProgNatSae.estValide(); }
 

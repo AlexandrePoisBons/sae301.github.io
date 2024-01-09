@@ -95,6 +95,7 @@ public class PanelStage extends JPanel {
 
 	public HashMap<String, Integer> getDataHeures() { return this.pCentreStage.getData(); }
 	public HashMap<String,Integer>  getData()       { return this.pCentreStage.getData(); }
+	public List<Heure> getDeletedHeures() { return this.pCentreStage.getDeletedHeures(); }
 	
 	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }
