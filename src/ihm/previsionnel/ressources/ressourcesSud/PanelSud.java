@@ -57,11 +57,11 @@ public class PanelSud extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.boutonEnregistrer) {
 			this.enregistrer();
-			this.panelRessources.fermerFrameFormulaire();
+			//this.panelRessources.fermerFrameFormulaire();
 		}
 		else if(e.getSource() == this.boutonAnnuler) {
 			this.frame.changerPanel(new PanelPrevi(this.frame));
-			this.panelRessources.fermerFrameFormulaire();
+			//this.panelRessources.fermerFrameFormulaire();
 		}
 	}
 
