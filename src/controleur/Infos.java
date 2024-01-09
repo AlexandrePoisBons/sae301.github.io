@@ -1,5 +1,10 @@
 package controleur;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Infos {
@@ -8,11 +13,22 @@ public class Infos {
 	private String login;
 	private String database;
 
-	public static String NOM_FICHIER = "infos.txt";
+	public static final String NOM_FICHIER = "infos.txt";
+
+	public static final String URL_DATABASE = "jdbc:postgresql://localhost:5432/";
 
 
 	public Infos() {
+		this.database = "";
+		this.login = "";
+		this.password = "";
+
 		this.initValues();
+
+		System.out.println("database: "+database);
+		System.out.println("login: "+login);
+		System.out.println("password: "+password);
+
 	}
 
 	private boolean initValues() {
@@ -47,10 +63,23 @@ public class Infos {
 
 	}
 
-	public void ecrire(String url, String login, String password) {
-		// faire la méthode pour écrire
-	}
+	public static void ecrire(String url, String login, String password) {
+		String content = "";
 
+		try {
+			File file = new File("./bin/controleur/"+Infos.NOM_FICHIER);
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file, StandardCharsets.UTF_8));
+			content += "database:" + url      + "\n";
+			content += "login:"    + login    + "\n";
+			content += "password:" + password;
+
+			writer.write(content);
+
+			System.out.println("saved");
+			writer.close();
+		} catch (IOException e) { e.printStackTrace(); }
+
+	}
 
 	public String getDatabase() { return this.database; }
 	public String getLogin()    { return this.login;    }

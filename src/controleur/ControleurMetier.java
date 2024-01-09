@@ -121,7 +121,6 @@ public class ControleurMetier {
 	/*  Delete */
 	public boolean supprimerIntervenant( Intervenant intervenant ) throws SQLException {
 
-		System.out.println("nulleuh");
 		this.requetes.deleteIntervenant(intervenant);
 		this.intervenants.remove(intervenant);
 
@@ -199,7 +198,7 @@ public class ControleurMetier {
 
 		this.heures = this.requetes.initHeures();
 		Collections.sort( this.heures );
-		
+
 		this.statuts = this.requetes.getStatuts();
 
 		this.intervenants = this.requetes.initIntervenants();
@@ -221,7 +220,7 @@ public class ControleurMetier {
 			idHeure = tabHeuresModule[i][0];
 			idModule = tabHeuresModule[i][1];
 			this.getModuleById(idModule).ajouterHeure(this.getHeureById(idHeure));
-			// previous version:	this.modules.get(idModule-1).ajouterHeure(this.heures.get(idHeure-1));
+			// previous version:   this.modules.get(idModule-1).ajouterHeure(this.heures.get(idHeure-1));
 		}
 
 		System.out.println("LIAISON HEURES-MODULES FAITE");

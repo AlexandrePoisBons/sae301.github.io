@@ -52,7 +52,7 @@ public class FrameConnexion extends JFrame implements ActionListener{
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(0, 0, 10, 5);
-		panelPrincipal.add(new JLabel("URL : "), gbc);
+		panelPrincipal.add(new JLabel("Database : "), gbc);
 		gbc.gridy = 1;
 		panelPrincipal.add(new JLabel("Login : "), gbc);
 		gbc.gridy = 2;
@@ -109,7 +109,7 @@ public class FrameConnexion extends JFrame implements ActionListener{
 		}
 
 		try {
-			String url = "jdbc:postgresql://localhost:5432/" + u;
+			String url = Infos.URL_DATABASE + u;
 
 			Connection connec = DriverManager.getConnection(url,login,password);
 
@@ -122,10 +122,12 @@ public class FrameConnexion extends JFrame implements ActionListener{
 			return;
 		}
 
+		System.out.println("coucou twa");
+		Infos.ecrire(u, login, password);
 		this.dispose();
 		new Controleur();
 
-		
+
 
 	}
 
