@@ -47,6 +47,10 @@ public class Infos {
 
 	}
 
+	public void ecrire(String url, String login, String password) {
+		// faire la méthode pour écrire
+	}
+
 
 	public String getDatabase() { return this.database; }
 	public String getLogin()    { return this.login;    }

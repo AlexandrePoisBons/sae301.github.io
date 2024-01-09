@@ -3,6 +3,7 @@ package ihm.etat;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -29,6 +30,7 @@ public class PanelModule extends JPanel implements ActionListener {
 	private JPanel             panelPrincipal;
 	private JPanel             panelSud;
 	private JButton            btnGenererHtml;
+	private JLabel             lblMessage;
 	private JButton            btnRetour;
 	private JComboBox<String>  ddlstModule;
 	private List<Module>       listModule;
@@ -50,9 +52,11 @@ public class PanelModule extends JPanel implements ActionListener {
 		this.panelPrincipal  = new JPanel();
 		this.panelSud        = new JPanel();
 		this.btnGenererHtml  = new JButton("Genérer html");
+		this.lblMessage      = new JLabel("");
 		this.btnRetour       = new JButton("Retour");
 		this.ddlstModule     = this.init();
 
+		this.panelSud.setLayout(new GridLayout(2, 1, 0, 10));
 		this.panelPrincipal.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 
@@ -65,6 +69,7 @@ public class PanelModule extends JPanel implements ActionListener {
 		gbc.gridy = 2;
 		this.panelPrincipal.add(this.btnGenererHtml, gbc);
 
+		this.panelSud.add(this.lblMessage);
 		this.panelSud.add(this.btnRetour);
 
 		this.add(this.panelPrincipal, BorderLayout.CENTER);
@@ -106,6 +111,7 @@ public class PanelModule extends JPanel implements ActionListener {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath), StandardCharsets.UTF_8))) {
 			// Écriture de la chaîne HTML dans le fichier
 			writer.write(htmlContent);
+			this.lblMessage.setText("Fichier HTML généré avec succès à l'emplacement : " + filePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

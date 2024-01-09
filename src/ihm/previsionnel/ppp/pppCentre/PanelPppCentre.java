@@ -99,4 +99,6 @@ public class PanelPppCentre extends JPanel {
 	public int getNbGpTd() { return this.panelMere.getNbGpTdMaj(); }
 	public int getNbGpTp() { return this.panelMere.getNbGpTpMaj(); }
 
+	public void fermerFrameFormulaire() { this.panelRepartition.fermerFrameFormulaire(); }
+
 }

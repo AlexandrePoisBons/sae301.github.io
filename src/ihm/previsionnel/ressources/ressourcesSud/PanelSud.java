@@ -57,9 +57,11 @@ public class PanelSud extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.boutonEnregistrer) {
 			this.enregistrer();
+			this.panelRessources.fermerFrameFormulaire();
 		}
 		else if(e.getSource() == this.boutonAnnuler) {
 			this.frame.changerPanel(new PanelPrevi(this.frame));
+			this.panelRessources.fermerFrameFormulaire();
 		}
 	}
 
@@ -112,9 +114,9 @@ public class PanelSud extends JPanel implements ActionListener {
 		} else {
 			this.module.setTypeModule(m.getTypeModule());
 			this.module.setSemestre(m.getSemestre());
-			this.module.setLibelle(m.getLibelle());
-			this.module.setLibelleCourt(m.getLibelleCourt());
-			this.module.setCode(m.getCode());
+			this.module.setLibelle(libelle);
+			this.module.setLibelleCourt(libelleCourt);
+			this.module.setCode(code);
 			this.module.setNbEtudiants(m.getNbEtudiants());
 			this.module.setNbGpTD(m.getNbGpTD());
 			this.module.setNbGpTP(m.getNbGpTP());

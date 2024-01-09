@@ -13,12 +13,9 @@ import java.util.EventObject;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.CellEditorListener;
-import javax.swing.table.TableCellEditor;
 import ihm.previsionnel.ressources.ressourcesCentre.PanelRepartition;
 import metier.Heure;
 import metier.Intervenant;
-import metier.Statut;
 import metier.TypeHeure;
 import metier.Module;
 
@@ -40,7 +37,6 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 
 		this.panelMere       = panelMere;
 		this.module = m;
-
 
 		//Définition de la taille et la position de la fenêtre
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
@@ -210,7 +206,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		this.panelMere.setHeureAffecte();
 	}
 
-	public String getNbGp(){
+	public String getNbGp() {
 		return this.txtNbH.getText();
 	}
 
@@ -244,7 +240,6 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		else {
 			calcul = Integer.parseInt(this.txtNbH.getText());
 		}
-		System.out.println("donova: "+calcul);
 		this.txtTotEqtd.setText("" + calcul);
 	}
 
