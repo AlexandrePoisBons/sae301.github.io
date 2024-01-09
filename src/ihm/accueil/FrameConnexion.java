@@ -6,10 +6,14 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
 import controleur.Controleur;
+import controleur.Infos;
 
 public class FrameConnexion extends JFrame implements ActionListener{
 
@@ -18,7 +22,11 @@ public class FrameConnexion extends JFrame implements ActionListener{
 	private JPasswordField pswMdp;
 	private JButton        btnConnexion;
 
+	private Infos infos;
+
 	public FrameConnexion() {
+
+		this.infos = new Infos();
 
 		//Positionnement de la frame
 		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
@@ -32,6 +40,9 @@ public class FrameConnexion extends JFrame implements ActionListener{
 		this.txtUrl            = new JTextField(10);
 		this.txtLogin          = new JTextField(10);
 		this.pswMdp            = new JPasswordField(10);
+		this.txtUrl.setText(infos.getDatabase());
+		this.txtLogin.setText(infos.getLogin());
+		this.pswMdp.setText(infos.getPassword());
 		this.btnConnexion      = new JButton("Connexion");
 		JPanel panelPrincipal  = new JPanel();
 	
@@ -73,10 +84,50 @@ public class FrameConnexion extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnConnexion) {
-			new Controleur();
-			this.dispose();
+			this.connexion();
 		}
 	}
-	
-	
+
+	private void connexion() {
+		String u;
+		String login;
+		String password;
+
+		u = this.txtUrl.getText();
+		login = this.txtLogin.getText();
+		password = new String(this.pswMdp.getPassword());
+
+		try {
+			Class.forName("org.postgresql.Driver");
+			System.out.println ("CHARGEMENT DU PILOTE OK");
+		} catch ( ClassNotFoundException e ) {
+			// e.printStackTrace();
+			System.out.println("\n|| CONNEXION IMPOSSIBLE ||");
+			this.dispose();
+			new FrameConnexion();
+			return;
+		}
+
+		try {
+			String url = "jdbc:postgresql://localhost:5432/" + u;
+
+			Connection connec = DriverManager.getConnection(url,login,password);
+
+			System.out.println("CONNEXION A LA BADO: REUSSIE");
+		} catch ( SQLException e ) {
+			// e.printStackTrace();
+			System.out.println("\n|| CONNEXION IMPOSSIBLE ||");
+			this.dispose();
+			new FrameConnexion();
+			return;
+		}
+
+		this.dispose();
+		new Controleur();
+
+		
+
+	}
+
+
 }
