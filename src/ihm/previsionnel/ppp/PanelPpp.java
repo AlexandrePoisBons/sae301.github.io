@@ -82,6 +82,7 @@ public class PanelPpp extends JPanel {
 	public String getLibelle()      { return this.panelPppNord.getLibelle();      }
 	public String getLibelleCourt() { return this.panelPppNord.getLibelleCourt(); }
 	public Module getModule ()      { return this.module;                     }
+	public List<Heure> getDeletedHeures() { return this.panelPppCentre.getDeletedHeures(); }
 
 	public HashMap<String, Integer> getDataHeures() { return this.panelPppCentre.getData(); }
 	public HashMap<String,Integer>  getData()       { return this.panelPppCentre.getData(); }
