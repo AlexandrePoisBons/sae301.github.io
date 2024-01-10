@@ -27,7 +27,7 @@ public class FrameConnexion extends JFrame implements ActionListener{
 
 	private Infos infos;
 
-	public FrameConnexion(String erreur) {
+	public FrameConnexion() {
 
 		this.infos = new Infos();
 
@@ -40,7 +40,9 @@ public class FrameConnexion extends JFrame implements ActionListener{
 		this.setLocation((int)(largeur*0.5-xSize*0.5),(int)(hauteur*0.5-ySize*0.5));
 		this.setTitle("Accueil");
 
-		this.txtDatabase            = new JTextField(10);
+		this.setResizable(false);
+
+		this.txtDatabase       = new JTextField(10);
 		this.txtLogin          = new JTextField(10);
 		this.pswMdp            = new JPasswordField(10);
 		this.txtDatabase.setText(infos.getDatabase());
@@ -72,11 +74,9 @@ public class FrameConnexion extends JFrame implements ActionListener{
 		gbc.gridx = 1;
 		gbc.gridy = 3;
 
-		if ( erreur != null ) {
-			this.lblErreur = new JLabel(erreur);
-			this.lblErreur.setForeground(java.awt.Color.RED);
-			panelPrincipal.add(this.lblErreur, gbc);
-		}
+		this.lblErreur = new JLabel("");
+		this.lblErreur.setForeground(java.awt.Color.RED);
+		panelPrincipal.add(this.lblErreur, gbc);
 
 		gbc.gridx = 1;
 		gbc.gridy = 4;
@@ -113,8 +113,8 @@ public class FrameConnexion extends JFrame implements ActionListener{
 			Class.forName("org.postgresql.Driver");
 			// System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch ( ClassNotFoundException e ) {
-			this.dispose();
-			new FrameConnexion("Connexion à la bado impossible");
+			this.lblErreur.setText("Connexion à la bado impossible");
+			this.repaint();
 			return;
 		}
 
@@ -125,8 +125,8 @@ public class FrameConnexion extends JFrame implements ActionListener{
 
 			// System.out.println("CONNEXION A LA BADO: REUSSIE");
 		} catch ( SQLException e ) {
-			this.dispose();
-			new FrameConnexion("Connexion à la bado impossible");
+			this.lblErreur.setText("Connexion à la bado impossible");
+			this.repaint();
 			return;
 		}
 
