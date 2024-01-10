@@ -211,7 +211,7 @@ public class PanelInter extends JPanel implements ActionListener {
 			for ( Intervenant intervenant : intervenants ) {
 				writer.newLine();
 				writer.write(
-						intervenant.getStatut()                                       + ";" +
+						intervenant.getStatut().getNomStatut()                        + ";" +
 						intervenant.getNom()                                          + ";" +
 						intervenant.getPrenom()                                       + ";" +
 						intervenant.getNbEqTD()                                       + ";" +
