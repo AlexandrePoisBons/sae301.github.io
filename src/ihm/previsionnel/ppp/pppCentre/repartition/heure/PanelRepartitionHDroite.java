@@ -268,9 +268,7 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 				this.ensTxtFld.get(3).transferFocus();
 				this.repaint();
 				this.revalidate();
-			} catch (Exception err) {
-				System.out.print("");
-			}
+			} catch (Exception err) {}
 
 		} else if (e.getSource() == this.ensTxtFld.get(4)) {
 			try {
@@ -287,9 +285,7 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 				this.ensTxtFld.get(4).transferFocusBackward();
 				this.repaint();
 				this.revalidate();
-			} catch (Exception err) {
-				System.out.print("");
-			}
+			} catch (Exception err) {}
 
 		}
 	}

@@ -13,9 +13,13 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
+import metier.Heure;
+import metier.Module;
+
 
 public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionListener, FocusListener {
 
+	private Module m;
 	private PanelRepHStage panelMere;
 	private ArrayList<JTextField> ensJTextField;
 
@@ -23,7 +27,8 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 	private int sommeHTut = 0;
 	private int totalSomme = 0;
 
-	public PanelRepartitionHeureGaucheStage(PanelRepHStage panelRepH) {
+	public PanelRepartitionHeureGaucheStage(PanelRepHStage panelRepH, Module module) {
+		this.m = module;
 		this.panelMere = panelRepH;
 		this.ensJTextField = new ArrayList<JTextField>();
 
@@ -70,11 +75,34 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 
 		this.add(panelHC);
 
+		int hTut = 0;
+		int hSae = 0;
+		for (Heure h : this.m.getHeures()) {
+			if(h.getTypeHeure().getNomTypeHeure().equals("TUT")){
+				hTut += h.getDuree();
+			}
+			if(h.getTypeHeure().getNomTypeHeure().equals("SAE")) {
+				hSae += h.getDuree();
+			}
+		}
+		if(hSae != 0 || hTut != 0){
+			this.setHeureAffecte(hSae, hTut);
+			this.actualiserSomme();
+		}
+
 		for(int i=0;i<this.ensJTextField.size()/2;i++){
 			this.ensJTextField.get(i).addActionListener(this);
 			this.ensJTextField.get(i).addFocusListener(this);
 		}
+	}
 
+
+	public void actualiserSomme() {
+		int somme = 0;
+		for(int i=2;i<this.ensJTextField.size();i++) {
+			somme += Integer.parseInt(this.ensJTextField.get(i).getText());
+		}
+		this.panelMere.setSommeAffecte(somme);
 	}
 
 
@@ -136,19 +164,14 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.ensJTextField.get(0));
 				}
-				if (this.ensJTextField.get(0).getText().equals(Integer.toString(this.sommeHSae))
-						&& this.ensJTextField.get(1).getText().equals("")){
-					System.out.println("Cette valeur a déjas été prise en compte");
-				} else {
+				else {
 					if (this.ensJTextField.get(0).getText().equals("") || Integer.parseInt(this.ensJTextField.get(0).getText()) < 0)
 						this.ensJTextField.get(0).setText("0");
 					this.setLabelErreur("");
 					this.setCouleurErreur(false, this.ensJTextField.get(0));
 					this.sommeHSae = Integer.parseInt(this.ensJTextField.get(0).getText());
 				}
-			} catch (Exception err) {
-				System.out.print("");
-			}
+			} catch (Exception err) {}
 		}
 
 		if (e.getSource() == this.ensJTextField.get(1)) {
@@ -159,19 +182,14 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.ensJTextField.get(1));
 				}
-				if (this.ensJTextField.get(1).getText().equals(Integer.toString(this.sommeHTut))
-						&& this.ensJTextField.get(0).getText().equals("")) {
-					System.out.println("Cette valeur a déjas été prise en compte");
-				} else {
+				else {
 					if (this.ensJTextField.get(1).getText().equals("")|| Integer.parseInt(this.ensJTextField.get(1).getText()) < 0)
 						this.ensJTextField.get(1).setText("0");
 					this.setLabelErreur("");
 					this.setCouleurErreur(false, this.ensJTextField.get(1));
 					this.sommeHTut = Integer.parseInt(this.ensJTextField.get(1).getText());
 				}
-			} catch (Exception err) {
-				System.out.print("");
-			}
+			} catch (Exception err) {}
 		}
 		this.totalSomme = this.sommeHSae + this.sommeHTut;
 		this.setSommePromo(this.totalSomme);

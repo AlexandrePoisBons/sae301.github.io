@@ -237,10 +237,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.txtHPonctWrite);
 				}
-				if ( this.txtHPonctWrite.getText().equals(Integer.toString(sommeHPonct) )
-						&& this.txtHPonctWrite.getText().equals("")) {
-					System.out.println("Cette valeur a déjas été prise en compte");
-				} else {
+				else {
 					if ( this.txtHPonctWrite.getText().equals("") || Integer.parseInt(this.txtHPonctWrite.getText()) < 0 )
 						this.txtHPonctWrite.setText("0");
 					this.setLabelErreur("");
@@ -257,10 +254,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.txtHTutWrite);
 				}
-				if (this.txtHTutWrite.getText().equals(Integer.toString(sommeHTut))
-						&& this.txtHTutWrite.getText().equals("")) {
-					System.out.println("Cette valeur a déjas été prise en compte");
-				} else {
+				else {
 					if (this.txtHTutWrite.getText().equals("") || Integer.parseInt(this.txtHTutWrite.getText()) < 0)
 						this.txtHTutWrite.setText("0");
 					this.setLabelErreur("");
@@ -278,10 +272,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.txtCMWrite);
 				}
-				if (this.txtCMWrite.getText().equals(Integer.toString(sommeCM))
-						&& (this.txtTPWrite.getText().equals("") && this.txtTDWrite.getText().equals(""))) {
-					System.out.println("Cette valeur a déjas été prise en compte");
-				} else {
+				else {
 					if (this.txtCMWrite.getText().equals("") || Integer.parseInt(this.txtCMWrite.getText()) < 0)
 						this.txtCMWrite.setText("0");
 					this.setLabelErreur("");
@@ -303,10 +294,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.txtTDWrite);
 				}
-				if (this.txtTDWrite.getText().equals(Integer.toString(sommeTD))
-						&& (this.txtTPWrite.getText().equals("") && this.txtCMWrite.getText().equals(""))) {
-					System.out.println("Cette valeur a déjas été prise en compte");
-				} else {
+				else {
 					if (this.txtTDWrite.getText().equals("") || Integer.parseInt(this.txtTDWrite.getText()) < 0)
 						this.txtTDWrite.setText("0");
 					this.setLabelErreur("");
@@ -330,10 +318,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.txtTPWrite);
 				}
-				if (this.txtTPWrite.getText().equals(Integer.toString(sommeTP))
-						&& (this.txtCMWrite.getText().equals("") && this.txtTDWrite.getText().equals(""))) {
-					System.out.println("Cette valeur a déjas été prise en compte");
-				} else {
+				else {
 					if (this.txtTPWrite.getText().equals("") || Integer.parseInt(this.txtTPWrite.getText()) < 0)
 						this.txtTPWrite.setText("0");
 					this.setLabelErreur("");

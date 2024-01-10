@@ -3,6 +3,7 @@ package ihm.previsionnel;
 //Imports classes Java
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import controleur.Controleur;
 import ihm.accueil.FrameAccueil;
@@ -67,6 +69,10 @@ public class PanelSemestre extends JPanel {
 		headerRenderer.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK)); // Ajoute une bordure inférieure
 
 		this.tabModule.getTableHeader().setDefaultRenderer(headerRenderer);
+		
+		this.tabModule.getColumnModel().getColumn(3).setCellRenderer(new CheckBoxRenderer());
+		this.tabModule.getColumnModel().getColumn(2).setCellRenderer(new CenteredRenderer());
+		
 
 		Border tableBorder = BorderFactory.createLineBorder(Color.BLACK);
 		this.tabModule.setBorder(tableBorder);
@@ -92,6 +98,24 @@ public class PanelSemestre extends JPanel {
 		this.setVisible(true);
 
 	}
+
+	private static class CheckBoxRenderer extends JCheckBox implements TableCellRenderer {
+        public CheckBoxRenderer() {
+            setHorizontalAlignment(SwingConstants.CENTER);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            setSelected(value != null && (boolean) value);
+            return this;
+        }
+    }
+
+	private static class CenteredRenderer extends DefaultTableCellRenderer {
+        public CenteredRenderer() {
+            setHorizontalAlignment(SwingConstants.CENTER);
+        }
+    }
 
 
 	// Getters
@@ -123,7 +147,7 @@ public class PanelSemestre extends JPanel {
 	public void setModules(List<Module> list) {
 		this.modules = list;
 		for (Module module : this.modules) {
-			String[] s = {module.getCode(), module.getLibelle()};
+			Object[] s = {module.getCode(), module.getLibelle(), "Panel Semestre l126", module.isValide()};
 			this.dtm.addRow(s);
 		}
 		if ( this.modules.size() >= 1 ){
@@ -136,14 +160,12 @@ public class PanelSemestre extends JPanel {
 
 	public void ajouterModule(Module module) {
 		this.modules.add(module);
-		String[] s = {module.getCode(), module.getLibelle(), "test" , ""+module.isValide()};
-		this.dtm.addRow(s);
 	}
 
 	public void updateModule(Module module) {
-		try{this.removeModule();} catch(SQLException e) {e.printStackTrace();}
-		String[] s = {module.getCode(), module.getLibelle(), "test", ""+module.isValide()};
-		this.dtm.addRow(s);
+		try{
+			this.removeModule();
+		} catch(SQLException e) {e.printStackTrace();}
 	}
 
 	public Module getCurrentModule() {

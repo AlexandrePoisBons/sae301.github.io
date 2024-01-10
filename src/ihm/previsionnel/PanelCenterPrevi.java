@@ -76,7 +76,8 @@ public class PanelCenterPrevi extends JPanel {
 		for (PanelSemestre semestre : this.listSemestre) {
 			list = new ArrayList<Module>();
 			for (Module module : alModules) {
-				if ( module.getSemestre().equals("S"+i) ) list.add(module);
+				if ( module.getSemestre().equals("S"+i) ) 
+					list.add(module);
 			}
 			semestre.setModules(list);
 			i++;

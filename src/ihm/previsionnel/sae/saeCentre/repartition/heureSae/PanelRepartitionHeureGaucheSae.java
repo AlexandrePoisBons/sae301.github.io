@@ -50,7 +50,7 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 
 		gbcH.gridx = 1;
 		gbcH.gridy = 0;
-		gbcH.insets = new Insets(10, 0, 2, 0);
+		gbcH.insets = new Insets(10, 0, 2, 5);
 		panelHC.add(new JLabel("h Sae")	, gbcH);
 		gbcH.gridx = 2;
 		panelHC.add(new JLabel("h Tut")	, gbcH);
@@ -84,15 +84,16 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 		for (Heure h : this.m.getHeures()) {
 			if(h.getTypeHeure().getNomTypeHeure().equals("TUT")){
 				hTut += h.getDuree();
-				System.out.println("hTut : " + hTut);
 			}
 			if(h.getTypeHeure().getNomTypeHeure().equals("SAE")) {
 				hSae += h.getDuree();
-				System.out.println("hSae : " + hSae);
 			}
 		}
-		this.setHeureAffecte(hSae, hTut);
-		this.actualiserSomme();
+		if(hSae != 0 || hTut != 0){
+			this.setHeureAffecte(hSae, hTut);
+			this.actualiserSomme();
+		}
+		
 
 		for(int i=0;i<this.ensJTextField.size()/2;i++){
 			this.ensJTextField.get(i).addActionListener(this);
@@ -152,19 +153,14 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.ensJTextField.get(0));
 				}
-				if (this.ensJTextField.get(0).getText().equals(Integer.toString(this.sommeHSae))
-						&& this.ensJTextField.get(1).getText().equals("")){
-					System.out.println("Cette valeur a déjas été prise en compte");
-				} else {
+				else {
 					if (this.ensJTextField.get(0).getText().equals("") || Integer.parseInt(this.ensJTextField.get(0).getText()) < 0)
 						this.ensJTextField.get(0).setText("0");
 					this.setLabelErreur("");
 					this.setCouleurErreur(false, this.ensJTextField.get(0));
 					this.sommeHSae = Integer.parseInt(this.ensJTextField.get(0).getText());
 				}
-			} catch (Exception err) {
-				System.out.print("");
-			}
+			} catch (Exception err) {}
 		}
 
 		if (e.getSource() == this.ensJTextField.get(1)) {
@@ -175,19 +171,14 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.ensJTextField.get(1));
 				}
-				if (this.ensJTextField.get(1).getText().equals(Integer.toString(this.sommeHTut))
-						&& this.ensJTextField.get(0).getText().equals("")) {
-					System.out.println("Cette valeur a déjas été prise en compte");
-				} else {
+				else {
 					if (this.ensJTextField.get(1).getText().equals("")|| Integer.parseInt(this.ensJTextField.get(1).getText()) < 0)
 						this.ensJTextField.get(1).setText("0");
 					this.setLabelErreur("");
 					this.setCouleurErreur(false, this.ensJTextField.get(1));
 					this.sommeHTut = Integer.parseInt(this.ensJTextField.get(1).getText());
 				}
-			} catch (Exception err) {
-				System.out.print("");
-			}
+			} catch (Exception err) {}
 		}
 		this.totalSomme = this.sommeHSae + this.sommeHTut;
 		this.setSommePromo(this.totalSomme);
@@ -219,7 +210,7 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 	}
 
 	public void setHeureAffecte(int hSae, int hTut) {
-		System.out.println("panelHeureDroite");
+		System.out.println("mtn");
 		this.ensJTextField.get(2).setText("" + hSae);
 		this.ensJTextField.get(3).setText("" + hTut);
 		this.repaint();

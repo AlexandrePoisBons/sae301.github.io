@@ -36,8 +36,8 @@ public class PNordStage extends JPanel{
 		this.txtTypeModule = new JTextField("Stage/suivi", 10);
 		this.txtSemestre   = new JTextField(10);
 		this.txtCode       = new JTextField(10);
-		this.txtLibLong    = new JTextField(10);
-		this.txtLibCourt   = new JTextField(10);
+		this.txtLibLong    = new JTextField(20);
+		this.txtLibCourt   = new JTextField(15);
 		this.txtNbEtd      = new JTextField(2);
 		this.txtNbGpTd     = new JTextField(2);
 		this.txtNbGpTp     = new JTextField(2);

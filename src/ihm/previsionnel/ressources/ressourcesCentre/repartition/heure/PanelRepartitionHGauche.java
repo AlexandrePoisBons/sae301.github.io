@@ -162,10 +162,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 						this.setCouleurErreur(true, this.ensJTextField.get(0));
 					}
-					if (this.ensJTextField.get(0).getText().equals(Integer.toString(somme))
-							&& this.ensJTextField.get(1).getText().equals("")) {
-						System.out.println("Cette valeur a déjas été prise en compte");
-					} else {
+					else {
 						if (this.ensJTextField.get(0).getText().equals("")|| Integer.parseInt(this.ensJTextField.get(0).getText())<0)
 							this.ensJTextField.get(0).setText("0");
 						this.setLabelErreur("");
@@ -193,10 +190,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 						this.setCouleurErreur(true, this.ensJTextField.get(1));
 					}
-					if (this.ensJTextField.get(1).getText().equals(Integer.toString(somme))
-							&& this.ensJTextField.get(0).getText().equals("")) {
-						System.out.println("Cette valeur a déja été prise en compte");
-					} else{
+					else{
 						if (this.ensJTextField.get(1).getText().equals("") || Integer.parseInt(this.ensJTextField.get(1).getText())<0)
 							this.ensJTextField.get(1).setText("0");
 						this.setLabelErreur("");
@@ -231,10 +225,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 						this.setCouleurErreur(true, this.ensJTextField.get(2));
 					}
-					if (this.ensJTextField.get(2).getText().equals(Integer.toString(somme))
-							&& this.ensJTextField.get(3).getText().equals("")) {
-						System.out.println("Cette valeur a déjas été prise en compte");
-					} else {
+					else {
 						if (this.ensJTextField.get(2).getText().equals("") || Integer.parseInt(this.ensJTextField.get(2).getText())<0)
 							this.ensJTextField.get(2).setText("0");
 						this.setLabelErreur("");
@@ -266,10 +257,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 						this.setCouleurErreur(true, this.ensJTextField.get(3));
 					}
-					if (this.ensJTextField.get(3).getText().equals(Integer.toString(somme))
-							&& this.ensJTextField.get(2).getText().equals("")) {
-						System.out.println("Cette valeur a déjas été prise en compte");
-					} else {
+					else {
 						if (this.ensJTextField.get(3).getText().equals("") || Integer.parseInt(this.ensJTextField.get(3).getText())<0)
 							this.ensJTextField.get(3).setText("0");
 						this.setLabelErreur("");
@@ -308,10 +296,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 						this.setCouleurErreur(true, this.ensJTextField.get(4));
 					}
-					if (this.ensJTextField.get(4).getText().equals(Integer.toString(somme))
-							&& this.ensJTextField.get(5).getText().equals("")) {
-						System.out.println("Cette valeur a déjas été prise en compte");
-					} else {
+					else {
 						if (this.ensJTextField.get(4).getText().equals("") || Integer.parseInt(this.ensJTextField.get(4).getText())<0)
 							this.ensJTextField.get(4).setText("0");
 						this.setLabelErreur("");
@@ -343,10 +328,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 						this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 						this.setCouleurErreur(true, this.ensJTextField.get(5));
 					}
-					if (this.ensJTextField.get(5).getText().equals(Integer.toString(somme))
-							&& this.ensJTextField.get(4).getText().equals("")) {
-						System.out.println("Cette valeur a déjas été prise en compte");
-					} else {
+					else {
 						if (this.ensJTextField.get(5).getText().equals("") || Integer.parseInt(this.ensJTextField.get(5).getText())<0)
 							this.ensJTextField.get(5).setText("0");
 						this.setLabelErreur("");
