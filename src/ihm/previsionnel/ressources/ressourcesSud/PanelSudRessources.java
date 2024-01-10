@@ -83,6 +83,11 @@ public class PanelSudRessources extends JPanel implements ActionListener {
 		String libelleCourt = this.panelRessources.getLibelleCourt();
 		String code         = this.panelRessources.getCode();
 
+		if ( code.length() <= 0 || libelle.length() <= 0 || libelleCourt.length() <= 0 ) {
+			this.frame.changerPanel(new PanelPrevi(this.frame));
+			return;
+		}
+
 		int nbEtudiants = this.panelPrevi.getNbEtd(); 
 		int nbGpTD      = this.panelPrevi.getNbGpTd();
 		int nbGpTP      = this.panelPrevi.getNbGpTp();

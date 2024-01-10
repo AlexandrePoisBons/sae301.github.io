@@ -33,7 +33,8 @@ public class ControleurMetier {
 		this.intervenants = new ArrayList<Intervenant>();
 		this.modules      = new ArrayList<Module>();
 
-		try { this.init(); } catch (SQLException e) { e.printStackTrace(); }
+		try { this.init(); } catch (SQLException e) { /*e.printStackTrace();*/ }
+
 	}
 
 

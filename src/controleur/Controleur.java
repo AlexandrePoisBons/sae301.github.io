@@ -8,7 +8,7 @@ public class Controleur {
 	private ControleurIHM    ihm;
 	private Infos            infos;
 
-	public static void main(String[] args) { new FrameConnexion(); }
+	public static void main(String[] args) { new FrameConnexion(null); }
 
 	public Controleur() {
 

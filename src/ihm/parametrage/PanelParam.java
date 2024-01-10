@@ -95,8 +95,8 @@ public class PanelParam extends JPanel implements ActionListener{
 		//rendre les lignes du tableau non éditables
 		this.tableauStatut.setDefaultEditor(Object.class, null);
 		this.tableauCoef.setDefaultEditor(Object.class, null);
-		
-		
+
+
 		// Creation des scrollpane
 		JScrollPane scrollStatut = new JScrollPane(this.tableauStatut);
 		scrollStatut.setPreferredSize(new Dimension(300, 125));
