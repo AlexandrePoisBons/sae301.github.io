@@ -6,6 +6,8 @@ import java.util.*;
 
 import metier.Statut;
 import metier.TypeHeure;
+import ihm.FrameValidation;
+import ihm.FrameValidation;
 import ihm.accueil.FrameAccueil;
 import ihm.accueil.PanelAcceuil;
 
@@ -79,7 +81,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.btnSuppStatut     = new JButton("Supprimer");
 		this.btnRetour         = new JButton("Retour");
 		this.btnEnregistrer    = new JButton("Enregistrer");
-		this.lblErreur       = new JLabel("");
+		this.lblErreur         = new JLabel("");
 
 		// Coloration en rouge du label d'erreur
 		this.lblErreur.setForeground(java.awt.Color.RED);
@@ -135,9 +137,9 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.panelSud.add(this.lblErreur);
 
 		// Ajout des panels
-		this.add(this.panelTableaux   , BorderLayout.WEST);
+		this.add(this.panelTableaux, BorderLayout.WEST);
 		this.add(this.panelFormulaireStatut, BorderLayout.CENTER);
-		this.add(this.panelSud , BorderLayout.SOUTH);
+		this.add(this.panelSud, BorderLayout.SOUTH);
 
 		// Activation des boutons 
 		this.btnAjoutCoef      .addActionListener(this);
@@ -354,12 +356,23 @@ public class PanelParam extends JPanel implements ActionListener{
 		} else if ( e.getSource() == this.btnModifierStatut ) {
 			this.modifierStatut();
 		} else if ( e.getSource() == this.btnEnregistrer ) {
-			this.enregistrer();
-			this.frame.dispose();
-			this.frame = new FrameAccueil(this.frame.getControleur());
+			new FrameValidation(this);
 		} else if (e.getSource() == this.btnRetour) {
 			this.frame.changerPanel(new PanelAcceuil(frame));
 		}
 	}
+
+
+	public void validation(boolean valide) {
+		if (valide ) {
+			this.enregistrer();
+			this.frame.dispose();
+			this.frame = new FrameAccueil(this.frame.getControleur());
+		} else {
+			this.frame.dispose();
+			this.frame.changerPanel(new PanelParam(this.frame));
+		}
+	}
+
 
 }

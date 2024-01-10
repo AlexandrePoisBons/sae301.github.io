@@ -1,5 +1,6 @@
 package ihm.previsionnel.sae.saeSud;
 
+import ihm.FrameValidation;
 import ihm.accueil.*;
 //Import des classes externes au package
 import ihm.previsionnel.*;
@@ -56,11 +57,19 @@ public class PanelSudSae extends JPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.boutonEnregistrer) {
-			this.enregistrer();
-			this.panelSae.fermerFrameFormulaire();
+			new FrameValidation(this);
 		}
 		else if(e.getSource() == this.boutonAnnuler) {
 			this.frame.changerPanel(new PanelPrevi(this.frame));
+		}
+	}
+
+	public void validation(boolean valide) {
+		if ( valide ) {
+			this.enregistrer();
+			this.panelSae.fermerFrameFormulaire();
+		} else {
+			// this.panelRessources.fermerFrameFormulaire();
 		}
 	}
 

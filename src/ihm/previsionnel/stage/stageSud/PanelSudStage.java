@@ -1,5 +1,6 @@
 package ihm.previsionnel.stage.stageSud;
 
+import ihm.FrameValidation;
 import ihm.accueil.*;
 //Import des classes externes au package
 import ihm.previsionnel.*;
@@ -58,11 +59,19 @@ public class PanelSudStage extends JPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.boutonEnregistrer) {
-			this.enregistrer();
-			this.panelStage.fermerFrameFormulaire();
+			new FrameValidation(this);
 		}
 		else if(e.getSource() == this.boutonAnnuler) {
 			this.frame.changerPanel(new PanelPrevi(this.frame));
+		}
+	}
+
+	public void validation(boolean valide) {
+		if ( valide ) {
+			this.enregistrer();
+			this.panelStage.fermerFrameFormulaire();
+		} else {
+			this.panelStage.fermerFrameFormulaire();
 		}
 	}
 

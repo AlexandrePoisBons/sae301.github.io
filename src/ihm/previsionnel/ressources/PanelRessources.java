@@ -11,7 +11,7 @@ import java.util.List;
 import ihm.accueil.*;
 import ihm.previsionnel.ressources.ressourcesCentre.PRCentre;
 import ihm.previsionnel.ressources.ressourcesNord.PRNord;
-import ihm.previsionnel.ressources.ressourcesSud.PanelSud;
+import ihm.previsionnel.ressources.ressourcesSud.PanelSudRessources;
 import metier.Heure;
 import metier.Intervenant;
 import metier.Module;
@@ -22,7 +22,7 @@ public class PanelRessources extends JPanel {
 	private PanelPrevi  panelMere;
 	private PRNord      pRNord;
 	private PRCentre    pRCentre;
-	private PanelSud    panelSud;
+	private PanelSudRessources    panelSudRessources;
 	private Module      module;
 
 	public PanelRessources(FrameAccueil frame, PanelPrevi framePrevi, Module m) {
@@ -45,13 +45,13 @@ public class PanelRessources extends JPanel {
 		this.pRNord   = new PRNord   (this, this.module);
 		this.pRNord.setValues();
 		this.pRCentre = new PRCentre (this, this.module);
-		this.panelSud = new PanelSud (this.frame, this.panelMere, this, this.module);
+		this.panelSudRessources = new PanelSudRessources (this.frame, this.panelMere, this, this.module);
 
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add( this.pRNord,   BorderLayout.NORTH  );
 		this.add( this.pRCentre, BorderLayout.CENTER );
-		this.add( this.panelSud, BorderLayout.SOUTH  );
+		this.add( this.panelSudRessources, BorderLayout.SOUTH  );
 	}
 
 
