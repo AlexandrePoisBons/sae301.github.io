@@ -97,6 +97,11 @@ public class PanelSudStage extends JPanel implements ActionListener{
 		int    nbHeures     = 0;
 		boolean valide = this.panelStage.estValide();
 
+		if ( code.length() <= 0 || libelle.length() <= 0 || libelleCourt.length() <= 0 ) {
+			this.frame.changerPanel(new PanelPrevi(this.frame));
+			return;
+		}
+
 		HashMap<String, Integer> map = this.panelStage.getDataHeures();
 		for (String heure : map.keySet() ){
 			if (map.get(heure) > nbSemaines)

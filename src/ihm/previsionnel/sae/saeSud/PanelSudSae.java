@@ -67,7 +67,7 @@ public class PanelSudSae extends JPanel implements ActionListener{
 	public void validation(boolean valide) {
 		if ( valide ) {
 			this.enregistrer();
-			this.panelSae.fermerFrameFormulaire();
+			// this.panelSae.fermerFrameFormulaire();
 		} else {
 			// this.panelRessources.fermerFrameFormulaire();
 		}
@@ -95,6 +95,11 @@ public class PanelSudSae extends JPanel implements ActionListener{
 		int    nbSemaines   = 0;
 		int    nbHeures     = 0;
 		boolean valide = this.panelSae.estValide();
+
+		if ( code.length() <= 0 || libelle.length() <= 0 || libelleCourt.length() <= 0 ) {
+			this.frame.changerPanel(new PanelPrevi(this.frame));
+			return;
+		}
 
 		HashMap<String, Integer> map = this.panelSae.getDataHeures();
 		for (String heure : map.keySet()) {
