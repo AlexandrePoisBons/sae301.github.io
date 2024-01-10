@@ -222,14 +222,10 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					}
 				}
 
-				catch (NumberFormatException ex) {
-					System.out.print("");
-				}
+				catch (NumberFormatException ex) {}
 			}
 
-		} catch (Exception ex) {
-			System.err.print("");
-		}
+		} catch (Exception ex) {}
 
 		try {
 			// Addition des heures saisies dans les champs
@@ -265,9 +261,7 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					}
 				}
 
-				catch (NumberFormatException ex) {
-					System.out.print("");
-				}
+				catch (NumberFormatException ex) {}
 			}
 
 			if (e.getSource() == this.ensJTextField.get(3)) {
@@ -301,13 +295,9 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					}
 				}
 
-				catch (NumberFormatException ex) {
-					System.out.print("");
-				}
+				catch (NumberFormatException ex) {}
 			}
-		} catch (Exception ex) {
-			System.err.print("");
-		}
+		} catch (Exception ex) {}
 
 		try {
 			// Addition des heures saisies dans les champs
@@ -344,9 +334,7 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					}
 				}
 
-				catch (NumberFormatException ex) {
-					System.out.print("");
-				}
+				catch (NumberFormatException ex) {}
 			}
 
 			if (e.getSource() == this.ensJTextField.get(5)) {
@@ -380,16 +368,10 @@ public class PanelRepartitionHGauche extends JPanel implements ActionListener, F
 					}
 				}
 
-				catch (NumberFormatException ex) {
-					System.out.print("");
-				}
+				catch (NumberFormatException ex) {}
 			}
 
-		} catch (Exception ex) {
-			System.err.print("");// mettez rien, je sais plus comment j'ai fait mais les try catch sont
-									// obligatoires pour le bon fonctionnement des calculs et ça marche donc touchez
-									// pas
-		}
+		} catch (Exception ex) {}
 	}
 
 	@Override
