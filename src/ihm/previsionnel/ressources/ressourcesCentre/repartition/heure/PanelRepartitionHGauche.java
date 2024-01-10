@@ -17,10 +17,10 @@ import javax.swing.*;
 
 public class PanelRepartitionHGauche extends JPanel implements FocusListener, ActionListener{
 
-	private PanelRepartitionHeure 	panelMere;
+	private PanelRepartitionHeure panelMere;
 
-	private JPanel 					panelHeure;
-	private ArrayList<JTextField> 	ensJTextField;
+	private JPanel                panelHeure;
+	private ArrayList<JTextField> ensJTextField;
 
 	public PanelRepartitionHGauche(PanelRepartitionHeure panelMere){
 		this.panelMere = panelMere;
@@ -47,21 +47,21 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 
 		gbcH.gridx = 0;
 		gbcH.gridy = 0;
-		panelHC.add(new JLabel("nbSem")		, gbcH);
+		panelHC.add(new JLabel("nbSem"), gbcH);
 		gbcH.gridx = 1;
-		panelHC.add(new JLabel("nbH")	, gbcH);
+		panelHC.add(new JLabel("nbH"), gbcH);
 		gbcH.gridx = 2;
 		gbcH.insets = new Insets(0, 7, 5, 0);
-		panelHC.add(new JLabel("nbSem")		, gbcH);
+		panelHC.add(new JLabel("nbSem"), gbcH);
 		gbcH.insets = new Insets(0, 0, 5, 0);
 		gbcH.gridx = 3;
-		panelHC.add(new JLabel("nbH")	, gbcH);
+		panelHC.add(new JLabel("nbH"), gbcH);
 		gbcH.gridx = 4;
 		gbcH.insets = new Insets(0, 7, 5, 0);
-		panelHC.add(new JLabel("nbSem")		, gbcH);
+		panelHC.add(new JLabel("nbSem"), gbcH);
 		gbcH.insets = new Insets(0, 0, 5, 0);
 		gbcH.gridx = 5;
-		panelHC.add(new JLabel("nbH")	, gbcH);
+		panelHC.add(new JLabel("nbH"), gbcH);
 
 		gbcH.gridx = 0;
 		gbcH.gridy = 1;
@@ -105,7 +105,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
 	//méthode pour gérer la couleur du cadre en fonction de la validité de la saisie
 	public void setCouleurErreur(boolean b, JTextField txt) {
-		if (b == true) {
+		if (b) {
 			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
 		} else {
 			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
@@ -195,7 +195,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					}
 					if (this.ensJTextField.get(1).getText().equals(Integer.toString(somme))
 							&& this.ensJTextField.get(0).getText().equals("")) {
-						System.out.println("Cette valeur a déjas été prise en compte");
+						System.out.println("Cette valeur a déja été prise en compte");
 					} else{
 						if (this.ensJTextField.get(1).getText().equals("") || Integer.parseInt(this.ensJTextField.get(1).getText())<0)
 							this.ensJTextField.get(1).setText("0");
@@ -215,14 +215,10 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					}
 				}
 
-				catch (NumberFormatException ex) {
-					System.out.print("");
-				}
+				catch (NumberFormatException ex) { }
 			}
 
-		} catch (Exception ex) {
-			System.err.print("");
-		}
+		} catch (Exception ex) { }
 
 		try {
 			// Addition des heures saisies dans les champs
@@ -459,4 +455,5 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 		}
 		return bOk;
 	}
+
 }

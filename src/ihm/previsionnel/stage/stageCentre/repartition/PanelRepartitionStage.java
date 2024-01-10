@@ -81,7 +81,7 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
-	public void fermerFrameFormulaire() { this.frameFormulaire.dispose(); }
+	public void fermerFrameFormulaire() { if ( this.frameFormulaire != null) this.frameFormulaire.dispose(); }
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);

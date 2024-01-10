@@ -71,9 +71,9 @@ public class PanelSudPpp extends JPanel implements ActionListener {
 	public void validation(boolean valide) {
 		if (valide ) {
 			this.enregistrer();
-			this.panelPpp.fermerFrameFormulaire();
+			// this.panelPpp.fermerFrameFormulaire();
 		} else {
-			this.panelPpp.fermerFrameFormulaire();
+			// this.panelPpp.fermerFrameFormulaire();
 		}
 	}
 
@@ -99,6 +99,11 @@ public class PanelSudPpp extends JPanel implements ActionListener {
 		int    nbSemaines   = 0;
 		int    nbHeures     = 0;
 		boolean valide = this.panelPpp.isValide();
+
+		if ( code.length() <= 0 || libelle.length() <= 0 || libelleCourt.length() <= 0 ) {
+			this.frame.changerPanel(new PanelPrevi(this.frame));
+			return;
+		}
 
 		HashMap<String, Integer> map = this.panelPpp.getDataHeures();
 		for (String heure : map.keySet()) {

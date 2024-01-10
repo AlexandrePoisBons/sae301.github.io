@@ -1,6 +1,5 @@
 package ihm.previsionnel.ressources.ressourcesCentre.repartition;
 
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -8,8 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.ArrayList;
-import java.util.EventObject;
 import java.util.List;
 
 import javax.swing.*;
@@ -144,8 +141,8 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		}
 
 		for(int i=0;i<typesHeures.size();i++) {
-			if(typesHeures.get(i).getNomTypeHeure().equals("CM") || 
-			   typesHeures.get(i).getNomTypeHeure().equals("TD") || 
+			if(typesHeures.get(i).getNomTypeHeure().equals("CM") ||
+			   typesHeures.get(i).getNomTypeHeure().equals("TD") ||
 			   typesHeures.get(i).getNomTypeHeure().equals("TP") ||
 			   typesHeures.get(i).getNomTypeHeure().equals("HP")) {
 				heures[cpt] = i;
@@ -155,7 +152,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 
 		String[] tabTypesHeures = new String[cpt];
 
-		for (int i = 0; i < cpt; i++) {
+		for ( int i = 0; i < cpt; i++ ) {
 			tabTypesHeures[i] = typesHeures.get(heures[i]).getNomTypeHeure();
 		}
 
@@ -169,24 +166,25 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		TypeHeure typeHeure     = null;
 		Intervenant intervenant = null;
 		Heure heure = null;
-		for (TypeHeure tH : this.panelMere.getTypesHeures()) {
+
+		for ( TypeHeure tH : this.panelMere.getTypesHeures() ) {
 			if(this.ddlstTypesHeures.getSelectedItem().toString() == tH.getNomTypeHeure()){
 				typeHeure = tH;
 			}
 		}
-		for (Intervenant inter : this.panelMere.getIntervenants()) {
+		for ( Intervenant inter : this.panelMere.getIntervenants() ) {
 			if(this.ddlstIntervenant.getSelectedItem().toString().equals(inter.getNom() + " " + inter.getPrenom())) {
 				intervenant = inter;
 			}
 		}
 
-		if(!(this.ddlstTypesHeures.getSelectedItem().toString().equals("HP"))){
+		if ( !(this.ddlstTypesHeures.getSelectedItem().toString().equals("HP")) ){
 			heure = Heure.creerHeure( this.module,
-									    (typeHeure),
-									    Integer.parseInt(this.txtNbSemaines.getText()),
-									    Integer.parseInt(this.txtNbH.getText()),
-										Float.parseFloat(this.txtTotEqtd.getText()),
-										this.txtCommentaire.getText() );
+									  typeHeure,
+									  Integer.parseInt(this.txtNbSemaines.getText()),
+									  Integer.parseInt(this.txtNbH.getText()),
+									  Float.parseFloat(this.txtTotEqtd.getText()),
+									  this.txtCommentaire.getText() );
 		}
 		else {
 			heure = Heure.creerHeure( this.module,
