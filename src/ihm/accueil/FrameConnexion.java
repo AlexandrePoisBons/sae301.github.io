@@ -6,6 +6,7 @@ import controleur.Infos;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Insets;
@@ -32,7 +33,7 @@ public class FrameConnexion extends JFrame implements ActionListener{
 		this.infos = new Infos();
 
 		//Positionnement de la frame
-		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+		int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 		int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		int xSize   = (int)(largeur*0.2);
 		int ySize   = (int)(hauteur*0.3);
@@ -87,18 +88,14 @@ public class FrameConnexion extends JFrame implements ActionListener{
 
 		this.btnConnexion.addActionListener(this);
 
+
 		//Permet la fermeture de la fenetre quand on appuie sur la croix
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		this.setVisible(true);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.btnConnexion) {
-			this.connexion();
-		}
-	}
+
 
 	private void connexion() {
 		String u;
@@ -136,4 +133,11 @@ public class FrameConnexion extends JFrame implements ActionListener{
 
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// Faire en sorte que ça passe au prochain textfield quand on clique sur entre avec .transferFocus();
+		if(e.getSource() == this.btnConnexion) {
+			this.connexion();
+		}
+	}
 }

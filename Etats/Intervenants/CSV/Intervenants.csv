@@ -1,4 +1,4 @@
 Catégorie;Nom;Prénom;Service Dû;Max Heures Autorisé;Coeff TP;Total Heures Impairs;Total Heures Pairs;Total Heures
-Statut [nomStatut=Enseignant, nbHeuresService=180h, nbHeuresMax=350h, coeffTP=1.0];Chabrier;Pierre;277.5;0.0;0.0;43.0;4.0;57.0
-Statut [nomStatut=Chercheur, nbHeuresService=120h, nbHeuresMax=250h, coeffTP=1.0];Levy;Sylvain;249.0;0.0;0.0;20.0;35.0;52.82
-Statut [nomStatut=Vacataire, nbHeuresService=100h, nbHeuresMax=200h, coeffTP=0.0];Vatanen;Ari;102.0;0.0;0.0;0.0;0.0;20.58
+Enseignant;Chabrier;Pierre;277.5;0.0;0.0;43.0;4.0;57.0
+Chercheur;Levy;Sylvain;249.0;0.0;0.0;20.0;35.0;52.82
+Vacataire;Vatanen;Ari;102.0;0.0;0.0;0.0;0.0;20.58
