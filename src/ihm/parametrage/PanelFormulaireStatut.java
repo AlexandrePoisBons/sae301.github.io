@@ -106,6 +106,7 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 
 	public void valider() {
 
+		Statut s = null;
 		int nbHeuresService = 0;
 		int nbHeuresMax = 0;
 		float coeff = 1.0f;
@@ -131,11 +132,13 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 			this.revalidate();
 		}
 
-		Statut s = new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff);
+		if(nbHeuresService < nbHeuresMax) {
+			s = new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff);
+		}
 
-		if ( this.statut != null ) 
+		if ( this.statut != null )  {
 			this.panelMere.majStatut(this.statut, s);
-
+		}
 
 		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
 		if (nbHeuresService == 0 || nbHeuresMax == 0 || coeff == 0.0f) {
