@@ -19,38 +19,38 @@ import metier.Module;
 public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	private static final double COEFF_CM_TD = 1.5;
 
-	private PanelPppCentre panelMere;
+	private PanelPppCentre   panelMere;
 
-	private JPanel panelPrincipal;
-	private JPanel panelValidation;
-	private JTextField txtHTutWrite;
-	private JTextField txtHPonctWrite;
-	private JTextField txtCMWrite;
-	private JTextField txtTDWrite;
-	private JTextField txtTPWrite;
-	private JTextField txtCM;
-	private JTextField txtTD;
-	private JTextField txtTP;
-	private JTextField txtSomme;
-	private JTextField txtTotalSomme;
-	private JCheckBox checkValid;
+	private JPanel      panelPrincipal;
+	private JPanel     panelValidation;
+	private JTextField    txtHTutWrite;
+	private JTextField  txtHPonctWrite;
+	private JTextField      txtCMWrite;
+	private JTextField      txtTDWrite;
+	private JTextField      txtTPWrite;
+	private JTextField           txtCM;
+	private JTextField           txtTD;
+	private JTextField           txtTP;
+	private JTextField        txtSomme;
+	private JTextField   txtTotalSomme;
+	private JCheckBox       checkValid;
 
-	private JLabel labelErreur;
+	private JLabel         labelErreur;
 
-	private Module module;
+	private Module              module;
 
-	private int sommeAction;
-	private int sommeTotSansCoeff;
-	private int sommeHPonct = 0;
-	private int sommeHTut = 0;
-	private int sommeCM = 0;
-	private int sommeTD = 0;
-	private int sommeTP = 0;
+	private int            sommeAction;
+	private int      sommeTotSansCoeff;
+	private int        sommeHPonct = 0;
+	private int          sommeHTut = 0;
+	private int            sommeCM = 0;
+	private int            sommeTD = 0;
+	private int            sommeTP = 0;
 
-	private int totalSomme = 0;
-	private int sommeCMAvecCoeff = 0;
-	private int sommeTDAvecCoeff = 0;
-	private int sommeTPAvecCoeff = 0;
+	private int         totalSomme = 0;
+	private int   sommeCMAvecCoeff = 0;
+	private int   sommeTDAvecCoeff = 0;
+	private int   sommeTPAvecCoeff = 0;
 
 	public ProgNat(PanelPppCentre panelMere, Module m) {
 		this.panelMere = panelMere;
