@@ -59,20 +59,20 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 		this.setLayout(new BorderLayout());
 
 		// Initialisation des composants
-		JPanel pnlCentre = new JPanel();
-		this.panelPrincipal = new JPanel();
+		JPanel pnlCentre     = new JPanel();
+		this.panelPrincipal  = new JPanel();
 		this.panelValidation = new JPanel();
-		this.txtHTutWrite = new JTextField(4);
-		this.txtHPonctWrite = new JTextField(4);
-		this.txtCMWrite = new JTextField(4);
-		this.txtTDWrite = new JTextField(4);
-		this.txtTPWrite = new JTextField(4);
-		this.txtCM = new JTextField(4);
-		this.txtTD = new JTextField(4);
-		this.txtTP = new JTextField(4);
-		this.txtSomme = new JTextField(4);
-		this.txtTotalSomme = new JTextField(4);
-		this.labelErreur = new JLabel("");
+		this.txtHTutWrite    = new JTextField(4);
+		this.txtHPonctWrite  = new JTextField(4);
+		this.txtCMWrite      = new JTextField(4);
+		this.txtTDWrite      = new JTextField(4);
+		this.txtTPWrite      = new JTextField(4);
+		this.txtCM           = new JTextField(4);
+		this.txtTD           = new JTextField(4);
+		this.txtTP           = new JTextField(4);
+		this.txtSomme        = new JTextField(4);
+		this.txtTotalSomme   = new JTextField(4);
+		this.labelErreur     = new JLabel("");
 		// set la couleur du label erreur en rouge
 		this.labelErreur.setForeground(Color.RED);
 		this.checkValid = new JCheckBox();
@@ -80,60 +80,60 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 		this.panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 		// Layouts
-		pnlCentre.setLayout(new BorderLayout());
-		this.panelPrincipal.setLayout(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
+		pnlCentre.setLayout(          new BorderLayout()     );
+		this.panelPrincipal.setLayout(new GridBagLayout()    );
+		GridBagConstraints gbc =      new GridBagConstraints();
 
 		// Rendre certain champ de sasie non modifiable
-		this.txtCM.setEditable(false);
-		this.txtTD.setEditable(false);
-		this.txtTP.setEditable(false);
-		this.txtSomme.setEditable(false);
+		this.txtCM        .setEditable(false);
+		this.txtTD        .setEditable(false);
+		this.txtTP        .setEditable(false);
+		this.txtSomme     .setEditable(false);
 		this.txtTotalSomme.setEditable(false);
 
 		// Ajout des composants avec GridBagLayout
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(11, 0, 2, 0);
-		this.panelPrincipal.add(new JLabel("H tut"), gbc);
+		this.panelPrincipal.add(new JLabel("H tut")  , gbc);
 		gbc.gridx = 2;
 		this.panelPrincipal.add(new JLabel("H ponct"), gbc);
 		gbc.gridx = 3;
-		this.panelPrincipal.add(new JLabel("CM"), gbc);
+		this.panelPrincipal.add(new JLabel("CM")     , gbc);
 		gbc.insets = new Insets(11, 5, 2, 0);
 		gbc.gridx = 4;
-		this.panelPrincipal.add(new JLabel("TD"), gbc);
+		this.panelPrincipal.add(new JLabel("TD")     , gbc);
 		gbc.gridx = 5;
-		this.panelPrincipal.add(new JLabel("TP"), gbc);
+		this.panelPrincipal.add(new JLabel("TP")     , gbc);
 		gbc.gridx = 6;
-		this.panelPrincipal.add(new JLabel("Σ"), gbc);
+		this.panelPrincipal.add(new JLabel("Σ")      , gbc);
 
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		gbc.insets = new Insets(0, 0, 2, 0);
-		this.panelPrincipal.add(this.txtHTutWrite, gbc);
+		this.panelPrincipal.add(this.txtHTutWrite        , gbc);
 		gbc.gridx = 2;
-		this.panelPrincipal.add(this.txtHPonctWrite, gbc);
+		this.panelPrincipal.add(this.txtHPonctWrite      , gbc);
 		gbc.gridx = 3;
-		this.panelPrincipal.add(this.txtCMWrite, gbc);
+		this.panelPrincipal.add(this.txtCMWrite          , gbc);
 		gbc.insets = new Insets(0, 5, 2, 0);
 		gbc.gridx = 4;
-		this.panelPrincipal.add(this.txtTDWrite, gbc);
+		this.panelPrincipal.add(this.txtTDWrite          , gbc);
 		gbc.gridx = 5;
-		this.panelPrincipal.add(this.txtTPWrite, gbc);
+		this.panelPrincipal.add(this.txtTPWrite          , gbc);
 		gbc.gridx = 6;
-		this.panelPrincipal.add(this.txtSomme, gbc);
+		this.panelPrincipal.add(this.txtSomme            , gbc);
 
 		gbc.gridx = 3;
 		gbc.gridy = 2;
-		this.panelPrincipal.add(this.txtCM, gbc);
+		this.panelPrincipal.add(this.txtCM               , gbc);
 		gbc.insets = new Insets(0, 5, 2, 0);
 		gbc.gridx = 4;
-		this.panelPrincipal.add(this.txtTD, gbc);
+		this.panelPrincipal.add(this.txtTD               , gbc);
 		gbc.gridx = 5;
-		this.panelPrincipal.add(this.txtTP, gbc);
+		this.panelPrincipal.add(this.txtTP               , gbc);
 		gbc.gridx = 6;
-		this.panelPrincipal.add(this.txtTotalSomme, gbc);
+		this.panelPrincipal.add(this.txtTotalSomme       , gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 2;
@@ -144,22 +144,22 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 		this.panelValidation.add(this.checkValid);
 
 		pnlCentre.add(this.panelValidation, BorderLayout.NORTH);
-		pnlCentre.add(this.labelErreur, BorderLayout.WEST);
+		pnlCentre.add(this.labelErreur    , BorderLayout.WEST);
 
-		this.add(this.panelPrincipal, BorderLayout.NORTH);
-		this.add(pnlCentre, BorderLayout.CENTER);
+		this.add(this.panelPrincipal      , BorderLayout.NORTH);
+		this.add(pnlCentre                , BorderLayout.CENTER);
 
 		// Ajout des listeners
-		this.txtHPonctWrite.addActionListener(this);
-		this.txtHTutWrite.addActionListener(this);
-		this.txtCMWrite.addActionListener(this);
-		this.txtTDWrite.addActionListener(this);
-		this.txtTPWrite.addActionListener(this);
-		this.txtHPonctWrite.addFocusListener(this);
-		this.txtHTutWrite.addFocusListener(this);
-		this.txtCMWrite.addFocusListener(this);
-		this.txtTDWrite.addFocusListener(this);
-		this.txtTPWrite.addFocusListener(this);
+		this.txtHPonctWrite .addActionListener(this);
+		this.txtHTutWrite   .addActionListener(this);
+		this.txtCMWrite     .addActionListener(this);
+		this.txtTDWrite     .addActionListener(this);
+		this.txtTPWrite     .addActionListener(this);
+		this.txtHPonctWrite .addFocusListener (this);
+		this.txtHTutWrite   .addFocusListener (this);
+		this.txtCMWrite     .addFocusListener (this);
+		this.txtTDWrite     .addFocusListener (this);
+		this.txtTPWrite     .addFocusListener (this);
 
 		this.setVisible(true);
 	}
@@ -175,7 +175,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 		}
 
 		try {
-			map.put("TUT", Integer.parseInt(this.txtHTutWrite.getText()));
+			map.put("TUT", Integer.parseInt(this.txtHTutWrite    .getText()));
 		} catch (NumberFormatException e) {
 			map.put("TUT", 0);
 		}
@@ -198,7 +198,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	// saisie
 	public void setCouleurErreur(boolean b, JTextField txt) {
 		if ( b ) {
-			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1 ));
 		} else {
 			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		}
@@ -206,24 +206,24 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 
 	// méthode pour set le labelErreur
 	public void setLabelErreur(String s) {
-		this.labelErreur.setText(s);
-		this.labelErreur.repaint();
+		this.labelErreur.setText(s  );
+		this.labelErreur.repaint(   );
 		this.labelErreur.revalidate();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == this.txtHPonctWrite) {
+		if (e.getSource() == this.txtHPonctWrite)      {
 			this.txtHPonctWrite.transferFocus();
 		} else if (e.getSource() == this.txtHTutWrite) {
-			this.txtHTutWrite.transferFocus();
-		} else if (e.getSource() == this.txtCMWrite) {
-			this.txtCMWrite.transferFocus();
-		} else if (e.getSource() == this.txtTDWrite) {
-			this.txtTDWrite.transferFocus();
-		} else if (e.getSource() == this.txtTPWrite) {
-			this.txtTPWrite.transferFocus();
+			this.txtHTutWrite  .transferFocus();
+		} else if (e.getSource() == this.txtCMWrite)   {
+			this.txtCMWrite    .transferFocus();
+		} else if (e.getSource() == this.txtTDWrite)   {
+			this.txtTDWrite    .transferFocus();
+		} else if (e.getSource() == this.txtTPWrite)   {
+			this.txtTPWrite    .transferFocus();
 		}
 	}
 
@@ -305,7 +305,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 					this.sommeTDAvecCoeff = (int) (Integer.parseInt(this.txtTDWrite.getText())
 							* this.panelMere.getNbGpTd());
 					this.txtTD.setText(Integer.toString(this.sommeTDAvecCoeff));
-					this.txtTD.repaint();
+					this.txtTD.repaint   ();
 					this.txtTD.revalidate();
 				}
 			} catch (Exception err) { }
@@ -352,7 +352,7 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 				this.setCouleurErreur(true, this.txtCMWrite);
 			} else {
-				this.setLabelErreur("");
+				this.setLabelErreur  ("");
 				this.setCouleurErreur(false, this.txtCMWrite);
 			}
 		} else if ( e.getSource() == this.txtTDWrite ) {
