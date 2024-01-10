@@ -206,6 +206,7 @@ public class PanelParam extends JPanel implements ActionListener{
 			this.dtmStatut.removeRow(ligneSelectionne);
 			this.ensStatut.remove(this.ensStatut.get(ligneSelectionne));
 			this.lblErreur.setText("");
+			this.panelFormulaireStatut.effacer();
 			this.repaint();
 			this.revalidate();
 		} else {

@@ -107,33 +107,63 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 	public void valider() {
 
 		Statut s = null;
-		int nbHeuresService = 0;
-		int nbHeuresMax = 0;
-		float coeff = 1.0f;
+		int nbHeuresService = -1;
+		int nbHeuresMax = -1;
+		float coeff = -1.0f;
 
-		try { nbHeuresService = Integer.parseInt(this.txtNbHeuresService.getText()); }
-		catch ( NumberFormatException e ) {
-			this.lblErreur.setText(this.txtNbHeuresService.getText() + " : pas un Integer"); 
-			this.repaint();
-			this.revalidate();
+		if(this.txtNomStatut.getText().equals("")) {
+			this.lblErreur.setText("Remplissez Nom Statut");
+			return;
 		}
 
-		try { nbHeuresMax = Integer.parseInt(this.txtNbHeuresMax.getText()); }
-		catch ( NumberFormatException e ) {
-			this.lblErreur.setText(this.txtNbHeuresService.getText() + " : pas un Integer"); 
-			this.repaint();
-			this.revalidate();
+		if(!this.txtNbHeuresService.getText().equals("")) {
+			try {
+				nbHeuresService = Integer.parseInt(this.txtNbHeuresService.getText()); 
+			}
+			catch ( NumberFormatException e ) {
+				this.lblErreur.setText(this.txtNbHeuresService.getText() + " : pas un Integer"); 
+				return;
+			}
+		} else {
+			this.lblErreur.setText("Remplissez Heures Service");
+			return;
 		}
 
-		try { coeff =  Float.parseFloat(this.txtCoeff.getText()); }
-		catch ( NumberFormatException e ) {
-			this.lblErreur.setText(this.txtNbHeuresService.getText() + " : pas un Float"); 
-			this.repaint();
-			this.revalidate();
+
+
+		if(!this.txtNbHeuresMax.getText().equals("")) {
+			try {
+				nbHeuresMax = Integer.parseInt(this.txtNbHeuresMax.getText()); 
+			}
+			catch ( NumberFormatException e ) {
+				this.lblErreur.setText(this.txtNbHeuresMax.getText() + " : pas un Integer"); 
+				return;
+			}
+		} else {
+			this.lblErreur.setText("Remplissez Heures Max");
+			return;
+		}
+
+		if(!this.txtCoeff.getText().equals("")) {
+			try {
+				coeff = Float.parseFloat(this.txtCoeff.getText()); 
+			}
+			catch ( NumberFormatException e ) {
+				this.lblErreur.setText(this.txtCoeff.getText() + " : pas un Float"); 
+				return;
+			}
+		} else {
+			this.lblErreur.setText("Remplissez Coefficient");
+			return;
 		}
 
 		if(nbHeuresService < nbHeuresMax) {
 			s = new Statut(this.txtNomStatut.getText(), nbHeuresService, nbHeuresMax, coeff);
+		}
+		else {
+			this.lblErreur.setText("nbHServ < nbHMax");
+			this.txtNbHeuresService.setText("");
+			return;
 		}
 
 		if ( this.statut != null )  {
@@ -141,14 +171,16 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener {
 		}
 
 		//verification qu'il n'ajoute pas si c'est les valeurs par défaut
-		if (nbHeuresService == 0 || nbHeuresMax == 0 || coeff == 0.0f) {
+		if ( s.getNomStatut().equals("") || s.getNbHeureService() == -1 || s.getNbHeuresMax() == -1 || s.getCoeffTP() == -1.0f) {
 			this.lblErreur.setText("Vérifier vos valeurs");
+			return;
 		} else {
 			this.panelMere.ajouterStatut(s);
 			if ( statut != null ) this.panelMere.supprimerStatut();
 		}
 
 		this.effacer();
+		this.lblErreur.setText("");
 	}
 
 	public void effacer() {
