@@ -71,7 +71,6 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 		//set la couleur du label erreur en rouge
 		this.labelErreur.setForeground(Color.RED);
 		this.checkValid = new JCheckBox();
-		System.out.println(this.module.isValide());
 		this.checkValid.setSelected(this.module.isValide());
 		this.panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 

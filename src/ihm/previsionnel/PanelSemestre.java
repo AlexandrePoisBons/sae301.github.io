@@ -20,7 +20,6 @@ import metier.Module;
 public class PanelSemestre extends JPanel {
 
 	// Attributs
-	private FrameAccueil      frame        ;
 	private Controleur        ctrl         ;
 	private JTextField        txtNbGpTd    ;
 	private JTextField        txtNbGpTp    ;
@@ -35,18 +34,18 @@ public class PanelSemestre extends JPanel {
 	public PanelSemestre(FrameAccueil frameAccueil, int idSemestre) {
 
 		// Synchronisation des pages
-		this.ctrl = frameAccueil.getControleur().getCtrl();
+		this.ctrl = frameAccueil.getControleur();
 
 		// Permet d'identifier le semestre cliqué
-		this.id 	= idSemestre;
+		this.id = idSemestre;
 
 		// JPanels
 		JPanel panelNord   = new JPanel();
 		JPanel panelCentre = new JPanel();
 
 		// Layout
-		this.setLayout			(new BorderLayout());
-		panelCentre.setLayout	(new BorderLayout());
+		this.setLayout(new BorderLayout());
+		panelCentre.setLayout(new BorderLayout());
 
 		//Instanciations des composants
 		this.txtNbGpTd    = new JTextField(2);
@@ -73,15 +72,15 @@ public class PanelSemestre extends JPanel {
 		this.tabModule.setBorder(tableBorder);
 
 		// Ajout des composants
-		panelNord.add	( new JLabel("nb gp TD")    );
-		panelNord.add	( this.txtNbGpTd            );
-		panelNord.add	( new JLabel("nb gp TP")    );
-		panelNord.add	( this.txtNbGpTp            );
-		panelNord.add	( new JLabel("nb Etd")      );
-		panelNord.add	( this.txtNbEtd             );
-		panelNord.add	( new JLabel("nb semaines") );
-		panelNord.add	( this.txtNbSemaine         );
-		//panelCentre.add	(new JLabel("Liste des modules :")  , BorderLayout.NORTH  );
+		panelNord.add ( new JLabel("nb gp TD")    );
+		panelNord.add ( this.txtNbGpTd            );
+		panelNord.add ( new JLabel("nb gp TP")    );
+		panelNord.add ( this.txtNbGpTp            );
+		panelNord.add ( new JLabel("nb Etd")      );
+		panelNord.add ( this.txtNbEtd             );
+		panelNord.add ( new JLabel("nb semaines") );
+		panelNord.add ( this.txtNbSemaine         );
+		//panelCentre.add (new JLabel("Liste des modules :")  , BorderLayout.NORTH  );
 		panelCentre.add (new JScrollPane(this.tabModule), BorderLayout.CENTER );
 
 		this.add(panelNord                              , BorderLayout.NORTH  );
@@ -156,7 +155,7 @@ public class PanelSemestre extends JPanel {
 
 	public void removeModule() throws SQLException {
 		if(this.tabModule.getSelectedRow() != -1){
-			this.ctrl.metier().supprimerModule(this.getCurrentModule());
+			this.ctrl.supprimerModule(this.getCurrentModule());
 			this.modules.remove(this.tabModule.getSelectedRow());
 			this.dtm.removeRow (this.tabModule.getSelectedRow());
 		}

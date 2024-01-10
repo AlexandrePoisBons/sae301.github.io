@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import ihm.accueil.*;
-import ihm.previsionnel.ppp.pppSud.PanelSud;
+import ihm.previsionnel.ppp.pppSud.PanelSudPpp;
 import metier.Heure;
 import metier.Intervenant;
 import metier.Module;
@@ -21,7 +21,7 @@ public class PanelPpp extends JPanel {
 	private PanelPrevi  panelMere;
 	private PanelPppNord      panelPppNord;
 	private PanelPppCentre    panelPppCentre;
-	private PanelSud    panelSud;
+	private PanelSudPpp    panelSudPpp;
 	private Module module;
 
 	public PanelPpp(FrameAccueil frame, PanelPrevi framePrevi, Module m) {
@@ -44,12 +44,12 @@ public class PanelPpp extends JPanel {
 		this.panelPppNord = new PanelPppNord(this, this.module);
 		this.panelPppNord.setValues();
 		this.panelPppCentre = new PanelPppCentre(this, this.module);
-		this.panelSud = new PanelSud(this.frame, this.panelMere, this, this.module);
+		this.panelSudPpp = new PanelSudPpp(this.frame, this.panelMere, this, this.module);
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add(this.panelPppNord, BorderLayout.NORTH);
 		this.add(this.panelPppCentre, BorderLayout.CENTER);
-		this.add(this.panelSud, BorderLayout.SOUTH);
+		this.add(this.panelSudPpp, BorderLayout.SOUTH);
 	}
 
 	public void enregistrer(Module m) {
@@ -71,7 +71,7 @@ public class PanelPpp extends JPanel {
 	}
 
 	public void setErreur(String message) {
-		this.panelSud.setErreur(message);
+		this.panelSudPpp.setErreur(message);
 	}
 
 	public String getSemestre()     { return this.panelMere.getSemestre();    }
@@ -88,8 +88,8 @@ public class PanelPpp extends JPanel {
 	public HashMap<String,Integer>  getData()       { return this.panelPppCentre.getData(); }
 	public List<Heure> getDeletedHeures() { return this.panelPppCentre.getDeletedHeures(); }
 
-	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
-	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }
+	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getIntervenants(); }
+	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getTypesHeures();  }
 
 	public boolean isValide() { return this.panelPppCentre.estValide(); }
 

@@ -11,7 +11,7 @@ import java.util.List;
 import ihm.accueil.*;
 import ihm.previsionnel.ressources.ressourcesCentre.PRCentre;
 import ihm.previsionnel.ressources.ressourcesNord.PRNord;
-import ihm.previsionnel.ressources.ressourcesSud.PanelSud;
+import ihm.previsionnel.ressources.ressourcesSud.PanelSudRessources;
 import metier.Heure;
 import metier.Intervenant;
 import metier.Module;
@@ -22,7 +22,7 @@ public class PanelRessources extends JPanel {
 	private PanelPrevi  panelMere;
 	private PRNord      pRNord;
 	private PRCentre    pRCentre;
-	private PanelSud    panelSud;
+	private PanelSudRessources    panelSudRessources;
 	private Module      module;
 
 	public PanelRessources(FrameAccueil frame, PanelPrevi framePrevi, Module m) {
@@ -45,13 +45,13 @@ public class PanelRessources extends JPanel {
 		this.pRNord   = new PRNord   (this, this.module);
 		this.pRNord.setValues();
 		this.pRCentre = new PRCentre (this, this.module);
-		this.panelSud = new PanelSud (this.frame, this.panelMere, this, this.module);
+		this.panelSudRessources = new PanelSudRessources (this.frame, this.panelMere, this, this.module);
 
 
 		// Utiliser BoxLayout pour organiser les composants horizontalement
 		this.add( this.pRNord,   BorderLayout.NORTH  );
 		this.add( this.pRCentre, BorderLayout.CENTER );
-		this.add( this.panelSud, BorderLayout.SOUTH  );
+		this.add( this.panelSudRessources, BorderLayout.SOUTH  );
 	}
 
 
@@ -65,7 +65,6 @@ public class PanelRessources extends JPanel {
 	}
 
 	public void update(Module oldModule, Module newModule) {
-		System.out.println("aller stp "+newModule.isValide());
 		List<Heure> heures = this.pRCentre.getHeures();
 
 		newModule.setHeures(heures);
@@ -89,8 +88,8 @@ public class PanelRessources extends JPanel {
 	public HashMap<String,Integer>  getData()          { return this.pRCentre.getData();     }
 	public List<Heure>              getDeletedHeures() { return pRCentre.getDeletedHeures(); }
 
-	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
-	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }
+	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getIntervenants(); }
+	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getTypesHeures();  }
 
 	//pour mettre à jour les données dans pCentre
 	public int getNbGpTdMaj() { return this.pRNord.getTxtNbGpTd(); }

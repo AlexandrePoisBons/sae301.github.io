@@ -1,17 +1,17 @@
-package ihm.accueil			;
+package ihm.accueil;
 
-import javax.swing.*		;
+import javax.swing.*;
 
-import controleur.ControleurIHM;
+import controleur.Controleur;
 
 
 public class FrameAccueil extends JFrame {
 	//Attribut(s)
 	private JPanel panel;
-	private ControleurIHM ctrl;
+	private Controleur ctrl;
 
 	//Constructeur
-	public FrameAccueil(ControleurIHM ctrl) {
+	public FrameAccueil(Controleur ctrl) {
 		this.ctrl = ctrl;
 		this.setTitle("Accueil");
 		this.setResizable(false);
@@ -38,7 +38,7 @@ public class FrameAccueil extends JFrame {
 	}
 
 
-	public ControleurIHM getControleur() { return this.ctrl; }
+	public Controleur getControleur() { return this.ctrl; }
 
 
 }

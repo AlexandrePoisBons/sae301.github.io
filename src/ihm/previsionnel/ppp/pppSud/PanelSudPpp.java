@@ -5,7 +5,9 @@ package ihm.previsionnel.ppp.pppSud;
 
 import ihm.previsionnel.*;
 import ihm.previsionnel.ppp.PanelPpp;
+import ihm.FrameValidation;
 import ihm.accueil.*;
+import ihm.parametrage.PanelParam;
 import metier.Module;
 import metier.Heure;
 
@@ -21,7 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 
-public class PanelSud extends JPanel implements ActionListener {
+public class PanelSudPpp extends JPanel implements ActionListener {
 	private FrameAccueil frame;
 	private PanelPrevi   panelPrevi;
 	private JButton      boutonEnregistrer;
@@ -32,7 +34,7 @@ public class PanelSud extends JPanel implements ActionListener {
 	private Module module;
 	private Module oldModule;
 
-	public PanelSud(FrameAccueil frame, PanelPrevi panelPrevi, PanelPpp panelPpp, Module m) {
+	public PanelSudPpp(FrameAccueil frame, PanelPrevi panelPrevi, PanelPpp panelPpp, Module m) {
 		this.frame = frame;
 		this.panelPrevi = panelPrevi;
 		this.panelPpp = panelPpp;
@@ -59,11 +61,19 @@ public class PanelSud extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.boutonEnregistrer) {
-			this.enregistrer();
-			this.panelPpp.fermerFrameFormulaire();
+			new FrameValidation(this);
 		}
 		else if(e.getSource() == this.boutonAnnuler) {
 			this.frame.changerPanel(new PanelPrevi(this.frame));
+		}
+	}
+
+	public void validation(boolean valide) {
+		if (valide ) {
+			this.enregistrer();
+			this.panelPpp.fermerFrameFormulaire();
+		} else {
+			this.panelPpp.fermerFrameFormulaire();
 		}
 	}
 

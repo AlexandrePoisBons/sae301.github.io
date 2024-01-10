@@ -118,8 +118,8 @@ public class PanelModule extends JPanel implements ActionListener {
 	}
 
 	public JComboBox<String> init() {
-		this.listModule = this.panelMere.getControleur().getCtrl().metier().getModules();
-		List<Module> listModule = this.panelMere.getControleur().getCtrl().metier().getModules();
+		this.listModule = this.panelMere.getControleur().getModules();
+		List<Module> listModule = this.panelMere.getControleur().getModules();
 		JComboBox<String> ddlst = new JComboBox<String>();
 
 		for (Module module : listModule) {
@@ -132,7 +132,7 @@ public class PanelModule extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if ( e.getSource() == this.btnGenererHtml ) {
 			Module m = null;
-			for ( Module module : this.frame.getControleur().getCtrl().metier().getModules() ) {
+			for ( Module module : this.frame.getControleur().getModules() ) {
 				if ( this.ddlstModule.getSelectedItem().equals(module.getCode() + " " + module.getLibelleCourt()) ) {
 					m = module;
 				}

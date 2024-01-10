@@ -1,4 +1,5 @@
 package ihm.previsionnel.ressources.ressourcesSud;
+import ihm.FrameValidation;
 import ihm.accueil.*;
 //Import des classes externes au package
 import ihm.previsionnel.*;
@@ -17,7 +18,7 @@ import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.List;
 
-public class PanelSud extends JPanel implements ActionListener {
+public class PanelSudRessources extends JPanel implements ActionListener {
 	private FrameAccueil    frame;
 	private PanelPrevi      panelPrevi;
 	private JButton         boutonEnregistrer;
@@ -28,7 +29,7 @@ public class PanelSud extends JPanel implements ActionListener {
 	private Module          module;
 	private Module          oldModule;
 
-	public PanelSud(FrameAccueil frame, PanelPrevi panelPrevi, PanelRessources panelRessources, Module m) {
+	public PanelSudRessources(FrameAccueil frame, PanelPrevi panelPrevi, PanelRessources panelRessources, Module m) {
 		this.frame = frame;
 		this.panelPrevi        = panelPrevi;
 		this.panelRessources = panelRessources;
@@ -56,12 +57,21 @@ public class PanelSud extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.boutonEnregistrer) {
-			this.enregistrer();
+			new FrameValidation(this);
 			//this.panelRessources.fermerFrameFormulaire();
 		}
 		else if(e.getSource() == this.boutonAnnuler) {
 			this.frame.changerPanel(new PanelPrevi(this.frame));
 			//this.panelRessources.fermerFrameFormulaire();
+		}
+	}
+
+	public void validation(boolean valide) {
+		if (valide ) {
+			this.enregistrer();
+			// this.panelRessources.fermerFrameFormulaire();
+		} else {
+			// this.panelRessources.fermerFrameFormulaire();
 		}
 	}
 
@@ -72,6 +82,11 @@ public class PanelSud extends JPanel implements ActionListener {
 		String libelle      = this.panelRessources.getLibelle();
 		String libelleCourt = this.panelRessources.getLibelleCourt();
 		String code         = this.panelRessources.getCode();
+
+		if ( code.length() <= 0 || libelle.length() <= 0 || libelleCourt.length() <= 0 ) {
+			this.frame.changerPanel(new PanelPrevi(this.frame));
+			return;
+		}
 
 		int nbEtudiants = this.panelPrevi.getNbEtd(); 
 		int nbGpTD      = this.panelPrevi.getNbGpTd();
@@ -131,4 +146,5 @@ public class PanelSud extends JPanel implements ActionListener {
 			this.panelRessources.update(this.oldModule, this.module);
 		}
 	}
+
 }
