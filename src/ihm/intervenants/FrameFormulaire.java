@@ -50,12 +50,17 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		this.txtPrenom      = new JTextField(15);
 		this.txtHServ       = new JTextField(15);
 		this.txtHMax        = new JTextField(15);
-		this.txtCoefTP      = new JTextField("1.0", 15);
+		this.txtCoefTP      = new JTextField(15);
 		this.btnValider     = new JButton("Valider");
 		this.btnAnnuler     = new JButton("Annuler");
 		this.lblErreur      = new JLabel("");
 
+		this.txtHServ.setEditable(false);
+		this.txtHMax.setEditable(false);
 		this.txtCoefTP.setEditable(false);
+
+		this.majCoefTp();
+		this.majHeures();
 
 		//Colorisation du label d'erreur en rouge
 		this.lblErreur.setForeground(java.awt.Color.RED);
@@ -111,6 +116,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if ( e.getSource() == this.ddlstStatut ) {
 			this.majCoefTp();
+			this.majHeures();
 		} else if ( e.getSource() == this.btnValider ) {
 			this.valider();
 			this.dispose();
@@ -125,6 +131,16 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		}
 		else {
 			this.txtCoefTP.setText("1.0");
+		}
+	}
+
+	private void majHeures(){
+		List<Statut> lstStatuts = this.panelMere.getStatuts();
+		for(Statut statut : lstStatuts){
+			if(statut.getNomStatut().equals(this.ddlstStatut.getSelectedItem())){
+				this.txtHServ.setText(String.valueOf(statut.getNbHeureService()));
+				this.txtHMax.setText(String.valueOf(statut.getNbHeuresMax()));
+			}
 		}
 	}
 
