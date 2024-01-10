@@ -32,9 +32,7 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 		this.btnValider         = new JButton("Valider");
 		this.btnAnnuler         = new JButton("Annuler");
 
-		if ( typeHeure != null ) {
-			this.txtTypeHeure.setEditable(false);
-		}
+		this.txtTypeHeure.setEditable(false);
 
 		gbc.gridy = 0;
 		gbc.gridx = 0;

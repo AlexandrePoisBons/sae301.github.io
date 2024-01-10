@@ -32,9 +32,7 @@ public class PanelParam extends JPanel implements ActionListener{
 	private JPanel            panelTableaux;
 	private JPanel            panelSud;
 
-	private JButton           btnAjoutCoef;
 	private JButton           btnModifierCoef;
-	private JButton           btnSuppCoef;
 	private JButton           btnAjoutStatut;
 	private JButton           btnModifierStatut;
 	private JButton           btnSuppStatut;
@@ -73,9 +71,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.dtmCoef             = new DefaultTableModel();
 		
 
-		this.btnAjoutCoef      = new JButton("Ajouter");
 		this.btnModifierCoef   = new JButton("Modifer");
-		this.btnSuppCoef       = new JButton("Supprimer");
 		this.btnAjoutStatut    = new JButton("Ajouter");
 		this.btnModifierStatut = new JButton("Modifier");
 		this.btnSuppStatut     = new JButton("Supprimer");
@@ -120,9 +116,7 @@ public class PanelParam extends JPanel implements ActionListener{
 
 		panelTableauCoef.add(scrollCoef);
 
-		panelBtnCoef.add(this.btnAjoutCoef);
 		panelBtnCoef.add(this.btnModifierCoef);
-		panelBtnCoef.add(this.btnSuppCoef);
 
 		// Ajout dans panel gauche
 		this.panelTableaux.add(panelTableauCoef);
@@ -142,9 +136,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		this.add(this.panelSud, BorderLayout.SOUTH);
 
 		// Activation des boutons 
-		this.btnAjoutCoef      .addActionListener(this);
 		this.btnModifierCoef   .addActionListener(this);
-		this.btnSuppCoef       .addActionListener(this);
 		this.btnAjoutStatut    .addActionListener(this);
 		this.btnModifierStatut .addActionListener(this);
 		this.btnSuppStatut     .addActionListener(this);
@@ -343,12 +335,9 @@ public class PanelParam extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		this.lblErreur.setText("");
 
-		if ( e.getSource() == this.btnAjoutCoef ) {
-			this.ajouter(new PanelFormulaireCoef(this, null));
-		} else if ( e.getSource() == this.btnModifierCoef ) {
+		
+		if ( e.getSource() == this.btnModifierCoef ) {
 			this.modifierTypeHeure();
-		} else if (e.getSource() == this.btnSuppCoef ) {
-			this.supprimerTypeHeure();
 		} else if ( e.getSource() == this.btnAjoutStatut ) {
 			this.ajouter(new PanelFormulaireStatut(this, null));
 		} else if ( e.getSource() == this.btnSuppStatut ) {
