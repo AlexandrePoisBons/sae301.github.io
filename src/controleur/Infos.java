@@ -20,7 +20,7 @@ public class Infos {
 
 	public Infos() {
 		this.database = "";
-		this.login = "";
+		this.login    = "";
 		this.password = "";
 
 		this.initValues();
@@ -40,7 +40,7 @@ public class Infos {
 			}
 			sc.close();
 		} catch( Exception exc ) {
-			System.out.println("Erreur fichier " + exc);
+			// System.out.println("Erreur fichier " + exc);
 			return false;
 		}
 
