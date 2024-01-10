@@ -27,7 +27,7 @@ public class Controleur {
 	private List<Statut>      statuts;
 	private List<Heure>       heures;
 
-	public static void main(String[] args) { new FrameConnexion(null); }
+	public static void main(String[] args) { new FrameConnexion(); }
 
 	public Controleur() {
 

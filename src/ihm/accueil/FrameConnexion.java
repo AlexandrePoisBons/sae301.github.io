@@ -3,7 +3,6 @@ package ihm.accueil;
 import controleur.Controleur;
 import controleur.Infos;
 
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
