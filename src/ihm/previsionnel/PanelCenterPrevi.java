@@ -87,7 +87,7 @@ public class PanelCenterPrevi extends JPanel {
 
 		for(Module m : this.getCurrentSemestre().getModules()) {
 			if ( m.getIdModule() == newModule.getIdModule()) {
-				this.frame.getControleur().getCtrl().metier().updateModule(oldModule, newModule);
+				this.frame.getControleur().updateModule(oldModule, newModule);
 				this.getCurrentSemestre().getModules().remove(oldModule);
 				this.getCurrentSemestre().getModules().add(newModule);
 				return;
@@ -99,7 +99,7 @@ public class PanelCenterPrevi extends JPanel {
 		this.getCurrentSemestre().ajouterModule(module);
 		for( Module m : this.getCurrentSemestre().getModules() ) {
 			if ( m.getIdModule() == module.getIdModule() ) {
-				this.frame.getControleur().getCtrl().metier().ajouterModule(module);
+				this.frame.getControleur().ajouterModule(module);
 				for (PanelSemestre panelSemestre : this.listSemestre) {
 					if (module.getSemestre().equals("S"+panelSemestre.getIdSemestre())){
 						panelSemestre.ajouterModule(module);

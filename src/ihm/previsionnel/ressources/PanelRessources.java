@@ -65,7 +65,6 @@ public class PanelRessources extends JPanel {
 	}
 
 	public void update(Module oldModule, Module newModule) {
-		System.out.println("aller stp "+newModule.isValide());
 		List<Heure> heures = this.pRCentre.getHeures();
 
 		newModule.setHeures(heures);
@@ -89,8 +88,8 @@ public class PanelRessources extends JPanel {
 	public HashMap<String,Integer>  getData()          { return this.pRCentre.getData();     }
 	public List<Heure>              getDeletedHeures() { return pRCentre.getDeletedHeures(); }
 
-	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
-	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }
+	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getIntervenants(); }
+	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getTypesHeures();  }
 
 	//pour mettre à jour les données dans pCentre
 	public int getNbGpTdMaj() { return this.pRNord.getTxtNbGpTd(); }

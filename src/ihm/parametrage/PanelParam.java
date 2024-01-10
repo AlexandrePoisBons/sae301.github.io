@@ -158,8 +158,8 @@ public class PanelParam extends JPanel implements ActionListener{
 
 
 	public void init() {
-		List<Statut> statuts = this.frame.getControleur().getCtrl().metier().getStatuts();
-		List<TypeHeure> typeHeures = this.frame.getControleur().getCtrl().metier().getTypesHeures();
+		List<Statut> statuts = this.frame.getControleur().getStatuts();
+		List<TypeHeure> typeHeures = this.frame.getControleur().getTypesHeures();
 
 		for (Statut statut : statuts)
 			this.ajouterStatut(statut);
@@ -310,8 +310,8 @@ public class PanelParam extends JPanel implements ActionListener{
 	}
 
 	public void enregistrer() {
-		this.frame.getControleur().getCtrl().metier().majTypesHeures(this.ensTypeHeure);
-		this.frame.getControleur().getCtrl().metier().majStatuts(this.ensStatut);
+		this.frame.getControleur().majTypesHeures(this.ensTypeHeure);
+		this.frame.getControleur().majStatuts(this.ensStatut);
 	}
 
 	//Supprimer Ligne

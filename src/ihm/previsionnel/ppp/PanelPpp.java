@@ -88,8 +88,8 @@ public class PanelPpp extends JPanel {
 	public HashMap<String,Integer>  getData()       { return this.panelPppCentre.getData(); }
 	public List<Heure> getDeletedHeures() { return this.panelPppCentre.getDeletedHeures(); }
 
-	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getCtrl().metier().getIntervenants(); }
-	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getCtrl().metier().getTypesHeures();  }
+	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getIntervenants(); }
+	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getTypesHeures();  }
 
 	public boolean isValide() { return this.panelPppCentre.estValide(); }
 

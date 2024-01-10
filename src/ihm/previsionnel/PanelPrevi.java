@@ -77,7 +77,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.btnSupprimer.addActionListener(this);
 		this.btnRetour   .addActionListener(this);
 
-		List<Module> alModule = this.frame.getControleur().getCtrl().metier().getModules();
+		List<Module> alModule = this.frame.getControleur().getModules();
 		this.panelCenterPrevi.setModules( alModule );
 	}
 
@@ -114,7 +114,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 						case "SAE"       -> {this.frame.changerPanel(new PanelSae        (this.frame, this, m ) );}
 						case "Stage"     -> {this.frame.changerPanel(new PanelStage      (this.frame, this, m ) );}
 						case "PPP"       -> {this.frame.changerPanel(new PanelPpp        (this.frame, this, m ) );}
-						default          -> System.err.println("TypeModule inexistant");
+						default -> System.err.println("TypeModule inexistant");
 					}
 				} else {
 					this.lblErreur.setText("Veuillez seléctionner une ligne");

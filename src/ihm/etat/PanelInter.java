@@ -192,8 +192,8 @@ public class PanelInter extends JPanel implements ActionListener {
 
 
 	public JComboBox<String> init() {
-		this.listInter = this.panelMere.getControleur().getCtrl().metier().getIntervenants();
-		List<Intervenant> listInter = this.panelMere.getControleur().getCtrl().metier().getIntervenants();
+		this.listInter = this.panelMere.getControleur().getIntervenants();
+		List<Intervenant> listInter = this.panelMere.getControleur().getIntervenants();
 		JComboBox<String> ddlst = new JComboBox<String>();
 
 		for (Intervenant intervenant : listInter) {

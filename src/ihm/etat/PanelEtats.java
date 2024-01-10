@@ -4,7 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import javax.swing.*;
 
-import controleur.ControleurIHM;
+import controleur.Controleur;
 import ihm.accueil.FrameAccueil;
 import ihm.accueil.PanelAcceuil;
 
@@ -52,7 +52,7 @@ public class PanelEtats extends JPanel implements ActionListener {
 		this.frame.setTitle("États");
 	}
 
-	public ControleurIHM getControleur() {
+	public Controleur getControleur() {
 		return this.frame.getControleur();
 	}
 

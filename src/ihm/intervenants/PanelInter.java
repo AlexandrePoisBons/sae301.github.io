@@ -42,7 +42,7 @@ public class PanelInter extends JPanel implements ActionListener {
 
 		//this.intervenants = new ArrayList<>();
 
-		List<Intervenant> list = this.frame.getControleur().getCtrl().metier().getIntervenants();
+		List<Intervenant> list = this.frame.getControleur().getIntervenants();
 		this.intervenants = new ArrayList<>(list);
 
 
@@ -215,10 +215,10 @@ public class PanelInter extends JPanel implements ActionListener {
 
 		int i = this.intervenants.size();
 
-		for ( Intervenant intervenant : this.frame.getControleur().getCtrl().metier().getIntervenants() ) {
+		for ( Intervenant intervenant : this.frame.getControleur().getIntervenants() ) {
 			if ( !this.intervenants.contains(intervenant) ) {
 				try {
-					this.frame.getControleur().getCtrl().metier().supprimerIntervenant(intervenant);
+					this.frame.getControleur().supprimerIntervenant(intervenant);
 				} catch (SQLException e) { }
 			}
 		}
@@ -229,7 +229,7 @@ public class PanelInter extends JPanel implements ActionListener {
 			if ( tmp.getIdIntervenant() == -1 ) {
 				Intervenant inter = Intervenant.creerIntervenant(tmp.getPrenom(), tmp.getNom(), tmp.getStatut(), tmp.getNbEqTD());
 				this.intervenants.remove(tmp);
-				this.frame.getControleur().getCtrl().metier().ajouterIntervenant(inter);
+				this.frame.getControleur().ajouterIntervenant(inter);
 			}
 		}
 
@@ -241,7 +241,7 @@ public class PanelInter extends JPanel implements ActionListener {
 		this.revalidate();
 	}
 
-	public List<Statut> getStatuts() { return this.frame.getControleur().getCtrl().metier().getStatuts(); }
+	public List<Statut> getStatuts() { return this.frame.getControleur().getStatuts(); }
 
 	public void ajouterIntervenant( Intervenant intervenant ) {
 		this.intervenants.add(intervenant);
