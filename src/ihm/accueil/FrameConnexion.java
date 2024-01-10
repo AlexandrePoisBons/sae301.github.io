@@ -112,6 +112,9 @@ public class FrameConnexion extends JFrame implements ActionListener{
 			Class.forName("org.postgresql.Driver");
 			// System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch ( ClassNotFoundException e ) {
+			this.txtDatabase.setText("");
+			this.txtLogin.setText("");
+			this.pswMdp.setText("");
 			this.lblErreur.setText("Connexion à la bado impossible");
 			this.repaint();
 			return;
@@ -124,6 +127,9 @@ public class FrameConnexion extends JFrame implements ActionListener{
 
 			// System.out.println("CONNEXION A LA BADO: REUSSIE");
 		} catch ( SQLException e ) {
+			this.txtDatabase.setText("");
+			this.txtLogin.setText("");
+			this.pswMdp.setText("");
 			this.lblErreur.setText("Connexion à la bado impossible");
 			this.repaint();
 			return;
