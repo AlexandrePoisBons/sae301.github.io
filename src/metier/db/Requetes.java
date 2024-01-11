@@ -158,7 +158,6 @@ public class Requetes {
 
 				connect = DriverManager.getConnection(url,login,password);
 
-				// System.out.println("CONNEXION A LA BADO: REUSSIE");
 			} catch ( SQLException e ) { e.printStackTrace(); }
 		}else{
 			try{

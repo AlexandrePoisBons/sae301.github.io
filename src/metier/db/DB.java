@@ -21,7 +21,6 @@ public class DB {
 
 		try {
 			Class.forName("org.postgresql.Driver");
-			// System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch ( ClassNotFoundException e ) { e.printStackTrace(); }
 
 
@@ -33,7 +32,6 @@ public class DB {
 
 				connec = DriverManager.getConnection(url,login,password);
 
-				// System.out.println("CONNEXION A LA BADO: REUSSIE");
 			} catch ( SQLException e ) { e.printStackTrace(); }
 		}else{
 			try{
@@ -44,24 +42,20 @@ public class DB {
 				String passwordLdap = this.infos.getPasswordLdap();
 				
 
-				int sshPort = 4660; // SSH port number
+				int sshPort = 4660; 
 				JSch jsch = new JSch();
 				Session session = jsch.getSession(login, sshHost, sshPort);
 				session.setPassword(passwordLdap);
 				session.setConfig("StrictHostKeyChecking", "no");
 				session.connect();
 
-				// Set up port forwarding (SSH tunnel)
-				int localPort = 5433; // Local port for tunneling
-				int remotePort = 5432; // Remote PostgreSQL port
+				int localPort = 5433; 
+				int remotePort = 5432; 
 				session.setPortForwardingL(localPort, dbHost, remotePort);
 				Class.forName("org.postgresql.Driver");
 
-				// Connect to the PostgreSQL database through the SSH tunnel
 				String jdbcUrl = "jdbc:postgresql://localhost:"+localPort + "/" + login;
 				this.connec = DriverManager.getConnection(jdbcUrl, login, password);
-
-				// Perform database operations (e.g., execute queries)
 
 
 				try {
@@ -69,7 +63,6 @@ public class DB {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				// System.out.println("CONNEXION A LA BADO: REUSSIE");
 			} 
 			catch ( SQLException e ) { e.printStackTrace(); } catch (ClassNotFoundException e) {
 				e.printStackTrace();
