@@ -7,20 +7,25 @@ Bienvenue sur l'application ASTRE ! Ce guide vous fournira des instructions dét
 ---
 ## Connexion
 
-1. Aller dans le répertoire src/controleur et modifier le fichier infos.txt en y renseignant les différents champs qui sont :
+- Si vous êtes connecté sur le réseau du serveur qui héberge votre base de données, remplissez les champs de saisie par ces informations : 
 
 - database : le nom de votre base de donnée
 - login    : le nom d'utilisateur qui se connectera à la base de donnée
 - mdp      : le mot de passe de l'utilisateur à la base de donnée
 
+- Si vous n'êtes pas sur le réseau du serveur hébergeant votre base de données, cochez la case en dessous de "Connexion distante" puis remplissez les champs de saisies par ces informations :
+
+- database : le nom de votre base de donnée
+- login    : le nom d'utilisateur qui se connectera à la base de donnée
+- mdp      : le mot de passe de l'utilisateur à la base de donnée
+- mdp LDAP : le mot de passe de votre session
+
 ## Paramétrage
 
-### 1. Configuration des Statuts d'Intervenants
+### Configuration des Statuts d'Intervenants
 
 1. Allez sur le tableau "Statut".
 2. Configurez chaque catégorie d'intervenant en spécifiant le nom, le service, le nombre d'heures maximum autorisé, et le coefficient TP à l'aide des boutons "ajouter", "modifier". Cliquez sur "Enregistrer" pour chaque modification.
-
----
 
 ## Saisie du Prévisionnel
 
@@ -50,7 +55,7 @@ Bienvenue sur l'application ASTRE ! Ce guide vous fournira des instructions dét
 
 ##### Calcul Automatique
 
-L'équivalent TD sera calculé automatiquement pour chaque ligne. Si des heures ponctuelles sont saisies, le nombre de semaines devient invisible et non saisissable. Le total d'eqtd affectées au module est également calculé automatiquement.
+L'équivalent TD sera calculé automatiquement pour chaque ligne. Si des heures ponctuelles sont saisies, le nombre de semaines devient invisible et non saisissable. Le total des équivalents TD affectées au module est également calculé automatiquement.
 
 #### 2.2. Module Saé
 
@@ -66,7 +71,7 @@ L'équivalent TD sera calculé automatiquement pour chaque ligne. Si des heures 
 
 ##### Calcul Automatique
 
-L'équivalent eqtd sera calculé automatiquement pour chaque ligne. Le total d'eqtd affectées au module est également calculé automatiquement.
+L'équivalent TD sera calculé automatiquement pour chaque ligne. Le total des équivalents TD affectées au module est également calculé automatiquement.
 
 #### 2.3. Module Stages/Suivi
 
@@ -82,13 +87,13 @@ L'équivalent eqtd sera calculé automatiquement pour chaque ligne. Le total d'e
 
 ##### Calcul Automatique
 
-L'équivalent eqtd sera calculé automatiquement pour chaque ligne. Le total d'eqtd affectées au module est également calculé automatiquement.
+L'équivalent TD sera calculé automatiquement pour chaque ligne. Le total des équivalents TD affectées au module est également calculé automatiquement.
 
 ---
 
 ## Gestion des Intervenants
 
-### 1. Ajout d'Intervenants
+### Ajout d'Intervenants
 
 1. Ajoutez, modifiez ou supprimez des intervenants. Remplissez les informations requises telles que la catégorie, le service, etc.
 2. **Saisie des Heures :** Pour chaque intervenant, saisissez les heures prévisionnelles par semestre, en veillant à respecter les contraintes du programme national.
