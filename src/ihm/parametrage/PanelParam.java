@@ -178,7 +178,7 @@ public class PanelParam extends JPanel implements ActionListener{
 		int ligneSelectionnee = this.tableauStatut.getSelectedRow();
 
 		if ( ligneSelectionnee != -1 ) {
-			int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()  - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
+			int hauteur = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() - (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.05);
 			int largeur = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 			int xSize = (int)(largeur*0.8);
 			int ySize = (int)(hauteur*0.7);
@@ -206,6 +206,7 @@ public class PanelParam extends JPanel implements ActionListener{
 			this.dtmStatut.removeRow(ligneSelectionne);
 			this.ensStatut.remove(this.ensStatut.get(ligneSelectionne));
 			this.lblErreur.setText("");
+			this.panelFormulaireStatut.effacer();
 			this.repaint();
 			this.revalidate();
 		} else {

@@ -1,15 +1,10 @@
 package ihm.previsionnel.stage.stageCentre.repartition.heureStage;
-import ihm.previsionnel.sae.saeCentre.repartition.PanelRepartitionSae;
-import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepartitionHeureDroiteSae;
-import ihm.previsionnel.sae.saeCentre.repartition.heureSae.PanelRepartitionHeureGaucheSae;
 import ihm.previsionnel.stage.stageCentre.repartition.PanelRepartitionStage;
 import java.awt.GridLayout;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
-
 import java.awt.Color;
-
 import javax.swing.JPanel;
 
 import metier.Module;
@@ -30,6 +25,7 @@ public class PanelRepHStage extends JPanel{
 
 		this.panelRepartitionHGauche = new PanelRepartitionHeureGaucheStage(this, this.module);
 		this.panelRepartitionHDroite = new PanelRepartitionHeureDroiteStage(this);
+		this.panelRepartitionHGauche = new PanelRepartitionHeureGaucheStage(this, module);
 
 		this.add(this.panelRepartitionHGauche);
 		this.add(this.panelRepartitionHDroite);

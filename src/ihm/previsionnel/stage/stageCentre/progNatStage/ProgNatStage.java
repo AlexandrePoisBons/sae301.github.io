@@ -198,49 +198,39 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 	@Override
 	public void focusLost(FocusEvent e) {
 		if(e.getSource() == this.txtHSae){
-		try {
-			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-			if(this.estChiffre(this.txtHSae.getText()) == false){
-				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
-				this.setCouleurErreur(true, this.txtHSae);
+			try {
+				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+				if(this.estChiffre(this.txtHSae.getText()) == false){
+					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+					this.setCouleurErreur(true, this.txtHSae);
+				}
+				else{
+					if (this.txtHSae.getText().equals("") || Integer.parseInt(this.txtHSae.getText()) < 0)
+						this.txtHSae.setText("0");
+					this.setLabelErreur("");
+					this.setCouleurErreur(false, this.txtHSae);
+					this.sommeHSae = Integer.parseInt(this.txtHSae.getText()); 
+				}
 			}
-			if(this.txtHSae.getText().equals(Integer.toString(this.sommeHSae)) && this.txtHTut.getText().equals("")){
-				System.out.println("Cette valeur a déjas été prise en compte");
-			}
-			else{
-				if (this.txtHSae.getText().equals("") || Integer.parseInt(this.txtHSae.getText()) < 0)
-					this.txtHSae.setText("0");
-				this.setLabelErreur("");
-				this.setCouleurErreur(false, this.txtHSae);
-				this.sommeHSae = Integer.parseInt(this.txtHSae.getText()); 
-			}
-		}
-		catch(NumberFormatException ex) {
-			System.out.print("");
-		}
+			catch(NumberFormatException ex) {}
 		}
 
 		if(e.getSource() == this.txtHTut){
-		try {
-			//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
-			if(this.estChiffre(this.txtHTut.getText()) == false){
-				this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
-				this.setCouleurErreur(true, this.txtHTut);
+			try {
+				//Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans somme
+				if(this.estChiffre(this.txtHTut.getText()) == false){
+					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
+					this.setCouleurErreur(true, this.txtHTut);
+				}
+				else{
+					if (this.txtHTut.getText().equals("") || Integer.parseInt(this.txtHTut.getText()) < 0)
+						this.txtHTut.setText("0");
+					this.setLabelErreur("");
+					this.setCouleurErreur(false, this.txtHTut);
+					this.sommeHTut = Integer.parseInt(this.txtHTut.getText());
+				}
 			}
-			if(this.txtHTut.getText().equals(Integer.toString(this.sommeHTut)) && this.txtHSae.getText().equals("")){
-				System.out.println("Cette valeur a déjas été prise en compte");
-			}
-			else{
-				if (this.txtHTut.getText().equals("") || Integer.parseInt(this.txtHTut.getText()) < 0)
-					this.txtHTut.setText("0");
-				this.setLabelErreur("");
-				this.setCouleurErreur(false, this.txtHTut);
-				this.sommeHTut = Integer.parseInt(this.txtHTut.getText());
-			}
-		}
-		catch(NumberFormatException ex) {
-			System.out.print("");
-		}
+			catch(NumberFormatException ex) {}
 		}
 
 		this.totalSomme = this.sommeHSae + this.sommeHTut;

@@ -227,9 +227,6 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.txtHSae);
 				}
-				if(this.txtHSae.getText().equals(Integer.toString(this.sommeHSae)) && this.txtHTut.getText().equals("")){
-					System.out.println("Cette valeur a déjas été prise en compte");
-				}
 				else{
 					if (this.txtHSae.getText().equals("") || Integer.parseInt(this.txtHSae.getText()) < 0)
 						this.txtHSae.setText("0");
@@ -238,9 +235,7 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 					this.sommeHSae = Integer.parseInt(this.txtHSae.getText()); 
 				}
 			}
-			catch(NumberFormatException ex) {
-				System.out.print("");
-			}
+			catch(NumberFormatException ex) {}
 		}
 
 		if(e.getSource() == this.txtHTut){
@@ -250,9 +245,6 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.txtHTut);
 				}
-				if(this.txtHTut.getText().equals(Integer.toString(this.sommeHTut)) && this.txtHSae.getText().equals("")){
-					System.out.println("Cette valeur a déjas été prise en compte");
-				}
 				else{
 					if (this.txtHTut.getText().equals("")|| Integer.parseInt(this.txtHTut.getText()) < 0)
 						this.txtHTut.setText("0");
@@ -261,9 +253,7 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 					this.sommeHTut = Integer.parseInt(this.txtHTut.getText());
 				}
 			}
-			catch(NumberFormatException ex) {
-				System.out.print("");
-			}
+			catch(NumberFormatException ex) {}
 		}
 
 		this.totalSomme = this.sommeHSae + this.sommeHTut;
