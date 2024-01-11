@@ -152,7 +152,6 @@ public class Requetes {
 
 		if(infos.getPasswordLdap().equals("")){
 			
-			System.out.println("PAS NORMAL");
 			try {
 				String url = Infos.URL_DATABASE + infos.getDatabase();
 				String login = infos.getLogin();
