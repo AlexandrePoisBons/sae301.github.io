@@ -173,7 +173,6 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 
 		if ( map != null )
 			for (TypeHeure typeHeure : map.keySet()) {
-				System.out.println(typeHeure.getNomTypeHeure()+" nnn "+ map.get(typeHeure).get("pn"));
 				switch (typeHeure.getNomTypeHeure()) {
 					case "TUT"  ->
 						this.txtHTutWrite.setText(""+map.get(typeHeure).get("pn"));
