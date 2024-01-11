@@ -9,12 +9,12 @@ VALUES
   	(5, 'Ressource', 'S2', 'Développement Web Avancé', 'Web Avancé', 'WEB401', 30, 0, 2, 10, 40, FALSE),
   	(6, 'Stage', 'S3', 'Systèmes Exploitation', 'Sys OS', 'SYS401', 50, 1, 2, 14, 56, FALSE),
   	(7, 'Stage', 'S5', 'Ingénierie Logicielle', 'Ingé Log', 'ING401', 35, 0, 2, 10, 40, FALSE),
-  	(8, 'HP', 'S1', 'Réseaux Avancés', 'Réseaux Av', 'RNET501', 40, 1, 1, 12, 36, FALSE),
+  	(8, 'Stage', 'S1', 'Réseaux Avancés', 'Réseaux Av', 'RNET501', 40, 1, 1, 12, 36, FALSE),
   	(9, 'Stage', 'S2', 'Sécurité Informatique', 'Secu Info', 'SEC401', 25, 0, 2, 10, 40, FALSE),
   	(10, 'SAE', 'S3', 'Web Services', 'Web Serv', 'WEB601', 55, 2, 1, 14, 56, FALSE),
-  	(11, 'HP', 'S5', 'Blockchain', 'Block', 'BCN801', 20, 0, 1, 12, 36, FALSE),
+  	(11, 'Ressource', 'S5', 'Blockchain', 'Block', 'BCN801', 20, 0, 1, 12, 36, FALSE),
   	(12, 'SAE', 'S2', 'Cloud Computing', 'Cloud Comp', 'CLOUD301', 40, 1, 1, 12, 36, FALSE),
-  	(13, 'HP', 'S3', 'Big Data', 'Big Data', 'BIGDATA401', 30, 0, 2, 14, 40, FALSE),
+  	(13, 'SAE', 'S3', 'Big Data', 'Big Data', 'BIGDATA401', 30, 0, 2, 14, 40, FALSE),
   	(14, 'Stage', 'S5', 'Génie Logiciel', 'Génie Log', 'GL701', 35, 0, 2, 14, 40, FALSE),
   	(15, 'SAE', 'S1', 'Data Science', 'Data Sci', 'DATASCI501', 60, 2, 1, 14, 56, FALSE);
 
