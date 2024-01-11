@@ -143,4 +143,8 @@ public class PanelModule extends JPanel implements ActionListener {
 		}
 	}
 
+	public List<Module> getListModule() {
+		return this.listModule;
+	}
+
 }

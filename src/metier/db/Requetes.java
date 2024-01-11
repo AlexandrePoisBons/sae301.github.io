@@ -16,7 +16,6 @@ import metier.Module;
 import metier.Statut;
 import metier.TypeHeure;
 
-import java.util.Random;
 
 
 public class Requetes {
@@ -436,10 +435,13 @@ public class Requetes {
 			while ( rs.next() ) nbHeures = rs.getInt(1);
 
 			connect.close();
-		} catch (SQLException e) { e.printStackTrace(); 
-		} finally {
+			
 			return nbHeures;
+		} catch (SQLException e) { 
+			e.printStackTrace(); 
 		}
+
+		return nbHeures;
 	}
 
 
@@ -611,8 +613,6 @@ public class Requetes {
 	public static int getNbModules()
 	{
 		int nbModules = -1;
-
-		Infos infos = new Infos();
 
 		try {
 			Class.forName("org.postgresql.Driver");

@@ -26,8 +26,6 @@ public class DB {
 
 
 		if(this.infos.getPasswordLdap().equals("")){
-			
-			System.out.println("PAS NORMAL");
 			try {
 				String url = Infos.URL_DATABASE + this.infos.getDatabase();
 				String login = this.infos.getLogin();
@@ -39,7 +37,6 @@ public class DB {
 			} catch ( SQLException e ) { e.printStackTrace(); }
 		}else{
 			try{
-				String url = Infos.URL_DATABASE + this.infos.getDatabase();
 				String dbHost = "woody.iut.univ-lehavre.fr";
 				String sshHost = "c-corton.iut.univ-lehavre.fr";
 				String login = this.infos.getLogin();
@@ -65,18 +62,9 @@ public class DB {
 				this.connec = DriverManager.getConnection(jdbcUrl, login, password);
 
 				// Perform database operations (e.g., execute queries)
-				String sqlQuery = "SELECT * FROM achat;";
-				try (PreparedStatement preparedStatement = this.connec.prepareStatement(sqlQuery)) {
-					ResultSet resultSet = preparedStatement.executeQuery();
-					while (resultSet.next()) {
-						// Process the results
-						System.out.println(resultSet.getString("ncli"));
-					}
-				}
-				
 
 
-				System.out.println(connec == null ? "ok" : "ko");
+
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {

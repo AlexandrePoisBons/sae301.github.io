@@ -6,8 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import com.jcraft.jsch.JSchException;
-
 import ihm.accueil.FrameAccueil;
 import ihm.accueil.FrameConnexion;
 import metier.Heure;
@@ -36,8 +34,6 @@ public class Controleur {
 	public Controleur() {
 
 		this.infos = new Infos();
-
-		System.out.println(infos.getDatabase()+"="+infos.getLogin()+":"+infos.getPassword());
 
 		this.frame    = new FrameAccueil(this);
 		this.requetes = new Requetes();
@@ -151,6 +147,8 @@ public class Controleur {
 	public List<TypeHeure>   getTypesHeures()  { return this.typesHeures;  }
 	public List<Intervenant> getIntervenants() { return this.intervenants; }
 	public List<Module>      getModules()      { return this.modules;      }
+	public FrameAccueil      getFrame()        { return this.frame;        }
+	public Infos             getInfos()        { return this.infos;        }
 
 
 	/* Insert */

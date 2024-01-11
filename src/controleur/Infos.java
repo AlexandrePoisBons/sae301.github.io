@@ -43,8 +43,6 @@ public class Infos {
 			}
 			sc.close();
 
-			if(this.passwordLdap.equals(""))
-				System.out.println("TESHTSdpaqzshjfv^p");
 		} catch( Exception exc ) {
 			// System.out.println("Erreur fichier " + exc);
 			return false;
