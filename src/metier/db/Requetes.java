@@ -2,6 +2,7 @@ package metier.db;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import controleur.Infos;
@@ -64,6 +65,12 @@ public class Requetes {
 	private PreparedStatement psDeleteHM;
 	private PreparedStatement psUpdateHM;
 
+	// TypeHeure_Module
+	private PreparedStatement psSelectTHM;
+	private PreparedStatement psInsertTHM;
+	private PreparedStatement psDeleteTHM;
+	private PreparedStatement psUpdateTHM;
+
 
 	public Requetes() {
 		this.db     = DB.getInstance();
@@ -110,11 +117,73 @@ public class Requetes {
 			this.psDeleteHM = this.connec.prepareStatement("DELETE FROM Heure_Module WHERE id_heure=? AND id_module=?;");
 			this.psUpdateHM = this.connec.prepareStatement("UPDATE Heure_Module SET id_heure=?, id_module=? WHERE id_heure=? AND id_module=?;");
 
+			this.psSelectTHM = this.connec.prepareStatement("SELECT * FROM TypeHeure_Module WHERE id_module=?;");
+			this.psInsertTHM = this.connec.prepareStatement("INSERT INTO TypeHeure_Module VALUES(?,?,?,?,?);");
+			this.psDeleteTHM = this.connec.prepareStatement("DELETE FROM TypeHeure_Module WHERE id_module=?;");
+			
+
 		} catch( SQLException e ) { e.printStackTrace(); }
 
 	}
 
 	public void close() throws SQLException { this.db.close(); }
+
+
+	public void deleteTypesHeuresParModule(int idModule) {
+		try {
+			this.psDeleteTHM.setInt(1,idModule);
+			this.psDeleteTHM.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace(); }
+	}
+
+	public void insertTypesHeuresParModule(int idModule, int idTypeHeure, int pn, int nbSemaines, int nbHeures) {
+		try {
+			this.psInsertTHM.setInt(1, idModule);
+			this.psInsertTHM.setInt(2, idTypeHeure);
+			this.psInsertTHM.setInt(3, pn);
+			this.psInsertTHM.setInt(4, nbSemaines);
+			this.psInsertTHM.setInt(5, nbHeures);
+
+			this.psInsertTHM.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace(); }
+	}
+
+	public boolean typesHeuresDansModuleRentrees(int idModule) throws SQLException{
+
+			this.psSelectTHM.setInt(1, idModule);
+			ResultSet rs = this.psSelectTHM.executeQuery();
+
+			int cpt=0;
+			while( rs.next() ) {
+				cpt++;
+			}
+			rs.close();
+
+			return cpt>0;
+	}
+
+	public HashMap<Integer,HashMap<String,Integer>> getTypesHeuresParModule(int idModule) throws SQLException {
+
+		HashMap<Integer,HashMap<String,Integer>> map = new HashMap<>();
+ 
+		this.psSelectHM.setInt(1, idModule);
+		ResultSet rs = this.psSelectTHM.executeQuery();
+
+		while( rs.next() ) {
+			HashMap<String,Integer> temp = new HashMap<>();
+			int idTypeHeure = rs.getInt("id_type_heure");
+			temp.put("pn",rs.getInt("pn"));
+			temp.put("nb_semaines", rs.getInt("nb_semaines"));
+			temp.put("nb_heures", rs.getInt("nb_heures"));
+			map.put(idTypeHeure,temp);
+		}
+		rs.close();
+
+		return map;
+	}
+
+
+
 
 
 	/*----------------------------------------*/

@@ -25,7 +25,7 @@ public class PCentreStage extends JPanel {
 
 	private Module module;
 
-	public PCentreStage(PanelStage panelMere, Module m){
+	public PCentreStage(PanelStage panelMere, Module m) {
 		this.panelMere = panelMere;
 		this.module = m;
 
@@ -61,19 +61,7 @@ public class PCentreStage extends JPanel {
 	}
 
 	public List<Heure> getHeures() { return this.panelRepartitionStage.getHeures(); }
-
-	public HashMap<String, Integer> getData() {
-
-		HashMap<String,Integer> map = new HashMap<>();
-		HashMap<String,Integer> mapN = this.pProgNatStage.getHeuresTot();
-		HashMap<String,Integer> mapR = this.panelRepartitionStage.getNbSemaines();
-
-		for ( String type : mapN.keySet() )
-			if ( mapN.get(type) != 0 && mapR.get(type) != 0 )
-				map.put(type, mapR.get(type));
-
-		return map;
-	}
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.panelMere.getHeuresParTypesHeures(module); }
 
 	public void setLabelErreur(String message) { this.pProgNatStage.setLabelErreur(message); }
 
@@ -81,6 +69,53 @@ public class PCentreStage extends JPanel {
 
 	public void setErreur(String message) {
 		this.panelMere.setErreur(message);
+	}
+
+	public HashMap<TypeHeure, HashMap<String,Integer>> getDataHeuresTypesHeures() {
+
+		HashMap<TypeHeure, HashMap<String,Integer>> map = new HashMap<>();
+
+		HashMap<String, Integer> mapNat = this.pProgNatStage.getHeuresTot();
+		HashMap<String, HashMap<String,Integer>> mapRep = this.panelRepartitionStage.getDataHeuresTypesHeures();
+
+
+		HashMap<String, Integer> temp;
+		for (String typeHeure : mapRep.keySet()) {
+			TypeHeure typeHeureTemp = this.panelMere.getTypeHeureParNom(typeHeure);
+
+			temp = new HashMap<>();
+
+			for (String tHeure : mapNat.keySet()) {
+				if ( tHeure == typeHeure ) {
+					System.out.println(tHeure+" - "+typeHeure);
+					temp.put("pn",mapNat.get(typeHeure));
+				}
+			}
+
+			for (String tHeure : mapRep.keySet()) {
+				if (tHeure == typeHeure ) {
+					System.out.println(tHeure+" _ "+typeHeure);
+					temp.put("nb_heures", mapRep.get(typeHeure).get("nb_heures"));
+				}
+			}
+
+			if ( typeHeure == "SAE" ) {
+				temp.put("pn", mapNat.get("SAE"));
+			}
+
+			map.put(typeHeureTemp, temp);
+		
+		}
+
+		HashMap<String, Integer> t = new HashMap<>();
+		t.put("pn",mapNat.get("SAE"));
+		map.put(this.panelMere.getTypeHeureParNom("SAE"), t);
+
+
+
+		return map;
+
+		// combiner gros les 2 et hop
 	}
 
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }

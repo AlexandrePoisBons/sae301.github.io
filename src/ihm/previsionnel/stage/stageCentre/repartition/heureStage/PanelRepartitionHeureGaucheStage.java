@@ -13,6 +13,9 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
+import metier.Module;
+import metier.TypeHeure;
+
 
 public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionListener, FocusListener {
 
@@ -23,8 +26,12 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 	private int sommeHTut = 0;
 	private int totalSomme = 0;
 
-	public PanelRepartitionHeureGaucheStage(PanelRepHStage panelRepH) {
+	private Module module;
+
+	public PanelRepartitionHeureGaucheStage(PanelRepHStage panelRepH, Module m) {
 		this.panelMere = panelRepH;
+		this.module = m;
+
 		this.ensJTextField = new ArrayList<JTextField>();
 
 
@@ -34,7 +41,7 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 			if(cpt>1){
 				jtf.setEditable(false);
 			}
-			this.ensJTextField.add(jtf);	
+			this.ensJTextField.add(jtf);
 		}
 		panelHC.setLayout(new GridBagLayout());
 		GridBagConstraints gbcH = new GridBagConstraints();
@@ -43,9 +50,9 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 		gbcH.gridx = 1;
 		gbcH.gridy = 0;
 		gbcH.insets = new Insets(10, 0, 2, 0);
-		panelHC.add(new JLabel("REH")		, gbcH);
+		panelHC.add(new JLabel("REH"), gbcH);
 		gbcH.gridx = 2;
-		panelHC.add(new JLabel("h TUT")	, gbcH);
+		panelHC.add(new JLabel("h TUT"), gbcH);
 
 
 		gbcH.gridx = 0;
@@ -75,7 +82,53 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 			this.ensJTextField.get(i).addFocusListener(this);
 		}
 
+		if ( this.module != null )
+			this.initValues();
+
 	}
+
+
+	public void initValues() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.panelMere.getHeuresParTypesHeures(this.module);
+		
+		if ( map != null )
+			for (TypeHeure typeHeure : map.keySet()) {
+				switch (typeHeure.getNomTypeHeure()) {
+					case "REH"  -> {
+						this.ensJTextField.get(0).setText(""+map.get(typeHeure).get("nb_heures"));
+					} case "TUT"  -> {
+						this.ensJTextField.get(1).setText(""+map.get(typeHeure).get("nb_heures"));
+					}
+				}
+			}
+
+	}
+
+	public HashMap<String, HashMap<String,Integer>> getDataHeuresTypesHeures() {
+		HashMap<String, HashMap<String,Integer>> map = new HashMap<>();
+
+		HashMap<String,Integer> temp = new HashMap<>();
+		temp.put("nb_heures", this.getIntVal(this.ensJTextField.get(0)) );
+		map.put("REH", temp);
+
+		temp = new HashMap<>();
+		temp.put("nb_heures", this.getIntVal(this.ensJTextField.get(1)) );
+		map.put("TUT", temp);
+
+
+		return map;
+
+	}
+
+	public int getIntVal(JTextField txt) {
+		int nb;
+		try {
+			nb = Integer.parseInt(txt.getText());
+		} catch(NumberFormatException e) { nb=0; }
+
+		return nb;
+	}
+
 
 
 	public HashMap<String, Integer> getNbSemaines() {

@@ -1,8 +1,14 @@
 package ihm.previsionnel.ressources.ressourcesCentre.repartition.heure;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import metier.TypeHeure;
+import metier.Module;
+
 import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -29,8 +35,13 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 	private int clcCM, clcTD, clcTP;
 	private int val;
 
-	public PanelRepartitionHDroite(PanelRepartitionHeure panelMere) {
+	private Module module;
+
+	public PanelRepartitionHDroite() { }
+
+	public PanelRepartitionHDroite(PanelRepartitionHeure panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
 		this.sommeActionTD = this.sommeActionTP = this.sommeActionCM = 0;
 		this.val = 0;
 		this.panelN = new JPanel();
@@ -118,9 +129,39 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 
 		this.ensTxtFld.get(3).addActionListener(this);
 		this.ensTxtFld.get(3).addFocusListener(this);
+
+		if ( this.module != null )
+			this.initValues();
 	}
 
-	public PanelRepartitionHDroite() {
+
+	public void initValues() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.panelMere.getHeuresParTypesHeures(this.module);
+
+		if ( map != null )
+			for (TypeHeure typeHeure : map.keySet()) {
+				switch (typeHeure.getNomTypeHeure()) {
+					case "HP" -> {
+						this.ensTxtFld.get(3).setText(""+map.get(typeHeure).get("nb_heures"));
+					}
+				}
+			}
+
+	}
+
+	public HashMap<String, HashMap<String,Integer>> getDataHeuresTypesHeures() {
+
+		HashMap<String, HashMap<String,Integer>> map = new HashMap<>();
+
+		int nb;
+		try { nb = Integer.parseInt(this.ensTxtFld.get(3).getText()); }
+		catch (NumberFormatException e) { nb=0; }
+		HashMap<String,Integer> temp = new HashMap<>();
+		temp.put("nb_heures",nb);
+
+		map.put("HP", temp );
+
+		return map;
 	}
 
 	public void setLabelErreur(String message) {
@@ -130,7 +171,7 @@ public class PanelRepartitionHDroite extends JPanel implements FocusListener, Ac
 	// méthode pour gérer la couleur du cadre en fonction de la validité de la
 	// saisie
 	public void setCouleurErreur(boolean b, JTextField txt) {
-		if (b == true) {
+		if (b) {
 			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
 		} else {
 			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));

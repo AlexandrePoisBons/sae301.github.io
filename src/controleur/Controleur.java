@@ -3,6 +3,7 @@ package controleur;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import ihm.accueil.FrameAccueil;
@@ -26,9 +27,10 @@ public class Controleur {
 	private List<Module>      modules;
 	private List<Statut>      statuts;
 	private List<Heure>       heures;
+	private HashMap<Module, HashMap<TypeHeure, HashMap<String, Integer>>> heuresParModule;
 
 	public static void main(String[] args) { new FrameConnexion(); }
-
+ 
 	public Controleur() {
 
 		this.infos = new Infos();
@@ -123,9 +125,25 @@ public class Controleur {
 		}
 
 
+		this.heuresParModule = new HashMap<>();
+
+		for (Module module : this.modules) {
+			if ( this.requetes.typesHeuresDansModuleRentrees(module.getIdModule()) ) {
+				HashMap<TypeHeure, HashMap<String,Integer>> map = new HashMap<>();
+				HashMap<Integer, HashMap<String,Integer>> temp = this.requetes.getTypesHeuresParModule(module.getIdModule());
+				for (Integer idTypeHeure : temp.keySet()) {
+					map.put(this.getTypeHeureById(idTypeHeure), temp.get(idTypeHeure));
+				}
+				this.heuresParModule.put(module, map);
+			}
+		}
+
+
 		// System.out.println("--- FIN INITIALISATION ---");
+
 	}
 
+	public HashMap<TypeHeure, HashMap<String,Integer>> getTypesHeuresParModule(Module module) { return this.heuresParModule.get(module); }
 
 	public List<Statut>      getStatuts()      { return this.statuts;      }
 	public List<TypeHeure>   getTypesHeures()  { return this.typesHeures;  }
@@ -143,6 +161,43 @@ public class Controleur {
 			return true;
 		} catch (SQLException e) { return false; }
 	}
+
+
+	public void majTypesHeuresModule(Module module, HashMap<TypeHeure, HashMap<String,Integer>> map) {
+
+		if ( this.heuresParModule.containsKey(module) ) {
+			this.heuresParModule.remove(module);
+		}
+		this.heuresParModule.put(module, map);
+
+		this.requetes.deleteTypesHeuresParModule(module.getIdModule());
+		int pn, nbSemaines, nbHeures;
+		for (TypeHeure typeHeure : map.keySet()) {
+			pn = 0;
+			nbSemaines = 0;
+			nbHeures = 0;
+			for (String data : map.get(typeHeure).keySet()) {
+				switch(data) {
+					case "pn" -> {
+						if ( map.containsKey(typeHeure) ) {
+							try{
+								pn = map.get(typeHeure).get(data);
+							} catch (NullPointerException e) { }
+						}
+					} case "nb_semaines" -> {
+						if ( map.containsKey(typeHeure) )
+							nbSemaines = map.get(typeHeure).get(data);
+					} case "nb_heures" -> {
+						if ( map.containsKey(typeHeure) )
+							nbHeures = map.get(typeHeure).get(data);
+					}
+				}
+			}
+			this.requetes.insertTypesHeuresParModule(module.getIdModule(), typeHeure.getIdTypeHeure(), pn, nbSemaines, nbHeures);
+		}
+
+	}
+
 
 	public boolean ajouterModule( Module module ) {
 		try {
@@ -256,6 +311,22 @@ public class Controleur {
 			if ( heure.getIdHeure() == idHeure )
 				return heure;
 	
+		return null;
+	}
+
+	public TypeHeure getTypeHeureById( int idTypeHeure ) {
+		for (TypeHeure typeHeure : this.typesHeures) {
+			if ( typeHeure.getIdTypeHeure() == idTypeHeure )
+				return typeHeure;
+		}
+		return null;
+	}
+
+	public TypeHeure getTypeHeureByNom(String nom) {
+		for (TypeHeure typeHeure : this.typesHeures)
+			if ( typeHeure.getNomTypeHeure().equals(nom) )
+				return typeHeure;
+			
 		return null;
 	}
 

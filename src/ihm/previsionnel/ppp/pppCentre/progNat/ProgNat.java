@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.awt.Color;
 
 import metier.Module;
+import metier.TypeHeure;
 
 public class ProgNat extends JPanel implements ActionListener, FocusListener {
 	private static final double COEFF_CM_TD = 1.5;
@@ -161,7 +162,64 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 		this.txtTDWrite.addFocusListener(this);
 		this.txtTPWrite.addFocusListener(this);
 
+		if ( this.module != null )
+			this.initValues();
+
 		this.setVisible(true);
+	}
+
+	private void initValues() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.panelMere.getHeuresParTypesHeures(this.module);
+
+		if ( map != null )
+			for (TypeHeure typeHeure : map.keySet()) {
+				System.out.println(typeHeure.getNomTypeHeure()+" nnn "+ map.get(typeHeure).get("pn"));
+				switch (typeHeure.getNomTypeHeure()) {
+					case "TUT"  ->
+						this.txtHTutWrite.setText(""+map.get(typeHeure).get("pn"));
+					case "HP"  ->
+						this.txtHPonctWrite.setText(""+map.get(typeHeure).get("pn"));
+					case "CM"  ->
+						this.txtCMWrite.setText(""+map.get(typeHeure).get("pn"));
+					case "TD"  ->
+						this.txtTDWrite.setText(""+map.get(typeHeure).get("pn"));
+					case "TP"  ->
+						this.txtTPWrite.setText(""+map.get(typeHeure).get("pn"));
+				}
+			}
+	}
+
+	public HashMap<String, Integer> getDataHeuresTypesHeures() {
+		
+		HashMap<String,Integer> map = new HashMap<>();
+
+		int nb;
+		try {
+			nb = Integer.parseInt(this.txtHTutWrite.getText());
+		} catch (NumberFormatException e) { nb=0; }
+		map.put("TUT", nb);
+
+		try {
+			nb = Integer.parseInt(this.txtHPonctWrite.getText());
+		} catch (NumberFormatException e) { nb=0; }
+		map.put("HP", nb);
+
+		try {
+			nb = Integer.parseInt(this.txtCMWrite.getText());
+		} catch (NumberFormatException e) { nb=0; }
+		map.put("CM", nb);
+
+		try {
+			nb = Integer.parseInt(this.txtTDWrite.getText());
+		} catch (NumberFormatException e) { nb=0; }
+		map.put("TD", nb);
+
+		try {
+			nb = Integer.parseInt(this.txtTPWrite.getText());
+		} catch (NumberFormatException e) { nb=0; }
+		map.put("TP", nb);
+
+		return map;
 	}
 
 	public HashMap<String, Integer> getHeuresTot() {

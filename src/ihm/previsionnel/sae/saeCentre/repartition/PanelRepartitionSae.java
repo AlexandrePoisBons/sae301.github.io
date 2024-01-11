@@ -2,7 +2,6 @@ package ihm.previsionnel.sae.saeCentre.repartition;
 
 //Imports classes Java
 import java.awt.BorderLayout;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -41,10 +40,10 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 
 		JPanel panelBtn = new JPanel();
 
-		this.panelRepH 	            = new PanelRepH					(this, this.module)		    ;
-		this.panelAffect	 		= new PanelAffectSae			(this, this.module);
-		this.btnAjouter 			= new JButton					("Ajouter")   	;
-		this.btnSuppr				= new JButton					("Supprimer")	;	
+		this.panelRepH = new PanelRepH(this, this.module);
+		this.panelAffect= new PanelAffectSae(this, this.module);
+		this.btnAjouter = new JButton("Ajouter");
+		this.btnSuppr = new JButton("Supprimer");
 
 		//Ajout des boutons au panel de boutons
 		panelBtn.add(this.btnAjouter);
@@ -71,6 +70,9 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 		}
 	}
 
+	public HashMap<String, HashMap<String, Integer>> getDataHeuresTypesHeures() {
+		return this.panelRepH.getDataHeuresTypesHeures();
+	}
 
 	public HashMap<String,Integer> getNbSemaines() { return this.panelRepH.getNbSemaines(); }
 	public HashMap<String,Integer> getData() { return this.panelMere.getData(); }
@@ -79,6 +81,7 @@ public class PanelRepartitionSae extends JPanel implements ActionListener {
 	public List<Heure> getDeletedHeures() { return this.panelAffect.getDeletedHeures(); }
 	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
 	public int getSommeAffecte() { return this.panelRepH.getSommeAffecte(); }
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.panelMere.getHeuresParTypesHeures(module); }
 
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }

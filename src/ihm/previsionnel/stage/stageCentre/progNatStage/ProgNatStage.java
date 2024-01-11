@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.awt.Color;
 
 import metier.Module;
+import metier.TypeHeure;
 
 public class ProgNatStage extends JPanel implements ActionListener, FocusListener{
 	private PCentreStage panelMere;
@@ -117,8 +118,26 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 		this.txtHTut.addActionListener(this);
 		this.txtHSae.addFocusListener(this);
 		this.txtHTut.addFocusListener(this);
+
+		if ( this.module != null )
+			this.initValues();
 		
 	}
+
+	private void initValues() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.panelMere.getHeuresParTypesHeures(this.module);
+
+		if ( map != null )
+			for (TypeHeure typeHeure : map.keySet()) {
+				switch (typeHeure.getNomTypeHeure()) {
+					case "SAE" ->
+						this.txtHSae.setText(""+map.get(typeHeure).get("pn"));
+					case "TUT" ->
+						this.txtHTut.setText(""+map.get(typeHeure).get("pn"));
+				}
+			}
+	}
+
 
 
 	public HashMap<String, Integer> getHeuresTot() {

@@ -66,6 +66,7 @@ public class PanelSudSae extends JPanel implements ActionListener{
 
 	public void validation(boolean valide) {
 		if ( valide ) {
+			this.panelSae.saveDataHeures();
 			this.enregistrer();
 			// this.panelSae.fermerFrameFormulaire();
 		} else {
@@ -105,7 +106,7 @@ public class PanelSudSae extends JPanel implements ActionListener{
 		for (String heure : map.keySet()) {
 			if (map.get(heure) > nbSemaines)
 				nbSemaines = map.get(heure);
-			nbHeures+= map.get(heure);
+			nbHeures += map.get(heure);
 		}
 
 		List<Heure> deletedHeures = this.panelSae.getDeletedHeures();
@@ -152,6 +153,5 @@ public class PanelSudSae extends JPanel implements ActionListener{
 
 	}
 
-	// public boolean estValide() { return this.panelSae.estValide(); }
 
 }

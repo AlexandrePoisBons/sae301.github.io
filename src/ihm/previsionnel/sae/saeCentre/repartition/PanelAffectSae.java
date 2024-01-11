@@ -6,8 +6,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import metier.Heure;
-import metier.Intervenant;
-import metier.TypeHeure;
 import metier.Module;
 
 import java.util.ArrayList;

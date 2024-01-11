@@ -59,6 +59,13 @@ public class PanelStage extends JPanel {
 		this.add( this.pSudStage,    BorderLayout.SOUTH  );
 	}
 
+	public void saveDataHeures() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.pCentreStage.getDataHeuresTypesHeures();
+
+		this.frame.getControleur().majTypesHeuresModule(this.module, map);
+
+	}
+
 
 	public void enregistrer(Module m) {
 		List<Heure> heures = this.pCentreStage.getHeures();
@@ -82,20 +89,24 @@ public class PanelStage extends JPanel {
 		this.pSudStage.setErreur(message);
 	}
 
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.frame.getControleur().getTypesHeuresParModule(module); }
 
+
+	public Module getModule()       { return this.module;                       }
 	public String getSemestre()     { return this.panelMere.getSemestre();      }
-	public int    getNbEtd()        { return this.panelMere.getNbEtd();         }
-	public int    getNbGpTd()       { return this.panelMere.getNbGpTd();        }
-	public int    getNbGpTp()       { return this.panelMere.getNbGpTp();        }
 	public String getCode()         { return this.pNordStage.getCode();         }
 	public String getLibelle()      { return this.pNordStage.getLibelle();      }
 	public String getLibelleCourt() { return this.pNordStage.getLibelleCourt(); }
-	public Module getModule()       { return this.module;                       }
+	public int    getNbEtd()        { return this.panelMere.getNbEtd();         }
+	public int    getNbGpTd()       { return this.panelMere.getNbGpTd();        }
+	public int    getNbGpTp()       { return this.panelMere.getNbGpTp();        }
+	
 	public boolean estValide()      { return this.pCentreStage.estValide();     }
+
 	public void fermerFrameFormulaire() { this.pCentreStage.fermerFrameFormulaire(); }
 
-	public HashMap<String, Integer> getDataHeures() { return this.pCentreStage.getData(); }
-	public HashMap<String,Integer>  getData()       { return this.pCentreStage.getData(); }
+	public TypeHeure getTypeHeureParNom(String nom) { return this.frame.getControleur().getTypeHeureByNom(nom); }
+
 	public List<Heure> getDeletedHeures() { return this.pCentreStage.getDeletedHeures(); }
 	
 	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getIntervenants(); }

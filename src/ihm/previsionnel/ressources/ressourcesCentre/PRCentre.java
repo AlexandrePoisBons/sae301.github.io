@@ -71,12 +71,71 @@ public class PRCentre extends JPanel {
 		return map;
 	}
 
-	public void setData() { this.panelRepartition.setHeures(this.module.getHeures()); }
+	public void setData() {
+		this.panelRepartition.setHeures(this.module.getHeures());
+	}
+
+	public HashMap<TypeHeure, HashMap<String,Integer>> getDataHeuresTypesHeures() {
+
+		HashMap<TypeHeure, HashMap<String,Integer>> map = new HashMap<>();
+
+		HashMap<String, Integer> mapNat = this.pProgNat.getDataHeuresTypesHeures();
+		HashMap<String, HashMap<String,Integer>> mapRep = this.panelRepartition.getDataHeuresTypesHeures();
+
+
+		HashMap<String, Integer> temp;
+		for (String typeHeure : mapRep.keySet()) {
+			TypeHeure typeHeureTemp = this.panelMere.getTypeHeureParNom(typeHeure);
+
+			temp = new HashMap<>();
+
+			for (String nom : mapRep.get(typeHeure).keySet()) {
+				// if ( typeHeure.equals("TD") && nom.equals("pn") )
+				temp.put(nom,mapRep.get(typeHeure).get(nom));
+				temp.put("pn", mapNat.get(nom));
+			}
+
+			if ( !temp.containsKey("pn") )
+				temp.put("pn",0);
+			else {
+				temp.remove("pn");
+				temp.put("pn",mapNat.get(typeHeure));
+			}
+			if ( !temp.containsKey("nb_semaines") )
+				temp.put("nb_semaines",0);
+			if ( !temp.containsKey("nb_heures") )
+				temp.put("nb_heures",0);
+
+
+			map.put(typeHeureTemp, temp);
+
+		}
+
+		List<TypeHeure> typesHeures = this.panelMere.getTypesHeures();
+
+		for (TypeHeure typeHeure : typesHeures) {
+			temp = new HashMap<>();
+			if ( !map.containsKey(typeHeure) ) {
+
+				temp.put("pn",0);
+				temp.put("nb_semaines",0);
+				temp.put("nb_heures",0);
+
+				map.put(typeHeure, temp);
+			}
+		}
+
+
+		return map;
+
+		// combiner gros les 2 et hop
+	}
 
 
 	public List<Intervenant> getIntervenants()  { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()   { return this.panelMere.getTypesHeures();  }
 	public List<Heure>       getDeletedHeures() { return this.panelRepartition.getDeletedHeures(); }
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.panelMere.getHeuresParTypesHeures(module); }
 
 	public int getNbGpTd() { return this.panelMere.getNbGpTdMaj(); }
 	public int getNbGpTp() { return this.panelMere.getNbGpTpMaj(); }

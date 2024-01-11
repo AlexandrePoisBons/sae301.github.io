@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.awt.Color;
 
 import metier.Module;
+import metier.TypeHeure;
 
 public class ProgNat extends JPanel implements FocusListener, ActionListener {
 	// Constante coefficient de conversion des heures de CM en heures TD (1h de TD =
@@ -148,7 +149,50 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 		this.txtTPWrite.addActionListener(this);
 		this.txtOEWrite.addActionListener(this);
 
+		if ( this.module != null )
+			this.initValues();
+
 		this.setVisible(true);
+	}
+
+	private void initValues() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.panelMere.getHeuresParTypesHeures(this.module);
+
+		if ( map != null )
+			for (TypeHeure typeHeure : map.keySet()) {
+				switch (typeHeure.getNomTypeHeure()) {
+					case "CM"  -> 
+						this.txtCMWrite.setText(""+map.get(typeHeure).get("pn"));
+					case "TD"  ->
+						this.txtTDWrite.setText(""+map.get(typeHeure).get("pn"));
+					case "TP"  ->
+						this.txtTPWrite.setText(""+map.get(typeHeure).get("pn"));
+				}
+			}
+
+	}
+
+	public HashMap<String, Integer> getDataHeuresTypesHeures() {
+		
+		HashMap<String,Integer> map = new HashMap<>();
+
+		int nb;
+		try {
+			nb = Integer.parseInt(this.txtCMWrite.getText());
+		} catch (NumberFormatException e) { nb=0; }
+		map.put("CM", nb);
+
+		try {
+			nb = Integer.parseInt(this.txtTDWrite.getText());
+		} catch (NumberFormatException e) { nb=0; }
+		map.put("TD", nb);
+
+		try {
+			nb = Integer.parseInt(this.txtTPWrite.getText());
+		} catch (NumberFormatException e) { nb=0; }
+		map.put("TP", nb);
+
+		return map;
 	}
 
 	public HashMap<String, Integer> getHeuresTot() {

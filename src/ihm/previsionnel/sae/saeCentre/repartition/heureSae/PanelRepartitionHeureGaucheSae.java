@@ -20,17 +20,17 @@ import metier.TypeHeure;
 public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListener, ActionListener {
 
 	private PanelRepH panelMere;
-	private Module m;
 	private ArrayList<JTextField> ensJTextField;
-	private int sommeAction;
+
+	private Module module;
 
 	private int sommeHSae = 0;
 	private int sommeHTut = 0;
 	private int totalSomme = 0;
 
 	public PanelRepartitionHeureGaucheSae(PanelRepH panelRepH, Module m) {
-		this.m = m;
 		this.panelMere = panelRepH;
+		this.module = m;
 		this.ensJTextField = new ArrayList<JTextField>();
 
 
@@ -51,9 +51,9 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 		gbcH.gridx = 1;
 		gbcH.gridy = 0;
 		gbcH.insets = new Insets(10, 0, 2, 0);
-		panelHC.add(new JLabel("h Sae")	, gbcH);
+		panelHC.add(new JLabel("h Sae"), gbcH);
 		gbcH.gridx = 2;
-		panelHC.add(new JLabel("h Tut")	, gbcH);
+		panelHC.add(new JLabel("h Tut"), gbcH);
 
 
 		gbcH.gridx = 0;
@@ -81,14 +81,12 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 
 		int hTut = 0;
 		int hSae = 0;
-		for (Heure h : this.m.getHeures()) {
+		for (Heure h : this.module.getHeures()) {
 			if(h.getTypeHeure().getNomTypeHeure().equals("TUT")){
 				hTut += h.getDuree();
-				System.out.println("hTut : " + hTut);
 			}
 			if(h.getTypeHeure().getNomTypeHeure().equals("SAE")) {
 				hSae += h.getDuree();
-				System.out.println("hSae : " + hSae);
 			}
 		}
 		this.setHeureAffecte(hSae, hTut);
@@ -99,13 +97,56 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 			this.ensJTextField.get(i).addFocusListener(this);
 		}
 
+		if ( this.module != null )
+			this.initValues();
+
 		this.setVisible(true);
 	}
+
+
+	private void initValues() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.panelMere.getHeuresParTypesHeures(this.module);
+
+		if ( map != null )
+			for (TypeHeure typeHeure : map.keySet()) {
+				switch (typeHeure.getNomTypeHeure()) {
+					case "SAE"  -> {
+						this.ensJTextField.get(0).setText(""+map.get(typeHeure).get("nb_heures"));
+					} case "TUT"  -> {
+						this.ensJTextField.get(1).setText(""+map.get(typeHeure).get("nb_heures"));
+					}
+				}
+			}
+	}
+
+	public HashMap<String, HashMap<String,Integer>> getDataHeuresTypesHeures() {
+		HashMap<String, HashMap<String,Integer>> map = new HashMap<>();
+
+		HashMap<String,Integer> temp = new HashMap<>();
+		temp.put("nb_heures", this.getIntVal(this.ensJTextField.get(0)) );
+		map.put("SAE", temp);
+
+		temp = new HashMap<>();
+		temp.put("nb_heures", this.getIntVal(this.ensJTextField.get(1)) );
+		map.put("TUT", temp);
+
+		return map;
+	}
+
+	public int getIntVal(JTextField txt) {
+		int nb;
+		try {
+			nb = Integer.parseInt(txt.getText());
+		} catch(NumberFormatException e) { nb=0; }
+
+		return nb;
+	}
+
 
 	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
 	//méthode pour gérer la couleur du cadre en fonction de la validité de la saisie
 	public void setCouleurErreur(boolean b, JTextField txt) {
-		if (b == true) {
+		if (b) {
 			txt.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
 		} else {
 			txt.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));

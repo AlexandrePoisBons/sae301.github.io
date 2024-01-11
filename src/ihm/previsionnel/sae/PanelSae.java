@@ -57,6 +57,13 @@ public class PanelSae extends JPanel {
 
 	}
 
+	public void saveDataHeures() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.pCentreSae.getDataHeuresTypesHeures();
+
+		this.frame.getControleur().majTypesHeuresModule(this.module, map);
+
+	}
+
 	public void enregistrer(Module m) {
 		List<Heure> heures = this.pCentreSae.getHeures();
 
@@ -89,6 +96,8 @@ public class PanelSae extends JPanel {
 	public String getLibelleCourt() { return this.pNordSae.getLibelleCourt(); }
 	public Module getModule ()      { return this.module;                     }
 	public void fermerFrameFormulaire() { this.pCentreSae.fermerFrameFormulaire(); }
+	public TypeHeure getTypeHeureParNom(String nom) { return this.frame.getControleur().getTypeHeureByNom(nom); }
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.frame.getControleur().getTypesHeuresParModule(module); }
 
 	public HashMap<String, Integer> getDataHeures() { return this.pCentreSae.getData(); }
 	public HashMap<String,Integer>  getData()       { return this.pCentreSae.getData(); }

@@ -54,6 +54,13 @@ public class PanelRessources extends JPanel {
 		this.add( this.panelSudRessources, BorderLayout.SOUTH  );
 	}
 
+	public void saveDataHeures() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.pRCentre.getDataHeuresTypesHeures();
+
+		this.frame.getControleur().majTypesHeuresModule(this.module, map);
+
+	}
+
 
 	public void enregistrer(Module m) {
 		List<Heure> heures = this.pRCentre.getHeures();
@@ -81,6 +88,10 @@ public class PanelRessources extends JPanel {
 	public String getLibelle()      { return this.pRNord.getLibelle();      }
 	public String getLibelleCourt() { return this.pRNord.getLibelleCourt(); }
 	public Module getModule()       { return this.module;                   }
+	public TypeHeure getTypeHeureParNom(String nom) { return this.frame.getControleur().getTypeHeureByNom(nom); }
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.frame.getControleur().getTypesHeuresParModule(module); }
+
+	//public HashMap<TypeHeure, HashMap<String,Integer>> getValeursHeuresParTypesHeures(Module module) { return null; }
 
 	public boolean estValide() { return this.pRCentre.estValide(); }
 

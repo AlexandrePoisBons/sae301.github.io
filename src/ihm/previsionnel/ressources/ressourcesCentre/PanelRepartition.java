@@ -41,7 +41,7 @@ public class PanelRepartition extends JPanel implements ActionListener {
 
 		JPanel panelBoutons = new JPanel();
 
-		this.panelRepartitionHeure = new PanelRepartitionHeure(this);
+		this.panelRepartitionHeure = new PanelRepartitionHeure(this, this.module);
 		this.panelAffect = new PanelAffect(this, this.module);
 		panelBoutons     = new JPanel();
 		this.btnAjouter  = new JButton("Ajouter");
@@ -84,6 +84,10 @@ public class PanelRepartition extends JPanel implements ActionListener {
 		}
 	}
 
+	public HashMap<String, HashMap<String, Integer>> getDataHeuresTypesHeures() {
+		return this.panelRepartitionHeure.getDataHeuresTypesHeures();
+	}
+
 
 	public HashMap<String,Integer> getData() { return this.panelMere.getData(); }
 	public HashMap<String,Integer> getNbSemaines() { return this.panelRepartitionHeure.getNbSemaines(); }
@@ -94,6 +98,8 @@ public class PanelRepartition extends JPanel implements ActionListener {
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }
 	public void fermerFrameFormulaire() { if ( this.frameFormulaire != null) this.frameFormulaire.dispose(); }
+
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.panelMere.getHeuresParTypesHeures(module); }
 
 	public int getNbGpTd() {return this.panelMere.getNbGpTd();}
 	public int getNbGpTp() {return this.panelMere.getNbGpTp();}

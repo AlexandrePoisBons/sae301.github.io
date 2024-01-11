@@ -12,34 +12,53 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+import metier.Module;
+import metier.TypeHeure;
+
 public class PanelRepHStage extends JPanel{
 	private PanelRepartitionStage panelMere;
 	private PanelRepartitionHeureGaucheStage panelRepartitionHGauche;
 	private PanelRepartitionHeureDroiteStage panelRepartitionHDroite;
 
-	public PanelRepHStage(PanelRepartitionStage panelMere){
+	private Module module;
+
+	public PanelRepHStage(PanelRepartitionStage panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
 		this.setLayout(new GridLayout(1,2));
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
-		this.panelRepartitionHGauche = new PanelRepartitionHeureGaucheStage(this);
+		this.panelRepartitionHGauche = new PanelRepartitionHeureGaucheStage(this, this.module);
 		this.panelRepartitionHDroite = new PanelRepartitionHeureDroiteStage(this);
 
 		this.add(this.panelRepartitionHGauche);
 		this.add(this.panelRepartitionHDroite);
 	}
 
+	
+
 	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
 
 	public boolean estChiffre(String texte) {
-        // Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
-        for (char c : texte.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
+		// Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
+		for (char c : texte.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public HashMap<String, HashMap<String,Integer>> getDataHeuresTypesHeures() {
+
+		HashMap<String, HashMap<String, Integer>> mapGauche = this.panelRepartitionHGauche.getDataHeuresTypesHeures();
+
+		return mapGauche;
+
+	}
+
+
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.panelMere.getHeuresParTypesHeures(module); }
 
 	public HashMap<String, Integer> getNbSemaines() {
 		return this.panelRepartitionHGauche.getNbSemaines();

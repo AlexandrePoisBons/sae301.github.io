@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 
 import metier.Module;
+import metier.TypeHeure;
 
 public class ProgNatSae extends JPanel implements FocusListener, ActionListener {
 	private PCentreSae panelMere;
@@ -122,7 +123,44 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 		this.txtHTut.addActionListener(this);
 		this.txtSomme.addActionListener(this);
 
+		if ( this.module != null )
+			this.initValues();
+
 		this.setVisible(true);
+	}
+
+
+	private void initValues() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.panelMere.getHeuresParTypesHeures(this.module);
+
+		if ( map != null )
+			for (TypeHeure typeHeure : map.keySet()) {
+				switch (typeHeure.getNomTypeHeure()) {
+					case "SAE"  ->
+						this.txtHSae.setText(""+map.get(typeHeure).get("pn"));
+					case "TUT"  ->
+						this.txtHTut.setText(""+map.get(typeHeure).get("pn"));
+				}
+			}
+
+	}
+
+	public HashMap<String, Integer> getDataHeuresTypesHeures() {
+		
+		HashMap<String,Integer> map = new HashMap<>();
+
+		int nb;
+		try {
+			nb = Integer.parseInt(this.txtHSae.getText());
+		} catch (NumberFormatException e) { nb=0; }
+		map.put("SAE", nb);
+
+		try {
+			nb = Integer.parseInt(this.txtHTut.getText());
+		} catch (NumberFormatException e) { nb=0; }
+		map.put("TUT", nb);
+
+		return map;
 	}
 
 
@@ -140,14 +178,14 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 	}
 
 	private boolean estChiffre(String texte) {
-        // Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
-        for (char c : texte.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
+		// Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
+		for (char c : texte.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	//méthode pour gérer la couleur du cadre en fonction de la validité de la saisie
 	public void setCouleurErreur(boolean b, JTextField txt) {

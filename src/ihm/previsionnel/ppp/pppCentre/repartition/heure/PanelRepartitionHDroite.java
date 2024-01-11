@@ -1,6 +1,7 @@
 package ihm.previsionnel.ppp.pppCentre.repartition.heure;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -18,6 +19,9 @@ import java.awt.event.FocusListener;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
+import metier.Module;
+import metier.TypeHeure;
+
 public class PanelRepartitionHDroite extends JPanel implements ActionListener, FocusListener {
 	// Constante coefficient de conversion des heures de CM en heures TD (1h de TD = 1.5h CM)
 	private static final double COEFF_CM_TD = 1.5;
@@ -31,8 +35,12 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 	private int clcCM, clcTD, clcTP;
 	private int valTut, valPonct;
 
-	public PanelRepartitionHDroite(PanelRepartitionHeure panelMere) {
+	private Module module;
+
+	public PanelRepartitionHDroite(PanelRepartitionHeure panelMere, Module m) {
 		this.panelMere = panelMere;
+		this.module = m;
+
 		this.sommeActionTD = this.sommeActionTP = this.sommeActionCM = 0;
 		this.valTut = this.valPonct = 0;
 		this.panelN = new JPanel();
@@ -147,6 +155,49 @@ public class PanelRepartitionHDroite extends JPanel implements ActionListener, F
 			this.ensTxtFld.get(cpt).addActionListener(this);
 			this.ensTxtFld.get(cpt).addFocusListener(this);
 		}
+
+		if ( this.module != null )
+			this.initValues();
+
+	}
+
+	public void initValues() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.panelMere.getHeuresParTypesHeures(this.module);
+
+		if ( map != null )
+			for (TypeHeure typeHeure : map.keySet()) {
+				switch (typeHeure.getNomTypeHeure()) {
+					case "TUT" -> {
+						this.ensTxtFld.get(3).setText(""+map.get(typeHeure).get("nb_heures"));
+					}
+					case "HP" -> {
+						this.ensTxtFld.get(4).setText(""+map.get(typeHeure).get("nb_heures"));
+					}
+				}
+			}
+
+	}
+
+	public HashMap<String, HashMap<String,Integer>> getDataHeuresTypesHeures() {
+
+		HashMap<String, HashMap<String,Integer>> map = new HashMap<>();
+
+		int nb;
+		try { nb = Integer.parseInt(this.ensTxtFld.get(3).getText()); }
+		catch (NumberFormatException e) { nb=0; }
+		HashMap<String,Integer> temp = new HashMap<>();
+		temp.put("nb_heures", nb);
+
+		map.put("TUT", temp);
+
+		try { nb = Integer.parseInt(this.ensTxtFld.get(4).getText()); }
+		catch (NumberFormatException e) { nb=0; }
+		temp = new HashMap<>();
+		temp.put("nb_heures", nb);
+
+		map.put("HP", temp);
+
+		return map;
 	}
 
 	public void setLabelErreur(String message) {

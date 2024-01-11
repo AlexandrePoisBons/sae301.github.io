@@ -24,7 +24,6 @@ public class Infos {
 		this.password = "";
 
 		this.initValues();
-
 	}
 
 	private boolean initValues() {

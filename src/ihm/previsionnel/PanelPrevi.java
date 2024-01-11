@@ -8,6 +8,7 @@ import ihm.previsionnel.ressources.PanelRessources;
 import ihm.previsionnel.sae.PanelSae;
 import ihm.previsionnel.stage.PanelStage;
 import metier.Module;
+import metier.TypeHeure;
 
 import java.awt.Color;
 // Imports classes Java
@@ -17,6 +18,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.*;
@@ -81,7 +83,7 @@ public class PanelPrevi extends JPanel implements ActionListener {
 		this.panelCenterPrevi.setModules( alModule );
 	}
 
-
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.frame.getControleur().getTypesHeuresParModule(module); }
 
 	public String getSemestre()   { return "S"+this.panelCenterPrevi.getCurrentSemestre().getIdSemestre();   }
 	public int    getNbEtd()      { return this.panelCenterPrevi.getNbEtd();      }

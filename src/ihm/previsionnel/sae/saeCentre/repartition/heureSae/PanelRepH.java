@@ -11,22 +11,23 @@ import javax.swing.JPanel;
 
 import ihm.previsionnel.sae.saeCentre.repartition.PanelRepartitionSae;
 import metier.Module;
+import metier.TypeHeure;
 
 
 public class PanelRepH extends JPanel{
 	private PanelRepartitionSae panelMere;
-	private Module m;
+	private Module module;
 	private PanelRepartitionHeureGaucheSae panelRepartitionHGauche;
 	private PanelRepartitionHeureDroiteSae panelRepartitionHDroite;
 
 	public PanelRepH(PanelRepartitionSae panelMere, Module m) {
-		this.m = m;
+		this.module = m;
 		this.panelMere = panelMere;
 		this.setLayout(new GridLayout(1,2));
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 		this.panelRepartitionHDroite = new PanelRepartitionHeureDroiteSae();
-		this.panelRepartitionHGauche = new PanelRepartitionHeureGaucheSae(this, this.m);
+		this.panelRepartitionHGauche = new PanelRepartitionHeureGaucheSae(this, this.module);
 
 		this.add(this.panelRepartitionHGauche);
 		this.add(this.panelRepartitionHDroite);
@@ -44,6 +45,15 @@ public class PanelRepH extends JPanel{
 		}
 		return true;
 	}
+
+	public HashMap<String, HashMap<String,Integer>> getDataHeuresTypesHeures() {
+
+		HashMap<String, HashMap<String, Integer>> mapGauche = this.panelRepartitionHGauche.getDataHeuresTypesHeures();
+
+		return mapGauche;
+	}
+
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.panelMere.getHeuresParTypesHeures(module); }
 	
 	public HashMap<String, Integer> getNbSemaines() {
 		return this.panelRepartitionHGauche.getNbSemaines();

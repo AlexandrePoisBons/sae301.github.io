@@ -40,27 +40,26 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 
 		JPanel panelBtn = new JPanel();
 
-		this.panelRepH 	= new PanelRepHStage					(this)				;
-		this.panelAffect	 		= new PanelAffectStage			(this, this.module)				;	
-		this.btnAjouter 			= new JButton					("Ajouter")	;
-		this.btnSuppr				= new JButton					("Supprimer")	;	
+		this.panelRepH = new PanelRepHStage(this, this.module);
+		this.panelAffect = new PanelAffectStage(this, this.module);
+		this.btnAjouter = new JButton("Ajouter");
+		this.btnSuppr = new JButton("Supprimer");
 
 		//Ajout des boutons au panel de boutons
-		panelBtn.add(this.btnAjouter)								;
-		panelBtn.add(this.btnSuppr)									;
+		panelBtn.add(this.btnAjouter);
+		panelBtn.add(this.btnSuppr);
 
 		this.add(this.panelRepH, BorderLayout.NORTH);
 		this.add(this.panelAffect, BorderLayout.CENTER);
 		this.add(panelBtn, BorderLayout.SOUTH);
 
 		//Ajout des
-		this.btnAjouter.addActionListener	(this);
-		this.btnSuppr.addActionListener		(this);
+		this.btnAjouter.addActionListener(this);
+		this.btnSuppr.addActionListener(this);
 	}
 	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
 
 
-	//A DECOMMENTER
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnAjouter){
 			this.frameFormulaire = new FrameFormulaire(this, this.module);
@@ -71,13 +70,18 @@ public class PanelRepartitionStage extends JPanel implements ActionListener{
 		}
 	}
 
-	public HashMap<String,Integer> getData() { return this.panelMere.getData(); }
+	public HashMap<String, HashMap<String, Integer>> getDataHeuresTypesHeures() {
+		return this.panelRepH.getDataHeuresTypesHeures();
+	}
+
 	public HashMap<String,Integer> getNbSemaines() { return this.panelRepH.getNbSemaines(); }
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }
 	public List<TypeHeure> getTypesHeures() { return this.panelMere.getTypesHeures(); }
 	public List<Heure> getHeures() { return this.panelAffect.getDataHeures(); }
 	public List<Heure> getDeletedHeures() { return this.panelAffect.getDeletedHeures(); }
 	public int getSommeAffecte() { return this.panelRepH.getSommeAffecte(); }
+
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.panelMere.getHeuresParTypesHeures(module); }
 
 	public void setHeures(List<Heure> heures) { this.panelAffect.setHeures(heures); }
 	public void ajouterHeure(Heure heure) { this.panelAffect.ajouterHeure(heure); }

@@ -52,6 +52,13 @@ public class PanelPpp extends JPanel {
 		this.add(this.panelSudPpp, BorderLayout.SOUTH);
 	}
 
+	public void saveDataHeures() {
+		HashMap<TypeHeure, HashMap<String,Integer>> map = this.panelPppCentre.getDataHeuresTypesHeures();
+
+		this.frame.getControleur().majTypesHeuresModule(this.module, map);
+
+	}
+
 	public void enregistrer(Module m) {
 		List<Heure> heures = this.panelPppCentre.getHeures();
 
@@ -87,6 +94,8 @@ public class PanelPpp extends JPanel {
 	public HashMap<String, Integer> getDataHeures() { return this.panelPppCentre.getData(); }
 	public HashMap<String,Integer>  getData()       { return this.panelPppCentre.getData(); }
 	public List<Heure> getDeletedHeures() { return this.panelPppCentre.getDeletedHeures(); }
+	public TypeHeure getTypeHeureParNom(String nom) { return this.frame.getControleur().getTypeHeureByNom(nom); }
+	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.frame.getControleur().getTypesHeuresParModule(module); }
 
 	public List<Intervenant> getIntervenants() { return this.frame.getControleur().getIntervenants(); }
 	public List<TypeHeure>   getTypesHeures()  { return this.frame.getControleur().getTypesHeures();  }

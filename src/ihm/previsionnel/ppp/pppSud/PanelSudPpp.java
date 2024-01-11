@@ -70,6 +70,7 @@ public class PanelSudPpp extends JPanel implements ActionListener {
 
 	public void validation(boolean valide) {
 		if (valide ) {
+			this.panelPpp.saveDataHeures();
 			this.enregistrer();
 			// this.panelPpp.fermerFrameFormulaire();
 		} else {

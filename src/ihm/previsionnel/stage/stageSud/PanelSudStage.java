@@ -30,7 +30,6 @@ public class PanelSudStage extends JPanel implements ActionListener{
 	private Module module;
 	private Module oldModule;
 
-
 	public PanelSudStage(FrameAccueil frame, PanelPrevi panelPrevi, PanelStage panelStage, Module m) {
 		this.frame      = frame;
 		this.panelStage = panelStage;
@@ -68,10 +67,11 @@ public class PanelSudStage extends JPanel implements ActionListener{
 
 	public void validation(boolean valide) {
 		if ( valide ) {
+			this.panelStage.saveDataHeures();
 			this.enregistrer();
-			this.panelStage.fermerFrameFormulaire();
+			// this.panelStage.fermerFrameFormulaire();
 		} else {
-			this.panelStage.fermerFrameFormulaire();
+			// this.panelStage.fermerFrameFormulaire();
 		}
 	}
 
@@ -102,12 +102,6 @@ public class PanelSudStage extends JPanel implements ActionListener{
 			return;
 		}
 
-		HashMap<String, Integer> map = this.panelStage.getDataHeures();
-		for (String heure : map.keySet() ){
-			if (map.get(heure) > nbSemaines)
-				nbSemaines = map.get(heure);
-			nbHeures+= map.get(heure);
-		}
 
 		List<Heure> deletedHeures = this.panelStage.getDeletedHeures();
 
@@ -129,7 +123,10 @@ public class PanelSudStage extends JPanel implements ActionListener{
 			for ( Heure heure : m.getHeures() )
 				if ( deletedHeures.contains(heure) )
 					m.getHeures().remove(heure);
-
+	
+			for (Heure heure : m.getHeures())
+				m.setNbHeures(m.getNbHeures()+(int)heure.getDuree());
+			
 			this.panelStage.enregistrer(m);
 		} else {
 			this.module.setTypeModule(m.getTypeModule());
@@ -147,6 +144,9 @@ public class PanelSudStage extends JPanel implements ActionListener{
 			for( Heure heure : this.module.getHeures() )
 				if ( deletedHeures.contains(heure) )
 					this.module.getHeures().remove(heure);
+
+			for (Heure heure : m.getHeures())
+				m.setNbHeures(m.getNbHeures()+(int)heure.getDuree());
 
 			this.panelStage.update(this.oldModule, this.module);
 		}

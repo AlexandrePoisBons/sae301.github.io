@@ -21,9 +21,9 @@ public class PanelRepartitionHeureDroiteSae extends JPanel {
 		for(int i = 0; i < 2; i++){
 			JTextField textField = new JTextField(3);
 			textField.setEditable(false);
-			this.ensTxtFld.add(textField); 
+			this.ensTxtFld.add(textField);
 		}
-		
+
 		this.panelC.setLayout(new GridBagLayout());
 		GridBagConstraints gbcC = new GridBagConstraints();
 
