@@ -52,13 +52,13 @@ public class DB {
 				session.connect();
 
 				// Set up port forwarding (SSH tunnel)
-				int localPort = 5432; // Local port for tunneling
+				int localPort = 5433; // Local port for tunneling
 				int remotePort = 5432; // Remote PostgreSQL port
 				session.setPortForwardingL(localPort, dbHost, remotePort);
 				Class.forName("org.postgresql.Driver");
 
 				// Connect to the PostgreSQL database through the SSH tunnel
-				String jdbcUrl = "jdbc:postgresql://localhost:5432/" + login;
+				String jdbcUrl = "jdbc:postgresql://localhost:"+localPort + "/" + login;
 				this.connec = DriverManager.getConnection(jdbcUrl, login, password);
 
 				// Perform database operations (e.g., execute queries)

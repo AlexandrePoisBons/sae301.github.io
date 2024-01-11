@@ -188,13 +188,13 @@ public class Requetes {
 				}
 				Requetes.alRandom.add(randomNum);
 				
-				int localPort = randomNum; // Local port for tunneling
+				int localPort = randomNum; // Local po	rt for tunneling
 				int remotePort = 5432; // Remote PostgreSQL port
 				session.setPortForwardingL(localPort, dbHost, remotePort);
 				Class.forName("org.postgresql.Driver");
 
 				// Connect to the PostgreSQL database through the SSH tunnel
-				String jdbcUrl = "jdbc:postgresql://localhost:5432/" + login;
+				String jdbcUrl = "jdbc:postgresql://localhost:"+ randomNum+"/" + login;
 				connect = DriverManager.getConnection(jdbcUrl, login, password);
 
 			}
