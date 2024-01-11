@@ -146,8 +146,10 @@ public class PanelSemestre extends JPanel {
 	}
 	public void setModules(List<Module> list) {
 		this.modules = list;
+		String heure;
 		for (Module module : this.modules) {
-			Object[] s = {module.getCode(), module.getLibelle(), "Panel Semestre l126", module.isValide()};
+			heure = module.getNbHeuresAffecte() + "/" + module.getNbHeures();
+			Object[] s = {module.getCode(), module.getLibelle(), heure, module.isValide()};
 			this.dtm.addRow(s);
 		}
 		if ( this.modules.size() >= 1 ){
