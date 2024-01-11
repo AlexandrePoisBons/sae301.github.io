@@ -140,7 +140,7 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener, Foc
 		if(!this.txtNbHeuresMax.getText().equals("")) {
 			try {nbHeuresMax = Integer.parseInt(this.txtNbHeuresMax.getText()); }
 			catch ( NumberFormatException e ) {
-				this.lblErreur.setText(this.txtNbHeuresMax.getText() + " : pas un Integer"); 
+				this.lblErreur.setText(this.txtNbHeuresMax.getText() + " n'est pas un Integer"); 
 				this.txtNbHeuresMax.setForeground(java.awt.Color.RED);
 				this.repaint();
 				return;
@@ -153,7 +153,7 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener, Foc
 		if(!this.txtCoeff.getText().equals("")) {
 			try {coeff = Float.parseFloat(this.txtCoeff.getText()); }
 			catch ( NumberFormatException e ) {
-				this.lblErreur.setText(this.txtCoeff.getText() + " : pas un Float"); 
+				this.lblErreur.setText(this.txtCoeff.getText() + " n'est pas un Float"); 
 				this.txtCoeff.setForeground(java.awt.Color.RED);
 				this.repaint();
 				return;
