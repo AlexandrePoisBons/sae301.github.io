@@ -213,6 +213,7 @@ public class Controleur {
 			}
 			this.modules.add(module);
 
+			this.majTypesHeuresModule(module, this.heuresParModule.get(module));
 			return true;
 		} catch ( SQLException e ) { return false; }
 	}

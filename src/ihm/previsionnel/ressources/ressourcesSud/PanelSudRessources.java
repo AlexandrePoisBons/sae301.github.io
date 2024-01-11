@@ -125,6 +125,8 @@ public class PanelSudRessources extends JPanel implements ActionListener {
 				if ( deletedHeures.contains(heure) )
 					m.getHeures().remove(heure);
 
+			this.panelRessources.saveDataHeures();
+
 			this.panelRessources.enregistrer(m);
 		} else {
 			this.module.setTypeModule(m.getTypeModule());
@@ -142,13 +144,13 @@ public class PanelSudRessources extends JPanel implements ActionListener {
 			for( Heure heure : this.module.getHeures() )
 				if ( deletedHeures.contains(heure) )
 					this.module.getHeures().remove(heure);
+			
+			this.panelRessources.saveDataHeures();
 
 			this.panelRessources.update(this.oldModule, this.module);
 		}
 
 
-		this.panelRessources.saveDataHeures();
 
 	}
-
 }
