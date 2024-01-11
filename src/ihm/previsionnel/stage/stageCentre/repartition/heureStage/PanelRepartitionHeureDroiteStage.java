@@ -1,11 +1,9 @@
 package ihm.previsionnel.stage.stageCentre.repartition.heureStage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.swing.*;
 
-import ihm.previsionnel.stage.stageCentre.repartition.PanelRepartitionStage;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -17,13 +15,9 @@ public class PanelRepartitionHeureDroiteStage extends JPanel  {
 
 	private JPanel panelC;
 	private ArrayList<JTextField> ensTxtFld;
-	private PanelRepHStage panelMere;
 
-	private int val;
 
-	public PanelRepartitionHeureDroiteStage(PanelRepHStage panelMere) {
-		this.panelMere = panelMere;
-		this.val = 0;
+	public PanelRepartitionHeureDroiteStage() {
 		this.panelC = new JPanel();
 		this.ensTxtFld = new ArrayList<JTextField>();
 

@@ -206,17 +206,13 @@ public class ProgNatSae extends JPanel implements FocusListener, ActionListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if(e.getSource() == this.txtHSae) {
+		if ( e.getSource() == this.txtHSae ) {
 			this.txtHSae.transferFocus();
-		}
-
-
-		else if(e.getSource() == this.txtHTut) {
+		} else if( e.getSource() == this.txtHTut ) {
 			this.txtHTut.transferFocusBackward();
 		}
 	}
 
-	//ICI
 
 	@Override
 	public void focusLost(FocusEvent e) {

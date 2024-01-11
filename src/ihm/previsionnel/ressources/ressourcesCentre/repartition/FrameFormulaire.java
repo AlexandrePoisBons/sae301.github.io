@@ -76,7 +76,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		this.panelFormulaire.add(new JLabel("commentaire"), gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		this.panelFormulaire.add(this.ddlstIntervenant		, gbc);
+		this.panelFormulaire.add(this.ddlstIntervenant, gbc);
 		gbc.gridy = 1;
 		this.panelFormulaire.add(this.ddlstTypesHeures, gbc);
 		gbc.gridy = 2;

@@ -46,7 +46,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 
 		this.panelFormulaire.setLayout(new GridBagLayout());
 
-		GridBagConstraints gbc 	= new GridBagConstraints();
+		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.anchor = GridBagConstraints.WEST;
 		
 		this.remplirListe(this.panelMere.getIntervenants(), this.panelMere.getTypesHeures());
@@ -64,18 +64,18 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		gbc.gridy = 1;
 		this.panelFormulaire.add(new JLabel("Type"), gbc);
 		gbc.gridy = 2;
-		this.panelFormulaire.add(new JLabel("Nb heure"	), gbc);
+		this.panelFormulaire.add(new JLabel("Nb heures"), gbc);
 		gbc.gridy = 3;
-		this.panelFormulaire.add(new JLabel("tot eqtd"), gbc);	
+		this.panelFormulaire.add(new JLabel("tot eqtd"), gbc);
 		gbc.gridy = 4;
-		this.panelFormulaire.add(new JLabel("commentaire"), gbc);
+		this.panelFormulaire.add(new JLabel("Commentaire"), gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		this.panelFormulaire.add(this.ddlstIntervenants, gbc);
 		gbc.gridy = 1;
 		this.panelFormulaire.add(this.ddlstTypesHeures, gbc);
 		gbc.gridy = 2;
-		this.panelFormulaire.add(this.txtNbH	, gbc);
+		this.panelFormulaire.add(this.txtNbH, gbc);
 		gbc.gridy = 3;
 		this.panelFormulaire.add(this.txtTotEqtd, gbc);
 		gbc.gridy = 4;
@@ -98,7 +98,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		this.setVisible(true);
 	}	
 
-	public void actionPerformed(ActionEvent e){
+	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnValider){
 			this.valider();
 			this.panelMere.setSommeAffecte();

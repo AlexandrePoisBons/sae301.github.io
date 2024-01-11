@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -79,7 +78,6 @@ public class PanelAffect extends JPanel {
 	public void supprimer() {
 		if(this.tableauAffect.getSelectedRow() != -1) {
 			this.deletedHeures.add(this.heures.get(this.tableauAffect.getSelectedRow()));
-			//this.heures.remove(this.tableauAffect.getSelectedRow());
 			this.dtm.removeRow(this.tableauAffect.getSelectedRow());
 		}
 		else {

@@ -24,14 +24,13 @@ public class PanelRepHStage extends JPanel{
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
 		this.panelRepartitionHGauche = new PanelRepartitionHeureGaucheStage(this, this.module);
-		this.panelRepartitionHDroite = new PanelRepartitionHeureDroiteStage(this);
+		this.panelRepartitionHDroite = new PanelRepartitionHeureDroiteStage();
 		this.panelRepartitionHGauche = new PanelRepartitionHeureGaucheStage(this, module);
 
 		this.add(this.panelRepartitionHGauche);
 		this.add(this.panelRepartitionHDroite);
 	}
 
-	
 
 	public void setLabelErreur(String message) { this.panelMere.setLabelErreur(message); }
 

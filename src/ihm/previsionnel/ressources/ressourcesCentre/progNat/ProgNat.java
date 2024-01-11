@@ -161,7 +161,7 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 		if ( map != null )
 			for (TypeHeure typeHeure : map.keySet()) {
 				switch (typeHeure.getNomTypeHeure()) {
-					case "CM"  -> 
+					case "CM"  ->
 						this.txtCMWrite.setText(""+map.get(typeHeure).get("pn"));
 					case "TD"  ->
 						this.txtTDWrite.setText(""+map.get(typeHeure).get("pn"));
@@ -173,7 +173,7 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 	}
 
 	public HashMap<String, Integer> getDataHeuresTypesHeures() {
-		
+
 		HashMap<String,Integer> map = new HashMap<>();
 
 		int nb;
@@ -217,14 +217,14 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 		return map;
 	}
 	private boolean estChiffre(String texte) {
-        // Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
-        for (char c : texte.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
+		// Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
+		for (char c : texte.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	//méthode pour gérer la couleur du cadre en fonction de la validité de la saisie
 	public void setCouleurErreur(boolean b, JTextField txt) {
@@ -260,8 +260,7 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
-				if(this.estChiffre(this.txtCMWrite.getText()) == false){
-					//this.txtCMWrite.setText("0");
+				if(this.estChiffre(this.txtCMWrite.getText()) == false) {
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.txtCMWrite);
 				}
@@ -290,8 +289,7 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
-				if(this.estChiffre(this.txtTDWrite.getText()) == false){
-					//this.txtTDWrite.setText("0");
+				if(this.estChiffre(this.txtTDWrite.getText()) == false) {
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.txtTDWrite);
 				}
@@ -322,8 +320,7 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 			try {
 				// Vérification que la saisie de cette valeur n'a pas déjas été enregistrée dans
 				// somme
-				if(this.estChiffre(this.txtTPWrite.getText()) == false){
-					//this.txtTPWrite.setText("");
+				if(this.estChiffre(this.txtTPWrite.getText()) == false) {
 					this.setLabelErreur("Erreur de saisie, veuillez entrer un nombre entier");
 					this.setCouleurErreur(true, this.txtTPWrite);
 				}
@@ -358,8 +355,8 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 		this.txtOE.revalidate();
 	}
 
-	public boolean estValide() { 
-		return this.checkValid.isSelected(); 
+	public boolean estValide() {
+		return this.checkValid.isSelected();
 	}
 
 	// Méthode inutilisée mais obligatoire
@@ -376,7 +373,7 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 				this.setCouleurErreur(false, this.txtCMWrite);
 			}
 		}
-		
+
 
 		if (e.getSource() == this.txtTDWrite) {
 			if (this.estChiffre(this.txtTDWrite.getText()) == false) {
@@ -388,7 +385,7 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 				this.setCouleurErreur(false, this.txtTDWrite);
 			}
 		}
-		
+
 
 		if (e.getSource() == this.txtTPWrite) {
 			if (this.estChiffre(this.txtTPWrite.getText()) == false) {
@@ -400,7 +397,7 @@ public class ProgNat extends JPanel implements FocusListener, ActionListener {
 				this.setCouleurErreur(false, this.txtTPWrite);
 			}
 		}
-		
+
 
 	 }
 

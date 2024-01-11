@@ -76,9 +76,8 @@ public class PanelSudSae extends JPanel implements ActionListener{
 
 	public void setErreur(String message) {
 		if(message.equals("erreur")) {
-			this.lblErreur.setText("Choisir une ligne");
-		}
-		else{
+			this.lblErreur.setText("Veuillez sélectionner une ligne");
+		} else {
 			this.lblErreur.setText("");
 		}
 	}

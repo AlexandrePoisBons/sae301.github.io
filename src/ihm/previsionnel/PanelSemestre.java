@@ -100,22 +100,22 @@ public class PanelSemestre extends JPanel {
 	}
 
 	private static class CheckBoxRenderer extends JCheckBox implements TableCellRenderer {
-        public CheckBoxRenderer() {
-            setHorizontalAlignment(SwingConstants.CENTER);
-        }
+		public CheckBoxRenderer() {
+			setHorizontalAlignment(SwingConstants.CENTER);
+		}
 
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            setSelected(value != null && (boolean) value);
-            return this;
-        }
-    }
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			setSelected(value != null && (boolean) value);
+			return this;
+		}
+	}
 
 	private static class CenteredRenderer extends DefaultTableCellRenderer {
-        public CenteredRenderer() {
-            setHorizontalAlignment(SwingConstants.CENTER);
-        }
-    }
+		public CenteredRenderer() {
+			setHorizontalAlignment(SwingConstants.CENTER);
+		}
+	}
 
 
 	// Getters

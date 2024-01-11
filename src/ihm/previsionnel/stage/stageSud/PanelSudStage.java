@@ -8,7 +8,6 @@ import ihm.previsionnel.stage.PanelStage;
 import metier.Heure;
 import metier.Module;
 
-import java.util.HashMap;
 import java.util.List;
 
 //Import des classes Java
@@ -69,9 +68,6 @@ public class PanelSudStage extends JPanel implements ActionListener{
 		if ( valide ) {
 			this.panelStage.saveDataHeures();
 			this.enregistrer();
-			// this.panelStage.fermerFrameFormulaire();
-		} else {
-			// this.panelStage.fermerFrameFormulaire();
 		}
 	}
 

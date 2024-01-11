@@ -63,15 +63,15 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 
 		gbc.gridy = 0;
 		gbc.gridx = 0;
-		this.panelFormulaire.add(new JLabel("Intervenants"				), gbc);
+		this.panelFormulaire.add(new JLabel("Intervenants"), gbc);
 		gbc.gridy = 1;
 		this.panelFormulaire.add(new JLabel("Type"), gbc);
 		gbc.gridy = 2;
-		this.panelFormulaire.add(new JLabel("Nb heure"	), gbc);
+		this.panelFormulaire.add(new JLabel("Nb heure"), gbc);
 		gbc.gridy = 3;
-		this.panelFormulaire.add(new JLabel("tot eqtd"				), gbc);	
+		this.panelFormulaire.add(new JLabel("tot eqtd"), gbc);
 		gbc.gridy = 4;
-		this.panelFormulaire.add(new JLabel("commentaire"				), gbc);
+		this.panelFormulaire.add(new JLabel("commentaire"), gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		this.panelFormulaire.add(this.ddlstIntervenants, gbc);
@@ -156,7 +156,7 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		}
 		Heure heure = Heure.creerHeure(this.module,
 		                               (typeHeure),
-									   0,0,
+		                               0,0,
 		                                Float.parseFloat(this.txtNbH.getText()),
 		                                this.txtCommentaire.getText() );
 		

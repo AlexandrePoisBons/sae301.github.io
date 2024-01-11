@@ -42,7 +42,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 		JPanel panelB 	= new JPanel();
 		for(int cpt=0; cpt < 6; cpt++){
 			JTextField jtf = new JTextField(3);
-			this.ensJTextField.add(jtf);	
+			this.ensJTextField.add(jtf);
 		}
 
 		panelHN.setLayout(new GridLayout(1, 3));
@@ -376,9 +376,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					}
 				}
 
-				catch (NumberFormatException ex) {
-					System.out.print("");
-				}
+				catch (NumberFormatException ex) { }
 			}
 
 			if (e.getSource() == this.ensJTextField.get(5)) {
@@ -408,9 +406,7 @@ public class PanelRepartitionHGauche extends JPanel implements FocusListener, Ac
 					}
 				}
 
-				catch (NumberFormatException ex) {
-					System.out.print("");
-				}
+				catch (NumberFormatException ex) { }
 			}
 
 		} catch (Exception ex) {

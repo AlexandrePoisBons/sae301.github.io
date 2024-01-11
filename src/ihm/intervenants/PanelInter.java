@@ -40,8 +40,6 @@ public class PanelInter extends JPanel implements ActionListener {
 		// Synchronisation des pages
 		this.frame = frAcceuil;
 
-		//this.intervenants = new ArrayList<>();
-
 		List<Intervenant> list = this.frame.getControleur().getIntervenants();
 		this.intervenants = new ArrayList<>(list);
 
@@ -209,8 +207,7 @@ public class PanelInter extends JPanel implements ActionListener {
 	}
 
 
-	// Méthode permettant d'ajouter les nouveaux intervenants à la bd 
-
+	// Méthode permettant d'ajouter les nouveaux intervenants à la bd
 	private void enregistrer() {
 
 		int i = this.intervenants.size();

@@ -87,14 +87,12 @@ public class PCentreStage extends JPanel {
 
 			for (String tHeure : mapNat.keySet()) {
 				if ( tHeure == typeHeure ) {
-					System.out.println(tHeure+" - "+typeHeure);
 					temp.put("pn",mapNat.get(typeHeure));
 				}
 			}
 
 			for (String tHeure : mapRep.keySet()) {
 				if (tHeure == typeHeure ) {
-					System.out.println(tHeure+" _ "+typeHeure);
 					temp.put("nb_heures", mapRep.get(typeHeure).get("nb_heures"));
 				}
 			}
@@ -112,10 +110,8 @@ public class PCentreStage extends JPanel {
 		map.put(this.panelMere.getTypeHeureParNom("SAE"), t);
 
 
-
 		return map;
 
-		// combiner gros les 2 et hop
 	}
 
 	public List<Intervenant> getIntervenants() { return this.panelMere.getIntervenants(); }

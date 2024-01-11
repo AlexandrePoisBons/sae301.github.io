@@ -69,7 +69,7 @@ public class Requetes {
 	private PreparedStatement psSelectTHM;
 	private PreparedStatement psInsertTHM;
 	private PreparedStatement psDeleteTHM;
-	private PreparedStatement psUpdateTHM;
+	// private PreparedStatement psUpdateTHM;
 
 
 	public Requetes() {

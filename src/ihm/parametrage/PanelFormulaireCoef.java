@@ -85,7 +85,7 @@ public class PanelFormulaireCoef extends JPanel implements ActionListener {
 		float coeff = 1.0f;
 
 		try { coeff =  Float.parseFloat(this.txtCoeff.getText()); }
-	catch ( NumberFormatException e ) { /* System.out.println(this.txtCoeff.getText() + " : pas un Float"); */ }
+	catch ( NumberFormatException e ) { }
 
 		if ( this.typeHeure != null )
 			this.typeHeure.setCoeff(coeff);

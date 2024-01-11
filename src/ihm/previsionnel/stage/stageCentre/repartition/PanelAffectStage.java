@@ -1,6 +1,5 @@
 package ihm.previsionnel.stage.stageCentre.repartition;
 import java.awt.Dimension;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -37,7 +36,7 @@ public class PanelAffectStage extends JPanel {
 		dtm.addColumn("type");
 		dtm.addColumn("nb h");
 		dtm.addColumn("tot eqtd");
-		dtm.addColumn("commentaire");
+		dtm.addColumn("Commentaire");
 
 		this.tableauAffect = new JTable(dtm);
 

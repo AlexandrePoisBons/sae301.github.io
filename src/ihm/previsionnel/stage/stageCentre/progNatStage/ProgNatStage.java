@@ -4,7 +4,6 @@ package ihm.previsionnel.stage.stageCentre.progNatStage;
 import javax.swing.*;
 
 import ihm.previsionnel.stage.stageCentre.PCentreStage;
-import ihm.previsionnel.stage.stageCentre.repartition.heureStage.PanelRepHStage;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
@@ -154,14 +153,14 @@ public class ProgNatStage extends JPanel implements ActionListener, FocusListene
 	}
 
 	private boolean estChiffre(String texte) {
-        // Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
-        for (char c : texte.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
+		// Vérifie chaque caractère dans la chaîne pour s'assurer qu'il s'agit d'un chiffre.
+		for (char c : texte.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	//méthode pour gérer la couleur du cadre en fonction de la validité de la saisie
 	public void setCouleurErreur(boolean b, JTextField txt) {

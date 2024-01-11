@@ -65,27 +65,27 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 
 		gbc.gridy = 0;
 		gbc.gridx = 0;
-		this.panelFormulaire.add(new JLabel("Intervenants"				), gbc);
+		this.panelFormulaire.add(new JLabel("Intervenants"), gbc);
 		gbc.gridy = 1;
 		this.panelFormulaire.add(new JLabel("Type"), gbc);
 		gbc.gridy = 2;
-		this.panelFormulaire.add(new JLabel("Nb Semaines"	), gbc);
+		this.panelFormulaire.add(new JLabel("Nb Semaines"), gbc);
 		gbc.gridy = 3;
-		this.panelFormulaire.add(this.lblNbGpNbH, gbc);	
+		this.panelFormulaire.add(this.lblNbGpNbH, gbc);
 		gbc.gridy = 4;
-		this.panelFormulaire.add(new JLabel("tot eqtd"				), gbc);
+		this.panelFormulaire.add(new JLabel("tot eqtd"), gbc);
 		gbc.gridy = 5;
 		this.panelFormulaire.add(new JLabel("Commentaire"), gbc);
 
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		this.panelFormulaire.add(this.ddlstIntervenants		, gbc);
+		this.panelFormulaire.add(this.ddlstIntervenants, gbc);
 		gbc.gridy = 1;
 		this.panelFormulaire.add(this.ddlstTypesHeures, gbc);
 		gbc.gridy = 2;
-		this.panelFormulaire.add(this.txtNbSemaine	, gbc);
+		this.panelFormulaire.add(this.txtNbSemaine, gbc);
 		gbc.gridy = 3;
-		this.panelFormulaire.add(this.txtNbH			, gbc);
+		this.panelFormulaire.add(this.txtNbH, gbc);
 		gbc.gridy = 4;
 		this.panelFormulaire.add(this.txtTotEqtd, gbc);
 		gbc.gridy = 5;
@@ -122,11 +122,11 @@ public class FrameFormulaire extends JFrame implements ActionListener, FocusList
 		if(e.getSource() == this.ddlstTypesHeures){
 			if(!(this.ddlstTypesHeures.getSelectedItem().toString().equals("HP") || 
 				 this.ddlstTypesHeures.getSelectedItem().toString().equals("TUT"))) {
-				this.lblNbGpNbH.setText("Nb groupe");
+				this.lblNbGpNbH.setText("Nb groupes");
 				this.txtNbSemaine.setEditable(true);
 			}
 			else {
-				this.lblNbGpNbH.setText("Nb heure");
+				this.lblNbGpNbH.setText("Nb heures");
 				this.txtNbSemaine.setEditable(false);
 			}
 		}

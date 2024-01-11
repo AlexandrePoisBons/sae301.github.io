@@ -51,7 +51,7 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 		gbcH.gridx = 1;
 		gbcH.gridy = 0;
 		gbcH.insets = new Insets(10, 0, 2, 5);
-		panelHC.add(new JLabel("h Sae")	, gbcH);
+		panelHC.add(new JLabel("h Sae"), gbcH);
 		gbcH.gridx = 2;
 		panelHC.add(new JLabel("h Tut"), gbcH);
 
@@ -253,7 +253,6 @@ public class PanelRepartitionHeureGaucheSae extends JPanel implements FocusListe
 	}
 
 	public void setHeureAffecte(int hSae, int hTut) {
-		System.out.println("mtn");
 		this.ensJTextField.get(2).setText("" + hSae);
 		this.ensJTextField.get(3).setText("" + hTut);
 		this.repaint();

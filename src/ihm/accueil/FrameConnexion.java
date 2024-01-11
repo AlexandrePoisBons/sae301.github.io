@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import javax.swing.*;
 
 
-public class FrameConnexion extends JFrame implements ActionListener{
+public class FrameConnexion extends JFrame implements ActionListener {
 
 	private JTextField     txtDatabase;
 	private JTextField     txtLogin;

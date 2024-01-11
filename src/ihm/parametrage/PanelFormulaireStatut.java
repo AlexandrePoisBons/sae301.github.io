@@ -23,7 +23,7 @@ public class PanelFormulaireStatut extends JPanel implements ActionListener, Foc
 	private Statut     statut            ;
 	private JLabel     lblErreur         ;
 
-	public PanelFormulaireStatut() {}
+	public PanelFormulaireStatut() { }
 
 	public PanelFormulaireStatut(PanelParam panelMere, Statut statut) {
 		this.panelMere = panelMere;

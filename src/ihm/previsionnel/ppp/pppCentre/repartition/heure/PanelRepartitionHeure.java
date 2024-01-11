@@ -1,6 +1,5 @@
 package ihm.previsionnel.ppp.pppCentre.repartition.heure;
 
-import java.awt.GridLayout;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;

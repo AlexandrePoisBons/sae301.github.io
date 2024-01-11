@@ -71,9 +71,9 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		gbc.gridy = 1;
 		this.panelFormulaire.add(new JLabel("Nom"), gbc);
 		gbc.gridy = 2;
-		this.panelFormulaire.add(new JLabel("Prénom"	), gbc);
+		this.panelFormulaire.add(new JLabel("Prénom"), gbc);
 		gbc.gridy = 3;
-		this.panelFormulaire.add(new JLabel("Heures services"), gbc);	
+		this.panelFormulaire.add(new JLabel("Heures services"), gbc);
 		gbc.gridy = 4;
 		this.panelFormulaire.add(new JLabel("Heures max"), gbc);
 		gbc.gridy = 5;
@@ -85,9 +85,9 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 		gbc.gridy = 1;
 		this.panelFormulaire.add(this.txtNom, gbc);
 		gbc.gridy = 2;
-		this.panelFormulaire.add(this.txtPrenom	, gbc);
+		this.panelFormulaire.add(this.txtPrenom, gbc);
 		gbc.gridy = 3;
-		this.panelFormulaire.add(this.txtHServ			, gbc);
+		this.panelFormulaire.add(this.txtHServ, gbc);
 		gbc.gridy = 4;
 		this.panelFormulaire.add(this.txtHMax, gbc);
 		gbc.gridy = 5;
@@ -137,7 +137,7 @@ public class FrameFormulaire extends JFrame implements ActionListener{
 	private void majHeures(){
 		List<Statut> lstStatuts = this.panelMere.getStatuts();
 		for(Statut statut : lstStatuts){
-			if(statut.getNomStatut().equals(this.ddlstStatut.getSelectedItem())){
+			if(statut.getNomStatut().equals(this.ddlstStatut.getSelectedItem())) {
 				this.txtHServ.setText(String.valueOf(statut.getNbHeureService()));
 				this.txtHMax.setText(String.valueOf(statut.getNbHeuresMax()));
 			}

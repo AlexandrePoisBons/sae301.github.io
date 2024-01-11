@@ -91,8 +91,6 @@ public class PanelRessources extends JPanel {
 	public TypeHeure getTypeHeureParNom(String nom) { return this.frame.getControleur().getTypeHeureByNom(nom); }
 	public HashMap<TypeHeure, HashMap<String,Integer>> getHeuresParTypesHeures(Module module) { return this.frame.getControleur().getTypesHeuresParModule(module); }
 
-	//public HashMap<TypeHeure, HashMap<String,Integer>> getValeursHeuresParTypesHeures(Module module) { return null; }
-
 	public boolean estValide() { return this.pRCentre.estValide(); }
 
 	public HashMap<String, Integer> getDataHeures()    { return this.pRCentre.getData();     }

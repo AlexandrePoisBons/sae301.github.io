@@ -7,7 +7,6 @@ import java.util.*;
 import metier.Statut;
 import metier.TypeHeure;
 import ihm.FrameValidation;
-import ihm.FrameValidation;
 import ihm.accueil.FrameAccueil;
 import ihm.accueil.PanelAcceuil;
 

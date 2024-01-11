@@ -264,23 +264,23 @@ public class ProgNat extends JPanel implements ActionListener, FocusListener {
 
 	// méthode pour set le labelErreur
 	public void setLabelErreur(String s) {
-		this.labelErreur.setText(s  );
-		this.labelErreur.repaint(   );
+		this.labelErreur.setText(s);
+		this.labelErreur.repaint();
 		this.labelErreur.revalidate();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == this.txtHPonctWrite)      {
+		if (e.getSource() == this.txtHPonctWrite) {
 			this.txtHPonctWrite.transferFocus();
 		} else if (e.getSource() == this.txtHTutWrite) {
 			this.txtHTutWrite  .transferFocus();
-		} else if (e.getSource() == this.txtCMWrite)   {
+		} else if (e.getSource() == this.txtCMWrite) {
 			this.txtCMWrite    .transferFocus();
-		} else if (e.getSource() == this.txtTDWrite)   {
+		} else if (e.getSource() == this.txtTDWrite) {
 			this.txtTDWrite    .transferFocus();
-		} else if (e.getSource() == this.txtTPWrite)   {
+		} else if (e.getSource() == this.txtTPWrite) {
 			this.txtTPWrite    .transferFocus();
 		}
 	}

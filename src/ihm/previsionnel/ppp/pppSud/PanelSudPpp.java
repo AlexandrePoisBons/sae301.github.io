@@ -7,7 +7,6 @@ import ihm.previsionnel.*;
 import ihm.previsionnel.ppp.PanelPpp;
 import ihm.FrameValidation;
 import ihm.accueil.*;
-import ihm.parametrage.PanelParam;
 import metier.Module;
 import metier.Heure;
 
@@ -157,5 +156,4 @@ public class PanelSudPpp extends JPanel implements ActionListener {
 
 	}
 
-	// public boolean isValide() { return this.panelPpp.isValide(); }
 }

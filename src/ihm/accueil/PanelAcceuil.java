@@ -57,10 +57,10 @@ public class PanelAcceuil extends JPanel implements ActionListener {
 		panelBas      = new JPanel();
 		panelGauche   = new JPanel();
 		panelDroite   = new JPanel();
-		this.btnParam = new JButton("Paramètres		");
-		this.btnPrevi = new JButton("Prévisionnel	");
-		this.btnInter = new JButton("Intervenants	");
-		this.btnEtats = new JButton("Etats			");
+		this.btnParam = new JButton("Paramètres");
+		this.btnPrevi = new JButton("Prévisionnel");
+		this.btnInter = new JButton("Intervenants");
+		this.btnEtats = new JButton("Etats");
 
 		panelCentre.setLayout(new GridLayout(4, 1, 10, 5));
 
