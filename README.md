@@ -5,7 +5,7 @@
 Bienvenue sur l'application ASTRE ! Ce guide vous fournira des instructions détaillées sur la configuration des paramètres, la saisie du prévisionnel, la gestion des intervenants, et la génération des états au sein de l'application.
 
 ---
-## Prérequis
+## Connexion
 
 1. Aller dans le répertoire src/controleur et modifier le fichier infos.txt en y renseignant les différents champs qui sont :
 
@@ -15,15 +15,10 @@ Bienvenue sur l'application ASTRE ! Ce guide vous fournira des instructions dét
 
 ## Paramétrage
 
-### 1. Configuration des Types d'Heures
-
-1. Allez sur le tableau "Types d'Heures".
-2. Créez les catégories d'heures telles que CM, TD, TP, H tut, REH, H Saé, HP. Affectez les coefficients équivalents TD à chacune de ces catégories. Enregistrez les modifications.
-
-### 2. Configuration des Statuts d'Intervenants
+### 1. Configuration des Statuts d'Intervenants
 
 1. Allez sur le tableau "Statut".
-2. Configurez chaque catégorie d'intervenant en spécifiant le nom, le service, le nombre d'heures maximum autorisé, et le ratio TP à l'aide des boutons "ajouter", "modifier". Cliquez sur "Enregistrer" pour chaque modification.
+2. Configurez chaque catégorie d'intervenant en spécifiant le nom, le service, le nombre d'heures maximum autorisé, et le coefficient TP à l'aide des boutons "ajouter", "modifier". Cliquez sur "Enregistrer" pour chaque modification.
 
 ---
 
@@ -55,7 +50,7 @@ Bienvenue sur l'application ASTRE ! Ce guide vous fournira des instructions dét
 
 ##### Calcul Automatique
 
-L'équivalent eqtd sera calculé automatiquement pour chaque ligne. Si des heures ponctuelles sont saisies, le nombre de semaines devient invisible et non saisissable. Le total d'eqtd affectées au module est également calculé automatiquement.
+L'équivalent TD sera calculé automatiquement pour chaque ligne. Si des heures ponctuelles sont saisies, le nombre de semaines devient invisible et non saisissable. Le total d'eqtd affectées au module est également calculé automatiquement.
 
 #### 2.2. Module Saé
 
@@ -95,7 +90,7 @@ L'équivalent eqtd sera calculé automatiquement pour chaque ligne. Le total d'e
 
 ### 1. Ajout d'Intervenants
 
-1. Ajoutez, modifiez ou supprimez des intervenants. Remplissez les informations requises telles que la catégorie, le coefficient TP, le service, etc.
+1. Ajoutez, modifiez ou supprimez des intervenants. Remplissez les informations requises telles que la catégorie, le service, etc.
 2. **Saisie des Heures :** Pour chaque intervenant, saisissez les heures prévisionnelles par semestre, en veillant à respecter les contraintes du programme national.
 
 ---
