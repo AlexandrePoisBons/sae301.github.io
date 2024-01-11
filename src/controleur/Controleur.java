@@ -76,9 +76,6 @@ public class Controleur {
 			this.getModuleById(idModule).ajouterHeure(this.getHeureById(idHeure));
 		}
 
-		// System.out.println("LIAISON HEURES-MODULES FAITE");
-
-
 
 		Integer[][] tabIntervenantsHeure = this.requetes.getIntervenantsParHeure();
 
@@ -90,8 +87,6 @@ public class Controleur {
 			this.getHeureById(idHeure).ajouterIntervenant(this.getIntervenantById(idIntervenant));
 			this.getIntervenantById(idIntervenant).ajouterHeure(this.getHeureById(idHeure));
 		}
-
-		// System.out.println("LIAISON INTERVENANTS-HEURES FAITE");
 
 
 
@@ -106,7 +101,6 @@ public class Controleur {
 			this.getIntervenantById(idIntervenant).ajouterModule(this.getModuleById(idModule));
 		}
 
-		// System.out.println("LIAISON INTERVENANTS-MODULES FAITE");
 
 
 
@@ -135,9 +129,6 @@ public class Controleur {
 				this.heuresParModule.put(module, map);
 			}
 		}
-
-
-		// System.out.println("--- FIN INITIALISATION ---");
 
 	}
 
