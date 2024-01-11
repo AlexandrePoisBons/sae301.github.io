@@ -12,6 +12,9 @@ public class Infos {
 	private String password;
 	private String login;
 	private String database;
+	private String passwordLdap;
+
+	
 
 	public static final String NOM_FICHIER = "infos.txt";
 
@@ -19,9 +22,10 @@ public class Infos {
 
 
 	public Infos() {
-		this.database = "";
-		this.login    = "";
-		this.password = "";
+		this.database	  = "";
+		this.login   	  = "";
+		this.password	  = "";
+		this.passwordLdap = "";
 
 		this.initValues();
 	}
@@ -38,6 +42,9 @@ public class Infos {
 				this.traiteLigne(ligne);
 			}
 			sc.close();
+
+			if(this.passwordLdap.equals(""))
+				System.out.println("TESHTSdpaqzshjfv^p");
 		} catch( Exception exc ) {
 			// System.out.println("Erreur fichier " + exc);
 			return false;
@@ -54,6 +61,7 @@ public class Infos {
 			case "database" -> this.database = decString[1];
 			case "login"    -> this.login    = decString[1];
 			case "password" -> this.password = decString[1];
+			case "mdpLdap"  -> this.passwordLdap = decString[1];
 		}
 
 	}
@@ -75,8 +83,27 @@ public class Infos {
 
 	}
 
+	public static void ecrire(String url, String login, String password , String mdpLdap) {
+		String content = "";
+
+		try {
+			File file = new File("./bin/controleur/"+Infos.NOM_FICHIER);
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file, StandardCharsets.UTF_8));
+			content += "database:" + url      + "\n";
+			content += "login:"    + login    + "\n";
+			content += "password:" + password + "\n";
+			content += "mdpLdap:"  + mdpLdap;
+
+			writer.write(content);
+
+			writer.close();
+		} catch (IOException e) { /*e.printStackTrace();*/ }
+
+	}
+
 	public String getDatabase() { return this.database; }
 	public String getLogin()    { return this.login;    }
 	public String getPassword() { return this.password; }
+	public String getPasswordLdap() { return this.passwordLdap; }
 
 }

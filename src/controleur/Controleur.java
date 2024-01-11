@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import com.jcraft.jsch.JSchException;
+
 import ihm.accueil.FrameAccueil;
 import ihm.accueil.FrameConnexion;
 import metier.Heure;
@@ -30,7 +32,7 @@ public class Controleur {
 	private HashMap<Module, HashMap<TypeHeure, HashMap<String, Integer>>> heuresParModule;
 
 	public static void main(String[] args) { new FrameConnexion(); }
- 
+
 	public Controleur() {
 
 		this.infos = new Infos();

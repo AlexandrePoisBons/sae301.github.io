@@ -5,12 +5,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+
 import controleur.Infos;
 import metier.Heure;
 import metier.Intervenant;
 import metier.Module;
 import metier.Statut;
 import metier.TypeHeure;
+
+import java.util.Random;
+
 
 public class Requetes {
 
@@ -71,9 +78,20 @@ public class Requetes {
 	private PreparedStatement psDeleteTHM;
 	// private PreparedStatement psUpdateTHM;
 
+	private static List<Integer>     alRandom;
 
 	public Requetes() {
-		this.db     = DB.getInstance();
+		
+		Requetes.alRandom = new ArrayList<Integer>();
+
+		try {
+			this.db     = DB.getInstance();
+		} catch (ClassNotFoundException | JSchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			// TODO Auto-generated catch block
+
 		this.connec = this.db.getConnection();
 
 		try {
@@ -127,6 +145,67 @@ public class Requetes {
 	}
 
 	public void close() throws SQLException { this.db.close(); }
+
+	public static Connection getConnect(){
+
+		Infos infos = new Infos();
+		Connection connect = null;
+
+		if(infos.getPasswordLdap().equals("")){
+			
+			System.out.println("PAS NORMAL");
+			try {
+				String url = Infos.URL_DATABASE + infos.getDatabase();
+				String login = infos.getLogin();
+				String password = infos.getPassword();
+
+				connect = DriverManager.getConnection(url,login,password);
+
+				// System.out.println("CONNEXION A LA BADO: REUSSIE");
+			} catch ( SQLException e ) { e.printStackTrace(); }
+		}else{
+			try{
+				String dbHost = "woody.iut.univ-lehavre.fr";
+				String sshHost = "c-corton.iut.univ-lehavre.fr";
+				String login = infos.getLogin();
+				String password = infos.getPassword();
+				String passwordLdap = infos.getPasswordLdap();
+				
+
+				int sshPort = 4660; // SSH port number
+				JSch jsch = new JSch();
+				Session session = jsch.getSession(login, sshHost, sshPort);
+				session.setPassword(passwordLdap);
+				session.setConfig("StrictHostKeyChecking", "no");
+				session.connect();
+
+				// Set up port forwarding (SSH tunnel)
+				int randomNum = 5432;
+
+				Requetes.alRandom.add(5432);
+
+
+				while( randomNum < 1024 || randomNum > 65535 || Requetes.alRandom.contains(randomNum)){
+					randomNum = (int)(Math.random() * 99999);
+					
+				}
+				Requetes.alRandom.add(randomNum);
+				
+				int localPort = randomNum; // Local port for tunneling
+				int remotePort = 5432; // Remote PostgreSQL port
+				session.setPortForwardingL(localPort, dbHost, remotePort);
+				Class.forName("org.postgresql.Driver");
+
+				// Connect to the PostgreSQL database through the SSH tunnel
+				String jdbcUrl = "jdbc:postgresql://localhost:5432/" + login;
+				connect = DriverManager.getConnection(jdbcUrl, login, password);
+
+			}
+			catch ( SQLException | JSchException | ClassNotFoundException e ) { e.printStackTrace(); }
+		
+		}
+		return connect;
+	}
 
 
 	public void deleteTypesHeuresParModule(int idModule) {
@@ -247,7 +326,6 @@ public class Requetes {
 	{
 		int nbModules = -1;
 
-		Infos infos = new Infos();
 
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -255,22 +333,17 @@ public class Requetes {
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			String url = Infos.URL_DATABASE + infos.getDatabase() ;
-			String login = infos.getLogin();
-			String password = infos.getPassword();
-
-			Connection connec = DriverManager.getConnection(url,login,password);
-
+				Connection connect = getConnect();
 			// System.out.println("CONNEXION A LA BADO: REUSSIE");
 
 			try {
-				PreparedStatement psGetNbIntervenant =  connec.prepareStatement("SELECT COUNT(*) FROM Intervenant;");
+				PreparedStatement psGetNbIntervenant =  connect.prepareStatement("SELECT COUNT(*) FROM Intervenant;");
 				ResultSet rs = psGetNbIntervenant.executeQuery();
 				while ( rs.next() ) nbModules = rs.getInt(1);
 
 			} catch ( SQLException e ) { e.printStackTrace(); }
-
-			connec.close();
+		
+			connect.close();
 		} catch ( SQLException e ) { e.printStackTrace(); }
 
 		return nbModules;
@@ -348,35 +421,25 @@ public class Requetes {
 	public static int getNbHeures() {
 		int nbHeures = -1;
 
-		Infos infos = new Infos();
-
 		try {
 			Class.forName("org.postgresql.Driver");
 			// System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch ( ClassNotFoundException e ) { e.printStackTrace(); }
 
 		try {
-			String url = Infos.URL_DATABASE + infos.getDatabase();
-			String login = infos.getLogin();
-			String password = infos.getPassword();
+			Connection connect = getConnect();
 
-			Connection connec = DriverManager.getConnection(url,login,password);
-			// System.out.println("CONNEXION A LA BADO: REUSSIE");
+			PreparedStatement psGetNbHeures =  connect.prepareStatement("SELECT COUNT(*) FROM Heure;");
 
-			try {
+			ResultSet rs = psGetNbHeures.executeQuery();
 
-				PreparedStatement psGetNbHeures =  connec.prepareStatement("SELECT COUNT(*) FROM Heure;");
+			while ( rs.next() ) nbHeures = rs.getInt(1);
 
-				ResultSet rs = psGetNbHeures.executeQuery();
-
-				while ( rs.next() ) nbHeures = rs.getInt(1);
-
-			} catch ( SQLException e ) { e.printStackTrace(); }
-
-			connec.close();
-		} catch (SQLException e) { e.printStackTrace(); }
-
-		return nbHeures;
+			connect.close();
+		} catch (SQLException e) { e.printStackTrace(); 
+		} finally {
+			return nbHeures;
+		}
 	}
 
 
@@ -442,29 +505,21 @@ public class Requetes {
 
 		int nbTypeHeures = -1;
 
-		Infos infos = new Infos();
 
 		try {
 			Class.forName("org.postgresql.Driver");
 			// System.out.println ("CHARGEMENT DU PILOTE OK");
 		} catch ( ClassNotFoundException e ) { e.printStackTrace(); }
 
+		
+		Connection connect = getConnect();
 		try {
-			String url = Infos.URL_DATABASE + infos.getDatabase();
-			String login = infos.getLogin();
-			String password = infos.getPassword();
-
-			Connection connec = DriverManager.getConnection(url,login,password);
-
-			// System.out.println("CONNEXION A LA BADO: REUSSIE");
-
-			try {
-				Statement sGetNbTypeHeures =  connec.createStatement();
-				ResultSet rs = sGetNbTypeHeures.executeQuery("SELECT COUNT(*) FROM Type_Heure");
-				while ( rs.next() ) nbTypeHeures = rs.getInt(1);
-			} catch ( SQLException e ) { e.printStackTrace(); }
-
-			connec.close();
+			Statement sGetNbTypeHeures =  connect.createStatement();
+			ResultSet rs = sGetNbTypeHeures.executeQuery("SELECT COUNT(*) FROM Type_Heure");
+			while ( rs.next() ) nbTypeHeures = rs.getInt(1);
+		} catch ( SQLException e ) { e.printStackTrace(); }
+		try{
+			connect.close();
 		} catch ( SQLException e ) { e.printStackTrace(); }
 
 		return nbTypeHeures;
@@ -565,19 +620,15 @@ public class Requetes {
 		} catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 		try {
-			String url = Infos.URL_DATABASE + infos.getDatabase();
-			String login = infos.getLogin();
-			String password = infos.getPassword();
-			Connection connec = DriverManager.getConnection(url,login,password);
-			// System.out.println("CONNEXION A LA BADO: REUSSIE");
+			Connection connect = getConnect();
 
 			try {
-				PreparedStatement  psGetNbModules =  connec.prepareStatement("SELECT COUNT(*) FROM Module;");
+				PreparedStatement  psGetNbModules =  connect.prepareStatement("SELECT COUNT(*) FROM Module;");
 				ResultSet rs = psGetNbModules.executeQuery();
 				while ( rs.next() ) nbModules = rs.getInt(1);
 			} catch (SQLException e) { e.printStackTrace(); }
 		
-			connec.close();
+			connect.close();
 		} catch (SQLException e) { e.printStackTrace(); }
 
 		return nbModules;
