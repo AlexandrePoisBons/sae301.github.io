@@ -68,7 +68,6 @@ public class PanelSudRessources extends JPanel implements ActionListener {
 
 	public void validation(boolean valide) {
 		if (valide) {
-			this.panelRessources.saveDataHeures();
 			this.enregistrer();
 			// this.panelRessources.fermerFrameFormulaire();
 		} else {
@@ -146,6 +145,9 @@ public class PanelSudRessources extends JPanel implements ActionListener {
 
 			this.panelRessources.update(this.oldModule, this.module);
 		}
+
+
+		this.panelRessources.saveDataHeures();
 
 	}
 

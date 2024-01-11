@@ -81,7 +81,7 @@ public class FrameValidation extends JFrame implements ActionListener{
 
 		this.btnOui.addActionListener(this);
 		this.btnNon.addActionListener(this);
-		
+
 		this.panelValidation.add(new JLabel("Voulez-vous enregistrer les modifications ?"));
 		this.panelValidation.add(this.btnOui);
 		this.panelValidation.add(this.btnNon);
@@ -96,7 +96,7 @@ public class FrameValidation extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ( e.getSource() == this.btnOui ) {
-			
+
 			switch( this.nomPanel ) {
 				case "PanelParam"         -> this.panelParam.validation(true);
 				case "PanelSudPpp"        -> this.panelSudPpp.validation(true);
@@ -108,7 +108,7 @@ public class FrameValidation extends JFrame implements ActionListener{
 			this.repaint();
 			this.revalidate();
 		} else if ( e.getSource() == this.btnNon ) {
-			
+
 			switch( this.nomPanel ) {
 				case "PanelParam"         -> this.panelParam.validation(false);
 				case "PanelSudPpp"        -> this.panelSudPpp.validation(false);

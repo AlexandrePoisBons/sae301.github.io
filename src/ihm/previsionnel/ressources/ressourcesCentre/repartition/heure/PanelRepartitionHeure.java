@@ -44,6 +44,9 @@ public class PanelRepartitionHeure extends JPanel{
 				mapDroite.put(typeHeure,mapGauche.get(typeHeure));
 		}
 
+		if ( mapDroite == null)
+			System.out.println("donova");
+
 		return mapDroite;
 	}
 

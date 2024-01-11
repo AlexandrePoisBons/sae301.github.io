@@ -64,7 +64,6 @@ public class DB {
 				// Perform database operations (e.g., execute queries)
 
 
-
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {

@@ -22,9 +22,9 @@ public class Infos {
 
 
 	public Infos() {
-		this.database	  = "";
-		this.login   	  = "";
-		this.password	  = "";
+		this.database     = "";
+		this.login        = "";
+		this.password     = "";
 		this.passwordLdap = "";
 
 		this.initValues();
