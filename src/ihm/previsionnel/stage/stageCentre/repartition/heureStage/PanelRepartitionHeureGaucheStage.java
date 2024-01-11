@@ -15,11 +15,11 @@ import javax.swing.*;
 
 import metier.Module;
 import metier.TypeHeure;
+import metier.Heure;
 
 
 public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionListener, FocusListener {
 
-	private Module m;
 	private PanelRepHStage panelMere;
 	private ArrayList<JTextField> ensJTextField;
 
@@ -80,7 +80,7 @@ public class PanelRepartitionHeureGaucheStage extends JPanel implements ActionLi
 
 		int hTut = 0;
 		int hSae = 0;
-		for (Heure h : this.m.getHeures()) {
+		for (Heure h : this.module.getHeures()) {
 			if(h.getTypeHeure().getNomTypeHeure().equals("TUT")){
 				hTut += h.getDuree();
 			}
