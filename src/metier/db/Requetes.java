@@ -137,7 +137,6 @@ public class Requetes {
 			this.psSelectTHM = this.connec.prepareStatement("SELECT * FROM TypeHeure_Module WHERE id_module=?;");
 			this.psInsertTHM = this.connec.prepareStatement("INSERT INTO TypeHeure_Module VALUES(?,?,?,?,?);");
 			this.psDeleteTHM = this.connec.prepareStatement("DELETE FROM TypeHeure_Module WHERE id_module=?;");
-			
 
 		} catch( SQLException e ) { e.printStackTrace(); }
 
@@ -222,7 +221,7 @@ public class Requetes {
 			this.psInsertTHM.setInt(5, nbHeures);
 
 			this.psInsertTHM.executeUpdate();
-		} catch (SQLException e) { e.printStackTrace(); }
+		} catch (SQLException e) { }
 	}
 
 	public boolean typesHeuresDansModuleRentrees(int idModule) throws SQLException{
@@ -471,7 +470,7 @@ public class Requetes {
 
 			this.psInsertTH.executeUpdate();
 		} else {
-			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" deja existant");
+			// System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" deja existant");
 		}
 	}
 
@@ -484,7 +483,7 @@ public class Requetes {
 
 			this.psDeleteTH.executeUpdate();
 		} else {
-			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
+			// System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
 		}
 	}
 
@@ -498,7 +497,7 @@ public class Requetes {
 
 			this.psUpdateTH.executeUpdate();
 		} else {
-			System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
+			// System.out.println("TypeHeure id_type_heure = "+typeHeure.getIdTypeHeure()+" inexistant");
 		}
 	}
 
@@ -566,7 +565,7 @@ public class Requetes {
 
 			return true;
 		} else {
-			System.out.println("Module id_module = "+module.getIdModule()+" deja existant");
+			// System.out.println("Module id_module = "+module.getIdModule()+" deja existant");
 			return false;
 		}
 	}
@@ -605,7 +604,7 @@ public class Requetes {
 
 			this.psUpdateM.executeUpdate();
 		} else {
-			System.out.println("Module id_module = "+module.getIdModule()+" inexistant");
+			// System.out.println("Module id_module = "+module.getIdModule()+" inexistant");
 		}
 	}
 
@@ -660,7 +659,7 @@ public class Requetes {
 
 			this.psInsertS.executeUpdate();
 		} else {
-			System.out.println("statut id_statut = "+statut.getNomStatut()+" deja existant");
+			// System.out.println("statut id_statut = "+statut.getNomStatut()+" deja existant");
 		}
 	}
 
@@ -673,7 +672,7 @@ public class Requetes {
 
 			this.psDeleteS.executeUpdate();
 		} else {
-			System.out.println("Statut nom_statut = "+statut.getNomStatut()+" inexistant");
+			// System.out.println("Statut nom_statut = "+statut.getNomStatut()+" inexistant");
 		}
 	}
 
@@ -689,7 +688,7 @@ public class Requetes {
 
 			this.psUpdateS.executeUpdate();
 		} else {
-			System.out.println("Statut nom_statut = "+statut.getNomStatut()+" inexistant");
+			// System.out.println("Statut nom_statut = "+statut.getNomStatut()+" inexistant");
 		}
 	}
 
@@ -727,7 +726,7 @@ public class Requetes {
 
 			this.psInsertIM.executeUpdate();
 		} else {
-			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" deja existant");
+			// System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" deja existant");
 		}
 	}
 
@@ -741,7 +740,7 @@ public class Requetes {
 
 			this.psDeleteIM.executeUpdate();
 		} else {
-			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" inexistant");
+			// System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" inexistant");
 		}
 	}
 
@@ -757,7 +756,7 @@ public class Requetes {
 
 			this.psUpdateIM.executeUpdate();
 		} else {
-			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" inexistant");
+			// System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_module = "+module.getIdModule()+" inexistant");
 		}
 	}
 
@@ -795,7 +794,7 @@ public class Requetes {
 
 			this.psInsertIH.executeUpdate();
 		} else {
-			System.out.println("IntervenantHeure id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" deja existant");
+			// System.out.println("IntervenantHeure id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" deja existant");
 		}
 	}
 
@@ -808,7 +807,7 @@ public class Requetes {
 
 			this.psDeleteIH.executeUpdate();
 		} else {
-			System.out.println("Intervenant id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" inexistant");
+			// System.out.println("Intervenant id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" inexistant");
 		}
 	}
 
@@ -823,7 +822,7 @@ public class Requetes {
 
 			this.psUpdateIH.executeUpdate();
 		} else {
-			System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" inexistant");
+			// System.out.println("IntervenantModule id_intervenant = "+intervenant.getIdIntervenant()+", id_heure = "+heure.getIdHeure()+" inexistant");
 		}
 	}
 
@@ -859,7 +858,7 @@ public class Requetes {
 
 			this.psInsertHM.executeUpdate();
 		} else {
-			System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" deja existant");
+			// System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" deja existant");
 		}
 	}
 
@@ -873,7 +872,7 @@ public class Requetes {
 
 			this.psDeleteHM.executeUpdate();
 		} else {
-			System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" inexistant");
+			// System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" inexistant");
 		}
 	}
 
@@ -889,7 +888,7 @@ public class Requetes {
 
 			this.psUpdateHM.executeUpdate();
 		} else {
-			System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" inexistant");
+			// System.out.println("HeureModule id_heure = "+heure.getIdHeure()+", id_module = "+module.getIdModule()+" inexistant");
 		}
 	}
 

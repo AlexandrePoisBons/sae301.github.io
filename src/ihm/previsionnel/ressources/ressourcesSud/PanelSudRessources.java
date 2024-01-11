@@ -149,8 +149,5 @@ public class PanelSudRessources extends JPanel implements ActionListener {
 
 			this.panelRessources.update(this.oldModule, this.module);
 		}
-
-
-
 	}
 }

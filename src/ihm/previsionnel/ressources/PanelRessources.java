@@ -57,7 +57,7 @@ public class PanelRessources extends JPanel {
 	public void saveDataHeures() {
 		HashMap<TypeHeure, HashMap<String,Integer>> map = this.pRCentre.getDataHeuresTypesHeures();
 
-		this.frame.getControleur().majTypesHeuresModule(this.module, map);
+		if (map != null) try{this.frame.getControleur().majTypesHeuresModule(this.module, map);}catch(Exception e){}
 
 	}
 

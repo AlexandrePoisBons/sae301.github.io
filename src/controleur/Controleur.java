@@ -193,6 +193,12 @@ public class Controleur {
 					}
 				}
 			}
+
+			try{
+				if ( !this.requetes.existsModule(module.getIdModule()) )
+				this.requetes.insertModule(module);
+			}catch(SQLException e){}
+			
 			this.requetes.insertTypesHeuresParModule(module.getIdModule(), typeHeure.getIdTypeHeure(), pn, nbSemaines, nbHeures);
 		}
 
@@ -213,7 +219,8 @@ public class Controleur {
 			}
 			this.modules.add(module);
 
-			this.majTypesHeuresModule(module, this.heuresParModule.get(module));
+			// this.majTypesHeuresModule(module, this.heuresParModule.get(module));
+
 			return true;
 		} catch ( SQLException e ) { return false; }
 	}
